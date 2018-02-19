@@ -46,6 +46,7 @@
     <Compile Include="Interface1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SampleSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -59,9 +60,21 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\KamiSama.Configs.Json\KamiSama.Configs.Json.csproj">
+      <Project>{31610fea-0a11-4c06-8861-e2518b0ef305}</Project>
+      <Name>KamiSama.Configs.Json</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KamiSama.Configs\KamiSama.Configs.csproj">
+      <Project>{AE3637F6-6FDA-43B7-9E05-94669A84B62F}</Project>
+      <Name>KamiSama.Configs</Name>
+    </ProjectReference>
     <ProjectReference Include="..\KamiSama.Extenders.Ninject\KamiSama.Extenders.Ninject.csproj">
       <Project>{24DF1B61-4B5C-4C4D-BAA1-C5835C8893D0}</Project>
       <Name>KamiSama.Extenders.Ninject</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KamiSama.Extenders.Serialization\KamiSama.Extenders.Serialization.csproj">
+      <Project>{B0014FD3-CB24-466F-8CE9-2B216BAB17DB}</Project>
+      <Name>KamiSama.Extenders.Serialization</Name>
     </ProjectReference>
     <ProjectReference Include="..\KamiSama.Ninject.Attributes\KamiSama.Extenders.Attributes.csproj">
       <Project>{D16348E7-2B30-4E25-9EF3-AAE8C9F7BE06}</Project>
