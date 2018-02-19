@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Kamran Fallah</Authors>
+    <Company>-</Company>
+    <Description>BindTo Attribute for automatic ninject binding.</Description>
+    <Product>KamiSama.Extenders.Attributes</Product>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+</Project>

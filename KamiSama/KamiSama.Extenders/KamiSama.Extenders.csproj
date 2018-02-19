@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<Authors>Kamran Fallah</Authors>
+		<Company>-</Company>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<Description>Useful extenders suchas ToBytes, ToHex, ...</Description>
+		<PackageReleaseNotes>1.0.1
+XmlSerializationExtender is moved to KamiSama.Serialization
+v1.0.0
+first version		</PackageReleaseNotes>
+		<DebugType>Full</DebugType>
+		<Version>1.0.1</Version>
+	</PropertyGroup>
+
+</Project>
