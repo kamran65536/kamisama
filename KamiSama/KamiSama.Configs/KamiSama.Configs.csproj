@@ -2,6 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Kamran Fallah</Authors>
+    <Company>-</Company>
+    <Description>a Library for easily using configs in .net standard and core projects.</Description>
+    <PackageReleaseNotes>96-11-30 v1.0.0
+initial version</PackageReleaseNotes>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
 </Project>

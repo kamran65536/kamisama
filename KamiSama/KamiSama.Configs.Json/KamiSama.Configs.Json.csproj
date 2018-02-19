@@ -2,6 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Kamran Fallah</Authors>
+    <Company>-</Company>
+    <Description>Json Config Provider for KamiSama.Configs</Description>
+    <PackageReleaseNotes>96-11-30 v1.0.0
+initial version</PackageReleaseNotes>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
