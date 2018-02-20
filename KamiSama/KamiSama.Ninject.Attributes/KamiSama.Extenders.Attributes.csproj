@@ -7,6 +7,7 @@
     <Description>BindTo Attribute for automatic ninject binding.</Description>
     <Product>KamiSama.Extenders.Attributes</Product>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <RepositoryUrl>https://gitlab.com/kamran65536/KamiSama</RepositoryUrl>
   </PropertyGroup>
 
 </Project>

@@ -1,6 +1,4 @@
-﻿using KamiSama.Configs.Json;
-
-namespace KamiSama.Configs
+﻿namespace KamiSama.Configs
 {
 	public static class JsonProviderExtender
     {

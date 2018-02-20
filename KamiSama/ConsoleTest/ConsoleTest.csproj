@@ -64,6 +64,10 @@
       <Project>{31610fea-0a11-4c06-8861-e2518b0ef305}</Project>
       <Name>KamiSama.Configs.Json</Name>
     </ProjectReference>
+    <ProjectReference Include="..\KamiSama.Configs.Xml\KamiSama.Configs.Xml.csproj">
+      <Project>{89071b3b-f1d0-47e6-8d81-2a2470d693c2}</Project>
+      <Name>KamiSama.Configs.Xml</Name>
+    </ProjectReference>
     <ProjectReference Include="..\KamiSama.Configs\KamiSama.Configs.csproj">
       <Project>{AE3637F6-6FDA-43B7-9E05-94669A84B62F}</Project>
       <Name>KamiSama.Configs</Name>

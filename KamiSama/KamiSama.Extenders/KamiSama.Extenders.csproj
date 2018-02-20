@@ -12,6 +12,7 @@ v1.0.0
 first version		</PackageReleaseNotes>
 		<DebugType>Full</DebugType>
 		<Version>1.0.1</Version>
+		<RepositoryUrl>https://gitlab.com/kamran65536/KamiSama</RepositoryUrl>
 	</PropertyGroup>
 
 </Project>

@@ -32,11 +32,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Repositories.Entit
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{06152C35-4D40-488E-AFD3-7229BD59475C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KamiSama.Configs", "KamiSama.Configs\KamiSama.Configs.csproj", "{AE3637F6-6FDA-43B7-9E05-94669A84B62F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Configs", "KamiSama.Configs\KamiSama.Configs.csproj", "{AE3637F6-6FDA-43B7-9E05-94669A84B62F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configs", "Configs", "{F9FE5869-D7A2-4D69-82BC-4776362DBD1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KamiSama.Configs.Json", "KamiSama.Configs.Json\KamiSama.Configs.Json.csproj", "{31610FEA-0A11-4C06-8861-E2518B0EF305}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Configs.Json", "KamiSama.Configs.Json\KamiSama.Configs.Json.csproj", "{31610FEA-0A11-4C06-8861-E2518B0EF305}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KamiSama.Configs.Xml", "KamiSama.Configs.Xml\KamiSama.Configs.Xml.csproj", "{89071B3B-F1D0-47E6-8D81-2A2470D693C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KamiSama.Repositories.Json", "KamiSama.Repositories.Json\KamiSama.Repositories.Json.csproj", "{003CB3F6-686D-46C1-A828-05E388C66381}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KamiSama.Repositories.Xml", "KamiSama.Repositories.Xml\KamiSama.Repositories.Xml.csproj", "{C2AD02A1-AB4D-4182-8C6E-865513F5A377}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -88,6 +94,18 @@ Global
 		{31610FEA-0A11-4C06-8861-E2518B0EF305}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31610FEA-0A11-4C06-8861-E2518B0EF305}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31610FEA-0A11-4C06-8861-E2518B0EF305}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89071B3B-F1D0-47E6-8D81-2A2470D693C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89071B3B-F1D0-47E6-8D81-2A2470D693C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89071B3B-F1D0-47E6-8D81-2A2470D693C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89071B3B-F1D0-47E6-8D81-2A2470D693C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{003CB3F6-686D-46C1-A828-05E388C66381}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{003CB3F6-686D-46C1-A828-05E388C66381}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{003CB3F6-686D-46C1-A828-05E388C66381}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{003CB3F6-686D-46C1-A828-05E388C66381}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2AD02A1-AB4D-4182-8C6E-865513F5A377}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2AD02A1-AB4D-4182-8C6E-865513F5A377}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2AD02A1-AB4D-4182-8C6E-865513F5A377}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2AD02A1-AB4D-4182-8C6E-865513F5A377}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -103,6 +121,9 @@ Global
 		{BBFF641B-DDB3-4939-94E4-F7A70097CAB4} = {57FBED1C-A5FD-44AC-8830-287E28388989}
 		{AE3637F6-6FDA-43B7-9E05-94669A84B62F} = {F9FE5869-D7A2-4D69-82BC-4776362DBD1F}
 		{31610FEA-0A11-4C06-8861-E2518B0EF305} = {F9FE5869-D7A2-4D69-82BC-4776362DBD1F}
+		{89071B3B-F1D0-47E6-8D81-2A2470D693C2} = {F9FE5869-D7A2-4D69-82BC-4776362DBD1F}
+		{003CB3F6-686D-46C1-A828-05E388C66381} = {57FBED1C-A5FD-44AC-8830-287E28388989}
+		{C2AD02A1-AB4D-4182-8C6E-865513F5A377} = {57FBED1C-A5FD-44AC-8830-287E28388989}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0C85F907-8B96-40E2-9668-52CDEA46BF29}

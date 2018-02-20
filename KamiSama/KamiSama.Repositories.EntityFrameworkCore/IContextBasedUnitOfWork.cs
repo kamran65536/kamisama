@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace KamiSama.Repositories.EntityFrameworkCore
+namespace KamiSama.Repositories
 {
 	public interface IContextBasedUnitOfWork<_ContextType>
 		where _ContextType : DbContext

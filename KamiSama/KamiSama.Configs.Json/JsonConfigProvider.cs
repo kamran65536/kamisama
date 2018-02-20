@@ -2,7 +2,7 @@
 using KamiSama.Extenders;
 using Newtonsoft.Json;
 
-namespace KamiSama.Configs.Json
+namespace KamiSama.Configs
 {
 	public class JsonConfigProvider<_ConfigType> : IConfigProvider<_ConfigType>
 		where _ConfigType : ConfigData<_ConfigType>

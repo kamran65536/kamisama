@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 
-namespace KamiSama.Repositories.EntityFrameworkCore
+namespace KamiSama.Repositories
 {
 	public class DbRepository<_ContextType, _EntityType> : IRepository<IContextBasedUnitOfWork<_ContextType>, _EntityType>
 		where _ContextType : DbContext

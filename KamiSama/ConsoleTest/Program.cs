@@ -27,7 +27,7 @@ namespace ConsoleTest
 			//	Y = 11
 			//});
 
-			SampleSettings.Instance.UseJsonProvider(@"d:\sample.json");
+			SampleSettings.Instance.UseXmlProvider(@"d:\sample.xml");
 
 			Console.WriteLine(SampleSettings.Instance.X);
 
