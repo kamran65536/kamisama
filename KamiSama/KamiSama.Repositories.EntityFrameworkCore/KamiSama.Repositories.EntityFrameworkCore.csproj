@@ -5,11 +5,12 @@
     <Authors>Kamran Fallah</Authors>
     <Company>-</Company>
     <Description>Entity Framework Core Repository Pattern</Description>
-    <Version>1.0.0-alpha05</Version>
+    <Version>1.0.0-alpha06</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>-v1.0.0 (alpha05)
+    <PackageReleaseNotes>-v1.0.0 (alpha06)
 IContextBasedUnitOfWork
-DbRepository</PackageReleaseNotes>
+DbRepository
+SaveChanges is added.</PackageReleaseNotes>
     <RepositoryUrl>https://gitlab.com/kamran65536/KamiSama</RepositoryUrl>
     <RootNamespace>KamiSama.Repositories</RootNamespace>
   </PropertyGroup>

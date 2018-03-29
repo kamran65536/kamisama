@@ -7,7 +7,7 @@ namespace KamiSama.Repositories
 {
 	public abstract class CachedRepository<_UnitOfWorkType, _EntityType> : IRepository<_UnitOfWorkType, _EntityType>
 	{
-		private _EntityType[] items;
+		protected _EntityType[] Items { get; private set; }
 		public DateTime LastUpdate { get; private set; } = DateTime.MinValue;
 		public TimeSpan RefreshInterval { get; private set; }
 
@@ -29,21 +29,21 @@ namespace KamiSama.Repositories
 		{
 			CheckForItems(unitOfWork, forceUpdate: false);
 
-			if (items == null)
+			if (Items == null)
 				return new _EntityType[0];
 
-			return items.Where(predicate.Compile());
+			return Items.Where(predicate.Compile());
 		}
 
 		private void CheckForItems(_UnitOfWorkType unitOfWork, bool forceUpdate)
 		{
 			if (forceUpdate ||
-				(items == null) ||
+				(Items == null) ||
 				(DateTime.Now - LastUpdate > RefreshInterval))
 			{
 				try
 				{
-					items = LoadItems(unitOfWork);
+					Items = LoadItems(unitOfWork);
 				}
 				catch (Exception)
 				{
@@ -55,5 +55,9 @@ namespace KamiSama.Repositories
 		}
 
 		protected abstract _EntityType[] LoadItems(_UnitOfWorkType unitOfWork);
+
+		public virtual void SaveChanges(_UnitOfWorkType unitOfWork)
+		{
+		}
 	}
 }

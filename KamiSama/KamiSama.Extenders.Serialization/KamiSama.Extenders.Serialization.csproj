@@ -5,7 +5,9 @@
 		<Description>Serialization helpers  for Json and XML</Description>
 		<Authors>Kamran Fallah</Authors>
 		<Company>Kamran Fallah</Company>
-		<PackageReleaseNotes>v1.0.1
+		<PackageReleaseNotes>v1.0.2
+- XmlDictionary is added which is serializable.
+v1.0.1
 - Xml Serialization is added here.
 v1.0.0
 - first version</PackageReleaseNotes>

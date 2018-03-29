@@ -1,0 +1,52 @@
+﻿using System.Diagnostics.CodeAnalysis;
+using KamiSama.Extenders;
+using Xunit;
+using Xunit.Categories;
+
+namespace XTest
+{
+	[Category("KS.Ex.Hashing")]
+	[ExcludeFromCodeCoverage]
+	public class HashTests
+	{
+		[Fact(DisplayName = "Byte[] MD5")]
+		public void ByteArray_Md5Test()
+		{
+			var data = new byte[] {0x03, 0x44, 0x55, 0x12};
+			var result = new byte[] {0x19, 0x9b, 0xf2, 0xf3, 0x31, 0x0d, 0xd9, 0x4d, 0x24, 0x82, 0x0e, 0xc1, 0x25, 0x47, 0x8a, 0x83};
+			Assert.Equal(result, data.GetMd5());
+			Assert.Equal("199BF2F3310DD94D24820EC125478A83", data.GetMd5Hex());
+		}
+
+		[Fact(DisplayName = "String MD5")]
+		public void String_Md5Test()
+		{
+			var data = "salam";
+
+			var result = new byte[] { 0xde, 0x68, 0x38, 0x25, 0x2f, 0x95, 0xd3, 0xb9, 0xe8, 0x03, 0xb2, 0x8d, 0xf3, 0x3b, 0x4b, 0xaa};
+
+			Assert.Equal(result, data.GetMd5());
+			Assert.Equal("DE6838252F95D3B9E803B28DF33B4BAA", data.GetMd5Hex());
+		}
+
+		[Fact(DisplayName = "Byte[] Sha1")]
+		public void ByteArray_Sha1Test()
+		{
+			var data = new byte[] { 0x03, 0x44, 0x55, 0x12 };
+			var result = new byte[] { 0xbf, 0xfb, 0xe0, 0x75, 0xa2, 0x2b, 0x4a, 0x97, 0x2d, 0xfa, 0x97, 0x6e, 0x07, 0x47, 0x8c, 0x43, 0xbe, 0xfa, 0xfc ,0xad};
+			Assert.Equal(result, data.GetSha1());
+			Assert.Equal("BFFBE075A22B4A972DFA976E07478C43BEFAFCAD", data.GetSha1Hex());
+		}
+
+		[Fact(DisplayName = "String Sha1")]
+		public void String_Sha1Test()
+		{
+			var data = "salam";
+
+			var result = new byte[] { 0x18, 0xae, 0x4d, 0xd1, 0xe3, 0xdb ,0x1d, 0x49, 0xa7, 0x38, 0x22, 0x61, 0x69, 0xe3, 0xb0, 0x99, 0x32, 0x5c, 0x79, 0xa0};
+
+			Assert.Equal(result, data.GetSha1());
+			Assert.Equal("18AE4DD1E3DB1D49A738226169E3B099325C79A0", data.GetSha1Hex());
+		}
+	}
+}

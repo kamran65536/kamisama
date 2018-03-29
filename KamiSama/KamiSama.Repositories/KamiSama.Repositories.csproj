@@ -5,11 +5,12 @@
 		<Authors>Kamran Fallah</Authors>
 		<Company>-</Company>
 		<Description>Repository pattern common usages.</Description>
-		<PackageReleaseNotes>v1.0.0-alpha04 (not tested)
-- in memory repository</PackageReleaseNotes>
+		<PackageReleaseNotes>v1.0.0-alpha06 (not tested)
+- in memory repository
+- save changes is added.</PackageReleaseNotes>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<DebugType>Full</DebugType>
-		<Version>1.0.0-alpha04</Version>
+		<Version>1.0.0-alpha06</Version>
 		<RepositoryUrl>https://gitlab.com/kamran65536/KamiSama</RepositoryUrl>
 	</PropertyGroup>
 

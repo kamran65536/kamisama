@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -79,6 +80,18 @@
     <ProjectReference Include="..\KamiSama.Extenders.Serialization\KamiSama.Extenders.Serialization.csproj">
       <Project>{B0014FD3-CB24-466F-8CE9-2B216BAB17DB}</Project>
       <Name>KamiSama.Extenders.Serialization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KamiSama.Extenders\KamiSama.Extenders.csproj">
+      <Project>{82fd91c2-25eb-4d44-a755-991746320f71}</Project>
+      <Name>KamiSama.Extenders</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KamiSama.Iso8583.Xml\KamiSama.Iso8583.Xml.csproj">
+      <Project>{334AF693-8831-4D32-9F16-A93B2803ECB9}</Project>
+      <Name>KamiSama.Iso8583.Xml</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KamiSama.Iso8583\KamiSama.Iso8583.csproj">
+      <Project>{41999B3E-2913-4F9D-881F-1375C52EE5AA}</Project>
+      <Name>KamiSama.Iso8583</Name>
     </ProjectReference>
     <ProjectReference Include="..\KamiSama.Ninject.Attributes\KamiSama.Extenders.Attributes.csproj">
       <Project>{D16348E7-2B30-4E25-9EF3-AAE8C9F7BE06}</Project>

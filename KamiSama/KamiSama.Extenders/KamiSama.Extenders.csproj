@@ -6,13 +6,18 @@
 		<Company>-</Company>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<Description>Useful extenders suchas ToBytes, ToHex, ...</Description>
-		<PackageReleaseNotes>1.0.1
+		<PackageReleaseNotes>v1.0.2
+bug fix in encryption/decryption
+v1.0.1
 XmlSerializationExtender is moved to KamiSama.Serialization
 v1.0.0
-first version		</PackageReleaseNotes>
-		<DebugType>Full</DebugType>
-		<Version>1.0.1</Version>
+first version
+		</PackageReleaseNotes>
+
+		<Version>1.0.2</Version>
 		<RepositoryUrl>https://gitlab.com/kamran65536/KamiSama</RepositoryUrl>
 	</PropertyGroup>
-
+	<PropertyGroup>
+		<DebugType>Full</DebugType>
+	</PropertyGroup>
 </Project>

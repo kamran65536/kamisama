@@ -8,7 +8,6 @@ namespace KamiSama.Extenders
 	public static class XmlSerializationExtender
 	{
 		#region Serialization
-
 		public static string Serialize(this object obj, bool indented = false)
 		{
 			using (var writer = new StringWriter())
@@ -42,7 +41,6 @@ namespace KamiSama.Extenders
 			}
 		}
 		#endregion
-
 		#region Deserialization
 
 		public static _ObjectType Deserialize<_ObjectType>(this string str)

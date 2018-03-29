@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KamiSama.Iso8583.Protocols\KamiSama.Iso8583.Protocols.csproj" />
+  </ItemGroup>
+
+</Project>

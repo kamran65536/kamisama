@@ -9,7 +9,7 @@ namespace KamiSama.Repositories
 	{
 		private HashSet<_EntityType> items;
 
-		public InMemoryRepository(_UnitOfWorkType unitOfWork, IEnumerable<_EntityType> initialItems = null, IEqualityComparer<_EntityType> comparer = null)
+		public InMemoryRepository(IEnumerable<_EntityType> initialItems = null, IEqualityComparer<_EntityType> comparer = null)
 		{
 			initialItems = initialItems ?? new _EntityType[0];
 
@@ -31,5 +31,9 @@ namespace KamiSama.Repositories
 
 		public IEnumerable<_EntityType> Where(_UnitOfWorkType unitOfWork, Expression<Func<_EntityType, bool>> predicate)
 			=> items.Where(predicate.Compile());
+
+		public void SaveChanges(_UnitOfWorkType unitOfWork)
+		{
+		}
 	}
 }

@@ -50,25 +50,27 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="ArrayTests.cs" />
-    <Compile Include="ByteArrayTests.cs" />
-    <Compile Include="ConversionTests.cs" />
-    <Compile Include="CryptographyTests.cs" />
+    <Compile Include="KamiSama.Configs\ConfigTests.cs" />
+    <Compile Include="KamiSama.Configs\SampleSettings.cs" />
+    <Compile Include="KamiSama.Extenders\ArrayTests.cs" />
+    <Compile Include="KamiSama.Extenders\ByteArrayTests.cs" />
+    <Compile Include="KamiSama.Extenders\ConversionTests.cs" />
+    <Compile Include="KamiSama.Extenders\CryptographyTests.cs" />
     <Compile Include="DataTypes\Kami.cs" />
     <Compile Include="DataTypes\Kamran.cs" />
-    <Compile Include="HashTests.cs" />
-    <Compile Include="NinjectTests.cs" />
-    <Compile Include="JsonSerializationTests.cs" />
+    <Compile Include="KamiSama.Extenders\HashTests.cs" />
+    <Compile Include="KamiSama.Extenders.Ninject\NinjectTests.cs" />
+    <Compile Include="KamiSama.Extenders.Serialization\JsonSerializationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="StreamTests.cs" />
-    <Compile Include="StringTests.cs" />
-    <Compile Include="TimeSpanTests.cs" />
-    <Compile Include="XmlSerializationTests.cs" />
+    <Compile Include="KamiSama.Extenders\StreamTests.cs" />
+    <Compile Include="KamiSama.Extenders\StringTests.cs" />
+    <Compile Include="KamiSama.Extenders\TimeSpanTests.cs" />
+    <Compile Include="KamiSama.Extenders.Serialization\XmlSerializationTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk">
@@ -97,6 +99,10 @@
     <ProjectReference Include="..\KamiSama.Agents\KamiSama.Agents.csproj">
       <Project>{6ef95733-8911-4043-8638-46beafc7c606}</Project>
       <Name>KamiSama.Agents</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KamiSama.Configs\KamiSama.Configs.csproj">
+      <Project>{AE3637F6-6FDA-43B7-9E05-94669A84B62F}</Project>
+      <Name>KamiSama.Configs</Name>
     </ProjectReference>
     <ProjectReference Include="..\KamiSama.Extenders.Ninject\KamiSama.Extenders.Ninject.csproj">
       <Project>{24df1b61-4b5c-4c4d-baa1-c5835c8893d0}</Project>

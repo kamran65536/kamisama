@@ -10,5 +10,8 @@ initial version</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <RepositoryUrl>https://gitlab.com/kamran65536/KamiSama</RepositoryUrl>
   </PropertyGroup>
+	<PropertyGroup>
+		<DebugType>Full</DebugType>
+	</PropertyGroup>
 
 </Project>

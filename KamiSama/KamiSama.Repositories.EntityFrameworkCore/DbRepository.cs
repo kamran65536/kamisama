@@ -46,5 +46,8 @@ namespace KamiSama.Repositories
 
 		public IEnumerable<_EntityType> Where(IContextBasedUnitOfWork<_ContextType> unitOfWork, Expression<Func<_EntityType, bool>> predicate)
 			=> unitOfWork.GetContext().Set<_EntityType>().Where(predicate);
+
+		public void SaveChanges(IContextBasedUnitOfWork<_ContextType> unitOfWork)
+			=> unitOfWork.GetContext().SaveChanges();
 	}
 }
