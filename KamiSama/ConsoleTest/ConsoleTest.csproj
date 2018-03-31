@@ -97,6 +97,10 @@
       <Project>{D16348E7-2B30-4E25-9EF3-AAE8C9F7BE06}</Project>
       <Name>KamiSama.Extenders.Attributes</Name>
     </ProjectReference>
+    <ProjectReference Include="..\KamiSama.SecureModule.LocalSsm\KamiSama.SecureModule.LocalSsm.csproj">
+      <Project>{201E80F3-A992-4918-ACFC-C8B8C6F8FA0C}</Project>
+      <Name>KamiSama.SecureModule.LocalSsm</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

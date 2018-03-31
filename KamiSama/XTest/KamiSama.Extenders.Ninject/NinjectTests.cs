@@ -33,6 +33,14 @@ namespace XTest.KamiSama.Extenders.Ninject
 	class C4 : Interface3
 	{
 	}
+	[BindTo(typeof(Interface3), Name = "C5")]
+	abstract class C5 : Interface3
+	{
+	}
+	[BindTo(typeof(Interface3), Name = "I4")]
+	abstract class Interface4 : Interface3
+	{
+	}
 	[Category("KS.Ex.Ninject")]
 	[ExcludeFromCodeCoverage]
 	public class NinjectTests
@@ -56,7 +64,7 @@ namespace XTest.KamiSama.Extenders.Ninject
 			Container.ActiveProfiles.Add("Runtime");
 			var kernel = new StandardKernel();
 
-			kernel.Bind<Interface1>().To<C1	>().WhenProfileIs("Runtime2");
+			kernel.Bind<Interface1>().To<C1>().WhenProfileIs("Runtime2");
 
 			Assert.Null(kernel.TryGet<Interface1>());
 		}
@@ -119,6 +127,18 @@ namespace XTest.KamiSama.Extenders.Ninject
 			Container.Instance.ApplyBindToAttributes("XTest.dll");
 
 			Assert.Equal(2, Container.GetAll<Interface2>().Count());
+		}
+		[Fact(DisplayName = "Abstract or Interface")]
+		public void TestAbstractOrInterface()
+		{
+			Container.Reset();
+			Container.ActiveProfiles.Clear();
+			Container.ActiveProfiles.Add("Default");
+			Container.ActiveProfiles.Add("Runtime");
+			Container.Instance.ApplyBindToAttributes("XTest.dll");
+
+			Assert.Null(Container.TryGet<Interface3>("C5"));
+			Assert.Null(Container.TryGet<Interface3>("I4"));
 		}
 	}
 }

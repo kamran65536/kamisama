@@ -22,6 +22,13 @@ namespace XTest.KamiSama.Configs
 
 			SampleSettings.Instance.UseInMemoryPrvider(tmp);
 			Assert.True(object.ReferenceEquals(tmp, SampleSettings.Instance));
+
+			tmp.X = 12;
+
+			SampleSettings.Save();
+			SampleSettings.Load();
+
+			Assert.Equal(12, SampleSettings.Instance.X);
 		}
 	}
 

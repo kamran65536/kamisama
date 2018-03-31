@@ -35,7 +35,9 @@
 						<CollectFromChildProcesses>True</CollectFromChildProcesses>
 						<CollectAspDotNet>False</CollectAspDotNet>
 						<Attributes>
-							<Exclude>^System\.Diagnostics\.CodeAnalysis.ExcludeFromCodeCoverageAttribute$</Exclude>
+							<Exclude>
+								<Attribute>^System\.Diagnostics\.CodeAnalysis.ExcludeFromCodeCoverageAttribute$</Attribute>
+							</Exclude>
 						</Attributes>
 					</CodeCoverage>
 				</Configuration>

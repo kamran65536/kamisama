@@ -61,6 +61,7 @@
     <Compile Include="KamiSama.Extenders\HashTests.cs" />
     <Compile Include="KamiSama.Extenders.Ninject\NinjectTests.cs" />
     <Compile Include="KamiSama.Extenders.Serialization\JsonSerializationTests.cs" />
+    <Compile Include="KamiSama.SecureModule\SecureModuleTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -74,10 +75,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk">
-      <Version>15.5.0</Version>
+      <Version>15.6.2</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
-      <Version>10.0.3</Version>
+      <Version>11.0.2</Version>
     </PackageReference>
     <PackageReference Include="Ninject">
       <Version>3.3.4</Version>
@@ -123,6 +124,14 @@
     <ProjectReference Include="..\KamiSama.Repositories\KamiSama.Repositories.csproj">
       <Project>{a4f56de8-b735-4e12-ba7c-c2b5170b0c7e}</Project>
       <Name>KamiSama.Repositories</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KamiSama.SecureModule.Api\KamiSama.SecureModule.Api.csproj">
+      <Project>{74DDB1F3-E7F0-4970-B747-399664895374}</Project>
+      <Name>KamiSama.SecureModule.Api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KamiSama.SecureModule.LocalSsm\KamiSama.SecureModule.LocalSsm.csproj">
+      <Project>{201E80F3-A992-4918-ACFC-C8B8C6F8FA0C}</Project>
+      <Name>KamiSama.SecureModule.LocalSsm</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

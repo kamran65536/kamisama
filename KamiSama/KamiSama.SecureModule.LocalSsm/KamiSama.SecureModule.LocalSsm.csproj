@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json.Bson" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KamiSama.Extenders\KamiSama.Extenders.csproj" />
+    <ProjectReference Include="..\KamiSama.SecureModule.Api\KamiSama.SecureModule.Api.csproj" />
+  </ItemGroup>
+	<PropertyGroup>
+		<DebugType>Full</DebugType>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<Authors>Kamran Fallah</Authors>
+		<Company>-</Company>
+		<Description>Local SSM (Software Secure Module)</Description>
+		<PackageReleaseNotes>v1.0.1
+- ISecureModule, SecureModuleBase
+v1.0.0
+- Initial version (tested)</PackageReleaseNotes>
+		<Version>1.0.1</Version>
+	</PropertyGroup>
+</Project>

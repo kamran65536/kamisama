@@ -8,7 +8,7 @@ using Ninject.Syntax;
 
 namespace KamiSama.Extenders.Ninject
 {
-	internal class AttributeBasedBindingGenerator  : IBindingGenerator
+	internal class AttributeBasedBindingGenerator : IBindingGenerator
 	{
 		private static IBindingWhenInNamedWithOrOnSyntax<object> ApplyBinding(BindToAttribute attr, Type type, IBindingRoot bindingRoot)
 		{
@@ -25,6 +25,7 @@ namespace KamiSama.Extenders.Ninject
 
 			return syntax as IBindingWhenInNamedWithOrOnSyntax<object>;
 		}
+
 
 		[ExcludeFromCodeCoverage]
 		IEnumerable<IBindingWhenInNamedWithOrOnSyntax<object>> IBindingGenerator.CreateBindings(Type type, IBindingRoot bindingRoot)
