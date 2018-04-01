@@ -6,7 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KamiSama.Repositories
 {
-	public class DbRepository<_ContextType, _EntityType> : IRepository<IContextBasedUnitOfWork<_ContextType>, _EntityType>
+	public class DbRepository<_UnitOfWorkType, _ContextType, _EntityType> : IRepository<_UnitOfWorkType, _EntityType>
+		where _UnitOfWorkType : IContextBasedUnitOfWork<_ContextType>
 		where _ContextType : DbContext
 		where _EntityType : class
 
@@ -22,7 +23,7 @@ namespace KamiSama.Repositories
 			this.autoSaveChanges = autoSaveChanges;
 		}
 
-		public _EntityType Add(IContextBasedUnitOfWork<_ContextType> unitOfWork, _EntityType item)
+		public _EntityType Add(_UnitOfWorkType unitOfWork, _EntityType item)
 		{
 			var context = unitOfWork.GetContext();
 
@@ -33,7 +34,7 @@ namespace KamiSama.Repositories
 			return item;
 		}
 
-		public bool Remove(IContextBasedUnitOfWork<_ContextType> unitOfWork, _EntityType item)
+		public bool Remove(_UnitOfWorkType unitOfWork, _EntityType item)
 		{
 			var context = unitOfWork.GetContext();
 
@@ -44,10 +45,10 @@ namespace KamiSama.Repositories
 			return true;
 		}
 
-		public IEnumerable<_EntityType> Where(IContextBasedUnitOfWork<_ContextType> unitOfWork, Expression<Func<_EntityType, bool>> predicate)
+		public IEnumerable<_EntityType> Where(_UnitOfWorkType unitOfWork, Expression<Func<_EntityType, bool>> predicate)
 			=> unitOfWork.GetContext().Set<_EntityType>().Where(predicate);
 
-		public void SaveChanges(IContextBasedUnitOfWork<_ContextType> unitOfWork)
+		public void SaveChanges(_UnitOfWorkType unitOfWork)
 			=> unitOfWork.GetContext().SaveChanges();
 	}
 }

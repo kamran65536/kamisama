@@ -6,10 +6,11 @@
     <Authors>Kamran Fallah</Authors>
     <Company>-Kamran Fallah</Company>
     <Description>Entity Framework Repository Pattern</Description>
-    <PackageReleaseNotes>-v1.0.0 (alpha06)
+    <PackageReleaseNotes>-v1.0.0 (alpha07)
+change in  repository pattern interface
 IContextBasedUnitOfWork
 DbRepository</PackageReleaseNotes>
-    <Version>1.0.0-alpha06</Version>
+    <Version>1.0.0-alpha07</Version>
   </PropertyGroup>
 
   <ItemGroup>
