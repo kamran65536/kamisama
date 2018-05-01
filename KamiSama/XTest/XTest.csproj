@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\xunit.core.2.0.0\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.core.props" Condition="Exists('..\packages\xunit.core.2.0.0\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.core.props')" />
+  <Import Project="..\packages\xunit.runner.visualstudio.2.0.1\build\net20\xunit.runner.visualstudio.props" Condition="Exists('..\packages\xunit.runner.visualstudio.2.0.1\build\net20\xunit.runner.visualstudio.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -8,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>XTest</RootNamespace>
     <AssemblyName>XTest</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -16,10 +18,8 @@
     <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
     <IsCodedUITest>False</IsCodedUITest>
     <TestProjectType>UnitTest</TestProjectType>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>b0edf53b</NuGetPackageImportStamp>
     <TargetFrameworkProfile />
-    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,7 +39,29 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json.Bson, Version=1.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.Bson.1.0.1\lib\net45\Newtonsoft.Json.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\packages\xunit.abstractions.2.0.0\lib\net35\xunit.abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="xunit.assert, Version=2.0.0.2929, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\packages\xunit.assert.2.0.0\lib\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.assert.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="xunit.core, Version=2.0.0.2929, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\packages\xunit.extensibility.core.2.0.0\lib\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -50,59 +72,40 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="KamiSama.Configs\ConfigTests.cs" />
-    <Compile Include="KamiSama.Configs\SampleSettings.cs" />
-    <Compile Include="KamiSama.Extenders\ArrayTests.cs" />
-    <Compile Include="KamiSama.Extenders\ByteArrayTests.cs" />
-    <Compile Include="KamiSama.Extenders\ConversionTests.cs" />
-    <Compile Include="KamiSama.Extenders\CryptographyTests.cs" />
     <Compile Include="DataTypes\Kami.cs" />
     <Compile Include="DataTypes\Kamran.cs" />
-    <Compile Include="KamiSama.Extenders\HashTests.cs" />
-    <Compile Include="KamiSama.Extenders.Ninject\NinjectTests.cs" />
-    <Compile Include="KamiSama.Extenders.Serialization\JsonSerializationTests.cs" />
-    <Compile Include="KamiSama.SecureModule\SecureModuleTests.cs" />
+    <Compile Include="Ks.Configs\ConfigTests.cs" />
+    <Compile Include="Ks.Configs\SampleSettings.cs" />
+    <Compile Include="Ks.Extenders.Ninject\NinjectTests.cs" />
+    <Compile Include="Ks.Extenders.Serialization\JsonSerializationTests.cs" />
+    <Compile Include="Ks.Extenders.Serialization\XmlSerializationTests.cs" />
+    <Compile Include="Ks.Extenders\ArrayTests.cs" />
+    <Compile Include="Ks.Extenders\ByteArrayTests.cs" />
+    <Compile Include="Ks.Extenders\ConversionTests.cs" />
+    <Compile Include="Ks.Extenders\CryptographyTests.cs" />
+    <Compile Include="Ks.Extenders\HashTests.cs" />
+    <Compile Include="Ks.Extenders\StreamTests.cs" />
+    <Compile Include="Ks.Extenders\StringTests.cs" />
+    <Compile Include="Ks.Extenders\TimeSpanTests.cs" />
+    <Compile Include="Ks.SecureModule\SecureModuleTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="KamiSama.Extenders\StreamTests.cs" />
-    <Compile Include="KamiSama.Extenders\StringTests.cs" />
-    <Compile Include="KamiSama.Extenders\TimeSpanTests.cs" />
-    <Compile Include="KamiSama.Extenders.Serialization\XmlSerializationTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk">
-      <Version>15.6.2</Version>
-    </PackageReference>
-    <PackageReference Include="Newtonsoft.Json">
-      <Version>11.0.2</Version>
-    </PackageReference>
-    <PackageReference Include="Ninject">
-      <Version>3.3.4</Version>
-    </PackageReference>
-    <PackageReference Include="Ninject.Extensions.Conventions">
-      <Version>3.3.0</Version>
-    </PackageReference>
-    <PackageReference Include="xunit">
-      <Version>2.3.1</Version>
-    </PackageReference>
-    <PackageReference Include="xunit.categories">
-      <Version>2.0.3</Version>
-    </PackageReference>
-    <PackageReference Include="xunit.runner.visualstudio">
-      <Version>2.3.1</Version>
-    </PackageReference>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\KamiSama.Agents\KamiSama.Agents.csproj">
-      <Project>{6ef95733-8911-4043-8638-46beafc7c606}</Project>
-      <Name>KamiSama.Agents</Name>
+    <ProjectReference Include="..\KamiSama.Configs.Json\KamiSama.Configs.Json.csproj">
+      <Project>{31610fea-0a11-4c06-8861-e2518b0ef305}</Project>
+      <Name>KamiSama.Configs.Json</Name>
     </ProjectReference>
     <ProjectReference Include="..\KamiSama.Configs\KamiSama.Configs.csproj">
-      <Project>{AE3637F6-6FDA-43B7-9E05-94669A84B62F}</Project>
+      <Project>{ae3637f6-6fda-43b7-9e05-94669a84b62f}</Project>
       <Name>KamiSama.Configs</Name>
     </ProjectReference>
     <ProjectReference Include="..\KamiSama.Extenders.Ninject\KamiSama.Extenders.Ninject.csproj">
@@ -118,20 +121,20 @@
       <Name>KamiSama.Extenders</Name>
     </ProjectReference>
     <ProjectReference Include="..\KamiSama.Ninject.Attributes\KamiSama.Extenders.Attributes.csproj">
-      <Project>{D16348E7-2B30-4E25-9EF3-AAE8C9F7BE06}</Project>
+      <Project>{d16348e7-2b30-4e25-9ef3-aae8c9f7be06}</Project>
       <Name>KamiSama.Extenders.Attributes</Name>
     </ProjectReference>
-    <ProjectReference Include="..\KamiSama.Repositories\KamiSama.Repositories.csproj">
-      <Project>{a4f56de8-b735-4e12-ba7c-c2b5170b0c7e}</Project>
-      <Name>KamiSama.Repositories</Name>
-    </ProjectReference>
     <ProjectReference Include="..\KamiSama.SecureModule.Api\KamiSama.SecureModule.Api.csproj">
-      <Project>{74DDB1F3-E7F0-4970-B747-399664895374}</Project>
+      <Project>{AD144E79-6F7D-48D1-8D6F-E00F6FCED403}</Project>
       <Name>KamiSama.SecureModule.Api</Name>
     </ProjectReference>
     <ProjectReference Include="..\KamiSama.SecureModule.LocalSsm\KamiSama.SecureModule.LocalSsm.csproj">
       <Project>{201E80F3-A992-4918-ACFC-C8B8C6F8FA0C}</Project>
       <Name>KamiSama.SecureModule.LocalSsm</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KamiSama.SecureModule\KamiSama.SecureModule.csproj">
+      <Project>{4F93E5AD-45C9-4F52-B7BF-84512C240CC9}</Project>
+      <Name>KamiSama.SecureModule</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -142,6 +145,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\RsaKey.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Ks.Algorithms.Simplex\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
@@ -163,6 +169,13 @@
   </Choose>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\xunit.runner.visualstudio.2.0.1\build\net20\xunit.runner.visualstudio.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\xunit.runner.visualstudio.2.0.1\build\net20\xunit.runner.visualstudio.props'))" />
+    <Error Condition="!Exists('..\packages\xunit.core.2.0.0\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\xunit.core.2.0.0\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.core.props'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

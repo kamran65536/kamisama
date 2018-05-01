@@ -1,25 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Security.Cryptography;
 using KamiSama.SecureModule.Api;
+using KamiSama.SecureModule.KeySerializers.Bson;
+using KamiSama.SecureModule.KeyStores;
 using KamiSama.SecureModule.LocalSsm.Algorithms;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Bson;
 
 namespace KamiSama.SecureModule.LocalSsm
 {
 
 	public class LocalSoftwareSecureModule : SecureModuleBase<SsmKey>
 	{
-		internal SsmKey masterKey;
-		private JsonSerializer jsonSerializer;
-		public Dictionary<string, ISecurityAlgorithm> Algorithms { get; }
+		public override IKeySerializer<SsmKey> KeySerializer { get; }
 
-		public LocalSoftwareSecureModule(SsmKey masterKey)
+		protected LocalSsmSettings Settings { get; }
+		public Dictionary<string, ISecurityAlgorithm> Algorithms { get; }
+		protected SsmKey MasterKey { get; private set; }
+
+		public LocalSoftwareSecureModule(LocalSsmSettings settings)
 		{
-			this.masterKey = masterKey;
-			this.jsonSerializer = JsonSerializer.CreateDefault();
+			settings = settings ?? LocalSsmSettings.Instance;
+
+			this.MasterKey = SsmKey.CreatePlainKey(settings.MasterKeyAlgorithm, settings.MasterKey);
+			this.KeySerializer = new BsonKeySerializer<SsmKey>(this);
+
 			this.Algorithms = new Dictionary<string, ISecurityAlgorithm>(StringComparer.InvariantCultureIgnoreCase)
 			{
 				{ "des" ,  new DesAlgorithm() },
@@ -30,39 +34,12 @@ namespace KamiSama.SecureModule.LocalSsm
 				{ "aes" ,  new AesAlgorithm() },
 			};
 		}
-
-		#region Load/Store Key
-		public override SsmKey LoadKey(byte[] keyData)
+		public LocalSoftwareSecureModule()
+			: this(null)
 		{
-			if (keyData == null)
-				throw new NullReferenceException("Key data cannot be null.");
-
-			using (var memStream = new MemoryStream(keyData))
-			{
-				using (var bsonReader = new BsonDataReader(memStream))
-				{
-					return jsonSerializer.Deserialize<SsmKey>(bsonReader);
-				}
-			}
 		}
 
-		public override byte[] StoreKey(SsmKey key)
-		{
-			if (key == null)
-				throw new NullReferenceException("Key cannot be null.");
-
-			using (var memStream = new MemoryStream())
-			{
-				using (var bsonWriter = new BsonDataWriter(memStream))
-				{
-					jsonSerializer.Serialize(bsonWriter, key);
-				}
-
-				return memStream.ToArray();
-			}
-		}
-		#endregion
-		public override byte[] Encrypt(SsmKey key, byte[] data, byte[] iv = null, CipherMode cipherMode = CipherMode.CBC, PaddingMode padding = PaddingMode.None)
+		public override byte[] Encrypt(SsmKey key, byte[] data, byte[] iv = null, CipherMode cipherMode = CipherMode.CBC, PaddingMode padding = PaddingMode.PKCS7)
 		{
 			if (!Algorithms.TryGetValue(key.Algorithm, out ISecurityAlgorithm algorithm))
 				throw new Exception($"Algorithm {key.Algorithm} is not found.");
@@ -71,7 +48,7 @@ namespace KamiSama.SecureModule.LocalSsm
 				if (key.IsPlainKey)
 					key.DecryptedKey = key.KeyData;
 				else
-					key.DecryptedKey = Decrypt(masterKey, key.KeyData, iv: null, cipherMode: CipherMode.CBC, padding: PaddingMode.PKCS7);
+					key.DecryptedKey = Decrypt(MasterKey, key.KeyData, iv: null, cipherMode: CipherMode.CBC, padding: PaddingMode.PKCS7);
 
 			return algorithm.Encrypt(key.DecryptedKey, data, iv, cipherMode, padding);
 		}
@@ -84,10 +61,34 @@ namespace KamiSama.SecureModule.LocalSsm
 				if (key.IsPlainKey)
 					key.DecryptedKey = key.KeyData;
 				else
-					key.DecryptedKey = Decrypt(masterKey, key.KeyData, iv: null, cipherMode: CipherMode.CBC, padding: PaddingMode.PKCS7);
+					key.DecryptedKey = Decrypt(MasterKey, key.KeyData, iv: null, cipherMode: CipherMode.CBC, padding: PaddingMode.PKCS7);
 
 			return algorithm.Decrypt(key.DecryptedKey, data, iv, cipherMode, padding);
 		}
 
+		public override SsmKey GenerateKeyObject(string algorithm, byte[] key, SsmKey parentKey = null)
+		{
+			parentKey = parentKey ?? MasterKey;
+
+			return new SsmKey
+			{
+				Algorithm = algorithm,
+				KeyData = Encrypt(parentKey, key, null, CipherMode.CBC, PaddingMode.PKCS7),
+				IsPlainKey = false,
+			};
+		}
+
+		protected override IKeyStore<SsmKey> CreateKeyStore(string name)
+		{
+			switch (name?.ToLower())
+			{
+				default:
+				case "":
+				case "inmemory":
+					return new InMemoryKeyStore<SsmKey>(this);
+				case "filebased":
+					return new FileBasedKeyStore<SsmKey>(Settings.FileBasedKeyStorePath, this);
+			}
+		}
 	}
 }

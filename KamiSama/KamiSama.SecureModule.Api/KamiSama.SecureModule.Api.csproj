@@ -2,15 +2,18 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Authors>Kamran Fallah</Authors>
-    <Company>-</Company>
     <Description>API Library for SecureModule (SSM and HSM)</Description>
-    <PackageReleaseNotes>v1.0.1
+    <Authors>Kamran Fallah</Authors>
+    <PackageReleaseNotes>v1.1.0
+SecureModuleBase is moved to KamiSama.SecureModule
+IKeySerializer and IKeyStore are added.
+LoadKey and StoreKey methods are moved to IKeySerializer
+v1.0.1
 - ISecureModule ans SecureModuleBase
 v1.0.0
 - IKey, ISecureModule</PackageReleaseNotes>
-    <Version>1.0.1</Version>
+    <Version>1.1.0</Version>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
 </Project>

@@ -3,11 +3,22 @@
 namespace KamiSama.SecureModule.Api
 {
 	public interface ISecureModule
-	{
-		IKeyReference LoadKey(byte[] keyData);
-		byte[] StoreKey(IKeyReference key);
+    {
+		IKeySerializer KeySerializer { get; }
 
-		byte[] Encrypt(IKeyReference key, byte[] data, byte[] iv = null, CipherMode cipherMode = CipherMode.CBC, PaddingMode padding = PaddingMode.None);
-		byte[] Decrypt(IKeyReference key, byte[] data, byte[] iv = null, CipherMode cipherMode = CipherMode.CBC, PaddingMode padding = PaddingMode.None);
+		IKeyStore GetKeyStore(string name = null);
+		byte[] Encrypt(IKey key, byte[] data, byte[] iv = null, CipherMode cipherMode = CipherMode.CBC, PaddingMode padding = PaddingMode.PKCS7);
+		byte[] Decrypt(IKey key, byte[] cipher, byte[] iv = null, CipherMode cipherMode = CipherMode.CBC, PaddingMode padding = PaddingMode.PKCS7);
+		IKey GenerateKeyObject(string algorithm, byte[] key, IKey parentKey = null);
+    }
+	public interface ISecureModule<_KeyType> : ISecureModule
+		where _KeyType : class, IKey
+	{
+		new IKeySerializer<_KeyType> KeySerializer { get; }
+
+		new IKeyStore<_KeyType> GetKeyStore(string name = null);
+		byte[] Encrypt(_KeyType key, byte[] data, byte[] iv = null, CipherMode cipherMode = CipherMode.CBC, PaddingMode padding = PaddingMode.PKCS7);
+		byte[] Decrypt(_KeyType key, byte[] cipher, byte[] iv = null, CipherMode cipherMode = CipherMode.CBC, PaddingMode padding = PaddingMode.PKCS7);
+		_KeyType GenerateKeyObject(string algorithm, byte[] key, _KeyType parentKey = null);
 	}
 }
