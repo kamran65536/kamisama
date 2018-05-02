@@ -9,7 +9,7 @@ namespace KamiSama.SecureModule.Api
 		IKeyStore GetKeyStore(string name = null);
 		byte[] Encrypt(IKey key, byte[] data, byte[] iv = null, CipherMode cipherMode = CipherMode.CBC, PaddingMode padding = PaddingMode.PKCS7);
 		byte[] Decrypt(IKey key, byte[] cipher, byte[] iv = null, CipherMode cipherMode = CipherMode.CBC, PaddingMode padding = PaddingMode.PKCS7);
-		IKey GenerateKeyObject(string algorithm, byte[] key, IKey parentKey = null);
+		IKey GenerateKeyObject(string algorithm, byte[] key, KeyGenerationSettings settings	 = null);
     }
 	public interface ISecureModule<_KeyType> : ISecureModule
 		where _KeyType : class, IKey
@@ -19,6 +19,6 @@ namespace KamiSama.SecureModule.Api
 		new IKeyStore<_KeyType> GetKeyStore(string name = null);
 		byte[] Encrypt(_KeyType key, byte[] data, byte[] iv = null, CipherMode cipherMode = CipherMode.CBC, PaddingMode padding = PaddingMode.PKCS7);
 		byte[] Decrypt(_KeyType key, byte[] cipher, byte[] iv = null, CipherMode cipherMode = CipherMode.CBC, PaddingMode padding = PaddingMode.PKCS7);
-		_KeyType GenerateKeyObject(string algorithm, byte[] key, _KeyType parentKey = null);
+		new _KeyType GenerateKeyObject(string algorithm, byte[] key, KeyGenerationSettings settings = null);
 	}
 }

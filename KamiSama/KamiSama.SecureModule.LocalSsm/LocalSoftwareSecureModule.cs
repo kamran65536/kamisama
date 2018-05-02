@@ -66,9 +66,9 @@ namespace KamiSama.SecureModule.LocalSsm
 			return algorithm.Decrypt(key.DecryptedKey, data, iv, cipherMode, padding);
 		}
 
-		public override SsmKey GenerateKeyObject(string algorithm, byte[] key, SsmKey parentKey = null)
+		public override SsmKey GenerateKeyObject(string algorithm, byte[] key, KeyGenerationSettings settings = null)
 		{
-			parentKey = parentKey ?? MasterKey;
+			var parentKey = ((SsmKey) settings.ParentKey) ?? MasterKey;
 
 			return new SsmKey
 			{

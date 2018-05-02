@@ -22,12 +22,14 @@
 		<Authors>Kamran Fallah</Authors>
 		<Company>Kamran Fallah</Company>
 		<Description>Local SSM (Software Secure Module)</Description>
-		<PackageReleaseNotes>v1.1.0
+		<PackageReleaseNotes>v1.1.1
+KeyGenerationSettings is added
+v1.1.0
 - some refactorings corresponding to KamiSama.SecureModule v1.1.0
 v1.0.1
 - ISecureModule, SecureModuleBase
 v1.0.0
 - Initial version (tested)</PackageReleaseNotes>
-		<Version>1.1.0</Version>
+		<Version>1.1.1</Version>
 	</PropertyGroup>
 </Project>

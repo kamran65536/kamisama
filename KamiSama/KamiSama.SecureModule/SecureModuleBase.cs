@@ -17,8 +17,8 @@ namespace KamiSama.SecureModule
 		byte[] ISecureModule.Decrypt(IKey key, byte[] cipher, byte[] iv, CipherMode cipherMode, PaddingMode padding) => Decrypt((_KeyType) key, cipher, iv, cipherMode, padding);
 		public abstract byte[] Encrypt(_KeyType key, byte[] data, byte[] iv = null, CipherMode cipherMode = CipherMode.CBC, PaddingMode padding = PaddingMode.PKCS7);
 		byte[] ISecureModule.Encrypt(IKey key, byte[] cipher, byte[] iv, CipherMode cipherMode, PaddingMode padding) => Encrypt((_KeyType) key, cipher, iv, cipherMode, padding);
-		public abstract _KeyType GenerateKeyObject(string algorithm, byte[] key, _KeyType parentKey = null);
-		IKey ISecureModule.GenerateKeyObject(string algorithm, byte[] key, IKey parentKey) => GenerateKeyObject(algorithm, key, (_KeyType) parentKey);
+		public abstract _KeyType GenerateKeyObject(string algorithm, byte[] key, KeyGenerationSettings settings);
+		IKey ISecureModule.GenerateKeyObject(string algorithm, byte[] key, KeyGenerationSettings settings) => GenerateKeyObject(algorithm, key, settings);
 		IKeyStore ISecureModule.GetKeyStore(string name) => this.GetKeyStore(name);
 		public IKeyStore<_KeyType> GetKeyStore(string name = null)
 		{

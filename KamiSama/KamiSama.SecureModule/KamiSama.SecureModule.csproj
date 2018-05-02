@@ -6,9 +6,11 @@
     <Authors>Kamran Fallah</Authors>
     <Company>-</Company>
     <Description>SecureModule base classes</Description>
-    <PackageReleaseNotes>v1.1.0
+    <PackageReleaseNotes>v1.1.1
+KeyGenerationSettings is added
+v1.1.0
 SecureModuleBase</PackageReleaseNotes>
-    <Version>1.1.0</Version>
+    <Version>1.1.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
