@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<Authors>Kamran Fallah</Authors>
+		<Company>-</Company>
+		<Product>KamiSama.Extenders.Ninject</Product>
+		<Description>Ninject Wrapper with BindTo additional attribute.</Description>
+		<PackageReleaseNotes>v1.1.0 almost redesigned
+- ioc-settings is removed from package
+- container does not have two kernels anymore. instead use Container.ActiveProfiles
+- ApplyBindToAttributes extender is added.
+- WhenProfileIs condition is added.
+v1.0.0
+- initial version
+		</PackageReleaseNotes>
+		<Version>1.1.0</Version>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<DebugType>Full</DebugType>
+		<RepositoryUrl>https://gitlab.com/kamran65536/KamiSama</RepositoryUrl>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Ninject" Version="3.3.4" />
+		<PackageReference Include="Ninject.Extensions.Conventions" Version="3.3.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\KamiSama.Extenders.Attributes\KamiSama.Extenders.Attributes.csproj" />
+	</ItemGroup>
+
+</Project>

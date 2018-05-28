@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Kamran Fallah</Authors>
+    <Company>-</Company>
+    <Description>Xml Message template for iso8583</Description>
+    <PackageReleaseNotes>v1.0.0</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\KamiSama.Extenders\KamiSama.Extenders.Serialization\KamiSama.Extenders.Serialization.csproj" />
+    <ProjectReference Include="..\KamiSama.Iso8583.Protocols\KamiSama.Iso8583.Protocols.csproj" />
+    <ProjectReference Include="..\KamiSama.Iso8583\KamiSama.Iso8583.csproj" />
+  </ItemGroup>
+
+</Project>

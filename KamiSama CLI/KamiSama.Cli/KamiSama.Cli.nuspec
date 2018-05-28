@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+	<metadata>
+		<id>KamiSama.Cli</id>
+		<version>$version$</version>
+		<authors>Kamran Fallah</authors>
+		<owners>Kamran Fallah</owners>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>Kami Sama helper tools</description>
+		<!--<packageTypes>
+			<packageType name="DotnetCliTool" />
+		</packageTypes>-->
+	</metadata>
+	<files>
+		<file src="bin\$configuration$\$id$.dll" target="tools" />
+		<file src="bin\$configuration$\$id$.dll" target="tools\dotnet-$id$.dll" />
+	</files>
+</package>

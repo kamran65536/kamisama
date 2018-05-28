@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<package >
+	<!--
+	Any nuget reference you add will be included in the nuget package as a dependency without you
+	having to add it in here.
+	
+	For more info on how to compose a nuspec file see http://docs.nuget.org/create/nuspec-reference 
+	-->
+
+	<metadata>
+		<id>X.Common</id>
+		<version>1.0.0.2</version>
+		<title>X Common Library by KF</title>
+		<description>from X Libraries edition</description>
+		<authors>Kamran Fallah</authors>
+		<owners>Kamran Fallah</owners>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<releaseNotes>
+			v1.0.0.2
+				- StreamExtender is added
+			v1.0.0.1
+				-Agents
+				-Extenders: TimeSpan, Object, ByteArray, Array, Serialization ....
+				-IOC based on Ninject
+		</releaseNotes>
+		<copyright>Copyright 2017</copyright>
+		<dependencies>
+			<dependency id="Nlog" version="[4.4.11,5)" />
+			<dependency id="Newtonsoft.Json" version="[10.0.3, 11.0.0)" />
+			<dependency id="Ninject" version="[3.2.2.0, 4.0.0.0)" />
+			<dependency id="Ninject.Extensions.Conventions" version="[3.2.0.0, 4.0.0.0)" />
+		</dependencies>
+	</metadata>
+	<files>
+		<file src="$OutputPath$$id$.Dll" target="lib\net462\" />
+		<file src="$OutputPath$$id$.pdb" target="lib\net462\" />
+	</files>
+</package>

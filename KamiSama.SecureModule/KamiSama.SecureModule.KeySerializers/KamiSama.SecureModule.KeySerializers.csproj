@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Kamran Fallah</Authors>
+    <Description>KeySerializer base classes</Description>
+    <PackageReleaseNotes>v1.1.2
+- KeyGenerationSettings is changed.
+v1.1.0
+KeySerializer base class is added.</PackageReleaseNotes>
+    <Version>1.1.2-beta</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KamiSama.SecureModule.Api\KamiSama.SecureModule.Api.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,79 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2000
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.SecureModule.Api", "KamiSama.SecureModule.Api\KamiSama.SecureModule.Api.csproj", "{569240E0-1398-4709-8F01-6E86522F7353}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.SecureModule", "KamiSama.SecureModule\KamiSama.SecureModule.csproj", "{B29D9FC0-5D0B-42FD-92B8-B54DC279143C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.SecureModule.KeySerializers", "KamiSama.SecureModule.KeySerializers\KamiSama.SecureModule.KeySerializers.csproj", "{BC7B0C06-9A14-46B7-81FD-B16389560F07}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.SecureModule.KeySerializers.Bson", "KamiSama.SecureModule.KeySerializers.Bson\KamiSama.SecureModule.KeySerializers.Bson.csproj", "{3B1ED144-617D-4BE4-A1AD-6D4AD10EDC04}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.SecureModule.KeyStores", "KamiSama.SecureModule.KeyStores\KamiSama.SecureModule.KeyStores.csproj", "{351EF650-888B-4F32-AA64-8B2B610FA019}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.SecureModule.LocalSsm", "KamiSama.SecureModule.LocalSsm\KamiSama.SecureModule.LocalSsm.csproj", "{44A2C58E-AD3C-4F1E-B9E4-1A71F40EA9BC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{DA891839-AEEB-4902-8107-014A5BA1F2EF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Extenders", "..\KamiSama.Extenders\KamiSama.Extenders\KamiSama.Extenders.csproj", "{33D3C6EC-B5A2-47BA-A19E-92DA044DB640}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Configs", "..\KamiSama.Configs\KamiSama.Configs\KamiSama.Configs.csproj", "{66ED00A6-89EE-49FF-A97A-826ADB6851FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XTest", "..\KamiSama.Repsitories\XTest\XTest.csproj", "{2E3DF5C2-8A38-4A03-86D7-8D463C917E47}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{569240E0-1398-4709-8F01-6E86522F7353}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{569240E0-1398-4709-8F01-6E86522F7353}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{569240E0-1398-4709-8F01-6E86522F7353}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{569240E0-1398-4709-8F01-6E86522F7353}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B29D9FC0-5D0B-42FD-92B8-B54DC279143C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B29D9FC0-5D0B-42FD-92B8-B54DC279143C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B29D9FC0-5D0B-42FD-92B8-B54DC279143C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B29D9FC0-5D0B-42FD-92B8-B54DC279143C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC7B0C06-9A14-46B7-81FD-B16389560F07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC7B0C06-9A14-46B7-81FD-B16389560F07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC7B0C06-9A14-46B7-81FD-B16389560F07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC7B0C06-9A14-46B7-81FD-B16389560F07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B1ED144-617D-4BE4-A1AD-6D4AD10EDC04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B1ED144-617D-4BE4-A1AD-6D4AD10EDC04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B1ED144-617D-4BE4-A1AD-6D4AD10EDC04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B1ED144-617D-4BE4-A1AD-6D4AD10EDC04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{351EF650-888B-4F32-AA64-8B2B610FA019}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{351EF650-888B-4F32-AA64-8B2B610FA019}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{351EF650-888B-4F32-AA64-8B2B610FA019}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{351EF650-888B-4F32-AA64-8B2B610FA019}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44A2C58E-AD3C-4F1E-B9E4-1A71F40EA9BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44A2C58E-AD3C-4F1E-B9E4-1A71F40EA9BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44A2C58E-AD3C-4F1E-B9E4-1A71F40EA9BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44A2C58E-AD3C-4F1E-B9E4-1A71F40EA9BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33D3C6EC-B5A2-47BA-A19E-92DA044DB640}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33D3C6EC-B5A2-47BA-A19E-92DA044DB640}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33D3C6EC-B5A2-47BA-A19E-92DA044DB640}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33D3C6EC-B5A2-47BA-A19E-92DA044DB640}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66ED00A6-89EE-49FF-A97A-826ADB6851FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66ED00A6-89EE-49FF-A97A-826ADB6851FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66ED00A6-89EE-49FF-A97A-826ADB6851FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66ED00A6-89EE-49FF-A97A-826ADB6851FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E3DF5C2-8A38-4A03-86D7-8D463C917E47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E3DF5C2-8A38-4A03-86D7-8D463C917E47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E3DF5C2-8A38-4A03-86D7-8D463C917E47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E3DF5C2-8A38-4A03-86D7-8D463C917E47}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{33D3C6EC-B5A2-47BA-A19E-92DA044DB640} = {DA891839-AEEB-4902-8107-014A5BA1F2EF}
+		{66ED00A6-89EE-49FF-A97A-826ADB6851FF} = {DA891839-AEEB-4902-8107-014A5BA1F2EF}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4981F9F5-6795-4CD8-89E6-65060ADB9965}
+	EndGlobalSection
+EndGlobal

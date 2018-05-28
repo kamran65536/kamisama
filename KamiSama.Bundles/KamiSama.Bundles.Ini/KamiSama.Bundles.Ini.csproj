@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Kamran Fallah</Authors>
+    <Description>Ini Source for KamiSama.Bundles</Description>
+    <PackageProjectUrl>https://gitlab.com/kamran65536/KamiSama</PackageProjectUrl>
+    <RepositoryUrl>https://gitlab.com/kamran65536/KamiSama</RepositoryUrl>
+    <PackageReleaseNotes>v1.0.0
+- Ini source</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KamiSama.Bundles\KamiSama.Bundles.csproj" />
+  </ItemGroup>
+
+</Project>

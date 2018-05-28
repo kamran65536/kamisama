@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Kamran Fallah</Authors>
+    <Description>The Easy way to use bundles either as bundle class or key-value pair.</Description>
+    <PackageProjectUrl>https://gitlab.com/kamran65536/KamiSama</PackageProjectUrl>
+    <RepositoryUrl>https://gitlab.com/kamran65536/KamiSama</RepositoryUrl>
+    <PackageReleaseNotes>v1.0.0
+- bundles, in memory bundle source</PackageReleaseNotes>
+  </PropertyGroup>
+
+</Project>
