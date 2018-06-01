@@ -57,7 +57,10 @@
     <Compile Include="Ks.Extenders\ByteArrayTests.cs" />
     <Compile Include="Ks.Extenders\ConversionTests.cs" />
     <Compile Include="Ks.Extenders\CryptographyTests.cs" />
+    <Compile Include="Ks.Extenders\DictionaryTests.cs" />
     <Compile Include="Ks.Extenders\HashTests.cs" />
+    <Compile Include="Ks.Extenders\StackTests.cs" />
+    <Compile Include="Ks.Extenders\QueueTests.cs" />
     <Compile Include="Ks.Extenders\StreamTests.cs" />
     <Compile Include="Ks.Extenders\StringTests.cs" />
     <Compile Include="Ks.Extenders\TimeSpanTests.cs" />
