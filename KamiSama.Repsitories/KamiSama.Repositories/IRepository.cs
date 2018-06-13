@@ -4,12 +4,11 @@ using System.Linq.Expressions;
 
 namespace KamiSama.Repositories
 {
-	public interface IRepository<_UnitOfWorkType, _EntityType>
+	public interface IRepository<_EntityType> : IDisposable
     {
-		IEnumerable<_EntityType> Where(_UnitOfWorkType unitOfWork, Expression<Func<_EntityType, bool>> predicate);
-		_EntityType Add(_UnitOfWorkType unitOfWork, _EntityType item);
-		bool Remove(_UnitOfWorkType unitOfWork, _EntityType item);
-
-		void SaveChanges(_UnitOfWorkType unitOfWork);
+		IEnumerable<_EntityType> Where(Expression<Func<_EntityType, bool>> predicate);
+		void Add(_EntityType item);
+		void Update(_EntityType item);
+		void Delete(_EntityType item);
     }
 }

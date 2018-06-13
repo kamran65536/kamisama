@@ -6,11 +6,13 @@
     <Authors>Kamran Fallah</Authors>
     <Company>-Kamran Fallah</Company>
     <Description>Entity Framework Repository Pattern</Description>
-    <PackageReleaseNotes>-v1.0.0
+    <PackageReleaseNotes>v1.1.0
+complete refactor for DbRepository, namespace is changed.
+v1.0.0
 change in  repository pattern interface
 IContextBasedUnitOfWork
 DbRepository</PackageReleaseNotes>
-    <Version>1.0.0</Version>
+    <Version>1.1.0</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

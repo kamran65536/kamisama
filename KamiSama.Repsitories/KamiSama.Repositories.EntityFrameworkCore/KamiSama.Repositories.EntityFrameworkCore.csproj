@@ -5,15 +5,18 @@
     <Authors>Kamran Fallah</Authors>
     <Company>-</Company>
     <Description>Entity Framework Core Repository Pattern</Description>
-    <Version>1.0.0</Version>
+    <Version>1.1.0</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>-v1.0.0
+    <PackageReleaseNotes>v1.1.0
+complete refactor for dbRepository, namespace is changed.
+iContextBasedUnitOfWork is removed.
+v1.0.0
 changes in repository pattern
 IContextBasedUnitOfWork
 DbRepository
 SaveChanges is added.</PackageReleaseNotes>
     <RepositoryUrl>https://gitlab.com/kamran65536/KamiSama</RepositoryUrl>
-    <RootNamespace>KamiSama.Repositories</RootNamespace>
+    <RootNamespace>KamiSama.Repositories.EntityFrameworkCore</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

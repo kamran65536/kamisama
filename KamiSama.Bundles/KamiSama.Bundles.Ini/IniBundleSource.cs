@@ -7,11 +7,13 @@ namespace KamiSama.Bundles.Ini
 	public class IniBundleSource : BundleSourceBase
 	{
 		public string FileName { get; }
+		public bool TrimKeys { get; }
 
-		public IniBundleSource(string fileName, string defaultCulture = "")
+		public IniBundleSource(string fileName, string defaultCulture = "", bool trimKeys = true)
 			: base(defaultCulture)
 		{
 			this.FileName = fileName;
+			this.TrimKeys = trimKeys;
 		}
 		private string MapDefaultCulture(string culture)
 		{
@@ -34,7 +36,10 @@ namespace KamiSama.Bundles.Ini
 				culture = MapDefaultCulture(culture);
 
 				foreach (var key in file.GetKeys(section))
-					yield return new BundleItem { Culture = culture, Key = key, Value = file.GetValue(key, section) };
+				{
+					var tmp = TrimKeys ? key?.Trim() : key; 
+					yield return new BundleItem { Culture = culture, Key = tmp, Value = file.GetValue(key, section) };
+				}
 			}
 		}
 

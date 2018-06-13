@@ -5,11 +5,16 @@ using System.Linq.Expressions;
 
 namespace KamiSama.Repositories
 {
-	public class InMemoryRepository<_UnitOfWorkType, _EntityType> : IRepository<_UnitOfWorkType, _EntityType>
+	public class InMemoryRepository<_EntityType> : IRepository<_EntityType>
 	{
 		private HashSet<_EntityType> items;
 
-		public InMemoryRepository(IEnumerable<_EntityType> initialItems = null, IEqualityComparer<_EntityType> comparer = null)
+
+		public InMemoryRepository()
+			: this(null, null)
+		{
+		}
+		public InMemoryRepository(IEnumerable<_EntityType> initialItems, IEqualityComparer<_EntityType> comparer = null)
 		{
 			initialItems = initialItems ?? new _EntityType[0];
 
@@ -19,21 +24,22 @@ namespace KamiSama.Repositories
 				items = new HashSet<_EntityType>(initialItems, comparer);
 		}
 
-		public _EntityType Add(_UnitOfWorkType unitOfWork, _EntityType item)
+		public void Dispose()
 		{
-			items.Add(item);
-
-			return item;
+			try { items.Clear(); } catch { }
 		}
 
-		public bool Remove(_UnitOfWorkType unitOfWork, _EntityType item)
+		public void Add(_EntityType item)
+			=> items.Add(item);
+		public void Update(_EntityType item)
+		{
+		}
+
+		public void Delete(_EntityType item)
 			=> items.Remove(item);
 
-		public IEnumerable<_EntityType> Where(_UnitOfWorkType unitOfWork, Expression<Func<_EntityType, bool>> predicate)
-			=> items.Where(predicate.Compile());
+		public IEnumerable<_EntityType> Where(Expression<Func<_EntityType, bool>> predicate)
+			=> (predicate == null) ? new _EntityType[0] : items.Where(predicate.Compile());
 
-		public void SaveChanges(_UnitOfWorkType unitOfWork)
-		{
-		}
 	}
 }

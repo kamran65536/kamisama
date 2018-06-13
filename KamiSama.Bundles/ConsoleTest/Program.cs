@@ -26,12 +26,12 @@ namespace ConsoleTest
 
 		static void Main(string[] args)
 		{
-			var bundles = new BundleItem[]
-			{
-				new BundleItem{ Culture = "", Key = "A", Value = "10" },
-				new BundleItem { Culture = "", Key = "B", Value = "11" },
-				new BundleItem { Culture = "", Key = "C.C", Value = "12"}
-			};
+			//var bundles = new BundleItem[]
+			//{
+			//	new BundleItem{ Culture = "", Key = "A", Value = "10" },
+			//	new BundleItem { Culture = "", Key = "B", Value = "11" },
+			//	new BundleItem { Culture = "", Key = "C.C", Value = "12"}
+			//};
 
 			//var jsonSource = new JsonBundleSource(@"D:\1.json");
 
@@ -65,9 +65,13 @@ namespace ConsoleTest
 
 			//Console.WriteLine(JsonConvert.SerializeObject(bb, Formatting.Indented));
 
-			var kamran = BundleMapper.MapTo<Kamran>(bundles);
+			//var kamran = BundleMapper.MapTo<Kamran>(bundles);
 
-			Console.WriteLine(JsonConvert.SerializeObject(kamran));
+			//Console.WriteLine(JsonConvert.SerializeObject(kamran));
+
+			var iniBundle = new IniBundleSource("./bundles.ini");
+
+			Console.WriteLine(iniBundle["test"]);
 		}
 	}
 }
