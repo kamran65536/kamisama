@@ -10,7 +10,7 @@ namespace KamiSama.Repositories
 		public static _EntityType FirstOrDefault< _EntityType>(this IRepository<_EntityType> repository, Expression<Func<_EntityType, bool>> predicate)
 			=> repository.Where(predicate).FirstOrDefault();
 
-		public static IEnumerable<_EntityType> GetAll<_UnitOfWorkType, _EntityType>(this IRepository<_EntityType> repository)
+		public static IEnumerable<_EntityType> GetAll<_EntityType>(this IRepository<_EntityType> repository)
 			=> repository.Where(x => true);
 	}
 }

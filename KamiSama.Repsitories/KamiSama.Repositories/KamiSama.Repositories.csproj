@@ -5,7 +5,9 @@
 		<Authors>Kamran Fallah</Authors>
 		<Company>-</Company>
 		<Description>Repository pattern common usages.</Description>
-		<PackageReleaseNotes>v1.1.0
+		<PackageReleaseNotes>v1.1.1
+bug fix in GetAll method.
+v1.1.0
 complete refactor for repository pattern
 unit of work is removed from the interface.
 cashedRepository is removed.
@@ -14,7 +16,7 @@ v1.0.0
 - save changes is added.</PackageReleaseNotes>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<DebugType>Full</DebugType>
-		<Version>1.1.0</Version>
+		<Version>1.1.1</Version>
 		<RepositoryUrl>https://gitlab.com/kamran65536/KamiSama</RepositoryUrl>
 	</PropertyGroup>
 
