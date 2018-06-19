@@ -23,9 +23,9 @@ namespace KamiSama.Bundles
 				if (!isLoaded)
 					Load();
 
-				var dicKey = $"{culture ?? DefaultCulture}-{key ?? ""}";
-
-				if (bundles.TryGetValue(dicKey, out BundleItem item))
+				if (bundles.TryGetValue($"{culture + ""}-{key ?? ""}", out BundleItem item))
+					return item;
+				else if (bundles.TryGetValue($"{DefaultCulture}-{key ?? ""}", out item))
 					return item;
 				else
 					return null;
