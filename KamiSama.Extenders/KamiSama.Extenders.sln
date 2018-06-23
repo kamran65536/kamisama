@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Extenders.Attribut
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{7BCF5655-814D-4D8C-96DC-43C2871B211E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KamiSama.Extenders.MsTest", "KamiSama.Extenders.MsTest\KamiSama.Extenders.MsTest.csproj", "{174851A6-42D8-475B-B83C-D96A05A20D29}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Extenders.MsTest", "KamiSama.Extenders.MsTest\KamiSama.Extenders.MsTest.csproj", "{174851A6-42D8-475B-B83C-D96A05A20D29}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KamiSama.Extenders.EntityFramework", "KamiSama.Extenders.EntityFramework\KamiSama.Extenders.EntityFramework.csproj", "{7DCAE5CA-2C71-4DC4-8032-2FF4887CBBA4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{174851A6-42D8-475B-B83C-D96A05A20D29}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{174851A6-42D8-475B-B83C-D96A05A20D29}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{174851A6-42D8-475B-B83C-D96A05A20D29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DCAE5CA-2C71-4DC4-8032-2FF4887CBBA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DCAE5CA-2C71-4DC4-8032-2FF4887CBBA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DCAE5CA-2C71-4DC4-8032-2FF4887CBBA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DCAE5CA-2C71-4DC4-8032-2FF4887CBBA4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
