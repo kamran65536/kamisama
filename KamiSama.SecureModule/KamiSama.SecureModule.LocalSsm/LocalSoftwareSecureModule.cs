@@ -65,7 +65,19 @@ namespace KamiSama.SecureModule.LocalSsm
 
 			return algorithm.Decrypt(key.DecryptedKey, data, iv, cipherMode, padding);
 		}
+		public override byte[] Sign(SsmKey key, byte[] data, byte[] iv = null, PaddingMode padding = PaddingMode.PKCS7)
+		{
+			if (!Algorithms.TryGetValue(key.Algorithm, out ISecurityAlgorithm algorithm))
+				throw new Exception($"Algorithm {key.Algorithm} is not found.");
 
+			if (key.DecryptedKey == null)
+				if (key.IsPlainKey)
+					key.DecryptedKey = key.KeyData;
+				else
+					key.DecryptedKey = Decrypt(MasterKey, key.KeyData, iv: null, cipherMode: CipherMode.CBC, padding: PaddingMode.PKCS7);
+
+			return algorithm.Sign(key.DecryptedKey, data, iv, padding);
+		}
 		public override SsmKey GenerateKeyObject(KeyGenerationSettings settings)
 		{
 			if (settings == null)
@@ -76,7 +88,7 @@ namespace KamiSama.SecureModule.LocalSsm
 			if (settings.Group != null)
 				throw new NotSupportedException("Key Grouping is not supported.");
 
-			var parentKey = ((SsmKey) settings.ParentKey) ?? MasterKey;
+			var parentKey = ((SsmKey)settings.ParentKey) ?? MasterKey;
 
 			var key = new SsmKey
 			{
@@ -113,5 +125,7 @@ namespace KamiSama.SecureModule.LocalSsm
 					return new FileBasedKeyStore<SsmKey>(Settings.FileBasedKeyStorePath, this);
 			}
 		}
+
+
 	}
 }

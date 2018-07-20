@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Ninject;
 using Ninject.Parameters;
 using Ninject.Syntax;
@@ -17,6 +18,7 @@ namespace KamiSama.Extenders.Ninject
 			Instance = new StandardKernel();
 			ActiveProfiles = new HashSet<string>(StringComparer.InvariantCultureIgnoreCase);
 		}
+		[ExcludeFromCodeCoverage]
 		public static void Reset()
 		{
 			try

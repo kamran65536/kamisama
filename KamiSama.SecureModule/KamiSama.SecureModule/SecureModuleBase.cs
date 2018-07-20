@@ -18,5 +18,9 @@ namespace KamiSama.SecureModule
 		IKey ISecureModule.GenerateKeyObject(KeyGenerationSettings settings) => GenerateKeyObject(settings);
 		IKeyStore ISecureModule.GetKeyStore(string name) => this.GetKeyStore(name);
 		public abstract IKeyStore<_KeyType> GetKeyStore(string name);
+
+		public abstract byte[] Sign(_KeyType key, byte[] data, byte[] iv = null, PaddingMode padding = PaddingMode.PKCS7);
+		byte[] ISecureModule.Sign(IKey key, byte[] data, byte[] iv,  PaddingMode padding)
+			=> Sign(key as _KeyType, data, iv, padding);
 	}
 }

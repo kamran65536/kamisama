@@ -6,5 +6,6 @@ namespace KamiSama.SecureModule.LocalSsm.Algorithms
     {
 		byte[] Encrypt(byte[] key, byte[] data, byte[] iv = null, CipherMode cipherMode = CipherMode.CBC, PaddingMode padding = PaddingMode.PKCS7);
 		byte[] Decrypt(byte[] key, byte[] data, byte[] iv = null, CipherMode cipherMode = CipherMode.CBC, PaddingMode padding = PaddingMode.PKCS7);
+		byte[] Sign(byte[] key, byte[] data, byte[] iv = null, PaddingMode padding = PaddingMode.PKCS7);
 	}
 }
