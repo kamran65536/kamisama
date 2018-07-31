@@ -20,31 +20,41 @@ namespace KamiSama.Iso8583
 		{
 		}
 
-		public bool Has(int fieldNo) => fields[fieldNo] != null;
+		public bool Has(int fieldNo)
+		{
+			if ((fieldNo < 0) || (fieldNo > 128))
+					throw new IndexOutOfRangeException($"field no must between 0 and 128");
+			if (fieldNo == 0)
+				return fields[0] != null;
+			else if (fieldNo < 65)
+				return PrimaryBitmap[fieldNo];
+			else
+				return SecondaryBitmap?[fieldNo - 64] == true;
+		}
 
 		public IsoFieldBase this[int fieldNo]
 		{
 			get
 			{
 				if ((fieldNo < 0) || (fieldNo > 128))
-					throw new ArgumentException($"field no must be greater than zero: {fieldNo}");
+					throw new IndexOutOfRangeException($"field no must be greater than zero: {fieldNo}");
 
 				return fields[fieldNo];
 			}
 			set
 			{
 				if ((fieldNo < 0) || (fieldNo > 128))
-					throw new ArgumentException($"field no must be greater than zero: {fieldNo}");
+					throw new IndexOutOfRangeException($"field no must be greater than zero: {fieldNo}");
 
 				fields[fieldNo] = value;
-
-				if (fieldNo <= 64)
+				
+				if ((fieldNo > 0) && (fieldNo <= 64))
 				{
 					if (PrimaryBitmap == null)
 						fields[0] = new BitmapIsoField();
 					PrimaryBitmap[fieldNo] = value != null;
 				}
-				else
+				else if (fieldNo > 64)
 				{
 					if (SecondaryBitmap == null)
 					{
@@ -70,5 +80,6 @@ namespace KamiSama.Iso8583
 
 			return $"Iso Message: {Id}\r\n{string.Join("\r\n", all)}";
 		}
+		public override string ToString() => ToDebugString();
 	}
 }

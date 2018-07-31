@@ -1,0 +1,67 @@
+<iso-protocol xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<fixed no="0" data-type="bitmap-hex" length="16"  />
+	<fixed no="1" data-type="bitmap-hex" length="16"  />
+	<variable no="2" length-datatype="bcd" length-type="LLVar"  data-type="text"  />
+	<fixed no="3" data-type="text" length="6"   />
+	<fixed no="4" data-type="text" length="12"   />
+	<fixed no="6" data-type="text" length="12"   />
+	<fixed no="7" data-type="text" length="10"  />
+	<fixed no="10" data-type="text" length="8"   />
+	<fixed no="11" data-type="text" length="6"   />
+	<fixed no="12" data-type="text" length="12"   />
+	<fixed no="13" data-type="text" length="4" />
+	<fixed no="14" data-type="text" length="4"   />
+	<fixed no="15" data-type="text" length="4"  />
+	<fixed no="17" data-type="text" length="4" />
+	<fixed no="22" data-type="text" length="12"  />
+	<fixed no="24" data-type="text" length="3"/>
+	<fixed no="25" data-type="text" length="4"  />
+	<variable no="32" length-datatype="bcd" length-type="LVar"  data-type="text" />
+	<variable no="33" length-datatype="bcd" length-type="LVar"  data-type="text" />
+	<fixed no="35" data-type="text" length="37" />
+	<fixed no="37" data-type="text" length="12"   />
+	<fixed no="38" data-type="text" length="6"  />
+	<fixed no="39" data-type="text" length="3"   />
+	<fixed no="41" data-type="text" length="8"  />
+	<fixed no="42" data-type="text" length="15"  />
+	<variable no="43" length-datatype="bcd" length-type="LLVar"  data-type="text" />
+	<variable no="44" length-datatype="bcd" length-type="LLVar"  data-type="binary"  />
+	<variable no="48" length-datatype="bcd" length-type="LLLVar"  data-type="text" />
+	<fixed no="49" data-type="text" length="3"  />
+	<fixed no="50" data-type="text" length="3"  />
+	<fixed no="51" data-type="text" length="3"  />
+	<fixed no="52" data-type="text" length="16" />
+	<variable no="53" length-datatype="bcd" length-type="LLVar"  data-type="text" />
+	<variable no="54" length-datatype="bcd" length-type="LLLVar"  data-type="text" />
+	<variable no="56" length-datatype="bcd" length-type="LVar"  data-type="text" />
+	<variable no="60" length-datatype="bcd" length-type="LLVar"  data-type="text" />
+	<variable no="62" length-datatype="bcd" length-type="LLLVar"  data-type="text"  data-encoding="UTF8" />
+	<variable no="63" length-datatype="bcd" length-type="LLLVar"  data-type="text"  data-encoding="UTF8" />
+	<fixed no="64" data-type="text" length="16"  />
+	<fixed no="71" data-type="text" length="8"  />
+	<variable no="72" length-datatype="bcd" length-type="LLLVar"  data-type="text" data-encoding="UTF8" />
+	<fixed no="73" data-type="text" length="6"   />
+	<fixed no="74" data-type="text" length="10"  />
+	<fixed no="75" data-type="text" length="10"  />
+	<fixed no="76" data-type="text" length="10"  />
+	<fixed no="77" data-type="text" length="10"  />
+	<fixed no="78" data-type="text" length="10"  />
+	<fixed no="79" data-type="text" length="10"  />
+	<fixed no="83" data-type="text" length="10" />
+	<fixed no="84" data-type="text" length="10" />
+	<fixed no="86" data-type="text" length="16"   />
+	<fixed no="87" data-type="text" length="16"   />
+	<fixed no="88" data-type="text" length="16"   />
+	<fixed no="89" data-type="text" length="16"   />
+	<fixed no="90" data-type="text" length="42"   />
+	<fixed no="95" data-type="text" length="42"  />
+	<fixed no="97" data-type="text" length="17"   />
+	<variable no="100" length-datatype="bcd" length-type="LVar"  data-type="text" />
+	<variable no="101" length-datatype="bcd" length-type="LLVar"  data-type="text" />
+	<variable no="102" length-datatype="bcd" length-type="LLVar"  data-type="text" />
+	<variable no="103" length-datatype="bcd" length-type="LVar"  data-type="text" />
+	<variable no="105" length-datatype="bcd" length-type="LLLVar"  data-type="text" data-encoding="UTF8" />
+	<variable no="115" length-datatype="bcd" length-type="LLLVar"  data-type="text" data-encoding="UTF8" />
+	<fixed no="124" data-type="text" length="8"  data-encoding="UTF8" />
+	<fixed no="128" data-type="text" length="16"  />
+</iso-protocol>

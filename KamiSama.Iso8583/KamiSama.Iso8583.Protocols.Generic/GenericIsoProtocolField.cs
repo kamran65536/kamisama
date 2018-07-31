@@ -25,6 +25,8 @@ namespace KamiSama.Iso8583.Protocols.Generic
 			DataTypeHandlers.Add("bitmap", new BitmapDataTypeHandler());
 			DataTypeHandlers.Add("bmp", new BitmapDataTypeHandler());
 			DataTypeHandlers.Add("hex-bitmap", new HexBitmapDataTypeHandler());
+			DataTypeHandlers.Add("bitmap-hex", new HexBitmapDataTypeHandler());
+			DataTypeHandlers.Add("bmp-hex", new HexBitmapDataTypeHandler());
 			DataTypeHandlers.Add("hex-bmp", new HexBitmapDataTypeHandler());
 		}
 

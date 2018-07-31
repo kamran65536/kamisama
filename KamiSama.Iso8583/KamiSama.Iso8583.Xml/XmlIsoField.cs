@@ -11,17 +11,22 @@ namespace KamiSama.Iso8583.Xml
 		public int FieldNo { get; set; }
 		[XmlText]
 		public string Data { get; set; }
+		[XmlAttribute("type")]
+		public XmlIsoFieldType Type { get; set; } = XmlIsoFieldType.String;
 
 		public IsoFieldBase GetIsoField()
 		{
-			if (Data.StartsWith("bin:"))
-				return Data.Substring("bin:".Length).FromHex();
-			else if (Data.StartsWith("text:"))
-				return Data.Substring("text:".Length);
-			else if (Data.StartsWith("bmp:"))
-				return BitmapIsoField.FromHex(Data.Substring("bmp:".Length));
-			else
-				return Data;
+			switch (Type)
+			{
+				default:
+					throw new NotSupportedException($"Type {Type} is not supporte.");
+				case XmlIsoFieldType.String:
+					return new StringIsoField { Data = Data };
+				case XmlIsoFieldType.BinaryHex:
+					return new BinaryIsoField { Data = Data.FromHex() };
+				case XmlIsoFieldType.BitmapHex:
+					return BitmapIsoField.FromHex(Data);
+			}
 		}
 	}
 }

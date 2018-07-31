@@ -20,8 +20,12 @@ namespace KamiSama.Iso8583.Protocols.Generic
 			: base(generateMacFunc)
 		{
 		}
+		public GenericIsoProtocol()
+			: base(null)
+		{
+		}
 
-		protected override void ReaderHeader(Stream stream, out MemoryStream memoryStream, out IsoMessage message)
+		protected override void ReaderHeaderAndData(Stream stream, out MemoryStream memoryStream, out IsoMessage message)
 		{
 			string lenStr;
 			try
@@ -54,12 +58,15 @@ namespace KamiSama.Iso8583.Protocols.Generic
 				throw new IsoMessageReadException($"Cannot read iso message completely, id: {message.Id}, length: {len}", exp);
 			}
 		}
-		protected override void WrtieHeader(Stream stream, MemoryStream messageData, IsoMessage message)
+		protected override void WrtieHeaderAndData(Stream stream, MemoryStream messageData, IsoMessage message)
 		{
 			var arr = messageData.ToArray();
 			var len = arr.Length + 4;
 			stream.Write(len.ToString("0000").ToBytes(Encoding.ASCII));
 			stream.Write(message.Id.PadLeft(4, '0').ToBytes(Encoding.ASCII));
+
+			Console.Write($"{len.ToString("0000")}{message.Id.PadLeft(4, '0')}{arr.ToHex()}");
+
 			stream.Write(arr);
 		}
 		protected override void ReadField(MemoryStream memoryStream, int fieldNo, IsoMessage message)

@@ -21,6 +21,7 @@ namespace KamiSama.Iso8583.Protocols.Generic
 		protected internal override void Write(MemoryStream messageStream, int fieldNo, IsoMessage message)
 		{
 			var data = GetDataTypeHandler(false).ConvertToByteArray(message[fieldNo], GetEncoding());
+
 			messageStream.Write(data);
 			data = null;
 		}

@@ -1,4 +1,6 @@
-﻿namespace KamiSama.Iso8583
+﻿using System;
+
+namespace KamiSama.Iso8583
 {
 	public class StringIsoField : IsoFieldBase
 	{

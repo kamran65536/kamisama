@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -8,6 +8,10 @@
     <Description>Xml Message template for iso8583</Description>
     <PackageReleaseNotes>v1.0.0</PackageReleaseNotes>
   </PropertyGroup>
+
+	<PropertyGroup>
+		<DebugType>Full</DebugType>
+	</PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\KamiSama.Extenders\KamiSama.Extenders.Serialization\KamiSama.Extenders.Serialization.csproj" />

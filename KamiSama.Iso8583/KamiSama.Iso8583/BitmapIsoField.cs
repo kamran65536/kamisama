@@ -22,7 +22,7 @@ namespace KamiSama.Iso8583
 					fieldNo -= 64;
 
 				if ((fieldNo <= 0) || (fieldNo > 64))
-					throw new ArgumentException($"Invalid field no: {org}");
+					throw new IndexOutOfRangeException($"Invalid field no: {org}");
 
 				return flags[fieldNo - 1];
 			}
@@ -33,7 +33,7 @@ namespace KamiSama.Iso8583
 					fieldNo -= 64;
 
 				if ((fieldNo <= 0) || (fieldNo > 64))
-					throw new ArgumentException($"Invalid field no: {org}");
+					throw new IndexOutOfRangeException($"Invalid field no: {org}");
 
 				flags[fieldNo - 1] = value;
 			}
@@ -46,19 +46,27 @@ namespace KamiSama.Iso8583
 			var result = new BitmapIsoField();
 
 			for (int i = 0; i < 64; i++)
-				result.flags[i] = (arr[i / 8] >> (i % 8)) == 1;
+			{
+				var bit = 1 << (7 - i % 8);
 
-			result.flags = result.flags.Reverse().ToArray();
-
+				result.flags[i] = (arr[i / 8] & bit) == bit;
+			}
 			return result;
 		}
 
 		public string GetBitmapHex()
 		{
-			var bitmap = "";
+			byte[] arr = new byte[8];
+
 			for (int i = 0; i < 64; i++)
-				bitmap = (flags[i] ? "1" : "0") + bitmap;
-			return Convert.ToInt64(bitmap, 2).ToString("X2").PadLeft(16, '0');
+			{
+				var bit = 1 << (7 - i % 8);
+
+				if (flags[i])
+					arr[i / 8] |= (byte) bit;
+			}
+
+			return arr.ToHex();
 		}
 
 		public override string ToDebugString(int fieldNo)

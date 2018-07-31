@@ -1,11 +1,13 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 using System.Xml.Serialization;
 using KamiSama.Extenders;
 
 namespace KamiSama.Iso8583.Xml
 {
 	[Serializable]
+	[XmlRoot("message")]
 	public class XmlIsoMessage
 	{
 		[XmlAttribute("id")]
@@ -13,8 +15,11 @@ namespace KamiSama.Iso8583.Xml
 		[XmlElement("field")]
 		public XmlIsoField[] Fields { get; set; }
 
-		public static XmlIsoMessage LoadFromFile(string path)
+		public static XmlIsoMessage LoadFromXmlFile(string path)
 			=> File.ReadAllText(path).Deserialize<XmlIsoMessage>();
+
+		public void SaveToXmlFile(string path)
+			=> File.WriteAllText(path, this.Serialize(indented: true));
 
 		public IsoMessage GetIsoMessage()
 		{
