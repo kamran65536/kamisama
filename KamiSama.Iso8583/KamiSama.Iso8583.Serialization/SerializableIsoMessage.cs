@@ -1,22 +1,21 @@
 ﻿using System;
 using System.IO;
-using System.Text;
 using System.Xml.Serialization;
 using KamiSama.Extenders;
 
-namespace KamiSama.Iso8583.Xml
+namespace KamiSama.Iso8583.Serialization
 {
 	[Serializable]
 	[XmlRoot("message")]
-	public class XmlIsoMessage
+	public class SerializableIsoMessage
 	{
 		[XmlAttribute("id")]
 		public string Id { get; set; }
 		[XmlElement("field")]
-		public XmlIsoField[] Fields { get; set; }
+		public SerializableIsoField[] Fields { get; set; }
 
-		public static XmlIsoMessage LoadFromXmlFile(string path)
-			=> File.ReadAllText(path).Deserialize<XmlIsoMessage>();
+		public static SerializableIsoMessage LoadFromXmlFile(string path)
+			=> File.ReadAllText(path).Deserialize<SerializableIsoMessage>();
 
 		public void SaveToXmlFile(string path)
 			=> File.WriteAllText(path, this.Serialize(indented: true));

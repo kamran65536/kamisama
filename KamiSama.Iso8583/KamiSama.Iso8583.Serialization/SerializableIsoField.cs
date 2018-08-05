@@ -1,18 +1,19 @@
 ﻿using System;
+using System.Runtime.Serialization;
 using System.Xml.Serialization;
 using KamiSama.Extenders;
 
-namespace KamiSama.Iso8583.Xml
+namespace KamiSama.Iso8583.Serialization
 {
 	[Serializable]
-	public class XmlIsoField
+	public class SerializableIsoField
 	{
 		[XmlAttribute("no")]
 		public int FieldNo { get; set; }
 		[XmlText]
 		public string Data { get; set; }
 		[XmlAttribute("type")]
-		public XmlIsoFieldType Type { get; set; } = XmlIsoFieldType.String;
+		public SerializableIsoFieldType Type { get; set; } = SerializableIsoFieldType.String;
 
 		public IsoFieldBase GetIsoField()
 		{
@@ -20,11 +21,11 @@ namespace KamiSama.Iso8583.Xml
 			{
 				default:
 					throw new NotSupportedException($"Type {Type} is not supporte.");
-				case XmlIsoFieldType.String:
+				case SerializableIsoFieldType.String:
 					return new StringIsoField { Data = Data };
-				case XmlIsoFieldType.BinaryHex:
+				case SerializableIsoFieldType.BinaryHex:
 					return new BinaryIsoField { Data = Data.FromHex() };
-				case XmlIsoFieldType.BitmapHex:
+				case SerializableIsoFieldType.BitmapHex:
 					return BitmapIsoField.FromHex(Data);
 			}
 		}

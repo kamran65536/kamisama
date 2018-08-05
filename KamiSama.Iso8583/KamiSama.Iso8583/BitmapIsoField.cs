@@ -69,6 +69,8 @@ namespace KamiSama.Iso8583
 			return arr.ToHex();
 		}
 
+	
+
 		public override string ToDebugString(int fieldNo)
 		{
 			var prefix = (fieldNo == 0) ? "P" : "S";

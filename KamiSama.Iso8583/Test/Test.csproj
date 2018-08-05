@@ -57,10 +57,12 @@
     <Compile Include="Ks_Iso8583\StringIsoFieldTests.cs" />
     <Compile Include="Ks_Iso8583\BinaryIsoFieldTests.cs" />
     <Compile Include="Ks_Iso8583\IsoFieldBaseTests.cs" />
-    <Compile Include="Ks_Iso8583_Xml\IsoMessageExtenderTests.cs" />
-    <Compile Include="Ks_Iso8583_Xml\IsoFieldExtenderTests.cs" />
-    <Compile Include="Ks_Iso8583_Xml\XmlIsoFieldTests.cs" />
-    <Compile Include="Ks_Iso8583_Xml\XmlIsoMessageTests.cs" />
+    <Compile Include="Ks_Iso8583_Protocols\FixedIsoFieldTests.cs" />
+    <Compile Include="Ks_Iso8583_Protocols\GenericIsoProtocolFieldTests.cs" />
+    <Compile Include="Ks_Iso8583_Serialization\IsoMessageExtenderTests.cs" />
+    <Compile Include="Ks_Iso8583_Serialization\IsoFieldExtenderTests.cs" />
+    <Compile Include="Ks_Iso8583_Serialization\SerializableIsoFieldTests.cs" />
+    <Compile Include="Ks_Iso8583_Serialization\SerializableIsoMessageTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -76,13 +78,13 @@
       <Project>{a09bace2-9ba2-4f04-9fab-76ed80b30af6}</Project>
       <Name>KamiSama.Iso8583.Protocols</Name>
     </ProjectReference>
+    <ProjectReference Include="..\KamiSama.Iso8583.Serialization\KamiSama.Iso8583.Serialization.csproj">
+      <Project>{812233c2-4f00-45c8-8dd9-8025213b3cc6}</Project>
+      <Name>KamiSama.Iso8583.Serialization</Name>
+    </ProjectReference>
     <ProjectReference Include="..\KamiSama.Iso8583.Server\KamiSama.Iso8583.Server.csproj">
       <Project>{1ba5bdd1-1ada-4e3d-af44-ca4128fb249c}</Project>
       <Name>KamiSama.Iso8583.Server</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\KamiSama.Iso8583.Xml\KamiSama.Iso8583.Xml.csproj">
-      <Project>{9daec47e-bed4-48bd-bd75-c5653f9ae28b}</Project>
-      <Name>KamiSama.Iso8583.Xml</Name>
     </ProjectReference>
     <ProjectReference Include="..\KamiSama.Iso8583\KamiSama.Iso8583.csproj">
       <Project>{C00079FE-56E1-4F10-9FE1-061E59A50916}</Project>

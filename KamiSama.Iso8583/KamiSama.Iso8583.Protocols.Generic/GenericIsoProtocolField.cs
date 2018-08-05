@@ -39,7 +39,7 @@ namespace KamiSama.Iso8583.Protocols.Generic
 
 		private IsoDataTypeHandler dataTypeHandler;
 
-		protected IsoDataTypeHandler GetDataTypeHandler(bool readOrWrite)
+		protected internal IsoDataTypeHandler GetDataTypeHandler(bool readOrWrite)
 		{
 			if (dataTypeHandler != null)
 				return dataTypeHandler;

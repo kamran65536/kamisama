@@ -23,7 +23,7 @@ namespace KamiSama.Iso8583
 		public bool Has(int fieldNo)
 		{
 			if ((fieldNo < 0) || (fieldNo > 128))
-					throw new IndexOutOfRangeException($"field no must between 0 and 128");
+				throw new IndexOutOfRangeException($"field no must between 0 and 128");
 			if (fieldNo == 0)
 				return fields[0] != null;
 			else if (fieldNo < 65)
@@ -47,7 +47,7 @@ namespace KamiSama.Iso8583
 					throw new IndexOutOfRangeException($"field no must be greater than zero: {fieldNo}");
 
 				fields[fieldNo] = value;
-				
+
 				if ((fieldNo > 0) && (fieldNo <= 64))
 				{
 					if (PrimaryBitmap == null)

@@ -1,26 +1,24 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using KamiSama.Iso8583;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using KamiSama.Iso8583.Xml;
-using KamiSama.Extenders;
-using System;
 using System.Linq;
+using KamiSama.Iso8583;
+using KamiSama.Iso8583.Serialization;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Test.Ks_Iso8583_Xml
+namespace Test.Ks_Iso8583_Serialization
 {
 	[TestClass]
-	[TestCategory("Ks.Iso8583.Xml.IsoFieldExtender")]
+	[TestCategory("Ks.Iso8583.Serialization.SerilizableIsoFieldExtender")]
 	[ExcludeFromCodeCoverage]
 	public class IsoMessageExtenderTests
 	{
 		[TestMethod]
-		public void GetXmlIsoMessageWithoutBitmapMustCreateXmlIsoMessageWithoutBitmaps()
+		public void GetSerializableMessageWithoutBitmapMustCreateSerializableIsoMessageWithoutBitmaps()
 		{
 			var msg = new IsoMessage(1100);
 			msg[2] = "5022291000000000";
 			msg[65] = "5022291000000001";
 
-			var xmlMsg = msg.GetXmlIsoMessage();
+			var xmlMsg = msg.GetSerializableMessage();
 
 			Assert.IsNotNull(xmlMsg);
 			Assert.AreEqual("1100", xmlMsg.Id);
@@ -32,13 +30,13 @@ namespace Test.Ks_Iso8583_Xml
 			Assert.AreEqual("5022291000000001", field65.Data);
 		}
 		[TestMethod]
-		public void GetXmlIsoMessageWithBitmapMustCreateXmlIsoMessageWithBitmaps()
+		public void GetSerializableMessageWithBitmapMustCreateSerializableIsoMessageWithBitmaps()
 		{
 			var msg = new IsoMessage(1100);
 			msg[2] = "5022291000000000";
 			msg[65] = "5022291000000001";
 
-			var xmlMsg = msg.GetXmlIsoMessage(true);
+			var xmlMsg = msg.GetSerializableMessage(true);
 
 			Assert.IsNotNull(xmlMsg);
 			Assert.AreEqual("1100", xmlMsg.Id);

@@ -77,10 +77,6 @@
       <Project>{1ba5bdd1-1ada-4e3d-af44-ca4128fb249c}</Project>
       <Name>KamiSama.Iso8583.Server</Name>
     </ProjectReference>
-    <ProjectReference Include="..\KamiSama.Iso8583.Xml\KamiSama.Iso8583.Xml.csproj">
-      <Project>{9daec47e-bed4-48bd-bd75-c5653f9ae28b}</Project>
-      <Name>KamiSama.Iso8583.Xml</Name>
-    </ProjectReference>
     <ProjectReference Include="..\KamiSama.Iso8583\KamiSama.Iso8583.csproj">
       <Project>{c00079fe-56e1-4f10-9fe1-061e59a50916}</Project>
       <Name>KamiSama.Iso8583</Name>

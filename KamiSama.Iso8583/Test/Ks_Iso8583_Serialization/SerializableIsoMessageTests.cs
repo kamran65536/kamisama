@@ -1,32 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.IO;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using KamiSama.Extenders;
 using KamiSama.Iso8583;
-using KamiSama.Iso8583.Xml;
+using KamiSama.Iso8583.Serialization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Test.Ks_Iso8583_Xml
+namespace Test.Ks_Iso8583_Serialization
 {
 	[TestClass]
-	[TestCategory("Ks.Iso8583.Xml.IsoMessage")]
+	[TestCategory("Ks.Iso8583.Serialization.IsoMessage")]
 	[ExcludeFromCodeCoverage]
-	public class XmlIsoMessageTests
+	public class SerializableIsoMessageTests
 	{
 		[TestMethod]
 		public void GetIsoMessageMustReturnEquivalantIsoMessage()
 		{
-			var xmlMsg = new XmlIsoMessage
+			var xmlMsg = new SerializableIsoMessage
 			{
 				Id = "1100",
-				Fields = new XmlIsoField[]
+				Fields = new SerializableIsoField[]
 				{
-					new XmlIsoField { FieldNo = 2, Data = "1234567", Type = XmlIsoFieldType.String },
-					new XmlIsoField { FieldNo = 65, Data = "010203", Type = XmlIsoFieldType.BinaryHex },
+					new SerializableIsoField { FieldNo = 2, Data = "1234567", Type = SerializableIsoFieldType.String },
+					new SerializableIsoField { FieldNo = 65, Data = "010203", Type = SerializableIsoFieldType.BinaryHex },
 				}
 			};
 
@@ -39,22 +34,22 @@ namespace Test.Ks_Iso8583_Xml
 			Assert.AreEqual("010203", (msg[65] as BinaryIsoField).Data.ToHex());
 		}
 		[TestMethod]
-		public void SaveToXmlFileAndLoadFromXmlFileMustCreateSameXmlIsoMessage()
+		public void SaveToXmlFileAndLoadFromXmlFileMustCreateSameSerializableIsoMessage()
 		{
 			var filename = "./isomessage-test.xml";
 
-			var xmlMsg1 = new XmlIsoMessage
+			var xmlMsg1 = new SerializableIsoMessage
 			{
 				Id = "1100",
-				Fields = new XmlIsoField[]
+				Fields = new SerializableIsoField[]
 				{
-					new XmlIsoField { FieldNo = 2, Data = "1234567", Type = XmlIsoFieldType.String },
-					new XmlIsoField { FieldNo = 65, Data = "010203", Type = XmlIsoFieldType.BinaryHex },
+					new SerializableIsoField { FieldNo = 2, Data = "1234567", Type = SerializableIsoFieldType.String },
+					new SerializableIsoField { FieldNo = 65, Data = "010203", Type = SerializableIsoFieldType.BinaryHex },
 				}
 			};
 
 			xmlMsg1.SaveToXmlFile(filename);
-			var xmlMsg2 = XmlIsoMessage.LoadFromXmlFile(filename);
+			var xmlMsg2 = SerializableIsoMessage.LoadFromXmlFile(filename);
 
 			Assert.AreEqual(xmlMsg1.Id, xmlMsg2.Id);
 			Assert.AreEqual(xmlMsg1.Fields.Length, xmlMsg2.Fields.Length);

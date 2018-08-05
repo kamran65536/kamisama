@@ -2,20 +2,20 @@
 using System.Diagnostics.CodeAnalysis;
 using KamiSama.Extenders;
 using KamiSama.Iso8583;
-using KamiSama.Iso8583.Xml;
+using KamiSama.Iso8583.Serialization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Test.Ks_Iso8583_Xml
+namespace Test.Ks_Iso8583_Serialization
 {
 	[TestClass]
-	[TestCategory("Ks.Iso8583.Xml.IsoField")]
+	[TestCategory("Ks.Iso8583.Serialization.SerilizableIsoField")]
 	[ExcludeFromCodeCoverage]
-	public class XmlIsoFieldTests
+	public class SerializableIsoFieldTests
 	{
 		[TestMethod]
 		public void GetIsoFieldWithStringTypeReturnsStringIsoField()
 		{
-			var xmlField = new XmlIsoField { FieldNo = 2, Data = "123456", Type = XmlIsoFieldType.String };
+			var xmlField = new SerializableIsoField { FieldNo = 2, Data = "123456", Type = SerializableIsoFieldType.String };
 
 			var field = xmlField.GetIsoField();
 			var stringIsoField = field as StringIsoField;
@@ -26,7 +26,7 @@ namespace Test.Ks_Iso8583_Xml
 		[TestMethod]
 		public void GetIsoFieldWithBinaryTypeReturnsStringIsoField()
 		{
-			var xmlField = new XmlIsoField { FieldNo = 2, Data = "010203", Type = XmlIsoFieldType.BinaryHex };
+			var xmlField = new SerializableIsoField { FieldNo = 2, Data = "010203", Type = SerializableIsoFieldType.BinaryHex };
 
 			var field = xmlField.GetIsoField();
 			var binaryIsoField = field as BinaryIsoField;
@@ -37,7 +37,7 @@ namespace Test.Ks_Iso8583_Xml
 		[TestMethod]
 		public void GetIsoFieldWithBitmapTypeReturnsStringIsoField()
 		{
-			var xmlField = new XmlIsoField { FieldNo = 2, Data = "C000000000000000", Type = XmlIsoFieldType.BitmapHex };
+			var xmlField = new SerializableIsoField { FieldNo = 2, Data = "C000000000000000", Type = SerializableIsoFieldType.BitmapHex };
 
 			var field = xmlField.GetIsoField();
 			var bitmap = field as BitmapIsoField;
@@ -48,7 +48,7 @@ namespace Test.Ks_Iso8583_Xml
 		[TestMethod]
 		public void GetIsoFieldWithIncorrectTypeMustThrowException()
 		{
-			var xmlField = new XmlIsoField { FieldNo = 2, Data = "C000000000000000", Type = (XmlIsoFieldType) 111 };
+			var xmlField = new SerializableIsoField { FieldNo = 2, Data = "C000000000000000", Type = (SerializableIsoFieldType) 111 };
 			Assert.ThrowsException<NotSupportedException>(() => xmlField.GetIsoField());
 		}
 	}
