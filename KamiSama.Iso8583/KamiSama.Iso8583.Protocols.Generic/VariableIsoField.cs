@@ -28,23 +28,23 @@ namespace KamiSama.Iso8583.Protocols.Generic
 				return lengthDataTypeHandler;
 		}
 
-		protected internal override void Read(MemoryStream memoryStream, int fieldNo, IsoMessage message)
+		protected internal override void Read(MemoryStream memoryStream, int fieldNo, IsoMessage message, int retryCount = 100)
 		{
-			var length = GetLengthDataTypeHandler(true).ReadAsLength(memoryStream, LengthType);
+			var length = GetLengthDataTypeHandler(true).ReadAsLength(memoryStream, LengthType, retryCount);
 			if (length < 0)
 				throw new IsoMessageReadException($"Invalid length for field: {fieldNo}");
 
-			var data = memoryStream.ReadComplete(length);
+			var data = memoryStream.ReadComplete(length, retryCount);
 
 			message[fieldNo] = GetDataTypeHandler(true).ConvertToIsoField(data, GetEncoding());
 
 			data = null;
 		}
-		protected internal override void Write(MemoryStream memoryStream, int fieldNo, IsoMessage message)
+		protected internal override void Write(MemoryStream memoryStream, int fieldNo, IsoMessage message, int retryCount = 100)
 		{
 			var data = GetDataTypeHandler(false).ConvertToByteArray(message[fieldNo], GetEncoding());
 
-			GetLengthDataTypeHandler(false).WrtieAsLength(memoryStream, data.Length, LengthType);
+			GetLengthDataTypeHandler(false).WriteAsLength(memoryStream, data.Length, LengthType, retryCount);
 			memoryStream.Write(data);
 
 			data = null;

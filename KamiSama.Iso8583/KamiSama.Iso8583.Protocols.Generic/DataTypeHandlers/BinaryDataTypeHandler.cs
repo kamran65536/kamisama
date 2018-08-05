@@ -22,7 +22,7 @@ namespace KamiSama.Iso8583.Protocols.Generic.DataTypeHandlers
 		protected internal override IsoFieldBase ConvertToIsoField(byte[] data, Encoding encoding)
 			=> data;
 
-		protected internal override int ReadAsLength(Stream stream, VariableLengthType lengthType)
+		protected internal override int ReadAsLength(Stream stream, VariableLengthType lengthType, int retryCount)
 		{
 			var arr = stream.ReadComplete((int)lengthType);
 
@@ -35,8 +35,8 @@ namespace KamiSama.Iso8583.Protocols.Generic.DataTypeHandlers
 
 			return result;
 		}
-
-		protected internal override void WrtieAsLength(Stream stream, int length, VariableLengthType lengthType)
+		
+		protected internal override void WriteAsLength(Stream stream, int length, VariableLengthType lengthType, int retryCount)
 		{
 			var str = length.ToString("X2").PadLeft((int)lengthType * 2, '0');
 

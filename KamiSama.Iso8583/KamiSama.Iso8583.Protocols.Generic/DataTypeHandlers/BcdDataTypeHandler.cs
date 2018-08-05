@@ -19,7 +19,7 @@ namespace KamiSama.Iso8583.Protocols.Generic.DataTypeHandlers
 		protected internal override IsoFieldBase ConvertToIsoField(byte[] data, Encoding encoding)
 			=> data.ToHex();
 
-		protected internal override int ReadAsLength(Stream stream, VariableLengthType lengthType)
+		protected internal override int ReadAsLength(Stream stream, VariableLengthType lengthType, int retryCount)
 		{
 			var lengthLength = ((int)lengthType + 1) / 2;
 
@@ -32,7 +32,7 @@ namespace KamiSama.Iso8583.Protocols.Generic.DataTypeHandlers
 			return result;
 		}
 
-		protected internal override void WrtieAsLength(Stream stream, int length, VariableLengthType lengthType)
+		protected internal override void WriteAsLength(Stream stream, int length, VariableLengthType lengthType, int retryCount)
 		{
 			var lengthLength = ((int)lengthType + 1) / 2;
 

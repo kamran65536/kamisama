@@ -19,10 +19,10 @@ namespace KamiSama.Iso8583.Protocols.Generic.DataTypeHandlers
 		protected internal override IsoFieldBase ConvertToIsoField(byte[] data, Encoding encoding)
 			=> BitmapIsoField.FromHex(data.GetString());
 
-		protected internal override int ReadAsLength(Stream stream, VariableLengthType lengthType)
+		protected internal override int ReadAsLength(Stream stream, VariableLengthType lengthType, int retryCount)
 			=> throw new NotSupportedException($"BitmapDataTypeHandler cannot be used for Length");
 
-		protected internal override void WrtieAsLength(Stream stream, int length, VariableLengthType lengthType)
+		protected internal override void WriteAsLength(Stream stream, int length, VariableLengthType lengthType, int retryCount)
 			=> throw new NotSupportedException($"BitmapDataTypeHandler cannot be used for Length");
 	}
 }
