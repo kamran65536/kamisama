@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Xml.Serialization;
 using KamiSama.Extenders;
 using KamiSama.Iso8583.Protocols.Exceptions;
@@ -15,7 +16,7 @@ namespace KamiSama.Iso8583.Protocols.Generic
 
 		private IsoDataTypeHandler lengthDataTypeHandler;
 
-		protected IsoDataTypeHandler GetLengthDataTypeHandler(bool readOrWrite)
+		protected internal IsoDataTypeHandler GetLengthDataTypeHandler(bool readOrWrite)
 		{
 			if (lengthDataTypeHandler != null)
 				return lengthDataTypeHandler;
@@ -28,26 +29,40 @@ namespace KamiSama.Iso8583.Protocols.Generic
 				return lengthDataTypeHandler;
 		}
 
-		protected internal override void Read(MemoryStream memoryStream, int fieldNo, IsoMessage message, int retryCount = 100)
+		protected internal override void Read(Stream stream, int fieldNo, IsoMessage message, int retryCount = 100)
 		{
-			var length = GetLengthDataTypeHandler(true).ReadAsLength(memoryStream, LengthType, retryCount);
-			if (length < 0)
-				throw new IsoMessageReadException($"Invalid length for field: {fieldNo}");
+			try
+			{
+				var length = GetLengthDataTypeHandler(true).ReadAsLength(stream, LengthType, retryCount);
+				if (length < 0)
+					throw new IsoMessageReadException($"Invalid length for field: {fieldNo}");
 
-			var data = memoryStream.ReadComplete(length, retryCount);
+				var data = stream.ReadComplete(length, retryCount);
 
-			message[fieldNo] = GetDataTypeHandler(true).ConvertToIsoField(data, GetEncoding());
+				message[fieldNo] = GetDataTypeHandler(true).ConvertToIsoField(data, GetEncoding());
 
-			data = null;
+				data = null;
+			}
+			catch (Exception ex) when (!(ex is IsoMessageReadException))
+			{
+				throw new IsoMessageReadException($"Cannot read from the input for field {FieldNo}.", ex);
+			}
 		}
-		protected internal override void Write(MemoryStream memoryStream, int fieldNo, IsoMessage message, int retryCount = 100)
+		protected internal override void Write(Stream stream, int fieldNo, IsoMessage message, int retryCount = 100)
 		{
-			var data = GetDataTypeHandler(false).ConvertToByteArray(message[fieldNo], GetEncoding());
+			try
+			{
+				var data = GetDataTypeHandler(false).ConvertToByteArray(message[fieldNo], GetEncoding());
 
-			GetLengthDataTypeHandler(false).WriteAsLength(memoryStream, data.Length, LengthType, retryCount);
-			memoryStream.Write(data);
+				GetLengthDataTypeHandler(false).WriteAsLength(stream, data.Length, LengthType, retryCount);
+				stream.Write(data);
 
-			data = null;
+				data = null;
+			}
+			catch (Exception ex) when (!(ex is IsoMessageWriteException))
+			{
+				throw new IsoMessageWriteException($"Cannot read from the input for field {FieldNo}.", ex);
+			}
 		}
 	}
 }

@@ -12,29 +12,37 @@ namespace KamiSama.Iso8583.Protocols.Generic
 		[XmlAttribute("length")]
 		public int Length { get; set; }
 
-		protected internal override void Read(MemoryStream memoryStream, int fieldNo, IsoMessage message, int retryCount = 100)
+		protected internal override void Read(Stream stream, int fieldNo, IsoMessage message, int retryCount = 100)
 		{
 			try
 			{
-				var data = memoryStream.ReadComplete(Length, retryCount);
+				var data = stream.ReadComplete(Length, retryCount);
 				message[fieldNo] = GetDataTypeHandler(true).ConvertToIsoField(data, GetEncoding());
 
 				data = null;
 			}
-			catch (Exception ex)
+			catch (Exception ex) when (!(ex is IsoMessageReadException))
 			{
 				throw new IsoMessageReadException($"Problem in reading field no {fieldNo}.", ex);
 			}
 		}
-		protected internal override void Write(MemoryStream messageStream, int fieldNo, IsoMessage message, int retryCount = 100)
+		protected internal override void Write(Stream stream, int fieldNo, IsoMessage message, int retryCount = 100)
 		{
-			var data = GetDataTypeHandler(false).ConvertToByteArray(message[fieldNo], GetEncoding());
+			try
+			{
+				var data = GetDataTypeHandler(false).ConvertToByteArray(message[fieldNo], GetEncoding());
 
-			if (data.Length != Length)
-				throw new IsoMessageWriteException($"Cannot write iso field no {fieldNo} because the length of the input is not valid");
+				if (data.Length != Length)
+					throw new IsoMessageWriteException($"Cannot write iso field no {fieldNo} because the length of the input is not valid");
 
-			messageStream.Write(data);
-			data = null;
+				stream.Write(data);
+				data = null;
+			}
+			catch (Exception ex) when (!(ex is IsoMessageWriteException))
+			{
+				throw new IsoMessageWriteException($"Cannot write iso field {fieldNo}.", ex);
+			}
+			
 		}
 	}
 }

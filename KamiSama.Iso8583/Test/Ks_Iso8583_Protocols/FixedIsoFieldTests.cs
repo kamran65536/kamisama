@@ -10,6 +10,8 @@ using KamiSama.Iso8583;
 using KamiSama.Iso8583.Protocols.Exceptions;
 using KamiSama.Iso8583.Protocols.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NSubstitute;
+using NSubstitute.ExceptionExtensions;
 
 namespace Test.Ks_Iso8583_Protocols
 {
@@ -80,6 +82,24 @@ namespace Test.Ks_Iso8583_Protocols
 			var stream = new MemoryStream();
 
 			msg[2] = "12345678";
+
+			Assert.ThrowsException<IsoMessageWriteException>(() => field.Write(stream, 2, msg));
+		}
+		[TestMethod]
+		public void FixedFieldMustThrowExceptionOnFaultyStream()
+		{
+			var field = new FixedIsoField
+			{
+				DataType = "txt",
+				FieldNo = 2,
+				Length = 10,
+			};
+			var msg = new IsoMessage("1100");
+			var stream = Substitute.For<MemoryStream>();
+
+			stream.When(x => x.Write(Arg.Any<byte[]>(), Arg.Any<int>(), Arg.Any<int>())).Do(x => { throw new Exception(); });
+
+			msg[2] = "1234567890";
 
 			Assert.ThrowsException<IsoMessageWriteException>(() => field.Write(stream, 2, msg));
 		}

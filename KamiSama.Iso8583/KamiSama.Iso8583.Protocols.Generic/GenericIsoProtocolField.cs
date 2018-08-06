@@ -54,8 +54,8 @@ namespace KamiSama.Iso8583.Protocols.Generic
 		internal Encoding encoding;
 		protected internal Encoding GetEncoding() => encoding ?? (encoding = System.Text.Encoding.GetEncoding(Encoding));
 
-		protected internal abstract void Read(MemoryStream memoryStream, int fieldNo, IsoMessage message, int retryCount = 100);
-		protected internal abstract void Write(MemoryStream memoryStream, int fieldNo, IsoMessage message, int retryCount = 100);
+		protected internal abstract void Read(Stream stream, int fieldNo, IsoMessage message, int retryCount = 100);
+		protected internal abstract void Write(Stream stream, int fieldNo, IsoMessage message, int retryCount = 100);
 
 	}
 }
