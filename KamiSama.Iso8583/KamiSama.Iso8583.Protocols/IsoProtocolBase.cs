@@ -45,7 +45,7 @@ namespace KamiSama.Iso8583.Protocols
 			var newMacHex = GenerateMacFunc(memoryStream)?.ToHex() + "";
 			var messageMacHex = messageMac?.Data?.ToHex() + "";
 
-			if (messageMacHex != newMacHex)
+			if (messageMacHex.ToLower() != newMacHex.ToLower())
 				throw new MacVerificationFailedException(messageMacHex, newMacHex);
 		}
 

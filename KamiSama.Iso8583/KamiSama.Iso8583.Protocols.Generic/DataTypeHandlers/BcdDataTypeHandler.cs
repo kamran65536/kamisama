@@ -1,6 +1,8 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Text;
 using KamiSama.Extenders;
+using KamiSama.Iso8583.Protocols.Exceptions;
 
 namespace KamiSama.Iso8583.Protocols.Generic.DataTypeHandlers
 {
@@ -23,7 +25,10 @@ namespace KamiSama.Iso8583.Protocols.Generic.DataTypeHandlers
 		{
 			var lengthLength = ((int)lengthType + 1) / 2;
 
-			var arr = stream.ReadComplete(lengthLength);
+			var arr = stream.ReadComplete(lengthLength, retryCount);
+
+			if ((int)lengthType % 2 == 1)
+				arr[0] &= 0x0f;
 
 			var result = arr.ToHex().ConvertTo(-1);
 
@@ -34,9 +39,13 @@ namespace KamiSama.Iso8583.Protocols.Generic.DataTypeHandlers
 
 		protected internal override void WriteAsLength(Stream stream, int length, VariableLengthType lengthType, int retryCount)
 		{
+			if (Math.Log10(length) > (int)lengthType)
+				throw new IsoMessageWriteException($"Invalid length ({length}) for type: {lengthType}");
+
 			var lengthLength = ((int)lengthType + 1) / 2;
 
 			var str = length.ToString().PadLeft(lengthLength * 2, '0');
+
 
 			stream.Write(str.FromHex());
 		}
