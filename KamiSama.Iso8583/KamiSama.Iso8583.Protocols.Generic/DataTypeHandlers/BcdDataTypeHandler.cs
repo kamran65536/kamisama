@@ -10,7 +10,12 @@ namespace KamiSama.Iso8583.Protocols.Generic.DataTypeHandlers
 	{
 		protected internal override byte[] ConvertToByteArray(IsoFieldBase isoField, Encoding encoding)
 		{
-			var str = isoField + "";
+			string str;
+
+			if (isoField is StringIsoField stringIsoField)
+				str = stringIsoField.Data;
+			else
+				throw new IsoMessageReadException($"Iso field of type {isoField?.GetType()} is not supported.");
 
 			if (str.Length % 2 != 0)
 				str = '0' + str;

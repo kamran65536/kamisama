@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Text;
 using KamiSama.Extenders;
 using KamiSama.Iso8583.Protocols.Exceptions;
@@ -24,12 +25,12 @@ namespace KamiSama.Iso8583.Protocols.Generic.DataTypeHandlers
 
 		protected internal override int ReadAsLength(Stream stream, VariableLengthType lengthType, int retryCount)
 		{
-			var arr = stream.ReadComplete((int)lengthType);
+			var arr = stream.ReadComplete((int)lengthType, retryCount);
 
 			var result = 0;
 
-			for (int i = arr.Length - 1; i >= 0; i--)
-				result = result * 8 + arr[i];
+			for (int i = 0; i < arr.Length; i++)
+				result = result * 256 + arr[i];
 
 			arr = null;
 
@@ -38,6 +39,9 @@ namespace KamiSama.Iso8583.Protocols.Generic.DataTypeHandlers
 		
 		protected internal override void WriteAsLength(Stream stream, int length, VariableLengthType lengthType, int retryCount)
 		{
+			if (Math.Log10(length) > ((int)lengthType * 2))
+				throw new IsoMessageWriteException($"Invalid length ({length}) for type: {lengthType}");
+
 			var str = length.ToString("X2").PadLeft((int)lengthType * 2, '0');
 
 			stream.Write(str.FromHex());

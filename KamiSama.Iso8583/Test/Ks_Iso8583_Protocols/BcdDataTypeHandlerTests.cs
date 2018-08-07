@@ -29,6 +29,16 @@ namespace Test.Ks_Iso8583_Protocols
 			Assert.AreEqual(result.ToHex(), "1234567890");
 		}
 		[TestMethod]
+		public void ConvertToByteArrayMustThrowExceptionOnInvalidType()
+		{
+			var field = new BinaryIsoField { Data = new byte[4] };
+
+			var handler = new BcdDataTypeHandler();
+
+			Assert.ThrowsException<IsoMessageReadException>(() => handler.ConvertToByteArray(field, Encoding.UTF8));
+			Assert.ThrowsException<IsoMessageReadException>(() => handler.ConvertToByteArray(null, Encoding.UTF8));
+		}
+		[TestMethod]
 		public void ConvertToByteArrayMustConvertOddLengthDataAsHex()
 		{
 			var msg = new IsoMessage(1100);
