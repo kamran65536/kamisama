@@ -150,7 +150,7 @@ namespace Test.Ks_Iso8583_Protocols
 
 			handler.WriteAsLength(stream, 19, VariableLengthType.LLLLVar, 100);
 
-			Assert.AreEqual("000013", stream.ToArray().ToHex());
+			Assert.AreEqual("00000013", stream.ToArray().ToHex());
 		}
 		[TestMethod]
 		public void WriteAsLengthThrowExceptionForInvalidLength()

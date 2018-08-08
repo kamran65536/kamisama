@@ -71,6 +71,7 @@
     <Compile Include="Ks_Iso8583\StringIsoFieldTests.cs" />
     <Compile Include="Ks_Iso8583\BinaryIsoFieldTests.cs" />
     <Compile Include="Ks_Iso8583\IsoFieldBaseTests.cs" />
+    <Compile Include="Ks_Iso8583_Protocols\BitmapDataTypeHandlerTests.cs" />
     <Compile Include="Ks_Iso8583_Protocols\BinaryDataTypeHandlerTests.cs" />
     <Compile Include="Ks_Iso8583_Protocols\BcdDataTypeHandlerTests.cs" />
     <Compile Include="Ks_Iso8583_Protocols\SomeOtherIsoFieldType.cs" />
