@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -16,10 +17,12 @@ namespace KamiSama.Iso8583.Protocols.Generic
 		[XmlElement("variable", typeof(VariableIsoField))]
 		public GenericIsoProtocolField[] Fields { get; set; }
 
+		[ExcludeFromCodeCoverage]
 		public GenericIsoProtocol(Func<MemoryStream, byte[]> generateMacFunc)
 			: base(generateMacFunc)
 		{
 		}
+		[ExcludeFromCodeCoverage]
 		public GenericIsoProtocol()
 			: base(null)
 		{
@@ -63,10 +66,9 @@ namespace KamiSama.Iso8583.Protocols.Generic
 		{
 			var arr = messageData.ToArray();
 			var len = arr.Length + 4;
+
 			stream.Write(len.ToString("0000").ToBytes(Encoding.ASCII));
 			stream.Write(message.Id.PadLeft(4, '0').ToBytes(Encoding.ASCII));
-
-			Console.Write($"{len.ToString("0000")}{message.Id.PadLeft(4, '0')}{arr.ToHex()}");
 
 			stream.Write(arr);
 		}
