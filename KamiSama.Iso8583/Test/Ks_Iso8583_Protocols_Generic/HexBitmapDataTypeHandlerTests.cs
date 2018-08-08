@@ -9,7 +9,7 @@ using KamiSama.Iso8583.Protocols.Generic;
 using KamiSama.Iso8583.Protocols.Generic.DataTypeHandlers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Test.Ks_Iso8583_Protocols
+namespace Test.Ks_Iso8583_Protocols_Generic
 {
 	[TestClass]
 	[TestCategory("Ks.Iso8583.Protocols.Generic.HexBitmapDataTypeHandler")]

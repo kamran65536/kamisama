@@ -39,11 +39,11 @@ namespace KamiSama.Iso8583.Protocols
 			return message;
 		}
 
-		protected virtual void VerifyMac(IsoMessage message, MemoryStream memoryStream)
+		protected internal virtual void VerifyMac(IsoMessage message, MemoryStream memoryStream)
 		{
 			if (GenerateMacFunc == null)
 				return;
-			var messageMac = (message[64] ?? message[128]) as BinaryIsoField;
+			var messageMac = (message[128] ?? message[64]) as BinaryIsoField;
 
 			var newMacHex = GenerateMacFunc(memoryStream)?.ToHex() + "";
 			var messageMacHex = messageMac?.Data?.ToHex() + "";
@@ -66,7 +66,7 @@ namespace KamiSama.Iso8583.Protocols
 			}
 		}
 
-		protected virtual void WriteMac(MemoryStream memoryStream, IsoMessage message, int retryCount)
+		protected internal virtual void WriteMac(MemoryStream memoryStream, IsoMessage message, int retryCount)
 		{
 			if (GenerateMacFunc == null)
 				return;

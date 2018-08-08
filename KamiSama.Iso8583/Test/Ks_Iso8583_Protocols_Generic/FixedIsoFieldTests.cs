@@ -13,7 +13,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 using NSubstitute.ExceptionExtensions;
 
-namespace Test.Ks_Iso8583_Protocols
+namespace Test.Ks_Iso8583_Protocols_Generic
 {
 	[TestClass]
 	[TestCategory("Ks.Iso8583.Protocols.Generic.FixedIsoField")]

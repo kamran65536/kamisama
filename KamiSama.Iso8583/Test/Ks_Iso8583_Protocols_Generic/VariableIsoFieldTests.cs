@@ -13,7 +13,7 @@ using KamiSama.Iso8583.Protocols.Generic.DataTypeHandlers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 
-namespace Test.Ks_Iso8583_Protocols
+namespace Test.Ks_Iso8583_Protocols_Generic
 {
 	[TestClass]
 	[TestCategory("Ks.Iso8583.Protocols.Generic.VariableIsoField")]

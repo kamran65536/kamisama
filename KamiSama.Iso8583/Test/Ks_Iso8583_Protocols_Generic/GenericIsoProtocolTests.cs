@@ -6,7 +6,7 @@ using KamiSama.Iso8583.Protocols.Exceptions;
 using KamiSama.Iso8583.Protocols.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Test.Ks_Iso8583_Protocols
+namespace Test.Ks_Iso8583_Protocols_Generic
 {
 	[TestClass]
 	[TestCategory("Ks.Iso8583.Protocols.Generic.GenericIsoProtocol")]
