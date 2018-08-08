@@ -25,23 +25,24 @@ namespace KamiSama.Iso8583.Protocols.Generic
 		{
 		}
 
-		protected override void ReaderHeaderAndData(Stream stream, out MemoryStream memoryStream, out IsoMessage message)
+		protected override void ReadHeaderAndData(Stream stream, out MemoryStream memoryStream, out IsoMessage message, int retryCount)
 		{
 			string lenStr;
 			try
 			{
-				lenStr = stream.ReadComplete(4).GetString(Encoding.ASCII);
+				lenStr = stream.ReadComplete(4, retryCount).GetString(Encoding.ASCII);
 			}
 			catch (Exception exp)
 			{
 				throw new IsoMessageReadException("Cannot read message length.", exp);
 			}
-			
+
 			if (!int.TryParse(lenStr, out int len))
 				throw new IsoMessageReadException($"Invalid iso message length: {lenStr}");
+
 			try
 			{
-				var id = stream.ReadComplete(4).GetString(Encoding.ASCII);
+				var id = stream.ReadComplete(4, retryCount).GetString(Encoding.ASCII);
 				message = new IsoMessage(id);
 			}
 			catch (Exception exp)
@@ -51,14 +52,14 @@ namespace KamiSama.Iso8583.Protocols.Generic
 
 			try
 			{
-				memoryStream = new MemoryStream(stream.ReadComplete(len - 4));
+				memoryStream = new MemoryStream(stream.ReadComplete(len - 4, retryCount));
 			}
 			catch (Exception exp)
 			{
 				throw new IsoMessageReadException($"Cannot read iso message completely, id: {message.Id}, length: {len}", exp);
 			}
 		}
-		protected override void WrtieHeaderAndData(Stream stream, MemoryStream messageData, IsoMessage message)
+		protected override void WrtieHeaderAndData(Stream stream, MemoryStream messageData, IsoMessage message, int retryCount)
 		{
 			var arr = messageData.ToArray();
 			var len = arr.Length + 4;
@@ -69,24 +70,23 @@ namespace KamiSama.Iso8583.Protocols.Generic
 
 			stream.Write(arr);
 		}
-		protected override void ReadField(MemoryStream memoryStream, int fieldNo, IsoMessage message)
+		protected override void ReadField(MemoryStream memoryStream, int fieldNo, IsoMessage message, int retryCount)
 		{
 			var field = Fields.FirstOrDefault(x => x.FieldNo == fieldNo);
 
 			if (field == null)
 				throw new IsoMessageReadException($"Cannot read field no {fieldNo}, no proper Field reader/writer is found.");
 
-			field.Read(memoryStream, fieldNo, message);
+			field.Read(memoryStream, fieldNo, message, retryCount);
 		}
-
-		protected override void WriteField(MemoryStream messageData, int fieldNo, IsoMessage message)
+		protected override void WriteField(MemoryStream messageData, int fieldNo, IsoMessage message, int retryCount)
 		{
 			var field = Fields.FirstOrDefault(x => x.FieldNo == fieldNo);
 
 			if (field == null)
 				throw new IsoMessageReadException($"Cannot writer field no {fieldNo}, no proper Field reader/writer is found.");
 
-			field.Write(messageData, fieldNo, message);
+			field.Write(messageData, fieldNo, message, retryCount);
 		}
 	}
 }

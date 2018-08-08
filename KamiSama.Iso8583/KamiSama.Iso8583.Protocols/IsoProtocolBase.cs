@@ -20,15 +20,15 @@ namespace KamiSama.Iso8583.Protocols
 		{
 		}
 
-		public IsoMessage Read(Stream stream)
+		public IsoMessage Read(Stream stream, int retryCount)
 		{
-			ReaderHeaderAndData(stream, out MemoryStream memoryStream, out IsoMessage message);
+			ReadHeaderAndData(stream, out MemoryStream memoryStream, out IsoMessage message, retryCount);
 
 			using (memoryStream)
 			{
 				for (int fieldNo = 0; fieldNo <= 128; fieldNo++)
 					if ((fieldNo == 0) || message.Has(fieldNo))
-						ReadField(memoryStream, fieldNo, message);
+						ReadField(memoryStream, fieldNo, message, retryCount);
 
 				VerifyMac(message, memoryStream);				
 			}
@@ -49,21 +49,21 @@ namespace KamiSama.Iso8583.Protocols
 				throw new MacVerificationFailedException(messageMacHex, newMacHex);
 		}
 
-		public void Write(Stream stream, IsoMessage message)
+		public void Write(Stream stream, IsoMessage message, int retryCount)
 		{
 			using (var memoryStream = new MemoryStream())
 			{
 				for (int fieldNo = 0; fieldNo < 128; fieldNo++)
 					if ((fieldNo != 64) && message.Has(fieldNo))
-						WriteField(memoryStream, fieldNo, message);
+						WriteField(memoryStream, fieldNo, message, retryCount);
 
-				WriteMac(memoryStream, message);
+				WriteMac(memoryStream, message, retryCount);
 
-				WrtieHeaderAndData(stream, memoryStream, message);
+				WrtieHeaderAndData(stream, memoryStream, message, retryCount);
 			}
 		}
 
-		protected virtual void WriteMac(MemoryStream memoryStream, IsoMessage message)
+		protected virtual void WriteMac(MemoryStream memoryStream, IsoMessage message, int retryCount)
 		{
 			if (GenerateMacFunc == null)
 				return;
@@ -73,18 +73,18 @@ namespace KamiSama.Iso8583.Protocols
 			if (message.SecondaryBitmap != null)
 			{
 				message[128] = mac;
-				WriteField(memoryStream, 128, message);
+				WriteField(memoryStream, 128, message, retryCount);
 			}
 			else
-			{ 
+			{
 				message[64] = mac;
-				WriteField(memoryStream, 64, message);
+				WriteField(memoryStream, 64, message, retryCount);
 			}
 		}
 
-		protected abstract void WrtieHeaderAndData(Stream stream, MemoryStream messageData, IsoMessage message);
-		protected abstract void WriteField(MemoryStream messageData, int fieldNo, IsoMessage message);
-		protected abstract void ReaderHeaderAndData(Stream stream, out MemoryStream memoryStream, out IsoMessage message);
-		protected abstract void ReadField(MemoryStream memoryStream, int fieldNo, IsoMessage message);
+		protected internal abstract void WrtieHeaderAndData(Stream stream, MemoryStream messageData, IsoMessage message, int retryCount);
+		protected internal abstract void WriteField(MemoryStream messageData, int fieldNo, IsoMessage message, int retryCount);
+		protected internal abstract void ReadHeaderAndData(Stream stream, out MemoryStream memoryStream, out IsoMessage message, int retryCount);
+		protected internal  abstract void ReadField(MemoryStream memoryStream, int fieldNo, IsoMessage message, int retryCount);
 	}
 }
