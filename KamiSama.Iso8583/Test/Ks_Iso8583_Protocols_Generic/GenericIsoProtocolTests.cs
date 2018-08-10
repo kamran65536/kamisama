@@ -53,16 +53,16 @@ namespace Test.Ks_Iso8583_Protocols_Generic
 			Assert.ThrowsException<IsoMessageReadException>(() => protocol.ReadHeaderAndData(stream, out MemoryStream memStream, out IsoMessage msg, 100));
 		}
 		[TestMethod]
-		public void WriteHeaderAndDataMustWriteLengthAndThenId()
+		public void WriteHeaderAndDataMustWriteLengthAndMessage()
 		{
 			var protocol = new GenericIsoProtocol();
 			var stream = new MemoryStream();
 			var memStream = new MemoryStream("010203".FromHex());
 			var msg = new IsoMessage(1100);
 
-			protocol.WrtieHeaderAndData(stream, memStream, msg, 100);
+			protocol.WriteHeaderAndData(stream, memStream, msg, 100);
 
-			Assert.AreEqual("3030303731313030010203", stream.ToArray().ToHex());
+			Assert.AreEqual("30303033010203", stream.ToArray().ToHex());
 		}
 		[TestMethod]
 		public void ReadFieldMustReadFieldBasedOnProtocolFields()

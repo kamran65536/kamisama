@@ -70,15 +70,26 @@ namespace KamiSama.Iso8583.Protocols
 		{
 			using (var memoryStream = new MemoryStream())
 			{
+				WriteMessageId(memoryStream, message);
+				if (GenerateMacFunc != null)
+				{
+					if (message.SecondaryBitmap != null)
+						message.SecondaryBitmap[128] = true;
+					else
+						message.PrimaryBitmap[64] = true;
+				}
+
 				for (int fieldNo = 0; fieldNo < 128; fieldNo++)
 					if ((fieldNo != 64) && message.Has(fieldNo))
 						WriteField(memoryStream, fieldNo, message, retryCount);
 
+				
 				WriteMac(stream, message, memoryStream, retryCount);
 
-				WrtieHeaderAndData(stream, memoryStream, message, retryCount);
+				WriteHeaderAndData(stream, memoryStream, message, retryCount);
 			}
 		}
+
 
 		protected internal virtual void WriteMac(Stream stream, IsoMessage message, MemoryStream msgStream, int retryCount)
 		{
@@ -89,17 +100,18 @@ namespace KamiSama.Iso8583.Protocols
 
 			if (message.SecondaryBitmap != null)
 			{
-				message[128] = mac;
-				WriteField(stream, 128, message, retryCount);
+				message[128] = mac.ToHex();
+				WriteField(msgStream, 128, message, retryCount);
 			}
 			else
 			{
-				message[64] = mac;
-				WriteField(stream, 64, message, retryCount);
+				message[64] = mac.ToHex();
+				WriteField(msgStream, 64, message, retryCount);
 			}
 		}
 
-		protected internal abstract void WrtieHeaderAndData(Stream stream, MemoryStream messageData, IsoMessage message, int retryCount);
+		protected internal abstract void WriteMessageId(MemoryStream memoryStream, IsoMessage message);
+		protected internal abstract void WriteHeaderAndData(Stream stream, MemoryStream messageData, IsoMessage message, int retryCount);
 		protected internal abstract void WriteField(Stream stream, int fieldNo, IsoMessage message, int retryCount);
 		protected internal abstract void ReadHeaderAndData(Stream stream, out MemoryStream memoryStream, out IsoMessage message, int retryCount);
 		protected internal abstract void ReadField(Stream stream, int fieldNo, IsoMessage message, int retryCount);

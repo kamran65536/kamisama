@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics.CodeAnalysis;
 using KamiSama.Iso8583;
 
 namespace Test.Ks_Iso8583_Protocols_Generic
 {
+	[ExcludeFromCodeCoverage]
 	class SomeOtherIsoFieldType : IsoFieldBase
 	{
 		public override string ToDebugString(int fieldNo)

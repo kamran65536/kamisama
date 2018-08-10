@@ -62,14 +62,10 @@ namespace KamiSama.Iso8583.Protocols.Generic
 				throw new IsoMessageReadException("Cannot read message MTI.", exp);
 			}
 		}
-		protected override void WrtieHeaderAndData(Stream stream, MemoryStream messageData, IsoMessage message, int retryCount)
+		protected override void WriteHeaderAndData(Stream stream, MemoryStream messageData, IsoMessage message, int retryCount)
 		{
 			var arr = messageData.ToArray();
-			var len = arr.Length + 4;
-
-			stream.Write(len.ToString("0000").ToBytes(Encoding.ASCII));
-			stream.Write(message.Id.PadLeft(4, '0').ToBytes(Encoding.ASCII));
-
+			stream.Write(arr.Length.ToString("0000").ToBytes(Encoding.ASCII));
 			stream.Write(arr);
 		}
 		protected override void ReadField(Stream memoryStream, int fieldNo, IsoMessage message, int retryCount)
@@ -89,6 +85,11 @@ namespace KamiSama.Iso8583.Protocols.Generic
 				throw new IsoMessageReadException($"Cannot writer field no {fieldNo}, no proper Field reader/writer is found.");
 
 			field.Write(messageData, fieldNo, message, retryCount);
+		}
+
+		protected override void WriteMessageId(MemoryStream memoryStream, IsoMessage message)
+		{
+			memoryStream.Write(message.Id.PadLeft(4, '0').ToBytes(Encoding.ASCII));
 		}
 	}
 }
