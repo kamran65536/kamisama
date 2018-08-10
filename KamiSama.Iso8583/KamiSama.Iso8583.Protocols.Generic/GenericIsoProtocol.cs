@@ -18,7 +18,7 @@ namespace KamiSama.Iso8583.Protocols.Generic
 		public GenericIsoProtocolField[] Fields { get; set; }
 
 		[ExcludeFromCodeCoverage]
-		public GenericIsoProtocol(Func<MemoryStream, byte[]> generateMacFunc)
+		public GenericIsoProtocol(Func<byte[], byte[]> generateMacFunc)
 			: base(generateMacFunc)
 		{
 		}
@@ -28,7 +28,7 @@ namespace KamiSama.Iso8583.Protocols.Generic
 		{
 		}
 
-		protected override void ReadHeaderAndData(Stream stream, out MemoryStream memoryStream, out IsoMessage message, int retryCount)
+		protected override void ReadHeaderAndData(Stream stream, out MemoryStream messageStream, out IsoMessage message, int retryCount)
 		{
 			string lenStr;
 			try
@@ -45,21 +45,21 @@ namespace KamiSama.Iso8583.Protocols.Generic
 
 			try
 			{
-				var id = stream.ReadComplete(4, retryCount).GetString(Encoding.ASCII);
+				messageStream = new MemoryStream(stream.ReadComplete(len, retryCount));
+			}
+			catch (Exception exp)
+			{
+				throw new IsoMessageReadException($"Cannot read iso message completely, length: {len}", exp);
+			}
+
+			try
+			{
+				var id = messageStream.ReadComplete(4, retryCount).GetString(Encoding.ASCII);
 				message = new IsoMessage(id);
 			}
 			catch (Exception exp)
 			{
 				throw new IsoMessageReadException("Cannot read message MTI.", exp);
-			}
-
-			try
-			{
-				memoryStream = new MemoryStream(stream.ReadComplete(len - 4, retryCount));
-			}
-			catch (Exception exp)
-			{
-				throw new IsoMessageReadException($"Cannot read iso message completely, id: {message.Id}, length: {len}", exp);
 			}
 		}
 		protected override void WrtieHeaderAndData(Stream stream, MemoryStream messageData, IsoMessage message, int retryCount)
@@ -72,7 +72,7 @@ namespace KamiSama.Iso8583.Protocols.Generic
 
 			stream.Write(arr);
 		}
-		protected override void ReadField(MemoryStream memoryStream, int fieldNo, IsoMessage message, int retryCount)
+		protected override void ReadField(Stream memoryStream, int fieldNo, IsoMessage message, int retryCount)
 		{
 			var field = Fields.FirstOrDefault(x => x.FieldNo == fieldNo);
 
@@ -81,7 +81,7 @@ namespace KamiSama.Iso8583.Protocols.Generic
 
 			field.Read(memoryStream, fieldNo, message, retryCount);
 		}
-		protected override void WriteField(MemoryStream messageData, int fieldNo, IsoMessage message, int retryCount)
+		protected override void WriteField(Stream messageData, int fieldNo, IsoMessage message, int retryCount)
 		{
 			var field = Fields.FirstOrDefault(x => x.FieldNo == fieldNo);
 

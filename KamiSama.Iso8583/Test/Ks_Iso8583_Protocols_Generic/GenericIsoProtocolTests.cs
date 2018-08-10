@@ -24,7 +24,7 @@ namespace Test.Ks_Iso8583_Protocols_Generic
 			Assert.IsNotNull(msg);
 			Assert.IsNotNull(memStream);
 			Assert.AreEqual("1100", msg.Id);
-			Assert.AreEqual("12345678", memStream.ToArray().ToHex());
+			Assert.AreEqual("3131303012345678", memStream.ToArray().ToHex());
 		}
 		[TestMethod]
 		public void ReadHeaderAndDataMustThrowExceptionOnInvalidLength()
@@ -34,6 +34,8 @@ namespace Test.Ks_Iso8583_Protocols_Generic
 
 			Assert.ThrowsException<IsoMessageReadException>(() => protocol.ReadHeaderAndData(stream, out MemoryStream memStream, out IsoMessage msg, 100));
 			stream = new MemoryStream("3030303b".FromHex());
+			Assert.ThrowsException<IsoMessageReadException>(() => protocol.ReadHeaderAndData(stream, out MemoryStream memStream, out IsoMessage msg, 100));
+			stream = new MemoryStream("303030323030".FromHex());
 			Assert.ThrowsException<IsoMessageReadException>(() => protocol.ReadHeaderAndData(stream, out MemoryStream memStream, out IsoMessage msg, 100));
 		}
 		[TestMethod]
