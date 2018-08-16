@@ -6,6 +6,10 @@
 
 	<PropertyGroup>
 		<DebugType>Full</DebugType>
+		<PackageReleaseNotes>v1.0.0
+- initial release</PackageReleaseNotes>
+		<Authors>Kamran Fallah</Authors>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	</PropertyGroup>
 
   <ItemGroup>

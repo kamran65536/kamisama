@@ -1,11 +1,12 @@
 ﻿using System;
 using KamiSama.SecureModule.Api;
+using KamiSama.SecureModule.LocalSsm.Algorithms;
 
 namespace KamiSama.SecureModule.LocalSsm
 {
 	public class SsmKey : IKey, ICloneable
 	{
-		public string Algorithm { get; set; }
+		public Algorithm Algorithm { get; set; }
 		public byte[] KeyData { get; set; }
 		public bool IsPlainKey { get; set; }
 		internal byte[] DecryptedKey { get; set; }
@@ -20,7 +21,7 @@ namespace KamiSama.SecureModule.LocalSsm
 			};
 		}
 
-		public static SsmKey CreatePlainKey(string algorithm, byte[] key)
+		public static SsmKey CreatePlainKey(Algorithm algorithm, byte[] key)
 		{
 			return new SsmKey
 			{

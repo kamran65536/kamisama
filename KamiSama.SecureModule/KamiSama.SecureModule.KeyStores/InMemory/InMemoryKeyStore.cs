@@ -1,0 +1,135 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using KamiSama.SecureModule.Api;
+using KamiSama.SecureModule.KeySerializers;
+
+namespace KamiSama.SecureModule.KeyStores.InMemory
+{
+	public class InMemoryKeyStore<_KeyType> : KeyStoreBase<_KeyType>
+		where _KeyType : class, IKey
+	{
+		private readonly List<InMemoryKeyRecord<_KeyType>> keys;
+		private IKeySerializer<_KeyType> keySerialier;
+
+		public InMemoryKeyStore(
+			ISecureModule<_KeyType> securityModule,
+			IKeySerializer<_KeyType> keySerializer)
+			: base(securityModule)
+		{
+			this.keys = new List<InMemoryKeyRecord<_KeyType>>();
+			this.keySerialier = keySerializer;
+		}
+
+		public override _KeyType FindKey(KeySearchProperties keySearchProperties)
+		{
+			var result = FindKeys(keySearchProperties);
+
+			if ((result == null) || (result.Length == 0))
+				return default(_KeyType);
+
+			if (result.Length > 1)
+				throw new Exception($"More than one key is found.");
+
+			return result[0];
+		}
+		public override _KeyType[] FindKeys(KeySearchProperties keySearchProperties)
+		{
+			IEnumerable<InMemoryKeyRecord<_KeyType>> result = keys;
+
+			if (keySearchProperties == null)
+				throw new Exception($"KeySearchProperties object is null.");
+
+			if (keySearchProperties.Name != null)
+				result = result.Where(x => x.Name.ToLower() == keySearchProperties.Name.ToLower());
+			if (keySearchProperties.Group != null)
+				result = result.Where(x => x?.Group.ToLower() == keySearchProperties.Group.ToLower());
+			if (keySearchProperties.Algorithm != null)
+				result = result.Where(x => x.Algorithm == keySearchProperties.Algorithm);
+
+			return result.Select(x => x.Key).ToArray();
+		}
+		public override byte[] ExportKey(_KeyType key, ExportKeyProperties exportKeyProperties)
+		{
+			if (exportKeyProperties == null)
+				throw new Exception($"Export properties is null.");
+
+			var keyBlob = keySerialier.SerializeKey(key);
+
+			if (exportKeyProperties.ParentKey != null)
+				keyBlob = SecureModule.Encrypt(exportKeyProperties.ParentKey, keyBlob, padding: exportKeyProperties.KeyBlobPaddingMode, cipherMode: exportKeyProperties.KeyBlobCipherMode);
+
+
+			return keyBlob;
+		}
+		public override _KeyType ImportKey(byte[] keyBlob, ImportKeyProperties importKeyProperties)
+		{
+			if (importKeyProperties == null)
+				throw new Exception($"Export properties is null.");
+			if (importKeyProperties.Name == null)
+				throw new Exception($"Key name cannot be null.");
+
+
+			if (importKeyProperties.ParentKey != null)
+				keyBlob = SecureModule.Decrypt(importKeyProperties.ParentKey, keyBlob, padding: importKeyProperties.KeyBlobPaddingMode, cipherMode: importKeyProperties.KeyBlobCipherMode);
+
+			var key = keySerialier.DeserializeKey(keyBlob);
+			var record = keys.FirstOrDefault(x => x.Name.ToLower() == importKeyProperties.Name.ToLower());
+
+			if (importKeyProperties.ImportKeyStoreType == ImportKeyStoreType.ImportButNotStore)
+				return key;
+
+			if (record != null)
+				if (importKeyProperties.ImportKeyStoreType == ImportKeyStoreType.OverwriteExisting)
+				{
+					record.Algorithm = importKeyProperties.Algorithm;
+					record.Group = importKeyProperties.Group;
+					record.Name = importKeyProperties.Name;
+					record.Key = key;
+				}
+				else
+					throw new Exception($"Key with name {importKeyProperties.Name} already exists.");
+			else
+				keys.Add(new InMemoryKeyRecord<_KeyType>
+				{
+					Algorithm = importKeyProperties.Algorithm,
+					Group = importKeyProperties.Group,
+					Name = importKeyProperties.Name,
+					Key = key,
+				});
+
+			return key;
+		}
+
+		public override void DeleteKey(_KeyType key)
+		{
+			var record = keys.FirstOrDefault(x => object.ReferenceEquals(key, x.Key));
+
+			if (record == null)
+				throw new Exception($"key is not found.");
+
+			keys.Remove(record);
+		}
+		public override void InjectKey(_KeyType key, KeyInjectionProperties keyInjectionProperties)
+		{
+			if (keyInjectionProperties == null)
+				throw new Exception($"KeyInjectionProperties object is null.");
+
+			if (keyInjectionProperties.Name == null)
+				throw new Exception($"Key name cannot be null.");
+
+			if (FindKey(new KeySearchProperties { Name = keyInjectionProperties.Name }) != null)
+				throw new Exception($"Key already exists.");
+
+			var record = new InMemoryKeyRecord<_KeyType>
+			{
+				Algorithm = keyInjectionProperties.Algorithm,
+				Name = keyInjectionProperties.Name,
+				Group = keyInjectionProperties.Group,
+				Key = key
+			};
+
+			keys.Add(record);
+		}
+	}
+}

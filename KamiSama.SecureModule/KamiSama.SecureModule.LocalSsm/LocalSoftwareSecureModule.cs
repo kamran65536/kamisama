@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using KamiSama.SecureModule.Api;
 using KamiSama.SecureModule.KeySerializers.Bson;
-using KamiSama.SecureModule.KeyStores;
+using KamiSama.SecureModule.KeyStores.InMemory;
 using KamiSama.SecureModule.LocalSsm.Algorithms;
 
 namespace KamiSama.SecureModule.LocalSsm
@@ -11,121 +11,89 @@ namespace KamiSama.SecureModule.LocalSsm
 
 	public class LocalSoftwareSecureModule : SecureModuleBase<SsmKey>
 	{
-		public override IKeySerializer<SsmKey> KeySerializer { get; }
-
+		public override IKeyStore<SsmKey> InternalKeyStore { get; }
 		protected LocalSsmSettings Settings { get; }
-		public Dictionary<string, ISecurityAlgorithm> Algorithms { get; }
+		public Dictionary<Algorithm, ISecurityAlgorithm> Algorithms { get; }
 		protected SsmKey MasterKey { get; private set; }
-
+		private Random rand;
 		public LocalSoftwareSecureModule(LocalSsmSettings settings)
 		{
 			settings = settings ?? LocalSsmSettings.Instance;
-
 			this.MasterKey = SsmKey.CreatePlainKey(settings.MasterKeyAlgorithm, settings.MasterKey);
-			this.KeySerializer = new BsonKeySerializer<SsmKey>(this);
-
-			this.Algorithms = new Dictionary<string, ISecurityAlgorithm>(StringComparer.InvariantCultureIgnoreCase)
+			InternalKeyStore = new InMemoryKeyStore<SsmKey>(this, new BsonKeySerializer<SsmKey>());
+			this.rand = new Random();
+			this.Algorithms = new Dictionary<Algorithm, ISecurityAlgorithm>
 			{
-				{ "des" ,  new DesAlgorithm() },
-				{ "3des" ,  new TripleDesAlgorithm() },
-				{ "tdes" ,  new TripleDesAlgorithm() },
-				{ "tripledes" ,  new TripleDesAlgorithm() },
-				{ "triple-des" ,  new TripleDesAlgorithm() },
-				{ "aes" ,  new AesAlgorithm() },
+				{ Algorithm.Des ,  new DesAlgorithm() },
+				{ Algorithm.TripleDes,  new TripleDesAlgorithm() },
+				{ Algorithm.Aes,  new AesAlgorithm() },
 			};
 		}
 		public LocalSoftwareSecureModule()
 			: this(null)
 		{
 		}
-
-		public override byte[] Encrypt(SsmKey key, byte[] data, byte[] iv = null, CipherMode cipherMode = CipherMode.CBC, PaddingMode padding = PaddingMode.PKCS7)
+		private SsmKey TryDecryptKey(SsmKey key)
 		{
-			if (!Algorithms.TryGetValue(key.Algorithm, out ISecurityAlgorithm algorithm))
-				throw new Exception($"Algorithm {key.Algorithm} is not found.");
-
 			if (key.DecryptedKey == null)
 				if (key.IsPlainKey)
 					key.DecryptedKey = key.KeyData;
 				else
 					key.DecryptedKey = Decrypt(MasterKey, key.KeyData, iv: null, cipherMode: CipherMode.CBC, padding: PaddingMode.PKCS7);
 
-			return algorithm.Encrypt(key.DecryptedKey, data, iv, cipherMode, padding);
+			return key;
+		}
+		public override byte[] Encrypt(SsmKey key, byte[] data, byte[] iv = null, CipherMode cipherMode = CipherMode.CBC, PaddingMode padding = PaddingMode.PKCS7)
+		{
+			if (!Algorithms.TryGetValue(key.Algorithm, out ISecurityAlgorithm algorithm))
+				throw new Exception($"Algorithm {key.Algorithm} is not found.");
+
+			return algorithm.Encrypt(TryDecryptKey(key).DecryptedKey, data, iv, cipherMode, padding);
 		}
 		public override byte[] Decrypt(SsmKey key, byte[] data, byte[] iv = null, CipherMode cipherMode = CipherMode.CBC, PaddingMode padding = PaddingMode.None)
 		{
 			if (!Algorithms.TryGetValue(key.Algorithm, out ISecurityAlgorithm algorithm))
 				throw new Exception($"Algorithm {key.Algorithm} is not found.");
 
-			if (key.DecryptedKey == null)
-				if (key.IsPlainKey)
-					key.DecryptedKey = key.KeyData;
-				else
-					key.DecryptedKey = Decrypt(MasterKey, key.KeyData, iv: null, cipherMode: CipherMode.CBC, padding: PaddingMode.PKCS7);
-
-			return algorithm.Decrypt(key.DecryptedKey, data, iv, cipherMode, padding);
+			return algorithm.Decrypt(TryDecryptKey(key).DecryptedKey, data, iv, cipherMode, padding);
 		}
 		public override byte[] Sign(SsmKey key, byte[] data, byte[] iv = null, PaddingMode padding = PaddingMode.PKCS7)
 		{
 			if (!Algorithms.TryGetValue(key.Algorithm, out ISecurityAlgorithm algorithm))
 				throw new Exception($"Algorithm {key.Algorithm} is not found.");
-
-			if (key.DecryptedKey == null)
-				if (key.IsPlainKey)
-					key.DecryptedKey = key.KeyData;
-				else
-					key.DecryptedKey = Decrypt(MasterKey, key.KeyData, iv: null, cipherMode: CipherMode.CBC, padding: PaddingMode.PKCS7);
-
-			return algorithm.Sign(key.DecryptedKey, data, iv, padding);
+			return algorithm.Sign(TryDecryptKey(key).DecryptedKey, data, iv, padding);
 		}
-		public override SsmKey GenerateKeyObject(KeyGenerationSettings settings)
+		public override SsmKey GenerateKey(KeyGenerationSettings keyGenerationSettings)
 		{
-			if (settings == null)
+			if (keyGenerationSettings == null)
 				throw new Exception("Settings cannot be null.");
 
-			if (settings.ExpiryDate.HasValue)
+			if (keyGenerationSettings.ExpiryDate.HasValue)
 				throw new NotSupportedException("Expiry date is not supported.");
-			if (settings.Group != null)
+			if (keyGenerationSettings.Group != null)
 				throw new NotSupportedException("Key Grouping is not supported.");
 
-			var parentKey = ((SsmKey)settings.ParentKey) ?? MasterKey;
-
+			var keyData = new byte[keyGenerationSettings.KeySize];
+			rand.NextBytes(keyData);
 			var key = new SsmKey
 			{
-				Algorithm = settings.Algorithm,
-				KeyData = Encrypt(parentKey, settings.KeyData, null, CipherMode.CBC, PaddingMode.PKCS7),
+				Algorithm = (Algorithm) keyGenerationSettings.Algorithm,
 				IsPlainKey = false,
 			};
+			if (Settings.MasterKey != null)
+				keyData = Encrypt(MasterKey, keyData, iv: null, cipherMode: CipherMode.CBC, padding: PaddingMode.PKCS7);
 
-			if (!settings.IsExternalKey)
+			key.KeyData = keyData;
+			var keyInjectionProperties = new KeyInjectionProperties
 			{
-				var keyStore = GetKeyStore(settings.KeyStoreName);
-
-				if (keyStore == null)
-					throw new Exception($"No Key store is found, name: {settings.KeyStoreName}");
-
-				if (string.IsNullOrWhiteSpace(settings.KeyName))
-					throw new Exception($"No key name is set.");
-
-				keyStore.SaveKey(settings.KeyName, key);
-			}
+				Algorithm = keyGenerationSettings.Algorithm,
+				Group = keyGenerationSettings.Group,
+				KeySize = keyGenerationSettings.KeySize,
+				Name = keyGenerationSettings.KeyName,
+			};
+			this.InternalKeyStore.InjectKey(key, keyInjectionProperties);
 
 			return key;
 		}
-
-		public override IKeyStore<SsmKey> GetKeyStore(string name)
-		{
-			switch (name?.ToLower())
-			{
-				default:
-				case "":
-				case "inmemory":
-					return new InMemoryKeyStore<SsmKey>(this);
-				case "filebased":
-					return new FileBasedKeyStore<SsmKey>(Settings.FileBasedKeyStorePath, this);
-			}
-		}
-
-
 	}
 }

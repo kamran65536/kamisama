@@ -1,12 +1,12 @@
-﻿using System;
-using KamiSama.Configs;
+﻿using KamiSama.Configs;
+using KamiSama.SecureModule.LocalSsm.Algorithms;
 
 namespace KamiSama.SecureModule.LocalSsm
 {
 	public class LocalSsmSettings : ConfigData<LocalSsmSettings>
     {
 		public byte[] MasterKey { get; set; }
-		public string MasterKeyAlgorithm { get; set; }
+		public Algorithm MasterKeyAlgorithm { get; set; }
 
 		public string FileBasedKeyStorePath { get; set; } = "./local-ssm/";
 	}
