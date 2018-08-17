@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace KamiSama.SecureModule.Api
 {
+	[ExcludeFromCodeCoverage]
 	public class KeyGenerationSettings
 	{
 		public string Group { get; set; }

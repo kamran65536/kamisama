@@ -5,10 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="KamiSama.Configs" Version="1.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\..\KamiSama.Configs\KamiSama.Configs\KamiSama.Configs.csproj" />
     <ProjectReference Include="..\..\KamiSama.Extenders\KamiSama.Extenders\KamiSama.Extenders.csproj" />
     <ProjectReference Include="..\KamiSama.SecureModule.Api\KamiSama.SecureModule.Api.csproj" />
     <ProjectReference Include="..\KamiSama.SecureModule.KeySerializers.Bson\KamiSama.SecureModule.KeySerializers.Bson.csproj" />

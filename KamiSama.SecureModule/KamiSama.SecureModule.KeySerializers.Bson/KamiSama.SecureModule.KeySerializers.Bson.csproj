@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -8,6 +8,9 @@
     <PackageReleaseNotes>v1.1.0
 bsonkeyserializer is added.</PackageReleaseNotes>
   </PropertyGroup>
+	<PropertyGroup>
+		<DebugType>Full</DebugType>
+	</PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json.Bson" Version="1.0.1" />

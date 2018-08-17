@@ -1,5 +1,8 @@
-﻿namespace KamiSama.SecureModule.Api
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace KamiSama.SecureModule.Api
 {
+	[ExcludeFromCodeCoverage]
 	public class KeyInjectionProperties
 	{
 		public string Name { get; set; }

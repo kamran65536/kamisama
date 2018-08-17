@@ -1,7 +1,9 @@
-﻿using System.Security.Cryptography;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Security.Cryptography;
 
 namespace KamiSama.SecureModule.Api
 {
+	[ExcludeFromCodeCoverage]
 	public class ExportKeyProperties
 	{
 		public KeyBlobType KeyBlobType { get; set; }
