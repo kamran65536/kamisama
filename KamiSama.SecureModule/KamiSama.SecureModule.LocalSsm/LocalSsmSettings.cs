@@ -7,7 +7,5 @@ namespace KamiSama.SecureModule.LocalSsm
     {
 		public byte[] MasterKey { get; set; }
 		public Algorithm MasterKeyAlgorithm { get; set; }
-
-		public string FileBasedKeyStorePath { get; set; } = "./local-ssm/";
 	}
 }

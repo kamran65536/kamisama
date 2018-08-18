@@ -4,6 +4,5 @@
 	{
 		PlainKey = 1,
 		PublicKey = 2,
-		Prib
 	}
 }

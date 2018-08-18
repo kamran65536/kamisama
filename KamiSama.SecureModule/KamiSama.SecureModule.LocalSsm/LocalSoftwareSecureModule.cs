@@ -20,7 +20,7 @@ namespace KamiSama.SecureModule.LocalSsm
 		{
 			settings = settings ?? LocalSsmSettings.Instance;
 			this.MasterKey = SsmKey.CreatePlainKey(settings.MasterKeyAlgorithm, settings.MasterKey);
-			InternalKeyStore = new InMemoryKeyStore<SsmKey>(this, new BsonKeySerializer<SsmKey>());
+			InternalKeyStore = new InMemoryKeyStore<SsmKey>(this, new BsonKeySerializer<SsmKey>(), new SsmKeyFactory());
 			this.rand = new Random();
 			this.Algorithms = new Dictionary<Algorithm, ISecurityAlgorithm>
 			{

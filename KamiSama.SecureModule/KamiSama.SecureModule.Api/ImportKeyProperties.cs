@@ -8,6 +8,7 @@ namespace KamiSama.SecureModule.Api
     {
 		public ImportKeyStoreType ImportKeyStoreType { get; set; } = ImportKeyStoreType.ImportAndStore;
 		public IKey ParentKey { get; set; }
+		public KeyBlobType KeyBlobType { get; set; }
 		public PaddingMode KeyBlobPaddingMode { get; set; }
 		public CipherMode KeyBlobCipherMode { get; set; }
 		public string Name { get; set; }

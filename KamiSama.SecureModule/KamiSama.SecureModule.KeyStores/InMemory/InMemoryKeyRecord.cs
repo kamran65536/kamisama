@@ -1,7 +1,9 @@
-﻿using KamiSama.SecureModule.Api;
+﻿using System.Diagnostics.CodeAnalysis;
+using KamiSama.SecureModule.Api;
 
 namespace KamiSama.SecureModule.KeyStores.InMemory
 {
+	[ExcludeFromCodeCoverage]
 	public class InMemoryKeyRecord<_KeyType>
 		where _KeyType : IKey
     {

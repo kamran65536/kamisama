@@ -9,23 +9,26 @@ namespace KamiSama.SecureModule.KeyStores.InMemory
 	public class InMemoryKeyStore<_KeyType> : KeyStoreBase<_KeyType>
 		where _KeyType : class, IKey
 	{
-		private readonly List<InMemoryKeyRecord<_KeyType>> keys;
+		protected internal List<InMemoryKeyRecord<_KeyType>> Keys { get; }
 		private IKeySerializer<_KeyType> keySerialier;
+		private IKeyFactory<_KeyType> keyFactory;
 
 		public InMemoryKeyStore(
 			ISecureModule<_KeyType> securityModule,
-			IKeySerializer<_KeyType> keySerializer)
+			IKeySerializer<_KeyType> keySerializer,
+			IKeyFactory<_KeyType> keyFactory)
 			: base(securityModule)
 		{
-			this.keys = new List<InMemoryKeyRecord<_KeyType>>();
+			this.Keys = new List<InMemoryKeyRecord<_KeyType>>();
 			this.keySerialier = keySerializer;
+			this.keyFactory = keyFactory;
 		}
 
 		public override _KeyType FindKey(KeySearchProperties keySearchProperties)
 		{
 			var result = FindKeys(keySearchProperties);
 
-			if ((result == null) || (result.Length == 0))
+			if (result.Length == 0)
 				return default(_KeyType);
 
 			if (result.Length > 1)
@@ -35,7 +38,7 @@ namespace KamiSama.SecureModule.KeyStores.InMemory
 		}
 		public override _KeyType[] FindKeys(KeySearchProperties keySearchProperties)
 		{
-			IEnumerable<InMemoryKeyRecord<_KeyType>> result = keys;
+			IEnumerable<InMemoryKeyRecord<_KeyType>> result = Keys;
 
 			if (keySearchProperties == null)
 				throw new Exception($"KeySearchProperties object is null.");
@@ -72,9 +75,14 @@ namespace KamiSama.SecureModule.KeyStores.InMemory
 
 			if (importKeyProperties.ParentKey != null)
 				keyBlob = SecureModule.Decrypt(importKeyProperties.ParentKey, keyBlob, padding: importKeyProperties.KeyBlobPaddingMode, cipherMode: importKeyProperties.KeyBlobCipherMode);
+			_KeyType key;
 
-			var key = keySerialier.DeserializeKey(keyBlob);
-			var record = keys.FirstOrDefault(x => x.Name.ToLower() == importKeyProperties.Name.ToLower());
+			if (importKeyProperties.KeyBlobType == KeyBlobType.Simple)
+				key = keySerialier.DeserializeKey(keyBlob);
+			else
+				key = keyFactory.CreateKeyFrom(importKeyProperties.Algorithm, keyBlob);
+
+			var record = Keys.FirstOrDefault(x => x.Name.ToLower() == importKeyProperties.Name.ToLower());
 
 			if (importKeyProperties.ImportKeyStoreType == ImportKeyStoreType.ImportButNotStore)
 				return key;
@@ -90,7 +98,7 @@ namespace KamiSama.SecureModule.KeyStores.InMemory
 				else
 					throw new Exception($"Key with name {importKeyProperties.Name} already exists.");
 			else
-				keys.Add(new InMemoryKeyRecord<_KeyType>
+				Keys.Add(new InMemoryKeyRecord<_KeyType>
 				{
 					Algorithm = importKeyProperties.Algorithm,
 					Group = importKeyProperties.Group,
@@ -103,12 +111,12 @@ namespace KamiSama.SecureModule.KeyStores.InMemory
 
 		public override void DeleteKey(_KeyType key)
 		{
-			var record = keys.FirstOrDefault(x => object.ReferenceEquals(key, x.Key));
+			var record = Keys.FirstOrDefault(x => object.ReferenceEquals(key, x.Key));
 
 			if (record == null)
 				throw new Exception($"key is not found.");
 
-			keys.Remove(record);
+			Keys.Remove(record);
 		}
 		public override void InjectKey(_KeyType key, KeyInjectionProperties keyInjectionProperties)
 		{
@@ -129,7 +137,7 @@ namespace KamiSama.SecureModule.KeyStores.InMemory
 				Key = key
 			};
 
-			keys.Add(record);
+			Keys.Add(record);
 		}
 	}
 }

@@ -71,6 +71,8 @@
     <Compile Include="KS_SecureModule\SecureModuleBaseTests.cs" />
     <Compile Include="KS_SecureModule_KeySerializers\BsonKeySerializerTests.cs" />
     <Compile Include="KS_SecureModule_KeySerializers\KeySerializerBaseTests.cs" />
+    <Compile Include="KS_SecureModule_KeyStores\InMemoryKeyStoreTests.cs" />
+    <Compile Include="KS_SecureModule_KeyStores\KeyStoreBaseTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
