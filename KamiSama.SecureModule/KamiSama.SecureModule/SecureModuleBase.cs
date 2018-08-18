@@ -18,7 +18,7 @@ namespace KamiSama.SecureModule
 		public byte[] Decrypt(IKey key, byte[] cipher, byte[] iv = null, CipherMode cipherMode = CipherMode.CBC, PaddingMode padding = PaddingMode.PKCS7)
 			=> Decrypt((_KeyType)key, cipher, iv, cipherMode, padding);
 		public byte[] Encrypt(IKey key, byte[] data, byte[] iv = null, CipherMode cipherMode = CipherMode.CBC, PaddingMode padding = PaddingMode.PKCS7)
-			=> Decrypt((_KeyType)key, data, iv, cipherMode, padding);
+			=> Encrypt((_KeyType)key, data, iv, cipherMode, padding);
 		public byte[] Sign(IKey key, byte[] data, byte[] iv = null, PaddingMode padding = PaddingMode.PKCS7)
 			=> Sign((_KeyType)key, data, iv, padding);
 		IKey ISecureModule.GenerateKey(KeyGenerationSettings settings)

@@ -18,7 +18,10 @@
 		<Authors>Kamran Fallah</Authors>
 		<Company>Kamran Fallah</Company>
 		<Description>Local SSM (Software Secure Module)</Description>
-		<PackageReleaseNotes>v1.1.3.1
+		<PackageReleaseNotes>v1.2.0
+- KeyStore.Import/Export/Inject/FindKeys/Findkey methods are added.
+- some refactorings in ISecureModule.
+v1.1.3.1
 Sign Method is added.
 v1.1.1
 KeyGenerationSettings is added
@@ -28,6 +31,6 @@ v1.0.1
 - ISecureModule, SecureModuleBase
 v1.0.0
 - Initial version (tested)</PackageReleaseNotes>
-		<Version>1.1.3.1</Version>
+		<Version>1.2.0-beta1</Version>
 	</PropertyGroup>
 </Project>

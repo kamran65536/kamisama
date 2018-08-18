@@ -8,6 +8,7 @@ namespace KamiSama.SecureModule.Api
 		byte[] Encrypt(IKey key, byte[] data, byte[] iv = null, CipherMode cipherMode = CipherMode.CBC, PaddingMode padding = PaddingMode.PKCS7);
 		byte[] Decrypt(IKey key, byte[] cipher, byte[] iv = null, CipherMode cipherMode = CipherMode.CBC, PaddingMode padding = PaddingMode.PKCS7);
 		byte[] Sign(IKey key, byte[] data, byte[] iv = null, PaddingMode padding = PaddingMode.PKCS7);
+
 		IKey GenerateKey(KeyGenerationSettings settings);
 	}
 

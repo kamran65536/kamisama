@@ -2,6 +2,7 @@
 {
 	public enum KeyBlobType
 	{
-		Simple = 1,
+		SimpleBlob = 1,
+		RawKeyData = 2,
 	}
 }

@@ -23,19 +23,6 @@ namespace KamiSama.SecureModule.KeyStores.InMemory
 			this.keySerialier = keySerializer;
 			this.keyFactory = keyFactory;
 		}
-
-		public override _KeyType FindKey(KeySearchProperties keySearchProperties)
-		{
-			var result = FindKeys(keySearchProperties);
-
-			if (result.Length == 0)
-				return default(_KeyType);
-
-			if (result.Length > 1)
-				throw new Exception($"More than one key is found.");
-
-			return result[0];
-		}
 		public override _KeyType[] FindKeys(KeySearchProperties keySearchProperties)
 		{
 			IEnumerable<InMemoryKeyRecord<_KeyType>> result = Keys;
@@ -52,12 +39,37 @@ namespace KamiSama.SecureModule.KeyStores.InMemory
 
 			return result.Select(x => x.Key).ToArray();
 		}
+		public override _KeyType FindKey(KeySearchProperties keySearchProperties)
+		{
+			var result = FindKeys(keySearchProperties);
+
+			if (result.Length == 0)
+				return default(_KeyType);
+
+			if (result.Length > 1)
+				throw new Exception($"More than one key is found.");
+
+			return result[0];
+		}
 		public override byte[] ExportKey(_KeyType key, ExportKeyProperties exportKeyProperties)
 		{
 			if (exportKeyProperties == null)
 				throw new Exception($"Export properties is null.");
+			if (key == null)
+				throw new Exception($"key is null.");
 
-			var keyBlob = keySerialier.SerializeKey(key);
+			byte[] keyBlob;
+
+			switch (exportKeyProperties.KeyBlobType)
+			{
+				default:
+				case KeyBlobType.SimpleBlob:
+					keyBlob = keySerialier.SerializeKey(key);
+					break;
+				case KeyBlobType.RawKeyData:
+					throw new NotSupportedException($"Currently it is not supported.");
+			}
+
 
 			if (exportKeyProperties.ParentKey != null)
 				keyBlob = SecureModule.Encrypt(exportKeyProperties.ParentKey, keyBlob, padding: exportKeyProperties.KeyBlobPaddingMode, cipherMode: exportKeyProperties.KeyBlobCipherMode);
@@ -77,10 +89,16 @@ namespace KamiSama.SecureModule.KeyStores.InMemory
 				keyBlob = SecureModule.Decrypt(importKeyProperties.ParentKey, keyBlob, padding: importKeyProperties.KeyBlobPaddingMode, cipherMode: importKeyProperties.KeyBlobCipherMode);
 			_KeyType key;
 
-			if (importKeyProperties.KeyBlobType == KeyBlobType.Simple)
-				key = keySerialier.DeserializeKey(keyBlob);
-			else
-				key = keyFactory.CreateKeyFrom(importKeyProperties.Algorithm, keyBlob);
+			switch (importKeyProperties.KeyBlobType)
+			{
+				default:
+				case KeyBlobType.SimpleBlob:
+					key = keySerialier.DeserializeKey(keyBlob);
+					break;
+				case KeyBlobType.RawKeyData:
+					key = keyFactory.CreateKeyFrom(importKeyProperties.Algorithm, keyBlob);
+					break;
+			}
 
 			var record = Keys.FirstOrDefault(x => x.Name.ToLower() == importKeyProperties.Name.ToLower());
 
