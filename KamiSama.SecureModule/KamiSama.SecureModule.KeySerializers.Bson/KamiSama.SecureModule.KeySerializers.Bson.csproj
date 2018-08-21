@@ -2,9 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Authors>Kamran Fallah</Authors>
-    <Version>1.2.0-beta1</Version>
+    <Version>1.2.0-beta2</Version>
     <PackageReleaseNotes>v1.2.0
 - KeyStore.Import/Export/Inject/FindKeys/Findkey methods are added.
 - some refactorings in ISecureModule.

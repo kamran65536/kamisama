@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Authors>Kamran Fallah</Authors>
     <Company>-</Company>
     <Description>SecureModule base classes</Description>
@@ -15,7 +15,7 @@ v1.1.1
 KeyGenerationSettings is added
 v1.1.0
 SecureModuleBase</PackageReleaseNotes>
-    <Version>1.2.0-beta1</Version>
+    <Version>1.2.0-beta2</Version>
   </PropertyGroup>
 
   <ItemGroup>

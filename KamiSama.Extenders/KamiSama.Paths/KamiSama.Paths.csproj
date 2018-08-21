@@ -5,6 +5,12 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Kamran Fallah</Authors>
     <Description>Simple Path registration mechanisim.</Description>
+    <Version>1.0.1</Version>
+    <PackageReleaseNotes>v1.0.1
+- Translate(path) is added. 
+- paths are retranslated when new path is registered.
+v1.0.0
+initial release</PackageReleaseNotes>
   </PropertyGroup>
 
 </Project>

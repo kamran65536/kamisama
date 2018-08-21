@@ -21,8 +21,8 @@ v1.0.1
 - ISecureModule ans SecureModuleBase
 v1.0.0
 - IKey, ISecureModule</PackageReleaseNotes>
-    <Version>1.2.0-beta1</Version>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.2.0-beta2</Version>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 	<PropertyGroup>
 		<DebugType>Full</DebugType>

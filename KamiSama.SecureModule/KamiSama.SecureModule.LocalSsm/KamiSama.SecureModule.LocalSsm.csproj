@@ -14,7 +14,7 @@
   </ItemGroup>
 	<PropertyGroup>
 		<DebugType>Full</DebugType>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 		<Authors>Kamran Fallah</Authors>
 		<Company>Kamran Fallah</Company>
 		<Description>Local SSM (Software Secure Module)</Description>
@@ -31,6 +31,6 @@ v1.0.1
 - ISecureModule, SecureModuleBase
 v1.0.0
 - Initial version (tested)</PackageReleaseNotes>
-		<Version>1.2.0-beta1</Version>
+		<Version>1.2.0-beta2</Version>
 	</PropertyGroup>
 </Project>

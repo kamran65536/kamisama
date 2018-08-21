@@ -58,7 +58,7 @@ namespace Test.KS_SecureModule_KeySerializers
 			Assert.AreEqual(key2.IsPlainKey, key1.IsPlainKey);
 		}
 		[TestMethod]
-		public void Deerialize_throws_Exception_on_null_key()
+		public void Deserialize_throws_Exception_on_null_key()
 		{
 			Assert.ThrowsException<NullReferenceException>(() => genericSerializer.DeserializeKey(null));
 		}
