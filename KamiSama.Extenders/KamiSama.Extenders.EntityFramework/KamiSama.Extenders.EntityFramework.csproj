@@ -8,8 +8,11 @@
     <Description>Some usefull extenders for EntityFramework 6.
 examples:
   - changing history table extension</Description>
-    <PackageReleaseNotes>v1.0.0
+    <PackageReleaseNotes>v1.0.1
+CustomHistoryContext is now typed.
+v1.0.0
 DbMigrationConfigurationExtender and CustomHistoryContext are added.</PackageReleaseNotes>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

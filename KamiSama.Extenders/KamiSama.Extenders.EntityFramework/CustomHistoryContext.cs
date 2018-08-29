@@ -5,7 +5,8 @@ using System.Data.Entity.Migrations.History;
 
 namespace KamiSama.Extenders.EntityFramework
 {
-	public class CustomHistoryContext : HistoryContext
+	public class CustomHistoryContext<_ContextType> : HistoryContext
+		where _ContextType : DbContext
 	{
 		private Action<DbModelBuilder> modelBuildingCreatingAction;
 
