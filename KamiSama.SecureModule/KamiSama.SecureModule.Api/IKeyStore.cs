@@ -6,6 +6,7 @@
 
 		IKey FindKey(KeySearchProperties keySearchProperties);
 		IKey[] FindKeys(KeySearchProperties keySearchProperties);
+		string[] ListKeyNames(KeySearchProperties keySearchProperties);
 		byte[] ExportKey(IKey key, ExportKeyProperties exportKeyProperties);
 		void DeleteKey(IKey key);
 		IKey ImportKey(byte[] keyBlob, ImportKeyProperties importKeyProperties);

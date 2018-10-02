@@ -17,6 +17,17 @@ namespace Test.Ks.Extenders
 			AssertEx.AreEqual(new byte[0], (null as string).FromHex());
 		}
 		[TestMethod]
+		public void FromHex_must_throw_exception_on_invalid_string()
+		{
+			AssertEx.ThrowsException<Exception>(() => "1yyy".FromHex());
+		}
+		[TestMethod]
+		public void FromHex_must_strip_escaping_characters_from_string()
+		{
+			AssertEx.AreEqual(new byte[] { 0x01, 0x02, 0x03 }, @"
+01 02	03".FromHex());
+		}
+		[TestMethod]
 		public void EmptyToBytesTest()
 		{
 			AssertEx.AreEqual((null as string).ToBytes(), new byte[0]);

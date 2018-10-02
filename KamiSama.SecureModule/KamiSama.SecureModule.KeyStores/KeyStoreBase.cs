@@ -27,6 +27,7 @@ namespace KamiSama.SecureModule.KeyStores
 		IKey[] IKeyStore.FindKeys(KeySearchProperties keySearchProperties) => FindKeys(keySearchProperties);
 		void IKeyStore.DeleteKey(IKey key) => DeleteKey((_KeyType)key);
 		void IKeyStore.InjectKey(IKey key, KeyInjectionProperties keyInjectionProperties) => InjectKey((_KeyType)key, keyInjectionProperties);
+		public abstract string[] ListKeyNames(KeySearchProperties keySearchProperties);
 		#endregion
 	}
 }

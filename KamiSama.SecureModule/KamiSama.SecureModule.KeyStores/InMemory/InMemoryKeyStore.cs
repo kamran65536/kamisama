@@ -157,5 +157,22 @@ namespace KamiSama.SecureModule.KeyStores.InMemory
 
 			Keys.Add(record);
 		}
+
+		public override string[] ListKeyNames(KeySearchProperties keySearchProperties)
+		{
+			IEnumerable<InMemoryKeyRecord<_KeyType>> result = Keys;
+
+			if (keySearchProperties == null)
+				throw new Exception($"KeySearchProperties object is null.");
+
+			if (keySearchProperties.Name != null)
+				result = result.Where(x => x.Name.ToLower() == keySearchProperties.Name.ToLower());
+			if (keySearchProperties.Group != null)
+				result = result.Where(x => x?.Group.ToLower() == keySearchProperties.Group.ToLower());
+			if (keySearchProperties.Algorithm != null)
+				result = result.Where(x => x.Algorithm == keySearchProperties.Algorithm);
+
+			return result.Select(x => x.Name).ToArray();
+		}
 	}
 }

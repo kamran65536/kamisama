@@ -4,7 +4,9 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Description>API Library for SecureModule (SSM and HSM)</Description>
     <Authors>Kamran Fallah</Authors>
-    <PackageReleaseNotes>v1.2.0
+    <PackageReleaseNotes>v1.2.1.1
+- IKeyStore.ListKeyNames is added.
+v1.2.0
 - KeyStore.Import/Export/Inject/FindKeys/Findkey methods are added.
 - some refactorings in ISecureModule.
 v1.1.3

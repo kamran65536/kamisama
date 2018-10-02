@@ -1,4 +1,4 @@
-$PackageVersion = "1.2.0-beta2"
+$PackageVersion = "1.2.1.1"
 
 dotnet build -c Debug
 dotnet pack -c Debug /p:Version=$PackageVersion

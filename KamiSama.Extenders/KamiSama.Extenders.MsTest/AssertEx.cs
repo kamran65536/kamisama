@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace Microsoft.VisualStudio.TestTools.UnitTesting
 {
+	[ExcludeFromCodeCoverage]
 	public static class AssertEx
 	{
 		public static void AreEqual<T>(IEnumerable<T> expected, IEnumerable<T> obj)

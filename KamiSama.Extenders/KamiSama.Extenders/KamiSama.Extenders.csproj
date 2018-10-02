@@ -6,7 +6,9 @@
 		<Company>-</Company>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<Description>Useful extenders suchas ToBytes, ToHex, ...</Description>
-		<PackageReleaseNotes>v1.0.4
+		<PackageReleaseNotes>v1.0.5
+FromHex throws better excepton on invalid string
+v1.0.4
 - AesSign, DesSign, TripleDesSign are added.
 v1.0.3
 Dictionary.AddOrUpdate, Stack.PopOrDefault, Queue.DequeueOrDefault are added.
