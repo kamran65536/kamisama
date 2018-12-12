@@ -39,6 +39,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="KamiSama.Extenders.Serialization, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\KamiSama.Extenders.Serialization.1.0.1\lib\netstandard2.0\KamiSama.Extenders.Serialization.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -72,22 +75,8 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="DataTypes\Kami.cs" />
-    <Compile Include="DataTypes\Kamran.cs" />
     <Compile Include="Ks.Configs\ConfigTests.cs" />
     <Compile Include="Ks.Configs\SampleSettings.cs" />
-    <Compile Include="Ks.Extenders.Ninject\NinjectTests.cs" />
-    <Compile Include="Ks.Extenders.Serialization\JsonSerializationTests.cs" />
-    <Compile Include="Ks.Extenders.Serialization\XmlSerializationTests.cs" />
-    <Compile Include="Ks.Extenders\ArrayTests.cs" />
-    <Compile Include="Ks.Extenders\ByteArrayTests.cs" />
-    <Compile Include="Ks.Extenders\ConversionTests.cs" />
-    <Compile Include="Ks.Extenders\CryptographyTests.cs" />
-    <Compile Include="Ks.Extenders\HashTests.cs" />
-    <Compile Include="Ks.Extenders\StreamTests.cs" />
-    <Compile Include="Ks.Extenders\StringTests.cs" />
-    <Compile Include="Ks.Extenders\TimeSpanTests.cs" />
-    <Compile Include="Ks.SecureModule\SecureModuleTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -108,34 +97,6 @@
       <Project>{ae3637f6-6fda-43b7-9e05-94669a84b62f}</Project>
       <Name>KamiSama.Configs</Name>
     </ProjectReference>
-    <ProjectReference Include="..\KamiSama.Extenders.Ninject\KamiSama.Extenders.Ninject.csproj">
-      <Project>{24df1b61-4b5c-4c4d-baa1-c5835c8893d0}</Project>
-      <Name>KamiSama.Extenders.Ninject</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\KamiSama.Extenders.Serialization\KamiSama.Extenders.Serialization.csproj">
-      <Project>{b0014fd3-cb24-466f-8ce9-2b216bab17db}</Project>
-      <Name>KamiSama.Extenders.Serialization</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\KamiSama.Extenders\KamiSama.Extenders.csproj">
-      <Project>{82fd91c2-25eb-4d44-a755-991746320f71}</Project>
-      <Name>KamiSama.Extenders</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\KamiSama.Ninject.Attributes\KamiSama.Extenders.Attributes.csproj">
-      <Project>{d16348e7-2b30-4e25-9ef3-aae8c9f7be06}</Project>
-      <Name>KamiSama.Extenders.Attributes</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\KamiSama.SecureModule.Api\KamiSama.SecureModule.Api.csproj">
-      <Project>{AD144E79-6F7D-48D1-8D6F-E00F6FCED403}</Project>
-      <Name>KamiSama.SecureModule.Api</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\KamiSama.SecureModule.LocalSsm\KamiSama.SecureModule.LocalSsm.csproj">
-      <Project>{201E80F3-A992-4918-ACFC-C8B8C6F8FA0C}</Project>
-      <Name>KamiSama.SecureModule.LocalSsm</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\KamiSama.SecureModule\KamiSama.SecureModule.csproj">
-      <Project>{4F93E5AD-45C9-4F52-B7BF-84512C240CC9}</Project>
-      <Name>KamiSama.SecureModule</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -146,9 +107,7 @@
   <ItemGroup>
     <None Include="Resources\RsaKey.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Ks.Algorithms.Simplex\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

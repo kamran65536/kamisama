@@ -5,8 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\KamiSama.Configs\KamiSama.Configs\KamiSama.Configs.csproj" />
-    <ProjectReference Include="..\..\KamiSama.Extenders\KamiSama.Extenders\KamiSama.Extenders.csproj" />
+    <PackageReference Include="KamiSama.Configs" Version="1.0.0" />
+    <PackageReference Include="KamiSama.Extenders" Version="1.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\KamiSama.SecureModule.Api\KamiSama.SecureModule.Api.csproj" />
     <ProjectReference Include="..\KamiSama.SecureModule.KeySerializers.Bson\KamiSama.SecureModule.KeySerializers.Bson.csproj" />
     <ProjectReference Include="..\KamiSama.SecureModule.KeyStores\KamiSama.SecureModule.KeyStores.csproj" />

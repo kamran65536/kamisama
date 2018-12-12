@@ -9,11 +9,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Configs.Json", "Ka
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Configs.Xml", "KamiSama.Configs.Xml\KamiSama.Configs.Xml.csproj", "{DDCD64F1-C5C5-4256-8CEC-DC4B40A8D30D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Extenders.Serialization", "..\KamiSama.Extenders\KamiSama.Extenders.Serialization\KamiSama.Extenders.Serialization.csproj", "{C9BE137E-CA68-486F-9FC0-130C00466240}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XTest", "XTest\XTest.csproj", "{2E3DF5C2-8A38-4A03-86D7-8D463C917E47}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{DA59D6B7-7F23-4C0A-8D3C-9A4B5B748EF9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3D7CB936-B3AF-413B-86A0-810FB1014DB8}"
+	ProjectSection(SolutionItems) = preProject
+		pack-all.ps1 = pack-all.ps1
+		pack-project.ps1 = pack-project.ps1
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XTest", "..\KamiSama.Extenders\XTest\XTest.csproj", "{2E3DF5C2-8A38-4A03-86D7-8D463C917E47}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KamiSama.Configs.EntityFramework", "KamiSama.Configs.EntityFramework\KamiSama.Configs.EntityFramework.csproj", "{819B4C72-9F4C-4656-9F75-49B5EBCD5E26}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A1536DCB-2FC2-41BC-815D-5C836C518FCD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTest", "ConsoleTest\ConsoleTest.csproj", "{81A98FD2-DF24-4542-90B6-7C5D261736D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,20 +41,24 @@ Global
 		{DDCD64F1-C5C5-4256-8CEC-DC4B40A8D30D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDCD64F1-C5C5-4256-8CEC-DC4B40A8D30D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDCD64F1-C5C5-4256-8CEC-DC4B40A8D30D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C9BE137E-CA68-486F-9FC0-130C00466240}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C9BE137E-CA68-486F-9FC0-130C00466240}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C9BE137E-CA68-486F-9FC0-130C00466240}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C9BE137E-CA68-486F-9FC0-130C00466240}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2E3DF5C2-8A38-4A03-86D7-8D463C917E47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2E3DF5C2-8A38-4A03-86D7-8D463C917E47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E3DF5C2-8A38-4A03-86D7-8D463C917E47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E3DF5C2-8A38-4A03-86D7-8D463C917E47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{819B4C72-9F4C-4656-9F75-49B5EBCD5E26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{819B4C72-9F4C-4656-9F75-49B5EBCD5E26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{819B4C72-9F4C-4656-9F75-49B5EBCD5E26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{819B4C72-9F4C-4656-9F75-49B5EBCD5E26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81A98FD2-DF24-4542-90B6-7C5D261736D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81A98FD2-DF24-4542-90B6-7C5D261736D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81A98FD2-DF24-4542-90B6-7C5D261736D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81A98FD2-DF24-4542-90B6-7C5D261736D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{C9BE137E-CA68-486F-9FC0-130C00466240} = {DA59D6B7-7F23-4C0A-8D3C-9A4B5B748EF9}
+		{2E3DF5C2-8A38-4A03-86D7-8D463C917E47} = {A1536DCB-2FC2-41BC-815D-5C836C518FCD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C3256553-1667-4528-8CDD-2C6CA84BBC40}

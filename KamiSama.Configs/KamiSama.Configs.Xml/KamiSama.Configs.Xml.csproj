@@ -14,7 +14,10 @@ initial release</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\KamiSama.Extenders\KamiSama.Extenders.Serialization\KamiSama.Extenders.Serialization.csproj" />
+    <PackageReference Include="KamiSama.Extenders.Serialization" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\KamiSama.Configs\KamiSama.Configs.csproj" />
   </ItemGroup>
 
