@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace KamiSama.Repositories.EntityFramework
 {
-	public class DbRepository<_EntityType> : IRepository<_EntityType>
+	public class DbRepository<_EntityType> : IQueryableRepository<_EntityType>
 		where _EntityType : class
 
 	{
@@ -44,6 +44,8 @@ namespace KamiSama.Repositories.EntityFramework
 
 		public virtual IEnumerable<_EntityType> Where(Expression<Func<_EntityType, bool>> predicate)
 			=> dbSet.Where(predicate);
+		public virtual _EntityType Find(Expression<Func<_EntityType, bool>> predicate)
+			=> dbSet.FirstOrDefault(predicate);
 
 		public virtual void Dispose()
 		{

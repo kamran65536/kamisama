@@ -6,7 +6,11 @@
     <Authors>Kamran Fallah</Authors>
     <Company>-Kamran Fallah</Company>
     <Description>Entity Framework Repository Pattern</Description>
-    <PackageReleaseNotes>1.1.2
+    <PackageReleaseNotes>v1.2.0
+- IQueryableReposiotry is added.
+- Where method is moved to IQueryableRepository.
+- IRepository.Find method is added.
+1.1.2
 DbRepository&lt;entitytype, contexttype&gt; is added.
 dbrepository methods are now virtual.
 v1.1.0
@@ -15,7 +19,7 @@ v1.0.0
 change in  repository pattern interface
 IContextBasedUnitOfWork
 DbRepository</PackageReleaseNotes>
-    <Version>1.1.2</Version>
+    <Version>1.2.0</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

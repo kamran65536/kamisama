@@ -5,9 +5,13 @@
     <Authors>Kamran Fallah</Authors>
     <Company>-</Company>
     <Description>Entity Framework Core Repository Pattern</Description>
-    <Version>1.1.2</Version>
+    <Version>1.2.0</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>1.1.2
+    <PackageReleaseNotes>v1.2.0
+- IQueryableReposiotry is added.
+- Where method is moved to IQueryableRepository.
+- IRepository.Find method is added.
+1.1.2
 DbRepository&lt;entitytype, contexttype&gt; is added.
 dbrepository methods are now virtual.
 v1.1.0

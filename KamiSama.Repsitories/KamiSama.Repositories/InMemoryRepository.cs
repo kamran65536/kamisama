@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace KamiSama.Repositories
 {
-	public class InMemoryRepository<_EntityType> : IRepository<_EntityType>
+	public class InMemoryRepository<_EntityType> : IQueryableRepository<_EntityType>
 	{
 		private HashSet<_EntityType> items;
 
@@ -41,5 +41,7 @@ namespace KamiSama.Repositories
 		public IEnumerable<_EntityType> Where(Expression<Func<_EntityType, bool>> predicate)
 			=> (predicate == null) ? new _EntityType[0] : items.Where(predicate.Compile());
 
+		public _EntityType Find(Expression<Func<_EntityType, bool>> predicate)
+			=> (predicate == null) ? default(_EntityType) : items.FirstOrDefault(predicate.Compile());
 	}
 }

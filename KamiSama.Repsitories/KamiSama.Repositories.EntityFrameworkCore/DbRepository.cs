@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KamiSama.Repositories.EntityFrameworkCore
 {
-	public class DbRepository<_EntityType> : IRepository<_EntityType>
+	public class DbRepository<_EntityType> : IQueryableRepository<_EntityType>
 		where _EntityType : class
 	{
 		private DbContext context;
@@ -43,6 +43,9 @@ namespace KamiSama.Repositories.EntityFrameworkCore
 
 		public virtual IEnumerable<_EntityType> Where(Expression<Func<_EntityType, bool>> predicate)
 			=> dbSet.Where(predicate);
+
+		public virtual _EntityType Find(Expression<Func<_EntityType, bool>> predicate)
+			=> dbSet.FirstOrDefault(predicate);
 
 		public virtual void Dispose()
 		{
