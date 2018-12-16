@@ -16,7 +16,7 @@ v1.0.0
 - save changes is added.</PackageReleaseNotes>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<DebugType>Full</DebugType>
-		<Version>1.1.1</Version>
+		<Version>1.1.2</Version>
 		<RepositoryUrl>https://gitlab.com/kamran65536/KamiSama</RepositoryUrl>
 	</PropertyGroup>
 

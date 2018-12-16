@@ -25,27 +25,27 @@ namespace KamiSama.Repositories.EntityFramework
 			this.dbSet = context.Set<_EntityType>();
 		}
 
-		public void Add(_EntityType item)
+		public virtual void Add(_EntityType item)
 		{
 			dbSet.Add(item);
 			context.SaveChanges();
 		}
-		public void Update(_EntityType item)
+		public virtual void Update(_EntityType item)
 		{
 			context.Entry(item).State = EntityState.Modified;
 			context.SaveChanges();
 		}
 
-		public void Delete(_EntityType item)
+		public virtual void Delete(_EntityType item)
 		{
 			dbSet.Remove(item);
 			context.SaveChanges();
 		}
 
-		public IEnumerable<_EntityType> Where(Expression<Func<_EntityType, bool>> predicate)
+		public virtual IEnumerable<_EntityType> Where(Expression<Func<_EntityType, bool>> predicate)
 			=> dbSet.Where(predicate);
 
-		public void Dispose()
+		public virtual void Dispose()
 		{
 			try
 			{
@@ -53,6 +53,15 @@ namespace KamiSama.Repositories.EntityFramework
 					context.Dispose();
 			}
 			catch { }
+		}
+	}
+	public class DbRepository<_EntityType, _ContextType> : DbRepository<_EntityType>
+		where _ContextType : DbContext
+		where _EntityType: class
+	{
+		public DbRepository(_ContextType context)
+			: base(context)
+		{
 		}
 	}
 }

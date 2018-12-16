@@ -23,7 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Paths", "KamiSama.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTest", "ConsoleTest\ConsoleTest.csproj", "{ED48A717-35D5-4A38-9EF6-E5BBDEF00363}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KamiSama.Extenders.Serialization.Encryption", "KamiSama.Extenders.Serialization.Encryption\KamiSama.Extenders.Serialization.Encryption.csproj", "{F91CFCEF-C245-4865-863D-BD05A70ADD00}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Extenders.Serialization.Encryption", "KamiSama.Extenders.Serialization.Encryption\KamiSama.Extenders.Serialization.Encryption.csproj", "{F91CFCEF-C245-4865-863D-BD05A70ADD00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KamiSama.Extenders.DependencyInjection", "KamiSama.Extenders.DependencyInjection\KamiSama.Extenders.DependencyInjection.csproj", "{90EA972B-1A26-4409-9376-0641B1950D77}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +77,10 @@ Global
 		{F91CFCEF-C245-4865-863D-BD05A70ADD00}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F91CFCEF-C245-4865-863D-BD05A70ADD00}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F91CFCEF-C245-4865-863D-BD05A70ADD00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90EA972B-1A26-4409-9376-0641B1950D77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90EA972B-1A26-4409-9376-0641B1950D77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90EA972B-1A26-4409-9376-0641B1950D77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90EA972B-1A26-4409-9376-0641B1950D77}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
