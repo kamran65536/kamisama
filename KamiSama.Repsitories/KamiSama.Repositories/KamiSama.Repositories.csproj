@@ -5,7 +5,9 @@
 		<Authors>Kamran Fallah</Authors>
 		<Company>-</Company>
 		<Description>Repository pattern common usages.</Description>
-		<PackageReleaseNotes>v1.2.0
+		<PackageReleaseNotes>v1.2.1
+- IQueryableRepository returns IQueryable!
+v1.2.0
 - IQueryableReposiotry is added.
 - Where method is moved to IQueryableRepository.
 - IRepository.Find method is added.
@@ -20,7 +22,7 @@ v1.0.0
 - save changes is added.</PackageReleaseNotes>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<DebugType>Full</DebugType>
-		<Version>1.2.0</Version>
+		<Version>1.2.1</Version>
 		<RepositoryUrl>https://gitlab.com/kamran65536/KamiSama</RepositoryUrl>
 	</PropertyGroup>
 

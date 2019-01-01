@@ -38,9 +38,8 @@ namespace KamiSama.Repositories
 		public void Delete(_EntityType item)
 			=> items.Remove(item);
 
-		public IEnumerable<_EntityType> Where(Expression<Func<_EntityType, bool>> predicate)
-			=> (predicate == null) ? new _EntityType[0] : items.Where(predicate.Compile());
-
+		public IQueryable<_EntityType> Where(Expression<Func<_EntityType, bool>> predicate)
+			=> (predicate == null) ? new _EntityType[0].AsQueryable() : items.Where(predicate.Compile()).AsQueryable();
 		public _EntityType Find(Expression<Func<_EntityType, bool>> predicate)
 			=> (predicate == null) ? default(_EntityType) : items.FirstOrDefault(predicate.Compile());
 	}

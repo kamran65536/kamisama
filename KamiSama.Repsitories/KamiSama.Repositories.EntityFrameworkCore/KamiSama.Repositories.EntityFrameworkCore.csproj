@@ -5,9 +5,11 @@
     <Authors>Kamran Fallah</Authors>
     <Company>-</Company>
     <Description>Entity Framework Core Repository Pattern</Description>
-    <Version>1.2.0</Version>
+    <Version>1.2.1</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>v1.2.0
+    <PackageReleaseNotes>v1.2.1
+- IQueryableRepository returns IQueryable!
+v1.2.0
 - IQueryableReposiotry is added.
 - Where method is moved to IQueryableRepository.
 - IRepository.Find method is added.

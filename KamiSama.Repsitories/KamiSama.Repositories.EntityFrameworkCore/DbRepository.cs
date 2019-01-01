@@ -41,7 +41,7 @@ namespace KamiSama.Repositories.EntityFrameworkCore
 			context.SaveChanges();
 		}
 
-		public virtual IEnumerable<_EntityType> Where(Expression<Func<_EntityType, bool>> predicate)
+		public virtual IQueryable<_EntityType> Where(Expression<Func<_EntityType, bool>> predicate)
 			=> dbSet.Where(predicate);
 
 		public virtual _EntityType Find(Expression<Func<_EntityType, bool>> predicate)

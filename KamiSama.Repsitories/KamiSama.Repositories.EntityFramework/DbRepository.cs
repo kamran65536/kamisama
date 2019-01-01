@@ -11,7 +11,7 @@ namespace KamiSama.Repositories.EntityFramework
 
 	{
 		private DbContext context;
-		private bool contextMustBeDisposed;
+		private readonly bool contextMustBeDisposed;
 		private DbSet<_EntityType> dbSet;
 
 		public DbRepository(DbContext context)
@@ -42,7 +42,7 @@ namespace KamiSama.Repositories.EntityFramework
 			context.SaveChanges();
 		}
 
-		public virtual IEnumerable<_EntityType> Where(Expression<Func<_EntityType, bool>> predicate)
+		public virtual IQueryable<_EntityType> Where(Expression<Func<_EntityType, bool>> predicate)
 			=> dbSet.Where(predicate);
 		public virtual _EntityType Find(Expression<Func<_EntityType, bool>> predicate)
 			=> dbSet.FirstOrDefault(predicate);
