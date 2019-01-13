@@ -73,6 +73,7 @@
     <Compile Include="Ks.Extenders\CryptographyTests.cs" />
     <Compile Include="Ks.Extenders\DictionaryTests.cs" />
     <Compile Include="Ks.Extenders\HashTests.cs" />
+    <Compile Include="Ks.Extenders\PersianDateTimeTests.cs" />
     <Compile Include="Ks.Extenders\StackTests.cs" />
     <Compile Include="Ks.Extenders\QueueTests.cs" />
     <Compile Include="Ks.Extenders\StreamTests.cs" />

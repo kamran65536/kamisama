@@ -25,7 +25,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTest", "ConsoleTest\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Extenders.Serialization.Encryption", "KamiSama.Extenders.Serialization.Encryption\KamiSama.Extenders.Serialization.Encryption.csproj", "{F91CFCEF-C245-4865-863D-BD05A70ADD00}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KamiSama.Extenders.DependencyInjection", "KamiSama.Extenders.DependencyInjection\KamiSama.Extenders.DependencyInjection.csproj", "{90EA972B-1A26-4409-9376-0641B1950D77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Extenders.DependencyInjection", "KamiSama.Extenders.DependencyInjection\KamiSama.Extenders.DependencyInjection.csproj", "{90EA972B-1A26-4409-9376-0641B1950D77}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E1D8D942-19D4-4566-9BDD-06C47F42A02C}"
+	ProjectSection(SolutionItems) = preProject
+		pack-all.ps1 = pack-all.ps1
+		Package-Version.txt = Package-Version.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
