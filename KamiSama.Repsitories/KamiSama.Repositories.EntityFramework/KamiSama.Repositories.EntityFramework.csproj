@@ -6,7 +6,9 @@
     <Authors>Kamran Fallah</Authors>
     <Company>-Kamran Fallah</Company>
     <Description>Entity Framework Repository Pattern</Description>
-    <PackageReleaseNotes>v1.2.1
+    <PackageReleaseNotes>v1.2.6
+optimized update query
+v1.2.1
 - IQueryableRepository returns IQueryable!
 v1.2.0
 - IQueryableReposiotry is added.

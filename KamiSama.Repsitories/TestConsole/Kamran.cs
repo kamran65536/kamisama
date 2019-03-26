@@ -12,5 +12,8 @@ namespace TestConsole
 		[MaxLength(100)]
 		[Required]
 		public string Name { get; set; }
+
+		[MaxLength(100)]
+		public string FamilyName { get; set; }
 	}
 }

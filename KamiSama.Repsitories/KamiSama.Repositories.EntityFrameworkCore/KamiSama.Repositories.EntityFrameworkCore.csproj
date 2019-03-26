@@ -7,7 +7,9 @@
     <Description>Entity Framework Core Repository Pattern</Description>
     <Version>1.2.1</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>v1.2.1
+    <PackageReleaseNotes>v1.2.6
+optimized update query
+v1.2.1
 - IQueryableRepository returns IQueryable!
 v1.2.0
 - IQueryableReposiotry is added.

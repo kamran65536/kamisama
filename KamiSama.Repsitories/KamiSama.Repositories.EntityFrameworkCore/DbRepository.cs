@@ -31,7 +31,11 @@ namespace KamiSama.Repositories.EntityFrameworkCore
 		}
 		public virtual void Update(_EntityType item)
 		{
-			context.Entry(item).State = EntityState.Modified;
+			var entry = context.Entry(item);
+
+			if (entry.State != EntityState.Modified)
+				entry.State = EntityState.Modified;
+
 			context.SaveChanges();
 		}
 
