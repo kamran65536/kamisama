@@ -7,7 +7,7 @@ namespace KamiSama.Iso8583.Protocols.Generic.DataTypeHandlers
 	public class TextDataTypeHandler : IsoDataTypeHandler
 	{
 		protected internal override byte[] ConvertToByteArray(IsoFieldBase isoField, Encoding encoding)
-			=> encoding.GetBytes(isoField + "");
+			=> encoding.GetBytes(isoField.ToString());
 
 		protected internal override IsoFieldBase ConvertToIsoField(byte[] data, Encoding encoding)
 			=> encoding.GetString(data);
@@ -17,7 +17,7 @@ namespace KamiSama.Iso8583.Protocols.Generic.DataTypeHandlers
 
 		protected internal override void WriteAsLength(Stream stream, int length, VariableLengthType lengthType, int retryCount)
 		{
-			var str = (length + "").PadLeft((int)lengthType);
+			var str = length.ToString().PadLeft((int)lengthType);
 
 			stream.Write(str.ToBytes(Encoding.ASCII));
 		}

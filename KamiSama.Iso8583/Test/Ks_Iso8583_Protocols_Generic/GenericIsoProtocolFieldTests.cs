@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Text;
 using KamiSama.Iso8583.Protocols.Exceptions;
 using KamiSama.Iso8583.Protocols.Generic;
 using KamiSama.Iso8583.Protocols.Generic.DataTypeHandlers;
@@ -44,7 +45,7 @@ namespace Test.Ks_Iso8583_Protocols_Generic
 		[TestMethod]
 		public void GetDataTypeHandlerMustThrowAppropiateExceptionIfHanlderNotFound()
 		{
-			var field = new FixedIsoField { DataType = "kskssk", FieldNo = 2, Length = 10 };
+			var field = new FixedIsoField { DataType = "kskssk", FieldNo = 2, Length = 10, Encoding = "utf-8" };
 
 			Assert.ThrowsException<IsoMessageReadException>(() => field.GetDataTypeHandler(true));
 			Assert.ThrowsException<IsoMessageWriteException>(() => field.GetDataTypeHandler(false));
