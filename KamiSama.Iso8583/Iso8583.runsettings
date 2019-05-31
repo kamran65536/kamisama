@@ -27,6 +27,8 @@
 							<Exclude>
 								<ModulePath>.*CPPUnitTestFramework.*</ModulePath>
 								<ModulePath>.*KamiSama\.Extenders.*</ModulePath>
+								<ModulePath>^.*test\.dll$</ModulePath>
+								<ModulePath>^.*test\.exe</ModulePath>
 							</Exclude>
 						</ModulePaths>
 						<Attributes>

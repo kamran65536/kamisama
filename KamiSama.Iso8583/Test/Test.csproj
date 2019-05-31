@@ -74,6 +74,7 @@
   <ItemGroup>
     <Compile Include="Ks_Iso8583\BitmapIsoFieldTests.cs" />
     <Compile Include="Ks_Iso8583\IsoMessageTests.cs" />
+    <Compile Include="Ks_Iso8583\PinBlockUtilityTests.cs" />
     <Compile Include="Ks_Iso8583\StringIsoFieldTests.cs" />
     <Compile Include="Ks_Iso8583\BinaryIsoFieldTests.cs" />
     <Compile Include="Ks_Iso8583\IsoFieldBaseTests.cs" />

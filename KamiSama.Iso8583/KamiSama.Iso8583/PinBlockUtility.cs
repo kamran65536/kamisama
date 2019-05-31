@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using System;
+using System.Security.Cryptography;
 using KamiSama.Extenders;
 
 namespace KamiSama.Iso8583
@@ -7,10 +8,12 @@ namespace KamiSama.Iso8583
 	{
 		public static string GetPinBlock(string pan, string pin, byte[] pinKey)
 		{
-			if ((pan.Length < 16) ||
-				(pan.Length > 19) ||
-				(pin.Length < 4))
-				return "";
+			if (pan == null)
+				throw new Exception($"pan is null.");
+			if (pin == null)
+				throw new Exception($"pin is null.");
+			if (pinKey == null)
+				throw new Exception($"pinKey is null.");
 
 			string pinBlockHex =
 				"0" + // pin type
