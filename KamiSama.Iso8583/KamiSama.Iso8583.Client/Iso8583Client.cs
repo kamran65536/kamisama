@@ -1,6 +1,9 @@
-﻿using System.Net;
-using System.Net.Sockets;
+﻿using KamiSama.Iso8583.Client.Exceptions;
 using KamiSama.Iso8583.Protocols;
+using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Net;
+using System.Net.Sockets;
 
 namespace KamiSama.Iso8583.Client
 {
@@ -12,35 +15,65 @@ namespace KamiSama.Iso8583.Client
 		{
 			this.Protocol = protocol;
 		}
-
-		public IsoMessage Send(IsoMessage request, TcpClient client)
+		[ExcludeFromCodeCoverage]
+		public IsoMessage Send(IsoMessage request, TcpClient client) => Send(request, new InternalTcpClient(client));
+		public IsoMessage Send(IsoMessage request, ITcpClient client)
 		{
-			var stream = client.GetStream();
+			NetworkStream stream;
+			try
+			{
+				stream = client.GetStream();
 
-			Protocol.Write(stream, request);
-
-			return Protocol.Read(stream);
+				Protocol.Write(stream, request);
+			}
+			catch (Exception ex)
+			{
+				throw new SendingMessageFailedException($"Cannot send message.", ex);
+			}
+			try
+			{
+				return Protocol.Read(stream);
+			}
+			catch (Exception ex)
+			{
+				throw new ReceivingMessageFailedException($"Reading response message failed.", ex);
+			}
 		}
+		[ExcludeFromCodeCoverage]
 		public IsoMessage Send(IsoMessage request, IPEndPoint endPoint)
 		{
-			using (var client = new TcpClient())
+			using (var client = new InternalTcpClient())
 			{
-				client.Connect(endPoint);
+				try
+				{
+					client.Connect(endPoint);
+				}
+				catch (Exception ex)
+				{
+					throw new ConnectionRefusedException($"Cannot connect to {endPoint}.", ex);
+				}
 
 				return Send(request, client);
 			}
 		}
+		[ExcludeFromCodeCoverage]
 		public IsoMessage Send(IsoMessage request, string host, int port)
 		{
-			var endpoint = new DnsEndPoint(host, port);
-
-			using (var client = new TcpClient())
+			using (var client = new InternalTcpClient())
 			{
-				client.Connect(host, port);
+				try
+				{
+					client.Connect(host, port);
+				}
+				catch (Exception ex)
+				{
+					throw new ConnectionRefusedException($"Cannot connect to {host}:{port}.", ex);
+				}
 
 				return Send(request, client);
 			}
 		}
+		[ExcludeFromCodeCoverage]
 		public IsoMessage Send(IsoMessage request, IPAddress ipAddress, int port)
 			=> Send(request, new IPEndPoint(ipAddress, port));
 	}

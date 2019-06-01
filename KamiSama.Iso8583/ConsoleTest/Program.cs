@@ -46,7 +46,9 @@ namespace ConsoleTest
 
 			var client = new Iso8583Client(protocol);
 
-			var response = client.Send(msg, "10.9.12.41", 23223);
+			//var response = client.Send(msg, "tabnak.ir", 443);
+			//var response = client.Send(msg, "10.9.12.41", 19000);
+			var response = client.Send(msg, "10.11.21.42", 19000);
 
 			Console.WriteLine(response[39] + "");
 		}
