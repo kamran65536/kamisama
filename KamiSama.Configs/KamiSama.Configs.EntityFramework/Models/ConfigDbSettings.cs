@@ -4,6 +4,7 @@
 	{
 		public string ConnectionString { get; set; } = "Data Source=.;Initial Catalog=ConfigDb;Integrated Security=True;";
 		public string DbProviderName { get; set; } = "System.Data.SqlClient";
-		public string Schema { get; set; } = "dbo";
+		public string SchemaName { get; set; } = "dbo";
+		public string TableName { get; set; } = "Configs";
 	}
 }

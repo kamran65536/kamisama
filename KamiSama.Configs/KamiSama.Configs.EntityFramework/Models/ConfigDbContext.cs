@@ -7,7 +7,7 @@ namespace KamiSama.Configs.EntityFramework.Models
 {
 	public class ConfigDbContext : DbContext
 	{
-		public string SchemaName { get; set; }
+		public ConfigDbSettings Settings { get; }
 
 		public DbSet<ConfigRow> ConfigRows { get; set; }
 
@@ -17,10 +17,10 @@ namespace KamiSama.Configs.EntityFramework.Models
 			Database.SetInitializer<ConfigDbContext>(new MigrateDatabaseToLatestVersion<ConfigDbContext, ConfigDbConfiguration>());
 		}
 
-		public ConfigDbContext(ConfigDbSettings instance)
-			: base(CreateConnection(instance.ConnectionString, instance.DbProviderName), true)
+		public ConfigDbContext(ConfigDbSettings settings)
+			: base(CreateConnection(settings.ConnectionString, settings.DbProviderName), true)
 		{
-			this.SchemaName = instance.Schema;
+			this.Settings = settings;
 		}
 
 		private static DbConnection CreateConnection(string connectionString, string providerName)
@@ -38,10 +38,10 @@ namespace KamiSama.Configs.EntityFramework.Models
 		{
 			base.OnModelCreating(modelBuilder);
 
-			if (!string.IsNullOrWhiteSpace(SchemaName))
-				modelBuilder.HasDefaultSchema(SchemaName);
+			if (!string.IsNullOrWhiteSpace(Settings.SchemaName))
+				modelBuilder.HasDefaultSchema(Settings.SchemaName);
 
-			modelBuilder.Entity<ConfigRow>().ToTable("Configs");
+			modelBuilder.Entity<ConfigRow>().ToTable();
 		}
 	}
 }

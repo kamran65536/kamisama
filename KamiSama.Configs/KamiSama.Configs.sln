@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2000
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29001.49
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Configs", "KamiSama.Configs\KamiSama.Configs.csproj", "{407BC016-2E3B-4985-A5F4-3E7F0117663A}"
 EndProject
@@ -22,6 +22,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A1536DCB-2FC2-41BC-815D-5C836C518FCD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTest", "ConsoleTest\ConsoleTest.csproj", "{81A98FD2-DF24-4542-90B6-7C5D261736D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KamiSama.Configs.EntityFrameworkCore", "KamiSama.Configs.EntityFrameworkCore\KamiSama.Configs.EntityFrameworkCore.csproj", "{B6D3EB26-FEE2-4DDB-8278-DCF192264AC0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{81A98FD2-DF24-4542-90B6-7C5D261736D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81A98FD2-DF24-4542-90B6-7C5D261736D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81A98FD2-DF24-4542-90B6-7C5D261736D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6D3EB26-FEE2-4DDB-8278-DCF192264AC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6D3EB26-FEE2-4DDB-8278-DCF192264AC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6D3EB26-FEE2-4DDB-8278-DCF192264AC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6D3EB26-FEE2-4DDB-8278-DCF192264AC0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

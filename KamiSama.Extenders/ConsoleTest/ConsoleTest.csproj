@@ -32,6 +32,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.2.2.0\lib\net461\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -47,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KamiSama.Agents\KamiSama.Agents.csproj">
@@ -56,6 +63,10 @@
     <ProjectReference Include="..\KamiSama.Extenders.Attributes\KamiSama.Extenders.Attributes.csproj">
       <Project>{3ce1a3ea-72bc-4772-862c-d8e70bcff3ba}</Project>
       <Name>KamiSama.Extenders.Attributes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KamiSama.Extenders.DependencyInjection\KamiSama.Extenders.DependencyInjection.csproj">
+      <Project>{90ea972b-1a26-4409-9376-0641b1950d77}</Project>
+      <Name>KamiSama.Extenders.DependencyInjection</Name>
     </ProjectReference>
     <ProjectReference Include="..\KamiSama.Extenders.EntityFramework\KamiSama.Extenders.EntityFramework.csproj">
       <Project>{7dcae5ca-2c71-4dc4-8032-2ff4887cbba4}</Project>
