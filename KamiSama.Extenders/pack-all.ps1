@@ -54,9 +54,8 @@ Remove-Item ($o + "\*.nupkg")
 
 dotnet pack .\KamiSama.Agents -c $c -p:Version=$currentVersion -o $o
 dotnet pack .\KamiSama.Extenders -c $c -p:Version=$currentVersion -o $o
-dotnet pack .\KamiSama.Extenders.Attributes -c $c -p:Version=$currentVersion -o $o
+dotnet pack .\KamiSama.Extenders.Assertions -c $c -p:Version=$currentVersion -o $o
 dotnet pack .\KamiSama.Extenders.DependencyInjection -c $c -p:Version=$currentVersion -o $o
 dotnet pack .\KamiSama.Extenders.EntityFramework -c $c -p:Version=$currentVersion -o $o
-dotnet pack .\KamiSama.Extenders.MsTest -c $c -p:Version=$currentVersion -o $o
-dotnet pack .\KamiSama.Extenders.Ninject -c $c -p:Version=$currentVersion -o $o
 dotnet pack .\KamiSama.Extenders.Serialization -c $c -p:Version=$currentVersion -o $o
+dotnet pack .\KamiSama.Extenders.Paths -c $c -p:Version=$currentVersion -o $o

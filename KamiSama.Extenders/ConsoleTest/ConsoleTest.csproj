@@ -60,6 +60,10 @@
       <Project>{88b12777-c190-410b-a001-10e076c91186}</Project>
       <Name>KamiSama.Agents</Name>
     </ProjectReference>
+    <ProjectReference Include="..\KamiSama.Extenders.Assertions\KamiSama.Extenders.Assertions.csproj">
+      <Project>{c99207b3-e59e-4194-8e26-addd473ada2e}</Project>
+      <Name>KamiSama.Extenders.Assertions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\KamiSama.Extenders.Attributes\KamiSama.Extenders.Attributes.csproj">
       <Project>{3ce1a3ea-72bc-4772-862c-d8e70bcff3ba}</Project>
       <Name>KamiSama.Extenders.Attributes</Name>

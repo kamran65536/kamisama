@@ -1,10 +1,6 @@
-using System;
-using KamiSama.Paths;
-using KamiSama.Extenders;
-using System.Globalization;
-using Microsoft.Extensions.DependencyInjection;
-using KamiSama.Extenders.DependencyInjection;
+using KamiSama.Extenders.Assertions;
 
+using System;
 namespace ConsoleTest
 {
 	public class A
@@ -21,6 +17,14 @@ namespace ConsoleTest
 	}
 	class Program
 	{
+		public static double Div(double? x, double? y)
+		{
+			x.MustNotBeNull();
+			y.MustNotBeNull();
+			y.MustNotBeEqual(0, "Division by zero!");
+
+			return x.Value / y.Value;
+		}
 		static void Main(string[] args)
 		{
 			//Paths p = new Paths(dataPath: "{root-path}/{system-name}/data");
@@ -37,22 +41,26 @@ namespace ConsoleTest
 
 			//Console.WriteLine(dt.ToPersianString("yyyy/MM/dd HH:mm:ss"));
 
-			var serviceCollection = new ServiceCollection();
+			//var serviceCollection = new ServiceCollection();
 
-			serviceCollection.AddScoped<A, B>("b");
-			serviceCollection.AddScoped<A, C>("c");
+			//serviceCollection.AddScoped<A, B>("b");
+			//serviceCollection.AddScoped<A, C>("c");
 
-			using (var provider = serviceCollection.BuildServiceProvider())
-			{
-				using (var scope = provider.CreateScope())
-				{
-					var serviceB = provider.GetService<A>("b");
-					var serviceC = provider.GetService<A>("C");
+			//using (var provider = serviceCollection.BuildServiceProvider())
+			//{
+			//	using (var scope = provider.CreateScope())
+			//	{
+			//		var serviceB = provider.GetService<A>("b");
+			//		var serviceC = provider.GetService<A>("C");
 
-					serviceB.DoSomething();
-					serviceC.DoSomething();
-				}
-			}
+			//		serviceB.DoSomething();
+			//		serviceC.DoSomething();
+			//	}
+			//}
+			Div(10, 10);
+			//Div(null, 10);
+			//Div(10, null);
+			Div(10, 0);
 		}
 	}
 }
