@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace KamiSama.Repositories
 {
-	public class InMemoryRepository<_EntityType> : IQueryableRepository<_EntityType>
+	public class InMemoryRepository<_EntityType> : IQueryableRepository<_EntityType>, IAsyncQueryableRepository<_EntityType>
 	{
-		private HashSet<_EntityType> items;
-
-
+		private readonly HashSet<_EntityType> items;
 		public InMemoryRepository()
 			: this(null, null)
 		{
@@ -41,6 +40,31 @@ namespace KamiSama.Repositories
 		public IQueryable<_EntityType> Where(Expression<Func<_EntityType, bool>> predicate)
 			=> (predicate == null) ? new _EntityType[0].AsQueryable() : items.Where(predicate.Compile()).AsQueryable();
 		public _EntityType Find(Expression<Func<_EntityType, bool>> predicate)
-			=> (predicate == null) ? default(_EntityType) : items.FirstOrDefault(predicate.Compile());
+			=> (predicate == null) ? default : items.FirstOrDefault(predicate.Compile());
+
+		public Task AddAsync(_EntityType item)
+		{
+			Add(item);
+			return Task.FromResult(0);
+		}
+
+		public Task UpdateAsync(_EntityType item)
+		{
+			Update(item);
+			return Task.FromResult(0);
+		}
+
+		public Task DeleteAsync(_EntityType item)
+		{
+			Delete(item);
+			return Task.FromResult(0);
+		}
+
+		public Task<_EntityType> FindAsync(Expression<Func<_EntityType, bool>> predicate)
+		{
+			return Task.FromResult(Find(predicate));
+		}
+
+		public IQueryable<_EntityType> WhereAsync(Expression<Func<_EntityType, bool>> predicate) => Where(predicate);
 	}
 }

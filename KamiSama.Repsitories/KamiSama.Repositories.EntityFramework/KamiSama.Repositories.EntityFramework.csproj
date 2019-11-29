@@ -6,7 +6,9 @@
     <Authors>Kamran Fallah</Authors>
     <Company>-Kamran Fallah</Company>
     <Description>Entity Framework Repository Pattern</Description>
-    <PackageReleaseNotes>v1.2.6
+    <PackageReleaseNotes>v1.2.8
+ Async interfaces are added.
+v1.2.6
 optimized update query
 v1.2.1
 - IQueryableRepository returns IQueryable!

@@ -5,7 +5,9 @@
 		<Authors>Kamran Fallah</Authors>
 		<Company>-</Company>
 		<Description>Repository pattern common usages.</Description>
-		<PackageReleaseNotes>v1.2.1
+		<PackageReleaseNotes>v1.2.8
+ Async interfaces are added.
+v1.2.1
 - IQueryableRepository returns IQueryable!
 v1.2.0
 - IQueryableReposiotry is added.

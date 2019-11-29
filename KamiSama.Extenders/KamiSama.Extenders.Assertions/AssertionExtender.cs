@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace KamiSama.Extenders.Assertions
@@ -10,6 +9,8 @@ namespace KamiSama.Extenders.Assertions
 	{
 		[DebuggerHidden]
 		public static void MustBeTrue(this bool condition, string message = null) => Assert.IsTrue(condition, message);
+		[DebuggerHidden]
+		public static void MustBe<TObject>(this TObject obj, Func<TObject, bool> conditionFunc, string message) => Assert.IsTrue(conditionFunc(obj), message);
 		[DebuggerHidden]
 		public static void MustBeFalse(this bool condition, string message = null) => Assert.IsFalse(condition, message);
 		[DebuggerHidden]
