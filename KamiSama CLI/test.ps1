@@ -1,1 +1,0 @@
-Import-Module -Name .\KamiSama.Cli\bin\Debug\netstandard2.0\KamiSama.Cli.dll -Verbose
