@@ -1,11 +1,20 @@
-﻿using System;
-using KamiSama.Extenders;
+﻿using KamiSama.Extensions;
+using System;
 
 namespace KamiSama.Iso8583.Serialization
 {
-	public static class IsoFieldExtender
+	/// <summary>
+	/// Iso Field extensions
+	/// </summary>
+	public static class IsoFieldExtensions
     {
-		public static SerializableIsoField GetSerializableField(this IsoFieldBase field, int fieldNo)
+		/// <summary>
+		/// Converts an iso field to serializable form (SerializableIsoField)
+		/// </summary>
+		/// <param name="field">iso field</param>
+		/// <param name="fieldNo">field number</param>
+		/// <returns></returns>
+		public static SerializableIsoField AsSerializable(this IsoFieldBase field, int fieldNo)
 		{
 			if (field == null)
 				throw new NullReferenceException($"Field {fieldNo} is null.");

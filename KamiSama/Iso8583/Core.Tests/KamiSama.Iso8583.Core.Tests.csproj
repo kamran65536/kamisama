@@ -4,6 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
 
     <IsPackable>false</IsPackable>
+
+    <RootNamespace>KamiSama.Iso8583.Tests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
