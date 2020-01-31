@@ -1,8 +1,8 @@
-﻿using KamiSama.Extensions.Tests.Properties;
+﻿using KamiSama.Extensions.Core.Tests.Properties;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Security.Cryptography;
 
-namespace KamiSama.Extensions.Tests
+namespace KamiSama.Extensions.Core.Tests
 {
 	[TestClass]
 	public class CryptographyTests

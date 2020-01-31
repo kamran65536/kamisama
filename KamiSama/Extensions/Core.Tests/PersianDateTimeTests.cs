@@ -2,7 +2,7 @@
 using System;
 using System.Globalization;
 
-namespace KamiSama.Extensions.Tests
+namespace KamiSama.Extensions.Core.Tests
 {
 	[TestClass]
 	public class PersianDateTimeTests

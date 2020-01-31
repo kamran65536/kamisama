@@ -2,7 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Diagnostics.CodeAnalysis;
 
-namespace KamiSama.Extensions.Tests
+namespace KamiSama.Extensions.Core.Tests
 {
 	[TestClass]
 	public class StringTests

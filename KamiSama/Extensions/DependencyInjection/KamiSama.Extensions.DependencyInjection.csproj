@@ -3,12 +3,16 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Authors>Kamran Fallah</Authors>
     <Description>Extension for Microsoft.Extensions.DependencyInjection supporting named injection</Description>
     <PackageProjectUrl>https://gitlab.com/kamran65536/KamiSama</PackageProjectUrl>
     <RepositoryUrl>https://gitlab.com/kamran65536/KamiSama</RepositoryUrl>
     <Version>1.0.0.1</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	  <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

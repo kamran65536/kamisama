@@ -2,7 +2,7 @@
 using System;
 
 
-namespace KamiSama.Extensions.Tests
+namespace KamiSama.Extensions.Core.Tests
 {
 	[TestClass]
 	public class ByteArrayTests

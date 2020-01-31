@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{33FE9456-0296-4F7C-A133-B97F06B7225A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Extensions", "Extensions\Core\KamiSama.Extensions.csproj", "{80E8192F-A9B4-4DFA-941C-BA5E0589B7D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Extensions.Core", "Extensions\Core\KamiSama.Extensions.Core.csproj", "{80E8192F-A9B4-4DFA-941C-BA5E0589B7D0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Extensions.Assertions", "Extensions\Assertions\KamiSama.Extensions.Assertions.csproj", "{BC3BFAF6-2BDF-4EFF-B1D4-F45107DC022C}"
 EndProject
@@ -15,9 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Extensions.Pooling
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Extensions.Json", "Extensions\Json\KamiSama.Extensions.Json.csproj", "{D33716A6-69AD-4ACE-9A67-D6B2D66D6E06}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Extensions.Tests", "Extensions\Core.Tests\KamiSama.Extensions.Tests.csproj", "{AF853208-DC87-4E4F-A9AC-86F1741B8AD2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Extensions.Core.Tests", "Extensions\Core.Tests\KamiSama.Extensions.Core.Tests.csproj", "{AF853208-DC87-4E4F-A9AC-86F1741B8AD2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KamiSama.Extensions.Json.Tests", "KamiSama.Extensions.Json.Tests\KamiSama.Extensions.Json.Tests.csproj", "{67493B32-542A-4ED9-8872-D59FACB6A9B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Extensions.DependencyInjection.Tests", "Extensions\KamiSama.Extensions.DependencyInjection.Tests\KamiSama.Extensions.DependencyInjection.Tests.csproj", "{110A2AE0-49EA-4501-9792-7A279CD0C955}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Extensions.Json.Tests", "Extensions\KamiSama.Extensions.Json.Tests\KamiSama.Extensions.Json.Tests.csproj", "{EFDF7781-BA5A-4002-8148-FD8F4531C301}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,10 +51,14 @@ Global
 		{AF853208-DC87-4E4F-A9AC-86F1741B8AD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF853208-DC87-4E4F-A9AC-86F1741B8AD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF853208-DC87-4E4F-A9AC-86F1741B8AD2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{67493B32-542A-4ED9-8872-D59FACB6A9B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{67493B32-542A-4ED9-8872-D59FACB6A9B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{67493B32-542A-4ED9-8872-D59FACB6A9B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{67493B32-542A-4ED9-8872-D59FACB6A9B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{110A2AE0-49EA-4501-9792-7A279CD0C955}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{110A2AE0-49EA-4501-9792-7A279CD0C955}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{110A2AE0-49EA-4501-9792-7A279CD0C955}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{110A2AE0-49EA-4501-9792-7A279CD0C955}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFDF7781-BA5A-4002-8148-FD8F4531C301}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFDF7781-BA5A-4002-8148-FD8F4531C301}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFDF7781-BA5A-4002-8148-FD8F4531C301}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFDF7781-BA5A-4002-8148-FD8F4531C301}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +70,8 @@ Global
 		{5EB59795-988F-4DE8-9748-CC2181C5F4E8} = {33FE9456-0296-4F7C-A133-B97F06B7225A}
 		{D33716A6-69AD-4ACE-9A67-D6B2D66D6E06} = {33FE9456-0296-4F7C-A133-B97F06B7225A}
 		{AF853208-DC87-4E4F-A9AC-86F1741B8AD2} = {33FE9456-0296-4F7C-A133-B97F06B7225A}
+		{110A2AE0-49EA-4501-9792-7A279CD0C955} = {33FE9456-0296-4F7C-A133-B97F06B7225A}
+		{EFDF7781-BA5A-4002-8148-FD8F4531C301} = {33FE9456-0296-4F7C-A133-B97F06B7225A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {460D8DAE-DDB3-4A1F-A520-DE0634822553}

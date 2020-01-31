@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Xml.Serialization;
 
-namespace KamiSama.Extensions.Tests
+namespace KamiSama.Extensions.Core.Tests
 {
 	[TestClass]
 	public class XmlSerializationTests

@@ -14,11 +14,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Core\KamiSama.Extensions.csproj" />
+    <Folder Include="Resources\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Resources\" />
+    <ProjectReference Include="..\Core\KamiSama.Extensions.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
