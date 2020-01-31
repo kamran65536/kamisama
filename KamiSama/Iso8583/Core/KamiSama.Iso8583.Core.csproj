@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<Authors>Kamran Fallah</Authors>
+		<Company>-</Company>
+		<PackageReleaseNotes>
+			v1.0.0
+			-Intitial release
+		</PackageReleaseNotes>
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+		<DebugType>Full</DebugType>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<RootNamespace>KamiSama.Iso8583</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\Extensions\Core\KamiSama.Extensions.Core.csproj" />
+	</ItemGroup>
+
+</Project>

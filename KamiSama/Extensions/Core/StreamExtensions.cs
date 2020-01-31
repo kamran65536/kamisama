@@ -1,11 +1,23 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace KamiSama.Extensions
 {
+	/// <summary>
+	/// Stream Extensions
+	/// </summary>
 	public static class StreamExtensions
 	{
-		public static byte[] ReadComplete(this Stream stream, int length, int maxTries = int.MaxValue)
+		/// <summary>
+		/// Read exact bytes as specified
+		/// </summary>
+		/// <param name="stream">the stream</param>
+		/// <param name="length">length of bytes to be read</param>
+		/// <param name="maxTries">maximum tries default value is int.MaxValue</param>
+		/// <returns></returns>
+		public static byte[] ReadExact(this Stream stream, int length, int maxTries = int.MaxValue)
 		{
 			var buffer = new byte[length];
 
@@ -21,6 +33,38 @@ namespace KamiSama.Extensions
 
 				bytesRead += b;
 				tries++;
+				Thread.Sleep(1);
+			}
+
+			if (bytesRead < length)
+				throw new Exception($"Failed to read from stream after {tries} tries.");
+
+			return buffer;
+		}
+		/// <summary>
+		/// Read exact bytes as specified
+		/// </summary>
+		/// <param name="stream">the stream</param>
+		/// <param name="length">length of bytes to be read</param>
+		/// <param name="maxTries">maximum tries default value is int.MaxValue</param>
+		/// <returns></returns>
+		public static async Task<byte[]> ReadExactAsync(this Stream stream, int length, int maxTries = int.MaxValue)
+		{
+			var buffer = new byte[length];
+
+			int bytesRead = 0;
+
+			var tries = 0;
+
+			while ((tries < maxTries) && (bytesRead < length))
+			{
+				var b = await stream.ReadAsync(buffer, bytesRead, length - bytesRead);
+
+				b = Math.Max(0, b);
+
+				bytesRead += b;
+				tries++;
+				await Task.Delay(1);
 			}
 
 			if (bytesRead < length)

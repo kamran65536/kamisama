@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Linq;
-using KamiSama.Extenders;
+using KamiSama.Extensions;
 
 namespace KamiSama.Iso8583
 {
+	/// <summary>
+	/// Bitmap Iso field containing flags which fields should be in the iso message
+	/// </summary>
 	public class BitmapIsoField : IsoFieldBase
 	{
-		private bool[] flags;
-
-		public BitmapIsoField()
-		{
-			this.flags = new bool[64];
-		}
-
+		private bool[] flags = new bool[64];
+		/// <summary>
+		/// returns field's flag
+		/// </summary>
+		/// <param name="fieldNo">the field number to return</param>
+		/// <returns></returns>
 		public bool this[int fieldNo]
 		{
 			get
@@ -38,7 +40,11 @@ namespace KamiSama.Iso8583
 				flags[fieldNo - 1] = value;
 			}
 		}
-
+		/// <summary>
+		/// creates bitmap from hexadecimal value
+		/// </summary>
+		/// <param name="str"></param>
+		/// <returns></returns>
 		public static BitmapIsoField FromHex(string str)
 		{
 			var arr = str.FromHex();
@@ -53,7 +59,10 @@ namespace KamiSama.Iso8583
 			}
 			return result;
 		}
-
+		/// <summary>
+		/// returns bitmap hexadecimal value
+		/// </summary>
+		/// <returns></returns>
 		public string GetBitmapHex()
 		{
 			byte[] arr = new byte[8];
@@ -68,9 +77,11 @@ namespace KamiSama.Iso8583
 
 			return arr.ToHex();
 		}
-
-	
-
+		/// <summary>
+		/// returns debug string showing which fields flag is set. like P03, S100
+		/// </summary>
+		/// <param name="fieldNo"></param>
+		/// <returns></returns>
 		public override string ToDebugString(int fieldNo)
 		{
 			var prefix = (fieldNo == 0) ? "P" : "S";
@@ -82,7 +93,10 @@ namespace KamiSama.Iso8583
 			
 			return $"(Bitmap) hex: {GetBitmapHex()} fields: {string.Join(", ", fields)}";
 		}
-
+		/// <summary>
+		/// returns hexadecimal value of the iso bitmap
+		/// </summary>
+		/// <returns></returns>
 		public override string ToString() => GetBitmapHex();
 	}
 }

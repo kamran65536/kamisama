@@ -5,16 +5,16 @@ namespace KamiSama.ObjectPool
 	/// <summary>
 	/// Object Pool interface
 	/// </summary>
-	/// <typeparam name="_ObjectType"></typeparam>
-	public interface IObjectPool<_ObjectType> : IDisposable
+	/// <typeparam name="TObject"></typeparam>
+	public interface IObjectPool<TObject> : IDisposable
 	{
 		/// <summary>
 		/// returns a pooled item, if no available item is available new item will be created
 		/// </summary>
 		/// <param name="waitTime">maximum time to wait </param>
 		/// <returns></returns>
-		_ObjectType Get(TimeSpan waitTime);
-		void MarkAsDead(_ObjectType obj);
-		void Return(_ObjectType obj);
+		TObject Get(TimeSpan waitTime);
+		void MarkAsDead(TObject obj);
+		void Return(TObject obj);
 	}
 }

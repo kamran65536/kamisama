@@ -2,8 +2,18 @@
 
 namespace KamiSama.Extensions
 {
+	/// <summary>
+	/// Conversion Extensions
+	/// </summary>
 	public static class ConversionExtensions
 	{
+		/// <summary>
+		/// Converts an object to another type
+		/// </summary>
+		/// <param name="obj">the source object</param>
+		/// <param name="type">the desired type for conversion</param>
+		/// <param name="defaultValue">default value if conversion is failed</param>
+		/// <returns></returns>
 		public static object ConvertTo(this object obj, Type type, object defaultValue = null)
 		{
 			if (obj == null)
@@ -21,16 +31,16 @@ namespace KamiSama.Extensions
 			}
 			catch
 			{
-				//if (type.IsEnum)
-				//{
-				//	int intResult;
-				//	if (int.TryParse(obj + "", out intResult))
-				//		return (object)intResult;
-				//}
 				return defaultValue;
 			}
 		}
-
+		/// <summary>
+		/// Converts an object to another type
+		/// </summary>
+		/// <typeparam name="T">the desired type for conversion</typeparam>
+		/// <param name="obj">the source object</param>
+		/// <param name="defaultValue">default value if conversion is failed</param>
+		/// <returns></returns>
 		public static T ConvertTo<T>(this object obj, T defaultValue = default(T))
 			=> (T) obj.ConvertTo(typeof(T), defaultValue);
 	}

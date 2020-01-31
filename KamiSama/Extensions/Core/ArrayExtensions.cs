@@ -2,54 +2,88 @@
 
 namespace KamiSama.Extensions
 {
+	/// <summary>
+	/// Array Extensions
+	/// </summary>
 	public static class ArrayExtensions
 	{
-		public static T[] Pad<T>(this T[] arr, Func<int, bool> padCriteria, T pad = default(T))
+		/// <summary>
+		/// Pads an array until criteria is meets
+		/// </summary>
+		/// <typeparam name="TArrayItem"></typeparam>
+		/// <param name="arr">the array to be padded</param>
+		/// <param name="paddingCriteria">padding criteria</param>
+		/// <param name="paddingValue">the padding value</param>
+		/// <returns></returns>
+		public static TArrayItem[] Pad<TArrayItem>(this TArrayItem[] arr, Func<int, bool> paddingCriteria, TArrayItem paddingValue = default)
 		{
 			var newSize = arr.Length;
-			while (!padCriteria(newSize))
+			while (!paddingCriteria(newSize))
 				newSize++;
 
-			return arr.Pad(newSize, pad);
+			return arr.Pad(newSize, paddingValue);
 		}
-		public static T[] Pad<T>(this T[] arr, int newSize, T pad = default(T))
+		/// <summary>
+		/// Pads an array until criteria
+		/// </summary>
+		/// <typeparam name="TArrayItem"></typeparam>
+		/// <param name="arr">the array to be padded</param>
+		/// <param name="newSize">array new size</param>
+		/// <param name="paddingValue">the padding value</param>
+		/// <returns></returns>
+		/// <exception cref="ArgumentException">if new size is smaller than array's size</exception>
+		public static TArrayItem[] Pad<TArrayItem>(this TArrayItem[] arr, int newSize, TArrayItem paddingValue = default)
 		{
 			if (newSize == arr.Length)
 				return arr;
+			if (newSize < arr.Length)
+				throw new ArgumentException($"New size {newSize} cannot be smaller than array's size {arr.Length}");
 
-			var result = new T[newSize];
+			var result = new TArrayItem[newSize];
 
 			Array.Copy(arr, 0, result, 0, arr.Length);
 
 			for (int i = arr.Length; i < newSize; i++)
-				result[i] = pad;
+				result[i] = paddingValue;
 
 			return result;
 		}
-
-		public static T[] TrimEnd<T>(this T[] arr, Func<T, bool> trimCriteria)
+		/// <summary>
+		/// Trims end of the array with the specified criteria
+		/// </summary>
+		/// <typeparam name="TArrayItem"></typeparam>
+		/// <param name="arr">the array to be trimmed</param>
+		/// <param name="trimmingCriteria">the cirteria for trimming</param>
+		/// <returns></returns>
+		public static TArrayItem[] TrimEnd<TArrayItem>(this TArrayItem[] arr, Func<TArrayItem, bool> trimmingCriteria)
 		{
 			int newSize = arr.Length;
 
-			while ((newSize > 0) && trimCriteria(arr[newSize - 1]))
+			while ((newSize > 0) && trimmingCriteria(arr[newSize - 1]))
 				newSize--;
 
 			if (newSize == arr.Length)
 				return arr;
 
-			var result = new T[newSize];
+			var result = new TArrayItem[newSize];
 
 			Array.Copy(arr, 0, result, 0, newSize);
 
 			return result;
 		}
-
-		public static T[] TrimEnd<T>(this T[] arr, T _item)
+		/// <summary>
+		/// Trims end of an array for the item
+		/// </summary>
+		/// <typeparam name="TArrayItem"></typeparam>
+		/// <param name="arr">the array to be trimmed</param>
+		/// <param name="trimmingItem">the trimming item</param>
+		/// <returns></returns>
+		public static TArrayItem[] TrimEnd<TArrayItem>(this TArrayItem[] arr, TArrayItem trimmingItem)
 		{
-			if (object.Equals(_item, null))
+			if (object.Equals(trimmingItem, null))
 				return arr.TrimEnd(x => object.Equals(x, null));
 			else
-				return arr.TrimEnd(x => _item.Equals(x));
+				return arr.TrimEnd(x => trimmingItem.Equals(x));
 		}
 	}
 }

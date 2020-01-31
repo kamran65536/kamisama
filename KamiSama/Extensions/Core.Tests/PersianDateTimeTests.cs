@@ -22,5 +22,55 @@ namespace KamiSama.Extensions.Core.Tests
 
 			Assert.AreEqual("0001/01/01 13:00:00", dt.ToPersianString("yyyy/MM/dd HH:mm:ss"));
 		}
+		[TestMethod]
+		public void ParsePerstringString_must_parse_persian_date_time()
+		{
+			var str = "01/01/0001 01:00:00 ب.ظ";
+			var expected = new DateTime(1, 1, 1, 13, 0, 0, persianCalendar);
+
+			var parsed = str.ParsePersianString();
+
+			Assert.AreEqual(expected, parsed);
+		}
+		[TestMethod]
+		public void ParseExactPerstringString_must_parse_persian_date_time()
+		{
+			var str = "0001/01/01 01:02:03";
+			var expected = new DateTime(1, 1, 1, 1, 2, 3, persianCalendar);
+
+			var parsed = str.ParseExactFromPersianString("yyyy/MM/dd HH:mm:ss");
+
+			Assert.AreEqual(expected, parsed);
+		}
+		[TestMethod]
+		public void TryParsePerstringString_must_parse_persian_date_time()
+		{
+			var str = "01/01/0001 01:00:00 ب.ظ";
+			var expected = new DateTime(1, 1, 1, 13, 0, 0, persianCalendar);
+
+			var result = str.TryParseFromPersianString(out DateTime parsed);
+
+			Assert.AreEqual(expected, parsed);
+		}
+		[TestMethod]
+		public void TryParsePerstringString_must_return_false_for_invalid_string()
+		{
+			var str = "abc";
+			var expected = new DateTime(1, 1, 1, 13, 0, 0, persianCalendar);
+
+			var result = str.TryParseFromPersianString(out DateTime parsed);
+
+			Assert.IsFalse(result);
+		}
+		[TestMethod]
+		public void TryParseExactPerstringString_must_return_false_for_strings_without_exact_format()
+		{
+			var str = "001/01/01 01:02:03";
+			var expected = new DateTime(1, 1, 1, 1, 2, 3, persianCalendar);
+
+			var result = str.TryParseExactFromPersianString("yyyy/MM/dd HH:mm:ss", out DateTime parsed);
+
+			Assert.IsFalse(result);
+		}
 	}
 }

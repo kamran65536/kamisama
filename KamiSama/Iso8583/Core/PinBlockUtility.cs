@@ -1,11 +1,21 @@
-﻿using System;
+﻿using KamiSama.Extensions;
+using System;
 using System.Security.Cryptography;
-using KamiSama.Extenders;
 
 namespace KamiSama.Iso8583
 {
+	/// <summary>
+	/// Pin Block Utility
+	/// </summary>
 	public static class PinBlockUtility
 	{
+		/// <summary>
+		/// returns pin block hexadecimal for specified pan and pin and pinkey
+		/// </summary>
+		/// <param name="pan">PAN (Primary Account Number)</param>
+		/// <param name="pin">pin for card</param>
+		/// <param name="pinKey">pin encryption key</param>
+		/// <returns></returns>
 		public static string GetPinBlock(string pan, string pin, byte[] pinKey)
 		{
 			if (pan == null)

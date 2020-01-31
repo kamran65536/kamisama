@@ -1,4 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace KamiSama.Extensions.Core.Tests
 {
@@ -14,6 +16,15 @@ namespace KamiSama.Extensions.Core.Tests
 			Assert.AreEqual("0102030405000000", padded.ToHex());
 			padded = padded.Pad(len => len % 8 == 0);
 			Assert.AreEqual("0102030405000000", padded.ToHex());
+		}
+		[TestMethod]
+		[ExpectedException(typeof(ArgumentException))]
+		[ExcludeFromCodeCoverage]
+		public void Pad_with_size_smaller_than_original_array_throws_Exception()
+		{
+			var arr = "0102030405".FromHex();
+
+			var padded = arr.Pad(2, (byte) 0x00);
 		}
 
 		[TestMethod]
