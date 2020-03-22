@@ -28,7 +28,7 @@ namespace KamiSama.Extensions.Core.Tests
 			var str = "01/01/0001 01:00:00 ب.ظ";
 			var expected = new DateTime(1, 1, 1, 13, 0, 0, persianCalendar);
 
-			var parsed = str.ParsePersianString();
+			var parsed = str.ParseAsPersianDateTime();
 
 			Assert.AreEqual(expected, parsed);
 		}
@@ -38,7 +38,7 @@ namespace KamiSama.Extensions.Core.Tests
 			var str = "0001/01/01 01:02:03";
 			var expected = new DateTime(1, 1, 1, 1, 2, 3, persianCalendar);
 
-			var parsed = str.ParseExactFromPersianString("yyyy/MM/dd HH:mm:ss");
+			var parsed = str.ParseExactAsPersianDateTime("yyyy/MM/dd HH:mm:ss");
 
 			Assert.AreEqual(expected, parsed);
 		}
@@ -48,7 +48,7 @@ namespace KamiSama.Extensions.Core.Tests
 			var str = "01/01/0001 01:00:00 ب.ظ";
 			var expected = new DateTime(1, 1, 1, 13, 0, 0, persianCalendar);
 
-			var result = str.TryParseFromPersianString(out DateTime parsed);
+			var result = str.TryParseAsPersianDateTime(out DateTime parsed);
 
 			Assert.AreEqual(expected, parsed);
 		}
@@ -58,7 +58,7 @@ namespace KamiSama.Extensions.Core.Tests
 			var str = "abc";
 			var expected = new DateTime(1, 1, 1, 13, 0, 0, persianCalendar);
 
-			var result = str.TryParseFromPersianString(out DateTime parsed);
+			var result = str.TryParseAsPersianDateTime(out DateTime parsed);
 
 			Assert.IsFalse(result);
 		}
@@ -68,7 +68,7 @@ namespace KamiSama.Extensions.Core.Tests
 			var str = "001/01/01 01:02:03";
 			var expected = new DateTime(1, 1, 1, 1, 2, 3, persianCalendar);
 
-			var result = str.TryParseExactFromPersianString("yyyy/MM/dd HH:mm:ss", out DateTime parsed);
+			var result = str.TryParseExactAsPersianDateTime("yyyy/MM/dd HH:mm:ss", out DateTime parsed);
 
 			Assert.IsFalse(result);
 		}
