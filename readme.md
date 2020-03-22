@@ -155,4 +155,4 @@ str = obj.SerializeToJson(options);
 obj = str.DeserializeFromJson(options);
 ```
 # 4. KamiSama.Repositories Libraries
-Please see [this document](./KamiSama.Repository-readme.md).
+Please see [this document](./KamiSama.Repositories-readme.md).
