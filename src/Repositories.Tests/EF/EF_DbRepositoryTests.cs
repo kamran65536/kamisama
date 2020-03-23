@@ -1,8 +1,7 @@
 ﻿using KamiSama.Repositories.EntityFramework;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NSubstitute;
+using System;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,110 +10,96 @@ namespace KamiSama.Repositories.Tests.EF
 	[TestClass]
 	public class EF_DbRepositoryTests
 	{
+		private static SampleContext GetDbContext(SampleEntity[] initialDbSet = null)
+		{
+			var connection = Effort.DbConnectionFactory.CreateTransient();
+			var context = new SampleContext(connection, true);
+
+			if (initialDbSet != null)
+			{
+				context.SampleEntities.AddRange(initialDbSet);
+				context.SaveChanges();
+			}
+
+			return context;
+		}
 		[TestMethod]
 		public void Add_must_add_to_dbSet()
 		{
 			var entity = new SampleEntity { Id = 1, Name = "Test" };
-			var dbSet = Substitute.For<DbSet<SampleEntity>>();
-			var context = Substitute.For<SampleContext>();
-			context.Set<SampleEntity>().Returns(dbSet);
+			var context = GetDbContext();
 
 			var repository = new DbRepository<SampleEntity>(context);
 
 			repository.Add(entity);
 
-			dbSet.Received().Add(entity);
-			context.Received().SaveChanges();
+			CollectionAssert.Contains(context.SampleEntities.ToArray(), entity);
 		}
 		[TestMethod]
 		public async Task AddAsync_must_add_to_dbSet()
 		{
 			var entity = new SampleEntity { Id = 1, Name = "Test" };
-			var dbSet = Substitute.For<DbSet<SampleEntity>>();
-			var context = Substitute.For<SampleContext>();
-			context.Set<SampleEntity>().Returns(dbSet);
+			var context = GetDbContext();
 
 			var repository = new DbRepository<SampleEntity>(context);
 
 			await repository.AddAsync(entity);
 
-			dbSet.Received().Add(entity);
-			await context.Received().SaveChangesAsync();
+			CollectionAssert.Contains(context.SampleEntities.ToArray(), entity);
 		}
 		[TestMethod]
-		public void Update_must_update_status_to_dbSet()
+		public void Update_must_update_status_in_context()
 		{
 			var entity = new SampleEntity { Id = 1, Name = "Test" };
-			var dbSet = Substitute.For<DbSet<SampleEntity>>();
-			var context = Substitute.For<SampleContext>();
-			context.Set<SampleEntity>().Returns(dbSet);
+			var context = GetDbContext(initialDbSet: new[] { entity });
 
 			var repository = new DbRepository<SampleEntity>(context);
 
 			repository.Update(entity);
 
-			context.Received().SaveChanges();
+			CollectionAssert.Contains(context.SampleEntities.ToArray(), entity);
 		}
 		[TestMethod]
-		public async Task UpdateAsync_must_update_status_to_dbSet()
+		public async Task UpdateAsync_must_update_status_in_context()
 		{
 			var entity = new SampleEntity { Id = 1, Name = "Test" };
-			var dbSet = Substitute.For<DbSet<SampleEntity>>();
-			var context = Substitute.For<SampleContext>();
-			context.Set<SampleEntity>().Returns(dbSet);
+			var context = GetDbContext(initialDbSet: new[] { entity });
 
 			var repository = new DbRepository<SampleEntity>(context);
 
 			await repository.UpdateAsync(entity);
 
-			await context.Received().SaveChangesAsync();
+			Assert.AreEqual(EntityState.Unchanged, context.Entry(entity).State);
 		}
 		[TestMethod]
-		public void Delete_must_update_remove_from_dbSet()
+		public void Delete_must_remove_dbSet()
 		{
 			var entity = new SampleEntity { Id = 1, Name = "Test" };
-			var dbSet = Substitute.For<DbSet<SampleEntity>>();
-			var context = Substitute.For<SampleContext>();
-			context.Set<SampleEntity>().Returns(dbSet);
+			var context = GetDbContext(initialDbSet: new[] { entity });
 
 			var repository = new DbRepository<SampleEntity>(context);
 
 			repository.Delete(entity);
 
-			dbSet.Received().Remove(entity);
-			context.Received().SaveChanges();
+			CollectionAssert.DoesNotContain(context.SampleEntities.ToArray(), entity);
 		}
 		[TestMethod]
-		public async Task DeleteAsync_must_update_remove_from_dbSet()
+		public async Task DeleteAsync_must_remove_dbSet()
 		{
 			var entity = new SampleEntity { Id = 1, Name = "Test" };
-			var dbSet = Substitute.For<DbSet<SampleEntity>>();
-			var context = Substitute.For<SampleContext>();
-			context.Set<SampleEntity>().Returns(dbSet);
+			var context = GetDbContext(initialDbSet: new[] { entity });
 
 			var repository = new DbRepository<SampleEntity>(context);
 
 			await repository.DeleteAsync(entity);
 
-			dbSet.Received().Remove(entity);
-			await context.Received().SaveChangesAsync();
+			CollectionAssert.DoesNotContain(context.SampleEntities.ToArray(), entity);
 		}
 		[TestMethod]
 		public void Find_must_find_items_in_dbSet()
 		{
 			var entity = new SampleEntity { Id = 1, Name = "Test" };
-			var query = new[] { entity }.AsQueryable();
-			var dbSet = Substitute.For<DbSet<SampleEntity>, IQueryable<SampleEntity>>();
-			var context = Substitute.For<SampleContext>();
-
-			context.Set<SampleEntity>().Returns(dbSet);
-			var queryableDbSet = dbSet as IQueryable<SampleEntity>;
-
-			queryableDbSet.Provider.Returns(query.Provider);
-			queryableDbSet.Expression.Returns(query.Expression);
-			queryableDbSet.ElementType.Returns(query.ElementType);
-			queryableDbSet.GetEnumerator().Returns(query.GetEnumerator());
-
+			var context = GetDbContext(initialDbSet: new[] { entity });
 			var repository = new DbRepository<SampleEntity>(context);
 
 			var result = repository.Find(x => x.Id == 1);
@@ -127,23 +112,13 @@ namespace KamiSama.Repositories.Tests.EF
 		public async Task FindAsync_must_find_items_in_dbSet()
 		{
 			var entity = new SampleEntity { Id = 1, Name = "Test" };
-			var query = new[] { entity }.AsQueryable();
-			var dbSet = Substitute.For<DbSet<SampleEntity>, IQueryable<SampleEntity>>();
-			var context = Substitute.For<SampleContext>();
-			
-			context.Set<SampleEntity>().Returns(dbSet);
-			var queryableDbSet = dbSet as IQueryable<SampleEntity>;
-			queryableDbSet.Provider.Returns(new SampleDbAsyncQueryProvider(query.Provider));
-			queryableDbSet.Expression.Returns(query.Expression);
-			queryableDbSet.ElementType.Returns(query.ElementType);
-			queryableDbSet.GetEnumerator().Returns(query.GetEnumerator());
-
+			var context = GetDbContext(initialDbSet: new[] { entity });
 			var repository = new DbRepository<SampleEntity>(context);
 
 			var result = await repository.FindAsync(x => x.Id == 1);
 			Assert.AreEqual(entity, result);
 
-			var result2 = repository.Find(x => x.Id == 2);
+			var result2 = await repository.FindAsync(x => x.Id == 2);
 			Assert.IsNull(result2);
 		}
 		[TestMethod]
@@ -155,17 +130,7 @@ namespace KamiSama.Repositories.Tests.EF
 				new SampleEntity { Id = 2, Name = "sample2" },
 				new SampleEntity { Id = 3, Name = "-not-found" }
 			};
-			var query = arr.AsQueryable();
-			var dbSet = Substitute.For<DbSet<SampleEntity>, IQueryable<SampleEntity>>();
-			var context = Substitute.For<SampleContext>();
-
-			context.Set<SampleEntity>().Returns(dbSet);
-			var queryableDbSet = dbSet as IQueryable<SampleEntity>;
-			queryableDbSet.Provider.Returns(new SampleDbAsyncQueryProvider(query.Provider));
-			queryableDbSet.Expression.Returns(query.Expression);
-			queryableDbSet.ElementType.Returns(query.ElementType);
-			queryableDbSet.GetEnumerator().Returns(query.GetEnumerator());
-
+			var context = GetDbContext(initialDbSet: arr);
 			var repository = new DbRepository<SampleEntity>(context);
 
 			var result = repository.Where(x => x.Name.StartsWith("sample")).ToArray();
