@@ -2,29 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Authors>Kamran Fallah</Authors>
     <Company>-Kamran Fallah</Company>
     <Description>Entity Framework Repository Pattern</Description>
-    <PackageReleaseNotes>v1.2.8
- Async interfaces are added.
-v1.2.6
-optimized update query
-v1.2.1
-- IQueryableRepository returns IQueryable!
-v1.2.0
-- IQueryableReposiotry is added.
-- Where method is moved to IQueryableRepository.
-- IRepository.Find method is added.
-1.1.2
-DbRepository&lt;entitytype, contexttype&gt; is added.
-dbrepository methods are now virtual.
-v1.1.0
-complete refactor for DbRepository, namespace is changed.
-v1.0.0
-change in  repository pattern interface
-IContextBasedUnitOfWork
-DbRepository</PackageReleaseNotes>
+    <PackageReleaseNotes>v2.0.0
+- Refactored from old KamiSama.Repositories.EntityFramework library</PackageReleaseNotes>
     <Version>1.2.1</Version>
     <LangVersion>8.0</LangVersion>
 	  <GenerateDocumentationFile>true</GenerateDocumentationFile>
