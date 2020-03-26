@@ -11,9 +11,8 @@ namespace KamiSama.Extensions
 		private static DateTimeFormatInfo dateTimeFormatInfo;
 		static PersianDateTimeExtensions()
 		{
-			var cultureInfo = new CultureInfo("fa-IR");
 			var persianCalendar = new PersianCalendar();
-
+			var cultureInfo = new CultureInfo("fa-IR");
 			dateTimeFormatInfo = cultureInfo.DateTimeFormat.Clone() as DateTimeFormatInfo;
 
 			dateTimeFormatInfo.Calendar = persianCalendar;
