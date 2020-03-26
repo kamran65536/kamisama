@@ -16,3 +16,6 @@ test:
     stage: test
     script: 
         - "dotnet test src/KamiSama.Extensions.sln"
+
+publish:
+    echo $(nuget_apikey)
