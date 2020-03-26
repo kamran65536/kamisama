@@ -21,4 +21,4 @@ test:
 publish:
     stage: publish
     script:
-        - echo $(nuget_apikey)
+        - echo $nuget_apikey
