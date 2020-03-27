@@ -4,13 +4,14 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Authors>Kamran Fallah</Authors>
-    <Company>-Kamran Fallah</Company>
+    <Company>-</Company>
     <Description>Entity Framework Repository Pattern</Description>
     <PackageReleaseNotes>v2.0.0
 - Refactored from old KamiSama.Repositories.EntityFramework library</PackageReleaseNotes>
     <Version>1.2.1</Version>
     <LangVersion>8.0</LangVersion>
 	  <GenerateDocumentationFile>true</GenerateDocumentationFile>
+	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.4.0" />

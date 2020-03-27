@@ -14,6 +14,7 @@
 		<RootNamespace>KamiSama.Repositories</RootNamespace>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	</PropertyGroup>
 
 </Project>

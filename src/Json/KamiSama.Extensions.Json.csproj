@@ -4,6 +4,8 @@
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<PackageReleaseNotes>v2.0.0
 - Refactored from old KamiSama.Extenders.Serialization library and now using System.Text.Json instead of Newtonsoft.</PackageReleaseNotes>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<Authors>Kamran Fallah</Authors>
 	</PropertyGroup>
 
 	<ItemGroup>
