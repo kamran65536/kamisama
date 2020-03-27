@@ -1,6 +1,6 @@
 image: mcr.microsoft.com/dotnet/core/sdk:3.1
 variables:
-    PACKAGE_VERSION: "2.0.0"
+    PACKAGE_VERSION: "2.0.1"
 
 stages:
     - build
@@ -23,8 +23,7 @@ test:
 publish:
     stage: publish
     script:
-        - echo $nuget_apikey
-        - dotnet pack src/ -o nupkgs -p:PackageVersion=2.0.0
+        - dotnet pack src/ -o nupkgs -p:PackageVersion=$PACKAGE_VERSION
         - dotnet nuget push nupkgs/*.nupkg -k $nuget_apikey -s https://api.nuget.org/v3/index.json
         - rm -rf nupkgs
  #   when: manual
