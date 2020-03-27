@@ -24,6 +24,6 @@ publish:
     stage: publish
     script:
         - dotnet pack src/ -o nupkgs -p:PackageVersion=$PACKAGE_VERSION
-        - dotnet nuget push nupkgs/*.nupkg -k $nuget_apikey -s https://api.nuget.org/v3/index.json
+        - dotnet nuget push nupkgs/*.nupkg -k $nuget_apikey -s https://api.nuget.org/v3/index.json --skip-duplicate
         - rm -rf nupkgs
     when: manual
