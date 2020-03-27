@@ -23,6 +23,7 @@ test:
 publish:
     stage: publish
     script:
+        - echo $nuget_apikey
         - dotnet pack src/ -o nupkgs -p:PackageVersion=2.0.0
         - dotnet nuget push nupkgs/*.nupkg -k $nuget_apikey -s https://api.nuget.org/v3/index.json
         - rm -rf nupkgs
