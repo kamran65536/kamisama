@@ -27,6 +27,18 @@ namespace KamiSama.Extensions.Json.Tests
 			StringAssert.Contains(result, "}");
 		}
 		[TestMethod]
+		public void SerializeToJson_must_configure_if_it_is_null()
+		{
+			var a = new A { X = 10 };
+
+			var result = a.SerializeToJson(configure: null);
+
+			StringAssert.Contains(result, "{");
+			StringAssert.Contains(result, @"""X"":");
+			StringAssert.Contains(result, "10");
+			StringAssert.Contains(result, "}");
+		}
+		[TestMethod]
 		public void SerializeToJson_must_use_options_if_any()
 		{
 			var a = new A { X = 10 };
@@ -35,6 +47,18 @@ namespace KamiSama.Extensions.Json.Tests
 			{
 				WriteIndented = true
 			});
+
+			StringAssert.Contains(result, "{");
+			StringAssert.Contains(result, @" ""X"":");
+			StringAssert.Contains(result, "10");
+			StringAssert.Contains(result, "}");
+		}
+		[TestMethod]
+		public void SerializeToJson_must_use_optionsFunc_if_any()
+		{
+			var a = new A { X = 10 };
+
+			var result = a.SerializeToJson(opt => opt.WriteIndented = true);
 
 			StringAssert.Contains(result, "{");
 			StringAssert.Contains(result, @" ""X"":");
@@ -51,6 +75,15 @@ namespace KamiSama.Extensions.Json.Tests
 			Assert.AreEqual(10, result.X);
 		}
 		[TestMethod]
+		public void DeserializeFromJson_must_ignore_configure_if_it_is_null()
+		{
+			var str = "{\"X\":10}";
+
+			var result = str.DeserializeFromJson<A>(configure: null);
+
+			Assert.AreEqual(10, result.X);
+		}
+		[TestMethod]
 		public void DeserializeFromJson_must_use_options_if_any()
 		{
 			var str = "{\"X\":10,}";
@@ -59,6 +92,15 @@ namespace KamiSama.Extensions.Json.Tests
 			{
 				AllowTrailingCommas = true
 			});
+
+			Assert.AreEqual(10, result.X);
+		}
+		[TestMethod]
+		public void DeserializeFromJson_must_use_optionsFunc_if_any()
+		{
+			var str = "{\"X\":10,}";
+
+			var result = str.DeserializeFromJson<A>(opt => opt.AllowTrailingCommas = true);
 
 			Assert.AreEqual(10, result.X);
 		}

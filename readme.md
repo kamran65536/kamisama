@@ -9,17 +9,24 @@ Here is the list of libraries:
 ## 1. KamiSama.Extensions.Core
 The library includes some helper methods for string, hexadecimal, byte array, ....
 Here is some examples of the helper methods:
-- [Array Extensions](#11-array-extensions)
-- [Byte Array Extensions](#12-byte-array-extensions)
-- [Conversion Extensions](#13-conversion-extensions)
-- [Cryptography Extensions](#14-cryptography-extensions)
-- [Hasing Extensions](#15-hashing-extensions)
-- [Persian DateTime Extensions](#16-persian-datetime-extensions)
-- [Queue Extensions](#17-queue-extensions)
-- [Stream Extensions](#18-stream-extensions)
-- [String Extensions](#19-string-extensions)
-- [TimeSpan Extensions](#110-timespan-extensions)
-- [Xml Serialization Extensions](#111-xml-serialization-extensions)
+- [KamiSama Extension Libraries](#kamisama-extension-libraries)
+  - [Introduction](#introduction)
+  - [1. KamiSama.Extensions.Core](#1-kamisamaextensionscore)
+    - [1.1. Array Extensions](#11-array-extensions)
+    - [1.2. Byte Array Extensions](#12-byte-array-extensions)
+    - [1.3. Conversion Extensions](#13-conversion-extensions)
+    - [1.4 Cryptography Extensions](#14-cryptography-extensions)
+    - [1.5 Hashing Extensions](#15-hashing-extensions)
+    - [1.6 Persian DateTime Extensions](#16-persian-datetime-extensions)
+  - [1.7 Queue Extensions](#17-queue-extensions)
+  - [1.8 Stream Extensions](#18-stream-extensions)
+  - [1.9 String Extensions](#19-string-extensions)
+  - [1.10 TimeSpan Extensions](#110-timespan-extensions)
+  - [1.11 Xml Serialization Extensions](#111-xml-serialization-extensions)
+- [2. KamiSama.Extensions.DependencyInjection](#2-kamisamaextensionsdependencyinjection)
+- [3. KamiSama.Extensions.Json](#3-kamisamaextensionsjson)
+  - [3.1 HirerarchialJsonConverter](#31-hirerarchialjsonconverter)
+- [4. KamiSama.Repositories Libraries](#4-kamisamarepositories-libraries)
 ### 1.1. Array Extensions
 ```csharp
 // pads an array until to total length becomes multiplies of 8
@@ -154,5 +161,24 @@ str = obj.SerializeToJson(options);
 // deserializes a json string into an object
 obj = str.DeserializeFromJson(options);
 ```
+## 3.1 HirerarchialJsonConverter
+It is also possible to load abstract classes from json string based on configuration. To do that, the library provides HirerarchialJsonConverter.
+```csharp
+public abstract class BaseClass
+{
+    [JsonHirerarchyDiscriminator]
+    public abstract string Discriminator { get; }
+}
+public class ChildClass1 : BaseClass
+{
+    public override string Discriminator => "child1";
+}
+//To Register
+HirerarchialJsonConverter<BaseClass>.Register<ChildClass1>("child1");
+//To use:
+var obj = str.DeserializeFromJson(options => options.Converters.Add(new HirerarchialJsonConverter<BaseClass>());
+//you can also use JsonConverterAttribute too.
+```
+
 # 4. KamiSama.Repositories Libraries
 Please see [this document](./KamiSama.Repositories-readme.md).

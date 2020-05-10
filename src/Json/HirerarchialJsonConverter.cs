@@ -1,0 +1,91 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
+using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
+namespace KamiSama.Extensions.Json
+{
+	/// <summary>
+	/// Generic Json Hirerarchial Json Converter
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
+	public class HirerarchialJsonConverter<T> : JsonConverter<T>
+		where T : class
+	{
+		private readonly Type type;
+		private readonly string discriminiatorMapKeyName;
+		private readonly PropertyInfo discriminatorProperty;
+
+		/// <summary>
+		/// map from discriminator key value to child type
+		/// </summary>
+		internal static readonly Dictionary<string, Type> typeMap = new Dictionary<string, Type>(StringComparer.InvariantCultureIgnoreCase);
+		/// <summary>
+		/// Registers a child type to a key
+		/// </summary>
+		/// <typeparam name="TChild"></typeparam>
+		/// <param name="discriminatorKeyValue"></param>
+		public static void Register<TChild>(string discriminatorKeyValue) where TChild : T
+			=> typeMap[discriminatorKeyValue] = typeof(TChild);
+		/// <summary>
+		/// construcrotor
+		/// </summary>
+		public HirerarchialJsonConverter()
+		{
+			type = typeof(T);
+			discriminatorProperty = type.GetProperties().FirstOrDefault(x => x.GetCustomAttribute<JsonHirerarchyDiscriminatorAttribute>() != null);
+
+			if (discriminatorProperty == null)
+				throw new ArgumentException($"Type {type.Name} does not have a property with JsonDiscriminatorAttribute.");
+
+			var attr = discriminatorProperty.GetCustomAttribute<JsonPropertyNameAttribute>();
+
+			discriminiatorMapKeyName = attr?.Name ?? discriminatorProperty.Name;
+		}
+		/// <summary>
+		/// Writes a channel configuration (basically this method simply calls JsonSerializer.Serialize method)
+		/// </summary>
+		/// <param name="writer"></param>
+		/// <param name="value"></param>
+		/// <param name="options"></param>
+		public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+			=> JsonSerializer.Serialize(writer, value, options);
+		/// <summary>
+		/// Reads a <typeparamref name="T"/> from an input json and converts based on key
+		/// </summary>
+		/// <param name="reader">JsonReader</param>
+		/// <param name="typeToConvert"></param>
+		/// <param name="options"></param>
+		/// <returns></returns>
+		public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			// Check for null values
+			if (reader.TokenType == JsonTokenType.Null)
+				return default;
+
+			// Copy the current state from reader (it's a struct)
+			var readerAtStart = reader;
+
+			// Read the `ChannelProvider` from our JSON document
+			using (var jsonDocument = JsonDocument.ParseValue(ref reader))
+			{
+				var jsonObject = jsonDocument.RootElement;
+
+				if (!jsonObject.TryGetProperty(discriminiatorMapKeyName, out JsonElement jsonElement))
+					throw new Exception($"{discriminiatorMapKeyName} is not found in the json. It is mandatory.");
+
+				var key = jsonElement
+					.GetString();
+
+				if (!string.IsNullOrWhiteSpace(key) && typeMap.TryGetValue(key, out Type type))
+					return JsonSerializer.Deserialize(ref readerAtStart, type, options) as T;
+				else
+					throw new NotSupportedException($"{key ?? "<unknown>"} can not be deserialized");
+			}
+		}
+	}
+}
