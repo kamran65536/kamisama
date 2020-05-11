@@ -53,7 +53,7 @@ namespace KamiSama.Extensions.Json
 		/// <param name="value"></param>
 		/// <param name="options"></param>
 		public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
-			=> JsonSerializer.Serialize(writer, value, options);
+			=> JsonSerializer.Serialize(writer, value, value?.GetType(), options);
 		/// <summary>
 		/// Reads a <typeparamref name="T"/> from an input json and converts based on key
 		/// </summary>
