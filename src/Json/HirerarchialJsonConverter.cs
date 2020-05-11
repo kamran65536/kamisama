@@ -16,10 +16,9 @@ namespace KamiSama.Extensions.Json
 	public class HirerarchialJsonConverter<T> : JsonConverter<T>
 		where T : class
 	{
-		private readonly Type type;
-		private readonly string discriminiatorMapKeyName;
-		private readonly PropertyInfo discriminatorProperty;
-
+		private static readonly Type type;
+		private static readonly string discriminiatorMapKeyName;
+		private static readonly PropertyInfo discriminatorProperty;
 		/// <summary>
 		/// map from discriminator key value to child type
 		/// </summary>
@@ -32,9 +31,18 @@ namespace KamiSama.Extensions.Json
 		public static void Register<TChild>(string discriminatorKeyValue) where TChild : T
 			=> typeMap[discriminatorKeyValue] = typeof(TChild);
 		/// <summary>
+		/// Registers a child type based on default descriminator value
+		/// </summary>
+		/// <typeparam name="TChild"></typeparam>
+		public static void Register<TChild>() where TChild : T, new()
+		{
+			var instance = new TChild();
+			Register<TChild>(discriminatorProperty.GetValue(instance) + "");
+		}
+		/// <summary>
 		/// construcrotor
 		/// </summary>
-		public HirerarchialJsonConverter()
+		static HirerarchialJsonConverter()
 		{
 			type = typeof(T);
 			discriminatorProperty = type.GetProperties().FirstOrDefault(x => x.GetCustomAttribute<JsonHirerarchyDiscriminatorAttribute>() != null);

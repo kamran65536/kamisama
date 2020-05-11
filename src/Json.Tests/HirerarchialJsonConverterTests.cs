@@ -32,9 +32,9 @@ namespace KamiSama.Extensions.Json.Tests
 	public class HirerarchialJsonConverterTests
 	{
 		[TestMethod]
-		public void HirarchialJsonConverter_constructor_must_throw_ArgumentException_if_no_JsonHirerarchyDiscriminatorAttribute_exists()
+		public void HirarchialJsonConverter_constructor_must_throw_TypeInitializationException_if_no_JsonHirerarchyDiscriminatorAttribute_exists()
 		{
-			Assert.ThrowsException<ArgumentException>(() => new HirerarchialJsonConverter<BaseClassWithoutDiscriminatorProperty>());
+			Assert.ThrowsException<TypeInitializationException>(() => new HirerarchialJsonConverter<BaseClassWithoutDiscriminatorProperty>());
 		}
 		[TestMethod]
 		public void Register_must_add_conifguration_to_typeMaps()
