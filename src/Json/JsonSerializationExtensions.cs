@@ -70,7 +70,7 @@ namespace KamiSama.Extensions
 		/// <typeparam name="T"></typeparam>
 		/// <param name="options"></param>
 		/// <returns></returns>
-		public static JsonSerializerOptions AddHirarchialConverter<T>(this JsonSerializerOptions options)
+		public static JsonSerializerOptions AddHirerarchialConverter<T>(this JsonSerializerOptions options)
 			where T : class
 		{
 			options.Converters.Add(new HirerarchialJsonConverter<T>());

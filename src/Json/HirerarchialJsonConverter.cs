@@ -78,7 +78,7 @@ namespace KamiSama.Extensions.Json
 			// Copy the current state from reader (it's a struct)
 			var readerAtStart = reader;
 
-			// Read the `ChannelProvider` from our JSON document
+			// Read the `discriminator` from our JSON document
 			using (var jsonDocument = JsonDocument.ParseValue(ref reader))
 			{
 				var jsonObject = jsonDocument.RootElement;

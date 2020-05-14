@@ -1,13 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using System.Text.Json;
 
 namespace KamiSama.Extensions.Json.Tests
 {
 	[TestClass]
-	public class JsonSerializationTests
+	public class JsonSerializationExtensionsTests
 	{
 		public class A
 		{
@@ -103,6 +102,15 @@ namespace KamiSama.Extensions.Json.Tests
 			var result = str.DeserializeFromJson<A>(opt => opt.AllowTrailingCommas = true);
 
 			Assert.AreEqual(10, result.X);
+		}
+		[TestMethod]
+		public void AddHirerarchialConverter_must_add_AddHirerarchialConverter_to_options()
+		{
+			var options = new JsonSerializerOptions();
+
+			Assert.IsFalse(options.Converters.Any(x => x is HirerarchialJsonConverter<SampleBaseClass>));
+			options.AddHirerarchialConverter<SampleBaseClass>();
+			Assert.IsTrue(options.Converters.Any(x => x is HirerarchialJsonConverter<SampleBaseClass>));
 		}
 	}
 }
