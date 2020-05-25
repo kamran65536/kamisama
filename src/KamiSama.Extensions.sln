@@ -33,7 +33,20 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Repositories.Tests
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7DC27342-54E1-4AC5-ACF8-BF0DF7A28304}"
 	ProjectSection(SolutionItems) = preProject
+		..\.gitlab-ci.yml = ..\.gitlab-ci.yml
 		test-configs.runsettings = test-configs.runsettings
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NLog", "NLog", "{EE08210A-D4B5-4BEB-9795-A05C5489886A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Extensions.NLog", "NLog\KamiSama.Extensions.NLog.csproj", "{C11D6DCB-61E4-4D0D-87E1-3D0FA1716697}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Extensions.NLog.Tests", "Nlog.Tests\KamiSama.Extensions.NLog.Tests.csproj", "{5622AFDB-907A-474D-89F9-60160B950FE3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{C6941067-E3F2-45DD-93C2-4A25FE2214A6}"
+	ProjectSection(SolutionItems) = preProject
+		..\KamiSama.Repositories-readme.md = ..\KamiSama.Repositories-readme.md
+		..\readme.md = ..\readme.md
 	EndProjectSection
 EndProject
 Global
@@ -82,6 +95,14 @@ Global
 		{CBA815B4-922B-4EE0-A0E6-D12B5507FE7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBA815B4-922B-4EE0-A0E6-D12B5507FE7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBA815B4-922B-4EE0-A0E6-D12B5507FE7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C11D6DCB-61E4-4D0D-87E1-3D0FA1716697}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C11D6DCB-61E4-4D0D-87E1-3D0FA1716697}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C11D6DCB-61E4-4D0D-87E1-3D0FA1716697}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C11D6DCB-61E4-4D0D-87E1-3D0FA1716697}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5622AFDB-907A-474D-89F9-60160B950FE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5622AFDB-907A-474D-89F9-60160B950FE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5622AFDB-907A-474D-89F9-60160B950FE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5622AFDB-907A-474D-89F9-60160B950FE3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -97,6 +118,9 @@ Global
 		{A89B5DD5-49F7-46B7-9578-D9D1789D60AB} = {63220787-F3BB-4595-BC04-5C2F9593EE20}
 		{0EFB1ACD-DD4F-479F-8B3A-20F568CC6716} = {63220787-F3BB-4595-BC04-5C2F9593EE20}
 		{CBA815B4-922B-4EE0-A0E6-D12B5507FE7E} = {63220787-F3BB-4595-BC04-5C2F9593EE20}
+		{C11D6DCB-61E4-4D0D-87E1-3D0FA1716697} = {EE08210A-D4B5-4BEB-9795-A05C5489886A}
+		{5622AFDB-907A-474D-89F9-60160B950FE3} = {EE08210A-D4B5-4BEB-9795-A05C5489886A}
+		{C6941067-E3F2-45DD-93C2-4A25FE2214A6} = {7DC27342-54E1-4AC5-ACF8-BF0DF7A28304}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {460D8DAE-DDB3-4A1F-A520-DE0634822553}

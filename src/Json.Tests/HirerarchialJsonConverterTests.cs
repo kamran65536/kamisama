@@ -40,9 +40,9 @@ namespace KamiSama.Extensions.Json.Tests
 		public void Register_must_add_conifguration_to_typeMaps()
 		{
 			HirerarchialJsonConverter<SampleBaseClass>.typeMap.Clear();
-			HirerarchialJsonConverter<SampleBaseClass>.Register<SampleClass>("sample1");
+			HirerarchialJsonConverter<SampleBaseClass>.Register<SampleClass>();
 
-			Assert.IsTrue(HirerarchialJsonConverter<SampleBaseClass>.typeMap["sample1"] == typeof(SampleClass));
+			Assert.IsTrue(HirerarchialJsonConverter<SampleBaseClass>.typeMap[new SampleClass().Discriminator] == typeof(SampleClass));
 		}
 		[TestMethod]
 		public void Write_must_write_conifguration_with_no_change()
