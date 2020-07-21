@@ -22,8 +22,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\KamiSama.Repositories.Json\KamiSama.Repositories.Json.csproj" />
     <ProjectReference Include="..\Repositories.EntityFrameworkCore\KamiSama.Repositories.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\Repositories.EntityFramework\KamiSama.Repositories.EntityFramework.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Json\sample-entities.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

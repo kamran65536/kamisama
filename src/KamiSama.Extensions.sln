@@ -49,6 +49,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{C6941067-E
 		..\readme.md = ..\readme.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KamiSama.Repositories.Json", "KamiSama.Repositories.Json\KamiSama.Repositories.Json.csproj", "{D99140C9-1562-46D5-8D0A-4087941899B3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -103,6 +105,10 @@ Global
 		{5622AFDB-907A-474D-89F9-60160B950FE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5622AFDB-907A-474D-89F9-60160B950FE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5622AFDB-907A-474D-89F9-60160B950FE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D99140C9-1562-46D5-8D0A-4087941899B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D99140C9-1562-46D5-8D0A-4087941899B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D99140C9-1562-46D5-8D0A-4087941899B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D99140C9-1562-46D5-8D0A-4087941899B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -121,6 +127,7 @@ Global
 		{C11D6DCB-61E4-4D0D-87E1-3D0FA1716697} = {EE08210A-D4B5-4BEB-9795-A05C5489886A}
 		{5622AFDB-907A-474D-89F9-60160B950FE3} = {EE08210A-D4B5-4BEB-9795-A05C5489886A}
 		{C6941067-E3F2-45DD-93C2-4A25FE2214A6} = {7DC27342-54E1-4AC5-ACF8-BF0DF7A28304}
+		{D99140C9-1562-46D5-8D0A-4087941899B3} = {63220787-F3BB-4595-BC04-5C2F9593EE20}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {460D8DAE-DDB3-4A1F-A520-DE0634822553}

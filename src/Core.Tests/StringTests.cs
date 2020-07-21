@@ -33,7 +33,7 @@ namespace KamiSama.Extensions.Core.Tests
 		[TestMethod]
 		public void FromHexTest()
 		{
-			var arrFromHex = "1A0BB".FromHex();
+			var arrFromHex = "1\tA 0B\nB".FromHex();
 			var arr = new byte[] { 0x01, 0xA0, 0xBB};
 
 			CollectionAssert.AreEqual(arrFromHex, arr);

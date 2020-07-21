@@ -16,7 +16,7 @@ namespace KamiSama.Repositories.Tests
 		public override bool Equals(object obj) => Equals(obj as SampleEntity);
 		public override int GetHashCode()
 		{
-			return base.GetHashCode();
+			return HashCode.Combine(Id, Name);
 		}
 	}
 }

@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Company>Kamran Fallah</Company>
+    <Authors>Kamran Fallah</Authors>
+    <Description>Json Repository uses System.Text.Json</Description>
+    <PackageReleaseNotes>99-04-31 JsonRepository is added</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Json\KamiSama.Extensions.Json.csproj" />
+    <ProjectReference Include="..\Repositories.Core\KamiSama.Repositories.Core.csproj" />
+  </ItemGroup>
+
+</Project>

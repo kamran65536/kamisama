@@ -9,7 +9,7 @@ namespace KamiSama.Repositories.Tests.Core
 	[TestClass]
 	public class InMemoryRepositoryTests
 	{
-		class Module10Comparerer : IEqualityComparer<SampleEntity>
+		class Module10EntityComparer : IEqualityComparer<SampleEntity>
 		{
 			public bool Equals([AllowNull] SampleEntity x, [AllowNull] SampleEntity y)
 				=> x.Id - y.Id % 10 == 0;
@@ -44,7 +44,7 @@ namespace KamiSama.Repositories.Tests.Core
 				new SampleEntity { Id = 1 },
 				new SampleEntity { Id = 11 }
 			};
-			var repository = new InMemoryRepository<SampleEntity>(initialItems, new Module10Comparerer());
+			var repository = new InMemoryRepository<SampleEntity>(initialItems, new Module10EntityComparer());
 
 			Assert.AreEqual(1, repository.GetAll().Count());
 		}
