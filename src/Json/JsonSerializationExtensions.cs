@@ -76,5 +76,16 @@ namespace KamiSama.Extensions
 			options.Converters.Add(new HirerarchialJsonConverter<T>());
 			return options;
 		}
+		/// <summary>
+		/// Adds TimeSpanJsonConverter as default converter for json
+		/// </summary>
+		/// <param name="options"></param>
+		/// <returns></returns>
+		public static JsonSerializerOptions AddTimeSpanJsonConveter(this JsonSerializerOptions options)
+		{
+			options.Converters.Add(new TimeSpanJsonConverter());
+
+			return options;
+		}
 	}
 }
