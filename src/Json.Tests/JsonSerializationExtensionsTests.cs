@@ -104,13 +104,31 @@ namespace KamiSama.Extensions.Json.Tests
 			Assert.AreEqual(10, result.X);
 		}
 		[TestMethod]
-		public void AddHirerarchialConverter_must_add_AddHirerarchialConverter_to_options()
+		public void AddHirerarchialConverter_must_add_AddHirerarchialConverter_to_options_Converters()
 		{
 			var options = new JsonSerializerOptions();
 
 			Assert.IsFalse(options.Converters.Any(x => x is HirerarchialJsonConverter<SampleBaseClass>));
 			options.AddHirerarchialConverter<SampleBaseClass>();
 			Assert.IsTrue(options.Converters.Any(x => x is HirerarchialJsonConverter<SampleBaseClass>));
+		}
+		[TestMethod]
+		public void TimeSpanJsonConverter_must_add_TimeSpanJsonConverter_to_options_Converters()
+		{
+			var options = new JsonSerializerOptions();
+
+			Assert.IsFalse(options.Converters.Any(x => x is TimeSpanJsonConverter));
+			options.AddTimeSpanJsonConveter();
+			Assert.IsTrue(options.Converters.Any(x => x is TimeSpanJsonConverter));
+		}
+		[TestMethod]
+		public void AddHexByteConverter_must_add_HexByteConverter_to_options_Converters()
+		{
+			var options = new JsonSerializerOptions();
+
+			Assert.IsFalse(options.Converters.Any(x => x is HexByteArrayJsonConverter));
+			options.AddHexByteConverter();
+			Assert.IsTrue(options.Converters.Any(x => x is HexByteArrayJsonConverter));
 		}
 	}
 }

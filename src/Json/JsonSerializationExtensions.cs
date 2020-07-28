@@ -1,6 +1,5 @@
 ﻿using KamiSama.Extensions.Json;
 using System;
-using System.Linq.Expressions;
 using System.Text.Json;
 
 namespace KamiSama.Extensions
@@ -84,6 +83,17 @@ namespace KamiSama.Extensions
 		public static JsonSerializerOptions AddTimeSpanJsonConveter(this JsonSerializerOptions options)
 		{
 			options.Converters.Add(new TimeSpanJsonConverter());
+
+			return options;
+		}
+		/// <summary>
+		/// Adds TimeSpanJsonConverter as default converter for json
+		/// </summary>
+		/// <param name="options"></param>
+		/// <returns></returns>
+		public static JsonSerializerOptions AddHexByteConverter(this JsonSerializerOptions options)
+		{
+			options.Converters.Add(new HexByteArrayJsonConverter());
 
 			return options;
 		}

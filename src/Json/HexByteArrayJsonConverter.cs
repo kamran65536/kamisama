@@ -7,7 +7,7 @@ namespace KamiSama.Extensions.Json
 	/// <summary>
 	/// Hexadecimal byte array
 	/// </summary>
-	public class HexByteArrayConverter : JsonConverter<byte[]>
+	public class HexByteArrayJsonConverter : JsonConverter<byte[]>
 	{
 		/// <summary>
 		/// Reads hex value as byte array from input

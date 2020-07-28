@@ -39,5 +39,87 @@ namespace KamiSama.Extensions.DependencyInjection.Tests
 
 			Assert.AreSame(factory1, factory2);
 		}
+		[TestMethod]
+		public void AddScopedEx_injects_IScoped_TService()
+		{
+			var services = new ServiceCollection();
+
+			services.AddScopedEx<SampleInteface, SampleImplementation1>();
+
+			var provider = services.BuildServiceProvider();
+
+			using (var scope = provider.CreateScope())
+			{
+				var instance1 = scope.ServiceProvider.GetService<SampleInteface>();
+				var instance2 = scope.ServiceProvider.GetService<SampleInteface>();
+
+				var scoped1 = scope.ServiceProvider.GetService<IScoped<SampleInteface>>();
+				var scoped2 = scope.ServiceProvider.GetService<IScoped<SampleInteface>>();
+
+				Assert.IsNotNull(instance1);
+				Assert.IsNotNull(instance2);
+				Assert.IsNotNull(scoped1);
+				Assert.IsNotNull(scoped2);
+
+				Assert.AreNotSame(instance1, instance2);
+				Assert.AreSame(scoped1, scoped2);
+			}
+		}
+		[TestMethod]
+		public void AddSingletonEx_injects_ISingleton_TService()
+		{
+			var services = new ServiceCollection();
+
+			services.AddSingletonEx<SampleInteface, SampleImplementation1>();
+
+			var provider = services.BuildServiceProvider();
+
+			var instance1 = provider.GetService<SampleInteface>();
+			var instance2 = provider.GetService<SampleInteface>();
+
+			var singleton1 = provider.GetService<ISingleton<SampleInteface>>();
+			var singleton2 = provider.GetService<ISingleton<SampleInteface>>();
+
+			Assert.IsNotNull(instance1);
+			Assert.IsNotNull(instance2);
+			Assert.IsNotNull(singleton1);
+			Assert.IsNotNull(singleton2);
+
+			Assert.AreNotSame(instance1, instance2);
+			Assert.AreSame(singleton1, singleton2);
+		}
+		[TestMethod]
+		public void AddAllEx_injects_all_scoped_and_singleton_services()
+		{
+			var services = new ServiceCollection();
+
+			services.AddAllEx<SampleInteface, SampleImplementation1>();
+
+			var provider = services.BuildServiceProvider();
+
+			using (var scope = provider.CreateScope())
+			{
+				var instance1 = scope.ServiceProvider.GetService<SampleInteface>();
+				var instance2 = scope.ServiceProvider.GetService<SampleInteface>();
+
+				var scoped1 = scope.ServiceProvider.GetService<IScoped<SampleInteface>>();
+				var scoped2 = scope.ServiceProvider.GetService<IScoped<SampleInteface>>();
+
+				Assert.IsNotNull(instance1);
+				Assert.IsNotNull(instance2);
+				Assert.IsNotNull(scoped1);
+				Assert.IsNotNull(scoped2);
+
+				Assert.AreNotSame(instance1, instance2);
+				Assert.AreSame(scoped1, scoped2);
+			}
+
+			var singleton1 = provider.GetService<ISingleton<SampleInteface>>();
+			var singleton2 = provider.GetService<ISingleton<SampleInteface>>();
+			Assert.IsNotNull(singleton1);
+			Assert.IsNotNull(singleton2);
+
+			Assert.AreSame(singleton1, singleton2);
+		}
 	}
 }

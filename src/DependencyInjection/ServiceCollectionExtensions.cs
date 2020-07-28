@@ -233,7 +233,59 @@ namespace KamiSama.Extensions.DependencyInjection
 		public static IServiceCollection AddSingleton<TService, TImplementation>(this IServiceCollection services, string name, TImplementation implementationInstance)
 			where TService : class
 			where TImplementation : class, TService
-			=> services.AddNamed(name, typeof(TService), typeof(TImplementation)).AddSingleton(implementationInstance); 
+			=> services.AddNamed(name, typeof(TService), typeof(TImplementation)).AddSingleton(implementationInstance);
+		#endregion
+		#region Extended methods: AddScopedEx, AddSingletonEx, AddAllEx
+		/// <summary>
+		/// Adds <typeparamref name="TService"/> as transient and also adds <see cref="IScoped{TService}" /> for scoped usages
+		/// </summary>
+		/// <typeparam name="TService"></typeparam>
+		/// <typeparam name="TImplementation"></typeparam>
+		/// <param name="services"></param>
+		/// <returns></returns>
+		public static IServiceCollection AddScopedEx<TService, TImplementation>(this IServiceCollection services)
+			where TService: class
+			where TImplementation : class, TService
+		{
+			services.AddTransient<TService, TImplementation>();
+			services.AddScoped<IScoped<TService>, Scoped<TService>>();
+
+			return services;
+		}
+		/// <summary>
+		/// Adds <typeparamref name="TService"/> as transient and also adds <see cref="ISingleton{TService}"/>  for singleton usages
+		/// </summary>
+		/// <typeparam name="TService"></typeparam>
+		/// <typeparam name="TImplementation"></typeparam>
+		/// <param name="services"></param>
+		/// <returns></returns>
+		public static IServiceCollection AddSingletonEx<TService, TImplementation>(this IServiceCollection services)
+			where TService : class
+			where TImplementation : class, TService
+		{
+			services.AddTransient<TService, TImplementation>();
+			services.AddSingleton<ISingleton<TService>, Singleton<TService>>();
+
+			return services;
+		}
+		/// <summary>
+		/// Adds <typeparamref name="TService"/> as transient and also adds <see cref="ISingleton{TService}"/>  for singleton usages
+		/// <see cref="IScoped{TService}" /> for scoped usages
+		/// </summary>
+		/// <typeparam name="TService"></typeparam>
+		/// <typeparam name="TImplementation"></typeparam>
+		/// <param name="services"></param>
+		/// <returns></returns>
+		public static IServiceCollection AddAllEx<TService, TImplementation>(this IServiceCollection services)
+			where TService : class
+			where TImplementation : class, TService
+		{
+			services.AddTransient<TService, TImplementation>();
+			services.AddScoped<IScoped<TService>, Scoped<TService>>();
+			services.AddSingleton<ISingleton<TService>, Singleton<TService>>();
+
+			return services;
+		}
 		#endregion
 	}
 }
