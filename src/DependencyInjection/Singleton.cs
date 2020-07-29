@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace KamiSama.Extensions.DependencyInjection
+﻿namespace KamiSama.Extensions.DependencyInjection
 {
 	/// <summary>
 	/// Singleton Object for dependency injection
@@ -17,10 +13,10 @@ namespace KamiSama.Extensions.DependencyInjection
 		/// <summary>
 		/// constructor
 		/// </summary>
-		/// <param name="value"></param>
-		public Singleton(T value)
+		/// <param name="transient"></param>
+		public Singleton(ITransient<T> transient)
 		{
-			this.Value = value;
+			this.Value = transient.Value;
 		}
 	}
 }

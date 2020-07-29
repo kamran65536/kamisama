@@ -13,10 +13,10 @@
 		/// <summary>
 		/// constructor
 		/// </summary>
-		/// <param name="value"></param>
-		public Scoped(T value)
+		/// <param name="transient"></param>
+		public Scoped(ITransient<T> transient)
 		{
-			this.Value = value;
+			this.Value = transient.Value;
 		}
 	}
 }

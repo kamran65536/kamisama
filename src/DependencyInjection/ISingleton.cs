@@ -6,6 +6,9 @@
 	/// <typeparam name="T">Type</typeparam>
 	public interface ISingleton<T>
 	{
+		/// <summary>
+		/// inner value for the singleton
+		/// </summary>
 		T Value { get; }
 	}
 }

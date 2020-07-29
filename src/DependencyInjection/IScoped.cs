@@ -6,6 +6,9 @@
 	/// <typeparam name="T">inner object value</typeparam>
 	public interface IScoped<T>
 	{
+		/// <summary>
+		/// inner value for the scope
+		/// </summary>
 		T Value { get; }
 	}
 }

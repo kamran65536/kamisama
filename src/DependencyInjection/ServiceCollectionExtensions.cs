@@ -237,50 +237,36 @@ namespace KamiSama.Extensions.DependencyInjection
 		#endregion
 		#region Extended methods: AddScopedEx, AddSingletonEx, AddAllEx
 		/// <summary>
-		/// Adds <typeparamref name="TService"/> as transient and also adds <see cref="IScoped{TService}" /> for scoped usages
+		/// Adds specific interfaces for <see cref="ITransient{T}"/>, <see cref="ISingleton{T}"/> and <see cref="IScoped{T}" />
 		/// </summary>
 		/// <typeparam name="TService"></typeparam>
 		/// <typeparam name="TImplementation"></typeparam>
 		/// <param name="services"></param>
 		/// <returns></returns>
-		public static IServiceCollection AddScopedEx<TService, TImplementation>(this IServiceCollection services)
-			where TService: class
-			where TImplementation : class, TService
-		{
-			services.AddTransient<TService, TImplementation>();
-			services.AddScoped<IScoped<TService>, Scoped<TService>>();
-
-			return services;
-		}
-		/// <summary>
-		/// Adds <typeparamref name="TService"/> as transient and also adds <see cref="ISingleton{TService}"/>  for singleton usages
-		/// </summary>
-		/// <typeparam name="TService"></typeparam>
-		/// <typeparam name="TImplementation"></typeparam>
-		/// <param name="services"></param>
-		/// <returns></returns>
-		public static IServiceCollection AddSingletonEx<TService, TImplementation>(this IServiceCollection services)
+		public static IServiceCollection AddLifetimeSpecific<TService, TImplementation>(this IServiceCollection services)
 			where TService : class
 			where TImplementation : class, TService
 		{
 			services.AddTransient<TService, TImplementation>();
+			services.AddScoped<ITransient<TService>, Transient<TService>>();
+			services.AddScoped<IScoped<TService>, Scoped<TService>>();
 			services.AddSingleton<ISingleton<TService>, Singleton<TService>>();
 
 			return services;
 		}
 		/// <summary>
-		/// Adds <typeparamref name="TService"/> as transient and also adds <see cref="ISingleton{TService}"/>  for singleton usages
-		/// <see cref="IScoped{TService}" /> for scoped usages
+		/// Adds specific interfaces for <see cref="ITransient{T}"/>, <see cref="ISingleton{T}"/> and <see cref="IScoped{T}" />
 		/// </summary>
 		/// <typeparam name="TService"></typeparam>
-		/// <typeparam name="TImplementation"></typeparam>
 		/// <param name="services"></param>
+		/// <param name="implementationFactory">implementation factory</param>
 		/// <returns></returns>
-		public static IServiceCollection AddAllEx<TService, TImplementation>(this IServiceCollection services)
+		public static IServiceCollection AddLifetimeSpecific<TService>(this IServiceCollection services, Func<IServiceProvider, TService> implementationFactory)
 			where TService : class
-			where TImplementation : class, TService
 		{
-			services.AddTransient<TService, TImplementation>();
+			services.AddTransient<TService>(implementationFactory);
+
+			services.AddScoped<ITransient<TService>, Transient<TService>>();
 			services.AddScoped<IScoped<TService>, Scoped<TService>>();
 			services.AddSingleton<ISingleton<TService>, Singleton<TService>>();
 
