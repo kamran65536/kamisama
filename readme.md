@@ -23,11 +23,12 @@ Here is some examples of the helper methods:
   - [1.9 String Extensions](#19-string-extensions)
   - [1.10 TimeSpan Extensions](#110-timespan-extensions)
   - [1.11 Xml Serialization Extensions](#111-xml-serialization-extensions)
-- [2. KamiSama.Extensions.DependencyInjection](#2-kamisamaextensionsdependencyinjection)
+ - [2. KamiSama.Extensions.DependencyInjection](#2-kamisamaextensionsdependencyinjection)
 - [3. KamiSama.Extensions.Json](#3-kamisamaextensionsjson)
   - [3.1 HirerarchialJsonConverter](#31-hirerarchialjsonconverter)
 - [4. KamiSama.Extensions.Nlog](#4-kamisamaextensionsnlog)
 - [5. KamiSama.Repositories Libraries](#5-kamisamarepositories-libraries)
+- [6. KamiSama.IranSystem Library](#6-kamisamairansystem-library)
 ### 1.1. Array Extensions
 ```csharp
 // pads an array until to total length becomes multiplies of 8
@@ -215,3 +216,9 @@ public class Program
 
 # 5. KamiSama.Repositories Libraries
 Please see [this document](./KamiSama.Repositories-readme.md).
+
+# 6. KamiSama.IranSystem Library
+IranSystem is an old ASCII extension encoding used in many old dos programs. 
+The original code was from (https://www.codeproject.com/Tips/272928/iranian-system-encoding-standard).
+
+:warning: **As IranSystem is a shape based font, the conversion will not be the same as usual ascii codes. so becareful!**

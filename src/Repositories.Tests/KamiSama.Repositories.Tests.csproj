@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -22,9 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\KamiSama.Repositories.Json\KamiSama.Repositories.Json.csproj" />
     <ProjectReference Include="..\Repositories.EntityFrameworkCore\KamiSama.Repositories.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\Repositories.EntityFramework\KamiSama.Repositories.EntityFramework.csproj" />
+    <ProjectReference Include="..\Repositories.Json\KamiSama.Repositories.Json.csproj" />
   </ItemGroup>
 
   <ItemGroup>
