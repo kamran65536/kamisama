@@ -10,8 +10,16 @@ using System.Threading.Tasks;
 
 namespace KamiSama.Repositories.Json
 {
+	/// <summary>
+	/// Json File Repository
+	/// </summary>
+	/// <typeparam name="TEntity"></typeparam>
 	public class JsonRepository<TEntity> : IQueryableRepository<TEntity>, IAsyncQueryableRepository<TEntity>
 	{
+		/// <summary>
+		/// raised when loading items fails
+		/// </summary>
+		public event Action<JsonRepository<TEntity>, Exception> LoadFailed;
 		/// <summary>
 		/// the internal collection of items
 		/// </summary>
@@ -55,9 +63,11 @@ namespace KamiSama.Repositories.Json
 					.ReadAllText(filePath)
 					.DeserializeFromJson<TEntity[]>();
 			}
-			catch
+			catch (Exception ex)
 			{
 				initialItems = new TEntity[0];
+
+				LoadFailed?.Invoke(this, ex);
 			}
 			
 			if (comparer == null)
