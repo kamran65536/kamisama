@@ -2,6 +2,7 @@
 
 	<PropertyGroup>
 		<TargetFramework>netstandard2.0</TargetFramework>
+		<LangVersion>preview</LangVersion>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 		<Authors>Kamran Fallah</Authors>
@@ -10,7 +11,9 @@
 		<RepositoryUrl>https://gitlab.com/kamran65536/KamiSama</RepositoryUrl>
 		<Version>1.0.0.1</Version>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<PackageReleaseNotes>v2.0.0
+		<PackageReleaseNotes>v2.2.7
+- InjectAttribute is added.
+v2.0.0
 - Refactored from old KamiSama.Extenders.DependencyInjection library</PackageReleaseNotes>
 	</PropertyGroup>
 

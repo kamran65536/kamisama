@@ -2,6 +2,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Reflection;
 
 namespace KamiSama.Extensions.DependencyInjection
 {
@@ -235,40 +236,31 @@ namespace KamiSama.Extensions.DependencyInjection
 			where TImplementation : class, TService
 			=> services.AddNamed(name, typeof(TService), typeof(TImplementation)).AddSingleton(implementationInstance);
 		#endregion
-		#region Extended methods: AddScopedEx, AddSingletonEx, AddAllEx
+		#region Automatic Dependency Injection
 		/// <summary>
-		/// Adds specific interfaces for <see cref="ITransient{T}"/>, <see cref="ISingleton{T}"/> and <see cref="IScoped{T}" />
+		/// Automatically adds dependency injections using <see cref="InjectAttribute"/>
 		/// </summary>
-		/// <typeparam name="TService"></typeparam>
-		/// <typeparam name="TImplementation"></typeparam>
 		/// <param name="services"></param>
+		/// <param name="assemblies">list of assemblies to search, null means all assemblies</param>
 		/// <returns></returns>
-		public static IServiceCollection AddLifetimeSpecific<TService, TImplementation>(this IServiceCollection services)
-			where TService : class
-			where TImplementation : class, TService
+		public static IServiceCollection AutoAddDependencies(this IServiceCollection services, params Assembly[] assemblies)
 		{
-			services.AddTransient<TService, TImplementation>();
-			services.AddScoped<ITransient<TService>, Transient<TService>>();
-			services.AddScoped<IScoped<TService>, Scoped<TService>>();
-			services.AddSingleton<ISingleton<TService>, Singleton<TService>>();
+			if ((assemblies == null) || (assemblies.Length == 0))
+				assemblies = AppDomain.CurrentDomain.GetAssemblies();
 
-			return services;
-		}
-		/// <summary>
-		/// Adds specific interfaces for <see cref="ITransient{T}"/>, <see cref="ISingleton{T}"/> and <see cref="IScoped{T}" />
-		/// </summary>
-		/// <typeparam name="TService"></typeparam>
-		/// <param name="services"></param>
-		/// <param name="implementationFactory">implementation factory</param>
-		/// <returns></returns>
-		public static IServiceCollection AddLifetimeSpecific<TService>(this IServiceCollection services, Func<IServiceProvider, TService> implementationFactory)
-			where TService : class
-		{
-			services.AddTransient<TService>(implementationFactory);
+			var types = assemblies
+				.SelectMany(x => x.DefinedTypes)
+				.ToArray();
 
-			services.AddScoped<ITransient<TService>, Transient<TService>>();
-			services.AddScoped<IScoped<TService>, Scoped<TService>>();
-			services.AddSingleton<ISingleton<TService>, Singleton<TService>>();
+			foreach (var type in types)
+			{
+				var attr = type.GetCustomAttribute<InjectAttribute>();
+
+				if (attr == null)
+					continue;
+
+				attr.TryAddInjection(services, type);
+			}
 
 			return services;
 		}

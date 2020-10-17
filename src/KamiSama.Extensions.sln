@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{41184E5B-6
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Extensions.Core.Tests", "Core.Tests\KamiSama.Extensions.Core.Tests.csproj", "{7306C81C-1844-44A9-A15A-0093B3E6713A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DependencyInject", "DependencyInject", "{A0E2CE33-6B9C-4078-B910-15EB85AC8A03}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DependencyInjection", "DependencyInjection", "{A0E2CE33-6B9C-4078-B910-15EB85AC8A03}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Extensions.DependencyInjection", "DependencyInjection\KamiSama.Extensions.DependencyInjection.csproj", "{666A3ABF-6C89-44EC-BED3-651D85FF39B5}"
 EndProject
@@ -55,7 +55,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IranSystem", "IranSystem", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.IranSystem", "IranSystem\KamiSama.IranSystem.csproj", "{856BECC5-74BA-4ED7-A39A-00EA7AAEDA63}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KamiSama.IranSystem.Tests", "KamiSama.IranSystem.Tests\KamiSama.IranSystem.Tests.csproj", "{727F19D9-E62A-4F0C-8005-94D78F663D25}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.IranSystem.Tests", "KamiSama.IranSystem.Tests\KamiSama.IranSystem.Tests.csproj", "{727F19D9-E62A-4F0C-8005-94D78F663D25}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

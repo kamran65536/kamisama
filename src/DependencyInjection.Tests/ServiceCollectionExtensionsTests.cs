@@ -2,6 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
+using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 
 namespace KamiSama.Extensions.DependencyInjection.Tests
 {
@@ -40,94 +42,24 @@ namespace KamiSama.Extensions.DependencyInjection.Tests
 			Assert.AreSame(factory1, factory2);
 		}
 		[TestMethod]
-		public void AddLifetimeSpecific_injects_all_specific_services()
+		public void AutoAddDependencies_must_add_dependencies_based_on_InjectAttribute()
 		{
-			var services = new ServiceCollection();
-
-			services.AddLifetimeSpecific<SampleInteface, SampleImplementation1>();
-
-			var provider = services.BuildServiceProvider();
-
-			using (var scope = provider.CreateScope())
+			var array = new Assembly[][]
 			{
-				var instance1 = scope.ServiceProvider.GetService<SampleInteface>();
-				var instance2 = scope.ServiceProvider.GetService<SampleInteface>();
-
-				var transient1 = scope.ServiceProvider.GetService<SampleInteface>();
-				var transient2 = scope.ServiceProvider.GetService<SampleInteface>();
-
-				var scoped1 = scope.ServiceProvider.GetService<IScoped<SampleInteface>>();
-				var scoped2 = scope.ServiceProvider.GetService<IScoped<SampleInteface>>();
-
-				Assert.IsNotNull(transient1);
-				Assert.IsNotNull(transient2);
-				Assert.IsNotNull(instance1);
-				Assert.IsNotNull(instance2);
-				Assert.IsNotNull(scoped1);
-				Assert.IsNotNull(scoped2);
-
-				Assert.AreNotSame(transient1, transient2);
-				Assert.AreNotSame(instance1, instance2);
-				Assert.AreSame(scoped1, scoped2);
-			}
-
-			var singleton1 = provider.GetService<ISingleton<SampleInteface>>();
-			var singleton2 = provider.GetService<ISingleton<SampleInteface>>();
-			var transient3 = provider.GetService<SampleInteface>();
-			var transient4 = provider.GetService<SampleInteface>();
-
-			Assert.IsNotNull(transient3);
-			Assert.IsNotNull(transient4);
-			Assert.IsNotNull(singleton1);
-			Assert.IsNotNull(singleton2);
-
-			Assert.AreNotSame(transient3, transient4);
-			Assert.AreSame(singleton1, singleton2);
-		}
-		[TestMethod]
-		public void AddLifetimeSpecific_injects_all_specific_services2()
-		{
-			var services = new ServiceCollection();
-
-			services.AddLifetimeSpecific<SampleInteface>(sp => new SampleImplementation1());
-
-			var provider = services.BuildServiceProvider();
-
-			using (var scope = provider.CreateScope())
+				null,
+				new Assembly[0],
+				new Assembly[] { Assembly.GetExecutingAssembly() }
+			};
+			foreach (var assemblies in array)
 			{
-				var instance1 = scope.ServiceProvider.GetService<SampleInteface>();
-				var instance2 = scope.ServiceProvider.GetService<SampleInteface>();
+				var services = new ServiceCollection();
+				services.AutoAddDependencies(assemblies);
 
-				var transient1 = scope.ServiceProvider.GetService<SampleInteface>();
-				var transient2 = scope.ServiceProvider.GetService<SampleInteface>();
+				var descriptor = services.FirstOrDefault(x => x.ServiceType == typeof(SampleInteface));
 
-				var scoped1 = scope.ServiceProvider.GetService<IScoped<SampleInteface>>();
-				var scoped2 = scope.ServiceProvider.GetService<IScoped<SampleInteface>>();
-
-				Assert.IsNotNull(transient1);
-				Assert.IsNotNull(transient2);
-				Assert.IsNotNull(instance1);
-				Assert.IsNotNull(instance2);
-				Assert.IsNotNull(scoped1);
-				Assert.IsNotNull(scoped2);
-
-				Assert.AreNotSame(transient1, transient2);
-				Assert.AreNotSame(instance1, instance2);
-				Assert.AreSame(scoped1, scoped2);
+				Assert.AreEqual(ServiceLifetime.Singleton, descriptor.Lifetime);
+				Assert.AreEqual(typeof(InjectedImplementation), descriptor.ImplementationType);
 			}
-
-			var singleton1 = provider.GetService<ISingleton<SampleInteface>>();
-			var singleton2 = provider.GetService<ISingleton<SampleInteface>>();
-			var transient3 = provider.GetService<SampleInteface>();
-			var transient4 = provider.GetService<SampleInteface>();
-
-			Assert.IsNotNull(transient3);
-			Assert.IsNotNull(transient4);
-			Assert.IsNotNull(singleton1);
-			Assert.IsNotNull(singleton2);
-
-			Assert.AreNotSame(transient3, transient4);
-			Assert.AreSame(singleton1, singleton2);
 		}
 	}
 }
