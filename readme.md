@@ -142,7 +142,10 @@ str = obj.SerliazeToXml(settings => settings.Formatted = true);
 obj = str.DeserializeFromXml<SomeType>();
 ```
 # 2. KamiSama.Extensions.DependencyInjection
-This library is an simple extension on Microsoft.Extensions.DependencyInjection library. Currently this library only includes named services, but new features will be added if needed. Here is a sample code:
+This library is an simple extension on Microsoft.Extensions.DependencyInjection library. Currently this library only includes named services, but new features will be added if needed.
+
+# 2.1 Named Injection
+you can inject implementations by name.
 ```csharp
 // adds a singleton with name instance1
 services.AddSingleton<IMyInterface, SomeType>("instance1");
@@ -155,6 +158,17 @@ Note that you cannot use this feature for automatic injection. The only way to u
 ```csharp
 instance = serviceProvider.GetService("instance2");
 ```
+# 2.2 AutoAddDependencies
+Add InjectAttribute to the implementation.
+```
+[Inject(typeof(SampleInerface), ServiceLifetime.Transient)]
+public class Implementation : SampleInterface {... }
+```
+then add the following to the service collection:
+```
+services.AutoAddDependencies();
+```
+it will automatically adds all dependencies by InjectAttribute.
 # 3. KamiSama.Extensions.Json
 This library is an extension for System.Text.Json as helper method. If simillar methods are added to System.Text.Json this library will be discontiued.
 ```csharp
