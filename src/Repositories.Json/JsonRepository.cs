@@ -17,166 +17,195 @@ namespace KamiSama.Repositories.Json
 	public class JsonRepository<TEntity> : IQueryableRepository<TEntity>, IAsyncQueryableRepository<TEntity>
 	{
 		/// <summary>
-		/// raised when loading items fails
+		/// empty collection for queries
+		/// </summary>
+		private static readonly IQueryable<TEntity> Empty = (new TEntity[0]).AsQueryable();
+		/// <summary>
+		/// raised when loading items from file fails
 		/// </summary>
 		public event Action<JsonRepository<TEntity>, Exception> LoadFailed;
 		/// <summary>
-		/// the internal collection of items
+		/// raised when saving items to file fails
 		/// </summary>
-		private HashSet<TEntity> items;
-		private readonly SemaphoreSlim semaphore;
+		public event Action<JsonRepository<TEntity>, Exception> SaveFailed;
+		/// <summary>
+		/// json file path
+		/// </summary>
 		private readonly string filePath;
-		private readonly IEqualityComparer<TEntity> comparer;
-
 		/// <summary>
-		/// Constructor with initial items
+		/// internal entities collection
 		/// </summary>
-		/// <param name="initialItems"></param>
-		/// <param name="comparer"></param>
-		/// <param name="filePath"></param>
-		public JsonRepository(string filePath, IEqualityComparer<TEntity> comparer = null)
+		internal HashSet<TEntity> entities;
+		/// <summary>
+		/// semaphore for concurrent scenarios
+		/// </summary>
+		private readonly SemaphoreSlim semaphore;
+		/// <summary>
+		/// equality comparer for hashset
+		/// </summary>
+		private readonly IEqualityComparer<TEntity> equalityComparer;
+		/// <summary>
+		/// constructor
+		/// </summary>
+		/// <param name="filePath">path to json file as repository</param>
+		/// <param name="equalityComparer"></param>
+		public JsonRepository(string filePath, IEqualityComparer<TEntity> equalityComparer = null)
 		{
-			this.semaphore = new SemaphoreSlim(1);
 			this.filePath = filePath;
-			this.comparer = comparer;
+			this.equalityComparer = equalityComparer;
+			this.semaphore = new SemaphoreSlim(1);
+		}
+		/// <summary>
+		/// loads the json file if not loaded already
+		/// </summary>
+		/// <returns></returns>
+		public async Task<bool> TryLoadFileAsync(bool forceReload = false)
+		{
+			if (forceReload)
+				entities = null;
 
-			LoadFromFile();
-		}
-		/// <summary>
-		/// Dispose method, clears internal cache
-		/// </summary>
-		[ExcludeFromCodeCoverage]
-		public virtual void Dispose()
-		{
-			try { items.Clear(); } catch { }
-		}
-		/// <summary>
-		/// Loads items from file, if any exception happens, the initial items will be empty
-		/// </summary>
-		internal virtual void LoadFromFile()
-		{
-			TEntity[] initialItems;
+			if (entities != null)
+				return true;
+			await semaphore.WaitAsync();
+			if (entities != null)
+			{
+				semaphore.Release();
+				return true;
+			}
 
 			try
 			{
-				initialItems = File
-					.ReadAllText(filePath)
-					.DeserializeFromJson<TEntity[]>();
+				var all = (await File.ReadAllTextAsync(filePath)).DeserializeFromJson<TEntity[]>();
+
+				if (equalityComparer == null)
+					entities = new HashSet<TEntity>(all);
+				else
+					entities = new HashSet<TEntity>(all, equalityComparer);
+
+				return true;
 			}
-			catch (Exception ex)
+			catch (Exception exp)
 			{
-				initialItems = new TEntity[0];
+				LoadFailed?.Invoke(this, exp);
 
-				LoadFailed?.Invoke(this, ex);
+				return false;
 			}
-			
-			if (comparer == null)
-				items = new HashSet<TEntity>(initialItems);
-			else
-				items = new HashSet<TEntity>(initialItems, comparer);
+			finally
+			{
+				semaphore.Release();
+			}
+		}
+		/// <summary>
+		/// modifies (add,delete, update) the collection and saves the result into the file
+		/// </summary>
+		/// <param name="action"></param>
+		/// <returns></returns>
+		private async Task ModifyAndSaveToFileAsync(Action action)
+		{
+			if (!await TryLoadFileAsync())
+				return;
 
+			await semaphore.WaitAsync();
+			try
+			{
+				action();
+
+				await File.WriteAllTextAsync(filePath, entities.ToArray().SerializeToJson());
+			}
+			catch (Exception exp)
+			{
+				SaveFailed?.Invoke(this, exp);
+			}
+			finally
+			{
+				semaphore.Release();
+			}
 		}
-		/// <summary>
-		/// Saves items into the file
-		/// </summary>
-		internal virtual void SaveToFile()
+		/// <inheritdoc />
+		public void Dispose()
 		{
-			File.WriteAllText(filePath, items.ToArray().SerializeToJson());
-		}
-		/// <summary>
-		/// Reloads input file
-		/// </summary>
-		public void ReloadFile()
-		{
-			semaphore.Wait();
-			LoadFromFile();
-			semaphore.Release();
+			try
+			{
+				entities?.Clear();
+			}
+			catch
+			{
+			}
 		}
 		/// <summary>
 		/// Adds a new item in the repository; Modify to json repository is not recommanded for performance issues
 		/// </summary>
 		/// <param name="item"></param>
-		public virtual void Add(TEntity item)
-		{
-			semaphore.Wait();
-			items.Add(item);
-			SaveToFile();
-			semaphore.Release();
-		}
-		/// <summary>
-		/// Update method, updates the json file; Modify to json repository is not recommanded for performance issues
-		/// </summary>
-		/// <param name="item"></param>
-		public virtual void Update(TEntity item)
-		{
-			semaphore.Wait();
-			SaveToFile();
-			semaphore.Release();
-		}
+		/// <returns></returns>
+		public Task AddAsync(TEntity item)
+			=> ModifyAndSaveToFileAsync(() => entities.Add(item));
 		/// <summary>
 		/// Deletes an item from repository; Modify to json repository is not recommanded for performance issues
 		/// </summary>
 		/// <param name="item"></param>
-		public virtual void Delete(TEntity item)
+		public Task DeleteAsync(TEntity item)
+			=> ModifyAndSaveToFileAsync(() => entities.Remove(item));
+		/// <summary>
+		/// Update method, does nothing; Modify to json repository is not recommanded for performance issues
+		/// </summary>
+		/// <param name="item"></param>
+		public Task UpdateAsync(TEntity item)
+			=> ModifyAndSaveToFileAsync(() => { });
+		/// <summary>
+		/// Finds an single item in the repository
+		/// </summary>
+		/// <param name="predicate">the predicate to search, if null it returns null</param>
+		/// <returns></returns>
+		public async Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> predicate)
 		{
-			semaphore.Wait();
-			items.Remove(item);
-			SaveToFile();
-			semaphore.Release();
+			if (!await TryLoadFileAsync())
+				return default;
+			else if (predicate == null)
+				return default;
+			else
+				return entities.FirstOrDefault(predicate.Compile());
+		}
+		/// <summary>
+		/// Queries items in repository asynchronously for the predicate specified
+		/// </summary>
+		/// <param name="predicate">the predicate to search, if null it returns all items</param>
+		/// <returns></returns>
+		public async Task<IQueryable<TEntity>> WhereAsync(Expression<Func<TEntity, bool>> predicate = null)
+		{
+			if (!await TryLoadFileAsync())
+				return Empty;
+			else if (predicate == null)
+				return entities.AsQueryable();
+			else
+				return entities.Where(predicate.Compile()).AsQueryable();
 		}
 		/// <summary>
 		/// Queries items in repository for the predicate specified
 		/// </summary>
 		/// <param name="predicate">the predicate to search, if null it returns all items</param>
 		/// <returns></returns>
-		public virtual IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> predicate = null)
-			=> (predicate == null) ? items.AsQueryable() : items.Where(predicate.Compile()).AsQueryable();
-		/// <summary>
-		/// Finds an single item in the repository
-		/// </summary>
-		/// <param name="predicate">the predicate to search, if null it returns null</param>
-		/// <returns></returns>
-		public virtual TEntity Find(Expression<Func<TEntity, bool>> predicate)
-			=> (predicate == null) ? default : items.FirstOrDefault(predicate.Compile());
+		public IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> predicate = null)
+			=> WhereAsync(predicate).Result;
 		/// <summary>
 		/// Adds a new item in the repository; Modify to json repository is not recommanded for performance issues
 		/// </summary>
 		/// <param name="item"></param>
-		/// <returns></returns>
-		public virtual async Task AddAsync(TEntity item)
-		{
-			await semaphore.WaitAsync();
-			items.Add(item);
-			SaveToFile();
-			semaphore.Release();
-		}
+		public void Add(TEntity item) => AddAsync(item).Wait();
 		/// <summary>
-		/// Update method, does nothing; Modify to json repository is not recommanded for performance issues
+		/// Update method, updates the json file; Modify to json repository is not recommanded for performance issues
 		/// </summary>
 		/// <param name="item"></param>
-		public async Task UpdateAsync(TEntity item)
-		{
-			await semaphore.WaitAsync();
-			SaveToFile();
-			semaphore.Release();
-		}
+		public void Update(TEntity item) => UpdateAsync(item).Wait();
 		/// <summary>
 		/// Deletes an item from repository; Modify to json repository is not recommanded for performance issues
 		/// </summary>
 		/// <param name="item"></param>
-		public virtual async Task DeleteAsync(TEntity item)
-		{
-			await semaphore.WaitAsync();
-			items.Remove(item);
-			SaveToFile();
-			semaphore.Release();
-		}
+		public void Delete(TEntity item) => DeleteAsync(item).Wait();
 		/// <summary>
 		/// Finds an single item in the repository
 		/// </summary>
 		/// <param name="predicate">the predicate to search, if null it returns null</param>
 		/// <returns></returns>
-		public virtual Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> predicate = null)
-			=> Task.FromResult(Find(predicate));
+		public TEntity Find(Expression<Func<TEntity, bool>> predicate = null) => FindAsync(predicate).Result;
 	}
 }

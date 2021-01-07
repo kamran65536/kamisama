@@ -51,10 +51,11 @@ namespace KamiSama.Repositories.Tests.Core
 		public void Dispose_releases_items_in_repository()
 		{
 			var repository = new JsonRepository<SampleEntity>("./Json/sample-entities.json");
+			repository.TryLoadFileAsync(forceReload: true).Wait();
 
 			repository.Dispose();
 
-			Assert.AreEqual(0, repository.GetAll().Count());
+			Assert.AreEqual(0, repository.entities?.Count());
 		}
 		[TestMethod]
 		public void Add_must_add_new_item_to_repository()
@@ -83,7 +84,7 @@ namespace KamiSama.Repositories.Tests.Core
 			sample.Name = "item111";
 			repository.Update(sample);
 
-			repository.ReloadFile();
+			repository.TryLoadFileAsync(forceReload: true).Wait();
 
 			Assert.IsFalse(repository.GetAll().Any(x => x.Name == "item1"));
 			Assert.IsTrue(repository.GetAll().Any(x => x.Name == "item111"));
@@ -131,7 +132,7 @@ namespace KamiSama.Repositories.Tests.Core
 			sample.Name = "item111";
 			await repository.UpdateAsync(sample);
 
-			repository.ReloadFile();
+			repository.TryLoadFileAsync(forceReload: true).Wait();
 
 			Assert.IsFalse(repository.GetAll().Any(x => x.Name == "item1"));
 			Assert.IsTrue(repository.GetAll().Any(x => x.Name == "item111"));
