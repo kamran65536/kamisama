@@ -14,7 +14,7 @@ namespace KamiSama.Repositories.Xml
 	/// Json File Repository
 	/// </summary>
 	/// <typeparam name="TEntity"></typeparam>
-	public class XmlRepository<TEntity> : IQueryableRepository<TEntity>, IAsyncQueryableRepository<TEntity>
+	public class XmlFileRepository<TEntity> : IQueryableRepository<TEntity>, IAsyncQueryableRepository<TEntity>
 	{
 		/// <summary>
 		/// empty collection for queries
@@ -23,11 +23,11 @@ namespace KamiSama.Repositories.Xml
 		/// <summary>
 		/// raised when loading items from file fails
 		/// </summary>
-		public event Action<XmlRepository<TEntity>, Exception> LoadFailed;
+		public event Action<XmlFileRepository<TEntity>, Exception> LoadFailed;
 		/// <summary>
 		/// raised when saving items to file fails
 		/// </summary>
-		public event Action<XmlRepository<TEntity>, Exception> SaveFailed;
+		public event Action<XmlFileRepository<TEntity>, Exception> SaveFailed;
 		/// <summary>
 		/// json file path
 		/// </summary>
@@ -54,7 +54,7 @@ namespace KamiSama.Repositories.Xml
 		/// <param name="filePath">path to json file as repository</param>
 		/// <param name="equalityComparer"></param>
 		/// <param name="serializer"></param>
-		public XmlRepository(string filePath, XmlSerializer serializer = null, IEqualityComparer<TEntity> equalityComparer = null)
+		public XmlFileRepository(string filePath, XmlSerializer serializer = null, IEqualityComparer<TEntity> equalityComparer = null)
 		{
 			this.filePath = filePath;
 			this.equalityComparer = equalityComparer;
