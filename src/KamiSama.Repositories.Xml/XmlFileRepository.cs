@@ -14,7 +14,7 @@ namespace KamiSama.Repositories.Xml
 	/// Json File Repository
 	/// </summary>
 	/// <typeparam name="TEntity"></typeparam>
-	public class XmlRepository<TEntity> : IQueryableRepository<TEntity>, IAsyncQueryableRepository<TEntity>
+	public class XmlDirectoryRepository<TEntity> : IQueryableRepository<TEntity>, IAsyncQueryableRepository<TEntity>
 	{
 		/// <summary>
 		/// empty collection for queries
@@ -23,15 +23,15 @@ namespace KamiSama.Repositories.Xml
 		/// <summary>
 		/// raised when loading items from file fails
 		/// </summary>
-		public event Action<XmlRepository<TEntity>, Exception> LoadFailed;
+		public event Action<XmlDirectoryRepository<TEntity>, Exception> LoadFailed;
 		/// <summary>
 		/// raised when saving items to file fails
 		/// </summary>
-		public event Action<XmlRepository<TEntity>, Exception> SaveFailed;
+		public event Action<XmlDirectoryRepository<TEntity>, Exception> SaveFailed;
 		/// <summary>
-		/// json file path
+		/// xml directory path
 		/// </summary>
-		private readonly string filePath;
+		private readonly string directoryPath;
 		/// <summary>
 		/// internal entities collection
 		/// </summary>
@@ -49,17 +49,24 @@ namespace KamiSama.Repositories.Xml
 		/// </summary>
 		private readonly XmlSerializer serializer;
 		/// <summary>
+		/// a function to determine file names
+		/// </summary>
+		private readonly Func<TEntity, string> fileNameFunc;
+
+		/// <summary>
 		/// constructor
 		/// </summary>
 		/// <param name="filePath">path to json file as repository</param>
 		/// <param name="equalityComparer"></param>
 		/// <param name="serializer"></param>
-		public XmlRepository(string filePath, XmlSerializer serializer = null, IEqualityComparer<TEntity> equalityComparer = null)
+		/// <param name="fileNameFunc"></param>
+		public XmlDirectoryRepository(string filePath, Func<TEntity, string> fileNameFunc, XmlSerializer serializer = null, IEqualityComparer<TEntity> equalityComparer = null)
 		{
-			this.filePath = filePath;
+			this.directoryPath = filePath;
 			this.equalityComparer = equalityComparer;
 			this.semaphore = new SemaphoreSlim(1);
 			this.serializer = serializer ?? new XmlSerializer(typeof(TEntity[]));
+			this.fileNameFunc = fileNameFunc;
 		}
 		/// <summary>
 		/// loads the json file if not loaded already
@@ -81,12 +88,21 @@ namespace KamiSama.Repositories.Xml
 
 			try
 			{
-				var all = (await File.ReadAllTextAsync(filePath)).DeserializeFromXml<TEntity[]>();
+				var dir = new DirectoryInfo(directoryPath);
 
-				if (equalityComparer == null)
-					entities = new HashSet<TEntity>(all);
-				else
-					entities = new HashSet<TEntity>(all, equalityComparer);
+				var all = (equalityComparer == null) ? new HashSet<TEntity>() : new HashSet<TEntity>(equalityComparer);
+
+				foreach (var file in dir.GetFiles("*.xml"))
+				{
+					var entity = (await File.ReadAllTextAsync(file.FullName)).DeserializeFromXml<TEntity>();
+
+					if (fileNameFunc(entity) != file.Name)
+						throw new InvalidOperationException($"entity name {fileNameFunc(entity)} does not match file name: {file.Name}");
+
+					all.Add(entity);
+				}
+
+				entities = all;
 
 				return true;
 			}
@@ -116,7 +132,10 @@ namespace KamiSama.Repositories.Xml
 			{
 				action();
 
-				await File.WriteAllTextAsync(filePath, entities.ToArray().SerializeToXml());
+				foreach (var entity in entities)
+				{
+					await File.WriteAllTextAsync(directoryPath, entity.SerializeToXml());
+				}
 			}
 			catch (Exception exp)
 			{
