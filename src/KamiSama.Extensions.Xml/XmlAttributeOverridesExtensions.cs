@@ -17,7 +17,7 @@ namespace KamiSama.Extensions
 		/// <param name="overrides"></param>
 		/// <param name="assemblies"></param>
 		/// <param name="rootType"></param>
-		public static void AddAutoXmlAttributes(this XmlAttributeOverrides overrides, Type rootType, params Assembly[] assemblies)
+		public static void AddAutoXmlAttributes(this XmlAttributeOverrides overrides, Type rootType, Assembly[] assemblies)
 		{
 			if (assemblies == null)
 				assemblies = new Assembly[0];
@@ -27,6 +27,16 @@ namespace KamiSama.Extensions
 			if (allTypes.Length == 0)
 				return;
 
+			AddAutoXmlAttributes(overrides, rootType, allTypes);
+		}
+		/// <summary>
+		/// Adds AutoXmlAttributes for root type <paramref name="rootType"/> and neccessary overrides
+		/// </summary>
+		/// <param name="overrides"></param>
+		/// <param name="allTypes"></param>
+		/// <param name="rootType"></param>
+		public static void AddAutoXmlAttributes(this XmlAttributeOverrides overrides, Type rootType, Type[] allTypes)
+		{
 			var visitedTypes = new HashSet<Type>();
 
 			VisitType(rootType, overrides, visitedTypes, allTypes);
