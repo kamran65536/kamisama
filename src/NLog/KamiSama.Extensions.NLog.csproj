@@ -8,11 +8,16 @@
 			- PersianShortDateLayoutRenderer is added.
 			- EncryptedZipArchiveFileCompressor is added.
 		</PackageReleaseNotes>
+		<Description>Uilities for famous logging library (NLog):
+- PersianDateLayoutRenderer
+- PersianLongDateLayoutRenderer
+- PersianShortDateLayoutRenderer
+- EncryptedZipArchiFileCompressor (archieve file with password)</Description>
 	</PropertyGroup>
 
 	<ItemGroup>
     <PackageReference Include="DotNetZip" Version="1.15.0" />
-    <PackageReference Include="NLog" Version="4.7.6" />
+    <PackageReference Include="NLog" Version="4.7.9" />
   </ItemGroup>
 
   <ItemGroup>

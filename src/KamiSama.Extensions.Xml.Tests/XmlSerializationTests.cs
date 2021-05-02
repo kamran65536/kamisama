@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Xml.Serialization;
 
-namespace KamiSama.Extensions.Core.Tests
+namespace KamiSama.Extensions.Xml.Tests
 {
 	[TestClass]
 	public class XmlSerializationTests
@@ -28,7 +28,7 @@ namespace KamiSama.Extensions.Core.Tests
 			var a = new A { X = 10 };
 
 			var serializer = new XmlSerializer(typeof(A), new XmlRootAttribute { ElementName = "B", IsNullable = true });
-			var result = a.SerializeToXml(serializer : serializer);
+			var result = a.SerializeToXml(serializer: serializer);
 
 			StringAssert.Contains(result, "<B");
 			StringAssert.Contains(result, "<X>10</X>");

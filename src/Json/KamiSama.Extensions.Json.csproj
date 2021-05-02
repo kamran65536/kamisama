@@ -7,10 +7,14 @@ v2.1.0
 - HirerarchialJsonConverter is added.
 v2.0.0
 - Refactored from old KamiSama.Extenders.Serialization library and now using System.Text.Json instead of Newtonsoft.</PackageReleaseNotes>
+		<Description>Utilities for System.Text.Json such as:
+- hirerachyJsonConverter
+- TimeSpanJsonConverter
+- HexByteArrayJsonConverter</Description>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="System.Text.Json" Version="5.0.0" />
+		<PackageReference Include="System.Text.Json" Version="5.0.2" />
 	</ItemGroup>
 
 	<ItemGroup>

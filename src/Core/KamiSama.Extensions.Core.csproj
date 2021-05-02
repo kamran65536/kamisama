@@ -2,7 +2,10 @@
 	<Import Project="..\GeneralProperties.csproj" />
 	<PropertyGroup>
 		<Description>Useful extenders suchas ToBytes, ToHex, ...</Description>
-		<PackageReleaseNotes>v2.0.0
+		<PackageReleaseNotes>v2.4.0
+- XmlSerialization is moved to KamiSama.Extensions.Xml
+- supported .net is changed to .net standard 2.1
+v2.0.0
 - Refactored from old KamiSama.Extenders library</PackageReleaseNotes>
 		<DebugType>Full</DebugType>
 		<AssemblyName>KamiSama.Extensions.Core</AssemblyName>

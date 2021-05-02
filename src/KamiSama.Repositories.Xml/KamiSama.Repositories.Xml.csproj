@@ -9,7 +9,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Core\KamiSama.Extensions.Core.csproj" />
+		<ProjectReference Include="..\KamiSama.Extensions.Xml\KamiSama.Extensions.Xml.csproj" />
 		<ProjectReference Include="..\Repositories.Core\KamiSama.Repositories.Core.csproj" />
 	</ItemGroup>
 
