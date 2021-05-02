@@ -8,22 +8,22 @@ stages:
     - publish
 
 before_script:
-    - "dotnet restore src/"
+    - dotnet restore src/KamiSama.Extensions.sln
 
 build:
     stage: build
     script:
-        - "dotnet build src/"
+        - dotnet build src/KamiSama.Extensions.sln
 
 test:
     stage: test
     script: 
-        - "dotnet test src/"
+        - dotnet test src/KamiSama.Extensions.sln
 
 publish:
     stage: publish
     script:
-        - dotnet pack src/ -o nupkgs -p:PackageVersion=$PACKAGE_VERSION
+        - dotnet pack src/KamiSama.Extensions.sln -o nupkgs -p:PackageVersion=$PACKAGE_VERSION
         - find nupkgs -name '*.nupkg' | xargs -i dotnet nuget push {} -k $nuget_apikey -s https://api.nuget.org/v3/index.json --skip-duplicate
         - rm -rf nupkgs
     when: manual
