@@ -18,17 +18,15 @@ namespace KamiSama.Extensions
 		/// <returns>the cipher byte array</returns>
 		public static byte[] Encrypt(this byte[] data, SymmetricAlgorithm algorithm)
 		{
-			using (var memoryStream = new MemoryStream())
+			using var memoryStream = new MemoryStream();
+			
+			using var transform = algorithm.CreateEncryptor();
+
+			using (var cryptoStream = new CryptoStream(memoryStream, transform, CryptoStreamMode.Write))
 			{
-				using (var transform = algorithm.CreateEncryptor())
-				{
-					using (var cryptoStream = new CryptoStream(memoryStream, transform, CryptoStreamMode.Write))
-					{
-						cryptoStream.Write(data, 0, data.Length);
-					}
-					return memoryStream.ToArray();
-				}
+				cryptoStream.Write(data, 0, data.Length);
 			}
+			return memoryStream.ToArray();
 		}
 		/// <summary>
 		/// Encrypts data using specified algorithm (symmetric)
@@ -42,15 +40,14 @@ namespace KamiSama.Extensions
 		/// <returns></returns>
 		public static byte[] Encrypt(this byte[] data, Func<SymmetricAlgorithm> algorithmFactory, byte[] key, byte[] iv = null, CipherMode cipherMode = CipherMode.CBC, PaddingMode padding = PaddingMode.Zeros)
 		{
-			using (var algorithm = algorithmFactory())
-			{
-				algorithm.Key = key;
-				algorithm.IV = iv ?? new byte[algorithm.BlockSize / 8];
-				algorithm.Padding = padding;
-				algorithm.Mode = cipherMode;
+			using var algorithm = algorithmFactory();
+			
+			algorithm.Key = key;
+			algorithm.IV = iv ?? new byte[algorithm.BlockSize / 8];
+			algorithm.Padding = padding;
+			algorithm.Mode = cipherMode;
 
-				return data.Encrypt(algorithm);
-			}
+			return data.Encrypt(algorithm);
 		}
 		/// <summary>
 		/// Decrypts cipher data using the specified algorithm
@@ -60,18 +57,16 @@ namespace KamiSama.Extensions
 		/// <returns></returns>
 		public static byte[] Decrypt(this byte[] cipher, SymmetricAlgorithm algorithm)
 		{
-			using (var memoryStream = new MemoryStream())
-			{
-				using (var transform = algorithm.CreateDecryptor())
-				{
-					using (var cryptoStream = new CryptoStream(memoryStream, transform, CryptoStreamMode.Write))
-					{
-						cryptoStream.Write(cipher, 0, cipher.Length);
-					}
+			using var memoryStream = new MemoryStream();
 
-					return memoryStream.ToArray();
-				}
+			using var transform = algorithm.CreateDecryptor();
+			
+			using (var cryptoStream = new CryptoStream(memoryStream, transform, CryptoStreamMode.Write))
+			{
+				cryptoStream.Write(cipher, 0, cipher.Length);
 			}
+
+			return memoryStream.ToArray();
 		}
 		/// <summary>
 		/// Decrypts cipher data using the specified algorithm
@@ -85,14 +80,14 @@ namespace KamiSama.Extensions
 		/// <returns></returns>
 		public static byte[] Decrypt(this byte[] cipher, Func<SymmetricAlgorithm> algorithmFactory, byte[] key, byte[] iv = null, CipherMode cipherMode = CipherMode.CBC, PaddingMode padding = PaddingMode.Zeros)
 		{
-			using (var algorithm = algorithmFactory())
-			{
-				algorithm.Key = key;
-				algorithm.IV = iv ?? new byte[algorithm.BlockSize / 8];
-				algorithm.Padding = padding;
-				algorithm.Mode = cipherMode;
-				return cipher.Decrypt(algorithm);
-			}
+			using var algorithm = algorithmFactory();
+			
+			algorithm.Key = key;
+			algorithm.IV = iv ?? new byte[algorithm.BlockSize / 8];
+			algorithm.Padding = padding;
+			algorithm.Mode = cipherMode;
+			
+			return cipher.Decrypt(algorithm);
 		}
 		/// <summary>
 		/// Signs (MAC) for data using specified algorithm
@@ -122,15 +117,14 @@ namespace KamiSama.Extensions
 		/// <returns></returns>
 		public static byte[] Sign(this byte[] data, Func<SymmetricAlgorithm> algorithmFactory, byte[] key, byte[] iv = null, PaddingMode padding = PaddingMode.Zeros)
 		{
-			using (var algorithm = algorithmFactory())
-			{
-				algorithm.Key = key;
-				algorithm.IV = iv ?? new byte[algorithm.BlockSize / 8];
-				algorithm.Padding = padding;
-				algorithm.Mode = CipherMode.CBC;
+			using var algorithm = algorithmFactory();
+			
+			algorithm.Key = key;
+			algorithm.IV = iv ?? new byte[algorithm.BlockSize / 8];
+			algorithm.Padding = padding;
+			algorithm.Mode = CipherMode.CBC;
 
-				return data.Sign(algorithm);
-			}
+			return data.Sign(algorithm);
 		}
 		#endregion
 		#region DES
@@ -245,11 +239,11 @@ namespace KamiSama.Extensions
 		/// <returns></returns>
 		public static byte[] RsaEncrypt(this byte[] data, string xmlKey, RSAEncryptionPadding padding)
 		{
-			using (var algorithm = RSA.Create())
-			{
-				algorithm.FromXmlString(xmlKey);
-				return algorithm.Encrypt(data, padding);
-			}
+			using var algorithm = RSA.Create();
+			
+			algorithm.FromXmlString(xmlKey);
+			
+			return algorithm.Encrypt(data, padding);
 		}
 		/// <summary>
 		/// Decrupts cipher data using Rsa algorithm
@@ -260,12 +254,11 @@ namespace KamiSama.Extensions
 		/// <returns></returns>
 		public static byte[] RsaDecrypt(this byte[] cipher, string xmlKey, RSAEncryptionPadding padding)
 		{
-			using (var algorithm = RSA.Create())
-			{
-				algorithm.FromXmlString(xmlKey);
+			using var algorithm = RSA.Create();
+			
+			algorithm.FromXmlString(xmlKey);
 
-				return algorithm.Decrypt(cipher, padding);
-			}
+			return algorithm.Decrypt(cipher, padding);
 		}
 		#endregion
 	}

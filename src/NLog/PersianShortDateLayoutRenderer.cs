@@ -12,7 +12,7 @@ namespace KamiSama.Extensions.NLog
 	[LayoutRenderer("persian-shortDate")]
 	public class PersianShortDateLayoutRenderer : LayoutRenderer
 	{
-		private static readonly PersianCalendar persianCalendar = new PersianCalendar();
+		private static readonly PersianCalendar persianCalendar = new();
         /// <summary>
         /// appends long date with persian date time into it
         /// </summary>

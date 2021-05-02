@@ -19,22 +19,19 @@ namespace KamiSama.Extensions
 		/// <returns></returns>
 		public static string SerializeToXml(this object obj, Action<XmlWriterSettings> settingsAction = null, XmlSerializer serializer = null)
 		{
-			serializer = serializer ?? new XmlSerializer(obj.GetType());
+			serializer ??= new XmlSerializer(obj.GetType());
 
 			var settings = new XmlWriterSettings();
 
-			if (settingsAction != null)
-				settingsAction(settings);
+			settingsAction?.Invoke(settings);
 
-			using (var writer = new StringWriter())
+			using var writer = new StringWriter();
+			using (var xmlWriter = XmlWriter.Create(writer, settings))
 			{
-				using (var xmlWriter = XmlWriter.Create(writer, settings))
-				{
-					serializer.Serialize(xmlWriter, obj);
-				}
-
-				return writer.ToString();
+				serializer.Serialize(xmlWriter, obj);
 			}
+
+			return writer.ToString();
 		}
 		/// <summary>
 		/// Deserializes a string into an object
@@ -45,12 +42,11 @@ namespace KamiSama.Extensions
 		/// <returns></returns>
 		public static TObject DeserializeFromXml<TObject>(this string str, XmlSerializer serializer = null)
 		{
-			serializer = serializer ?? new XmlSerializer(typeof(TObject));
+			serializer ??= new XmlSerializer(typeof(TObject));
 
-			using (var reader = new StringReader(str))
-			{
-				return (TObject)serializer.Deserialize(reader);
-			}
+			using var reader = new StringReader(str);
+
+			return (TObject)serializer.Deserialize(reader);
 		}
 	}
 }

@@ -1,20 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="..\GeneralProperties.csproj" />
 	<PropertyGroup>
-		<TargetFramework>netstandard2.0</TargetFramework>
-		<Authors>Kamran Fallah</Authors>
-		<Company>-</Company>
-		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 		<Description>Useful extenders suchas ToBytes, ToHex, ...</Description>
 		<PackageReleaseNotes>v2.0.0
 - Refactored from old KamiSama.Extenders library</PackageReleaseNotes>
-		<Version>1.1.0</Version>
-		<RepositoryUrl>https://gitlab.com/kamran65536/KamiSama</RepositoryUrl>
-		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<DebugType>Full</DebugType>
 		<AssemblyName>KamiSama.Extensions.Core</AssemblyName>
 		<RootNamespace>KamiSama.Extensions</RootNamespace>
-		<PackageProjectUrl>https://gitlab.com/kamran65536/KamiSama</PackageProjectUrl>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	</PropertyGroup>
 </Project>

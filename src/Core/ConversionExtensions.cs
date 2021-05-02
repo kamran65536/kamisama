@@ -41,7 +41,7 @@ namespace KamiSama.Extensions
 		/// <param name="obj">the source object</param>
 		/// <param name="defaultValue">default value if conversion is failed</param>
 		/// <returns></returns>
-		public static T ConvertTo<T>(this object obj, T defaultValue = default(T))
+		public static T ConvertTo<T>(this object obj, T defaultValue = default)
 			=> (T) obj.ConvertTo(typeof(T), defaultValue);
 	}
 }

@@ -1,0 +1,15 @@
+<Project>
+	<PropertyGroup>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<LangVersion>preview</LangVersion>
+		<DebugType>Full</DebugType>
+		<Version>1.1.0</Version>
+		<PackageProjectUrl>https://gitlab.com/kamran65536/KamiSama</PackageProjectUrl>
+		<RepositoryUrl>https://gitlab.com/kamran65536/KamiSama</RepositoryUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<Authors>Kamran Fallah</Authors>
+		<Company>-</Company>
+		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+		<TargetFramework>netstandard2.1</TargetFramework>
+	</PropertyGroup>
+</Project>

@@ -23,8 +23,8 @@ namespace KamiSama.Extensions.Core.Tests
 		public void Pad_with_size_smaller_than_original_array_throws_Exception()
 		{
 			var arr = "0102030405".FromHex();
-
-			var padded = arr.Pad(2, (byte) 0x00);
+			
+			arr.Pad(2, (byte)0x00);
 		}
 
 		[TestMethod]

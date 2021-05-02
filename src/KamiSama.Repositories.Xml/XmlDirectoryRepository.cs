@@ -94,7 +94,7 @@ namespace KamiSama.Repositories.Xml
 				
 				foreach (var file in dir.GetFiles("*.xml"))
 				{
-					var entity = (await File.ReadAllTextAsync(file.FullName)).DeserializeFromXml<TEntity>();
+					var entity = (await File.ReadAllTextAsync(file.FullName)).DeserializeFromXml<TEntity>(serializer);
 
 					if (fileNameFunc(entity) != file.Name)
 						throw new InvalidOperationException($"entity name {fileNameFunc(entity)} does not match file name: {file.Name}");

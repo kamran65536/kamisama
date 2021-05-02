@@ -16,10 +16,10 @@ namespace KamiSama.Extensions.DependencyInjection.Tests
 			const string sampleName = "test";
 			var serviceCollection = new ServiceCollection();
 
-			serviceCollection.AddNamed(sampleName, typeof(SampleInteface), typeof(SampleImplementation1));
+			serviceCollection.AddNamed(sampleName, typeof(ISampleInteface), typeof(SampleImplementation1));
 
-			var factoryDescriptor = serviceCollection.FirstOrDefault(x => x.ServiceType == typeof(NamedFactory<SampleInteface>));
-			var factory = factoryDescriptor.ImplementationInstance as NamedFactory<SampleInteface>;
+			var factoryDescriptor = serviceCollection.FirstOrDefault(x => x.ServiceType == typeof(NamedFactory<ISampleInteface>));
+			var factory = factoryDescriptor.ImplementationInstance as NamedFactory<ISampleInteface>;
 
 			Assert.IsNotNull(factory);
 			Assert.AreEqual(typeof(SampleImplementation1), factory.namedTypes[sampleName]);
@@ -30,14 +30,14 @@ namespace KamiSama.Extensions.DependencyInjection.Tests
 			const string sampleName = "test";
 			var serviceCollection = new ServiceCollection();
 
-			serviceCollection.AddNamed(sampleName, typeof(SampleInteface), typeof(SampleImplementation1));
+			serviceCollection.AddNamed(sampleName, typeof(ISampleInteface), typeof(SampleImplementation1));
 
-			var factoryDescriptor1 = serviceCollection.FirstOrDefault(x => x.ServiceType == typeof(NamedFactory<SampleInteface>));
-			var factory1 = factoryDescriptor1.ImplementationInstance as NamedFactory<SampleInteface>;
+			var factoryDescriptor1 = serviceCollection.FirstOrDefault(x => x.ServiceType == typeof(NamedFactory<ISampleInteface>));
+			var factory1 = factoryDescriptor1.ImplementationInstance as NamedFactory<ISampleInteface>;
 		
-			serviceCollection.AddNamed(sampleName, typeof(SampleInteface), typeof(SampleImplementation2));
-			var factoryDescriptor2 = serviceCollection.FirstOrDefault(x => x.ServiceType == typeof(NamedFactory<SampleInteface>));
-			var factory2 = factoryDescriptor1.ImplementationInstance as NamedFactory<SampleInteface>;
+			serviceCollection.AddNamed(sampleName, typeof(ISampleInteface), typeof(SampleImplementation2));
+			var factoryDescriptor2 = serviceCollection.FirstOrDefault(x => x.ServiceType == typeof(NamedFactory<ISampleInteface>));
+			var factory2 = factoryDescriptor1.ImplementationInstance as NamedFactory<ISampleInteface>;
 
 			Assert.AreSame(factory1, factory2);
 		}
@@ -55,7 +55,7 @@ namespace KamiSama.Extensions.DependencyInjection.Tests
 				var services = new ServiceCollection();
 				services.AutoAddDependencies(assemblies);
 
-				var descriptor = services.FirstOrDefault(x => x.ServiceType == typeof(SampleInteface));
+				var descriptor = services.FirstOrDefault(x => x.ServiceType == typeof(ISampleInteface));
 
 				Assert.AreEqual(ServiceLifetime.Singleton, descriptor.Lifetime);
 				Assert.AreEqual(typeof(InjectedImplementation), descriptor.ImplementationType);

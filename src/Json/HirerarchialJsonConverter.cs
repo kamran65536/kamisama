@@ -22,7 +22,7 @@ namespace KamiSama.Extensions.Json
 		/// <summary>
 		/// map from discriminator key value to child type
 		/// </summary>
-		internal static readonly Dictionary<string, Type> typeMap = new Dictionary<string, Type>(StringComparer.InvariantCultureIgnoreCase);
+		internal static readonly Dictionary<string, Type> typeMap = new(StringComparer.InvariantCultureIgnoreCase);
 		/// <summary>
 		/// Registers a child type to a key
 		/// </summary>
@@ -79,21 +79,20 @@ namespace KamiSama.Extensions.Json
 			var readerAtStart = reader;
 
 			// Read the `discriminator` from our JSON document
-			using (var jsonDocument = JsonDocument.ParseValue(ref reader))
-			{
-				var jsonObject = jsonDocument.RootElement;
+			using var jsonDocument = JsonDocument.ParseValue(ref reader);
+			
+			var jsonObject = jsonDocument.RootElement;
 
-				if (!jsonObject.TryGetProperty(discriminiatorMapKeyName, out JsonElement jsonElement))
-					throw new Exception($"{discriminiatorMapKeyName} is not found in the json. It is mandatory.");
+			if (!jsonObject.TryGetProperty(discriminiatorMapKeyName, out JsonElement jsonElement))
+				throw new Exception($"{discriminiatorMapKeyName} is not found in the json. It is mandatory.");
 
-				var key = jsonElement
-					.GetString();
+			var key = jsonElement
+				.GetString();
 
-				if (!string.IsNullOrWhiteSpace(key) && typeMap.TryGetValue(key, out Type type))
-					return JsonSerializer.Deserialize(ref readerAtStart, type, options) as T;
-				else
-					throw new NotSupportedException($"{key ?? "<unknown>"} can not be deserialized");
-			}
+			if (!string.IsNullOrWhiteSpace(key) && typeMap.TryGetValue(key, out Type type))
+				return JsonSerializer.Deserialize(ref readerAtStart, type, options) as T;
+			else
+				throw new NotSupportedException($"{key ?? "<unknown>"} can not be deserialized");
 		}
 	}
 }

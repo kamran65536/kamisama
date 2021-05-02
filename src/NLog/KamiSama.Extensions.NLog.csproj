@@ -1,8 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
+	<Import Project="..\GeneralProperties.csproj" />
 	<PropertyGroup>
-		<TargetFramework>netstandard2.0</TargetFramework>
-		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<PackageReleaseNotes>
 			v2.2.0
 			- PersianDateLayoutRenderer is added.
@@ -10,8 +8,6 @@
 			- PersianShortDateLayoutRenderer is added.
 			- EncryptedZipArchiveFileCompressor is added.
 		</PackageReleaseNotes>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<Authors>Kamran Fallah</Authors>
 	</PropertyGroup>
 
 	<ItemGroup>

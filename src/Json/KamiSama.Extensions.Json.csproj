@@ -1,15 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="..\GeneralProperties.csproj" />
 	<PropertyGroup>
-		<TargetFramework>netstandard2.0</TargetFramework>
-		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<PackageReleaseNotes>v2.1.3
 - HexByteArrayConverter is added.
 v2.1.0
 - HirerarchialJsonConverter is added.
 v2.0.0
 - Refactored from old KamiSama.Extenders.Serialization library and now using System.Text.Json instead of Newtonsoft.</PackageReleaseNotes>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<Authors>Kamran Fallah</Authors>
 	</PropertyGroup>
 
 	<ItemGroup>

@@ -8,7 +8,7 @@ namespace KamiSama.Extensions
 	/// </summary>
 	public static class PersianDateTimeExtensions
 	{
-		private static DateTimeFormatInfo dateTimeFormatInfo;
+		private static readonly DateTimeFormatInfo dateTimeFormatInfo;
 		static PersianDateTimeExtensions()
 		{
 			var persianCalendar = new PersianCalendar();

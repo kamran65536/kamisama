@@ -1,9 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
+	<Import Project="..\GeneralProperties.csproj" />
 	<PropertyGroup>
-		<TargetFramework>netstandard2.1</TargetFramework>
-		<Company>Kamran Fallah</Company>
-		<Authors>Kamran Fallah</Authors>
 		<Description>Json Repository uses System.Text.Json</Description>
 		<PackageReleaseNotes>99-10-18 v2.2.8
 - Reimplementation of JsonRepository. SaveFailed is added.

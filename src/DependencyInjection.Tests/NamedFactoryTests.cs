@@ -13,7 +13,7 @@ namespace KamiSama.Extensions.DependencyInjection.Tests
 		[TestMethod]
 		public void Register_must_add_or_update_namedTypes()
 		{
-			var factory = new NamedFactory(typeof(SampleInteface));
+			var factory = new NamedFactory(typeof(ISampleInteface));
 
 			factory.Register("name", typeof(SampleImplementation1));
 
@@ -31,7 +31,7 @@ namespace KamiSama.Extensions.DependencyInjection.Tests
 		{
 			var serviceProvider = Substitute.For<IServiceProvider>();
 
-			var factory = new NamedFactory(typeof(SampleInteface));
+			var factory = new NamedFactory(typeof(ISampleInteface));
 
 			factory.FindByName(serviceProvider, "wrong name");
 		}
@@ -40,7 +40,7 @@ namespace KamiSama.Extensions.DependencyInjection.Tests
 		{
 			var serviceProvider = Substitute.For<IServiceProvider>();
 
-			var factory = new NamedFactory(typeof(SampleInteface));
+			var factory = new NamedFactory(typeof(ISampleInteface));
 			factory.Register<SampleImplementation1>("a");
 
 			serviceProvider.GetService(typeof(SampleImplementation1)).Returns(new SampleImplementation1());
@@ -52,9 +52,9 @@ namespace KamiSama.Extensions.DependencyInjection.Tests
 		[TestMethod]
 		public void GenericNameFactory_is_equivalant_to_NameFactory_with_corresponing_ServiceType()
 		{
-			var factory = new NamedFactory<SampleInteface>();
+			var factory = new NamedFactory<ISampleInteface>();
 
-			Assert.AreEqual(typeof(SampleInteface), factory.ServiceType);
+			Assert.AreEqual(typeof(ISampleInteface), factory.ServiceType);
 		}
 	}
 }

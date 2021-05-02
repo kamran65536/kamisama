@@ -34,6 +34,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7DC27342-54E1-4AC5-ACF8-BF0DF7A28304}"
 	ProjectSection(SolutionItems) = preProject
 		..\.gitlab-ci.yml = ..\.gitlab-ci.yml
+		GeneralProperties.csproj = GeneralProperties.csproj
 		test-configs.runsettings = test-configs.runsettings
 	EndProjectSection
 EndProject
@@ -57,7 +58,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.IranSystem", "Iran
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.IranSystem.Tests", "KamiSama.IranSystem.Tests\KamiSama.IranSystem.Tests.csproj", "{727F19D9-E62A-4F0C-8005-94D78F663D25}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KamiSama.Repositories.Xml", "KamiSama.Repositories.Xml\KamiSama.Repositories.Xml.csproj", "{33AAE54B-F6F9-4025-A6BB-38E941669A35}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Repositories.Xml", "KamiSama.Repositories.Xml\KamiSama.Repositories.Xml.csproj", "{33AAE54B-F6F9-4025-A6BB-38E941669A35}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

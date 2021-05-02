@@ -18,8 +18,8 @@ namespace KamiSama.Repositories.EntityFrameworkCore
 		/// <summary>
 		/// internal context class
 		/// </summary>
-		private DbContext context;
-		private DbSet<TEntity> dbSet;
+		private readonly DbContext context;
+		private readonly DbSet<TEntity> dbSet;
 		/// <summary>
 		/// initiates an db repository
 		/// </summary>

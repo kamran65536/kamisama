@@ -35,11 +35,11 @@ namespace KamiSama.Extensions.DependencyInjection.Tests
 		public void TryAdd_must_add_serviceDescriptor_based_on_lifetime(ServiceLifetime expectedLifetime)
 		{
 			var services = new ServiceCollection();
-			var attr = new InjectAttribute(serviceType: typeof(SampleInteface), expectedLifetime);
+			var attr = new InjectAttribute(serviceType: typeof(ISampleInteface), expectedLifetime);
 
 			attr.TryAddInjection(services, typeof(SampleImplementation1));
 
-			var descriptor = services.FirstOrDefault(x => x.ServiceType == typeof(SampleInteface));
+			var descriptor = services.FirstOrDefault(x => x.ServiceType == typeof(ISampleInteface));
 
 			Assert.AreEqual(typeof(SampleImplementation1), descriptor.ImplementationType);
 			Assert.AreEqual(expectedLifetime, descriptor.Lifetime);

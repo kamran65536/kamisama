@@ -1,20 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+	<Import Project="..\GeneralProperties.csproj" />
 	<PropertyGroup>
-		<TargetFramework>netstandard2.0</TargetFramework>
-		<Authors>Kamran Fallah</Authors>
-		<Company>-</Company>
 		<Description>Repository pattern common usages.</Description>
 		<PackageReleaseNotes>v2.0.0
 - Refactored from old KamiSama.Repositories library</PackageReleaseNotes>
-		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-		<DebugType>Full</DebugType>
-		<Version>1.2.1</Version>
 		<RepositoryUrl>https://gitlab.com/kamran65536/KamiSama</RepositoryUrl>
 		<RootNamespace>KamiSama.Repositories</RootNamespace>
-		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	</PropertyGroup>
 
 </Project>

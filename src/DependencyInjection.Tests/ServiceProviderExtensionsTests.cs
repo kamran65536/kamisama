@@ -12,11 +12,11 @@ namespace KamiSama.Extensions.DependencyInjection.Tests
 		{
 			var services = new ServiceCollection();
 
-			services.AddTransient<SampleInteface, SampleImplementation1>("name1");
+			services.AddTransient<ISampleInteface, SampleImplementation1>("name1");
 
 			var provider = services.BuildServiceProvider();
 
-			var implementation = provider.GetService(typeof(SampleInteface), "name1");
+			var implementation = provider.GetService(typeof(ISampleInteface), "name1");
 
 			Assert.IsNotNull(implementation);
 			Assert.IsInstanceOfType(implementation, typeof(SampleImplementation1));

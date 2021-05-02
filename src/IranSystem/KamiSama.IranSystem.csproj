@@ -1,13 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="..\GeneralProperties.csproj" />
 	<PropertyGroup>
-		<TargetFramework>netstandard2.1</TargetFramework>
-		<Authors>Kamran Fallah</Authors>
 		<Description>IranSystem encoding for .net standard</Description>
-		<RepositoryUrl>https://gitlab.com/kamran65536/KamiSama</RepositoryUrl>
-		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<DebugType>Full</DebugType>
-		<PackageProjectUrl>https://gitlab.com/kamran65536/KamiSama</PackageProjectUrl>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageReleaseNotes>v2.2.5
 IranSystemEncoding is added.</PackageReleaseNotes>
 	</PropertyGroup>

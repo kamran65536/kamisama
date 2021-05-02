@@ -1,6 +1,5 @@
 ﻿using KamiSama.Repositories.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.InMemory;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 using System;
@@ -12,10 +11,10 @@ namespace KamiSama.Repositories.Tests.EFCore
 	[TestClass]
 	public class EFCore_DbRepositoryTests
 	{
-		private static Random random = new Random();
+		private static readonly Random random = new Random();
 		private static SampleContext GetDbContext(string databaseName = null, SampleEntity[] initialDbSet = null)
 		{
-			databaseName = databaseName ?? ("SampleContext" + random.Next());
+			databaseName ??= ("SampleContext" + random.Next());
 			
 			var options = new DbContextOptionsBuilder<SampleContext>()
 				.UseInMemoryDatabase(databaseName)

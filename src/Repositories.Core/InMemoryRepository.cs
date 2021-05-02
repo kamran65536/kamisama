@@ -27,7 +27,7 @@ namespace KamiSama.Repositories
 		/// <param name="comparer"></param>
 		public InMemoryRepository(IEnumerable<TEntity> initialItems, IEqualityComparer<TEntity> comparer = null)
 		{
-			initialItems = initialItems ?? new TEntity[0];
+			initialItems ??= new TEntity[0];
 			semaphore = new SemaphoreSlim(1, 1);
 
 			if (comparer == null)

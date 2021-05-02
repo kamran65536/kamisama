@@ -11,7 +11,7 @@ namespace KamiSama.Extensions.DependencyInjection
 		/// <summary>
 		/// internal map for type  mapping
 		/// </summary>
-		internal Dictionary<string, Type> namedTypes = new Dictionary<string, Type>(StringComparer.InvariantCultureIgnoreCase);
+		internal Dictionary<string, Type> namedTypes = new(StringComparer.InvariantCultureIgnoreCase);
 		/// <summary>
 		/// returns the service type (you are looking for implementation)
 		/// </summary>

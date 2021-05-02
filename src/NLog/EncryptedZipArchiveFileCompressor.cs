@@ -34,15 +34,14 @@ namespace KamiSama.Extensions.NLog
 		/// </summary>
 		public void CompressFile(string fileName, string archiveFileName)
 		{
-			using (var zipFile = new ZipFile())
-			{
-				zipFile.Password = passwordFunc(fileName, archiveFileName);
+			using var zipFile = new ZipFile();
+			
+			zipFile.Password = passwordFunc(fileName, archiveFileName);
 
-				var file = new FileInfo(fileName);
-				zipFile.AddEntry(file.Name, File.ReadAllBytes(file.FullName));
+			var file = new FileInfo(fileName);
+			zipFile.AddEntry(file.Name, File.ReadAllBytes(file.FullName));
 
-				zipFile.Save(archiveFileName);
-			}
+			zipFile.Save(archiveFileName);
 		}
 	}
 }

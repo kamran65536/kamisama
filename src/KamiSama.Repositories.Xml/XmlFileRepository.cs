@@ -59,7 +59,8 @@ namespace KamiSama.Repositories.Xml
 		/// <param name="filePath">path to json file as repository</param>
 		/// <param name="equalityComparer"></param>
 		/// <param name="serializer"></param>
-		public XmlFileRepository(string filePath, XmlSerializer serializer = null, IEqualityComparer<TEntity> equalityComparer = null)
+		/// <param name="fileNameFunc">function to map entity to file name</param>
+		public XmlFileRepository(string filePath, XmlSerializer serializer = null, IEqualityComparer<TEntity> equalityComparer = null,Func<TEntity, string> fileNameFunc = null)
 		{
 			this.directoryPath = filePath;
 			this.equalityComparer = equalityComparer;
@@ -93,7 +94,7 @@ namespace KamiSama.Repositories.Xml
 
 				foreach (var file in dir.GetFiles("*.xml"))
 				{
-					var entity = (await File.ReadAllTextAsync(file.FullName)).DeserializeFromXml<TEntity>();
+					var entity = (await File.ReadAllTextAsync(file.FullName)).DeserializeFromXml<TEntity>(serializer);
 
 					if (fileNameFunc(entity) != file.Name)
 						throw new InvalidOperationException($"entity name {fileNameFunc(entity)} does not match file name: {file.Name}");
