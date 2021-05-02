@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Diagnostics.CodeAnalysis;
+﻿using System;
 
 namespace KamiSama.Extensions.Xml.Tests
 {

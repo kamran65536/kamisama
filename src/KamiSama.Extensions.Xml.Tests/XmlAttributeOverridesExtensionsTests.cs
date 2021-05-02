@@ -42,7 +42,7 @@ namespace KamiSama.Extensions.Xml.Tests
 
 			var overrides = new XmlAttributeOverrides();
 
-			overrides.AddAutoXmlAttributes(parentRoot, exampleRoot.Assembly);			
+			overrides.AddAutoXmlAttributes(parentRoot, new Assembly[] { exampleRoot.Assembly } );			
 			
 			var someProperty_elements = overrides[wrapper1, nameof(Wrapper1.SomeProperty)].XmlElements;
 			
@@ -82,7 +82,7 @@ namespace KamiSama.Extensions.Xml.Tests
 
 			var overrides = new XmlAttributeOverrides();
 
-			overrides.AddAutoXmlAttributes(parentRoot, exampleRoot.Assembly);
+			overrides.AddAutoXmlAttributes(parentRoot, new Assembly[] { exampleRoot.Assembly });
 			
 			var serializer = new XmlSerializer(parentRoot, overrides);
 
