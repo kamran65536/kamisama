@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Xml.Serialization;
 
@@ -30,5 +32,25 @@ namespace KamiSama.Extensions
 		/// <param name="overrides"></param>
 		/// <param name="allTypes"></param>
 		public abstract void VisitField(FieldInfo field, XmlAttributeOverrides overrides, Type[] allTypes);
+		/// <summary>
+		/// returns collection item type if the <paramref name="type"/> is <see cref="Array"/> or <see cref="ICollection{T}"/>
+		/// </summary>
+		/// <param name="type"></param>
+		/// <returns></returns>
+		protected Type GetCollectionItemType(Type type)
+		{
+			if (type.IsArray)
+				return type.GetElementType();
+			else
+			{
+				var collectionInterface = type.GetInterfaces()
+							.FirstOrDefault(x => x.IsGenericType && x.GetGenericTypeDefinition() == typeof(ICollection<>));
+
+				if (collectionInterface != null)
+					return collectionInterface.GetGenericArguments()[0];
+			}
+
+			return type;
+		}
 	}
 }

@@ -17,10 +17,7 @@ namespace KamiSama.Extensions
 		/// <inheritdoc />
 		public override void VisitProperty(PropertyInfo property, XmlAttributeOverrides overrides, Type[] allTypes)
 		{
-			var elementType = property.PropertyType;
-			
-			if (elementType.IsArray)
-				elementType = elementType.GetElementType();
+			var elementType = GetCollectionItemType(property.PropertyType);
 
 			var validTypes = allTypes.Where(x => !x.IsAbstract && x.IsSubclassOf(elementType)).ToArray();
 
@@ -38,10 +35,7 @@ namespace KamiSama.Extensions
 		/// <inheritdoc />
 		public override void VisitField(FieldInfo field, XmlAttributeOverrides overrides, Type[] allTypes)
 		{
-			var elementType = field.FieldType;
-
-			if (elementType.IsArray)
-				elementType = elementType.GetElementType();
+			var elementType = GetCollectionItemType(field.FieldType);
 
 			var validTypes = allTypes.Where(x => !x.IsAbstract && x.IsSubclassOf(elementType)).ToArray();
 
