@@ -1,5 +1,7 @@
 ﻿using KamiSama.Extensions.Json;
 using System;
+using System.Collections.Generic;
+using System.Dynamic;
 using System.Text.Json;
 
 namespace KamiSama.Extensions
@@ -17,6 +19,71 @@ namespace KamiSama.Extensions
 		/// <returns></returns>
 		public static string SerializeToJson(this object obj, JsonSerializerOptions options = null)
 			=> JsonSerializer.Serialize(obj, options);
+		/// <summary>
+		/// Converts an element to dynamic object (using expando object)
+		/// </summary>
+		/// <param name="element"></param>
+		/// <returns></returns>
+		public static object ConvertJsonToDynamicObject(this JsonElement element)
+		{
+			switch (element.ValueKind)
+			{
+				default:
+				case JsonValueKind.Undefined:
+				case JsonValueKind.Null: return null;
+				case JsonValueKind.Object:
+
+					var obj = new ExpandoObject();
+
+					var dic = obj as IDictionary<string, object>;
+
+					foreach (var item in element.EnumerateObject())
+					{
+						var value = ConvertJsonToDynamicObject(item.Value);
+
+						dic[item.Name] = value;
+					}
+
+					return obj;
+				case JsonValueKind.Array:
+					List<object> result = new();
+
+					foreach (var item in element.EnumerateArray())
+						result.Add(ConvertJsonToDynamicObject(item));
+
+					return result.ToArray();
+				case JsonValueKind.String: return element.GetString();
+				case JsonValueKind.Number: return element.GetDouble();
+				case JsonValueKind.True:
+				case JsonValueKind.False: return element.GetBoolean();
+			}
+		}
+		/// <summary>
+		/// Converts an json string to dynamic object (using expando object)
+		/// </summary>
+		/// <param name="jsonStr"></param>
+		/// <param name="options"></param>
+		/// <returns></returns>
+		public static object ConvertJsonToDynamicObject(this string jsonStr, JsonDocumentOptions options = default)
+		{
+			var doc = JsonDocument.Parse(jsonStr, options);
+
+			return doc.RootElement.ConvertJsonToDynamicObject();
+		}
+		/// <summary>
+		/// Converts an json string to dynamic object (using expando object)
+		/// </summary>
+		/// <param name="jsonStr"></param>
+		/// <param name="config"></param>
+		/// <returns></returns>
+		public static object ConvertJsonToDynamicObject(this string jsonStr, Action<JsonDocumentOptions> config)
+		{
+			var options = new JsonDocumentOptions();
+
+			config?.Invoke(options);
+
+			return jsonStr.ConvertJsonToDynamicObject(options);
+		}
 		/// <summary>
 		/// Serializes to Json using <see cref="JsonSerializer"/>
 		/// </summary>

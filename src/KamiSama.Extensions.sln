@@ -62,9 +62,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Repositories.Xml",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Xml", "Xml", "{71868FA6-3A12-47E6-83FB-378374A0290C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KamiSama.Extensions.Xml", "KamiSama.Extensions.Xml\KamiSama.Extensions.Xml.csproj", "{01AE1738-B41E-4D5C-A4A2-9C956FDE26E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Extensions.Xml", "KamiSama.Extensions.Xml\KamiSama.Extensions.Xml.csproj", "{01AE1738-B41E-4D5C-A4A2-9C956FDE26E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KamiSama.Extensions.Xml.Tests", "KamiSama.Extensions.Xml.Tests\KamiSama.Extensions.Xml.Tests.csproj", "{E651A60D-B001-4D60-A459-61A3744AB722}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Extensions.Xml.Tests", "KamiSama.Extensions.Xml.Tests\KamiSama.Extensions.Xml.Tests.csproj", "{E651A60D-B001-4D60-A459-61A3744AB722}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Emit", "Emit", "{F0895B4B-3743-4CF2-84F1-6624B59E5484}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
