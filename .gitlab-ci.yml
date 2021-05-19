@@ -9,6 +9,7 @@ stages:
 
 before_script:
     - dotnet restore src/KamiSama.Extensions.sln
+    
 
 build:
     stage: build
