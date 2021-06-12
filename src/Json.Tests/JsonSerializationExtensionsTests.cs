@@ -133,13 +133,13 @@ namespace KamiSama.Extensions.Json.Tests
 		[TestMethod]
 		public void ConvertToDynamicObject_must_convert_an_jsonString_to_ExpandoObject()
 		{
-			var str = @"{ ""x"" : 10, ""y"": { ""a"" : ""kamran""}, ""z"" : [ 1, 2, null, true, false ]}";
+			var str = @"{ ""x"" : 10.0, ""y"": { ""a"" : ""kamran""}, ""z"" : [ 1.1, 2, null, true, false ]}";
 
 			dynamic d = str.ConvertJsonToDynamicObject(opt => opt.MaxDepth = 100);
 
 			Assert.AreEqual(10, d.x);
 			Assert.AreEqual("kamran", d.y.a);
-			Assert.AreEqual(1, d.z[0]);
+			Assert.AreEqual(1.1, d.z[0]);
 			Assert.AreEqual(2, d.z[1]);
 			Assert.IsNull(d.z[2]);
 			Assert.IsTrue(d.z[3]);

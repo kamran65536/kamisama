@@ -53,7 +53,13 @@ namespace KamiSama.Extensions
 
 					return result.ToArray();
 				case JsonValueKind.String: return element.GetString();
-				case JsonValueKind.Number: return element.GetDouble();
+				case JsonValueKind.Number: 
+					var d = element.GetDouble();
+
+					if ((int)d == d)
+						return (int)d;
+					else
+						return d;
 				case JsonValueKind.True:
 				case JsonValueKind.False: return element.GetBoolean();
 			}
