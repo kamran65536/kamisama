@@ -32,6 +32,12 @@
 								<ModulePath>^.*tests\.dll$</ModulePath>
 							</Exclude>
 						</ModulePaths>
+						<Functions>
+							<Exclude>
+								<Function>.*get_.*</Function>
+								<Function>.*set_.*</Function>
+							</Exclude>
+						</Functions>
 						<Attributes>
 							<Exclude>
 								<Attribute>^System\.Diagnostics\.DebuggerHiddenAttribute$</Attribute>

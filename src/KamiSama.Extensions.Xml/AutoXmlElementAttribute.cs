@@ -30,7 +30,7 @@ namespace KamiSama.Extensions
 				overrides.Add(property.DeclaringType, property.Name, attributes = new XmlAttributes());
 
 			foreach (var type in validTypes)
-				attributes.XmlElements.Add(new XmlElementAttribute { Type = type });
+				attributes.XmlElements.Add(new XmlElementAttribute { Type = type, ElementName = type.Name });
 		}
 		/// <inheritdoc />
 		public override void VisitField(FieldInfo field, XmlAttributeOverrides overrides, Type[] allTypes)
@@ -48,7 +48,7 @@ namespace KamiSama.Extensions
 				overrides.Add(field.DeclaringType, field.Name, attributes = new XmlAttributes());
 
 			foreach (var type in validTypes)
-				attributes.XmlElements.Add(new XmlElementAttribute { Type = type });
+				attributes.XmlElements.Add(new XmlElementAttribute { Type = type, ElementName = type.Name });
 		}
 	}
 }

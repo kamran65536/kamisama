@@ -12,7 +12,6 @@ namespace KamiSama.Extensions.Xml.Tests
 	public class XmlAttributeOverridesExtensionsTests
 	{
 		[TestMethod]
-		[SuppressMessage("Style", "IDE0034:Simplify 'default' expression", Justification = "<Pending>")]
 		public void AddAutoAttributes_does_nothing_if_no_type_or_assembly_is_available()
 		{
 			var parentRoot = typeof(ParentRoot);
