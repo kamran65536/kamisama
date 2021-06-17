@@ -9,6 +9,11 @@
 		/// inner element
 		/// </summary>
 		[AutoXmlElement]
-		public TElement Element { get; set; }
+		public TElement Value { get; set; }
+		/// <summary>
+		/// implicit operator to convert <typeparamref name="TElement"/> to <see cref="AutoXmlElement{TElement}"/>
+		/// </summary>
+		/// <param name="value"></param>
+		public static implicit operator AutoXmlElement<TElement>(TElement value) => new() { Value = value };
 	}
 }
