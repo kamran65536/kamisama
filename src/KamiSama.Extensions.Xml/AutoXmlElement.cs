@@ -5,7 +5,7 @@ namespace KamiSama.Extensions
 	/// <summary>
 	/// This class wraps an element in order to always have the same name outside while inside is different
 	/// </summary>
-	public class AutoXmlElement<TValue> : IEquatable<AutoXmlElement<TValue>>
+	public class AutoXmlElement<TValue> : IEquatable<AutoXmlElement<TValue>>, IEquatable<TValue>
 	{
 		/// <summary>
 		/// inner element
@@ -18,7 +18,7 @@ namespace KamiSama.Extensions
 		/// <param name="value"></param>
 		public static implicit operator AutoXmlElement<TValue>(TValue value) => new() { Value = value };
 		/// <inheritdoc	/>
-		public bool Equals(AutoXmlElement<TValue> other)
+		bool IEquatable<AutoXmlElement<TValue>>.Equals(AutoXmlElement<TValue> other)
 		{
 			if (other == null)
 				return false;
@@ -27,8 +27,18 @@ namespace KamiSama.Extensions
 			else
 				return Value.Equals(other.Value);
 		}
+		/// <inheritdoc/>
+		bool IEquatable<TValue>.Equals(TValue value) => object.Equals(Value, value);
 		/// <inheritdoc />
-		public override bool Equals(object obj) => Equals(obj as AutoXmlElement<TValue>);
+		public override bool Equals(object obj)
+		{
+			if (obj is AutoXmlElement<TValue> element)
+				return Equals(element);
+			else if (obj is TValue value)
+				return Equals(value);
+			else
+				return false;
+		}
 		/// <inheritdoc />
 		public override int GetHashCode() => HashCode.Combine(Value);
 	}

@@ -254,7 +254,7 @@ namespace KamiSama.Extensions.DependencyInjection
 
 			foreach (var type in types)
 			{
-				var attr = type.GetCustomAttribute<InjectAttribute>();
+				var attr = type.GetCustomAttribute<AutoInjectAttribute>();
 
 				if (attr == null)
 					continue;

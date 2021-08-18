@@ -8,14 +8,14 @@ using System.Reflection;
 namespace KamiSama.Extensions.DependencyInjection.Tests
 {
 	[TestClass]
-	public class InjectAttributeTests
+	public class AutoInjectAttributeTests
 	{
 		[TestMethod]
 		[ExpectedException(typeof(InvalidOperationException))]
 		public void TryAdd_must_throw_InvalidOperationException_if_multiple_default_interfaces_are_faound()
 		{
 			var services = new ServiceCollection();
-			var attr = new InjectAttribute(serviceType: null, lifetime: ServiceLifetime.Singleton);
+			var attr = new AutoInjectAttribute(serviceType: null, lifetime: ServiceLifetime.Singleton);
 
 			attr.TryAddInjection(services, typeof(MultipleInterfacesImplementation));
 		}
@@ -24,7 +24,7 @@ namespace KamiSama.Extensions.DependencyInjection.Tests
 		public void TryAdd_must_throw_InvalidOperationException_if_no_default_interface_is_found()
 		{
 			var services = new ServiceCollection();
-			var attr = new InjectAttribute(serviceType: null, lifetime: ServiceLifetime.Singleton);
+			var attr = new AutoInjectAttribute(serviceType: null, lifetime: ServiceLifetime.Singleton);
 
 			attr.TryAddInjection(services, typeof(NoImplementation));
 		}
@@ -35,7 +35,7 @@ namespace KamiSama.Extensions.DependencyInjection.Tests
 		public void TryAdd_must_add_serviceDescriptor_based_on_lifetime(ServiceLifetime expectedLifetime)
 		{
 			var services = new ServiceCollection();
-			var attr = new InjectAttribute(serviceType: typeof(ISampleInteface), expectedLifetime);
+			var attr = new AutoInjectAttribute(serviceType: typeof(ISampleInteface), expectedLifetime);
 
 			attr.TryAddInjection(services, typeof(SampleImplementation1));
 
