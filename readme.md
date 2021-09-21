@@ -161,7 +161,7 @@ instance = serviceProvider.GetService("instance2");
 # 2.2 AutoAddDependencies
 Add InjectAttribute to the implementation.
 ```
-[Inject(typeof(SampleInerface), ServiceLifetime.Transient)]
+[AutoInject(typeof(SampleInerface), ServiceLifetime.Transient)]
 public class Implementation : SampleInterface {... }
 ```
 then add the following to the service collection:
