@@ -3,7 +3,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
-using System.Reflection;
 
 namespace KamiSama.Extensions.DependencyInjection.Tests
 {
@@ -20,13 +19,17 @@ namespace KamiSama.Extensions.DependencyInjection.Tests
 			attr.TryAddInjection(services, typeof(MultipleInterfacesImplementation));
 		}
 		[TestMethod]
-		[ExpectedException(typeof(InvalidOperationException))]
-		public void TryAdd_must_throw_InvalidOperationException_if_no_default_interface_is_found()
+		public void TryAdd_injects_the_type_itself_if_no_default_interface_is_found()
 		{
 			var services = new ServiceCollection();
 			var attr = new AutoInjectAttribute(serviceType: null, lifetime: ServiceLifetime.Singleton);
 
 			attr.TryAddInjection(services, typeof(NoImplementation));
+
+			var descriptor = services.FirstOrDefault(x => x.ServiceType == typeof(NoImplementation));
+
+			Assert.IsNotNull(descriptor);
+			Assert.AreEqual(typeof(NoImplementation), descriptor.ImplementationType);
 		}
 		[TestMethod]
 		[DataRow(ServiceLifetime.Transient)]

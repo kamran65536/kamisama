@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace KamiSama.Repositories.Tests.Core
@@ -51,7 +52,7 @@ namespace KamiSama.Repositories.Tests.Core
 		public void Dispose_releases_items_in_repository()
 		{
 			var repository = new JsonRepository<SampleEntity>("./Json/sample-entities.json");
-			repository.TryLoadFileAsync(forceReload: true).Wait();
+			repository.TryLoadFileAsync(forceReload: true, CancellationToken.None).Wait();
 
 			repository.Dispose();
 
@@ -84,7 +85,7 @@ namespace KamiSama.Repositories.Tests.Core
 			sample.Name = "item111";
 			repository.Update(sample);
 
-			repository.TryLoadFileAsync(forceReload: true).Wait();
+			repository.TryLoadFileAsync(forceReload: true, CancellationToken.None).Wait();
 
 			Assert.IsFalse(repository.GetAll().Any(x => x.Name == "item1"));
 			Assert.IsTrue(repository.GetAll().Any(x => x.Name == "item111"));
@@ -113,7 +114,7 @@ namespace KamiSama.Repositories.Tests.Core
 			File.Copy("./Json/sample-entities.json", tempFileName, true);
 			var repository = new JsonRepository<SampleEntity>(tempFileName);
 
-			await repository.AddAsync(new SampleEntity { Id = 333, Name = "item333" });
+			await repository.AddAsync(new SampleEntity { Id = 333, Name = "item333" }, CancellationToken.None);
 
 			Assert.IsNotNull(repository.Find(x => x.Id == 333 && x.Name == "item333"));
 
@@ -130,9 +131,9 @@ namespace KamiSama.Repositories.Tests.Core
 			var sample = repository.FirstOrDefault(x => x.Name == "item1");
 
 			sample.Name = "item111";
-			await repository.UpdateAsync(sample);
+			await repository.UpdateAsync(sample, CancellationToken.None);
 
-			repository.TryLoadFileAsync(forceReload: true).Wait();
+			repository.TryLoadFileAsync(forceReload: true, CancellationToken.None).Wait();
 
 			Assert.IsFalse(repository.GetAll().Any(x => x.Name == "item1"));
 			Assert.IsTrue(repository.GetAll().Any(x => x.Name == "item111"));
@@ -147,7 +148,7 @@ namespace KamiSama.Repositories.Tests.Core
 			var repository = new JsonRepository<SampleEntity>(tempFileName);
 
 			var item = repository.Find(x => x.Id == 1);
-			await repository.DeleteAsync(item);
+			await repository.DeleteAsync(item, CancellationToken.None);
 
 			Assert.IsNull(repository.Find(x => x.Id == 1));
 
@@ -179,21 +180,21 @@ namespace KamiSama.Repositories.Tests.Core
 		{
 			var repository = new JsonRepository<SampleEntity>("./Json/sample-entities.json");
 
-			Assert.IsNotNull(await repository.FindAsync(x => x.Id == 1 && x.Name == "item1"));
+			Assert.IsNotNull(await repository.FindAsync(x => x.Id == 1 && x.Name == "item1", CancellationToken.None));
 		}
 		[TestMethod]
 		public async Task FindAsync_must_return_null_if_none_matches_the_predicate()
 		{
 			var repository = new JsonRepository<SampleEntity>("./Json/sample-entities.json");
 
-			Assert.IsNull(await repository.FindAsync(x => x.Id == 1 && x.Name == "item1444"));
+			Assert.IsNull(await repository.FindAsync(x => x.Id == 1 && x.Name == "item1444", CancellationToken.None));
 		}
 		[TestMethod]
 		public async Task FindAsync_must_return_null_if_predicate_is_null()
 		{
 			var repository = new JsonRepository<SampleEntity>("./Json/sample-entities.json");
 
-			Assert.IsNull(await repository.FindAsync(null));
+			Assert.IsNull(await repository.FindAsync(null, CancellationToken.None));
 		}
 		[TestMethod]
 		public void Where_must_return_items_that_matches_the_predicate()

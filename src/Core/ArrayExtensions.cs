@@ -53,7 +53,7 @@ namespace KamiSama.Extensions
 		/// </summary>
 		/// <typeparam name="TArrayItem"></typeparam>
 		/// <param name="arr">the array to be trimmed</param>
-		/// <param name="trimmingCriteria">the cirteria for trimming</param>
+		/// <param name="trimmingCriteria">the criteria for trimming</param>
 		/// <returns></returns>
 		public static TArrayItem[] TrimEnd<TArrayItem>(this TArrayItem[] arr, Func<TArrayItem, bool> trimmingCriteria)
 		{

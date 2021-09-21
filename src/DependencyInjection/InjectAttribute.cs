@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace KamiSama.Extensions.DependencyInjection
 {
@@ -8,6 +9,7 @@ namespace KamiSama.Extensions.DependencyInjection
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = true)]
 	[Obsolete("This attribute is going to be removed in 2.5.+ version as it is similar to asp net core Inject attribute.")]
+	[ExcludeFromCodeCoverage]
 	public class InjectAttribute : AutoInjectAttribute
 	{
 		/// <inheritdoc />

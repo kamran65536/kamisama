@@ -109,8 +109,8 @@ item = queue.DequeueOrDefault(defaultItem);
 ## 1.8 Stream Extensions
 ```csharp
 // the output is allways an array of size desired length; otherwise it throws an Exception
-arr = stream.ReadExact(length: 10, maxTries: 100);
-arr = await stream.ReadExactAsync(length: 10, maxTries: 100);
+arr = stream.ReadExact(length: 10, CancellationToken.None);
+arr = await stream.ReadExactAsync(length: 10, CancellationToken.None);
 ```
 ## 1.9 String Extensions
 ```csharp

@@ -91,38 +91,24 @@ namespace KamiSama.Repositories
 		/// <returns></returns>
 		public virtual TEntity Find(Expression<Func<TEntity, bool>> predicate)
 			=> (predicate == null) ? default : items.FirstOrDefault(predicate.Compile());
-		/// <summary>
-		/// Adds a new item in the repository
-		/// </summary>
-		/// <param name="item"></param>
-		/// <returns></returns>
-		public virtual async Task AddAsync(TEntity item)
+		///
+		public virtual async Task AddAsync(TEntity item, CancellationToken cancellationToken = default)
 		{
 			await semaphore.WaitAsync();
 			items.Add(item);
 			semaphore.Release();
 		}
-		/// <summary>
-		/// Update method, does nothing
-		/// </summary>
-		/// <param name="item"></param>
-		public Task UpdateAsync(TEntity item) => Task.CompletedTask;
-		/// <summary>
-		/// Deletes an item from repository
-		/// </summary>
-		/// <param name="item"></param>
-		public virtual async Task DeleteAsync(TEntity item)
+		/// <inheritdoc />
+		public Task UpdateAsync(TEntity item, CancellationToken cancellationToken = default) => Task.CompletedTask;
+		/// <inheritdoc />
+		public virtual async Task DeleteAsync(TEntity item, CancellationToken cancellationToken = default)
 		{
 			await semaphore.WaitAsync();
 			items.Remove(item);
 			semaphore.Release();
 		}
-		/// <summary>
-		/// Finds an single item in the repository
-		/// </summary>
-		/// <param name="predicate">the predicate to search, if null it returns null</param>
-		/// <returns></returns>
-		public virtual Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> predicate = null)
+		/// <inheritdoc />
+		public virtual Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
 			=> Task.FromResult(Find(predicate));
 	}
 }

@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 using System;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace KamiSama.Repositories.Tests.EFCore
@@ -51,7 +52,7 @@ namespace KamiSama.Repositories.Tests.EFCore
 
 			var repository = new DbRepository<SampleEntity>(context);
 
-			await repository.AddAsync(entity);
+			await repository.AddAsync(entity, CancellationToken.None);
 
 			context.Received().SampleEntities.Add(entity);
 			await context.Received().SaveChangesAsync();
@@ -76,7 +77,7 @@ namespace KamiSama.Repositories.Tests.EFCore
 
 			var repository = new DbRepository<SampleEntity>(context);
 
-			await repository.UpdateAsync(entity);
+			await repository.UpdateAsync(entity, CancellationToken.None);
 
 			await context.Received().SaveChangesAsync();
 		}
@@ -101,7 +102,7 @@ namespace KamiSama.Repositories.Tests.EFCore
 
 			var repository = new DbRepository<SampleEntity>(context);
 
-			await repository.DeleteAsync(entity);
+			await repository.DeleteAsync(entity, CancellationToken.None);
 
 			context.Received().SampleEntities.Remove(entity);
 			await context.Received().SaveChangesAsync();
@@ -126,10 +127,10 @@ namespace KamiSama.Repositories.Tests.EFCore
 			var context = GetDbContext(initialDbSet: new[] { entity });
 			var repository = new DbRepository<SampleEntity>(context);
 
-			var result = await repository.FindAsync(x => x.Id == 1);
+			var result = await repository.FindAsync(x => x.Id == 1, CancellationToken.None);
 			Assert.AreEqual(entity, result);
 
-			var result2 = await repository.FindAsync(x => x.Id == 2);
+			var result2 = await repository.FindAsync(x => x.Id == 2, CancellationToken.None);
 			Assert.IsNull(result2);
 		}
 		[TestMethod]

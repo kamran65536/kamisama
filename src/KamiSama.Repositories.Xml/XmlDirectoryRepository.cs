@@ -72,14 +72,14 @@ namespace KamiSama.Repositories.Xml
 		/// loads the json file if not loaded already
 		/// </summary>
 		/// <returns></returns>
-		public async Task<bool> TryLoadFileAsync(bool forceReload = false)
+		public async Task<bool> TryLoadFileAsync(bool forceReload, CancellationToken cancellationToken = default)
 		{
 			if (forceReload)
 				entities = null;
 
 			if (entities != null)
 				return true;
-			await semaphore.WaitAsync();
+			await semaphore.WaitAsync(cancellationToken);
 			if (entities != null)
 			{
 				semaphore.Release();
@@ -94,7 +94,7 @@ namespace KamiSama.Repositories.Xml
 				
 				foreach (var file in dir.GetFiles("*.xml"))
 				{
-					var entity = (await File.ReadAllTextAsync(file.FullName)).DeserializeFromXml<TEntity>(serializer);
+					var entity = (await File.ReadAllTextAsync(file.FullName, cancellationToken)).DeserializeFromXml<TEntity>(serializer);
 
 					if (fileNameFunc(entity) != file.Name)
 						throw new InvalidOperationException($"entity name {fileNameFunc(entity)} does not match file name: {file.Name}");
@@ -121,20 +121,21 @@ namespace KamiSama.Repositories.Xml
 		/// modifies (add,delete, update) the collection and saves the result into the file
 		/// </summary>
 		/// <param name="action"></param>
+		/// <param name="cancellationToken"></param>
 		/// <returns></returns>
-		private async Task ModifyAndSaveToFileAsync(Action action)
+		private async Task ModifyAndSaveToFileAsync(Action action, CancellationToken cancellationToken = default)
 		{
-			if (!await TryLoadFileAsync())
+			if (!await TryLoadFileAsync(false, cancellationToken))
 				return;
 
-			await semaphore.WaitAsync();
+			await semaphore.WaitAsync(cancellationToken);
 			try
 			{
 				action();
 
 				foreach (var entity in entities)
 				{
-					await File.WriteAllTextAsync(directoryPath, entity.SerializeToXml());
+					await File.WriteAllTextAsync(directoryPath, entity.SerializeToXml(), cancellationToken);
 				}
 			}
 			catch (Exception exp)
@@ -157,80 +158,45 @@ namespace KamiSama.Repositories.Xml
 			{
 			}
 		}
-		/// <summary>
-		/// Adds a new item in the repository; Modify to json repository is not recommanded for performance issues
-		/// </summary>
-		/// <param name="item"></param>
-		/// <returns></returns>
-		public Task AddAsync(TEntity item)
-			=> ModifyAndSaveToFileAsync(() => entities.Add(item));
-		/// <summary>
-		/// Deletes an item from repository; Modify to json repository is not recommanded for performance issues
-		/// </summary>
-		/// <param name="item"></param>
-		public Task DeleteAsync(TEntity item)
-			=> ModifyAndSaveToFileAsync(() => entities.Remove(item));
-		/// <summary>
-		/// Update method, does nothing; Modify to json repository is not recommanded for performance issues
-		/// </summary>
-		/// <param name="item"></param>
-		public Task UpdateAsync(TEntity item)
-			=> ModifyAndSaveToFileAsync(() => { });
-		/// <summary>
-		/// Finds an single item in the repository
-		/// </summary>
-		/// <param name="predicate">the predicate to search, if null it returns null</param>
-		/// <returns></returns>
-		public async Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> predicate)
+		/// <inheritdoc />
+		public Task AddAsync(TEntity item, CancellationToken cancellationToken = default)
+			=> ModifyAndSaveToFileAsync(() => entities.Add(item), cancellationToken);
+		/// <inheritdoc />
+		public Task DeleteAsync(TEntity item, CancellationToken cancellationToken = default)
+			=> ModifyAndSaveToFileAsync(() => entities.Remove(item), cancellationToken);
+		/// <inheritdoc />
+		public Task UpdateAsync(TEntity item, CancellationToken cancellationToken = default)
+			=> ModifyAndSaveToFileAsync(() => { }, cancellationToken);
+		/// <inheritdoc />
+		public async Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
 		{
-			if (!await TryLoadFileAsync())
+			if (!await TryLoadFileAsync(false, cancellationToken))
 				return default;
 			else if (predicate == null)
 				return default;
 			else
 				return entities.FirstOrDefault(predicate.Compile());
 		}
-		/// <summary>
-		/// Queries items in repository asynchronously for the predicate specified
-		/// </summary>
-		/// <param name="predicate">the predicate to search, if null it returns all items</param>
-		/// <returns></returns>
-		public async Task<IQueryable<TEntity>> WhereAsync(Expression<Func<TEntity, bool>> predicate = null)
+		/// <inheritdoc />
+		public async Task<IQueryable<TEntity>> WhereAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
 		{
-			if (!await TryLoadFileAsync())
+			if (!await TryLoadFileAsync(false, cancellationToken))
 				return Empty;
 			else if (predicate == null)
 				return entities.AsQueryable();
 			else
 				return entities.Where(predicate.Compile()).AsQueryable();
 		}
-		/// <summary>
-		/// Queries items in repository for the predicate specified
-		/// </summary>
-		/// <param name="predicate">the predicate to search, if null it returns all items</param>
-		/// <returns></returns>
+		/// <inheritdoc />
 		public IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> predicate = null)
-			=> WhereAsync(predicate).Result;
-		/// <summary>
-		/// Adds a new item in the repository; Modify to json repository is not recommanded for performance issues
-		/// </summary>
-		/// <param name="item"></param>
-		public void Add(TEntity item) => AddAsync(item).Wait();
-		/// <summary>
-		/// Update method, updates the json file; Modify to json repository is not recommanded for performance issues
-		/// </summary>
-		/// <param name="item"></param>
-		public void Update(TEntity item) => UpdateAsync(item).Wait();
-		/// <summary>
-		/// Deletes an item from repository; Modify to json repository is not recommanded for performance issues
-		/// </summary>
-		/// <param name="item"></param>
-		public void Delete(TEntity item) => DeleteAsync(item).Wait();
-		/// <summary>
-		/// Finds an single item in the repository
-		/// </summary>
-		/// <param name="predicate">the predicate to search, if null it returns null</param>
-		/// <returns></returns>
-		public TEntity Find(Expression<Func<TEntity, bool>> predicate = null) => FindAsync(predicate).Result;
+			=> WhereAsync(predicate, CancellationToken.None).Result;
+		/// <inheritdoc />
+		public void Add(TEntity item) => AddAsync(item, CancellationToken.None).Wait();
+		/// <inheritdoc />
+		public void Update(TEntity item) => UpdateAsync(item, CancellationToken.None).Wait();
+		/// <inheritdoc />
+		public void Delete(TEntity item) => DeleteAsync(item, CancellationToken.None).Wait();
+		/// <inheritdoc />
+		public TEntity Find(Expression<Func<TEntity, bool>> predicate = null) => FindAsync(predicate, CancellationToken.None).Result;
 	}
 }

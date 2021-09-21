@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace KamiSama.Repositories.Tests.Core
@@ -104,7 +105,7 @@ namespace KamiSama.Repositories.Tests.Core
 			var sample = new SampleEntity { Id = 1, Name = "sample" };
 			var repository = new InMemoryRepository<SampleEntity>();
 
-			await repository.AddAsync(sample);
+			await repository.AddAsync(sample, CancellationToken.None);
 
 			Assert.AreEqual(sample, repository.FirstOrDefault(x => true));
 		}
@@ -116,7 +117,7 @@ namespace KamiSama.Repositories.Tests.Core
 
 			sample.Name = "sample2";
 
-			await repository.UpdateAsync(sample);
+			await repository.UpdateAsync(sample, CancellationToken.None);
 
 			var retrieved = repository.Find(x => x.Name == "sample2");
 
@@ -131,7 +132,7 @@ namespace KamiSama.Repositories.Tests.Core
 			};
 			var repository = new InMemoryRepository<SampleEntity>(initialItems);
 
-			await repository.DeleteAsync(initialItems[0]);
+			await repository.DeleteAsync(initialItems[0], CancellationToken.None);
 
 			Assert.IsNull(repository.Find(x => x.Id == 1));
 		}
@@ -183,7 +184,7 @@ namespace KamiSama.Repositories.Tests.Core
 			};
 			var repository = new InMemoryRepository<SampleEntity>(initialItems);
 
-			var result = await repository.FindAsync(x => x.Id == 2);
+			var result = await repository.FindAsync(x => x.Id == 2, CancellationToken.None);
 
 			Assert.AreEqual(initialItems[1], result);
 		}
@@ -196,7 +197,7 @@ namespace KamiSama.Repositories.Tests.Core
 			};
 			var repository = new InMemoryRepository<SampleEntity>(initialItems);
 
-			var result = await repository.FindAsync(x => x.Id == 3);
+			var result = await repository.FindAsync(x => x.Id == 3, CancellationToken.None);
 
 			Assert.IsNull(result);
 		}
@@ -209,7 +210,7 @@ namespace KamiSama.Repositories.Tests.Core
 			};
 			var repository = new InMemoryRepository<SampleEntity>(initialItems);
 
-			var result = await repository.FindAsync(null);
+			var result = await repository.FindAsync(null, CancellationToken.None);
 
 			Assert.IsNull(result);
 		}

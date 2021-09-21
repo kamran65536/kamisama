@@ -45,9 +45,9 @@ namespace KamiSama.Extensions
 		/// </summary>
 		/// <param name="stream">the stream</param>
 		/// <param name="length">length of bytes to be read</param>
-		/// <param name="maxTries">maximum tries default value is int.MaxValue</param>
+		/// <param name="cancellationToken"></param>
 		/// <returns></returns>
-		public static async Task<byte[]> ReadExactAsync(this Stream stream, int length, int maxTries = int.MaxValue)
+		public static async Task<byte[]> ReadExactAsync(this Stream stream, int length, CancellationToken cancellationToken = default)
 		{
 			var buffer = new byte[length];
 
@@ -55,9 +55,9 @@ namespace KamiSama.Extensions
 
 			var tries = 0;
 
-			while ((tries < maxTries) && (bytesRead < length))
+			while ((bytesRead < length) && !cancellationToken.IsCancellationRequested)
 			{
-				var b = await stream.ReadAsync(buffer, bytesRead, length - bytesRead);
+				var b = await stream.ReadAsync(buffer, bytesRead, length - bytesRead, cancellationToken);
 
 				b = Math.Max(0, b);
 
