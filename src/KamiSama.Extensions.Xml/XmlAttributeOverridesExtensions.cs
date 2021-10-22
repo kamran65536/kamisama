@@ -12,7 +12,7 @@ namespace KamiSama.Extensions
 	public static class XmlAttributeOverridesExtensions
 	{
 		/// <summary>
-		/// Adds AutoXmlAttributes for root type <paramref name="rootType"/> and neccessary overrides
+		/// Adds AutoXmlAttributes for root type <paramref name="rootType"/> and necessary overrides
 		/// </summary>
 		/// <param name="overrides"></param>
 		/// <param name="assemblies"></param>
@@ -30,7 +30,7 @@ namespace KamiSama.Extensions
 			AddAutoXmlAttributes(overrides, rootType, allTypes);
 		}
 		/// <summary>
-		/// Adds AutoXmlAttributes for root type <paramref name="rootType"/> and neccessary overrides
+		/// Adds AutoXmlAttributes for root type <paramref name="rootType"/> and necessary overrides
 		/// </summary>
 		/// <param name="overrides"></param>
 		/// <param name="allTypes"></param>
@@ -42,7 +42,7 @@ namespace KamiSama.Extensions
 			VisitType(rootType, overrides, visitedTypes, allTypes);
 		}
 		/// <summary>
-		/// Visits the type and adds neccessary overrides
+		/// Visits the type and adds necessary overrides
 		/// </summary>
 		/// <param name="rootType"></param>
 		/// <param name="overrides"></param>
@@ -69,7 +69,7 @@ namespace KamiSama.Extensions
 				VisitField(field, overrides, visitedTypes, allTypes);
 		}
 		/// <summary>
-		/// Visits the field and adds neccessary overrides
+		/// Visits the field and adds necessary overrides
 		/// </summary>
 		/// <param name="field"></param>
 		/// <param name="overrides"></param>
@@ -86,7 +86,7 @@ namespace KamiSama.Extensions
 			VisitType(field.FieldType, overrides, visitedTypes, allTypes);
 		}
 		/// <summary>
-		/// Visits the property and adds neccessary overrides
+		/// Visits the property and adds necessary overrides
 		/// </summary>
 		/// <param name="property"></param>
 		/// <param name="overrides"></param>

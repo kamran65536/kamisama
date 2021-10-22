@@ -13,7 +13,7 @@ namespace KamiSama.Extensions
 		/// <summary>
 		/// Serializes the object into Xml using XmlSerializer
 		/// </summary>
-		/// <param name="obj">object to be serialied</param>
+		/// <param name="obj">object to be serialized</param>
 		/// <param name="settingsAction">action to configure xml serializer</param>
 		/// <param name="serializer">the custom xml serializer, default is null and new xml serializer will be created</param>
 		/// <returns></returns>

@@ -8,7 +8,7 @@ using System.Text.Json.Serialization;
 namespace KamiSama.Extensions.Json
 {
 	/// <summary>
-	/// Generic Json Hirerarchial Json Converter
+	/// Generic Json Hierarchical Json Converter
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
 	public class HirerarchialJsonConverter<T> : JsonConverter<T>
@@ -29,7 +29,7 @@ namespace KamiSama.Extensions.Json
 		public static void Register<TChild>(string discriminatorKeyValue) where TChild : T
 			=> typeMap[discriminatorKeyValue] = typeof(TChild);
 		/// <summary>
-		/// Registers a child type based on default descriminator value
+		/// Registers a child type based on default discriminator value
 		/// </summary>
 		/// <typeparam name="TChild"></typeparam>
 		public static void Register<TChild>() where TChild : T, new()
@@ -38,14 +38,14 @@ namespace KamiSama.Extensions.Json
 			Register<TChild>(discriminatorProperty.GetValue(instance) + "");
 		}
 		/// <summary>
-		/// Reigsters a child type to a key
+		/// Registers a child type to a key
 		/// </summary>
 		/// <param name="discriminatorKeyValue"></param>
 		/// <param name="type"></param>
 		public static void Register(string discriminatorKeyValue, Type type)
 			=> typeMap[discriminatorKeyValue] = type;
 		/// <summary>
-		/// construcrotor
+		/// constructor
 		/// </summary>
 		static HirerarchialJsonConverter()
 		{

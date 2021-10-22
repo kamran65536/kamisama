@@ -26,7 +26,6 @@ namespace KamiSama.Extensions.Xml.Tests
 		public void SerializeToXml_must_use_custom_serializer_if_available()
 		{
 			var a = new A { X = 10 };
-
 			var serializer = new XmlSerializer(typeof(A), new XmlRootAttribute { ElementName = "B", IsNullable = true });
 			var result = a.SerializeToXml(serializer: serializer);
 

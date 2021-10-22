@@ -137,7 +137,7 @@ namespace KamiSama.Extensions
 				return JsonSerializer.Deserialize<TObject>(str);
 		}
 		/// <summary>
-		/// Adds a hirarchial converter based on <see cref="HirerarchialJsonConverter{T}"/> to the options
+		/// Adds a hierarchical converter based on <see cref="HirerarchialJsonConverter{T}"/> to the options
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <param name="options"></param>
