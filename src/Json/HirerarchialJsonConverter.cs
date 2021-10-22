@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -39,6 +37,13 @@ namespace KamiSama.Extensions.Json
 			var instance = new TChild();
 			Register<TChild>(discriminatorProperty.GetValue(instance) + "");
 		}
+		/// <summary>
+		/// Reigsters a child type to a key
+		/// </summary>
+		/// <param name="discriminatorKeyValue"></param>
+		/// <param name="type"></param>
+		public static void Register(string discriminatorKeyValue, Type type)
+			=> typeMap[discriminatorKeyValue] = type;
 		/// <summary>
 		/// construcrotor
 		/// </summary>
@@ -80,7 +85,7 @@ namespace KamiSama.Extensions.Json
 
 			// Read the `discriminator` from our JSON document
 			using var jsonDocument = JsonDocument.ParseValue(ref reader);
-			
+
 			var jsonObject = jsonDocument.RootElement;
 
 			if (!jsonObject.TryGetProperty(discriminiatorMapKeyName, out JsonElement jsonElement))
