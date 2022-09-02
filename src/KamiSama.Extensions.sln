@@ -72,8 +72,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Extensions.Xml", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Extensions.Xml.Tests", "KamiSama.Extensions.Xml.Tests\KamiSama.Extensions.Xml.Tests.csproj", "{E651A60D-B001-4D60-A459-61A3744AB722}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Emit", "Emit", "{F0895B4B-3743-4CF2-84F1-6624B59E5484}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

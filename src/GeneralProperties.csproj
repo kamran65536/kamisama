@@ -3,6 +3,7 @@
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<LangVersion>preview</LangVersion>
 		<DebugType>Full</DebugType>
+		<Nullable>disable</Nullable>
 		<Version>2.5.0</Version>
 		<PackageProjectUrl>https://gitlab.com/kamran65536/KamiSama</PackageProjectUrl>
 		<RepositoryUrl>https://gitlab.com/kamran65536/KamiSama</RepositoryUrl>
