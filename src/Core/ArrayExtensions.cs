@@ -15,7 +15,7 @@ namespace KamiSama.Extensions
 		/// <param name="paddingCriteria">padding criteria</param>
 		/// <param name="paddingValue">the padding value</param>
 		/// <returns></returns>
-		public static TArrayItem[] Pad<TArrayItem>(this TArrayItem[] arr, Func<int, bool> paddingCriteria, TArrayItem paddingValue = default)
+		public static TArrayItem[] Pad<TArrayItem>(this TArrayItem[] arr, Func<int, bool> paddingCriteria, TArrayItem paddingValue = default!)
 		{
 			var newSize = arr.Length;
 			while (!paddingCriteria(newSize))
@@ -32,7 +32,7 @@ namespace KamiSama.Extensions
 		/// <param name="paddingValue">the padding value</param>
 		/// <returns></returns>
 		/// <exception cref="ArgumentException">if new size is smaller than array's size</exception>
-		public static TArrayItem[] Pad<TArrayItem>(this TArrayItem[] arr, int newSize, TArrayItem paddingValue = default)
+		public static TArrayItem[] Pad<TArrayItem>(this TArrayItem[] arr, int newSize, TArrayItem paddingValue = default!)
 		{
 			if (newSize == arr.Length)
 				return arr;

@@ -23,11 +23,11 @@ namespace KamiSama.Repositories.Xml
 		/// <summary>
 		/// raised when loading items from file fails
 		/// </summary>
-		public event Action<XmlDirectoryRepository<TEntity>, Exception> LoadFailed;
+		public event Action<XmlDirectoryRepository<TEntity>, Exception>? LoadFailed;
 		/// <summary>
 		/// raised when saving items to file fails
 		/// </summary>
-		public event Action<XmlDirectoryRepository<TEntity>, Exception> SaveFailed;
+		public event Action<XmlDirectoryRepository<TEntity>, Exception>? SaveFailed;
 		/// <summary>
 		/// xml directory path
 		/// </summary>
@@ -35,15 +35,15 @@ namespace KamiSama.Repositories.Xml
 		/// <summary>
 		/// internal entities collection
 		/// </summary>
-		internal HashSet<TEntity> entities;
+		internal HashSet<TEntity>? entities;
 		/// <summary>
 		/// semaphore for concurrent scenarios
 		/// </summary>
 		private readonly SemaphoreSlim semaphore;
 		/// <summary>
-		/// equality comparer for hashset
+		/// equality comparer for HashSet
 		/// </summary>
-		private readonly IEqualityComparer<TEntity> equalityComparer;
+		private readonly IEqualityComparer<TEntity>? equalityComparer;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -60,7 +60,10 @@ namespace KamiSama.Repositories.Xml
 		/// <param name="equalityComparer"></param>
 		/// <param name="serializer"></param>
 		/// <param name="fileNameFunc"></param>
-		public XmlDirectoryRepository(string filePath, Func<TEntity, string> fileNameFunc, XmlSerializer serializer = null, IEqualityComparer<TEntity> equalityComparer = null)
+		public XmlDirectoryRepository(string filePath,
+								Func<TEntity, string> fileNameFunc,
+								XmlSerializer? serializer = null,
+								IEqualityComparer<TEntity>? equalityComparer = null)
 		{
 			this.directoryPath = filePath;
 			this.equalityComparer = equalityComparer;
@@ -133,9 +136,9 @@ namespace KamiSama.Repositories.Xml
 			{
 				action();
 
-				foreach (var entity in entities)
+				foreach (var entity in entities!)
 				{
-					await File.WriteAllTextAsync(directoryPath, entity.SerializeToXml(), cancellationToken);
+					await File.WriteAllTextAsync(directoryPath, entity!.SerializeToXml(), cancellationToken);
 				}
 			}
 			catch (Exception exp)
@@ -160,15 +163,15 @@ namespace KamiSama.Repositories.Xml
 		}
 		/// <inheritdoc />
 		public Task AddAsync(TEntity item, CancellationToken cancellationToken = default)
-			=> ModifyAndSaveToFileAsync(() => entities.Add(item), cancellationToken);
+			=> ModifyAndSaveToFileAsync(() => entities!.Add(item), cancellationToken);
 		/// <inheritdoc />
 		public Task DeleteAsync(TEntity item, CancellationToken cancellationToken = default)
-			=> ModifyAndSaveToFileAsync(() => entities.Remove(item), cancellationToken);
+			=> ModifyAndSaveToFileAsync(() => entities!.Remove(item), cancellationToken);
 		/// <inheritdoc />
 		public Task UpdateAsync(TEntity item, CancellationToken cancellationToken = default)
 			=> ModifyAndSaveToFileAsync(() => { }, cancellationToken);
 		/// <inheritdoc />
-		public async Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
+		public async Task<TEntity?> FindAsync(Expression<Func<TEntity, bool>>? predicate, CancellationToken cancellationToken = default)
 		{
 			if (!await TryLoadFileAsync(false, cancellationToken))
 				return default;
@@ -178,7 +181,7 @@ namespace KamiSama.Repositories.Xml
 				return entities.FirstOrDefault(predicate.Compile());
 		}
 		/// <inheritdoc />
-		public async Task<IQueryable<TEntity>> WhereAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
+		public async Task<IQueryable<TEntity>> WhereAsync(Expression<Func<TEntity, bool>>? predicate, CancellationToken cancellationToken = default)
 		{
 			if (!await TryLoadFileAsync(false, cancellationToken))
 				return Empty;
@@ -188,7 +191,7 @@ namespace KamiSama.Repositories.Xml
 				return entities.Where(predicate.Compile()).AsQueryable();
 		}
 		/// <inheritdoc />
-		public IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> predicate = null)
+		public IQueryable<TEntity> Where(Expression<Func<TEntity, bool>>? predicate = null)
 			=> WhereAsync(predicate, CancellationToken.None).Result;
 		/// <inheritdoc />
 		public void Add(TEntity item) => AddAsync(item, CancellationToken.None).Wait();
@@ -197,6 +200,6 @@ namespace KamiSama.Repositories.Xml
 		/// <inheritdoc />
 		public void Delete(TEntity item) => DeleteAsync(item, CancellationToken.None).Wait();
 		/// <inheritdoc />
-		public TEntity Find(Expression<Func<TEntity, bool>> predicate = null) => FindAsync(predicate, CancellationToken.None).Result;
+		public TEntity? Find(Expression<Func<TEntity, bool>>? predicate = null) => FindAsync(predicate, CancellationToken.None).Result;
 	}
 }

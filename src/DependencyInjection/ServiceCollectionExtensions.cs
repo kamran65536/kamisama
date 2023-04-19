@@ -26,7 +26,7 @@ namespace KamiSama.Extensions.DependencyInjection
 			var factoryType = typeof(NamedFactory<>);
 			factoryType = factoryType.MakeGenericType(serviceType);
 
-			NamedFactory factory = null;
+			NamedFactory? factory = null;
 			var serviceDescriptor = services.FirstOrDefault(x => x.ServiceType == factoryType);
 
 			if (serviceDescriptor == null)
@@ -35,7 +35,7 @@ namespace KamiSama.Extensions.DependencyInjection
 				services.AddSingleton(factoryType, factory);
 			}
 			else
-				factory = (NamedFactory)serviceDescriptor.ImplementationInstance;
+				factory = (NamedFactory)serviceDescriptor.ImplementationInstance!;
 
 			factory.Register(name, implementationType);
 
@@ -238,7 +238,7 @@ namespace KamiSama.Extensions.DependencyInjection
 		#endregion
 		#region Automatic Dependency Injection
 		/// <summary>
-		/// Automatically adds dependency injections using <see cref="InjectAttribute"/>
+		/// Automatically adds dependency injections using <see cref="AutoInjectAttribute"/>
 		/// </summary>
 		/// <param name="services"></param>
 		/// <param name="assemblies">list of assemblies to search, null means all assemblies</param>

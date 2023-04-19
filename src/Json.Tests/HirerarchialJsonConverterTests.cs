@@ -13,7 +13,7 @@ namespace KamiSama.Extensions.Json.Tests
 	}
 	public class TestClassWithConverter
 	{
-		[JsonConverter(typeof(HirerarchialJsonConverter<SampleBaseClass>))]
+		[JsonConverter(typeof(HierarchicalJsonConverter<SampleBaseClass>))]
 		public SampleBaseClass Configuration { get; set; }
 	}
 	public class TestClassWithoutConverter
@@ -34,15 +34,15 @@ namespace KamiSama.Extensions.Json.Tests
 		[TestMethod]
 		public void HirarchialJsonConverter_constructor_must_throw_TypeInitializationException_if_no_JsonHirerarchyDiscriminatorAttribute_exists()
 		{
-			Assert.ThrowsException<TypeInitializationException>(() => new HirerarchialJsonConverter<BaseClassWithoutDiscriminatorProperty>());
+			Assert.ThrowsException<TypeInitializationException>(() => new HierarchicalJsonConverter<BaseClassWithoutDiscriminatorProperty>());
 		}
 		[TestMethod]
 		public void Register_must_add_conifguration_to_typeMaps()
 		{
-			HirerarchialJsonConverter<SampleBaseClass>.typeMap.Clear();
-			HirerarchialJsonConverter<SampleBaseClass>.Register<SampleClass>();
+			HierarchicalJsonConverter<SampleBaseClass>.typeMap.Clear();
+			HierarchicalJsonConverter<SampleBaseClass>.Register<SampleClass>();
 
-			Assert.IsTrue(HirerarchialJsonConverter<SampleBaseClass>.typeMap[new SampleClass().Discriminator] == typeof(SampleClass));
+			Assert.IsTrue(HierarchicalJsonConverter<SampleBaseClass>.typeMap[new SampleClass().Discriminator] == typeof(SampleClass));
 		}
 		[TestMethod]
 		public void Write_must_write_conifguration_with_no_change()
@@ -79,7 +79,7 @@ namespace KamiSama.Extensions.Json.Tests
 		[TestMethod]
 		public void Read_must_throw_NotSupportedException_if_discriminator_property_is_not_recognized()
 		{
-			HirerarchialJsonConverter<SampleBaseClass>.typeMap.Clear();
+			HierarchicalJsonConverter<SampleBaseClass>.typeMap.Clear();
 
 			var testClass = new TestClassWithConverter
 			{
@@ -106,8 +106,8 @@ namespace KamiSama.Extensions.Json.Tests
 		[TestMethod]
 		public void Read_must_read_configuration_types_based_on_ChannelType()
 		{
-			HirerarchialJsonConverter<SampleBaseClass>.typeMap.Clear();
-			HirerarchialJsonConverter<SampleBaseClass>.typeMap["sample1"] = typeof(SampleClass);
+			HierarchicalJsonConverter<SampleBaseClass>.typeMap.Clear();
+			HierarchicalJsonConverter<SampleBaseClass>.typeMap["sample1"] = typeof(SampleClass);
 
 			var testClass = new TestClassWithConverter
 			{

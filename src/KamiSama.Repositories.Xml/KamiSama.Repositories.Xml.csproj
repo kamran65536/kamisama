@@ -9,8 +9,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\KamiSama.Extensions.Xml\KamiSama.Extensions.Xml.csproj" />
 		<ProjectReference Include="..\Repositories.Core\KamiSama.Repositories.Core.csproj" />
+		<ProjectReference Include="..\Xml\KamiSama.Extensions.Xml.csproj" />
 	</ItemGroup>
 
 </Project>

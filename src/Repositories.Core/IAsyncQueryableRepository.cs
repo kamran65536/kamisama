@@ -15,6 +15,6 @@ namespace KamiSama.Repositories
 		/// </summary>
 		/// <param name="predicate"></param>
 		/// <returns></returns>
-		IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> predicate = null);
+		IQueryable<TEntity> Where(Expression<Func<TEntity, bool>>? predicate = null);
 	}
 }

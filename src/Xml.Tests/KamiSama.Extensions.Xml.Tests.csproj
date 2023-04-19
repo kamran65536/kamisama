@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\KamiSama.Extensions.Xml\KamiSama.Extensions.Xml.csproj" />
+    <ProjectReference Include="..\Xml\KamiSama.Extensions.Xml.csproj" />
   </ItemGroup>
 
 </Project>

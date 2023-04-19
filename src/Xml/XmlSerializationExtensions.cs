@@ -17,7 +17,9 @@ namespace KamiSama.Extensions
 		/// <param name="settingsAction">action to configure xml serializer</param>
 		/// <param name="serializer">the custom xml serializer, default is null and new xml serializer will be created</param>
 		/// <returns></returns>
-		public static string SerializeToXml(this object obj, Action<XmlWriterSettings> settingsAction = null, XmlSerializer serializer = null)
+		public static string SerializeToXml(this object obj,
+									  Action<XmlWriterSettings>? settingsAction = null,
+									  XmlSerializer? serializer = null)
 		{
 			serializer ??= new XmlSerializer(obj.GetType());
 
@@ -40,7 +42,7 @@ namespace KamiSama.Extensions
 		/// <param name="str">string to be deserialized</param>
 		/// <param name="serializer">the custom xml serializer, default is null and new xml serializer will be created</param>
 		/// <returns></returns>
-		public static TObject DeserializeFromXml<TObject>(this string str, XmlSerializer serializer = null)
+		public static TObject DeserializeFromXml<TObject>(this string str, XmlSerializer? serializer = null)
 		{
 			serializer ??= new XmlSerializer(typeof(TObject));
 

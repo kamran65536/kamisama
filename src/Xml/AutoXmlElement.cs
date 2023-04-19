@@ -11,7 +11,7 @@ namespace KamiSama.Extensions
 		/// inner element
 		/// </summary>
 		[AutoXmlElement]
-		public TValue Value { get; set; }
+		public TValue Value { get; set; } = default!;
 		/// <summary>
 		/// implicit operator to convert <typeparamref name="TValue"/> to <see cref="AutoXmlElement{TElement}"/>
 		/// </summary>

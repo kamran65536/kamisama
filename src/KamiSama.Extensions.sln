@@ -33,6 +33,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Repositories.Tests
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7DC27342-54E1-4AC5-ACF8-BF0DF7A28304}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		..\.gitlab-ci.yml = ..\.gitlab-ci.yml
 		GeneralProperties.csproj = GeneralProperties.csproj
 		test-configs.runsettings = test-configs.runsettings
@@ -53,6 +54,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{C6941067-E
 		..\docs\5-repositories.md = ..\docs\5-repositories.md
 		..\docs\6-nlog.md = ..\docs\6-nlog.md
 		..\docs\7-iran-system.md = ..\docs\7-iran-system.md
+		..\docs\8-chassis.md = ..\docs\8-chassis.md
 		..\readme.md = ..\readme.md
 	EndProjectSection
 EndProject
@@ -68,9 +70,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Repositories.Xml",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Xml", "Xml", "{71868FA6-3A12-47E6-83FB-378374A0290C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Extensions.Xml", "KamiSama.Extensions.Xml\KamiSama.Extensions.Xml.csproj", "{01AE1738-B41E-4D5C-A4A2-9C956FDE26E3}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Chassis", "Chassis", "{A27AF119-9A0B-4F65-8889-04E2862E9083}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Extensions.Xml.Tests", "KamiSama.Extensions.Xml.Tests\KamiSama.Extensions.Xml.Tests.csproj", "{E651A60D-B001-4D60-A459-61A3744AB722}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Extensions.Xml", "Xml\KamiSama.Extensions.Xml.csproj", "{E8578717-FD85-44BE-A153-12D2BFB11F9E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Extensions.Xml.Tests", "Xml.Tests\KamiSama.Extensions.Xml.Tests.csproj", "{05C17250-CAC0-46C9-A1CB-BE8142597FD5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Chassis.HttpExceptions", "Chassis.Exceptions\KamiSama.Chassis.HttpExceptions.csproj", "{D513214D-4186-4AF7-B676-7229EF9DDC20}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KamiSama.Chassis.ProblemDetails", "Chassis.ProblemDetails\KamiSama.Chassis.ProblemDetails.csproj", "{0C455020-1050-49B6-B792-F613B723437E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -142,14 +150,22 @@ Global
 		{33AAE54B-F6F9-4025-A6BB-38E941669A35}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33AAE54B-F6F9-4025-A6BB-38E941669A35}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33AAE54B-F6F9-4025-A6BB-38E941669A35}.Release|Any CPU.Build.0 = Release|Any CPU
-		{01AE1738-B41E-4D5C-A4A2-9C956FDE26E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{01AE1738-B41E-4D5C-A4A2-9C956FDE26E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{01AE1738-B41E-4D5C-A4A2-9C956FDE26E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{01AE1738-B41E-4D5C-A4A2-9C956FDE26E3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E651A60D-B001-4D60-A459-61A3744AB722}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E651A60D-B001-4D60-A459-61A3744AB722}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E651A60D-B001-4D60-A459-61A3744AB722}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E651A60D-B001-4D60-A459-61A3744AB722}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8578717-FD85-44BE-A153-12D2BFB11F9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8578717-FD85-44BE-A153-12D2BFB11F9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8578717-FD85-44BE-A153-12D2BFB11F9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8578717-FD85-44BE-A153-12D2BFB11F9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05C17250-CAC0-46C9-A1CB-BE8142597FD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05C17250-CAC0-46C9-A1CB-BE8142597FD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05C17250-CAC0-46C9-A1CB-BE8142597FD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05C17250-CAC0-46C9-A1CB-BE8142597FD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D513214D-4186-4AF7-B676-7229EF9DDC20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D513214D-4186-4AF7-B676-7229EF9DDC20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D513214D-4186-4AF7-B676-7229EF9DDC20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D513214D-4186-4AF7-B676-7229EF9DDC20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C455020-1050-49B6-B792-F613B723437E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C455020-1050-49B6-B792-F613B723437E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C455020-1050-49B6-B792-F613B723437E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C455020-1050-49B6-B792-F613B723437E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -172,8 +188,10 @@ Global
 		{856BECC5-74BA-4ED7-A39A-00EA7AAEDA63} = {17932BAB-D52B-4834-8B67-5A41F99A27C7}
 		{727F19D9-E62A-4F0C-8005-94D78F663D25} = {17932BAB-D52B-4834-8B67-5A41F99A27C7}
 		{33AAE54B-F6F9-4025-A6BB-38E941669A35} = {63220787-F3BB-4595-BC04-5C2F9593EE20}
-		{01AE1738-B41E-4D5C-A4A2-9C956FDE26E3} = {71868FA6-3A12-47E6-83FB-378374A0290C}
-		{E651A60D-B001-4D60-A459-61A3744AB722} = {71868FA6-3A12-47E6-83FB-378374A0290C}
+		{E8578717-FD85-44BE-A153-12D2BFB11F9E} = {71868FA6-3A12-47E6-83FB-378374A0290C}
+		{05C17250-CAC0-46C9-A1CB-BE8142597FD5} = {71868FA6-3A12-47E6-83FB-378374A0290C}
+		{D513214D-4186-4AF7-B676-7229EF9DDC20} = {A27AF119-9A0B-4F65-8889-04E2862E9083}
+		{0C455020-1050-49B6-B792-F613B723437E} = {A27AF119-9A0B-4F65-8889-04E2862E9083}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {460D8DAE-DDB3-4A1F-A520-DE0634822553}

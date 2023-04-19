@@ -16,7 +16,7 @@ namespace KamiSama.Extensions.Json
 		/// <param name="typeToConvert"></param>
 		/// <param name="options"></param>
 		/// <returns></returns>
-		public override byte[] Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		public override byte[]? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
 			// Check for null values
 			if (reader.TokenType == JsonTokenType.Null)

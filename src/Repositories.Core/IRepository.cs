@@ -29,6 +29,6 @@ namespace KamiSama.Repositories
 		/// </summary>
 		/// <param name="predicate">the predicate to search, if null it returns null</param>
 		/// <returns></returns>
-		TEntity Find(Expression<Func<TEntity, bool>> predicate = null);
+		TEntity? Find(Expression<Func<TEntity, bool>>? predicate = null);
     }
 }

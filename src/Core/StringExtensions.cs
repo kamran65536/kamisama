@@ -14,13 +14,13 @@ namespace KamiSama.Extensions
 		/// <param name="str">the string to be converted</param>
 		/// <param name="encoding">encoding, default is Encoding.UTF8</param>
 		/// <returns></returns>
-		public static byte[] ToBytes(this string str, Encoding encoding = null)
+		public static byte[] ToBytes(this string str, Encoding? encoding = null)
 			=> (encoding ?? Encoding.UTF8).GetBytes(str ?? "");
 		/// <summary>
 		/// Converts hexadecimal string to byte array
 		/// </summary>
 		/// <param name="hex">hexadecimal string</param>
-		/// <returns>equivalant byte array</returns>
+		/// <returns>equivalent byte array</returns>
 		public static byte[] FromHex(this string hex)
 		{
 			var org = hex;

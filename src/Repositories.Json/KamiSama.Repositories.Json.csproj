@@ -7,6 +7,9 @@
 99-04-31 JsonRepository is added</PackageReleaseNotes>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 	</PropertyGroup>
+	<ItemGroup>
+	  <None Include="..\.editorconfig" Link=".editorconfig" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\Json\KamiSama.Extensions.Json.csproj" />

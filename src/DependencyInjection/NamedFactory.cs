@@ -39,7 +39,7 @@ namespace KamiSama.Extensions.DependencyInjection
 		public void Register<_ImplementationType>(string name)
 			=> Register(name, typeof(_ImplementationType));
 		/// <summary>
-		/// Finds a imeplemntation type and returns an instance using service provider
+		/// Finds a implementation type and returns an instance using service provider
 		/// </summary>
 		/// <param name="serviceProvider">service provider</param>
 		/// <param name="name">name of the implementation</param>

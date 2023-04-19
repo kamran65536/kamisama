@@ -4,7 +4,7 @@ using System.Text;
 namespace KamiSama.Extensions
 {
 	/// <summary>
-	/// Hashing Extesions
+	/// Hashing Extensions
 	/// </summary>
 	public static class HashExtensions
 	{
@@ -13,7 +13,7 @@ namespace KamiSama.Extensions
 
 		#region Generic Hashing
 		/// <summary>
-		/// Computes hash for an hasing algorithm
+		/// Computes hash for an hashing algorithm
 		/// </summary>
 		/// <param name="data">the data to be hashed</param>
 		/// <param name="algorithm">the hashing algorithm</param>
@@ -21,7 +21,7 @@ namespace KamiSama.Extensions
 		public static byte[] ComputeHash(this byte[] data, HashAlgorithm algorithm)
 			=> algorithm.ComputeHash(data);
 		/// <summary>
-		/// Computes hash and then converts it to hexadecial
+		/// Computes hash and then converts it to hexadecimal
 		/// </summary>
 		/// <param name="data">the data to be hashed</param>
 		/// <param name="algorithm">the hashing algorithm</param>
@@ -29,22 +29,22 @@ namespace KamiSama.Extensions
 		public static string ComputeHashHex(this byte[] data, HashAlgorithm algorithm)
 			=> data.ComputeHash(algorithm).ToHex();
 		/// <summary>
-		/// Computes hash for byte array equivalant string data
+		/// Computes hash for byte array equivalent string data
 		/// </summary>
 		/// <param name="data">the data to be hashed</param>
 		/// <param name="algorithm">the hashing algorithm</param>
 		/// <param name="encoding">encoding used to convert string to byte array, default is UTF8</param>
 		/// <returns></returns>
-		public static byte[] ComputeHash(this string data, HashAlgorithm algorithm, Encoding encoding = null)
+		public static byte[] ComputeHash(this string data, HashAlgorithm algorithm, Encoding? encoding = null)
 			=> data.ToBytes(encoding ?? Encoding.UTF8).ComputeHash(algorithm);
 		/// <summary>
-		/// Computes hash for byte array equivalant string data and then converts it to hexadecial
+		/// Computes hash for byte array equivalent string data and then converts it to hexadecimal
 		/// </summary>
 		/// <param name="data">the data to be hashed</param>
 		/// <param name="algorithm">the hashing algorithm</param>
 		/// <param name="encoding">encoding used to convert string to byte array, default is UTF8</param>
 		/// <returns>hexadecimal hashed data</returns>
-		public static string ComputeHashHex(this string data, HashAlgorithm algorithm, Encoding encoding = null)
+		public static string ComputeHashHex(this string data, HashAlgorithm algorithm, Encoding? encoding = null)
 			=> data.ToBytes(encoding ?? Encoding.UTF8).ComputeHash(algorithm).ToHex();
 		#endregion
 		#region MD5
@@ -68,7 +68,7 @@ namespace KamiSama.Extensions
 		/// <param name="data">data to be hashed</param>
 		/// <param name="encoding">encoding used to convert string to byte array, default is UTF8</param>
 		/// <returns></returns>
-		public static byte[] GetMd5(this string data, Encoding encoding = null)
+		public static byte[] GetMd5(this string data, Encoding? encoding = null)
 			=> data.ComputeHash(md5, encoding);
 		/// <summary>
 		/// returns MD5 hash for data
@@ -76,7 +76,7 @@ namespace KamiSama.Extensions
 		/// <param name="data">data to be hashed</param>
 		/// <param name="encoding">encoding used to convert string to byte array, default is UTF8</param>
 		/// <returns></returns>
-		public static string GetMd5Hex(this string data, Encoding encoding = null)
+		public static string GetMd5Hex(this string data, Encoding? encoding = null)
 			=> data.ComputeHashHex(md5, encoding);
 		#endregion
 		#region Sha1
@@ -99,7 +99,7 @@ namespace KamiSama.Extensions
 		/// <param name="data">data to be hashed</param>
 		/// <param name="encoding">encoding used to convert string to byte array, default is UTF8</param>
 		/// <returns></returns>
-		public static byte[] GetSha1(this string data, Encoding encoding = null)
+		public static byte[] GetSha1(this string data, Encoding? encoding = null)
 			=> data.ComputeHash(sha1, encoding);
 		/// <summary>
 		/// returns SHA1 hash for data
@@ -107,7 +107,7 @@ namespace KamiSama.Extensions
 		/// <param name="data">data to be hashed</param>
 		/// <param name="encoding">encoding used to convert string to byte array, default is UTF8</param>
 		/// <returns></returns>
-		public static string GetSha1Hex(this string data, Encoding encoding = null)
+		public static string GetSha1Hex(this string data, Encoding? encoding = null)
 			=> data.ComputeHashHex(sha1, encoding);
 		#endregion
 	}

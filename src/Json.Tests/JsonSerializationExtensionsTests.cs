@@ -108,9 +108,9 @@ namespace KamiSama.Extensions.Json.Tests
 		{
 			var options = new JsonSerializerOptions();
 
-			Assert.IsFalse(options.Converters.Any(x => x is HirerarchialJsonConverter<SampleBaseClass>));
-			options.AddHirerarchialConverter<SampleBaseClass>();
-			Assert.IsTrue(options.Converters.Any(x => x is HirerarchialJsonConverter<SampleBaseClass>));
+			Assert.IsFalse(options.Converters.Any(x => x is HierarchicalJsonConverter<SampleBaseClass>));
+			options.AddHierarchicalConverter<SampleBaseClass>();
+			Assert.IsTrue(options.Converters.Any(x => x is HierarchicalJsonConverter<SampleBaseClass>));
 		}
 		[TestMethod]
 		public void TimeSpanJsonConverter_must_add_TimeSpanJsonConverter_to_options_Converters()
@@ -118,7 +118,7 @@ namespace KamiSama.Extensions.Json.Tests
 			var options = new JsonSerializerOptions();
 
 			Assert.IsFalse(options.Converters.Any(x => x is TimeSpanJsonConverter));
-			options.AddTimeSpanJsonConveter();
+			options.AddTimeSpanJsonConverter();
 			Assert.IsTrue(options.Converters.Any(x => x is TimeSpanJsonConverter));
 		}
 		[TestMethod]

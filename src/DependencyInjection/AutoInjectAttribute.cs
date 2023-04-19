@@ -14,21 +14,11 @@ namespace KamiSama.Extensions.DependencyInjection
 		/// <summary>
 		/// Service Type
 		/// </summary>
-		public Type ServiceType { get; set; }
+		public Type? ServiceType { get; set; }
 		/// <summary>
 		/// Service Lifetime (default is Transient)
 		/// </summary>
-		public ServiceLifetime Lifetime { get; set; }
-		/// <summary>
-		/// constructor
-		/// </summary>
-		/// <param name="serviceType">if null, the default interface will be used</param>
-		/// <param name="lifetime">service lifetime, default is Transient</param>
-		public AutoInjectAttribute(Type serviceType = null, ServiceLifetime lifetime = ServiceLifetime.Transient)
-		{
-			this.Lifetime = lifetime;
-			this.ServiceType = serviceType;
-		}
+		public ServiceLifetime Lifetime { get; set; } = ServiceLifetime.Transient;
 		/// <summary>
 		/// Add binding to the service
 		/// </summary>

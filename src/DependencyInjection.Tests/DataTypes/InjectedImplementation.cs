@@ -2,7 +2,7 @@
 
 namespace KamiSama.Extensions.DependencyInjection.Tests.DataTypes
 {
-	[AutoInject(lifetime: ServiceLifetime.Singleton)]
+	[AutoInject(Lifetime = ServiceLifetime.Singleton)]
 	class InjectedImplementation : ISampleInteface
 	{
 		public int X { get; set; }

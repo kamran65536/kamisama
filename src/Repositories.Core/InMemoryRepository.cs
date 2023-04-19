@@ -25,7 +25,8 @@ namespace KamiSama.Repositories
 		/// </summary>
 		/// <param name="initialItems"></param>
 		/// <param name="comparer"></param>
-		public InMemoryRepository(IEnumerable<TEntity> initialItems, IEqualityComparer<TEntity> comparer = null)
+		public InMemoryRepository(IEnumerable<TEntity>? initialItems,
+							IEqualityComparer<TEntity>? comparer = null)
 		{
 			initialItems ??= new TEntity[0];
 			semaphore = new SemaphoreSlim(1, 1);
@@ -82,14 +83,14 @@ namespace KamiSama.Repositories
 		/// </summary>
 		/// <param name="predicate">the predicate to search, if null it returns all items</param>
 		/// <returns></returns>
-		public virtual IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> predicate = null)
+		public virtual IQueryable<TEntity> Where(Expression<Func<TEntity, bool>>? predicate = null)
 			=> (predicate == null) ? items.AsQueryable() : items.Where(predicate.Compile()).AsQueryable();
 		/// <summary>
 		/// Finds an single item in the repository
 		/// </summary>
 		/// <param name="predicate">the predicate to search, if null it returns null</param>
 		/// <returns></returns>
-		public virtual TEntity Find(Expression<Func<TEntity, bool>> predicate)
+		public virtual TEntity? Find(Expression<Func<TEntity, bool>>? predicate)
 			=> (predicate == null) ? default : items.FirstOrDefault(predicate.Compile());
 		///
 		public virtual async Task AddAsync(TEntity item, CancellationToken cancellationToken = default)
@@ -108,7 +109,7 @@ namespace KamiSama.Repositories
 			semaphore.Release();
 		}
 		/// <inheritdoc />
-		public virtual Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
+		public virtual Task<TEntity?> FindAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
 			=> Task.FromResult(Find(predicate));
 	}
 }

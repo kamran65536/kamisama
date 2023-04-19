@@ -11,11 +11,11 @@ namespace KamiSama.Extensions.Json
 	/// Generic Json Hierarchical Json Converter
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
-	public class HirerarchialJsonConverter<T> : JsonConverter<T>
+	public class HierarchicalJsonConverter<T> : JsonConverter<T>
 		where T : class
 	{
 		private static readonly Type type;
-		private static readonly string discriminiatorMapKeyName;
+		private static readonly string discriminatorMapKeyName;
 		private static readonly PropertyInfo discriminatorProperty;
 		/// <summary>
 		/// map from discriminator key value to child type
@@ -47,7 +47,7 @@ namespace KamiSama.Extensions.Json
 		/// <summary>
 		/// constructor
 		/// </summary>
-		static HirerarchialJsonConverter()
+		static HierarchicalJsonConverter()
 		{
 			type = typeof(T);
 			discriminatorProperty = type.GetProperties().FirstOrDefault(x => x.GetCustomAttribute<JsonHirerarchyDiscriminatorAttribute>() != null);
@@ -57,7 +57,7 @@ namespace KamiSama.Extensions.Json
 
 			var attr = discriminatorProperty.GetCustomAttribute<JsonPropertyNameAttribute>();
 
-			discriminiatorMapKeyName = attr?.Name ?? discriminatorProperty.Name;
+			discriminatorMapKeyName = attr?.Name ?? discriminatorProperty.Name;
 		}
 		/// <summary>
 		/// Writes a channel configuration (basically this method simply calls JsonSerializer.Serialize method)
@@ -66,7 +66,7 @@ namespace KamiSama.Extensions.Json
 		/// <param name="value"></param>
 		/// <param name="options"></param>
 		public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
-			=> JsonSerializer.Serialize(writer, value, value?.GetType(), options);
+			=> JsonSerializer.Serialize(writer, value, value?.GetType() ?? typeof(object), options);
 		/// <summary>
 		/// Reads a <typeparamref name="T"/> from an input json and converts based on key
 		/// </summary>
@@ -74,7 +74,7 @@ namespace KamiSama.Extensions.Json
 		/// <param name="typeToConvert"></param>
 		/// <param name="options"></param>
 		/// <returns></returns>
-		public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		public override T? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
 			// Check for null values
 			if (reader.TokenType == JsonTokenType.Null)
@@ -88,8 +88,8 @@ namespace KamiSama.Extensions.Json
 
 			var jsonObject = jsonDocument.RootElement;
 
-			if (!jsonObject.TryGetProperty(discriminiatorMapKeyName, out JsonElement jsonElement))
-				throw new Exception($"{discriminiatorMapKeyName} is not found in the json. It is mandatory.");
+			if (!jsonObject.TryGetProperty(discriminatorMapKeyName, out JsonElement jsonElement))
+				throw new Exception($"{discriminatorMapKeyName} is not found in the json. It is mandatory.");
 
 			var key = jsonElement
 				.GetString();

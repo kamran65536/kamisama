@@ -23,11 +23,11 @@ namespace KamiSama.Repositories.Json
 		/// <summary>
 		/// raised when loading items from file fails
 		/// </summary>
-		public event Action<JsonRepository<TEntity>, Exception> LoadFailed;
+		public event Action<JsonRepository<TEntity>, Exception>? LoadFailed;
 		/// <summary>
 		/// raised when saving items to file fails
 		/// </summary>
-		public event Action<JsonRepository<TEntity>, Exception> SaveFailed;
+		public event Action<JsonRepository<TEntity>, Exception>? SaveFailed;
 		/// <summary>
 		/// json file path
 		/// </summary>
@@ -35,21 +35,22 @@ namespace KamiSama.Repositories.Json
 		/// <summary>
 		/// internal entities collection
 		/// </summary>
-		internal HashSet<TEntity> entities;
+		internal HashSet<TEntity>? entities;
 		/// <summary>
 		/// semaphore for concurrent scenarios
 		/// </summary>
 		private readonly SemaphoreSlim semaphore;
 		/// <summary>
-		/// equality comparer for hashset
+		/// equality comparer for hash set
 		/// </summary>
-		private readonly IEqualityComparer<TEntity> equalityComparer;
+		private readonly IEqualityComparer<TEntity>? equalityComparer;
 		/// <summary>
 		/// constructor
 		/// </summary>
 		/// <param name="filePath">path to json file as repository</param>
 		/// <param name="equalityComparer"></param>
-		public JsonRepository(string filePath, IEqualityComparer<TEntity> equalityComparer = null)
+		public JsonRepository(string filePath,
+						IEqualityComparer<TEntity>? equalityComparer = null)
 		{
 			this.filePath = filePath;
 			this.equalityComparer = equalityComparer;
@@ -135,15 +136,15 @@ namespace KamiSama.Repositories.Json
 		}
 		/// <inheritdoc />
 		public Task AddAsync(TEntity item, CancellationToken cancellationToken = default)
-			=> ModifyAndSaveToFileAsync(() => entities.Add(item), cancellationToken);
+			=> ModifyAndSaveToFileAsync(() => entities?.Add(item), cancellationToken);
 		/// <inheritdoc />
 		public Task DeleteAsync(TEntity item, CancellationToken cancellationToken = default)
-			=> ModifyAndSaveToFileAsync(() => entities.Remove(item), cancellationToken);
+			=> ModifyAndSaveToFileAsync(() => entities?.Remove(item), cancellationToken);
 		/// <inheritdoc />
 		public Task UpdateAsync(TEntity item, CancellationToken cancellationToken = default)
 			=> ModifyAndSaveToFileAsync(() => { }, cancellationToken);
 		/// <inheritdoc />
-		public async Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
+		public async Task<TEntity?> FindAsync(Expression<Func<TEntity, bool>>? predicate, CancellationToken cancellationToken = default)
 		{
 			if (!await TryLoadFileAsync(false, cancellationToken))
 				return default;
@@ -153,7 +154,7 @@ namespace KamiSama.Repositories.Json
 				return entities.FirstOrDefault(predicate.Compile());
 		}
 		/// <inheritdoc />
-		public async Task<IQueryable<TEntity>> WhereAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
+		public async Task<IQueryable<TEntity>> WhereAsync(Expression<Func<TEntity, bool>>? predicate, CancellationToken cancellationToken = default)
 		{
 			if (!await TryLoadFileAsync(forceReload:false, cancellationToken))
 				return Empty;
@@ -163,7 +164,7 @@ namespace KamiSama.Repositories.Json
 				return entities.Where(predicate.Compile()).AsQueryable();
 		}
 		/// <inheritdoc />
-		public IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> predicate = null)
+		public IQueryable<TEntity> Where(Expression<Func<TEntity, bool>>? predicate = null)
 			=> WhereAsync(predicate, CancellationToken.None).Result;
 		/// <summary>
 		/// Adds a new item in the repository; Modify to json repository is not recommended for performance issues
@@ -185,6 +186,6 @@ namespace KamiSama.Repositories.Json
 		/// </summary>
 		/// <param name="predicate">the predicate to search, if null it returns null</param>
 		/// <returns></returns>
-		public TEntity Find(Expression<Func<TEntity, bool>> predicate = null) => FindAsync(predicate, CancellationToken.None).Result;
+		public TEntity? Find(Expression<Func<TEntity, bool>>? predicate = null) => FindAsync(predicate, CancellationToken.None).Result;
 	}
 }

@@ -38,6 +38,6 @@ namespace KamiSama.Repositories
 		/// <param name="predicate"></param>
 		/// <param name="cancellationToken"></param>
 		/// <returns></returns>
-		Task<_EntityType> FindAsync(Expression<Func<_EntityType, bool>> predicate, CancellationToken cancellationToken = default);
+		Task<_EntityType?> FindAsync(Expression<Func<_EntityType, bool>> predicate, CancellationToken cancellationToken = default);
 	}
 }

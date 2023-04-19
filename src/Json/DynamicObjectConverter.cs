@@ -10,8 +10,8 @@ namespace KamiSama.Extensions.Json
 	public class DynamicObjectConverter : JsonConverter<object>
 	{
 		/// <inheritdoc />
-		public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
-			=> JsonSerializer.Serialize(writer, value, value?.GetType(), options);
+		public override void Write(Utf8JsonWriter writer, object? value, JsonSerializerOptions options)
+			=> JsonSerializer.Serialize(writer, value, value?.GetType() ?? typeof(object), options);
 		/// <inheritdoc />
 		public override object Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{

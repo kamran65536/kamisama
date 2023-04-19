@@ -17,14 +17,14 @@ namespace KamiSama.Extensions
 		/// <param name="obj"></param>
 		/// <param name="options"></param>
 		/// <returns></returns>
-		public static string SerializeToJson(this object obj, JsonSerializerOptions options = null)
+		public static string SerializeToJson(this object obj, JsonSerializerOptions? options = null)
 			=> JsonSerializer.Serialize(obj, options);
 		/// <summary>
 		/// Converts an element to dynamic object (using expando object)
 		/// </summary>
 		/// <param name="element"></param>
 		/// <returns></returns>
-		public static object ConvertJsonToDynamicObject(this JsonElement element)
+		public static object? ConvertJsonToDynamicObject(this JsonElement element)
 		{
 			switch (element.ValueKind)
 			{
@@ -35,7 +35,7 @@ namespace KamiSama.Extensions
 
 					var obj = new ExpandoObject();
 
-					var dic = obj as IDictionary<string, object>;
+					var dic = obj as IDictionary<string, object?>;
 
 					foreach (var item in element.EnumerateObject())
 					{
@@ -49,7 +49,7 @@ namespace KamiSama.Extensions
 					List<object> result = new();
 
 					foreach (var item in element.EnumerateArray())
-						result.Add(ConvertJsonToDynamicObject(item));
+						result.Add(ConvertJsonToDynamicObject(item)!);
 
 					return result.ToArray();
 				case JsonValueKind.String: return element.GetString();
@@ -70,7 +70,7 @@ namespace KamiSama.Extensions
 		/// <param name="jsonStr"></param>
 		/// <param name="options"></param>
 		/// <returns></returns>
-		public static object ConvertJsonToDynamicObject(this string jsonStr, JsonDocumentOptions options = default)
+		public static object? ConvertJsonToDynamicObject(this string jsonStr, JsonDocumentOptions options = default)
 		{
 			var doc = JsonDocument.Parse(jsonStr, options);
 
@@ -82,7 +82,7 @@ namespace KamiSama.Extensions
 		/// <param name="jsonStr"></param>
 		/// <param name="config"></param>
 		/// <returns></returns>
-		public static object ConvertJsonToDynamicObject(this string jsonStr, Action<JsonDocumentOptions> config)
+		public static object? ConvertJsonToDynamicObject(this string jsonStr, Action<JsonDocumentOptions> config)
 		{
 			var options = new JsonDocumentOptions();
 
@@ -115,7 +115,7 @@ namespace KamiSama.Extensions
 		/// <param name="str"></param>
 		/// <param name="options"></param>
 		/// <returns></returns>
-		public static TObject DeserializeFromJson<TObject>(this string str, JsonSerializerOptions options = null)
+		public static TObject? DeserializeFromJson<TObject>(this string str, JsonSerializerOptions? options = null)
 			=> JsonSerializer.Deserialize<TObject>(str, options);
 		/// <summary>
 		/// Deserializes from json string using <see cref="JsonSerializer"/>
@@ -124,7 +124,7 @@ namespace KamiSama.Extensions
 		/// <param name="str"></param>
 		/// <param name="configure">configure action</param>
 		/// <returns></returns>
-		public static TObject DeserializeFromJson<TObject>(this string str, Action<JsonSerializerOptions> configure)
+		public static TObject? DeserializeFromJson<TObject>(this string str, Action<JsonSerializerOptions> configure)
 		{
 			if (configure != null)
 			{
@@ -137,15 +137,15 @@ namespace KamiSama.Extensions
 				return JsonSerializer.Deserialize<TObject>(str);
 		}
 		/// <summary>
-		/// Adds a hierarchical converter based on <see cref="HirerarchialJsonConverter{T}"/> to the options
+		/// Adds a hierarchical converter based on <see cref="HierarchicalJsonConverter{T}"/> to the options
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <param name="options"></param>
 		/// <returns></returns>
-		public static JsonSerializerOptions AddHirerarchialConverter<T>(this JsonSerializerOptions options)
+		public static JsonSerializerOptions AddHierarchicalConverter<T>(this JsonSerializerOptions options)
 			where T : class
 		{
-			options.Converters.Add(new HirerarchialJsonConverter<T>());
+			options.Converters.Add(new HierarchicalJsonConverter<T>());
 			return options;
 		}
 		/// <summary>
@@ -153,7 +153,7 @@ namespace KamiSama.Extensions
 		/// </summary>
 		/// <param name="options"></param>
 		/// <returns></returns>
-		public static JsonSerializerOptions AddTimeSpanJsonConveter(this JsonSerializerOptions options)
+		public static JsonSerializerOptions AddTimeSpanJsonConverter(this JsonSerializerOptions options)
 		{
 			options.Converters.Add(new TimeSpanJsonConverter());
 
