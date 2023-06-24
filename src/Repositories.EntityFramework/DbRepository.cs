@@ -16,31 +16,31 @@ namespace KamiSama.Repositories.EntityFramework
 		where TEntity : class
 
 	{
-		/// <summary>
-		/// internal context class
-		/// </summary>
-		private readonly DbContext context;
-		private readonly DbSet<TEntity> dbSet;
+        /// <summary>
+        /// context class
+        /// </summary>
+        protected DbContext Context { get; }
+        private readonly DbSet<TEntity> dbSet;
 		/// <summary>
 		/// initiates an db repository
 		/// </summary>
 		/// <param name="context"></param>
 		public DbRepository(DbContext context)
 		{
-			this.context = context;
+			this.Context = context;
 			this.dbSet = context.Set<TEntity>();
 		}
 		/// <inheritdoc />
 		public virtual Task AddAsync(TEntity item, CancellationToken cancellationToken = default)
 		{
 			dbSet.Add(item);
-			return context.SaveChangesAsync(cancellationToken);
+			return Context.SaveChangesAsync(cancellationToken);
 		}
 		/// <inheritdoc />
 		public virtual void Add(TEntity item)
 		{
 			dbSet.Add(item);
-			context.SaveChanges();
+			Context.SaveChanges();
 		}
 		/// <summary>
 		/// Updates an item in the repository
@@ -49,22 +49,22 @@ namespace KamiSama.Repositories.EntityFramework
 		/// <returns></returns>
 		public virtual void Update(TEntity item)
 		{
-			var entry = context.Entry(item);
+			var entry = Context.Entry(item);
 
 			if (entry.State != EntityState.Modified)
 				entry.State = EntityState.Modified;
 
-			context.SaveChanges();
+			Context.SaveChanges();
 		}
 		/// <inheritdoc />
 		public Task UpdateAsync(TEntity item, CancellationToken cancellationToken = default)
 		{
-			var entry = context.Entry(item);
+			var entry = Context.Entry(item);
 
 			if (entry.State != EntityState.Modified)
 				entry.State = EntityState.Modified;
 
-			return context.SaveChangesAsync(cancellationToken);
+			return Context.SaveChangesAsync(cancellationToken);
 		}
 		/// <summary>
 		/// Deletes an item from repository
@@ -74,13 +74,13 @@ namespace KamiSama.Repositories.EntityFramework
 		public virtual void Delete(TEntity item)
 		{
 			dbSet.Remove(item);
-			context.SaveChanges();
+			Context.SaveChanges();
 		}
 		/// <inheritdoc />
 		public virtual Task DeleteAsync(TEntity item, CancellationToken cancellationToken = default)
 		{
 			dbSet.Remove(item);
-			return context.SaveChangesAsync(cancellationToken);
+			return Context.SaveChangesAsync(cancellationToken);
 		}
 		/// <summary>
 		/// Queries items in repository for the predicate specified

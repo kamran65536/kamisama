@@ -17,9 +17,9 @@ namespace KamiSama.Repositories.EntityFrameworkCore
 
 	{
 		/// <summary>
-		/// internal context class
+		/// context class
 		/// </summary>
-		private readonly DbContext context;
+		protected DbContext Context { get; }
 		private readonly DbSet<TEntity> dbSet;
 		/// <summary>
 		/// initiates an db repository
@@ -27,52 +27,52 @@ namespace KamiSama.Repositories.EntityFrameworkCore
 		/// <param name="context"></param>
 		public DbRepository(DbContext context)
 		{
-			this.context = context;
+			this.Context = context;
 			this.dbSet = context.Set<TEntity>();
 		}
 		/// <inheritdoc />
 		public Task AddAsync(TEntity item, CancellationToken cancellationToken = default)
 		{
 			dbSet.Add(item);
-			return context.SaveChangesAsync();
+			return Context.SaveChangesAsync();
 		}
 		/// <inheritdoc />
 		public virtual void Add(TEntity item)
 		{
 			dbSet.Add(item);
-			context.SaveChanges();
+			Context.SaveChanges();
 		}
 		/// <inheritdoc />
 		public virtual void Update(TEntity item)
 		{
-			var entry = context.Entry(item);
+			var entry = Context.Entry(item);
 
 			if (entry.State != EntityState.Modified)
 				entry.State = EntityState.Modified;
 
-			context.SaveChanges();
+			Context.SaveChanges();
 		}
 		/// <inheritdoc />
 		public Task UpdateAsync(TEntity item, CancellationToken cancellationToken = default)
 		{
-			var entry = context.Entry(item);
+			var entry = Context.Entry(item);
 
 			if (entry.State != EntityState.Modified)
 				entry.State = EntityState.Modified;
 
-			return context.SaveChangesAsync();
+			return Context.SaveChangesAsync();
 		}
 		/// <inheritdoc />
 		public virtual void Delete(TEntity item)
 		{
 			dbSet.Remove(item);
-			context.SaveChanges();
+			Context.SaveChanges();
 		}
 		/// <inheritdoc />
 		public virtual Task DeleteAsync(TEntity item, CancellationToken cancellationToken = default)
 		{
 			dbSet.Remove(item);
-			return context.SaveChangesAsync();
+			return Context.SaveChangesAsync();
 		}
 		/// <inheritdoc />
 		public virtual IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> predicate)
