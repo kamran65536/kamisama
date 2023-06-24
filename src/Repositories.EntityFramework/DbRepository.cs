@@ -120,7 +120,7 @@ namespace KamiSama.Repositories.EntityFramework
 		/// <summary>
 		/// Inner Context
 		/// </summary>
-		protected new DbContext Context => (TDbContext)base.Context;
+		protected new TDbContext Context => (TDbContext)base.Context;
 		/// <summary>
 		/// constructor
 		/// </summary>
