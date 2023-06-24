@@ -17,7 +17,7 @@ namespace KamiSama.Repositories.EntityFramework
 
 	{
         /// <summary>
-        /// context class
+        /// inner context
         /// </summary>
         protected DbContext Context { get; }
         private readonly DbSet<TEntity> dbSet;
@@ -117,6 +117,10 @@ namespace KamiSama.Repositories.EntityFramework
 		where TDbContext : DbContext
 		where TEntity: class
 	{
+		/// <summary>
+		/// Inner Context
+		/// </summary>
+		protected new DbContext Context => (TDbContext)base.Context;
 		/// <summary>
 		/// constructor
 		/// </summary>

@@ -101,11 +101,15 @@ namespace KamiSama.Repositories.EntityFrameworkCore
 		where TDbContext : DbContext
 		where TEntity : class
 	{
-		/// <summary>
-		/// constructor
-		/// </summary>
-		/// <param name="context"></param>
-		public DbRepository(TDbContext context)
+        /// <summary>
+        /// Inner Context
+        /// </summary>
+        protected new DbContext Context => (TDbContext)base.Context;
+        /// <summary>
+        /// constructor
+        /// </summary>
+        /// <param name="context"></param>
+        public DbRepository(TDbContext context)
 			: base(context)
 		{
 		}
