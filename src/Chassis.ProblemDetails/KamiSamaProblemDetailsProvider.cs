@@ -15,17 +15,25 @@ public class KamiSamaProblemDetailsProvider : IProblemDetailsDataProvider
 	/// <inheritdoc/>
 	public ProblemDetails ConvertExceptionToProblemDetails(ExceptionContext context)
 	{
-		return context.Exception is not HttpExceptionBase exception
-			? new ProblemDetails
+		if (context.Exception is HttpExceptionBase exception)
+			return new ProblemDetails
+			{
+				Title = exception.Message,
+				Status = exception.StatusCode,
+			};
+		else if (context.Exception is InvalidOperationException)
+			return new ProblemDetails
+			{
+				Title = context.Exception.Message,
+				Detail = "Invalid Operation Exception",
+				Status = StatusCodes.Status500InternalServerError,
+			};
+		else
+			return new ProblemDetails
 			{
 				Title = context.Exception.Message,
 				Detail = context.Exception.StackTrace,
 				Status = StatusCodes.Status500InternalServerError,
-			}
-			: new ProblemDetails
-			{
-				Title = exception.Message,
-				Status = exception.StatusCode,
 			};
 	}
 }

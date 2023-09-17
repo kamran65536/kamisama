@@ -3,6 +3,8 @@
 	<PropertyGroup>
 		<TargetFramework>net7.0</TargetFramework>
 		<Nullable>enable</Nullable>
+		<Title>Http Exceptions for ProblemDetails</Title>
+		<Description>This library provides predefined HTTP exception classes in order to be used in KamiSama.Chassis.ProblemDetails</Description>
 	</PropertyGroup>
 	<ItemGroup>
 	  <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />

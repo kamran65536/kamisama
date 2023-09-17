@@ -12,7 +12,7 @@ public class NotFoundException : HttpExceptionBase
 	/// <inheritdoc />
 	public override int StatusCode => StatusCodes.Status404NotFound;
 	/// <inheritdoc />
-	public NotFoundException(string entityName, string? entityKey)
+	public NotFoundException(string entityName, object? entityKey)
 		: base($"{entityName} with key {entityKey} does not exists")
 	{
 	}
