@@ -8,7 +8,7 @@ namespace KamiSama.Extensions.Xml.Tests
 		[TestMethod]
 		public void Implicit_operator_creates_a_new_AutoXmlElement()
 		{
-			object o = new object();
+			object o = new();
 
 			AutoXmlElement<object> a = o;
 

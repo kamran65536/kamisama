@@ -6,7 +6,11 @@ namespace KamiSama.Extensions.DependencyInjection
 	/// <summary>
 	/// Named Factory used for named service registration inside the Microsoft.DependencyInjection library.
 	/// </summary>
-	public class NamedFactory
+	/// <remarks>
+	/// constructor
+	/// </remarks>
+	/// <param name="serviceType">the service type (you are looking for implementation)</param>
+	public class NamedFactory(Type serviceType)
 	{
 		/// <summary>
 		/// internal map for type  mapping
@@ -15,15 +19,8 @@ namespace KamiSama.Extensions.DependencyInjection
 		/// <summary>
 		/// returns the service type (you are looking for implementation)
 		/// </summary>
-		public Type ServiceType { get; }
-		/// <summary>
-		/// constructor
-		/// </summary>
-		/// <param name="serviceType">the service type (you are looking for implementation)</param>
-		public NamedFactory(Type serviceType)
-		{
-			this.ServiceType = serviceType;
-		}
+		public Type ServiceType { get; } = serviceType;
+
 		/// <summary>
 		/// Registers the implementation type with specified name inside the factory
 		/// </summary>
@@ -44,9 +41,9 @@ namespace KamiSama.Extensions.DependencyInjection
 		/// <param name="serviceProvider">service provider</param>
 		/// <param name="name">name of the implementation</param>
 		/// <returns>instance of implementation</returns>
-		public object FindByName(IServiceProvider serviceProvider, string name)
+		public object? FindByName(IServiceProvider serviceProvider, string name)
 		{
-			if (!namedTypes.TryGetValue(name, out Type type))
+			if (!namedTypes.TryGetValue(name, out Type? type))
 				throw new Exception($"Cannot find named instance for name:{name}, service type: {ServiceType}");
 
 			return serviceProvider.GetService(type);

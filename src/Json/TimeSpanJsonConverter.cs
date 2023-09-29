@@ -17,7 +17,7 @@ namespace KamiSama.Extensions.Json
 		/// <param name="options"></param>
 		/// <returns></returns>
 		public override TimeSpan Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-			=> TimeSpan.Parse(reader.GetString());
+			=> TimeSpan.Parse(reader.GetString()!);
 		/// <summary>
 		/// Writes timespan string
 		/// </summary>

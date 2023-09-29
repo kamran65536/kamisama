@@ -19,8 +19,7 @@ namespace KamiSama.Extensions
 		/// <param name="rootType"></param>
 		public static void AddAutoXmlAttributes(this XmlAttributeOverrides overrides, Type rootType, Assembly[] assemblies)
 		{
-			if (assemblies == null)
-				assemblies = new Assembly[0];
+			assemblies ??= [];
 
 			var allTypes = assemblies.SelectMany(a => a.GetTypes()).ToArray();
 
@@ -52,7 +51,7 @@ namespace KamiSama.Extensions
 		{
 			if (rootType.IsArray)
 			{
-				VisitType(rootType.GetElementType(), overrides, visitedTypes, allTypes);
+				VisitType(rootType.GetElementType()!, overrides, visitedTypes, allTypes);
 
 				return;
 			}

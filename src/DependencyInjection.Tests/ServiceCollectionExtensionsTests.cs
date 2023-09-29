@@ -47,7 +47,7 @@ namespace KamiSama.Extensions.DependencyInjection.Tests
 			var array = new Assembly[][]
 			{
 				null,
-				new Assembly[0],
+				System.Array.Empty<Assembly>(),
 				new Assembly[] { Assembly.GetExecutingAssembly() }
 			};
 			foreach (var assemblies in array)

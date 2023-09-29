@@ -46,7 +46,7 @@ namespace KamiSama.Extensions
 
 					return obj;
 				case JsonValueKind.Array:
-					List<object> result = new();
+					List<object> result = [];
 
 					foreach (var item in element.EnumerateArray())
 						result.Add(ConvertJsonToDynamicObject(item)!);

@@ -16,19 +16,15 @@ namespace KamiSama.Extensions.NLog
 	/// <summary>
 	/// Encrypted Zip Archive ispired by NLog ZipArchiveFileCompressor
 	/// </summary>
+	/// <remarks>
+	/// constructor
+	/// </remarks>
+	/// <param name="passwordFunc">password based on current file name</param>
 	[ExcludeFromCodeCoverage]
-	public class EncryptedZipArchiveFileCompressor : IFileCompressor
+	public class EncryptedZipArchiveFileCompressor(PassswordFunc passwordFunc) : IFileCompressor
 	{
-		private readonly PassswordFunc passwordFunc;
-		/// <summary>
-		/// constructor
-		/// </summary>
-		/// <param name="passwordFunc">password based on current file name</param>
-		public EncryptedZipArchiveFileCompressor(PassswordFunc passwordFunc)
-		{
-			
-			this.passwordFunc = passwordFunc;
-		}
+		private readonly PassswordFunc passwordFunc = passwordFunc;
+
 		/// <summary>
 		/// Implements <see cref="IFileCompressor.CompressFile(string, string)"/> using the .Net4.5 specific <see cref="System.IO.Compression.ZipArchive"/>
 		/// </summary>

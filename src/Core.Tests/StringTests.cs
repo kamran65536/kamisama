@@ -10,7 +10,7 @@ namespace KamiSama.Extensions.Core.Tests
 		[TestMethod]
 		public void EmptyFromHexTest()
 		{
-			CollectionAssert.AreEqual(new byte[0], (null as string).FromHex());
+			CollectionAssert.AreEqual(Array.Empty<byte>(), (null as string).FromHex());
 		}
 		[TestMethod]
 		[ExpectedException(typeof(Exception), AllowDerivedTypes = true)]
@@ -28,7 +28,7 @@ namespace KamiSama.Extensions.Core.Tests
 		[TestMethod]
 		public void EmptyToBytesTest()
 		{
-			CollectionAssert.AreEqual((null as string).ToBytes(), new byte[0]);
+			CollectionAssert.AreEqual((null as string).ToBytes(), Array.Empty<byte>());
 		}
 		[TestMethod]
 		public void FromHexTest()

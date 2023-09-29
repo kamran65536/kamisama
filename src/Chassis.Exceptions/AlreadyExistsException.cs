@@ -5,13 +5,8 @@ namespace KamiSama.Chassis.HttpExceptions;
 /// <summary>
 /// The entity already exists exception
 /// </summary>
+/// <inheritdoc />
 [ExcludeFromCodeCoverage]
-public class AlreadyExistsException : ConflictException
+public class AlreadyExistsException(string entityName, string? entityKey) : ConflictException($"{entityName} with key {entityKey} already exists.")
 {
-
-	/// <inheritdoc />
-	public AlreadyExistsException(string entityName, string? entityKey)
-		: base($"{entityName} with key {entityKey} already exists.")
-	{
-	}
 }

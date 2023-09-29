@@ -50,10 +50,12 @@ namespace KamiSama.Extensions.Json
 		static HierarchicalJsonConverter()
 		{
 			type = typeof(T);
-			discriminatorProperty = type.GetProperties().FirstOrDefault(x => x.GetCustomAttribute<JsonHirerarchyDiscriminatorAttribute>() != null);
 
-			if (discriminatorProperty == null)
-				throw new ArgumentException($"Type {type.Name} does not have a property with JsonDiscriminatorAttribute.");
+
+			discriminatorProperty = type
+				.GetProperties()
+				.FirstOrDefault(x => x.GetCustomAttribute<JsonHirerarchyDiscriminatorAttribute>() != null) 
+				?? throw new ArgumentException($"Type {type.Name} does not have a property with JsonDiscriminatorAttribute.");
 
 			var attr = discriminatorProperty.GetCustomAttribute<JsonPropertyNameAttribute>();
 
@@ -94,7 +96,7 @@ namespace KamiSama.Extensions.Json
 			var key = jsonElement
 				.GetString();
 
-			if (!string.IsNullOrWhiteSpace(key) && typeMap.TryGetValue(key, out Type type))
+			if (!string.IsNullOrWhiteSpace(key) && typeMap.TryGetValue(key, out Type? type))
 				return JsonSerializer.Deserialize(ref readerAtStart, type, options) as T;
 			else
 				throw new NotSupportedException($"{key ?? "<unknown>"} can not be deserialized");

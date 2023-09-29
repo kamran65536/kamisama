@@ -43,7 +43,7 @@ namespace KamiSama.Extensions.Core.Tests
 			var arr = new object[] {null, null, null};
 			var trimmed = arr.TrimEnd((object) null);
 
-			CollectionAssert.AreEqual(new object[] { }, trimmed);
+			CollectionAssert.AreEqual(Array.Empty<object>(), trimmed);
 		}
 	}
 }

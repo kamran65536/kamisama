@@ -31,7 +31,8 @@ namespace KamiSama.Extensions.DependencyInjection
 
 			if (serviceDescriptor == null)
 			{
-				factory = (NamedFactory)Activator.CreateInstance(factoryType);
+				factory = (NamedFactory)Activator.CreateInstance(factoryType)!;
+
 				services.AddSingleton(factoryType, factory);
 			}
 			else

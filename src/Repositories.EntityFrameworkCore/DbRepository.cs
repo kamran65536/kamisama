@@ -12,29 +12,25 @@ namespace KamiSama.Repositories.EntityFrameworkCore
 	/// Database Repository for entity framework
 	/// </summary>
 	/// <typeparam name="TEntity"></typeparam>
-	public class DbRepository<TEntity> : IQueryableRepository<TEntity>, IAsyncQueryableRepository<TEntity>
+	/// <remarks>
+	/// initiates an db repository
+	/// </remarks>
+	/// <param name="context"></param>
+	public class DbRepository<TEntity>(DbContext context) : IQueryableRepository<TEntity>, IAsyncQueryableRepository<TEntity>
 		where TEntity : class
 
 	{
 		/// <summary>
 		/// context class
 		/// </summary>
-		protected DbContext Context { get; }
-		private readonly DbSet<TEntity> dbSet;
-		/// <summary>
-		/// initiates an db repository
-		/// </summary>
-		/// <param name="context"></param>
-		public DbRepository(DbContext context)
-		{
-			this.Context = context;
-			this.dbSet = context.Set<TEntity>();
-		}
+		protected DbContext Context { get; } = context;
+		private readonly DbSet<TEntity> dbSet = context.Set<TEntity>();
+
 		/// <inheritdoc />
 		public Task AddAsync(TEntity item, CancellationToken cancellationToken = default)
 		{
 			dbSet.Add(item);
-			return Context.SaveChangesAsync();
+			return Context.SaveChangesAsync(cancellationToken);
 		}
 		/// <inheritdoc />
 		public virtual void Add(TEntity item)
@@ -60,7 +56,7 @@ namespace KamiSama.Repositories.EntityFrameworkCore
 			if (entry.State != EntityState.Modified)
 				entry.State = EntityState.Modified;
 
-			return Context.SaveChangesAsync();
+			return Context.SaveChangesAsync(cancellationToken);
 		}
 		/// <inheritdoc />
 		public virtual void Delete(TEntity item)
@@ -72,23 +68,24 @@ namespace KamiSama.Repositories.EntityFrameworkCore
 		public virtual Task DeleteAsync(TEntity item, CancellationToken cancellationToken = default)
 		{
 			dbSet.Remove(item);
-			return Context.SaveChangesAsync();
+			return Context.SaveChangesAsync(cancellationToken);
 		}
 		/// <inheritdoc />
-		public virtual IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> predicate)
-			=> dbSet.Where(predicate);
+		public virtual IQueryable<TEntity> Where(Expression<Func<TEntity, bool>>? predicate)
+			=> dbSet.Where(predicate ?? (x => true));
 		/// <inheritdoc />
-		public virtual TEntity Find(Expression<Func<TEntity, bool>> predicate)
-			=> dbSet.FirstOrDefault(predicate);
+		public virtual TEntity? Find(Expression<Func<TEntity, bool>>? predicate)
+			=> dbSet.FirstOrDefault(predicate ?? (x => true));
 		/// <inheritdoc />
-		public virtual Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
-			=> dbSet.FirstOrDefaultAsync(predicate);
+		public virtual Task<TEntity?> FindAsync(Expression<Func<TEntity, bool>>? predicate, CancellationToken cancellationToken = default)
+			=> dbSet.FirstOrDefaultAsync(predicate ?? (x => true), cancellationToken)!;
 		/// <summary>
 		/// Dispose method, does nothing
 		/// </summary>
 		[ExcludeFromCodeCoverage]
 		public virtual void Dispose()
 		{
+			GC.SuppressFinalize(this);
 		}
 	}
 	/// <summary>
@@ -96,8 +93,12 @@ namespace KamiSama.Repositories.EntityFrameworkCore
 	/// </summary>
 	/// <typeparam name="TEntity"></typeparam>
 	/// <typeparam name="TDbContext"></typeparam>
+	/// <remarks>
+	/// constructor
+	/// </remarks>
+	/// <param name="context"></param>
 	[ExcludeFromCodeCoverage]
-	public class DbRepository<TEntity, TDbContext> : DbRepository<TEntity>
+	public class DbRepository<TEntity, TDbContext>(TDbContext context) : DbRepository<TEntity>(context)
 		where TDbContext : DbContext
 		where TEntity : class
 	{
@@ -105,13 +106,5 @@ namespace KamiSama.Repositories.EntityFrameworkCore
         /// Inner Context
         /// </summary>
         protected new TDbContext Context => (TDbContext)base.Context;
-        /// <summary>
-        /// constructor
-        /// </summary>
-        /// <param name="context"></param>
-        public DbRepository(TDbContext context)
-			: base(context)
-		{
-		}
 	}
 }

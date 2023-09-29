@@ -19,15 +19,15 @@ namespace KamiSama.Extensions
 		{
 			var elementType = GetCollectionItemType(property.PropertyType);
 
-			var validTypes = allTypes.Where(x => !x.IsAbstract && x.IsSubclassOf(elementType)).ToArray();
+			var validTypes = allTypes.Where(x => !x.IsAbstract && x.IsSubclassOf(elementType!)).ToArray();
 
 			if (validTypes.Length == 0)
 				return;
 
-			var attributes = overrides[property.DeclaringType, property.Name];
+			var attributes = overrides[property.DeclaringType!, property.Name];
 
 			if (attributes == null)
-				overrides.Add(property.DeclaringType, property.Name, attributes = new XmlAttributes());
+				overrides.Add(property.DeclaringType!, property.Name, attributes = new XmlAttributes());
 
 			foreach (var type in validTypes)
 				attributes.XmlElements.Add(new XmlElementAttribute { Type = type, ElementName = type.Name });
@@ -37,15 +37,15 @@ namespace KamiSama.Extensions
 		{
 			var elementType = GetCollectionItemType(field.FieldType);
 
-			var validTypes = allTypes.Where(x => !x.IsAbstract && x.IsSubclassOf(elementType)).ToArray();
+			var validTypes = allTypes.Where(x => !x.IsAbstract && x.IsSubclassOf(elementType!)).ToArray();
 
 			if (validTypes.Length == 0)
 				return;
 
-			var attributes = overrides[field.DeclaringType, field.Name];
+			var attributes = overrides[field.DeclaringType!, field.Name];
 
 			if (attributes == null)
-				overrides.Add(field.DeclaringType, field.Name, attributes = new XmlAttributes());
+				overrides.Add(field.DeclaringType!, field.Name, attributes = new XmlAttributes());
 
 			foreach (var type in validTypes)
 				attributes.XmlElements.Add(new XmlElementAttribute { Type = type, ElementName = type.Name });

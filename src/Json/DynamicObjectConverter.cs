@@ -17,7 +17,7 @@ namespace KamiSama.Extensions.Json
 		{
 			using var doc = JsonDocument.ParseValue(ref reader);
 
-			return doc.RootElement.ConvertJsonToDynamicObject();
+			return doc.RootElement.ConvertJsonToDynamicObject()!;
 		}
 	}
 }

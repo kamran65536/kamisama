@@ -58,7 +58,7 @@ namespace KamiSama.Repositories.Tests.Core
 			};
 			var repository = new InMemoryRepository<SampleEntity>(initialItems);
 
-			repository.Dispose();
+			((System.IDisposable)repository).Dispose();
 
 			Assert.AreEqual(0, repository.GetAll().Count());
 		}

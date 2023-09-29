@@ -18,7 +18,7 @@ namespace KamiSama.Extensions
 		/// <param name="value"></param>
 		public static implicit operator AutoXmlElement<TValue>(TValue value) => new() { Value = value };
 		/// <inheritdoc	/>
-		bool IEquatable<AutoXmlElement<TValue>>.Equals(AutoXmlElement<TValue> other)
+		bool IEquatable<AutoXmlElement<TValue>>.Equals(AutoXmlElement<TValue>? other)
 		{
 			if (other == null)
 				return false;
@@ -28,9 +28,9 @@ namespace KamiSama.Extensions
 				return Value.Equals(other.Value);
 		}
 		/// <inheritdoc/>
-		bool IEquatable<TValue>.Equals(TValue value) => object.Equals(Value, value);
+		bool IEquatable<TValue>.Equals(TValue? value) => object.Equals(Value, value);
 		/// <inheritdoc />
-		public override bool Equals(object obj)
+		public override bool Equals(object? obj)
 		{
 			if (obj is AutoXmlElement<TValue> element)
 				return Equals(element);

@@ -12,24 +12,20 @@ namespace KamiSama.Repositories.EntityFramework
 	/// Database Repository for entity framework
 	/// </summary>
 	/// <typeparam name="TEntity"></typeparam>
-	public class DbRepository<TEntity> : IQueryableRepository<TEntity>, IAsyncQueryableRepository<TEntity>
+	/// <remarks>
+	/// initiates an db repository
+	/// </remarks>
+	/// <param name="context"></param>
+	public class DbRepository<TEntity>(DbContext context) : IQueryableRepository<TEntity>, IAsyncQueryableRepository<TEntity>
 		where TEntity : class
 
 	{
-        /// <summary>
-        /// inner context
-        /// </summary>
-        protected DbContext Context { get; }
-        private readonly DbSet<TEntity> dbSet;
 		/// <summary>
-		/// initiates an db repository
+		/// inner context
 		/// </summary>
-		/// <param name="context"></param>
-		public DbRepository(DbContext context)
-		{
-			this.Context = context;
-			this.dbSet = context.Set<TEntity>();
-		}
+		protected DbContext Context { get; } = context;
+		private readonly DbSet<TEntity> dbSet = context.Set<TEntity>();
+
 		/// <inheritdoc />
 		public virtual Task AddAsync(TEntity item, CancellationToken cancellationToken = default)
 		{
@@ -87,24 +83,25 @@ namespace KamiSama.Repositories.EntityFramework
 		/// </summary>
 		/// <param name="predicate">the predicate to search, if null it returns all items</param>
 		/// <returns></returns>
-		public virtual IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> predicate)
-			=> dbSet.Where(predicate);
+		public virtual IQueryable<TEntity> Where(Expression<Func<TEntity, bool>>? predicate)
+			=> dbSet.Where(predicate ?? (x => true));
 		/// <summary>
 		/// Finds an item in the repository
 		/// </summary>
 		/// <param name="predicate"></param>
 		/// <returns></returns>
-		public virtual TEntity Find(Expression<Func<TEntity, bool>> predicate)
-			=> dbSet.FirstOrDefault(predicate);
+		public virtual TEntity? Find(Expression<Func<TEntity, bool>>? predicate)
+			=> dbSet.FirstOrDefault(predicate ?? (x => true));
 		/// <inheritdoc />
-		public virtual Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
-			=> dbSet.FirstOrDefaultAsync(predicate, cancellationToken);
+		public virtual Task<TEntity?> FindAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
+			=> dbSet.FirstOrDefaultAsync(predicate, cancellationToken)!;
 		/// <summary>
 		/// Dispose method, does nothing
 		/// </summary>
 		[ExcludeFromCodeCoverage]
-		public virtual void Dispose()
+		void IDisposable.Dispose()
 		{
+			GC.SuppressFinalize(this);
 		}
 	}
 	/// <summary>
@@ -112,8 +109,12 @@ namespace KamiSama.Repositories.EntityFramework
 	/// </summary>
 	/// <typeparam name="TEntity"></typeparam>
 	/// <typeparam name="TDbContext"></typeparam>
+	/// <remarks>
+	/// constructor
+	/// </remarks>
+	/// <param name="context"></param>
 	[ExcludeFromCodeCoverage]
-	public class DbRepository<TEntity, TDbContext> : DbRepository<TEntity>
+	public class DbRepository<TEntity, TDbContext>(TDbContext context) : DbRepository<TEntity>(context)
 		where TDbContext : DbContext
 		where TEntity: class
 	{
@@ -121,13 +122,5 @@ namespace KamiSama.Repositories.EntityFramework
 		/// Inner Context
 		/// </summary>
 		protected new TDbContext Context => (TDbContext)base.Context;
-		/// <summary>
-		/// constructor
-		/// </summary>
-		/// <param name="context"></param>
-		public DbRepository(TDbContext context)
-			: base(context)
-		{
-		}
 	}
 }

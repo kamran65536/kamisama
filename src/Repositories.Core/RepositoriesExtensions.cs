@@ -17,7 +17,7 @@ namespace KamiSama.Repositories
 		/// <param name="repository"></param>
 		/// <param name="predicate"></param>
 		/// <returns></returns>
-		public static TEntity FirstOrDefault< TEntity>(this IQueryableRepository<TEntity> repository, Expression<Func<TEntity, bool>> predicate)
+		public static TEntity? FirstOrDefault< TEntity>(this IQueryableRepository<TEntity> repository, Expression<Func<TEntity, bool>> predicate)
 			=> repository.Where(predicate).FirstOrDefault();
 		/// <summary>
 		/// Returns all Items in the repository

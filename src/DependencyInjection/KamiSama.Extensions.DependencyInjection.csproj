@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<Import Project="..\GeneralProperties.csproj" />
 	<PropertyGroup>
-		<TargetFramework>netstandard2.0</TargetFramework>
 		<Description>Extension for Microsoft.Extensions.DependencyInjection supporting named injection</Description>
 		<PackageReleaseNotes>v2.2.7
 - InjectAttribute is added.

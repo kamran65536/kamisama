@@ -15,13 +15,13 @@ namespace KamiSama.Extensions.DependencyInjection
 		/// <param name="serviceType">the service type</param>
 		/// <param name="name">name of the implementation</param>
 		/// <returns>instance of implemented type</returns>
-		public static object GetService(this IServiceProvider serviceProvider, Type serviceType, string name)
+		public static object? GetService(this IServiceProvider serviceProvider, Type serviceType, string name)
 		{
 			var factoryType = typeof(NamedFactory<>).MakeGenericType(serviceType);
 
-			var namedFactory = (NamedFactory) serviceProvider.GetService(factoryType);
+			var namedFactory = (NamedFactory?) serviceProvider.GetService(factoryType) ;
 
-			return namedFactory.FindByName(serviceProvider, name);
+			return namedFactory?.FindByName(serviceProvider, name);
 		}
 		/// <summary>
 		/// Returns an named instance of service
@@ -31,7 +31,7 @@ namespace KamiSama.Extensions.DependencyInjection
 		/// <param name="name">name of the implementation</param>
 		/// <returns>instance of implemented type</returns>
 		[ExcludeFromCodeCoverage]
-		public static _ServiceType GetService<_ServiceType>(this IServiceProvider serviceProvider, string name)
-			=> (_ServiceType) serviceProvider.GetService(typeof(_ServiceType), name);
+		public static _ServiceType? GetService<_ServiceType>(this IServiceProvider serviceProvider, string name)
+			=> (_ServiceType?) serviceProvider.GetService(typeof(_ServiceType), name);
 	}
 }

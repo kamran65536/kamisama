@@ -54,9 +54,9 @@ namespace KamiSama.Repositories.Tests.Core
 			var repository = new JsonRepository<SampleEntity>("./Json/sample-entities.json");
 			repository.TryLoadFileAsync(forceReload: true, CancellationToken.None).Wait();
 
-			repository.Dispose();
+			((System.IDisposable)repository).Dispose();
 
-			Assert.AreEqual(0, repository.entities?.Count());
+			Assert.AreEqual(0, repository.entities?.Count);
 		}
 		[TestMethod]
 		public void Add_must_add_new_item_to_repository()

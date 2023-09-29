@@ -1,6 +1,6 @@
 image: mcr.microsoft.com/dotnet/sdk:7.0
 variables:
-    PACKAGE_VERSION: "2.6.5"
+    PACKAGE_VERSION: "2.6.6"
 
 stages:
     - build

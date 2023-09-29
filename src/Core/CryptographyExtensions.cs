@@ -38,7 +38,7 @@ namespace KamiSama.Extensions
 		/// <param name="cipherMode">cipher mode, such as cbc, ecb, fcb, ...</param>
 		/// <param name="padding">padding mode, such as none, zeros, pkcs5...</param>
 		/// <returns></returns>
-		public static byte[] Encrypt(this byte[] data, Func<SymmetricAlgorithm> algorithmFactory, byte[]? key, byte[]? iv = null, CipherMode cipherMode = CipherMode.CBC, PaddingMode padding = PaddingMode.Zeros)
+		public static byte[] Encrypt(this byte[] data, Func<SymmetricAlgorithm> algorithmFactory, byte[] key, byte[]? iv = null, CipherMode cipherMode = CipherMode.CBC, PaddingMode padding = PaddingMode.Zeros)
 		{
 			using var algorithm = algorithmFactory();
 			
@@ -78,7 +78,7 @@ namespace KamiSama.Extensions
 		/// <param name="cipherMode">cipher mode, such as cbc, ecb, fcb, ...</param>
 		/// <param name="padding">padding mode, such as none, zeros, pkcs5...</param>
 		/// <returns></returns>
-		public static byte[] Decrypt(this byte[] cipher, Func<SymmetricAlgorithm> algorithmFactory, byte[]? key, byte[]? iv = null, CipherMode cipherMode = CipherMode.CBC, PaddingMode padding = PaddingMode.Zeros)
+		public static byte[] Decrypt(this byte[] cipher, Func<SymmetricAlgorithm> algorithmFactory, byte[] key, byte[]? iv = null, CipherMode cipherMode = CipherMode.CBC, PaddingMode padding = PaddingMode.Zeros)
 		{
 			using var algorithm = algorithmFactory();
 			
@@ -115,7 +115,7 @@ namespace KamiSama.Extensions
 		/// <param name="iv">initial value, default is zero vector</param>
 		/// <param name="padding">padding mode, such as none, zeros, pkcs5...</param>
 		/// <returns></returns>
-		public static byte[] Sign(this byte[] data, Func<SymmetricAlgorithm> algorithmFactory, byte[]? key, byte[]? iv = null, PaddingMode padding = PaddingMode.Zeros)
+		public static byte[] Sign(this byte[] data, Func<SymmetricAlgorithm> algorithmFactory, byte[] key, byte[]? iv = null, PaddingMode padding = PaddingMode.Zeros)
 		{
 			using var algorithm = algorithmFactory();
 			
@@ -137,7 +137,7 @@ namespace KamiSama.Extensions
 		/// <param name="cipherMode">cipher mode, such as cbc, ecb, fcb, ...</param>
 		/// <param name="padding">padding mode, such as none, zeros, pkcs5...</param>
 		/// <returns></returns>
-		public static byte[] DesEncrypt(this byte[] data, byte[]? key, byte[]? iv = null, CipherMode cipherMode = CipherMode.CBC, PaddingMode padding = PaddingMode.Zeros)
+		public static byte[] DesEncrypt(this byte[] data, byte[] key, byte[]? iv = null, CipherMode cipherMode = CipherMode.CBC, PaddingMode padding = PaddingMode.Zeros)
 			=> data.Encrypt(DES.Create, key, iv, cipherMode, padding);
 		/// <summary>
 		/// Decrypts cipher data using DES algorithm
@@ -148,7 +148,7 @@ namespace KamiSama.Extensions
 		/// <param name="cipherMode">cipher mode, such as cbc, ecb, fcb, ...</param>
 		/// <param name="padding">padding mode, such as none, zeros, pkcs5...</param>
 		/// <returns></returns>
-		public static byte[] DesDecrypt(this byte[] cipher, byte[]? key, byte[]? iv = null, CipherMode cipherMode = CipherMode.CBC, PaddingMode padding = PaddingMode.Zeros)
+		public static byte[] DesDecrypt(this byte[] cipher, byte[] key, byte[]? iv = null, CipherMode cipherMode = CipherMode.CBC, PaddingMode padding = PaddingMode.Zeros)
 			=> cipher.Decrypt(DES.Create, key, iv, cipherMode, padding);
 		/// <summary>
 		/// Signs (MAC) for data using DES algorithm
@@ -158,7 +158,7 @@ namespace KamiSama.Extensions
 		/// <param name="iv">initial value</param>
 		/// <param name="padding">padding mode, such as none, zeros, pkcs5...</param>
 		/// <returns></returns>
-		public static byte[] DesSign(this byte[] data, byte[]? key, byte[]? iv = null, PaddingMode padding = PaddingMode.Zeros)
+		public static byte[] DesSign(this byte[] data, byte[] key, byte[]? iv = null, PaddingMode padding = PaddingMode.Zeros)
 			=> data.Sign(DES.Create, key, iv, padding);
 		#endregion
 		#region TripleDES
@@ -171,7 +171,7 @@ namespace KamiSama.Extensions
 		/// <param name="cipherMode">cipher mode, such as cbc, ecb, fcb, ...</param>
 		/// <param name="padding">padding mode, such as none, zeros, pkcs5...</param>
 		/// <returns></returns>
-		public static byte[] TripleDesEncrypt(this byte[] data, byte[]? key, byte[]? iv = null, CipherMode cipherMode = CipherMode.CBC, PaddingMode padding = PaddingMode.Zeros)
+		public static byte[] TripleDesEncrypt(this byte[] data, byte[] key, byte[]? iv = null, CipherMode cipherMode = CipherMode.CBC, PaddingMode padding = PaddingMode.Zeros)
 			=> data.Encrypt(TripleDES.Create, key, iv, cipherMode, padding);
 		/// <summary>
 		/// Decrypts cipher data using Triple DES (3DES) algorithm
@@ -182,7 +182,7 @@ namespace KamiSama.Extensions
 		/// <param name="cipherMode">cipher mode, such as cbc, ecb, fcb, ...</param>
 		/// <param name="padding">padding mode, such as none, zeros, pkcs5...</param>
 		/// <returns></returns>
-		public static byte[] TripleDesDecrypt(this byte[] cipher, byte[]? key, byte[]? iv = null, CipherMode cipherMode = CipherMode.CBC, PaddingMode padding = PaddingMode.Zeros)
+		public static byte[] TripleDesDecrypt(this byte[] cipher, byte[] key, byte[]? iv = null, CipherMode cipherMode = CipherMode.CBC, PaddingMode padding = PaddingMode.Zeros)
 			=> cipher.Decrypt(TripleDES.Create, key, iv, cipherMode, padding);
 		/// <summary>
 		/// Signs (MAC) for data using Triple DES (3DES) algorithm
@@ -192,7 +192,7 @@ namespace KamiSama.Extensions
 		/// <param name="iv">initial value</param>
 		/// <param name="padding">padding mode, such as none, zeros, pkcs5...</param>
 		/// <returns></returns>
-		public static byte[] TripleDesSign(this byte[] data, byte[]? key, byte[]? iv = null, PaddingMode padding = PaddingMode.Zeros)
+		public static byte[] TripleDesSign(this byte[] data, byte[] key, byte[]? iv = null, PaddingMode padding = PaddingMode.Zeros)
 			=> data.Sign(TripleDES.Create, key, iv, padding);
 		#endregion
 		#region AES
@@ -205,7 +205,7 @@ namespace KamiSama.Extensions
 		/// <param name="cipherMode">cipher mode, such as cbc, ecb, fcb, ...</param>
 		/// <param name="padding">padding mode, such as none, zeros, pkcs5...</param>
 		/// <returns></returns>
-		public static byte[] AesEncrypt(this byte[] data, byte[]? key, byte[]? iv = null, CipherMode cipherMode = CipherMode.CBC, PaddingMode padding = PaddingMode.Zeros)
+		public static byte[] AesEncrypt(this byte[] data, byte[] key, byte[]? iv = null, CipherMode cipherMode = CipherMode.CBC, PaddingMode padding = PaddingMode.Zeros)
 			=> data.Encrypt(Aes.Create, key, iv, cipherMode, padding);
 		/// <summary>
 		/// Decrypts cipher data using AES algorithm
@@ -216,7 +216,7 @@ namespace KamiSama.Extensions
 		/// <param name="cipherMode">cipher mode, such as cbc, ecb, fcb, ...</param>
 		/// <param name="padding">padding mode, such as none, zeros, pkcs5...</param>
 		/// <returns></returns>
-		public static byte[] AesDecrypt(this byte[] cipher, byte[]? key, byte[]? iv = null, CipherMode cipherMode = CipherMode.CBC, PaddingMode padding = PaddingMode.Zeros)
+		public static byte[] AesDecrypt(this byte[] cipher, byte[] key, byte[]? iv = null, CipherMode cipherMode = CipherMode.CBC, PaddingMode padding = PaddingMode.Zeros)
 			=> cipher.Decrypt(Aes.Create, key, iv, cipherMode, padding);
 		/// <summary>
 		/// Signs (MAC) for data using AES algorithm
@@ -226,7 +226,7 @@ namespace KamiSama.Extensions
 		/// <param name="iv">initial value</param>
 		/// <param name="padding">padding mode, such as none, zeros, pkcs5...</param>
 		/// <returns></returns>
-		public static byte[] AesSign(this byte[] data, byte[]? key, byte[]? iv = null, PaddingMode padding = PaddingMode.Zeros)
+		public static byte[] AesSign(this byte[] data, byte[] key, byte[]? iv = null, PaddingMode padding = PaddingMode.Zeros)
 			=> data.Sign(Aes.Create, key, iv, padding);
 		#endregion
 		#region RSA

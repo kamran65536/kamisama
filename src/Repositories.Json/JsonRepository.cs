@@ -1,7 +1,6 @@
 ﻿using KamiSama.Extensions;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
@@ -14,12 +13,18 @@ namespace KamiSama.Repositories.Json
 	/// Json File Repository
 	/// </summary>
 	/// <typeparam name="TEntity"></typeparam>
-	public class JsonRepository<TEntity> : IQueryableRepository<TEntity>, IAsyncQueryableRepository<TEntity>
+	/// <remarks>
+	/// constructor
+	/// </remarks>
+	/// <param name="filePath">path to json file as repository</param>
+	/// <param name="equalityComparer"></param>
+	public class JsonRepository<TEntity>(string filePath,
+					IEqualityComparer<TEntity>? equalityComparer = null) : IQueryableRepository<TEntity>, IAsyncQueryableRepository<TEntity>
 	{
 		/// <summary>
 		/// empty collection for queries
 		/// </summary>
-		private static readonly IQueryable<TEntity> Empty = (new TEntity[0]).AsQueryable();
+		private static readonly IQueryable<TEntity> Empty = (Array.Empty<TEntity>()).AsQueryable();
 		/// <summary>
 		/// raised when loading items from file fails
 		/// </summary>
@@ -31,7 +36,7 @@ namespace KamiSama.Repositories.Json
 		/// <summary>
 		/// json file path
 		/// </summary>
-		private readonly string filePath;
+		private readonly string filePath = filePath;
 		/// <summary>
 		/// internal entities collection
 		/// </summary>
@@ -39,23 +44,12 @@ namespace KamiSama.Repositories.Json
 		/// <summary>
 		/// semaphore for concurrent scenarios
 		/// </summary>
-		private readonly SemaphoreSlim semaphore;
+		private readonly SemaphoreSlim semaphore = new(1);
 		/// <summary>
 		/// equality comparer for hash set
 		/// </summary>
-		private readonly IEqualityComparer<TEntity>? equalityComparer;
-		/// <summary>
-		/// constructor
-		/// </summary>
-		/// <param name="filePath">path to json file as repository</param>
-		/// <param name="equalityComparer"></param>
-		public JsonRepository(string filePath,
-						IEqualityComparer<TEntity>? equalityComparer = null)
-		{
-			this.filePath = filePath;
-			this.equalityComparer = equalityComparer;
-			this.semaphore = new SemaphoreSlim(1);
-		}
+		private readonly IEqualityComparer<TEntity>? equalityComparer = equalityComparer;
+
 		/// <summary>
 		/// loads the json file if not loaded already
 		/// </summary>
@@ -76,7 +70,7 @@ namespace KamiSama.Repositories.Json
 
 			try
 			{
-				var all = (await File.ReadAllTextAsync(filePath)).DeserializeFromJson<TEntity[]>();
+				var all = (await File.ReadAllTextAsync(filePath, cancellationToken)).DeserializeFromJson<TEntity[]>() ?? [];
 
 				if (equalityComparer == null)
 					entities = new HashSet<TEntity>(all);
@@ -112,7 +106,7 @@ namespace KamiSama.Repositories.Json
 			{
 				action();
 
-				await File.WriteAllTextAsync(filePath, entities.ToArray().SerializeToJson());
+				await File.WriteAllTextAsync(filePath, entities?.ToArray().SerializeToJson(), cancellationToken);
 			}
 			catch (Exception exp)
 			{
@@ -124,7 +118,7 @@ namespace KamiSama.Repositories.Json
 			}
 		}
 		/// <inheritdoc />
-		public void Dispose()
+		void IDisposable.Dispose()
 		{
 			try
 			{
@@ -133,6 +127,7 @@ namespace KamiSama.Repositories.Json
 			catch
 			{
 			}
+			GC.SuppressFinalize(this);
 		}
 		/// <inheritdoc />
 		public Task AddAsync(TEntity item, CancellationToken cancellationToken = default)
@@ -151,7 +146,7 @@ namespace KamiSama.Repositories.Json
 			else if (predicate == null)
 				return default;
 			else
-				return entities.FirstOrDefault(predicate.Compile());
+				return entities!.FirstOrDefault(predicate.Compile());
 		}
 		/// <inheritdoc />
 		public async Task<IQueryable<TEntity>> WhereAsync(Expression<Func<TEntity, bool>>? predicate, CancellationToken cancellationToken = default)
@@ -159,9 +154,9 @@ namespace KamiSama.Repositories.Json
 			if (!await TryLoadFileAsync(forceReload:false, cancellationToken))
 				return Empty;
 			else if (predicate == null)
-				return entities.AsQueryable();
+				return entities!.AsQueryable();
 			else
-				return entities.Where(predicate.Compile()).AsQueryable();
+				return entities!.Where(predicate.Compile()).AsQueryable();
 		}
 		/// <inheritdoc />
 		public IQueryable<TEntity> Where(Expression<Func<TEntity, bool>>? predicate = null)

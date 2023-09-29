@@ -18,19 +18,19 @@ namespace KamiSama.Extensions
 		public override void VisitProperty(PropertyInfo property, XmlAttributeOverrides overrides, Type[] allTypes)
 		{
 			if (!property.PropertyType.IsArray)
-				throw new InvalidOperationException($"AutoXmlArrayItemAttribute can only be applied on array types. type: {property.DeclaringType.FullName}, member: {property.Name}");
+				throw new InvalidOperationException($"AutoXmlArrayItemAttribute can only be applied on array types. type: {property.DeclaringType?.FullName}, member: {property.Name}");
 
 			var elementType = property.PropertyType.GetElementType();
 
-			var validTypes = allTypes.Where(x => !x.IsAbstract && x.IsSubclassOf(elementType)).ToArray();
+			var validTypes = allTypes.Where(x => !x.IsAbstract && x.IsSubclassOf(elementType!)).ToArray();
 
 			if (validTypes.Length == 0)
 				return;
 
-			var attributes = overrides[property.DeclaringType, property.Name];
+			var attributes = overrides[property.DeclaringType!, property.Name];
 
 			if (attributes == null)
-				overrides.Add(property.DeclaringType, property.Name, attributes = new XmlAttributes());
+				overrides.Add(property.DeclaringType!, property.Name, attributes = new XmlAttributes());
 
 			foreach (var type in validTypes)
 				attributes.XmlArrayItems.Add(new XmlArrayItemAttribute { Type = type });
@@ -39,19 +39,19 @@ namespace KamiSama.Extensions
 		public override void VisitField(FieldInfo field, XmlAttributeOverrides overrides, Type[] allTypes)
 		{
 			if (!field.FieldType.IsArray)
-				throw new InvalidOperationException($"AutoXmlArrayItemAttribute can only be applied on array types. type: {field.DeclaringType.FullName}, member: {field.Name}");
+				throw new InvalidOperationException($"AutoXmlArrayItemAttribute can only be applied on array types. type: {field.DeclaringType?.FullName}, member: {field.Name}");
 
 			var elementType = field.FieldType.GetElementType();
 
-			var validTypes = allTypes.Where(x => !x.IsAbstract && x.IsSubclassOf(elementType)).ToArray();
+			var validTypes = allTypes.Where(x => !x.IsAbstract && x.IsSubclassOf(elementType!)).ToArray();
 
 			if (validTypes.Length == 0)
 				return;
 
-			var attributes = overrides[field.DeclaringType, field.Name];
+			var attributes = overrides[field.DeclaringType!, field.Name];
 
 			if (attributes == null)
-				overrides.Add(field.DeclaringType, field.Name, attributes = new XmlAttributes());
+				overrides.Add(field.DeclaringType!, field.Name, attributes = new XmlAttributes());
 
 			foreach (var type in validTypes)
 				attributes.XmlArrayItems.Add(new XmlArrayItemAttribute { Type = type });

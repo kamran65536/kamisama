@@ -25,7 +25,7 @@ namespace KamiSama.Extensions
 			try
 			{
 				if (type.IsEnum)
-					return Enum.Parse(type, obj.ToString(), true);
+					return Enum.Parse(type, obj.ToString()!, true);
 				else
 					return Convert.ChangeType(obj, type);
 			}

@@ -28,7 +28,7 @@ namespace KamiSama.Repositories
 		public InMemoryRepository(IEnumerable<TEntity>? initialItems,
 							IEqualityComparer<TEntity>? comparer = null)
 		{
-			initialItems ??= new TEntity[0];
+			initialItems ??= Array.Empty<TEntity>();
 			semaphore = new SemaphoreSlim(1, 1);
 
 			if (comparer == null)
@@ -47,9 +47,10 @@ namespace KamiSama.Repositories
 		/// Dispose method, clears internal cache
 		/// </summary>
 		[ExcludeFromCodeCoverage]
-		public virtual void Dispose()
+		void IDisposable.Dispose()
 		{
 			try { items.Clear(); } catch { }
+			GC.SuppressFinalize(this);
 		}
 		/// <summary>
 		/// Adds a new item in the repository
@@ -95,7 +96,7 @@ namespace KamiSama.Repositories
 		///
 		public virtual async Task AddAsync(TEntity item, CancellationToken cancellationToken = default)
 		{
-			await semaphore.WaitAsync();
+			await semaphore.WaitAsync(cancellationToken);
 			items.Add(item);
 			semaphore.Release();
 		}
@@ -104,7 +105,7 @@ namespace KamiSama.Repositories
 		/// <inheritdoc />
 		public virtual async Task DeleteAsync(TEntity item, CancellationToken cancellationToken = default)
 		{
-			await semaphore.WaitAsync();
+			await semaphore.WaitAsync(cancellationToken);
 			items.Remove(item);
 			semaphore.Release();
 		}

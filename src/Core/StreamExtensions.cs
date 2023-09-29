@@ -57,7 +57,7 @@ namespace KamiSama.Extensions
 
 			while ((bytesRead < length) && !cancellationToken.IsCancellationRequested)
 			{
-				var b = await stream.ReadAsync(buffer, bytesRead, length - bytesRead, cancellationToken);
+				var b = await stream.ReadAsync(buffer.AsMemory(bytesRead, length - bytesRead), cancellationToken);
 
 				b = Math.Max(0, b);
 

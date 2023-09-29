@@ -14,12 +14,22 @@ namespace KamiSama.Repositories.Xml
 	/// Json File Repository
 	/// </summary>
 	/// <typeparam name="TEntity"></typeparam>
-	public class XmlFileRepository<TEntity> : IQueryableRepository<TEntity>, IAsyncQueryableRepository<TEntity>
+	/// <remarks>
+	/// constructor
+	/// </remarks>
+	/// <param name="filePath">path to json file as repository</param>
+	/// <param name="equalityComparer"></param>
+	/// <param name="serializer"></param>
+	/// <param name="fileNameFunc">function to map entity to file name</param>
+	public class XmlFileRepository<TEntity>(string filePath,
+						   Func<TEntity, string> fileNameFunc,
+						   XmlSerializer? serializer = null,
+						   IEqualityComparer<TEntity>? equalityComparer = null) : IQueryableRepository<TEntity>, IAsyncQueryableRepository<TEntity>
 	{
 		/// <summary>
 		/// empty collection for queries
 		/// </summary>
-		private static readonly IQueryable<TEntity> Empty = (new TEntity[0]).AsQueryable();
+		private static readonly IQueryable<TEntity> Empty = (Array.Empty<TEntity>()).AsQueryable();
 		/// <summary>
 		/// raised when loading items from file fails
 		/// </summary>
@@ -31,7 +41,7 @@ namespace KamiSama.Repositories.Xml
 		/// <summary>
 		/// XML directory path
 		/// </summary>
-		private readonly string directoryPath;
+		private readonly string directoryPath = filePath;
 		/// <summary>
 		/// internal entities collection
 		/// </summary>
@@ -39,38 +49,20 @@ namespace KamiSama.Repositories.Xml
 		/// <summary>
 		/// semaphore for concurrent scenarios
 		/// </summary>
-		private readonly SemaphoreSlim semaphore;
+		private readonly SemaphoreSlim semaphore = new(1);
 		/// <summary>
 		/// equality comparer for hash set
 		/// </summary>
-		private readonly IEqualityComparer<TEntity>? equalityComparer;
+		private readonly IEqualityComparer<TEntity>? equalityComparer = equalityComparer;
 		/// <summary>
 		/// 
 		/// </summary>
-		private readonly XmlSerializer serializer;
+		private readonly XmlSerializer serializer = serializer ?? new XmlSerializer(typeof(TEntity[]));
 		/// <summary>
 		/// a function to determine file names
 		/// </summary>
-		private readonly Func<TEntity, string> fileNameFunc;
+		private readonly Func<TEntity, string> fileNameFunc = fileNameFunc;
 
-		/// <summary>
-		/// constructor
-		/// </summary>
-		/// <param name="filePath">path to json file as repository</param>
-		/// <param name="equalityComparer"></param>
-		/// <param name="serializer"></param>
-		/// <param name="fileNameFunc">function to map entity to file name</param>
-		public XmlFileRepository(string filePath,
-						   Func<TEntity, string> fileNameFunc,
-						   XmlSerializer? serializer = null,
-						   IEqualityComparer<TEntity>? equalityComparer = null)
-		{
-			this.directoryPath = filePath;
-			this.equalityComparer = equalityComparer;
-			this.semaphore = new SemaphoreSlim(1);
-			this.serializer = serializer ?? new XmlSerializer(typeof(TEntity[]));
-			this.fileNameFunc = fileNameFunc;
-		}
 		/// <summary>
 		/// loads the json file if not loaded already
 		/// </summary>
@@ -97,12 +89,12 @@ namespace KamiSama.Repositories.Xml
 
 				foreach (var file in dir.GetFiles("*.xml"))
 				{
-					var entity = (await File.ReadAllTextAsync(file.FullName)).DeserializeFromXml<TEntity>(serializer);
+					var entity = (await File.ReadAllTextAsync(file.FullName, cancellationToken)).DeserializeFromXml<TEntity>(serializer);
 
-					if (fileNameFunc(entity) != file.Name)
-						throw new InvalidOperationException($"entity name {fileNameFunc(entity)} does not match file name: {file.Name}");
+					if (fileNameFunc(entity!) != file.Name)
+						throw new InvalidOperationException($"entity name {fileNameFunc(entity!)} does not match file name: {file.Name}");
 
-					all.Add(entity);
+					all.Add(entity!);
 				}
 
 				entities = all;
@@ -138,7 +130,7 @@ namespace KamiSama.Repositories.Xml
 
 				foreach (var entity in entities!)
 				{
-					await File.WriteAllTextAsync(directoryPath, entity!.SerializeToXml());
+					await File.WriteAllTextAsync(directoryPath, entity!.SerializeToXml(), cancellationToken);
 				}
 			}
 			catch (Exception exp)
@@ -151,7 +143,7 @@ namespace KamiSama.Repositories.Xml
 			}
 		}
 		/// <inheritdoc />
-		public void Dispose()
+		void IDisposable.Dispose()
 		{
 			try
 			{
@@ -160,6 +152,7 @@ namespace KamiSama.Repositories.Xml
 			catch
 			{
 			}
+			GC.SuppressFinalize(this);
 		}
 		/// <inheritdoc />
 		public Task AddAsync(TEntity item, CancellationToken cancellationToken = default)
@@ -178,7 +171,7 @@ namespace KamiSama.Repositories.Xml
 			else if (predicate == null)
 				return default;
 			else
-				return entities.FirstOrDefault(predicate.Compile());
+				return entities!.FirstOrDefault(predicate.Compile());
 		}
 		/// <inheritdoc />
 		public async Task<IQueryable<TEntity>> WhereAsync(Expression<Func<TEntity, bool>>? predicate, CancellationToken cancellationToken = default)
@@ -186,9 +179,9 @@ namespace KamiSama.Repositories.Xml
 			if (!await TryLoadFileAsync(false, cancellationToken))
 				return Empty;
 			else if (predicate == null)
-				return entities.AsQueryable();
+				return entities!.AsQueryable();
 			else
-				return entities.Where(predicate.Compile()).AsQueryable();
+				return entities!.Where(predicate.Compile()).AsQueryable();
 		}
 		/// <inheritdoc />
 		public IQueryable<TEntity> Where(Expression<Func<TEntity, bool>>? predicate = null)
