@@ -13,6 +13,6 @@ namespace KamiSama.Repositories.Tests.EFCore
 		{
 		}
 
-		public DbSet<SampleEntity> SampleEntities { get; set; }
+		public virtual DbSet<SampleEntity> SampleEntities { get; set; }
 	}
 }

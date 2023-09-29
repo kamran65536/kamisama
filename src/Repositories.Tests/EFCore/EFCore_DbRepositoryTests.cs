@@ -19,9 +19,10 @@ namespace KamiSama.Repositories.Tests.EFCore
 			
 			var options = new DbContextOptionsBuilder<SampleContext>()
 				.UseInMemoryDatabase(databaseName)
+				.UseLazyLoadingProxies()
 				.Options;
 
-			var context = Substitute.ForPartsOf<SampleContext>(options);
+			var context = new SampleContext(options);
 
 			if (initialDbSet != null)
 			{
@@ -41,8 +42,7 @@ namespace KamiSama.Repositories.Tests.EFCore
 
 			repository.Add(entity);
 
-			context.Received().SampleEntities.Add(entity);
-			context.Received().SaveChanges();
+			Assert.IsTrue(context.SampleEntities.Any(x => x.Id == entity.Id && x.Name == entity.Name));
 		}
 		[TestMethod]
 		public async Task AddAsync_must_add_to_dbSet()
@@ -54,8 +54,7 @@ namespace KamiSama.Repositories.Tests.EFCore
 
 			await repository.AddAsync(entity, CancellationToken.None);
 
-			context.Received().SampleEntities.Add(entity);
-			await context.Received().SaveChangesAsync();
+			Assert.IsTrue(context.SampleEntities.Any(x => x.Id == entity.Id && x.Name == entity.Name));
 		}
 		[TestMethod]
 		public void Update_must_update_status_in_context()
@@ -65,9 +64,11 @@ namespace KamiSama.Repositories.Tests.EFCore
 
 			var repository = new DbRepository<SampleEntity>(context);
 
-			repository.Update(entity);
+			Assert.IsTrue(context.SampleEntities.Any(x => x.Id == entity.Id && x.Name == entity.Name));
 
-			context.Received().SaveChanges();
+			repository.Update(entity);
+		
+			Assert.IsTrue(context.SampleEntities.Any(x => x.Id == entity.Id && x.Name == "Test"));
 		}
 		[TestMethod]
 		public async Task UpdateAsync_must_update_status_in_context()
@@ -77,9 +78,11 @@ namespace KamiSama.Repositories.Tests.EFCore
 
 			var repository = new DbRepository<SampleEntity>(context);
 
-			await repository.UpdateAsync(entity, CancellationToken.None);
+			Assert.IsTrue(context.SampleEntities.Any(x => x.Id == entity.Id && x.Name == entity.Name));
 
-			await context.Received().SaveChangesAsync();
+			await repository.UpdateAsync(entity);
+
+			Assert.IsTrue(context.SampleEntities.Any(x => x.Id == entity.Id && x.Name == "Test"));
 		}
 		[TestMethod]
 		public void Delete_must_remove_dbSet()
@@ -89,10 +92,11 @@ namespace KamiSama.Repositories.Tests.EFCore
 
 			var repository = new DbRepository<SampleEntity>(context);
 
+			Assert.IsTrue(context.SampleEntities.Contains(entity));
+
 			repository.Delete(entity);
 
-			context.Received().SampleEntities.Remove(entity);
-			context.Received().SaveChanges();
+			Assert.IsFalse(context.SampleEntities.Contains(entity));
 		}
 		[TestMethod]
 		public async Task DeleteAsync_must_remove_dbSet()
@@ -102,10 +106,11 @@ namespace KamiSama.Repositories.Tests.EFCore
 
 			var repository = new DbRepository<SampleEntity>(context);
 
-			await repository.DeleteAsync(entity, CancellationToken.None);
+			Assert.IsTrue(context.SampleEntities.Contains(entity));
 
-			context.Received().SampleEntities.Remove(entity);
-			await context.Received().SaveChangesAsync();
+			await repository.DeleteAsync(entity);
+
+			Assert.IsFalse(context.SampleEntities.Contains(entity));
 		}
 		[TestMethod]
 		public void Find_must_find_items_in_dbSet()
