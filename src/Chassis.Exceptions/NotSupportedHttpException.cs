@@ -1,10 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 namespace KamiSama.Chassis.HttpExceptions;
 
 /// <summary>
@@ -12,6 +8,7 @@ namespace KamiSama.Chassis.HttpExceptions;
 /// </summary>
 public class NotSupportedHttpException : HttpExceptionBase
 {
+	/// <inheritdoc />
 	public override int StatusCode => StatusCodes.Status500InternalServerError;
 	/// <inheritdoc />
 	public NotSupportedHttpException()
