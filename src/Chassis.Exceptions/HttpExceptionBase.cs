@@ -19,7 +19,7 @@ public abstract class HttpExceptionBase : Exception
 	/// <summary>
 	/// Extended properties for Problem Details error handling
 	/// </summary>
-	public Dictionary<string, object?> ExtendedProperties { get; set; } = new Dictionary<string, object?>();
+	public Dictionary<string, object?> ExtendedProperties { get; set; } = [];
 	/// <inheritdoc />
 	protected HttpExceptionBase()
 	{

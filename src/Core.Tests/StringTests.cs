@@ -51,7 +51,7 @@ namespace KamiSama.Extensions.Core.Tests
 		{
 			var arr1 = "012".ToBytes();
 
-			var arr2 = new byte[] { 0x30, 0x31, 0x32 };
+			var arr2 = "012"u8.ToArray();
 
 			CollectionAssert.AreEqual(arr1, arr2);
 		}

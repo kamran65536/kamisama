@@ -7,7 +7,7 @@ namespace KamiSama.Extensions.Core.Tests
 	[TestClass]
 	public class PersianDateTimeTests
 	{
-		private static readonly PersianCalendar persianCalendar = new PersianCalendar();
+		private static readonly PersianCalendar persianCalendar = new();
 		[TestMethod]
 		[Ignore]
 		public void ToPersianString_must_return_similar_as_DateTime_ToString()

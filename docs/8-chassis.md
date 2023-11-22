@@ -29,4 +29,4 @@ builder.Services
 	.AddExceptionFilterForProblemDetails(new CustomizedProblemDetailsProvider());
 ```
 
-Thats easy!
+That's easy!

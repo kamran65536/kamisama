@@ -29,7 +29,7 @@ namespace KamiSama.Extensions.Core.Tests
 		[TestMethod]
 		public void GetString()
 		{
-			var arr = new byte[] { 0x30, 0x31, 0x32 };
+			var arr = "012"u8.ToArray();
 
 			var str = arr.GetString();
 

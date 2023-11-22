@@ -85,7 +85,7 @@ namespace KamiSama.Repositories.Xml
 			{
 				var dir = new DirectoryInfo(directoryPath);
 
-				var all = (equalityComparer == null) ? new HashSet<TEntity>() : new HashSet<TEntity>(equalityComparer);
+				var all = (equalityComparer == null) ? [] : new HashSet<TEntity>(equalityComparer);
 
 				foreach (var file in dir.GetFiles("*.xml"))
 				{

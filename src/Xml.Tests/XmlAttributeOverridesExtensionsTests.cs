@@ -89,31 +89,31 @@ namespace KamiSama.Extensions.Xml.Tests
 			{
 				ExampleRoot = new ExampleClass
 				{
-					SomeArrayField1 = new AbstractClass[]
-					{
+					SomeArrayField1 =
+					[
 						new DerivedClass1 { X = 10 },
 						new DerivedClass2 { Str = "abc-f1" }
-					},
+					],
 					Wrapper4 = new Wrapper4
 					{
-						SomeArrayField2 = new AbstractClass[]
-						{
+						SomeArrayField2 =
+						[
 							new DerivedClass1 { X = 10 },
 							new DerivedClass2 { Str = "abc-f2" }
-						}
+						]
 					},
-					SomeArrayProperty1 = new AbstractClass[]
-					{
+					SomeArrayProperty1 =
+					[
 						new DerivedClass1 { X = 11 },
 						new DerivedClass2 { Str = "abc-p1" }
-					},
+					],
 					Wrapper3 = new Wrapper3
 					{
-						SomeArrayProperty2 = new AbstractClass[]
-						{
+						SomeArrayProperty2 =
+						[
 							new DerivedClass1 { X = 11 },
 							new DerivedClass2 { Str = "abc-p2" }
-						}
+						]
 					},
 					Wrapper1 = new Wrapper1 { SomeProperty = new DerivedClass2 { Str = "13" } },
 					Wrapper2 = new Wrapper2 { SomeField = new DerivedClass1 { X = 12 } },
