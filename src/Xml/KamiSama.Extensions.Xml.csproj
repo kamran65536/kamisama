@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="..\props.xml" />
 
 	<PropertyGroup>
-	  <RootNamespace>KamiSama.Extensions</RootNamespace>
-	  <Description>v2.4.0
-AutoXmlIncludeAttribute is added.
-XmlSerialization is moved to KamiSama.Extensions.Xml</Description>
+		<RootNamespace>KamiSama.Extensions</RootNamespace>
+		<Description>
+			v2.4.0
+			AutoXmlIncludeAttribute is added.
+			XmlSerialization is moved to KamiSama.Extensions.Xml
+		</Description>
 	</PropertyGroup>
-
-	<Import Project="..\GeneralProperties.csproj" />
-
 </Project>

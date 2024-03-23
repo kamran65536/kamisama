@@ -1,16 +1,14 @@
 <Project>
 	<PropertyGroup>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<LangVersion>preview</LangVersion>
 		<DebugType>Full</DebugType>
-		<Version>2.8.0</Version>
+		<Version>2.8.1</Version>
 		<PackageProjectUrl>https://gitlab.com/kamran65536/KamiSama</PackageProjectUrl>
 		<RepositoryUrl>https://gitlab.com/kamran65536/KamiSama</RepositoryUrl>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<Authors>Kamran Fallah</Authors>
 		<Company>-</Company>
-		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 		<TargetFramework>net8.0</TargetFramework>
 		<Nullable>enable</Nullable>
+		<PackageLicenseFile>../LICENSE</PackageLicenseFile>
 	</PropertyGroup>
 </Project>

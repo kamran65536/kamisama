@@ -1,5 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="..\GeneralProperties.csproj" />
+	<Import Project="..\props.xml" />
 	<PropertyGroup>
 		<Description>Json Repository uses System.Text.Json</Description>
 		<PackageReleaseNotes>99-10-18 v2.2.8

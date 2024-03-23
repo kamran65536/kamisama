@@ -1,5 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="..\GeneralProperties.csproj" />
+	<Import Project="..\props.xml" />
 	<PropertyGroup>
 		<PackageReleaseNotes>v2.8.0
 - BigIntegerJsonConverter is added. 
@@ -16,7 +16,7 @@ v2.0.0
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="System.Text.Json" Version="8.0.0" />
+		<PackageReference Include="System.Text.Json" Version="8.0.3" />
 	</ItemGroup>
 
 	<ItemGroup>

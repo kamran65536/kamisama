@@ -1,5 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="..\GeneralProperties.csproj" />
+	<Import Project="..\props.xml" />
 	<PropertyGroup>
 		<Description>Repository pattern common usages.</Description>
 		<PackageReleaseNotes>v2.0.0

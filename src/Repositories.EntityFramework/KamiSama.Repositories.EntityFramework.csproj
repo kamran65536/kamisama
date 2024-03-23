@@ -1,5 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="..\GeneralProperties.csproj" />
+	<Import Project="..\props.xml" />
 
 	<PropertyGroup>
 		<Description>Entity Framework Repository Pattern</Description>

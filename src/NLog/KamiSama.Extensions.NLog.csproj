@@ -1,5 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="..\GeneralProperties.csproj" />
+	<Import Project="..\props.xml" />
 	<PropertyGroup>
 		<PackageReleaseNotes>
 			v2.2.0
@@ -17,7 +17,7 @@
 
 	<ItemGroup>
     <PackageReference Include="DotNetZip" Version="1.16.0" />
-    <PackageReference Include="NLog" Version="5.2.6" />
+    <PackageReference Include="NLog" Version="5.2.8" />
   </ItemGroup>
 
   <ItemGroup>

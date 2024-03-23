@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="..\GeneralProperties.csproj" />
+	<Import Project="..\props.xml" />
 
 	<PropertyGroup>
-		<TargetFramework>net8.0</TargetFramework>
 		<Description>Useful extenders suchas ToBytes, ToHex, ...</Description>
 		<PackageReleaseNotes>v2.4.0
 - XmlSerialization is moved to KamiSama.Extensions.Xml
