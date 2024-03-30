@@ -35,9 +35,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		..\.gitlab-ci.yml = ..\.gitlab-ci.yml
+		..\CHANGELOG = ..\CHANGELOG
 		LICENSE = LICENSE
-		test-configs.runsettings = test-configs.runsettings
 		props.xml = props.xml
+		test-configs.runsettings = test-configs.runsettings
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NLog", "NLog", "{EE08210A-D4B5-4BEB-9795-A05C5489886A}"

@@ -1,0 +1,3 @@
+1403-01-11 v2.8.2
+- KamiSama.Repositories.EntityFrameworkCore.DbRepository.UpdateAsync is now virtual.
+- KamiSama.Repositories.EntityFramework.DbRepository.UpdateAsync is now virtual.
