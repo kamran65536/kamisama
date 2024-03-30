@@ -53,7 +53,7 @@ namespace KamiSama.Repositories.EntityFramework
 			Context.SaveChanges();
 		}
 		/// <inheritdoc />
-		public Task UpdateAsync(TEntity item, CancellationToken cancellationToken = default)
+		public virtual Task UpdateAsync(TEntity item, CancellationToken cancellationToken = default)
 		{
 			var entry = Context.Entry(item);
 
