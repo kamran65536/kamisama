@@ -1,3 +1,6 @@
+1403-01-24 4/12/2024	v2.8.4
+- logo is added for all extensions libraries
+- documentations are updated.
 1403-01-24 4/12/2024	v2.8.3
 - KamiSama.Extensions.IQueryableExtensions.MakePaged is added.
 - KamiSama.Repositories.Paging is added.

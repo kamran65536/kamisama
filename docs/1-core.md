@@ -11,6 +11,7 @@ The library includes some helper methods for string, hexadecimal, byte array, ..
 - [1.8 Stream Extnesions](#18-stream-extensions)
 - [1.9 String Extensions](#19-string-extensions)
 - [1.10 TimeSpan Extensions](#110-timespan-extensions)
+- [1.11 IQueryable Extensions](#111-iqueryable-extensions)
 ## 1.1. Array Extensions
 ```csharp
 // pads an array until to total length becomes multiplies of 8
@@ -115,4 +116,12 @@ arr = base64Str.FromBase64();
     ts = 127.Hours();
     // creates an TimeSpan from days
     ts = 2.Days();
+```
+## 1.11. IQuerable Extensions
+You can page IQuerable results using the MakePaged extension method:
+```csharp
+   var pagedResult = query.MakePaged(SearchModel.FromPage(pageNumber: 1, pageSize: 10));
+
+   var pageItems = pagedResult.Items;
+   var totalCount = pagedResult.TotalItemsCount;
 ```

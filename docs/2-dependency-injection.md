@@ -5,7 +5,7 @@ This library is an simple extension on Microsoft.Extensions.DependencyInjection 
 - [Named Injection](#21-named-injection)
 - [AutoAddDependencies](#22-autoadddependencies)
 
-## 2.1 Named Injection
+## 2.1 Named Injection (deprecated)
 you can inject implementations by name.
 ```csharp
 // adds a singleton with name instance1

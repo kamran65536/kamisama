@@ -8,7 +8,7 @@ public class IQueryableExtensionsTests
 {
 	private static readonly Random random = new();
 
-	private static SampleContext GetDbContext(string? databaseName = null, SampleEntity[]? initialDbSet = null)
+	private static SampleContext GetDbContext(string? databaseName = null)
 	{
 		databaseName ??= ("SampleContext" + random.Next());
 
