@@ -7,7 +7,6 @@ public class IQueryableExtensionsTests
 {
 	private static SampleContext GetDbContext()
 	{
-		var initialDbSet = new SampleEntity[13];
 		var entities = new SampleEntity[13];
 
 		for (int i = 0; i < entities.Length; i++)
