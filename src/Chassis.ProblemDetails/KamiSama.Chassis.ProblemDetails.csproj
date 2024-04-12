@@ -1,7 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<Import Project="../props.xml" />
 	<ItemGroup>
+	  <None Remove="KamiSama.ico" />
+	</ItemGroup>
+	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 		<ProjectReference Include="..\Chassis.Exceptions\KamiSama.Chassis.HttpExceptions.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+	  <_DeploymentManifestIconFile Remove="KamiSama.ico" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Content Include="KamiSama.ico" />
 	</ItemGroup>
 </Project>

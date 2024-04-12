@@ -28,7 +28,7 @@ namespace KamiSama.Repositories
 		public InMemoryRepository(IEnumerable<TEntity>? initialItems,
 							IEqualityComparer<TEntity>? comparer = null)
 		{
-			initialItems ??= Array.Empty<TEntity>();
+			initialItems ??= [];
 			semaphore = new SemaphoreSlim(1, 1);
 
 			if (comparer == null)
@@ -94,23 +94,23 @@ namespace KamiSama.Repositories
 		public virtual TEntity? Find(Expression<Func<TEntity, bool>>? predicate)
 			=> (predicate == null) ? default : items.FirstOrDefault(predicate.Compile());
 		///
-		public virtual async Task AddAsync(TEntity item, CancellationToken cancellationToken = default)
+		public virtual async Task AddAsync(TEntity item, CancellationToken cancellationToken)
 		{
 			await semaphore.WaitAsync(cancellationToken);
 			items.Add(item);
 			semaphore.Release();
 		}
 		/// <inheritdoc />
-		public Task UpdateAsync(TEntity item, CancellationToken cancellationToken = default) => Task.CompletedTask;
+		public Task UpdateAsync(TEntity item, CancellationToken cancellationToken) => Task.CompletedTask;
 		/// <inheritdoc />
-		public virtual async Task DeleteAsync(TEntity item, CancellationToken cancellationToken = default)
+		public virtual async Task DeleteAsync(TEntity item, CancellationToken cancellationToken)
 		{
 			await semaphore.WaitAsync(cancellationToken);
 			items.Remove(item);
 			semaphore.Release();
 		}
 		/// <inheritdoc />
-		public virtual Task<TEntity?> FindAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
+		public virtual Task<TEntity?> FindAsync(Expression<Func<TEntity, bool>>? predicate, CancellationToken cancellationToken)
 			=> Task.FromResult(Find(predicate));
 	}
 }

@@ -1,14 +1,10 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Numerics;
-using System.Text.Json;
-
-namespace KamiSama.Extensions.Json.Tests;
+﻿namespace KamiSama.Extensions.Json.Tests;
 
 [TestClass]
 public class BitIntegerJsonConverterTests
 {
 	[TestMethod]
-	public void write_should_serialize_value_to_string()
+	public void Write_should_serialize_value_to_string()
 	{
 		var options = new JsonSerializerOptions();
 		options.Converters.Add(new BigIntegerJsonConverter());

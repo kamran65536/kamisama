@@ -21,10 +21,6 @@ public class ForbiddenException : HttpExceptionBase
 	{
 	}
 	/// <inheritdoc />
-	public ForbiddenException(SerializationInfo info, StreamingContext context) : base(info, context)
-	{
-	}
-	/// <inheritdoc />
 	public ForbiddenException(string? message, Exception? innerException) : base(message, innerException)
 	{
 	}

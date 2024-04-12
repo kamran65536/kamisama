@@ -11,6 +11,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="EntityFramework" Version="6.4.4" />
+		<ProjectReference Include="..\Core\KamiSama.Extensions.Core.csproj" />
 		<ProjectReference Include="..\Repositories.Core\KamiSama.Repositories.Core.csproj" />
 	</ItemGroup>
 

@@ -22,10 +22,6 @@ public class PaymentRequiredException : HttpExceptionBase
 	{
 	}
 	/// <inheritdoc />
-	public PaymentRequiredException(SerializationInfo info, StreamingContext context) : base(info, context)
-	{
-	}
-	/// <inheritdoc />
 	public PaymentRequiredException(string? message, Exception? innerException) : base(message, innerException)
 	{
 	}

@@ -73,7 +73,7 @@ namespace KamiSama.Repositories.EntityFramework
 			Context.SaveChanges();
 		}
 		/// <inheritdoc />
-		public virtual Task DeleteAsync(TEntity item, CancellationToken cancellationToken = default)
+		public virtual Task DeleteAsync(TEntity item, CancellationToken cancellationToken)
 		{
 			dbSet.Remove(item);
 			return Context.SaveChangesAsync(cancellationToken);
@@ -93,7 +93,7 @@ namespace KamiSama.Repositories.EntityFramework
 		public virtual TEntity? Find(Expression<Func<TEntity, bool>>? predicate)
 			=> dbSet.FirstOrDefault(predicate ?? (x => true));
 		/// <inheritdoc />
-		public virtual Task<TEntity?> FindAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
+		public virtual Task<TEntity?> FindAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken)
 			=> dbSet.FirstOrDefaultAsync(predicate, cancellationToken)!;
 		/// <summary>
 		/// Dispose method, does nothing

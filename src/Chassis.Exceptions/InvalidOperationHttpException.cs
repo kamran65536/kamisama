@@ -20,10 +20,6 @@ public class InvalidOperationHttpException : HttpExceptionBase
 	{
 	}
 	/// <inheritdoc />
-	public InvalidOperationHttpException(SerializationInfo info, StreamingContext context) : base(info, context)
-	{
-	}
-	/// <inheritdoc />
 	public InvalidOperationHttpException(string? message, Exception? innerException) : base(message, innerException)
 	{
 	}

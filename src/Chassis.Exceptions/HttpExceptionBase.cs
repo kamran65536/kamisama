@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Runtime.InteropServices.Marshalling;
-using System.Runtime.Serialization;
 
 namespace KamiSama.Chassis.HttpExceptions;
 
@@ -26,10 +24,6 @@ public abstract class HttpExceptionBase : Exception
 	}
 	/// <inheritdoc />
 	protected HttpExceptionBase(string? message) : base(message)
-	{
-	}
-	/// <inheritdoc />
-	protected HttpExceptionBase(SerializationInfo info, StreamingContext context) : base(info, context)
 	{
 	}
 	/// <inheritdoc />

@@ -1,6 +1,5 @@
-﻿namespace KamiSama.Extensions.Xml.Tests
+﻿namespace KamiSama.Extensions.Xml.Tests;
+
+public abstract class AbstractClass
 {
-	public abstract class AbstractClass
-	{
-	}
 }

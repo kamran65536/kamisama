@@ -8,23 +8,15 @@ namespace KamiSama.Chassis.HttpExceptions;
 /// </summary>
 public class BadRequestException : HttpExceptionBase
 {
-    /// <inheritdoc />
-    public override int StatusCode => StatusCodes.Status400BadRequest;
+	/// <inheritdoc />
+	public override int StatusCode => StatusCodes.Status400BadRequest;
 
-    /// <inheritdoc />
-    public BadRequestException()
-    {
-    }
-    /// <inheritdoc />
-    public BadRequestException(string? message) : base(message)
-    {
-    }
-    /// <inheritdoc />
-    public BadRequestException(SerializationInfo info, StreamingContext context) : base(info, context)
-    {
-    }
-    /// <inheritdoc />
-    public BadRequestException(string? message, Exception? innerException) : base(message, innerException)
-    {
-    }
- }
+	/// <inheritdoc />
+	public BadRequestException()
+	{
+	}
+	/// <inheritdoc />
+	public BadRequestException(string? message) : base(message)
+	{
+	}
+}

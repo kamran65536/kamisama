@@ -21,10 +21,6 @@ public class NotImplementedHttpException : HttpExceptionBase
 	{
 	}
 	/// <inheritdoc />
-	public NotImplementedHttpException(SerializationInfo info, StreamingContext context) : base(info, context)
-	{
-	}
-	/// <inheritdoc />
 	public NotImplementedHttpException(string? message, Exception? innerException) : base(message, innerException)
 	{
 	}

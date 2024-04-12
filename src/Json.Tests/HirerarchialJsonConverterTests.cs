@@ -1,9 +1,4 @@
-﻿using KamiSama.Extensions.Json;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-
+﻿
 namespace KamiSama.Extensions.Json.Tests
 {
 	public abstract class SampleBaseClass

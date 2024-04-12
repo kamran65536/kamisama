@@ -1,40 +1,33 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NSubstitute;
-using System;
-using System.Linq;
-using System.Linq.Expressions;
+﻿namespace KamiSama.Repositories.Tests.Core;
 
-namespace KamiSama.Repositories.Tests.Core
+[TestClass]
+public class IRepositoryExtensionsTests
 {
-	[TestClass]
-	public class IRepositoryExtensionsTests
+	[TestMethod]
+	public void FirstOrDefault_must_call_FirstOrDefault_on_Where_method()
 	{
-		[TestMethod]
-		public void FirstOrDefault_must_call_FirstOrDefault_on_Where_method()
-		{
-			var sampleCollection = new [] { new SampleEntity()};
-			Expression<Func<SampleEntity, bool>> predicate = se => true;
+		var sampleCollection = new [] { new SampleEntity()};
+		Expression<Func<SampleEntity, bool>> predicate = se => true;
 
-			var repository = Substitute.For<IQueryableRepository<SampleEntity>>();
-			repository.Where(Arg.Any<Expression<Func<SampleEntity, bool>>>()).Returns(sampleCollection.AsQueryable());
+		var repository = Substitute.For<IQueryableRepository<SampleEntity>>();
+		repository.Where(Arg.Any<Expression<Func<SampleEntity, bool>>>()).Returns(sampleCollection.AsQueryable());
 
-			var result = repository.FirstOrDefault(predicate);
+		var result = repository.FirstOrDefault(predicate);
 
-			Assert.AreEqual(sampleCollection[0], result);
-			repository.Received().Where(predicate);
-		}
-		[TestMethod]
-		public void GetAll_must_call_Where_method()
-		{
-			var sampleCollection = new[] { new SampleEntity() };
-			Expression<Func<SampleEntity, bool>> predicate = se => true;
+		Assert.AreEqual(sampleCollection[0], result);
+		repository.Received().Where(predicate);
+	}
+	[TestMethod]
+	public void GetAll_must_call_Where_method()
+	{
+		var sampleCollection = new[] { new SampleEntity() };
+		Expression<Func<SampleEntity, bool>> predicate = se => true;
 
-			var repository = Substitute.For<IQueryableRepository<SampleEntity>>();
-			repository.Where(Arg.Any<Expression<Func<SampleEntity, bool>>>()).Returns(sampleCollection.AsQueryable());
+		var repository = Substitute.For<IQueryableRepository<SampleEntity>>();
+		repository.Where(Arg.Any<Expression<Func<SampleEntity, bool>>>()).Returns(sampleCollection.AsQueryable());
 
-			var result = repository.GetAll();
+		var result = repository.GetAll();
 
-			CollectionAssert.AreEqual(sampleCollection, result.ToArray());
-		}
+		CollectionAssert.AreEqual(sampleCollection, result.ToArray());
 	}
 }

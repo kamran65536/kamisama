@@ -1,25 +1,21 @@
-﻿using KamiSama.Extensions.DependencyInjection.Tests.DataTypes;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿namespace KamiSama.Extensions.DependencyInjection.Tests;
 
-namespace KamiSama.Extensions.DependencyInjection.Tests
+[TestClass]
+public class ServiceProviderExtensionsTests
 {
-	[TestClass]
-	public class ServiceProviderExtensionsTests
+	[TestMethod]
+	[Obsolete("Method is obsolete, will be removed in next versions")]
+	public void GetService_must_return_named_instance_if_found()
 	{
-		[TestMethod]
-		public void GetService_must_return_named_instance_if_found()
-		{
-			var services = new ServiceCollection();
+		var services = new ServiceCollection();
 
-			services.AddTransient<ISampleInteface, SampleImplementation1>("name1");
+		services.AddTransient<ISampleInteface, SampleImplementation1>("name1");
 
-			var provider = services.BuildServiceProvider();
+		var provider = services.BuildServiceProvider();
 
-			var implementation = provider.GetService(typeof(ISampleInteface), "name1");
+		var implementation = provider.GetService(typeof(ISampleInteface), "name1");
 
-			Assert.IsNotNull(implementation);
-			Assert.IsInstanceOfType(implementation, typeof(SampleImplementation1));
-		}
+		Assert.IsNotNull(implementation);
+		Assert.IsInstanceOfType(implementation, typeof(SampleImplementation1));
 	}
 }

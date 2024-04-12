@@ -22,10 +22,6 @@ public class UnAuthorizedException : HttpExceptionBase
 	{
 	}
 	/// <inheritdoc />
-	public UnAuthorizedException(SerializationInfo info, StreamingContext context) : base(info, context)
-	{
-	}
-	/// <inheritdoc />
 	public UnAuthorizedException(string? message, Exception? innerException) : base(message, innerException)
 	{
 	}

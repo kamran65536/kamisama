@@ -21,11 +21,12 @@ namespace KamiSama.Extensions.DependencyInjection
 		/// <param name="serviceType">the service type</param>
 		/// <param name="implementationType">the implementation type to be used</param>
 		/// <returns></returns>
+		[Obsolete("This method is obsolete as .net 8 has added AddKeyed methods")]
 		public static IServiceCollection AddNamed(this IServiceCollection services, string name, Type serviceType, Type implementationType)
 		{
 			var factoryType = typeof(NamedFactory<>);
 			factoryType = factoryType.MakeGenericType(serviceType);
-
+			
 			NamedFactory? factory = null;
 			var serviceDescriptor = services.FirstOrDefault(x => x.ServiceType == factoryType);
 
@@ -52,6 +53,7 @@ namespace KamiSama.Extensions.DependencyInjection
 		/// <param name="implementationType">the implementation type to be used</param>
 		/// <returns></returns>
 		[ExcludeFromCodeCoverage]
+		[Obsolete("This method is obsolete as .net 8 has added AddKeyed methods")]
 		public static IServiceCollection AddNamed<TService>(this IServiceCollection services, string name, Type implementationType)
 			=> services.AddNamed(name, typeof(TService), implementationType);
 		/// <summary>
@@ -64,6 +66,7 @@ namespace KamiSama.Extensions.DependencyInjection
 		/// <param name="name">name of the implementation</param>
 		/// <returns></returns>
 		[ExcludeFromCodeCoverage]
+		[Obsolete("This method is obsolete as .net 8 has added AddKeyed methods")]
 		public static IServiceCollection AddNamed<TService, TImplementation>(this IServiceCollection services, string name)
 			=> services.AddNamed(name, typeof(TService), typeof(TImplementation));
 		#endregion
@@ -79,6 +82,7 @@ namespace KamiSama.Extensions.DependencyInjection
 		/// <param name="implementationType">the implementation type to be used</param>
 		/// <returns></returns>
 		[ExcludeFromCodeCoverage]
+		[Obsolete("This method is obsolete as .net 8 has added AddKeyed methods")]
 		public static IServiceCollection AddTransient<TService>(this IServiceCollection services, string name, Type implementationType)
 			=>	services.AddNamed<TService>(name, implementationType).AddTransient(implementationType);
 		/// <summary>
@@ -91,6 +95,7 @@ namespace KamiSama.Extensions.DependencyInjection
 		/// <param name="name">name of the implementation</param>
 		/// <param name="implementationType">the implementation type to be used</param>
 		[ExcludeFromCodeCoverage]
+		[Obsolete("This method is obsolete as .net 8 has added AddKeyed methods")]
 		public static IServiceCollection AddTransient(this IServiceCollection services, string name, Type serviceType, Type implementationType)
 			=>	services.AddNamed(name, serviceType, implementationType).AddTransient(serviceType, implementationType);
 		/// <summary>
@@ -104,6 +109,7 @@ namespace KamiSama.Extensions.DependencyInjection
 		/// <param name="name">name of the implementation</param>
 		/// <param name="implementationFactory">adds an item using implementation factory</param>
 		[ExcludeFromCodeCoverage]
+		[Obsolete("This method is obsolete as .net 8 has added AddKeyed methods")]
 		public static IServiceCollection AddTransient<TImplementation>(this IServiceCollection services, string name, Type serviceType, Func<IServiceProvider, TImplementation> implementationFactory) where TImplementation : class
 			=> services.AddNamed(name, serviceType, typeof(TImplementation)).AddTransient(implementationFactory);
 		/// <summary>
@@ -116,6 +122,7 @@ namespace KamiSama.Extensions.DependencyInjection
 		/// <param name="services">the service collection</param>
 		/// <param name="name">name of the implementation</param>
 		[ExcludeFromCodeCoverage]
+		[Obsolete("This method is obsolete as .net 8 has added AddKeyed methods")]
 		public static IServiceCollection AddTransient<TService, TImplementation>(this IServiceCollection services, string name) where TImplementation : class
 			=> services.AddNamed(name, typeof(TService), typeof(TImplementation)).AddTransient<TImplementation>();
 		/// <summary>
@@ -129,6 +136,7 @@ namespace KamiSama.Extensions.DependencyInjection
 		/// <param name="name">name of the implementation</param>
 		/// <param name="implementationFactory">adds an item using implementation factory</param>
 		[ExcludeFromCodeCoverage]
+		[Obsolete("This method is obsolete as .net 8 has added AddKeyed methods")]
 		public static IServiceCollection AddTransient<TService, TImplementation>(this IServiceCollection services, string name, Func<IServiceProvider, TImplementation> implementationFactory) where TImplementation : class
 			=> services.AddNamed(name, typeof(TService), typeof(TImplementation)).AddTransient(implementationFactory);
 		#endregion
@@ -143,6 +151,7 @@ namespace KamiSama.Extensions.DependencyInjection
 		/// <param name="services">the service collection</param>
 		/// <param name="name">name of the implementation</param>
 		[ExcludeFromCodeCoverage]
+		[Obsolete("This method is obsolete as .net 8 has added AddKeyed methods")]
 		public static IServiceCollection AddScoped(this IServiceCollection services, string name, Type serviceType, Type implementationType)
 			=> services.AddNamed(name, serviceType, implementationType).AddScoped(implementationType);
 		/// <summary>
@@ -155,6 +164,7 @@ namespace KamiSama.Extensions.DependencyInjection
 		/// <param name="services">the service collection</param>
 		/// <param name="name">name of the implementation</param>
 		[ExcludeFromCodeCoverage]
+		[Obsolete("This method is obsolete as .net 8 has added AddKeyed methods")]
 		public static IServiceCollection AddScoped<TService, TImplementation>(this IServiceCollection services, string name)
 			where TService : class
 			where TImplementation : class, TService
@@ -171,6 +181,7 @@ namespace KamiSama.Extensions.DependencyInjection
 		/// <param name="implementationFactory">factory for the named implementation instance</param>
 		/// <returns></returns>
 		[ExcludeFromCodeCoverage]
+		[Obsolete("This method is obsolete as .net 8 has added AddKeyed methods")]
 		public static IServiceCollection AddScoped<TService, TImplementation>(this IServiceCollection services, string name, Func<IServiceProvider, TImplementation> implementationFactory)
 			where TService : class
 			where TImplementation : class, TService
@@ -188,6 +199,7 @@ namespace KamiSama.Extensions.DependencyInjection
 		/// <param name="name">name of the implementation</param>
 		/// <returns></returns>
 		[ExcludeFromCodeCoverage]
+		[Obsolete("This method is obsolete as .net 8 has added AddKeyed methods")]
 		public static IServiceCollection AddSingleton(this IServiceCollection services, string name, Type serviceType, Type implementationType)
 			=> services.AddNamed(name, serviceType, implementationType).AddSingleton(implementationType);
 		/// <summary>
@@ -201,6 +213,7 @@ namespace KamiSama.Extensions.DependencyInjection
 		/// <param name="name">name of the implementation</param>
 		/// <returns></returns>
 		[ExcludeFromCodeCoverage]
+		[Obsolete("This method is obsolete as .net 8 has added AddKeyed methods")]
 		public static IServiceCollection AddSingleton<TService, TImplementation>(this IServiceCollection services, string name)
 			where TService : class
 			where TImplementation : class, TService
@@ -217,6 +230,7 @@ namespace KamiSama.Extensions.DependencyInjection
 		/// <param name="implementationFactory">factory for the named implementation instance</param>
 		/// <returns></returns>
 		[ExcludeFromCodeCoverage]
+		[Obsolete("This method is obsolete as .net 8 has added AddKeyed methods")]
 		public static IServiceCollection AddSingleton<TService, TImplementation>(this IServiceCollection services, string name, Func<IServiceProvider, TImplementation> implementationFactory)
 			where TService : class
 			where TImplementation : class, TService
@@ -232,6 +246,7 @@ namespace KamiSama.Extensions.DependencyInjection
 		/// <param name="name">name of the implementation</param>
 		/// <param name="implementationInstance">implementation instance</param>
 		[ExcludeFromCodeCoverage]
+		[Obsolete("This method is obsolete as .net 8 has added AddKeyed methods")]
 		public static IServiceCollection AddSingleton<TService, TImplementation>(this IServiceCollection services, string name, TImplementation implementationInstance)
 			where TService : class
 			where TImplementation : class, TService
@@ -244,7 +259,7 @@ namespace KamiSama.Extensions.DependencyInjection
 		/// <param name="services"></param>
 		/// <param name="assemblies">list of assemblies to search, null means all assemblies</param>
 		/// <returns></returns>
-		public static IServiceCollection AutoAddDependencies(this IServiceCollection services, params Assembly[] assemblies)
+		public static IServiceCollection AutoAddDependencies(this IServiceCollection services, params Assembly[]? assemblies)
 		{
 			if ((assemblies == null) || (assemblies.Length == 0))
 				assemblies = AppDomain.CurrentDomain.GetAssemblies();

@@ -22,10 +22,6 @@ public class ConflictException : HttpExceptionBase
 	{
 	}
 	/// <inheritdoc/>
-	public ConflictException(SerializationInfo info, StreamingContext context) : base(info, context)
-	{
-	}
-	/// <inheritdoc/>
 	public ConflictException(string? message, Exception? innerException) : base(message, innerException)
 	{
 	}

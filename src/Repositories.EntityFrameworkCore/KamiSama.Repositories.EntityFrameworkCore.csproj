@@ -15,6 +15,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\Core\KamiSama.Extensions.Core.csproj" />
 		<ProjectReference Include="..\Repositories.Core\KamiSama.Repositories.Core.csproj" />
 	</ItemGroup>
 

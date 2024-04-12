@@ -20,10 +20,6 @@ public class UnProcessableEntityException : HttpExceptionBase
     {
     }
     /// <inheritdoc />
-    public UnProcessableEntityException(SerializationInfo info, StreamingContext context) : base(info, context)
-    {
-    }
-    /// <inheritdoc />
     public UnProcessableEntityException(string? message, Exception? innerException) : base(message, innerException)
     {
     }

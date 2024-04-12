@@ -19,10 +19,6 @@ public class GoneException : HttpExceptionBase
 	{
 	}
 	/// <inheritdoc />
-	public GoneException(SerializationInfo info, StreamingContext context) : base(info, context)
-	{
-	}
-	/// <inheritdoc />
 	public GoneException(string? message, Exception? innerException) : base(message, innerException)
 	{
 	}

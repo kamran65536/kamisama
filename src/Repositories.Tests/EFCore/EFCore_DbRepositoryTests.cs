@@ -1,19 +1,13 @@
 ﻿using KamiSama.Repositories.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NSubstitute;
-using System;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace KamiSama.Repositories.Tests.EFCore
 {
 	[TestClass]
 	public class EFCore_DbRepositoryTests
 	{
-		private static readonly Random random = new Random();
-		private static SampleContext GetDbContext(string databaseName = null, SampleEntity[] initialDbSet = null)
+		private static readonly Random random = new();
+		private static SampleContext GetDbContext(string? databaseName = null, SampleEntity[]? initialDbSet = null)
 		{
 			databaseName ??= ("SampleContext" + random.Next());
 			
@@ -60,7 +54,7 @@ namespace KamiSama.Repositories.Tests.EFCore
 		public void Update_must_update_status_in_context()
 		{
 			var entity = new SampleEntity { Id = 1, Name = "Test" };
-			var context = GetDbContext(initialDbSet: new[] { entity });
+			var context = GetDbContext(initialDbSet: [entity]);
 
 			var repository = new DbRepository<SampleEntity>(context);
 
@@ -74,7 +68,7 @@ namespace KamiSama.Repositories.Tests.EFCore
 		public async Task UpdateAsync_must_update_status_in_context()
 		{
 			var entity = new SampleEntity { Id = 1, Name = "Test" };
-			var context = GetDbContext(initialDbSet: new[] { entity });
+			var context = GetDbContext(initialDbSet: [entity]);
 
 			var repository = new DbRepository<SampleEntity>(context);
 
@@ -88,7 +82,7 @@ namespace KamiSama.Repositories.Tests.EFCore
 		public void Delete_must_remove_dbSet()
 		{
 			var entity = new SampleEntity { Id = 1, Name = "Test" };
-			var context = GetDbContext(initialDbSet: new[] { entity });
+			var context = GetDbContext(initialDbSet: [entity]);
 
 			var repository = new DbRepository<SampleEntity>(context);
 
@@ -102,7 +96,7 @@ namespace KamiSama.Repositories.Tests.EFCore
 		public async Task DeleteAsync_must_remove_dbSet()
 		{
 			var entity = new SampleEntity { Id = 1, Name = "Test" };
-			var context = GetDbContext(initialDbSet: new[] { entity });
+			var context = GetDbContext(initialDbSet: [entity]);
 
 			var repository = new DbRepository<SampleEntity>(context);
 
@@ -116,7 +110,7 @@ namespace KamiSama.Repositories.Tests.EFCore
 		public void Find_must_find_items_in_dbSet()
 		{
 			var entity = new SampleEntity { Id = 1, Name = "Test" };
-			var context = GetDbContext(initialDbSet: new[] { entity });
+			var context = GetDbContext(initialDbSet: [entity]);
 			var repository = new DbRepository<SampleEntity>(context);
 
 			var result = repository.Find(x => x.Id == 1);
@@ -129,7 +123,7 @@ namespace KamiSama.Repositories.Tests.EFCore
 		public async Task FindAsync_must_find_items_in_dbSet()
 		{
 			var entity = new SampleEntity { Id = 1, Name = "Test" };
-			var context = GetDbContext(initialDbSet: new[] { entity });
+			var context = GetDbContext(initialDbSet: [entity]);
 			var repository = new DbRepository<SampleEntity>(context);
 
 			var result = await repository.FindAsync(x => x.Id == 1, CancellationToken.None);
@@ -150,7 +144,7 @@ namespace KamiSama.Repositories.Tests.EFCore
 			var context = GetDbContext(initialDbSet: arr);
 			var repository = new DbRepository<SampleEntity>(context);
 
-			var result = repository.Where(x => x.Name.StartsWith("sample")).ToArray();
+			var result = repository.Where(x => x.Name!.StartsWith("sample")).ToArray();
 
 			CollectionAssert.Contains(result, arr[0]);
 			CollectionAssert.Contains(result, arr[1]);

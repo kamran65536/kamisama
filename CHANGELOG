@@ -1,3 +1,11 @@
-1403-01-11 v2.8.2
+1403-01-24 4/12/2024	v2.8.3
+- KamiSama.Extensions.IQueryableExtensions.MakePaged is added.
+- KamiSama.Repositories.Paging is added.
+- KamiSama.Repositories.EntityFramework.Histories.HistoricalDbRepository is added.
+- KamiSama.Repositories.EntityFrameworkCore.Histories.HistoricalDbRepository is added.
+- KamiSama.Repositories.EntityFramework.IQueryableExtensions.MakePagedAsync is added.
+- KamiSama.Repositories.EntityFrameworkCore.IQueryableExtensions.MakePagedAsync is added.
+- KamiSama.Extensions.DependencyInjections.ServiceCollectionExtensions.AddNamed methods are deprecated as .net 8 already supports the concept: AddKeyedScope
+1403-01-11 3/30/2024	v2.8.2
 - KamiSama.Repositories.EntityFrameworkCore.DbRepository.UpdateAsync is now virtual.
 - KamiSama.Repositories.EntityFramework.DbRepository.UpdateAsync is now virtual.

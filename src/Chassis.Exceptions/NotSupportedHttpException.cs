@@ -19,10 +19,6 @@ public class NotSupportedHttpException : HttpExceptionBase
 	{
 	}
 	/// <inheritdoc />
-	public NotSupportedHttpException(SerializationInfo info, StreamingContext context) : base(info, context)
-	{
-	}
-	/// <inheritdoc />
 	public NotSupportedHttpException(string? message, Exception? innerException) : base(message, innerException)
 	{
 	}
