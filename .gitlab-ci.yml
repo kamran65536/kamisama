@@ -1,6 +1,6 @@
 image: mcr.microsoft.com/dotnet/sdk:8.0
 variables:
-    PACKAGE_VERSION: "2.8.5-preview"
+    PACKAGE_VERSION: "2.8.5-preview2"
 
 stages:
     - build
