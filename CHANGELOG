@@ -14,4 +14,6 @@
 
 1403-03-20 6/9/2024		v2.8.5
 - KamiSama.Testing.NSubstitute is added.
+- Localized exception text is added to KamiSama.Chassis.ProblemDetails
+- ServiceUnavailableException is added to KamiSama.Chassis.HttpExceptions.
 - all warnings will be treated as error for better code quality.
