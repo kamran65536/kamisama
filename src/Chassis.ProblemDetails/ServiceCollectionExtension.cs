@@ -17,10 +17,11 @@ public static class ServiceCollectionExtension
     public static IMvcBuilder AddExceptionFilterForProblemDetails(this IMvcBuilder builder, Func<IServiceProvider, IProblemDetailsDataProvider>? problemDetailsProviderFunc  = null)
     {
         if (problemDetailsProviderFunc != null)
-            builder.Services.AddTransient(problemDetailsProviderFunc);
+            builder.Services.AddScoped(problemDetailsProviderFunc);
         else
-            builder.Services.AddTransient<IProblemDetailsDataProvider, KamiSamaProblemDetailsProvider>();
-        builder.Services.AddTransient<KamiSamaProblemDetailsProvider>();
+            builder.Services.AddScoped<IProblemDetailsDataProvider, KamiSamaProblemDetailsProvider>();
+        builder.Services.AddScoped<KamiSamaProblemDetailsProvider>();
+        builder.Services.AddScoped<ProblemDetailsExceptionFilter>();
         return builder.AddMvcOptions(opt => opt.Filters.AddService<ProblemDetailsExceptionFilter>());
     }
 }
