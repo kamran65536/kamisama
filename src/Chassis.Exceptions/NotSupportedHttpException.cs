@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
-using System.Runtime.Serialization;
 namespace KamiSama.Chassis.HttpExceptions;
 
 /// <summary>
@@ -15,11 +14,11 @@ public class NotSupportedHttpException : HttpExceptionBase
 	{
 	}
 	/// <inheritdoc />
-	public NotSupportedHttpException(string? message) : base(message)
+	public NotSupportedHttpException(string messageKey, params object?[] args) : base(messageKey, args)
 	{
 	}
 	/// <inheritdoc />
-	public NotSupportedHttpException(string? message, Exception? innerException) : base(message, innerException)
+	public NotSupportedHttpException(string messageKey, object?[] args, Exception? innerException) : base(messageKey, args, innerException)
 	{
 	}
 }

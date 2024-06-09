@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using KamiSama.Chassis.HttpExceptions.Properties;
 
 namespace KamiSama.Chassis.HttpExceptions;
 
@@ -6,7 +6,6 @@ namespace KamiSama.Chassis.HttpExceptions;
 /// The entity already exists exception
 /// </summary>
 /// <inheritdoc />
-[ExcludeFromCodeCoverage]
-public class AlreadyExistsException(string entityName, string? entityKey) : ConflictException($"{entityName} with key {entityKey} already exists.")
+public class AlreadyExistsException(string entityName, string? entityKey) : ConflictException(nameof(Resources.AlreadyExistsException), entityName, entityKey)
 {
 }

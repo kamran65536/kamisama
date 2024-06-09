@@ -18,11 +18,11 @@ public class UnAuthorizedException : HttpExceptionBase
 	{
 	}
 	/// <inheritdoc />
-	public UnAuthorizedException(string? message) : base(message)
+	public UnAuthorizedException(string messageKey, params object?[] args) : base(messageKey, args)
 	{
 	}
 	/// <inheritdoc />
-	public UnAuthorizedException(string? message, Exception? innerException) : base(message, innerException)
+	public UnAuthorizedException(string messageKey, object?[] args, Exception? innerException) : base(messageKey, args, innerException)
 	{
 	}
 }

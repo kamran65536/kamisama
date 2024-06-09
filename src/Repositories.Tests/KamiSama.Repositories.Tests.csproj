@@ -33,6 +33,7 @@
 		<ProjectReference Include="..\Repositories.EntityFrameworkCore\KamiSama.Repositories.EntityFrameworkCore.csproj" />
 		<ProjectReference Include="..\Repositories.EntityFramework\KamiSama.Repositories.EntityFramework.csproj" />
 		<ProjectReference Include="..\Repositories.Json\KamiSama.Repositories.Json.csproj" />
+		<ProjectReference Include="..\Repositories.Xml\KamiSama.Repositories.Xml.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

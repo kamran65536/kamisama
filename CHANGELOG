@@ -3,7 +3,6 @@
 - documentations are updated.
 1403-01-24 4/12/2024	v2.8.3
 - KamiSama.Extensions.IQueryableExtensions.MakePaged is added.
-- KamiSama.Repositories.Paging is added.
 - KamiSama.Repositories.EntityFramework.Histories.HistoricalDbRepository is added.
 - KamiSama.Repositories.EntityFrameworkCore.Histories.HistoricalDbRepository is added.
 - KamiSama.Repositories.EntityFramework.IQueryableExtensions.MakePagedAsync is added.
@@ -12,3 +11,7 @@
 1403-01-11 3/30/2024	v2.8.2
 - KamiSama.Repositories.EntityFrameworkCore.DbRepository.UpdateAsync is now virtual.
 - KamiSama.Repositories.EntityFramework.DbRepository.UpdateAsync is now virtual.
+
+1403-03-20 6/9/2024		v2.8.5
+- KamiSama.Testing.NSubstitute is added.
+- all warnings will be treated as error for better code quality.

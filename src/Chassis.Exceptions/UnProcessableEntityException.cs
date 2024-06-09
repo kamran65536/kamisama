@@ -16,11 +16,11 @@ public class UnProcessableEntityException : HttpExceptionBase
     {
     }
     /// <inheritdoc />
-    public UnProcessableEntityException(string? message) : base(message)
+    public UnProcessableEntityException(string messageKey, params object?[] args) : base(messageKey, args)
     {
     }
     /// <inheritdoc />
-    public UnProcessableEntityException(string? message, Exception? innerException) : base(message, innerException)
+    public UnProcessableEntityException(string messageKey, object?[] args, Exception? innerException) : base(messageKey, args, innerException)
     {
     }
 }

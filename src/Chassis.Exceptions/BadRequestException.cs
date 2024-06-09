@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Runtime.Serialization;
 
 namespace KamiSama.Chassis.HttpExceptions;
 /// <summary>
@@ -16,7 +14,7 @@ public class BadRequestException : HttpExceptionBase
 	{
 	}
 	/// <inheritdoc />
-	public BadRequestException(string? message) : base(message)
+	public BadRequestException(string messageKey, params object?[] args) : base(messageKey, args)
 	{
 	}
 }

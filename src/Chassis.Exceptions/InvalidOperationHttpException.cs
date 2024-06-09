@@ -16,11 +16,11 @@ public class InvalidOperationHttpException : HttpExceptionBase
 	{
 	}
 	/// <inheritdoc />
-	public InvalidOperationHttpException(string? message) : base(message)
+	public InvalidOperationHttpException(string message, params object?[] args) : base(message, args)
 	{
 	}
 	/// <inheritdoc />
-	public InvalidOperationHttpException(string? message, Exception? innerException) : base(message, innerException)
+	public InvalidOperationHttpException(string messageKey, object?[] args, Exception? innerException) : base(messageKey, args, innerException)
 	{
 	}
 }

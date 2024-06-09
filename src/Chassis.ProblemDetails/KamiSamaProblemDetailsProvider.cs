@@ -3,6 +3,7 @@
 using KamiSama.Chassis.HttpExceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Diagnostics.CodeAnalysis;
 using ProblemDetails = Microsoft.AspNetCore.Mvc.ProblemDetails;

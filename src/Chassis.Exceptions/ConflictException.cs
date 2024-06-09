@@ -1,14 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Diagnostics.CodeAnalysis;
-using System.Runtime.Serialization;
 
 namespace KamiSama.Chassis.HttpExceptions;
 
 /// <summary>
 /// Indicates that the request could not be processed because of conflict in the current state of the resource, such as an edit conflict between multiple simultaneous updates.
 /// </summary>
-[ExcludeFromCodeCoverage]
 public class ConflictException : HttpExceptionBase
 {
 	/// <inheritdoc />
@@ -18,11 +16,11 @@ public class ConflictException : HttpExceptionBase
 	{
 	}
 	/// <inheritdoc/>
-	public ConflictException(string? message) : base(message)
+	public ConflictException(string messageKey, params object?[] args) : base(messageKey, args)
 	{
 	}
 	/// <inheritdoc/>
-	public ConflictException(string? message, Exception? innerException) : base(message, innerException)
+	public ConflictException(string messageKey, object?[] args, Exception? innerException) : base(messageKey, args, innerException)
 	{
-	}
+	}	
 }

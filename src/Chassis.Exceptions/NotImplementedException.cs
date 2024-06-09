@@ -10,18 +10,18 @@ namespace KamiSama.Chassis.HttpExceptions;
 [ExcludeFromCodeCoverage]
 public class NotImplementedHttpException : HttpExceptionBase
 {
-	/// <inheritdoc />
-	public override int StatusCode => StatusCodes.Status501NotImplemented;
-	/// <inheritdoc />
-	public NotImplementedHttpException()
-	{
-	}
-	/// <inheritdoc />
-	public NotImplementedHttpException(string? message) : base(message)
-	{
-	}
-	/// <inheritdoc />
-	public NotImplementedHttpException(string? message, Exception? innerException) : base(message, innerException)
-	{
-	}
+    /// <inheritdoc />
+    public override int StatusCode => StatusCodes.Status501NotImplemented;
+    /// <inheritdoc />
+    public NotImplementedHttpException()
+    {
+    }
+    /// <inheritdoc />
+    public NotImplementedHttpException(string message, params object?[] args) : base(message, args)
+    {
+    }
+    /// <inheritdoc />
+    public NotImplementedHttpException(string messageKey, object?[] args, Exception? innerException) : base(messageKey, args, innerException)
+    {
+    }
 }

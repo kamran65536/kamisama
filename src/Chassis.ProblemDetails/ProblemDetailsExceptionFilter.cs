@@ -1,9 +1,9 @@
-﻿using KamiSama.Chassis.ProblemDetails;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Localization;
 using System.Diagnostics.CodeAnalysis;
 
-namespace KamiSama.Chassis.Exceptions;
+namespace KamiSama.Chassis.ProblemDetails;
 
 using ProblemDetails = Microsoft.AspNetCore.Mvc.ProblemDetails;
 
@@ -14,13 +14,13 @@ using ProblemDetails = Microsoft.AspNetCore.Mvc.ProblemDetails;
 [ExcludeFromCodeCoverage]
 public class ProblemDetailsExceptionFilter(IProblemDetailsDataProvider problemDetailsDataProvider) : IExceptionFilter
 {
-	private readonly IProblemDetailsDataProvider problemDetailsDataProvider = problemDetailsDataProvider;
+    private readonly IProblemDetailsDataProvider problemDetailsDataProvider = problemDetailsDataProvider;
 
-	/// <inheritdoc />
-	public void OnException(ExceptionContext context)
-	{
-		ProblemDetails problemDetails = problemDetailsDataProvider.ConvertExceptionToProblemDetails(context);
-		context.Result = new ObjectResult(problemDetails);
-		context.ExceptionHandled = true;
-	}
+    /// <inheritdoc />
+    public void OnException(ExceptionContext context)
+    {
+        var problemDetails = problemDetailsDataProvider.ConvertExceptionToProblemDetails(context);
+        context.Result = new ObjectResult(problemDetails);
+        context.ExceptionHandled = true;
+    }
 }
