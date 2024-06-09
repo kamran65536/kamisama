@@ -1,10 +1,8 @@
 ﻿namespace KamiSama.Chassis.ProblemDetails;
 
 using KamiSama.Chassis.HttpExceptions;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.Extensions.Logging;
-using System;
+using Microsoft.Extensions.Localization;
 using System.Diagnostics.CodeAnalysis;
 using ProblemDetails = Microsoft.AspNetCore.Mvc.ProblemDetails;
 
@@ -12,30 +10,27 @@ using ProblemDetails = Microsoft.AspNetCore.Mvc.ProblemDetails;
 /// Converts <see cref="HttpExceptionBase" /> to <see cref="ProblemDetails"/>
 /// </summary>
 [ExcludeFromCodeCoverage]
-public class KamiSamaProblemDetailsProvider : IProblemDetailsDataProvider
+public class KamiSamaProblemDetailsProvider(IStringLocalizer<KamiSamaProblemDetailsProvider> localizer) : IProblemDetailsDataProvider
 {
 	/// <inheritdoc/>
 	public ProblemDetails ConvertExceptionToProblemDetails(ExceptionContext context)
 	{
-		if (context.Exception is HttpExceptionBase exception)
-			return new ProblemDetails
-			{
-				Title = exception.Message,
-				Status = exception.StatusCode,
-			};
-		else if (context.Exception is InvalidOperationException)
-			return new ProblemDetails
-			{
-				Title = context.Exception.Message,
-				Detail = "Invalid Operation Exception",
-				Status = StatusCodes.Status500InternalServerError,
-			};
-		else
-			return new ProblemDetails
-			{
-				Title = context.Exception.Message,
-				Detail = context.Exception.StackTrace,
-				Status = StatusCodes.Status500InternalServerError,
-			};
+		if (context.Exception is not HttpExceptionBase exception)
+			exception = new InvalidOperationHttpException(context.Exception.Message);
+
+		var args = new object[exception.ExceptionLocalizationArguments.Length];
+
+		for (int i = 0; i < args.Length; i++)
+			args[i] = exception.ExceptionLocalizationArguments[i] ?? "";
+
+		var localizedString = localizer.GetString(exception.ExceptionLocalizationKey, args);
+
+		string title = localizedString.ResourceNotFound ? context.Exception.Message : localizedString;
+
+		return new ProblemDetails
+		{
+			Title = title,
+			Status = exception.StatusCode,
+		};
 	}
 }

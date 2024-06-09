@@ -1,7 +1,5 @@
-﻿using KamiSama.Chassis.ProblemDetails.Properties;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Localization;
-using Microsoft.VisualBasic;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Diagnostics.CodeAnalysis;
 
 namespace KamiSama.Chassis.ProblemDetails;
@@ -15,14 +13,14 @@ public static class ServiceCollectionExtension
     /// <summary>
     /// Adds Exception Filter for problem details
     /// </summary>
-    /// <param name="builder"></param>
-    /// <param name="problemDetailsProvider"></param>
     /// <returns></returns>
-    public static IMvcBuilder AddExceptionFilterForProblemDetails(this IMvcBuilder builder, IProblemDetailsDataProvider? problemDetailsProvider = null)
+    public static IMvcBuilder AddExceptionFilterForProblemDetails(this IMvcBuilder builder, Func<IServiceProvider, IProblemDetailsDataProvider>? problemDetailsProviderFunc  = null)
     {
-        var filter = new ProblemDetailsExceptionFilter(problemDetailsProvider ?? new KamiSamaProblemDetailsProvider());
-        problemDetailsProvider ??= new KamiSamaProblemDetailsProvider();
-
+        if (problemDetailsProviderFunc != null)
+            builder.Services.AddScoped<IProblemDetailsDataProvider>(problemDetailsProviderFunc);
+        else
+            builder.Services.AddScoped<IProblemDetailsDataProvider, KamiSamaProblemDetailsProvider>(); 
+        
         return builder.AddMvcOptions(opt => opt.Filters.AddService<ProblemDetailsExceptionFilter>());
     }
 }
