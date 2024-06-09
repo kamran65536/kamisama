@@ -70,6 +70,15 @@ namespace KamiSama.Chassis.ProblemDetails.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to salaam.
+        /// </summary>
+        internal static string KKK {
+            get {
+                return ResourceManager.GetString("KKK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} with key {1} does not exists.
         /// </summary>
         internal static string NotFoundException {

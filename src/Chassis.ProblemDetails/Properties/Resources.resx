@@ -120,6 +120,9 @@
   <data name="AlreadyExistsException" xml:space="preserve">
     <value>{0} with key {1} already exists.</value>
   </data>
+  <data name="KKK" xml:space="preserve">
+    <value>salaam</value>
+  </data>
   <data name="NotFoundException" xml:space="preserve">
     <value>{0} with key {1} does not exists</value>
   </data>

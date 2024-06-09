@@ -4,6 +4,6 @@
 /// The entity already exists exception
 /// </summary>
 /// <inheritdoc />
-public class AlreadyExistsException(string entityName, string? entityKey) : ConflictException(nameof(AlreadyExistsException), entityName, entityKey)
+public class AlreadyExistsException(string entityName, object entityKey) : ConflictException(nameof(AlreadyExistsException), entityName, entityKey)
 {
 }

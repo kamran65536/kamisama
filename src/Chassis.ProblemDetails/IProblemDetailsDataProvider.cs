@@ -1,6 +1,7 @@
 ﻿namespace KamiSama.Chassis.ProblemDetails;
 
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Localization;
 using ProblemDetails = Microsoft.AspNetCore.Mvc.ProblemDetails;
 
 /// <summary>
@@ -8,6 +9,10 @@ using ProblemDetails = Microsoft.AspNetCore.Mvc.ProblemDetails;
 /// </summary>
 public interface IProblemDetailsDataProvider
 {
+	/// <summary>
+	/// String Localizer to be used
+	/// </summary>
+	IStringLocalizer? Localizer { get; set; }
 	/// <summary>
 	/// Converts Exception to ProblemDetails
 	/// </summary>

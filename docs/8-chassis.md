@@ -20,13 +20,25 @@ builder.Services
 	.AddControllers()
 	.AddExceptionFilterForProblemDetails();
 ```
-
+### Customization
 You can also customize the conversion of problem details:
 ```csharp
 builder.Services.AddProblemDetails();
 builder.Services
 	.AddControllers()
-	.AddExceptionFilterForProblemDetails(new CustomizedProblemDetailsProvider());
+	.AddExceptionFilterForProblemDetails(opt => opt.UseProblemDetailsProvider(sp => new CustomProvider()));
 ```
 
 That's easy!
+
+### Localization
+The KamiSama Chassis problem details library supports localization. In order to use, you can define your own Resources.resx 
+and use it in alongside the problem details. You need to add localization separately.
+
+```csharp
+builder.Services.AddProblemDetails();
+builder.Services
+	.AddControllers()
+    .AddExceptionFilterForProblemDetails(opt => opt.UseResourceLocalizer<CustomResources>());
+builder.Services.AddLocalization(); // adding localization
+```
