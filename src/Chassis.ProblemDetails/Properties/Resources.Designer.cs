@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace KamiSama.Chassis.HttpExceptions.Properties {
+namespace KamiSama.Chassis.ProblemDetails.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace KamiSama.Chassis.HttpExceptions.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("KamiSama.Chassis.HttpExceptions.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("KamiSama.Chassis.ProblemDetails.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -75,6 +75,15 @@ namespace KamiSama.Chassis.HttpExceptions.Properties {
         internal static string NotFoundException {
             get {
                 return ResourceManager.GetString("NotFoundException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} is not currently available..
+        /// </summary>
+        internal static string ServiceUnavailableException {
+            get {
+                return ResourceManager.GetString("ServiceUnavailableException", resourceCulture);
             }
         }
     }

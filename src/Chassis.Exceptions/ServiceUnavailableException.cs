@@ -1,5 +1,5 @@
-using System;
 using Microsoft.AspNetCore.Http;
+using System;
 
 namespace KamiSama.Chassis.HttpExceptions;
 
@@ -17,13 +17,13 @@ public class ServiceUnavailableException : HttpExceptionBase
     ///  Thrown when some external service is not available
     /// </summary>
     /// <param name="serviceName">Name of the service that is not available</param>
-    public ServiceUnavailableException(string serviceName) : base($"{serviceName} is not currently available")
+    public ServiceUnavailableException(string serviceName) : base(nameof(ServiceUnavailableException), serviceName)
     {
     }
 
 
     /// <inheritdoc />
-    public ServiceUnavailableException(string? message, Exception? innerException) : base(message, innerException)
+    public ServiceUnavailableException(string messageKey, object?[] args, Exception? innerException) : base(messageKey, args, innerException)
     {
     }
     /// <inheritdoc />

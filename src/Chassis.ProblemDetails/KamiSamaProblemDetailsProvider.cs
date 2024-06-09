@@ -1,6 +1,6 @@
 ﻿namespace KamiSama.Chassis.ProblemDetails;
-
 using KamiSama.Chassis.HttpExceptions;
+using KamiSama.Chassis.ProblemDetails.Properties;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Localization;
 using System.Diagnostics.CodeAnalysis;
@@ -25,7 +25,16 @@ public class KamiSamaProblemDetailsProvider(IStringLocalizer<KamiSamaProblemDeta
 
 		var localizedString = localizer.GetString(exception.ExceptionLocalizationKey, args);
 
-		string title = localizedString.ResourceNotFound ? context.Exception.Message : localizedString;
+		string title;
+
+		if (localizedString.ResourceNotFound)
+		{
+			var key = Resources.ResourceManager.GetString(exception.ExceptionLocalizationKey);
+
+			title = HttpExceptionBase.TryFormatString(key ?? "", exception.ExceptionLocalizationArguments);
+
+        } else 
+			title = localizedString;
 
 		return new ProblemDetails
 		{

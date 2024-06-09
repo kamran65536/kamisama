@@ -1,5 +1,4 @@
-﻿using KamiSama.Chassis.HttpExceptions.Properties;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 
 namespace KamiSama.Chassis.HttpExceptions;
 
@@ -7,7 +6,7 @@ namespace KamiSama.Chassis.HttpExceptions;
 /// Entity not found
 /// </summary>
 /// <inheritdoc />
-public class NotFoundException(string entityName, object? entityKey) : HttpExceptionBase(nameof(Resources.NotFoundException), entityName, entityKey)
+public class NotFoundException(string entityName, object? entityKey) : HttpExceptionBase(nameof(NotFoundException), entityName, entityKey)
 {
 	/// <inheritdoc />
 	public override int StatusCode => StatusCodes.Status404NotFound;

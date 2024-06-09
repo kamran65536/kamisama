@@ -123,4 +123,7 @@
   <data name="NotFoundException" xml:space="preserve">
     <value>{0} with key {1} does not exists</value>
   </data>
+  <data name="ServiceUnavailableException" xml:space="preserve">
+    <value>{0} is not currently available.</value>
+  </data>
 </root>

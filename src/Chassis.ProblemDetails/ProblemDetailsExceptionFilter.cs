@@ -1,12 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.Extensions.Localization;
+using Microsoft.Extensions.Logging;
 using System.Diagnostics.CodeAnalysis;
 
 namespace KamiSama.Chassis.ProblemDetails;
-
-using ProblemDetails = Microsoft.AspNetCore.Mvc.ProblemDetails;
-
 /// <summary>
 /// Filter for mapping exceptions to problem details 
 /// </summary>

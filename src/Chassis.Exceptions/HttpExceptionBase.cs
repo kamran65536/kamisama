@@ -50,7 +50,7 @@ public abstract class HttpExceptionBase : Exception
 	/// <param name="message"></param>
 	/// <param name="args"></param>
 	/// <returns></returns>
-	protected static string TryFormatString(string message, params object?[] args)
+	public static string TryFormatString(string message, params object?[] args)
     {
 		try
 		{
