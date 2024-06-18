@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<!--#if (UseProps)-->
+	<Import Project="../props.xml" />
+	<!--#else-->
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+	<!--#endif-->
+	<ItemGroup>
+		<ProjectReference Include="..\Example.Core\Example.Core.csproj" />
+		<PackageReference Include="KamiSama.Extensions.DependencyInjection" Version="2.8.4" />
+		<PackageReference Include="KamiSama.Repositories.EntityFrameworkCore" Version="2.8.4" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="8.0.4" />
+		<!--#if (UseSqlite)-->
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.4" />
+		<!--#endif-->
+		<!--#if (UsePostgresql)-->
+		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
+		<!--#endif-->
+		<!--#if (UseSqlServer)-->
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.4" />
+		<!--#endif-->
+	</ItemGroup>
+</Project>

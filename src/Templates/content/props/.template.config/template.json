@@ -1,0 +1,13 @@
+{
+	"$schema": "http://json.schemastore.org/template",
+	"author": "KamiSama",
+	"classifications": [ "Common" ],
+	"identity": "KamiSama.Solution.Props",
+	"name": "Common Project File",
+	"description": "Common Properties for .net 8 project",
+	"shortName": "props",
+	"tags": {
+		"language": "XML",
+		"type": "item"
+	}
+}

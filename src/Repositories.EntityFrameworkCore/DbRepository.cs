@@ -27,7 +27,7 @@ namespace KamiSama.Repositories.EntityFrameworkCore
 		private readonly DbSet<TEntity> dbSet = context.Set<TEntity>();
 
 		/// <inheritdoc />
-		public Task AddAsync(TEntity item, CancellationToken cancellationToken = default)
+		public virtual Task AddAsync(TEntity item, CancellationToken cancellationToken = default)
 		{
 			dbSet.Add(item);
 			return Context.SaveChangesAsync(cancellationToken);

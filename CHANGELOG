@@ -17,3 +17,7 @@
 - Localized exception text is added to KamiSama.Chassis.ProblemDetails
 - ServiceUnavailableException is added to KamiSama.Chassis.HttpExceptions.
 - all warnings will be treated as error for better code quality.
+1403-03-29 6/18/2024	v2.8.6
+- History is supported by KamiSama.Repositories.*
+- DataInitialization is supported by KamiSama.Repositories.*
+- KamiSama.Templates nuget is added, including Core, Repositories template projects.

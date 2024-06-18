@@ -1,0 +1,43 @@
+{
+	"$schema": "http://json.schemastore.org/template",
+	"author": "KamiSama",
+	"classifications": [ "Common", "Code" ],
+	"identity": "KamiSama.Projects.Core",
+	"name": "Core Project",
+	"description": "KamiSama Core Project",
+	"shortName": "kamisama-core",
+	"defaultName": "Example.Core",
+	"tags": {
+		"language": "C#",
+		"type": "project"
+	},
+	"sourceName": "Example.Core",
+	"symbols": {
+		"AddSamples": {
+			"type": "parameter",
+			"dataType": "bool",
+			"defaultValue": "true",
+			"displayName": "Sample Files",
+			"description": "adds sample files to the project"
+		},
+		"UseProps": {
+			"type": "parameter",
+			"dataType": "bool",
+			"defaultValue": "true",
+			"displayName": "Use prop.xml",
+			"description": "use prop.xml to unify the process of library versioning"
+		}
+	},
+	"sources": [
+		{
+			"modifiers": [
+				{
+					"condition": "(!AddSamples)",
+					"exclude": [
+						"Entities/SampleEntity.cs"
+					]
+				}
+			]
+		}
+	]
+}

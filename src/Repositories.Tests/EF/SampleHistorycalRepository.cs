@@ -3,13 +3,13 @@ using System.Data.Entity;
 
 namespace KamiSama.Repositories.Tests.EF;
 
-public class SampleHistorycalRepository<TEntity, TContext>(TContext context) : HistoricalDbRepository<TEntity, TContext>(context)
+public class SampleHistorycalRepository<TEntity, TContext>(TContext context) : KamiSama.Repositories.EntityFramework.Histories.HistoricalDbRepository<TEntity, TContext>(context)
 	where TEntity : class
 	where TContext : DbContext
 {
-	public History<TEntity>? LastHistoryItem { get; private set; }
+	public KamiSama.Repositories.EntityFramework.Histories.History<TEntity>? LastHistoryItem { get; private set; }
 
-	protected override Task AddToHistoryRepositoryAsync(History<TEntity> historyItem, CancellationToken cancellationToken)
+	protected override Task AddToHistoryRepositoryAsync(KamiSama.Repositories.EntityFramework.Histories.History<TEntity> historyItem, CancellationToken cancellationToken)
 	{
 		LastHistoryItem = historyItem;
 

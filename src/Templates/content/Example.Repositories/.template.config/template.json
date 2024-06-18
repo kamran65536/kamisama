@@ -1,0 +1,79 @@
+{
+	"$schema": "http://json.schemastore.org/template",
+	"author": "KamiSama",
+	"classifications": [ "Common", "Code" ],
+	"identity": "KamiSama.Projects.Repositories",
+	"name": "Repositories Project",
+	"description": "KamiSama Repositories Project",
+	"shortName": "kamisama-repos",
+	"defaultName": "Example.Repositories",
+	"preferDefaultName": true,
+	"tags": {
+		"language": "C#",
+		"type": "project"
+	},
+	"sourceName": "Example.Repositories",
+	"preferNameDirectory": false,
+	"symbols": {
+		"BaseName": {
+			"type": "parameter",
+			"datatype": "text",
+			"defaultValue": "Example",
+			"displayName": "Base Context Name",
+			"description": "Base name of project, eg. BaseName.Core",
+			"replaces": "Example",
+			"fileRename": "Example",
+			"isRequired": true
+		},
+		"AddSamples": {
+			"type": "parameter",
+			"dataType": "bool",
+			"defaultValue": "false",
+			"displayName": "Sample Files",
+			"description": "adds sample files to the project"
+		},
+		"UseSqlite": {
+			"type": "parameter",
+			"dataType": "bool",
+			"defaultValue": "false",
+			"displayName": "Supports Sqlite",
+			"description": "add sqlite dependencies to the project"
+		},
+		"UseSqlServer": {
+			"type": "parameter",
+			"dataType": "bool",
+			"defaultValue": "false",
+			"displayName": "Supports SqlServer",
+			"description": "add sqlserver dependencies to the project"
+		},
+		"UsePostgresql": {
+			"type": "parameter",
+			"dataType": "bool",
+			"defaultValue": "false",
+			"displayName": "Supports Postgresql",
+			"description": "add postgresql dependencies to the project"
+		},
+		"UseProps": {
+			"type": "parameter",
+			"dataType": "bool",
+			"defaultValue": "true",
+			"displayName": "Use prop.xml",
+			"description": "use prop.xml to unify the process of library versioning"
+		}
+	},
+	"sources": [
+		{
+			"modifiers": [
+				{
+					"condition": "(!AddSamples)",
+					"exclude": [
+						"Abstractions/ISampleRepository.cs",
+						"Implementations/SampleRepository.cs",
+						"Configurations/SampleEntityConfiguration.cs",
+						"SearchModels/SampleEntitySearchModel.cs"
+					]
+				}
+			]
+		}
+	]
+}
