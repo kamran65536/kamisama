@@ -16,7 +16,7 @@ Here is the list of libraries:
     NLog extensions for encryption archieving and persian fast log renderer
 7. [KamiSama.IranSystem](./docs/7-iran-system.md)
     Iran System Encoding used in many old Persian applications.
-8. [KamiSama.Chassis](./docs/8-chassis/readme.md)
+8. [KamiSama.Chassis](./docs/8-chassis.md)
     Chassis for less code in AspNetCore web applications. eg. exception handling
 9. [KamiSama.Testing.NSubstitute](../docs/9-testings.md)
     helper class to write more cleaner and comprehensible tests using dependency injection.
