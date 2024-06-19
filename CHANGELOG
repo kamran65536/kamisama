@@ -21,3 +21,5 @@
 - History is supported by KamiSama.Repositories.*
 - DataInitialization is supported by KamiSama.Repositories.*
 - KamiSama.Templates nuget is added, including Core, Repositories template projects.
+1403-03-30 6/19/2024	v2.8.7
+- DatabaseInitializerBase.TryAdd method is added.
