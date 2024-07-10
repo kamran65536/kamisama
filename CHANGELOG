@@ -23,3 +23,7 @@
 - KamiSama.Templates nuget is added, including Core, Repositories template projects.
 1403-03-30 6/19/2024	v2.8.7
 - DatabaseInitializerBase.TryAdd method is added.
+1403-04-20 7/10/2024	v2.8.8
+- OrderBy is added to KamiSama.Extensions.Paging.SearchModel.
+- KamiSama.Extensions.DependencyInjection AutoAddDependenciesFrom<T> method is added.
+- KamiSama.Chassis.HttpExceptions generic NotFoundException<TEntity> and AlreadyExistsException<TEnitty> are added.

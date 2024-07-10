@@ -2,7 +2,7 @@
 	<PropertyGroup>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<DebugType>Full</DebugType>
-		<Version>2.8.5</Version>
+		<Version>2.8.8</Version>
 		<PackageProjectUrl>https://gitlab.com/kamran65536/KamiSama</PackageProjectUrl>
 		<RepositoryUrl>https://gitlab.com/kamran65536/KamiSama</RepositoryUrl>
 		<Authors>Kamran Fallah</Authors>

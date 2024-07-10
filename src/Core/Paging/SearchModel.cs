@@ -7,8 +7,9 @@ namespace KamiSama.Extensions.Paging;
 /// </summary>
 /// <param name="Page">page number starts from 1</param>
 /// <param name="PageSize"></param>
+/// <param name="OrderBy"></param>
 [ExcludeFromCodeCoverage]
-public record SearchModel(int Page, int PageSize)
+public record SearchModel(int Page, int PageSize, string? OrderBy = null)
 {
 	/// <summary>
 	/// Represent Search model for All items

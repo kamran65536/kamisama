@@ -20,8 +20,6 @@ public class ServiceUnavailableException : HttpExceptionBase
     public ServiceUnavailableException(string serviceName) : base(nameof(ServiceUnavailableException), serviceName)
     {
     }
-
-
     /// <inheritdoc />
     public ServiceUnavailableException(string messageKey, object?[] args, Exception? innerException) : base(messageKey, args, innerException)
     {

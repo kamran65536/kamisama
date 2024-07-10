@@ -11,3 +11,11 @@ public class NotFoundException(string entityName, object? entityKey) : HttpExcep
 	/// <inheritdoc />
 	public override int StatusCode => StatusCodes.Status404NotFound;
 }
+/// <summary>
+/// Entity not found
+/// </summary>
+/// <inheritdoc />
+public class NotFoundException<TEntity>(object? entityKey)
+	: NotFoundException(nameof(TEntity), entityKey)
+{
+}

@@ -280,6 +280,18 @@ namespace KamiSama.Extensions.DependencyInjection
 
 			return services;
 		}
+		/// <summary>
+		/// Automatically adds dependency injections using <see cref="AutoInjectAttribute"/>
+		/// </summary>
+		/// <returns></returns>
+		public static IServiceCollection AutoAddDependenciesFrom<TAssemblyType>(this IServiceCollection services) 
+			=> services.AutoAddDependencies(typeof(TAssemblyType).Assembly);
+		/// <summary>
+		/// Automatically adds dependency injections using <see cref="AutoInjectAttribute"/>
+		/// </summary>
+		/// <returns></returns>
+		public static IServiceCollection AutoAddDependenciesFrom<TAssemblyType1, TAssemblyType2>(this IServiceCollection services)
+			=> services.AutoAddDependencies(typeof(TAssemblyType1).Assembly, typeof(TAssemblyType2).Assembly);
 		#endregion
 	}
 }
