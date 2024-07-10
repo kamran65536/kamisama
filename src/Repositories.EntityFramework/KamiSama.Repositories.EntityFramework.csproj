@@ -10,7 +10,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="EntityFramework" Version="6.4.4" />
+		<PackageReference Include="EntityFramework" Version="6.5.1" />
 		<ProjectReference Include="..\Core\KamiSama.Extensions.Core.csproj" />
 		<ProjectReference Include="..\Repositories.Core\KamiSama.Repositories.Core.csproj" />
 	</ItemGroup>

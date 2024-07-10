@@ -27,3 +27,4 @@
 - OrderBy is added to KamiSama.Extensions.Paging.SearchModel.
 - KamiSama.Extensions.DependencyInjection AutoAddDependenciesFrom<T> method is added.
 - KamiSama.Chassis.HttpExceptions generic NotFoundException<TEntity> and AlreadyExistsException<TEnitty> are added.
+- dependencies are updated.
