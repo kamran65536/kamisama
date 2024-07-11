@@ -1,4 +1,4 @@
-﻿namespace Example.Repositories;
+﻿namespace Project.Repositories;
 
 public static class ServiceCollectionExtensions
 {

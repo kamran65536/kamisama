@@ -1,4 +1,4 @@
-﻿namespace Example.Repositories.Abstractions;
+﻿namespace Project.Repositories.Abstractions;
 
 public interface ISampleRepository
 {

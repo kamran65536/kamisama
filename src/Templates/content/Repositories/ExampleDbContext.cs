@@ -1,4 +1,4 @@
-﻿namespace Example.Repositories;
+﻿namespace Project.Repositories;
 
 public class ExampleDbContext(DbContextOptions<ExampleDbContext> options) : DbContext(options)
 {

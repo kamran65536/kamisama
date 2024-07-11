@@ -3,10 +3,10 @@
 	"author": "KamiSama",
 	"classifications": [ "Common", "Code" ],
 	"identity": "KamiSama.Projects.BoundedContext.Abstractions",
-	"name": "Bounded Context",
+	"name": "Bounded Context Abstractions",
 	"description": "KamiSama Bounded Context Abstractions Project",
 	"shortName": "kamisama-bca",
-	"defaultName": "Project.Abstractions",
+	"defaultName": "Project",
 	"tags": {
 		"language": "C#",
 		"type": "project"

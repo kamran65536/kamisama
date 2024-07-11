@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Example.Core.Entities;
+namespace Project.Core.Entities;
 
 public class SampleEntity
 {

@@ -65,9 +65,27 @@
 				{
 					"condition": "(!AddSamples)",
 					"exclude": [
-						"Entities/*",
-						"Features/*",
-						"Repositories/Configurations*"
+						"Entities/**",
+						"Features/**",
+						"Repositories/Configurations/**"
+					]
+				},
+				{
+					"condition": "(!UseSqlServer)",
+					"exclude": [
+						"Repositories/Database/SqlServer/**"
+					]
+				},
+				{
+					"condition": "(!UseSqlite)",
+					"exclude": [
+						"Repositories/Database/Sqlite/**"
+					]
+				},
+				{
+					"condition": "(!UsePostgresql)",
+					"exclude": [
+						"Repositories/Database/Postgresql/**"
 					]
 				}
 			]

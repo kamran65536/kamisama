@@ -1,4 +1,4 @@
-﻿namespace Example.Repositories;
+﻿namespace Project.Repositories;
 
 public class ExampleDataInitializer(ExampleDbContext context)
 {

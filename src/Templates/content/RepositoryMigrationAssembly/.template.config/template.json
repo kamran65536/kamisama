@@ -16,7 +16,7 @@
 		"BaseName": {
 			"type": "parameter",
 			"datatype": "text",
-			"defaultValue": "Example",
+			"defaultValue": "Project",
 			"displayName": "Base Context Name",
 			"description": "Base name of project, eg. BaseName.Core",
 			"replaces": "Example",

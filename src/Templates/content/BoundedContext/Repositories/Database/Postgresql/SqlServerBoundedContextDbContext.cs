@@ -1,4 +1,4 @@
-﻿namespace Project.Repositories.Database.SqlServer;
+﻿namespace Project.Repositories.Database.Postgresql;
 
 internal class PostgresqlBoundedContextDbContext(DbContextOptions<PostgresqlBoundedContextDbContext> options) : BoundedContextDbContext(options)
 {

@@ -9,21 +9,20 @@
 	</PropertyGroup>
 	<!--#endif-->
 	<ItemGroup>
-		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.7" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="8.0.7" />
-		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.7" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="8.0.7" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.*" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.*" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="8.0.*" />
 		<!--#if (UseSqlite)-->
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.7" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.*" />
 		<!--#endif-->
 		<!--#if (UseSqlite)-->
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.7" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.*" />
 		<!--#endif-->
 		<!--#if (UsePostgresql)-->
-		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.7" />
+		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.*" />
 		<!--#endif-->
 		<!--#if (UseSqlServer)-->
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.7" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.*" />
 		<!--#endif-->
 	</ItemGroup>
 </Project>
