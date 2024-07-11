@@ -5,9 +5,9 @@ public class ParentRoot : IEquatable<ParentRoot>
 	public int P { get; set; }
 	public int F;
 
-	public ExampleClass ExampleRoot { get; set; }
+	public required ExampleClass ExampleRoot { get; set; }
 
-	public bool Equals(ParentRoot other)
+	public bool Equals(ParentRoot? other)
 	{
 		return
 			(other != null) &&
@@ -15,7 +15,7 @@ public class ParentRoot : IEquatable<ParentRoot>
 			(F == other.F) &&
 			ExampleRoot.Equals(other.ExampleRoot);
 	}
-	public override bool Equals(object obj) => Equals(obj as ParentRoot);
+	public override bool Equals(object? obj) => Equals(obj as ParentRoot);
 
 	public override int GetHashCode()
 	{

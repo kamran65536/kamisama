@@ -64,7 +64,7 @@ public class JsonSerializationExtensionsTests
 	{
 		var str = "{\"X\":10}";
 
-		var result = str.DeserializeFromJson<A>();
+		var result = str.DeserializeFromJson<A>()!;
 
 		Assert.AreEqual(10, result.X);
 	}
@@ -75,7 +75,7 @@ public class JsonSerializationExtensionsTests
 
 		var result = str.DeserializeFromJson<A>(configure: null);
 
-		Assert.AreEqual(10, result.X);
+		Assert.AreEqual(10, result!.X);
 	}
 	[TestMethod]
 	public void DeserializeFromJson_must_use_options_if_any()
@@ -85,7 +85,7 @@ public class JsonSerializationExtensionsTests
 		var result = str.DeserializeFromJson<A>(new JsonSerializerOptions
 		{
 			AllowTrailingCommas = true
-		});
+		})!;
 
 		Assert.AreEqual(10, result.X);
 	}
@@ -94,7 +94,7 @@ public class JsonSerializationExtensionsTests
 	{
 		var str = "{\"X\":10,}";
 
-		var result = str.DeserializeFromJson<A>(opt => opt.AllowTrailingCommas = true);
+		var result = str.DeserializeFromJson<A>(opt => opt.AllowTrailingCommas = true)!;
 
 		Assert.AreEqual(10, result.X);
 	}
@@ -130,7 +130,7 @@ public class JsonSerializationExtensionsTests
 	{
 		var str = @"{ ""x"" : 10.0, ""y"": { ""a"" : ""kamran""}, ""z"" : [ 1.1, 2, null, true, false ]}";
 
-		dynamic d = str.ConvertJsonToDynamicObject(opt => opt.MaxDepth = 100);
+		dynamic d = str.ConvertJsonToDynamicObject(opt => opt.MaxDepth = 100)!;
 
 		Assert.AreEqual(10, d.x);
 		Assert.AreEqual("kamran", d.y.a);
@@ -145,7 +145,7 @@ public class JsonSerializationExtensionsTests
 	{
 		var str = @"{ ""x"" : 10, ""y"": { ""a"" : ""kamran""}, ""z"" : [ 1, 2, null, true, false ]}";
 
-		dynamic d = str.ConvertJsonToDynamicObject((Action<JsonDocumentOptions>) null);
+		dynamic d = str.ConvertJsonToDynamicObject(null as Action<JsonDocumentOptions>)!;
 
 		Assert.AreEqual(10, d.x);
 		Assert.AreEqual("kamran", d.y.a);

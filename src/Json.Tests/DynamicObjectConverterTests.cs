@@ -3,7 +3,7 @@
 public class TestObject
 {
 	[JsonConverter(typeof(DynamicObjectConverter))]
-	public dynamic DynamicObject { get; set; }
+	public required dynamic DynamicObject { get; set; }
 }
 [TestClass]
 public class DynamicObjectConverterTests
@@ -33,7 +33,7 @@ public class DynamicObjectConverterTests
 		var str = test.SerializeToJson();
 		var test2 = str.DeserializeFromJson<TestObject>();
 
-		Assert.IsTrue(obj.x == test2.DynamicObject.x);
+		Assert.IsTrue(obj.x == test2!.DynamicObject.x);
 		Assert.IsTrue(obj.y == test2.DynamicObject.y);
 		Assert.IsTrue(obj.str == test2.DynamicObject.str);
 		Assert.IsTrue(obj.obj.ox == test2.DynamicObject.obj.ox);

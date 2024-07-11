@@ -23,7 +23,7 @@ public class TimeSpanJsonConverterTests
 	{
 		var str = @"{ ""TimeSpan"" : ""1.12:13:14.777"" }";
 
-		var a = str.DeserializeFromJson<AA>();
+		var a = str.DeserializeFromJson<AA>()!;
 		var expected = new TimeSpan(1, 12, 13, 14, 777);
 
 		Assert.AreEqual(expected, a.TimeSpan);

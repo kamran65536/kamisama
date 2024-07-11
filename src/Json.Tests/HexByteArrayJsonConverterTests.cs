@@ -3,7 +3,7 @@
 public class A
 {
 	[JsonConverter(typeof(HexByteArrayJsonConverter))]
-	public byte[] Arr { get; set; }
+	public byte[]? Arr { get; set; }
 }
 [TestClass]
 public class HexByteArrayJsonConverterTests
@@ -24,7 +24,7 @@ public class HexByteArrayJsonConverterTests
 
 		var a = str.DeserializeFromJson<A>();
 
-		CollectionAssert.AreEqual(new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05 }, a.Arr);
+		CollectionAssert.AreEqual(new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05 }, a!.Arr);
 	}
 	[TestMethod]
 	public void Read_must_read_null_as_null_byte_array()
@@ -42,8 +42,8 @@ public class HexByteArrayJsonConverterTests
 		var a1 = str1.DeserializeFromJson<A>();
 		var a2 = str2.DeserializeFromJson<A>();
 
-		Assert.IsNull(a1.Arr);
-		Assert.IsNull(a2.Arr);
+		Assert.IsNull(a1!.Arr);
+		Assert.IsNull(a2!.Arr);
 	}
 	[TestMethod]
 	public void Write_must_write_byte_array_as_hex_value()
@@ -66,7 +66,7 @@ public class HexByteArrayJsonConverterTests
 	[TestMethod]
 	public void Write_must_write_null_array_to_null()
 	{
-		var arr = (byte[])null;
+		var arr = null as byte[];
 
 		var str = arr.SerializeToJson(options => options.Converters.Add(new HexByteArrayJsonConverter()));
 

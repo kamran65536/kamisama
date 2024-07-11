@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Testing.Platform.Logging;
 
 namespace KamiSama.Testing.Tests.NSubstitute;
 

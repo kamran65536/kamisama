@@ -10,7 +10,7 @@ static class ArrayUtility
 			return false;
 
 		for (int i = 0; i < arr1.Length; i++)
-			if (!arr1[i].Equals(arr2[i]))
+			if (object.Equals(arr1[i] ,arr2[i]))
 				return false;
 
 		return true;

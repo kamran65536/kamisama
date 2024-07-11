@@ -26,41 +26,41 @@ public class XmlAttributeOverridesExtensionsTests
 	{
 		var parentRoot = typeof(ParentRoot);
 		var exampleRoot = typeof(ExampleClass);
-		var wrapper1 = typeof(Wrapper1);
-		var wrapper2 = typeof(Wrapper2);
-		var wrapper3 = typeof(Wrapper3);
-		var wrapper4 = typeof(Wrapper4);
+		var wrapper1 = typeof(Wrapper1)!;
+		var wrapper2 = typeof(Wrapper2)!;
+		var wrapper3 = typeof(Wrapper3)!;
+		var wrapper4 = typeof(Wrapper4)!;
 
 		var overrides = new XmlAttributeOverrides();
 
 		overrides.AddAutoXmlAttributes(parentRoot, new Assembly[] { exampleRoot.Assembly } );			
 		
-		var someProperty_elements = overrides[wrapper1, nameof(Wrapper1.SomeProperty)].XmlElements;
+		var someProperty_elements = overrides[wrapper1, nameof(Wrapper1.SomeProperty)]!.XmlElements;
 		
 		Assert.IsTrue(CollectionHas<XmlElementAttribute>(someProperty_elements, e => e.Type == typeof(DerivedClass1)));
 		Assert.IsTrue(CollectionHas<XmlElementAttribute>(someProperty_elements, e => e.Type == typeof(DerivedClass2)));
 
-		var someField_elements = overrides[wrapper2, nameof(Wrapper2.SomeField)].XmlElements;
+		var someField_elements = overrides[wrapper2, nameof(Wrapper2.SomeField)]!.XmlElements;
 		
 		Assert.IsTrue(CollectionHas<XmlElementAttribute>(someField_elements, e => e.Type == typeof(DerivedClass1)));
 		Assert.IsTrue(CollectionHas<XmlElementAttribute>(someField_elements, e => e.Type == typeof(DerivedClass2)));
 
-		var someArrayProperty_arrayItems = overrides[exampleRoot, nameof(ExampleClass.SomeArrayProperty1)].XmlArrayItems;
+		var someArrayProperty_arrayItems = overrides[exampleRoot, nameof(ExampleClass.SomeArrayProperty1)]!.XmlArrayItems;
 
 		Assert.IsTrue(CollectionHas<XmlArrayItemAttribute>(someArrayProperty_arrayItems, e => e.Type == typeof(DerivedClass1)));
 		Assert.IsTrue(CollectionHas<XmlArrayItemAttribute>(someArrayProperty_arrayItems, e => e.Type == typeof(DerivedClass2)));
 
-		var someArrayProperty_elements = overrides[wrapper3, nameof(Wrapper3.SomeArrayProperty2)].XmlElements;
+		var someArrayProperty_elements = overrides[wrapper3, nameof(Wrapper3.SomeArrayProperty2)]!.XmlElements;
 
 		Assert.IsTrue(CollectionHas<XmlElementAttribute>(someArrayProperty_elements, e => e.Type == typeof(DerivedClass1)));
 		Assert.IsTrue(CollectionHas<XmlElementAttribute>(someArrayProperty_elements, e => e.Type == typeof(DerivedClass2)));
 		
-		var someArrayField_arrayItems = overrides[exampleRoot, nameof(ExampleClass.SomeArrayField1)].XmlArrayItems;
+		var someArrayField_arrayItems = overrides[exampleRoot, nameof(ExampleClass.SomeArrayField1)]!.XmlArrayItems;
 
 		Assert.IsTrue(CollectionHas<XmlArrayItemAttribute>(someArrayField_arrayItems, e => e.Type == typeof(DerivedClass1)));
 		Assert.IsTrue(CollectionHas<XmlArrayItemAttribute>(someArrayField_arrayItems, e => e.Type == typeof(DerivedClass2)));
 
-		var someArrayField_elements = overrides[wrapper4, nameof(Wrapper4.SomeArrayField2)].XmlElements;
+		var someArrayField_elements = overrides[wrapper4, nameof(Wrapper4.SomeArrayField2)]!.XmlElements;
 
 		Assert.IsTrue(CollectionHas<XmlElementAttribute>(someArrayField_elements, e => e.Type == typeof(DerivedClass1)));
 		Assert.IsTrue(CollectionHas<XmlElementAttribute>(someArrayField_elements, e => e.Type == typeof(DerivedClass2)));

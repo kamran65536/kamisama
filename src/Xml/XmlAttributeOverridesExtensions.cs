@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Xml.Serialization;
 
 namespace KamiSama.Extensions
@@ -17,7 +14,7 @@ namespace KamiSama.Extensions
 		/// <param name="overrides"></param>
 		/// <param name="assemblies"></param>
 		/// <param name="rootType"></param>
-		public static void AddAutoXmlAttributes(this XmlAttributeOverrides overrides, Type rootType, Assembly[] assemblies)
+		public static void AddAutoXmlAttributes(this XmlAttributeOverrides overrides, Type rootType, Assembly[]? assemblies)
 		{
 			assemblies ??= [];
 
@@ -31,9 +28,6 @@ namespace KamiSama.Extensions
 		/// <summary>
 		/// Adds AutoXmlAttributes for root type <paramref name="rootType"/> and necessary overrides
 		/// </summary>
-		/// <param name="overrides"></param>
-		/// <param name="allTypes"></param>
-		/// <param name="rootType"></param>
 		public static void AddAutoXmlAttributes(this XmlAttributeOverrides overrides, Type rootType, Type[] allTypes)
 		{
 			var visitedTypes = new HashSet<Type>();

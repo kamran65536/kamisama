@@ -12,7 +12,7 @@ namespace KamiSama.Extensions
 	public class AutoXmlElementAttribute : AutoXmlAttribute
 	{
 		/// <inheritdoc />
-		public override void VisitType(Type rootType, XmlAttributeOverrides overrides, Type[] allTypes)
+		public override void VisitType(Type? rootType, XmlAttributeOverrides? overrides, Type[]? allTypes)
 			=> throw new InvalidOperationException("This method cannot be called for AutoXmlElement");
 		/// <inheritdoc />
 		public override void VisitProperty(PropertyInfo property, XmlAttributeOverrides overrides, Type[] allTypes)

@@ -6,12 +6,12 @@
 	"name": "Core Project",
 	"description": "KamiSama Core Project",
 	"shortName": "kamisama-core",
-	"defaultName": "Example.Core",
+	"defaultName": "Project",
 	"tags": {
 		"language": "C#",
 		"type": "project"
 	},
-	"sourceName": "Example.Core",
+	"sourceName": "Project",
 	"symbols": {
 		"AddSamples": {
 			"type": "parameter",
