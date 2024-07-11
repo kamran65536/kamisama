@@ -1,4 +1,4 @@
-﻿namespace Project.Repositories.Implementations;
+﻿namespace Example.Repositories.Implementations;
 
 [AutoInject(Lifetime = ServiceLifetime.Scoped, ServiceType = typeof(ISampleRepository))]
 internal class SampleRepository(ExampleDbContext context) : DbRepository<SampleEntity, ExampleDbContext>(context), ISampleRepository 

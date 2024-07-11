@@ -1,4 +1,4 @@
-﻿namespace Project.Repositories.Configurations;
+﻿namespace Example.Repositories.Configurations;
 
 internal class SampleEntityConfiguration : IEntityTypeConfiguration<SampleEntity>
 {

@@ -6,13 +6,13 @@
 	"name": "Repositories Project",
 	"description": "KamiSama Repositories Project",
 	"shortName": "kamisama-repos",
-	"defaultName": "Project",
+	"defaultName": "Example.Repositories",
 	"preferDefaultName": true,
 	"tags": {
 		"language": "C#",
 		"type": "project"
 	},
-	"sourceName": "Project",
+	"sourceName": "Example.Repositories",
 	"preferNameDirectory": false,
 	"symbols": {
 		"BaseName": {

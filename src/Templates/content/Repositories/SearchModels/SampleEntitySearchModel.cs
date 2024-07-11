@@ -1,4 +1,4 @@
-﻿namespace Project.Repositories.SearchModels;
+﻿namespace Example.Repositories.SearchModels;
 
 public record SampleEntitySearchModel(
 	string? Name,
