@@ -2,7 +2,7 @@
 	<PropertyGroup>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<DebugType>Full</DebugType>
-		<Version>2.8.8</Version>
+		<Version>2.8.9</Version>
 		<PackageProjectUrl>https://gitlab.com/kamran65536/KamiSama</PackageProjectUrl>
 		<RepositoryUrl>https://gitlab.com/kamran65536/KamiSama</RepositoryUrl>
 		<Authors>Kamran Fallah</Authors>
@@ -13,6 +13,7 @@
 		<PackageReadmeFile>readme.md</PackageReadmeFile>
 		<PackageIcon>KamiSama-logo-small.png</PackageIcon>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+		<ImplicitUsings>true</ImplicitUsings>
 	</PropertyGroup>
 	<ItemGroup>
 		<None Include="..\LICENSE">

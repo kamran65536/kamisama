@@ -27,6 +27,6 @@ public class Implementation : SampleInterface {... }
 ```
 then add the following to the service collection:
 ```
-services.AutoAddDependencies();
+services.AutoAddDependencies<SomeType>();
 ```
 it will automatically adds all dependencies by InjectAttribute.

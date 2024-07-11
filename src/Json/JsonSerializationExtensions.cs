@@ -82,7 +82,7 @@ namespace KamiSama.Extensions
 		/// <param name="jsonStr"></param>
 		/// <param name="config"></param>
 		/// <returns></returns>
-		public static object? ConvertJsonToDynamicObject(this string jsonStr, Action<JsonDocumentOptions> config)
+		public static object? ConvertJsonToDynamicObject(this string jsonStr, Action<JsonDocumentOptions>? config)
 		{
 			var options = new JsonDocumentOptions();
 
@@ -96,7 +96,7 @@ namespace KamiSama.Extensions
 		/// <param name="obj"></param>
 		/// <param name="configure"></param>
 		/// <returns></returns>
-		public static string SerializeToJson(this object obj, Action<JsonSerializerOptions> configure)
+		public static string SerializeToJson(this object? obj, Action<JsonSerializerOptions>? configure)
 		{
 			if (configure != null)
 			{
@@ -124,7 +124,7 @@ namespace KamiSama.Extensions
 		/// <param name="str"></param>
 		/// <param name="configure">configure action</param>
 		/// <returns></returns>
-		public static TObject? DeserializeFromJson<TObject>(this string str, Action<JsonSerializerOptions> configure)
+		public static TObject? DeserializeFromJson<TObject>(this string str, Action<JsonSerializerOptions>? configure)
 		{
 			if (configure != null)
 			{

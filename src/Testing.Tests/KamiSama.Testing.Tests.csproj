@@ -1,0 +1,6 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="../props-test.xml" />
+	<ItemGroup>
+		<ProjectReference Include="..\Testing.NSubstitute\KamiSama.Testing.NSubstitute.csproj" />
+	</ItemGroup>
+</Project>

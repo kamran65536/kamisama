@@ -35,8 +35,8 @@ public class ArrayTests
 	[TestMethod]
 	public void TrimmingEmptyArrayTest()
 	{
-		var arr = new object[] {null, null, null};
-		var trimmed = arr.TrimEnd((object) null);
+		var arr = new object?[] {null, null, null};
+		var trimmed = arr.TrimEnd(null as object);
 
 		CollectionAssert.AreEqual(Array.Empty<object>(), trimmed);
 	}

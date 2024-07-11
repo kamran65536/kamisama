@@ -9,11 +9,11 @@ namespace KamiSama.Extensions.Json.Tests
 	public class TestClassWithConverter
 	{
 		[JsonConverter(typeof(HierarchicalJsonConverter<SampleBaseClass>))]
-		public SampleBaseClass Configuration { get; set; }
+		public SampleBaseClass? Configuration { get; set; }
 	}
 	public class TestClassWithoutConverter
 	{
-		public SampleBaseClass Configuration { get; set; }
+		public required SampleBaseClass Configuration { get; set; }
 	}
 	public class SampleClass : SampleBaseClass
 	{
@@ -21,7 +21,7 @@ namespace KamiSama.Extensions.Json.Tests
 	}
 	public class BaseClassWithoutDiscriminatorProperty
 	{
-		public string SomeProperty { get; set; }
+		public required string SomeProperty { get; set; }
 	}
 	[TestClass]
 	public class HirerarchialJsonConverterTests
@@ -61,13 +61,13 @@ namespace KamiSama.Extensions.Json.Tests
 		{
 			var json = @"{ ""Conifguration"": null }";
 
-			var obj = JsonSerializer.Deserialize<TestClassWithConverter>(json);
+			var obj = JsonSerializer.Deserialize<TestClassWithConverter>(json)!;
 
 			Assert.IsNull(obj.Configuration);
 
 			json = @"{}";
 
-			obj = JsonSerializer.Deserialize<TestClassWithConverter>(json);
+			obj = JsonSerializer.Deserialize<TestClassWithConverter>(json)!;
 		
 			Assert.IsNull(obj.Configuration);
 		}
@@ -112,7 +112,7 @@ namespace KamiSama.Extensions.Json.Tests
 
 			var result = JsonSerializer.Deserialize<TestClassWithConverter>(json);
 
-			Assert.IsNotNull(result.Configuration);
+			Assert.IsNotNull(result!.Configuration);
 			Assert.IsInstanceOfType(result.Configuration, typeof(SampleClass));
 		}
 	}

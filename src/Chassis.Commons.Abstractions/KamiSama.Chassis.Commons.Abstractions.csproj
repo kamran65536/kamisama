@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="../props.xml" />
+	<PropertyGroup>
+		<RootNamespace>$(MSBuildProjectName.Replace(" ", "_").Replace(".Abstractions", ""))</RootNamespace>
+		<Description>Common features used in most DDD projects and CRUD</Description>
+	</PropertyGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\Core\KamiSama.Extensions.Core.csproj" />
+	</ItemGroup>
+</Project>

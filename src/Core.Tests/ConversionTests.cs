@@ -24,7 +24,7 @@ public class ConversionTests
 		Assert.AreEqual(Enum1.A, "A".ConvertTo(Enum1.None));
 		Assert.AreEqual(Enum1.A, "a".ConvertTo(Enum1.None));
 		Assert.AreEqual(Enum1.A, "1".ConvertTo(Enum1.None));
-		Assert.AreEqual(Enum1.None, ((string) null).ConvertTo(Enum1.None));
+		Assert.AreEqual(Enum1.None, (null as string).ConvertTo(Enum1.None));
 	}
 
 	[TestMethod]
@@ -36,6 +36,6 @@ public class ConversionTests
 	[TestMethod]
 	public void NullConversionTest()
 	{
-		Assert.IsNull(((object) null).ConvertTo<int?>(null));
+		Assert.IsNull((null as object).ConvertTo<int?>(null));
 	}
 }

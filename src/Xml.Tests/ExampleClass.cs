@@ -3,35 +3,35 @@
 public class Wrapper1
 {
 	[AutoXmlElement]
-	public AbstractClass SomeProperty { get; set; }
+	public required AbstractClass SomeProperty { get; set; }
 }
 public class Wrapper2
 {
 	[AutoXmlElement]
-	public AbstractClass SomeField;
+	public required AbstractClass SomeField;
 }
 public class Wrapper3
 {
 	[AutoXmlElement]
-	public AbstractClass[] SomeArrayProperty2 { get; set; }
+	public required AbstractClass[] SomeArrayProperty2 { get; set; }
 }
 public class Wrapper4
 {
 	[AutoXmlElement]
-	public AbstractClass[] SomeArrayField2;
+	public required AbstractClass[] SomeArrayField2;
 }
 public class ExampleClass : IEquatable<ExampleClass>
 {
-	public Wrapper1 Wrapper1 { get; set; }
-	public Wrapper2 Wrapper2 { get; set; }
-	public Wrapper3 Wrapper3 { get; set; }
-	public Wrapper4 Wrapper4 { get; set; }
+	public required Wrapper1 Wrapper1 { get; set; }
+	public required Wrapper2 Wrapper2 { get; set; }
+	public required Wrapper3 Wrapper3 { get; set; }
+	public required Wrapper4 Wrapper4 { get; set; }
 	[AutoXmlArrayItem]
-	public AbstractClass[] SomeArrayProperty1 { get; set; }
+	public required AbstractClass[] SomeArrayProperty1 { get; set; }
 	[AutoXmlArrayItem]
-	public AbstractClass[] SomeArrayField1;
+	public required AbstractClass[] SomeArrayField1;
 	
-	public bool Equals(ExampleClass other)
+	public bool Equals(ExampleClass? other)
 	{
 		return
 			(other != null) &&
@@ -42,7 +42,7 @@ public class ExampleClass : IEquatable<ExampleClass>
 			ArrayUtility.ArrayEqual(SomeArrayProperty1, other.SomeArrayProperty1) &&
 			ArrayUtility.ArrayEqual(Wrapper3.SomeArrayProperty2, other.Wrapper3.SomeArrayProperty2);
 	}
-	public override bool Equals(object obj) => Equals(obj as ExampleClass);
+	public override bool Equals(object? obj) => Equals(obj as ExampleClass);
 
 	public override int GetHashCode()
 	{

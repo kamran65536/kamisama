@@ -49,7 +49,7 @@ public class XmlSerializationTests
 	{
 		var str = @"<A><X>10</X></A>";
 
-		var a = str.DeserializeFromXml<A>();
+		var a = str.DeserializeFromXml<A>()!;
 
 		Assert.AreEqual(10, a.X);
 	}
@@ -60,7 +60,7 @@ public class XmlSerializationTests
 
 		var serializer = new XmlSerializer(typeof(A), new XmlRootAttribute { ElementName = "B" });
 
-		var a = str.DeserializeFromXml<A>(serializer);
+		var a = str.DeserializeFromXml<A>(serializer)!;
 
 		Assert.AreEqual(10, a.X);
 	}

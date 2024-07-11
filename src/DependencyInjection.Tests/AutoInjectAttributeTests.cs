@@ -51,5 +51,46 @@ public class AutoInjectAttributeTests
 
 		Assert.AreEqual(typeof(SampleImplementation1), descriptor.ImplementationType);
 		Assert.AreEqual(expectedLifetime, descriptor.Lifetime);
+		Assert.IsNull(descriptor.ServiceKey);
+	}
+	[TestMethod]
+	[DataRow(ServiceLifetime.Transient)]
+	[DataRow(ServiceLifetime.Scoped)]
+	[DataRow(ServiceLifetime.Singleton)]
+	public void TryAdd_must_add_serviceDescriptor_based_on_lifetime_for_ServiceKey(ServiceLifetime expectedLifetime)
+	{
+		var services = new ServiceCollection();
+		var serviceKey = 10;
+		var attr = new AutoInjectAttribute
+		{
+			ServiceKey = serviceKey,
+			Lifetime = expectedLifetime
+		};
+
+		attr.TryAddInjection(services, typeof(SampleImplementation1));
+
+		var descriptor = services.FirstOrDefault(x => x.ServiceType == typeof(ISampleInteface))!;
+
+		Assert.IsTrue(descriptor.IsKeyedService);
+		Assert.AreEqual(typeof(SampleImplementation1), descriptor.KeyedImplementationType);
+		Assert.AreEqual(expectedLifetime, descriptor.Lifetime);
+		Assert.AreEqual(serviceKey, descriptor.ServiceKey);
+	}
+	[TestMethod]
+	[DataRow(typeof(AutoInjectScopedAttribute), ServiceLifetime.Scoped)]
+	[DataRow(typeof(AutoInjectTransientAttribute), ServiceLifetime.Transient)]
+	[DataRow(typeof(AutoInjectSingletonAttribute), ServiceLifetime.Singleton)]
+	public void TryAdd_must_add_serviceDescriptor_based_on_lifetime_for_custom_AutoInjectAttributes(Type autoInjectAttributeType, ServiceLifetime expectedLifetime)
+	{
+		var services = new ServiceCollection();
+		var attr = Activator.CreateInstance(autoInjectAttributeType) as AutoInjectAttributeBase;
+
+		attr!.TryAddInjection(services, typeof(SampleImplementation1));
+
+		var descriptor = services.FirstOrDefault(x => x.ServiceType == typeof(ISampleInteface))!;
+
+		Assert.AreEqual(typeof(SampleImplementation1), descriptor.ImplementationType);
+		Assert.AreEqual(expectedLifetime, descriptor.Lifetime);
+		Assert.IsNull(descriptor.ServiceKey);
 	}
 }
