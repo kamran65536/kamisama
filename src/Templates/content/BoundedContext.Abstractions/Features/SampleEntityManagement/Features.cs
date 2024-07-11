@@ -1,4 +1,4 @@
-﻿namespace Project.Abstractions.Features.SampleEntityManagement;
+﻿namespace Example.Abstractions.Features.SampleEntityManagement;
 
 public interface IAddSampleEntity : IAddFeature<AddSampleEntityRequest>
 {

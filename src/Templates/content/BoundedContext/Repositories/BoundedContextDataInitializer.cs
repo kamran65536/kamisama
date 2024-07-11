@@ -1,4 +1,4 @@
-﻿namespace KamiSama.Templates.content.BoundedContext.Repositories.Database;
+﻿namespace Example.Templates.content.BoundedContext.Repositories.Database;
 
 [AutoInjectScoped(typeof(IDatabaseInitializer<BoundedContextDbContext>))]
 internal class BoundedContextDataInitializer : DatabaseInitializerBase<BoundedContextDbContext>

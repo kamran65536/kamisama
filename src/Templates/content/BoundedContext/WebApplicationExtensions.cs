@@ -1,4 +1,4 @@
-﻿namespace Project;
+﻿namespace Example;
 
 public static class WebApplicationExtensions
 {

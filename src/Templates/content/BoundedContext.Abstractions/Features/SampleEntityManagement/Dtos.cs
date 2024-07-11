@@ -1,4 +1,4 @@
-﻿namespace Project.Abstractions.Features.SampleEntityManagement;
+﻿namespace Example.Abstractions.Features.SampleEntityManagement;
 
 public record AddSampleEntityRequest([Required] string Name);
 public record UpdateSampleEntityRequest([Required] string Name);

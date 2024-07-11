@@ -1,4 +1,4 @@
-﻿namespace Project.Entities;
+﻿namespace Example.Entities;
 
 public class SampleEntity
 {

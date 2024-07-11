@@ -1,4 +1,4 @@
-﻿namespace KamiSama.Repositories.Abstractions;
+﻿namespace Example.Repositories.Abstractions;
 
 public interface ISampleRepository 
 	: IGenericRepository<SampleEntity, SampleEntitySearchModel>, IFindByNameRepository<SampleEntity>
