@@ -2,54 +2,23 @@
 	"$schema": "http://json.schemastore.org/template",
 	"author": "KamiSama",
 	"classifications": [ "Common", "Code" ],
-	"identity": "KamiSama.Projects.BoundedContext",
+	"identity": "KamiSama.Projects.BoundedContext.Abstractions",
 	"name": "Bounded Context",
-	"description": "KamiSama Bounded Context Project",
-	"shortName": "kamisama-bc",
-	"defaultName": "Example.BoundedContext",
+	"description": "KamiSama Bounded Context Abstractions Project",
+	"shortName": "kamisama-bca",
+	"defaultName": "Project.Abstractions",
 	"tags": {
 		"language": "C#",
 		"type": "project"
 	},
-	"sourceName": "Example.BoundedContext",
+	"sourceName": "Project",
 	"symbols": {
-		"BoundedContext": {
-			"type": "parameter",
-			"datatype": "text",
-			"defaultValue": "BoundedContext",
-			"displayName": "Bounded Context Name",
-			"description": "the name of the context used in the project",
-			"replaces": "BoundedCotnext",
-			"fileRename": "BoundedContext",
-			"isRequired": true
-		},
 		"AddSamples": {
 			"type": "parameter",
 			"dataType": "bool",
 			"defaultValue": "false",
 			"displayName": "Sample Files",
 			"description": "adds sample files to the project"
-		},
-		"UseSqlite": {
-			"type": "parameter",
-			"dataType": "bool",
-			"defaultValue": "false",
-			"displayName": "Supports Sqlite",
-			"description": "add sqlite dependencies to the project"
-		},
-		"UseSqlServer": {
-			"type": "parameter",
-			"dataType": "bool",
-			"defaultValue": "false",
-			"displayName": "Supports SqlServer",
-			"description": "add sqlserver dependencies to the project"
-		},
-		"UsePostgresql": {
-			"type": "parameter",
-			"dataType": "bool",
-			"defaultValue": "false",
-			"displayName": "Supports Postgresql",
-			"description": "add postgresql dependencies to the project"
 		},
 		"UseProps": {
 			"type": "parameter",
@@ -65,7 +34,7 @@
 				{
 					"condition": "(!AddSamples)",
 					"exclude": [
-						"Entities/SampleEntity.cs"
+						"Features/"
 					]
 				}
 			]

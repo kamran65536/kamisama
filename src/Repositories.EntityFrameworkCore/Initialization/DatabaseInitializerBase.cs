@@ -25,22 +25,22 @@ public abstract class DatabaseInitializerBase<TDbContext>(TDbContext context) : 
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    protected abstract Task InitializeData(CancellationToken cancellationToken);
+    protected abstract Task InitializeDataAsync(CancellationToken cancellationToken);
     /// <summary>
     /// Initialize test data for the database
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    protected abstract Task InitializeTestData(CancellationToken cancellationToken);
+    protected abstract Task InitializeTestDataAsync(CancellationToken cancellationToken);
     /// <inheritdoc />
     public async virtual Task InitializeAsync(DataInitializationOptions options, CancellationToken cancellationToken)
     {
         if (options.Migrate)
             await MigrateAsync(cancellationToken);
         if (options.InitializeData)
-            await InitializeData(cancellationToken);
+            await InitializeDataAsync(cancellationToken);
         if (options.InitializeTestData)
-            await InitializeTestData(cancellationToken);
+            await InitializeTestDataAsync(cancellationToken);
     }
     /// <summary>
     /// Safely adds an entity if it is not already exist

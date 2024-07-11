@@ -32,3 +32,4 @@
 - KamiSama.Extensions.AutoMapper is added, introducing CreatePatchedMap and JustPatchMembers extensions.
 - KamiSama.Extensions.DependencyInjection named mappings are removed as they exists in Microsoft.Extensions.DependencyInjection
 - KamiSama.Templates.BoundedContext projects are added.
+- KamiSama.Repositories.EntityFrameworkCore.Initialization.DatabaseInitializerBase.InitializeData and InitializeTestData are renamed to InitializeDataAsync and InitializeTestDataAsync.

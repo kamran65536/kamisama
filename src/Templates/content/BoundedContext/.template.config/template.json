@@ -65,7 +65,9 @@
 				{
 					"condition": "(!AddSamples)",
 					"exclude": [
-						"Entities/SampleEntity.cs"
+						"Entities/*",
+						"Features/*",
+						"Repositories/Configurations*"
 					]
 				}
 			]
