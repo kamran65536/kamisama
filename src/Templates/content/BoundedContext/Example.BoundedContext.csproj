@@ -16,6 +16,7 @@
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.*" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="8.0.*" />
 		<PackageReference Include="KamiSama.Chassis.Commons" Version="2.8.*" />
+		<PackageReference Include="KamiSama.Extensions.AutoMapper" Version="2.8.*" />
 		<PackageReference Include="KamiSama.Extensions.DependencyInjection" Version="2.8.*" />
 		<!--#if (UseSqlite)-->
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.*" />

@@ -24,12 +24,15 @@ namespace KamiSama.Extensions.DependencyInjection
 
 			foreach (var type in types)
 			{
-				var attr = type.GetCustomAttribute<AutoInjectAttribute>();
+				var attrs = type.GetCustomAttributes<AutoInjectAttributeBase>();
 
-				if (attr == null)
-					continue;
+				foreach (var attr in attrs)
+				{
+					if (attr == null)
+						continue;
 
-				attr.TryAddInjection(services, type);
+					attr.TryAddInjection(services, type);
+				}
 			}
 
 			return services;

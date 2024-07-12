@@ -5,7 +5,7 @@ internal class Mappings : Profile
 	public Mappings()
 	{
 		CreateMap<AddSampleEntity, SampleEntity>();
-		CreatePatchedMap<UpdateSampleEntity, SampleEntity>();
+		CreateMap<UpdateSampleEntity, SampleEntity>().JustPatchMembers();
 		CreateMap<SampleEntity, SampleEntityDto>();
 	}
 }

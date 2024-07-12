@@ -3,8 +3,8 @@
 /// <summary>
 /// Generic implementation of <see cref="IListFeature{TEntityDto, TSearchModel}"/>
 /// </summary>
-public abstract class GenericListFeature<TEntity, TEntityDto, TSearchModel, TRepository>(TRepository repository, IMapper mapper)
-	: IListFeature<TEntityDto, TSearchModel>
+public abstract class GenericListFeature<TEntity, TEntityDto, TSearchModel, TRepository>(TRepository repository, IMapper mapper) :
+	IListFeature<TEntityDto, TSearchModel>
 	where TRepository : IListingRepository<TEntity, TSearchModel>
 	where TSearchModel : SearchModel
 {

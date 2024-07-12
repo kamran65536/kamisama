@@ -13,6 +13,6 @@
 	</PropertyGroup>
 	<!--#endif-->
 	<ItemGroup>
-		<PackageReference Include="KamiSama.Chassis.Commons.Abstractions" Version="2.8.9-preview5" />
+		<PackageReference Include="KamiSama.Chassis.Commons.Abstractions" Version="2.8.*" />
 	</ItemGroup>
 </Project>

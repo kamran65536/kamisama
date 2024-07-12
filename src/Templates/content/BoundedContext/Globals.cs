@@ -6,7 +6,6 @@ global using KamiSama.Repositories.EntityFrameworkCore.Initialization;
 global using KamiSama.Repositories.Initialization;
 global using Example.BoundedContext.Entities;
 global using Example.BoundedContext.Repositories.Database;
-global using Example.BoundedContext.Repositories.Database.Sqlite;
 global using Example.BoundedContext.Repositories.Abstractions;
 global using Microsoft.AspNetCore.Builder;
 global using Microsoft.EntityFrameworkCore;

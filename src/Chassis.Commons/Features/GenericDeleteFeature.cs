@@ -6,7 +6,8 @@
 /// <typeparam name="TRepository"></typeparam>
 /// <typeparam name="TKey"></typeparam>
 /// <param name="repository"></param>
-public abstract class GenericDeleteFeature<TEntity, TRepository, TKey>(TRepository repository) : IDeleteFeature<TKey>
+public abstract class GenericDeleteFeature<TEntity, TRepository, TKey>(TRepository repository) :
+	IDeleteFeature<TKey>
 	where TRepository : IFindByIdRepository<TEntity, TKey>, IDeletableRepository<TEntity>
 {
 	/// <inheritdoc />

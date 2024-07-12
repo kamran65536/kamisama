@@ -3,7 +3,8 @@
 /// <summary>
 /// Generic implementation of <see cref="IFindByNameFeature{TEntityDto}"/>
 /// </summary>
-public abstract class GenericFindByNameFeature<TRepository, TEntity, TEntityDto>(TRepository repository, IMapper mapper) : IFindByNameFeature<TEntityDto>
+public abstract class GenericFindByNameFeature<TEntity, TEntityDto, TRepository>(TRepository repository, IMapper mapper) : 
+	IFindByNameFeature<TEntityDto>
 	where TRepository : IFindByNameRepository<TEntity>
 {
 	/// <inheritdoc />

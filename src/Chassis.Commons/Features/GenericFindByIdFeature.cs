@@ -9,8 +9,8 @@
 /// <typeparam name="TKey"></typeparam>
 /// <param name="repository"></param>
 /// <param name="mapper"></param>
-public class GenericFindByIdFeature<TEntity, TEntityDto, TRepository, TKey>(TRepository repository, IMapper mapper)
-	: IFindByIdFeature<TEntityDto, TKey>
+public abstract class GenericFindByIdFeature<TEntity, TEntityDto, TRepository, TKey>(TRepository repository, IMapper mapper) :
+	IFindByIdFeature<TEntityDto, TKey>
 	where TRepository : IFindByIdRepository<TEntity, TKey>
 {
 	/// <summary>

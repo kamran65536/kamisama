@@ -8,7 +8,8 @@
 /// <typeparam name="TRepository"></typeparam>
 /// <param name="repository"></param>
 /// <param name="mapper"></param>
-public abstract class GenericAddFeature<TAddRequest, TEntity, TRepository>(TRepository repository, IMapper mapper) : IAddFeature<TAddRequest>
+public abstract class GenericAddFeature<TAddRequest, TEntity, TRepository>(TRepository repository, IMapper mapper) : 
+	IAddFeature<TAddRequest>
 	where TRepository : IAddableRepository<TEntity>
 {
 	/// <summary>
