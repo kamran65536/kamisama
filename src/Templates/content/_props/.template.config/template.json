@@ -5,7 +5,7 @@
 	"identity": "KamiSama.Solution.Props",
 	"name": "Common Project File",
 	"description": "Common Properties for .net 8 project",
-	"shortName": "props",
+	"shortName": "kamisama-props",
 	"tags": {
 		"language": "XML",
 		"type": "item"

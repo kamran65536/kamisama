@@ -20,3 +20,5 @@ Here is the list of libraries:
     Chassis for less code in AspNetCore web applications. eg. exception handling
 9. [KamiSama.Testing.NSubstitute](../docs/9-testings.md)
     helper class to write more cleaner and comprehensible tests using dependency injection.
+10. [KamiSama.Templates](../docs/10-templates.md)
+    Template project for most common scenarios like Core (Domain) project, BoundedContext projects, Repository projects...

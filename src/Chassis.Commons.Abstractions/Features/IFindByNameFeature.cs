@@ -9,5 +9,5 @@ public interface IFindByNameFeature<TEntityDto>
 	/// Finds an <typeparamref name="TEntityDto"/> by it's name
 	/// </summary>
 	/// <returns></returns>
-	Task<TEntityDto> FindByNameAsync(string name, CancellationToken cancellationToken);
+	Task<TEntityDto?> FindByNameAsync(string name, CancellationToken cancellationToken);
 }

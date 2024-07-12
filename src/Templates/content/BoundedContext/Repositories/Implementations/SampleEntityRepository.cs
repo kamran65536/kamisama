@@ -20,4 +20,6 @@ internal class SampleEntityRepository(BoundedContextDbContext context)
 	}
 	public Task<SampleEntity?> FindByNameAsync(string name, CancellationToken cancellationToken)
 		=> base.FindAsync(x => x.Name.ToLower() == name.ToLower(), cancellationToken);
+	public Task<SampleEntity?> FindByIdAsync(Guid id, CancellationToken cancellationToken)
+		=> base.FindAsync(x => x.Id == id, cancellationToken);
 }

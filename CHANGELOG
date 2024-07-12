@@ -28,8 +28,11 @@
 - KamiSama.Extensions.DependencyInjection AutoAddDependenciesFrom<T> method is added.
 - KamiSama.Chassis.HttpExceptions generic NotFoundException<TEntity> and AlreadyExistsException<TEnitty> are added.
 - dependencies are updated.
-1403-04-21 7/11/2024	v2.8.9
+1403-04-22 7/12/2024	v2.8.9
+- KamiSama.Chassis.Commons and KamiSama.Chassis.Commons.Abstractions are added for common CRUD usecases.
 - KamiSama.Extensions.AutoMapper is added, introducing CreatePatchedMap and JustPatchMembers extensions.
 - KamiSama.Extensions.DependencyInjection named mappings are removed as they exists in Microsoft.Extensions.DependencyInjection
+- KamiSama.Extensions.DependencyInjection AutoInjectScoped, AutoInjectTransient and AutoInjectSingleton are added.
 - KamiSama.Templates.BoundedContext projects are added.
 - KamiSama.Repositories.EntityFrameworkCore.Initialization.DatabaseInitializerBase.InitializeData and InitializeTestData are renamed to InitializeDataAsync and InitializeTestDataAsync.
+- Documentations are updated for KamiSama.Chassis and KamiSama.Templates.

@@ -30,7 +30,7 @@ public class GenericFindByIdFeature<TEntity, TEntityDto, TRepository, TKey>(TRep
 	/// <exception cref="NotFoundException"></exception>
 	public async Task<TEntityDto> FindByIdAsync(TKey id, CancellationToken cancellationToken)
 	{
-		var entity = await repository.FindByIdAsync(id, cancellationToken) ?? throw new NotFoundException(nameof(TEntity), id);
+		var entity = await repository.FindByIdAsync(id, cancellationToken) ?? throw new NotFoundException<TEntity>(id);
 
 		return ConvertToDto(entity);
 	}

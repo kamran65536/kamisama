@@ -5,7 +5,7 @@
 	"identity": "KamiSama.Projects.BoundedContext",
 	"name": "Bounded Context",
 	"description": "KamiSama Bounded Context Project",
-	"shortName": "kamisama-bc",
+	"shortName": "kamisama-boundedcontext",
 	"defaultName": "Example.BoundedContext",
 	"tags": {
 		"language": "C#",

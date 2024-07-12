@@ -5,7 +5,7 @@
 	"identity": "KamiSama.Projects.BoundedContext.Abstractions",
 	"name": "Bounded Context Abstractions",
 	"description": "KamiSama Bounded Context Abstractions Project",
-	"shortName": "kamisama-bca",
+	"shortName": "kamisama-boundedcontext-abstractions",
 	"defaultName": "Example.SomeContext",
 	"tags": {
 		"language": "C#",

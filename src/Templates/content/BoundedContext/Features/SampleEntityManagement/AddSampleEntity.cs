@@ -1,6 +1,7 @@
 ﻿namespace Example.BoundedContext.Features.SampleEntityManagement;
 
 [AutoInjectScoped(typeof(IAddSampleEntity))]
-internal class AddSampleEntity(ISampleEntityRepository repository, IMapper mapper) : GenericAddFeature<AddSampleEntityRequest, SampleEntity, ISampleEntityRepository>(repository, mapper)
+internal class AddSampleEntity(ISampleEntityRepository repository, IMapper mapper) 
+	: GenericAddFeature<AddSampleEntityRequest, SampleEntity, ISampleEntityRepository>(repository, mapper), IAddSampleEntity
 {
 }

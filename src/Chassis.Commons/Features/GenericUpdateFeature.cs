@@ -3,7 +3,7 @@
 /// <summary>
 /// Generic implementation of <see cref="IUpdateFeature{TEntityDto, TKey}"/>
 /// </summary>
-public abstract class GenericUpdateByIdFeature<TUpdateRequest, TEntity, TRepository, TKey>(TRepository repository, IMapper mapper)
+public abstract class GenericUpdateFeature<TUpdateRequest, TEntity, TRepository, TKey>(TRepository repository, IMapper mapper)
 	: IUpdateFeature<TUpdateRequest, TKey>
 	where TRepository : IFindByIdRepository<TEntity, TKey>, IUpdatableRepository<TEntity>
 {

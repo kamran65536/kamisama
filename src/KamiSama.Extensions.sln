@@ -37,8 +37,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_", "_", "{7DC27342-54E1-4A
 		..\.gitlab-ci.yml = ..\.gitlab-ci.yml
 		..\CHANGELOG = ..\CHANGELOG
 		LICENSE = LICENSE
-		props.xml = props.xml
 		props-test.xml = props-test.xml
+		props.xml = props.xml
 		test-configs.runsettings = test-configs.runsettings
 	EndProjectSection
 EndProject
@@ -51,6 +51,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{C6941067-E3F2-45DD-93C2-4A25FE2214A6}"
 	ProjectSection(SolutionItems) = preProject
 		..\docs\1-core.md = ..\docs\1-core.md
+		..\docs\10-templates.md = ..\docs\10-templates.md
 		..\docs\2-dependency-injection.md = ..\docs\2-dependency-injection.md
 		..\docs\3-json.md = ..\docs\3-json.md
 		..\docs\4-xml.md = ..\docs\4-xml.md

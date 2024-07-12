@@ -5,7 +5,7 @@
 	"identity": "KamiSama.Projects.MigrationAssembly",
 	"name": "Repositories Migration Project",
 	"description": "KamiSama Repository Migration Assembly",
-	"shortName": "kamisama-migration-assembly",
+	"shortName": "kamisama-repos-migration",
 	"defaultName": "Example.Repositories.Sqlite",
 	"tags": {
 		"language": "C#",
