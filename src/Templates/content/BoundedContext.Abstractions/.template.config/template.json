@@ -6,12 +6,12 @@
 	"name": "Bounded Context Abstractions",
 	"description": "KamiSama Bounded Context Abstractions Project",
 	"shortName": "kamisama-bca",
-	"defaultName": "Example",
+	"defaultName": "Example.SomeContext",
 	"tags": {
 		"language": "C#",
 		"type": "project"
 	},
-	"sourceName": "Example",
+	"sourceName": "Example.SomeContext",
 	"symbols": {
 		"AddSamples": {
 			"type": "parameter",

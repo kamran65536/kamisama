@@ -18,4 +18,6 @@ internal class SampleEntityRepository(BoundedContextDbContext context)
 			_ => query.OrderBy(x => x.Id),
 		};
 	}
+	public Task<SampleEntity?> FindByNameAsync(string name, CancellationToken cancellationToken)
+		=> base.FindAsync(x => x.Name.ToLower() == name.ToLower(), cancellationToken);
 }

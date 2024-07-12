@@ -13,13 +13,13 @@ public static class ServiceCollectionExtensions
 			default:
 ///#if (UseSqlite)
 			case "sqlite":
-				services.AddDbContext < Repositories.Database.Sqlite.SqliteBoundedContextDbContext>(opt =>
+				services.AddDbContext<Repositories.Database.Sqlite.SqliteBoundedContextDbContext>(opt =>
 				{
 					opt.UseLazyLoadingProxies();
 					opt.UseSqlite(connectionString, x => x.MigrationsHistoryTable(MigrationHistoryTable))
 						.ConfigureWarnings(w => w.Ignore(RelationalEventId.MultipleCollectionIncludeWarning));
 				});
-				services.AddScoped<Repositories.Database.Sqlite.BoundedContextDbContext>(sp => sp.GetRequiredService<SqliteBoundedContextDbContext>());
+				services.AddScoped<BoundedContextDbContext>(sp => sp.GetRequiredService<Repositories.Database.Sqlite.SqliteBoundedContextDbContext>());
 				break;
 ///#endif
 ///#if (UsePostgresql)
@@ -30,7 +30,7 @@ public static class ServiceCollectionExtensions
 					opt.UseNpgsql(connectionString, x => x.MigrationsHistoryTable(MigrationHistoryTable))
 						.ConfigureWarnings(w => w.Ignore(RelationalEventId.MultipleCollectionIncludeWarning));
 				});
-				services.AddScoped<BoundedContextDbContext>(sp => sp.GetRequiredService<PostgresqlBoundedContextDbContext>());
+				services.AddScoped<BoundedContextDbContext>(sp => sp.GetRequiredService<Repositories.Database.Postgresql.PostgresqlBoundedContextDbContext>());
 				AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 				AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
 				break;
@@ -43,7 +43,7 @@ public static class ServiceCollectionExtensions
 					opt.UseSqlServer(connectionString, x => x.MigrationsHistoryTable(MigrationHistoryTable))
 						.ConfigureWarnings(w => w.Ignore(RelationalEventId.MultipleCollectionIncludeWarning));
 				});
-				services.AddScoped<BoundedContextDbContext>(sp => sp.GetRequiredService<SqliteBoundedContextDbContext>());
+				services.AddScoped<BoundedContextDbContext>(sp => sp.GetRequiredService<Repositories.Database.SqlServer.SqlServerBoundedContextDbContext>());
 				break;
 ///#endif
 		}

@@ -19,7 +19,7 @@
 			"defaultValue": "BoundedContext",
 			"displayName": "Bounded Context Name",
 			"description": "the name of the context used in the project",
-			"replaces": "BoundedCotnext",
+			"replaces": "BoundedContext",
 			"fileRename": "BoundedContext",
 			"isRequired": true
 		},

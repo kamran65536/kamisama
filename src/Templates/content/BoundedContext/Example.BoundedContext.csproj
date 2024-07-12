@@ -20,14 +20,12 @@
 		<!--#if (UseSqlite)-->
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.*" />
 		<!--#endif-->
-		<!--#if (UseSqlite)-->
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.*" />
-		<!--#endif-->
 		<!--#if (UsePostgresql)-->
 		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.*" />
 		<!--#endif-->
 		<!--#if (UseSqlServer)-->
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.*" />
 		<!--#endif-->
+		<FrameworkReference Include="Microsoft.AspnetCore.App" />
 	</ItemGroup>
 </Project>

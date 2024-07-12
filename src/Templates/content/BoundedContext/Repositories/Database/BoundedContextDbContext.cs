@@ -1,4 +1,4 @@
-﻿namespace Example.Repositories.Database;
+﻿namespace Example.BoundedContext.Repositories.Database;
 
 public abstract class BoundedContextDbContext : DbContext
 {
