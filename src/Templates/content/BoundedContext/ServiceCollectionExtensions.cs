@@ -53,9 +53,9 @@ public static class ServiceCollectionExtensions
 	public static IServiceCollection AddBoundedContext(this IServiceCollection services, string connectionString, string connectionProvider)
 	{
 		services.AutoAddDependencies(typeof(ServiceCollectionExtensions).Assembly);
-		services.AddAutoMapper(typeof(ServiceCollectionExtensions).Assembly);
 		services.AddBoundedContextDbContext(connectionString, connectionProvider);
-
+		services.AddAutoMapper(opt => opt.AddMaps(typeof(ServiceCollectionExtensions).Assembly));
+		
 		return services;
 	}
 }

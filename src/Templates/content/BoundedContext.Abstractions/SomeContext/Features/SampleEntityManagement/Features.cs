@@ -12,9 +12,9 @@ public interface IDeleteSampleEntity : IDeleteFeature<Guid>
 public interface IListSampleEntities : IListFeature<SampleEntityDto, SampleEntitySearchModel>
 {
 }
-public interface IFindByNameSampleEntityByName : IFindByNameFeature<SampleEntityDto>
+public interface IFindSampleEntityByName : IFindByNameFeature<SampleEntityDto>
 {
 }
-public interface IFindByIdSampleEntityByName : IFindByIdFeature<SampleEntityDto, Guid>
+public interface IFindSampleEntityById : IFindByIdFeature<SampleEntityDto, Guid>
 {
 }

@@ -8,7 +8,7 @@ public abstract class GenericFindByNameFeature<TEntity, TEntityDto, TRepository>
 	where TRepository : IFindByNameRepository<TEntity>
 {
 	/// <inheritdoc />
-	public async Task<TEntityDto?> FindByNameAsync(string name, CancellationToken cancellationToken)
+	public async Task<TEntityDto> FindByNameAsync(string name, CancellationToken cancellationToken)
 	{
 		var entity = await repository.FindByNameAsync(name, cancellationToken) ?? throw new NotFoundException<TEntity>(name);
 

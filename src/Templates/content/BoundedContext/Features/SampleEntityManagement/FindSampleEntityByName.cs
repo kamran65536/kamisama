@@ -1,6 +1,8 @@
-﻿namespace KamiSama.Templates.content.BoundedContext.Features.SampleEntityManagement;
+﻿namespace Example.BoundedContext.Features.SampleEntityManagement;
 
-[AutoInjectScoped(typeof(IFindSampleEntityByNameFeature))]
-internal class FindSampleEntityByName : GenericFindByNameFeature<SampleEntity, SampleEntityDto, ISampleEntityRepository>, IFindSampleEntityByNameFeature
+[AutoInjectScoped(typeof(IFindSampleEntityByName))]
+internal class FindSampleEntityByName(ISampleEntityRepository repository, IMapper mapper) :
+	GenericFindByNameFeature<SampleEntity, SampleEntityDto, ISampleEntityRepository>(repository, mapper),
+	IFindSampleEntityByName
 {
 }

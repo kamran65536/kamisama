@@ -30,6 +30,7 @@ dotnet new kamisama-boundedcontext-abstractions -n projectName
 ```
 
 It is recommended to create one for all bounded context (domain abstractions) project.
+You still need to run "Sync Namespaces" manually which will be fixed in next versions.
 
 ## 10.4 BoundedContext Project
 Full implementation of how to use KamiSama.Chassis.Commons library efficiently.
