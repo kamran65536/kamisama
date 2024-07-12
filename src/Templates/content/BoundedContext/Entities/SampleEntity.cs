@@ -1,4 +1,4 @@
-﻿namespace Example.Entities;
+﻿namespace Example.BoundedContext.Entities;
 
 public class SampleEntity
 {

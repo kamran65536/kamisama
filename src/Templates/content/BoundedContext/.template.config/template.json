@@ -6,12 +6,12 @@
 	"name": "Bounded Context",
 	"description": "KamiSama Bounded Context Project",
 	"shortName": "kamisama-bc",
-	"defaultName": "Example",
+	"defaultName": "Example.BoundedContext",
 	"tags": {
 		"language": "C#",
 		"type": "project"
 	},
-	"sourceName": "Example",
+	"sourceName": "Example.BoundedContext",
 	"symbols": {
 		"BoundedContext": {
 			"type": "parameter",

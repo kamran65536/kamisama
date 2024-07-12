@@ -18,11 +18,11 @@
 		"BaseName": {
 			"type": "parameter",
 			"datatype": "text",
-			"defaultValue": "Example",
+			"defaultValue": "Example.Core",
 			"displayName": "Base Context Name",
 			"description": "Base name of project, eg. BaseName.Core",
-			"replaces": "Example",
-			"fileRename": "Example",
+			"replaces": "Example.Core",
+			"fileRename": "Example.Core",
 			"isRequired": true
 		},
 		"AddSamples": {

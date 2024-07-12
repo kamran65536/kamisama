@@ -1,5 +1,5 @@
-﻿namespace Example.Repositories.Database.SqlServer;
+﻿namespace Example.BoundedContext.Repositories.Database.SqlServer;
 
-internal class SqliteBoundedContextDbContext(DbContextOptions<SqliteBoundedContextDbContext> options) : BoundedContextDbContext(options)
+internal class SqlServerBoundedContextDbContext(DbContextOptions<SqlServerBoundedContextDbContext> options) : BoundedContextDbContext(options)
 {
 }

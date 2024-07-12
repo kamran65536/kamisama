@@ -1,17 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<!--#if (UseProps)-->
 	<Import Project="../props.xml" />
+	<PropertyGroup>
+		<NoWarn>1701;1702;CA1862</NoWarn>
+	</PropertyGroup>
 	<!--#else-->
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
+		<NoWarn>1701;1702;CA1862</NoWarn>
 	</PropertyGroup>
 	<!--#endif-->
 	<ItemGroup>
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.*" />
-		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.*" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="8.0.*" />
+		<PackageReference Include="KamiSama.Chassis.Commons" Version="2.8.9-preview5" />
+		<PackageReference Include="KamiSama.Extensions.DependencyInjection" Version="2.8.9-preview5" />
 		<!--#if (UseSqlite)-->
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.*" />
 		<!--#endif-->

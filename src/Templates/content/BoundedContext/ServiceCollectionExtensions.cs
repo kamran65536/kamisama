@@ -1,4 +1,4 @@
-﻿namespace Example;
+﻿namespace Example.BoundedContext;
 
 public static class ServiceCollectionExtensions
 {

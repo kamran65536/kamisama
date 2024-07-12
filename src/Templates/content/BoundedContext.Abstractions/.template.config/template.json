@@ -34,7 +34,7 @@
 				{
 					"condition": "(!AddSamples)",
 					"exclude": [
-						"Features/"
+						"SomeContext/**"
 					]
 				}
 			]
