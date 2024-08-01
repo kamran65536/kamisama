@@ -36,3 +36,6 @@
 - KamiSama.Templates.BoundedContext projects are added.
 - KamiSama.Repositories.EntityFrameworkCore.Initialization.DatabaseInitializerBase.InitializeData and InitializeTestData are renamed to InitializeDataAsync and InitializeTestDataAsync.
 - Documentations are updated for KamiSama.Chassis and KamiSama.Templates.
+1403-05-11 8/1/2024	v2.9.0
+- KamiSama.Chassis.Commons.IAddFeature and GenericAddFeature now returns TEntityDto
+- bugfix: KamiSama.Chassis.HttpExceptions.NotFoundException<> and AlreadyExistsException<> wrong entity name

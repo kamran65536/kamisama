@@ -2,7 +2,7 @@
 
 [AutoInjectScoped(typeof(IAddSampleEntity))]
 internal class AddSampleEntity(ISampleEntityRepository repository, IMapper mapper) :
-	GenericAddFeature<AddSampleEntityRequest, SampleEntity, ISampleEntityRepository>(repository, mapper),
+	GenericAddFeature<AddSampleEntityRequest, ISampleEntityRepository, SampleEntity, SampleEntityDto>(repository, mapper),
 	IAddSampleEntity
 {
 	protected override async Task CheckDuplicateAsync(AddSampleEntityRequest request, CancellationToken cancellationToken)

@@ -10,8 +10,8 @@
 	<!--#endif-->
 	<ItemGroup>
 		<ProjectReference Include="..\Example.Core\Example.Core.csproj" />
-		<PackageReference Include="KamiSama.Extensions.DependencyInjection" Version="2.8.*" />
-		<PackageReference Include="KamiSama.Repositories.EntityFrameworkCore" Version="2.8.*" />
+		<PackageReference Include="KamiSama.Extensions.DependencyInjection" Version="2.9.*" />
+		<PackageReference Include="KamiSama.Repositories.EntityFrameworkCore" Version="2.9.*" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="8.0.*" />
 		<!--#if (UseSqlite)-->
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.*" />

@@ -16,6 +16,6 @@ public class NotFoundException(string entityName, object? entityKey) : HttpExcep
 /// </summary>
 /// <inheritdoc />
 public class NotFoundException<TEntity>(object? entityKey)
-	: NotFoundException(nameof(TEntity), entityKey)
+	: NotFoundException(typeof(TEntity).Name, entityKey)
 {
 }

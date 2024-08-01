@@ -12,6 +12,6 @@ public class AlreadyExistsException(string entityName, object entityKey) : Confl
 /// </summary>
 /// <inheritdoc />
 public class AlreadyExistsException<TEntity>(object entityKey)
-	: AlreadyExistsException(nameof(TEntity), entityKey)
+	: AlreadyExistsException(typeof(TEntity).Name, entityKey)
 {
 }

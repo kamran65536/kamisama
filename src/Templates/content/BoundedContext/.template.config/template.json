@@ -67,7 +67,9 @@
 					"exclude": [
 						"Entities/**",
 						"Features/**",
-						"Repositories/Configurations/**"
+						"Repositories/Configurations/**",
+						"Repositories/Abstractions/**",
+						"Repositories/Implementations/**"
 					]
 				},
 				{

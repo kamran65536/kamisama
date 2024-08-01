@@ -1,15 +1,10 @@
 ﻿namespace KamiSama.Chassis.Commons.Features;
 
 /// <summary>
-/// Generic implementation of <see cref="IAddFeature{TAddRequest}"/>
+/// Generic implementation of <see cref="IAddFeature{TAddRequest, TEntityDto}"/>
 /// </summary>
-/// <typeparam name="TAddRequest"></typeparam>
-/// <typeparam name="TEntity"></typeparam>
-/// <typeparam name="TRepository"></typeparam>
-/// <param name="repository"></param>
-/// <param name="mapper"></param>
-public abstract class GenericAddFeature<TAddRequest, TEntity, TRepository>(TRepository repository, IMapper mapper) : 
-	IAddFeature<TAddRequest>
+public abstract class GenericAddFeature<TAddRequest, TRepository, TEntity, TEntityDto>(TRepository repository, IMapper mapper) : 
+	IAddFeature<TAddRequest, TEntityDto>
 	where TRepository : IAddableRepository<TEntity>
 {
 	/// <summary>
@@ -26,13 +21,25 @@ public abstract class GenericAddFeature<TAddRequest, TEntity, TRepository>(TRepo
 	/// </summary>
 	protected virtual Task<TEntity> ConvertToEntity(TAddRequest request, CancellationToken cancellationToken)
 		=> Task.FromResult(mapper.Map<TEntity>(request));
+	/// <summary>
+	/// Converts the result entity to dto
+	/// </summary>
+	/// <param name="entity"></param>
+	/// <param name="cancellationToken"></param>
+	/// <returns></returns>
+	protected virtual Task<TEntityDto> ConvertToDto(TEntity entity, CancellationToken cancellationToken)
+		=> Task.FromResult(mapper.Map<TEntityDto>(entity));
 	/// <inheritdoc />
-	public virtual async Task AddAsync(TAddRequest request, CancellationToken cancellationToken)
+	public virtual async Task<TEntityDto> AddAsync(TAddRequest request, CancellationToken cancellationToken)
 	{
 		await CheckDuplicateAsync(request, cancellationToken);
 
 		var entity = await ConvertToEntity(request, cancellationToken);
 
 		await Repository.AddAsync(entity, cancellationToken);
+
+		var dto = await ConvertToDto(entity, cancellationToken);
+
+		return dto;
 	}
 }
