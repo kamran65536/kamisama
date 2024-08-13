@@ -39,3 +39,5 @@
 1403-05-11 8/1/2024	v2.9.0
 - KamiSama.Chassis.Commons.IAddFeature and GenericAddFeature now returns TEntityDto
 - bugfix: KamiSama.Chassis.HttpExceptions.NotFoundException<> and AlreadyExistsException<> wrong entity name
+1403-05-23 8/13/2024 v2.9.0.1
+- KamiSama.Chassis.Commons.Features methods are maed virtual.

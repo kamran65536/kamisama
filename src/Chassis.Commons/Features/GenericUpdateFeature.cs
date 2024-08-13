@@ -21,7 +21,7 @@ public abstract class GenericUpdateFeature<TUpdateRequest, TEntity, TRepository,
 	protected virtual void PatchEntity(TEntity entity, TUpdateRequest request)
 		=> mapper.Map(request, entity);
 	/// <inheritdoc />
-	public async Task UpdateAsync(TKey id, TUpdateRequest request, CancellationToken cancellationToken)
+	public async virtual Task UpdateAsync(TKey id, TUpdateRequest request, CancellationToken cancellationToken)
 	{
 		var entity = await Repository.FindByIdAsync(id, cancellationToken) ?? throw new NotFoundException(nameof(TEntity), id);
 

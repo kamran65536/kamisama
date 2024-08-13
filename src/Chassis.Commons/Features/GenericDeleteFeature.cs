@@ -11,7 +11,7 @@ public abstract class GenericDeleteFeature<TEntity, TRepository, TKey>(TReposito
 	where TRepository : IFindByIdRepository<TEntity, TKey>, IDeletableRepository<TEntity>
 {
 	/// <inheritdoc />
-	public async Task DeleteAsync(TKey id, CancellationToken cancellationToken)
+	public async virtual Task DeleteAsync(TKey id, CancellationToken cancellationToken)
 	{
 		var entity = await repository.FindByIdAsync(id, cancellationToken) ?? throw new NotFoundException(nameof(TEntity), id);
 

@@ -28,7 +28,7 @@ public abstract class GenericFindByIdFeature<TEntity, TEntityDto, TRepository, T
 	/// <param name="cancellationToken"></param>
 	/// <returns></returns>
 	/// <exception cref="NotFoundException"></exception>
-	public async Task<TEntityDto> FindByIdAsync(TKey id, CancellationToken cancellationToken)
+	public async virtual Task<TEntityDto> FindByIdAsync(TKey id, CancellationToken cancellationToken)
 	{
 		var entity = await repository.FindByIdAsync(id, cancellationToken) ?? throw new NotFoundException<TEntity>(id);
 
