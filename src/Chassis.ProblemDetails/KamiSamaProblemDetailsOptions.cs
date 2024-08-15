@@ -19,6 +19,10 @@ public class KamiSamaProblemDetailsOptions
 	/// </summary>
 	public Func<IServiceProvider, IStringLocalizer?>? StringLocalizerFunc { get; set; }
 	/// <summary>
+	/// Localize argument parameters or not
+	/// </summary>
+	public bool LocalizeArguments { get; set; } = true;
+	/// <summary>
 	/// Uses <see cref="KamiSamaProblemDetailsProvider"/> as default Problem Details Provider
 	/// </summary>
 	/// <returns></returns>
@@ -29,7 +33,7 @@ public class KamiSamaProblemDetailsOptions
 
 				if (options!.StringLocalizerFunc != null)
 					provider.Localizer = options.StringLocalizerFunc(sp);
-
+				provider.LocalizeArguments = options.LocalizeArguments;
 				return provider;
 			});
 	/// <summary>

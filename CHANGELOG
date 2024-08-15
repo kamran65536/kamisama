@@ -42,3 +42,8 @@
 1403-05-23 8/13/2024 v2.9.0.2
 - KamiSama.Chassis.Commons.Features methods are maed virtual.
 - DeleteFeature.CanBeDeleted is added.
+1403-05-25 8/15/2024 v2.10.0
+- Package references are updated, KamiSama.Extensions.NLog vulnurability is fixed.
+- KamiSama.Chassis.Commons.Features IExistsByNameFeature and IExistsByIdFeature are added.
+- (breaking) KamiSama.Chassis.Commons.Features IFindByIdRepository is renamed to ILookupByIdReposiotry, also ExistsByIdAsync method is added.
+- (breaking) KamiSama.Chassis.Commons.Features IFindByNameRepository is renamed to ILookupByNameReposiotry, also ExistsByNameAsync method is added.

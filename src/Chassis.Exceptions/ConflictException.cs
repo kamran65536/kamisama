@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Diagnostics.CodeAnalysis;
-
-namespace KamiSama.Chassis.HttpExceptions;
+﻿namespace KamiSama.Chassis.HttpExceptions;
 
 /// <summary>
 /// Indicates that the request could not be processed because of conflict in the current state of the resource, such as an edit conflict between multiple simultaneous updates.

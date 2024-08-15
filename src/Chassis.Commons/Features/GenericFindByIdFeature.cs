@@ -11,7 +11,7 @@
 /// <param name="mapper"></param>
 public abstract class GenericFindByIdFeature<TEntity, TEntityDto, TRepository, TKey>(TRepository repository, IMapper mapper) :
 	IFindByIdFeature<TEntityDto, TKey>
-	where TRepository : IFindByIdRepository<TEntity, TKey>
+	where TRepository : ILookupByIdRepository<TEntity, TKey>
 {
 	/// <summary>
 	/// converts an item, the default behaviour uses <see cref="IMapper"/>

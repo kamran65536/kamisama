@@ -5,7 +5,7 @@
 /// </summary>
 public abstract class GenericFindByNameFeature<TEntity, TEntityDto, TRepository>(TRepository repository, IMapper mapper) : 
 	IFindByNameFeature<TEntityDto>
-	where TRepository : IFindByNameRepository<TEntity>
+	where TRepository : ILookupByNameRepository<TEntity>
 {
 	/// <inheritdoc />
 	public async virtual Task<TEntityDto> FindByNameAsync(string name, CancellationToken cancellationToken)

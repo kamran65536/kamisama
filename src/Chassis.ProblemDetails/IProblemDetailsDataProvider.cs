@@ -14,6 +14,10 @@ public interface IProblemDetailsDataProvider
 	/// </summary>
 	IStringLocalizer? Localizer { get; set; }
 	/// <summary>
+	/// try to localize arguments or not
+	/// </summary>
+	bool LocalizeArguments { get; set; }
+	/// <summary>
 	/// Converts Exception to ProblemDetails
 	/// </summary>
 	/// <param name="context"></param>

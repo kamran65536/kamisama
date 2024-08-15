@@ -1,4 +1,6 @@
-﻿namespace KamiSama.Chassis.Commons.Features;
+﻿using KamiSama.Chassis.Commons.Repositories;
+
+namespace KamiSama.Chassis.Commons.Features;
 /// <summary>
 /// Generic implementation of <see cref="IDeleteFeature{TKey}"/>
 /// </summary>
@@ -8,7 +10,7 @@
 /// <param name="repository"></param>
 public abstract class GenericDeleteFeature<TEntity, TRepository, TKey>(TRepository repository) :
 	IDeleteFeature<TKey>
-	where TRepository : IFindByIdRepository<TEntity, TKey>, IDeletableRepository<TEntity>
+	where TRepository : ILookupByIdRepository<TEntity, TKey>, IDeletableRepository<TEntity>
 {
 	/// <summary>
 	/// Checks if the entity can be deleted or not. the default behaviour always returns true

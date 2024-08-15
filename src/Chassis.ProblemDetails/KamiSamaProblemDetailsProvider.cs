@@ -15,6 +15,19 @@ public class KamiSamaProblemDetailsProvider : IProblemDetailsDataProvider
 {
 	/// <inheritdoc	/>
 	public IStringLocalizer? Localizer { get; set; }
+	/// <inheritdoc />
+	public bool LocalizeArguments { get; set; }
+
+	private object? SafeLocalize(object? obj, params object[] args)
+	{
+		var str = obj + "";
+		var localized = Localizer!.GetString(str, args);
+
+		if (localized.ResourceNotFound)
+			return obj;
+		else
+			return localized.Value;
+	}
 
 	/// <inheritdoc/>
 	public ProblemDetails ConvertExceptionToProblemDetails(ExceptionContext context)
@@ -29,21 +42,19 @@ public class KamiSamaProblemDetailsProvider : IProblemDetailsDataProvider
 				Status = exception.StatusCode,
 			};
 
-		string title;
 		var args = new object[exception.ExceptionLocalizationArguments.Length];
 
 		for (int i = 0; i < args.Length; i++)
-			args[i] = exception.ExceptionLocalizationArguments[i] ?? "";
-		var localizedString = Localizer.GetString(exception.ExceptionLocalizationKey, args);
-
-		if (localizedString.ResourceNotFound)
-			title = HttpExceptionBase.TryFormatString(exception.ExceptionLocalizationKey ?? "", exception.ExceptionLocalizationArguments);
-		else
-			title = localizedString;
-
+		{
+			if (this.LocalizeArguments)
+				args[i] = SafeLocalize(exception.ExceptionLocalizationArguments[i]) ?? "";
+			else
+				args[i] = exception.ExceptionLocalizationArguments[i] + "";
+		}
+		
 		return new ProblemDetails
 		{
-			Title = title,
+			Title = SafeLocalize(exception.ExceptionLocalizationKey, args) + "",
 			Status = exception.StatusCode,
 		};
 	}

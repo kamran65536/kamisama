@@ -1,11 +1,13 @@
-﻿namespace KamiSama.Chassis.Commons.Features;
+﻿using KamiSama.Chassis.Commons.Repositories;
+
+namespace KamiSama.Chassis.Commons.Features;
 
 /// <summary>
 /// Generic implementation of <see cref="IUpdateFeature{TEntityDto, TKey}"/>
 /// </summary>
 public abstract class GenericUpdateFeature<TUpdateRequest, TEntity, TRepository, TKey>(TRepository repository, IMapper mapper) :
 	IUpdateFeature<TUpdateRequest, TKey>
-	where TRepository : IFindByIdRepository<TEntity, TKey>, IUpdatableRepository<TEntity>
+	where TRepository : ILookupByIdRepository<TEntity, TKey>, IUpdatableRepository<TEntity>
 {
 	/// <summary>
 	/// repository for fearther use
