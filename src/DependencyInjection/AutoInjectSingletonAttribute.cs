@@ -1,4 +1,6 @@
-﻿namespace KamiSama.Extensions.DependencyInjection;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace KamiSama.Extensions.DependencyInjection;
 
 /// <summary>
 /// AutoInject Singleton Attribute
@@ -21,3 +23,9 @@ public class AutoInjectSingletonAttribute : AutoInjectAttributeBase
 	{
 	}
 }
+/// <summary>
+/// AutoInject Singleton Attribute with generic service type
+/// </summary>
+/// <typeparam name="TService"></typeparam>
+[ExcludeFromCodeCoverage]
+public class AutoInjectSingletonAttribute<TService>() : AutoInjectSingletonAttribute(typeof(TService));

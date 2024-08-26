@@ -27,7 +27,7 @@ namespace KamiSama.Repositories.EntityFrameworkCore
 		private readonly DbSet<TEntity> dbSet = context.Set<TEntity>();
 
 		/// <inheritdoc />
-		public virtual Task AddAsync(TEntity item, CancellationToken cancellationToken = default)
+		public virtual Task AddAsync(TEntity item, CancellationToken cancellationToken)
 		{
 			dbSet.Add(item);
 			return Context.SaveChangesAsync(cancellationToken);
@@ -49,7 +49,7 @@ namespace KamiSama.Repositories.EntityFrameworkCore
 			Context.SaveChanges();
 		}
 		/// <inheritdoc />
-		public virtual Task UpdateAsync(TEntity item, CancellationToken cancellationToken = default)
+		public virtual Task UpdateAsync(TEntity item, CancellationToken cancellationToken)
 		{
 			var entry = Context.Entry(item);
 
@@ -65,20 +65,26 @@ namespace KamiSama.Repositories.EntityFrameworkCore
 			Context.SaveChanges();
 		}
 		/// <inheritdoc />
-		public virtual Task DeleteAsync(TEntity item, CancellationToken cancellationToken = default)
+		public virtual Task DeleteAsync(TEntity item, CancellationToken cancellationToken)
 		{
 			dbSet.Remove(item);
 			return Context.SaveChangesAsync(cancellationToken);
 		}
 		/// <inheritdoc />
-		public virtual IQueryable<TEntity> Where(Expression<Func<TEntity, bool>>? predicate)
-			=> dbSet.Where(predicate ?? (x => true));
+		public virtual IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> predicate)
+			=> dbSet.Where(predicate);
+		/// <summary>
+		/// Checks if any entity exists in the repository
+		/// </summary>
+		/// <returns></returns>
+		public virtual Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken)
+			=> dbSet.AnyAsync(predicate, cancellationToken);
 		/// <inheritdoc />
-		public virtual TEntity? Find(Expression<Func<TEntity, bool>>? predicate)
-			=> dbSet.FirstOrDefault(predicate ?? (x => true));
+		public virtual TEntity? Find(Expression<Func<TEntity, bool>> predicate)
+			=> dbSet.FirstOrDefault(predicate);
 		/// <inheritdoc />
-		public virtual Task<TEntity?> FindAsync(Expression<Func<TEntity, bool>>? predicate, CancellationToken cancellationToken = default)
-			=> dbSet.FirstOrDefaultAsync(predicate ?? (x => true), cancellationToken)!;
+		public virtual Task<TEntity?> FindAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken)
+			=> dbSet.FirstOrDefaultAsync(predicate, cancellationToken)!;
 		/// <summary>
 		/// Dispose method, does nothing
 		/// </summary>

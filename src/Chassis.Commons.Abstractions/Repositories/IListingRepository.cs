@@ -3,8 +3,9 @@
 /// <summary>
 /// A repository with listing capability
 /// </summary>
-public interface IListingRepository<TEntity, TSearchModel>
+public interface IListingRepository<TEntity, TSearchModel, TPagedResult>
 	where TSearchModel : SearchModel
+	where TPagedResult : PagedResult<TEntity>
 {
 	/// <summary>
 	/// Lists items and page them
@@ -12,5 +13,10 @@ public interface IListingRepository<TEntity, TSearchModel>
 	/// <param name="searchModel"></param>
 	/// <param name="cancellationToken"></param>
 	/// <returns></returns>
-	Task<PagedResult<TEntity>> ListAsync(TSearchModel searchModel, CancellationToken cancellationToken);
+	Task<TPagedResult> ListAsync(TSearchModel searchModel, CancellationToken cancellationToken);
 }
+/// <summary>
+/// A repository with listing capability
+/// </summary>
+public interface IListingRepository<TEntity, TSearchModel> : IListingRepository<TEntity, TSearchModel, PagedResult<TEntity>>
+	where TSearchModel : SearchModel;

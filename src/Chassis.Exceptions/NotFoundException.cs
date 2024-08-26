@@ -6,7 +6,8 @@ namespace KamiSama.Chassis.HttpExceptions;
 /// Entity not found
 /// </summary>
 /// <inheritdoc />
-public class NotFoundException(string entityName, object? entityKey) : HttpExceptionBase(nameof(NotFoundException), entityName, entityKey)
+public class NotFoundException(string entityName, object? entityKey, string keyType = "key") : 
+	HttpExceptionBase(nameof(NotFoundException), entityName, keyType, entityKey)
 {
 	/// <inheritdoc />
 	public override int StatusCode => StatusCodes.Status404NotFound;
@@ -15,7 +16,7 @@ public class NotFoundException(string entityName, object? entityKey) : HttpExcep
 /// Entity not found
 /// </summary>
 /// <inheritdoc />
-public class NotFoundException<TEntity>(object? entityKey)
-	: NotFoundException(typeof(TEntity).Name, entityKey)
+public class NotFoundException<TEntity>(object? entityKey, string keyType = "key")
+	: NotFoundException(typeof(TEntity).Name, entityKey, keyType)
 {
 }

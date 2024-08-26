@@ -47,7 +47,7 @@ public class AutoInjectAttributeTests
 
 		attr.TryAddInjection(services, typeof(SampleImplementation1));
 
-		var descriptor = services.FirstOrDefault(x => x.ServiceType == typeof(ISampleInteface))!;
+		var descriptor = services.FirstOrDefault(x => x.ServiceType == typeof(ISampleInterface))!;
 
 		Assert.AreEqual(typeof(SampleImplementation1), descriptor.ImplementationType);
 		Assert.AreEqual(expectedLifetime, descriptor.Lifetime);
@@ -69,7 +69,7 @@ public class AutoInjectAttributeTests
 
 		attr.TryAddInjection(services, typeof(SampleImplementation1));
 
-		var descriptor = services.FirstOrDefault(x => x.ServiceType == typeof(ISampleInteface))!;
+		var descriptor = services.FirstOrDefault(x => x.ServiceType == typeof(ISampleInterface))!;
 
 		Assert.IsTrue(descriptor.IsKeyedService);
 		Assert.AreEqual(typeof(SampleImplementation1), descriptor.KeyedImplementationType);
@@ -87,7 +87,7 @@ public class AutoInjectAttributeTests
 
 		attr!.TryAddInjection(services, typeof(SampleImplementation1));
 
-		var descriptor = services.FirstOrDefault(x => x.ServiceType == typeof(ISampleInteface))!;
+		var descriptor = services.FirstOrDefault(x => x.ServiceType == typeof(ISampleInterface))!;
 
 		Assert.AreEqual(typeof(SampleImplementation1), descriptor.ImplementationType);
 		Assert.AreEqual(expectedLifetime, descriptor.Lifetime);

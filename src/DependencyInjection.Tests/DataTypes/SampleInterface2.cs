@@ -1,7 +1,6 @@
-﻿namespace KamiSama.Extensions.DependencyInjection.Tests.DataTypes
+﻿namespace KamiSama.Extensions.DependencyInjection.Tests.DataTypes;
+
+public interface ISampleInterface2
 {
-	public interface ISampleInterface2
-	{
-		int Y { get; set; }
-	}
+	int Y { get; set; }
 }

@@ -1,43 +1,41 @@
 ﻿using Ionic.Zip;
 using NLog.Targets;
 using System.Diagnostics.CodeAnalysis;
-using System.IO;
 
-namespace KamiSama.Extensions.NLog
+namespace KamiSama.Extensions.NLog;
+
+/// <summary>
+/// Password function delegate
+/// </summary>
+/// <param name="fileName"></param>
+/// <param name="archiveFileName"></param>
+/// <returns></returns>
+public delegate string PassswordFunc(string fileName, string archiveFileName);
+
+/// <summary>
+/// Encrypted Zip Archive ispired by NLog ZipArchiveFileCompressor
+/// </summary>
+/// <remarks>
+/// constructor
+/// </remarks>
+/// <param name="passwordFunc">password based on current file name</param>
+[ExcludeFromCodeCoverage]
+public class EncryptedZipArchiveFileCompressor(PassswordFunc passwordFunc) : IFileCompressor
 {
-	/// <summary>
-	/// Password function delegate
-	/// </summary>
-	/// <param name="fileName"></param>
-	/// <param name="archiveFileName"></param>
-	/// <returns></returns>
-	public delegate string PassswordFunc(string fileName, string archiveFileName);
+	private readonly PassswordFunc passwordFunc = passwordFunc;
 
 	/// <summary>
-	/// Encrypted Zip Archive ispired by NLog ZipArchiveFileCompressor
+	/// Implements <see cref="IFileCompressor.CompressFile(string, string)"/> using the .Net4.5 specific <see cref="System.IO.Compression.ZipArchive"/>
 	/// </summary>
-	/// <remarks>
-	/// constructor
-	/// </remarks>
-	/// <param name="passwordFunc">password based on current file name</param>
-	[ExcludeFromCodeCoverage]
-	public class EncryptedZipArchiveFileCompressor(PassswordFunc passwordFunc) : IFileCompressor
+	public void CompressFile(string fileName, string archiveFileName)
 	{
-		private readonly PassswordFunc passwordFunc = passwordFunc;
+		using var zipFile = new ZipFile();
+		
+		zipFile.Password = passwordFunc(fileName, archiveFileName);
 
-		/// <summary>
-		/// Implements <see cref="IFileCompressor.CompressFile(string, string)"/> using the .Net4.5 specific <see cref="System.IO.Compression.ZipArchive"/>
-		/// </summary>
-		public void CompressFile(string fileName, string archiveFileName)
-		{
-			using var zipFile = new ZipFile();
-			
-			zipFile.Password = passwordFunc(fileName, archiveFileName);
+		var file = new FileInfo(fileName);
+		zipFile.AddEntry(file.Name, File.ReadAllBytes(file.FullName));
 
-			var file = new FileInfo(fileName);
-			zipFile.AddEntry(file.Name, File.ReadAllBytes(file.FullName));
-
-			zipFile.Save(archiveFileName);
-		}
+		zipFile.Save(archiveFileName);
 	}
 }

@@ -1,10 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace KamiSama.Extensions.DependencyInjection.Tests.DataTypes
+namespace KamiSama.Extensions.DependencyInjection.Tests.DataTypes;
+
+public class SampleImplementation2 : ISampleInterface
 {
-	[ExcludeFromCodeCoverage]
-	public class SampleImplementation2 : ISampleInteface
-	{
-		public int X { get; set; }
-	}
+	public int X { get; set; }
 }

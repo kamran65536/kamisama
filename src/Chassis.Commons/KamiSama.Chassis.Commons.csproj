@@ -1,11 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<Import Project="../props.xml" />
+
+	<PropertyGroup>
+		<Description>Common features used in most DDD projects and CRUD</Description>
+	</PropertyGroup>
 	<ItemGroup>
-	  <PackageReference Include="AutoMapper" Version="13.0.1" />
-	</ItemGroup>
-	<ItemGroup>
-	  <ProjectReference Include="..\Chassis.Commons.Abstractions\KamiSama.Chassis.Commons.Abstractions.csproj" />
-	  <ProjectReference Include="..\Chassis.Exceptions\KamiSama.Chassis.HttpExceptions.csproj" />
-	  <ProjectReference Include="..\Repositories.EntityFrameworkCore\KamiSama.Repositories.EntityFrameworkCore.csproj" />
+		<PackageReference Include="AutoMapper" Version="13.0.1" />
+		<ProjectReference Include="..\Chassis.Commons.Abstractions\KamiSama.Chassis.Commons.Abstractions.csproj" />
+		<ProjectReference Include="..\Chassis.Exceptions\KamiSama.Chassis.HttpExceptions.csproj" />
+		<ProjectReference Include="..\Repositories.EntityFrameworkCore\KamiSama.Repositories.EntityFrameworkCore.csproj" />
 	</ItemGroup>
 </Project>

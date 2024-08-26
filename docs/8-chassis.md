@@ -63,7 +63,7 @@ Repository interfaces and implementation for most CRUD scenarios:
 - IUpdatableRepository
 - IListingRepository
 - IDeletableRepository
-- IFindByIdRepository
-- IFindByNameRepository
+- ILookupByIdRepository
+- ILookupByCodeRepository
 
 The library also provides basic implementation named GenericyRepository with CRUD functionality. You should implement IFindByIdRepository and IFindByNameRepository by yourself. See KamiSama.Templates projects.

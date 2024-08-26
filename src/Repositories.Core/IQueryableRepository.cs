@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
 namespace KamiSama.Repositories
 {
@@ -15,6 +13,6 @@ namespace KamiSama.Repositories
 		/// </summary>
 		/// <param name="predicate">the predicate to search, if null it returns all items</param>
 		/// <returns></returns>
-		IQueryable<TEntity> Where(Expression<Func<TEntity, bool>>? predicate = null);
+		IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> predicate);
 	}
 }

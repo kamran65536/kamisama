@@ -1,7 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-
-namespace KamiSama.Extensions.DependencyInjection;
+﻿namespace KamiSama.Extensions.DependencyInjection;
 
 /// <summary>
 /// Inject Attribute tries to bind the current class as implementation to a service

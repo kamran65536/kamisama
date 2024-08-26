@@ -1,13 +1,20 @@
-﻿namespace KamiSama.Chassis.Commons.Features;
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace KamiSama.Chassis.Commons.Features;
 
 /// <summary>
 /// Generic implementation of <see cref="IListFeature{TEntityDto, TSearchModel}"/>
 /// </summary>
-public abstract class GenericListFeature<TEntity, TEntityDto, TSearchModel, TRepository>(TRepository repository, IMapper mapper) :
+public abstract class GenericListFeature<TEntity, TEntityDto, TSearchModel, TRepository, TPagedResult>(TRepository repository, IMapper mapper) :
 	IListFeature<TEntityDto, TSearchModel>
-	where TRepository : IListingRepository<TEntity, TSearchModel>
+	where TRepository : IListingRepository<TEntity, TSearchModel, TPagedResult>
 	where TSearchModel : SearchModel
+	where TPagedResult : PagedResult<TEntity>
 {
+	/// <summary>
+	/// repository to be used directly
+	/// </summary>
+	protected TRepository Repository { get => repository; }
 	/// <summary>
 	/// Covnerts a database <paramref name="entity"/> to <typeparamref name="TEntity"/>
 	/// default behaviour uses <see cref="IMapper" />
@@ -24,3 +31,10 @@ public abstract class GenericListFeature<TEntity, TEntityDto, TSearchModel, TRep
 		return result.ConvertTo(ConvertToDto);
 	}
 }
+/// <summary>
+/// Generic implementation of <see cref="IListFeature{TEntityDto, TSearchModel}"/>
+/// </summary>
+public abstract class GenericListFeature<TEntity, TEntityDto, TSearchModel, TRepository>(TRepository repository, IMapper mapper) :
+	GenericListFeature<TEntity, TEntityDto, TSearchModel, TRepository, PagedResult<TEntity>>(repository, mapper)
+	where TRepository : IListingRepository<TEntity, TSearchModel, PagedResult<TEntity>>
+	where TSearchModel: SearchModel;

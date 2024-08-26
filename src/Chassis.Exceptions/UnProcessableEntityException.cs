@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Runtime.Serialization;
-
-namespace KamiSama.Chassis.HttpExceptions;
+﻿namespace KamiSama.Chassis.HttpExceptions;
 
 /// <summary>
 /// The request was well-formed but was unable to be followed due to semantic errors.

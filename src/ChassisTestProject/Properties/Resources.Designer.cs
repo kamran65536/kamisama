@@ -59,23 +59,5 @@ namespace ChassisTestProject.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 1111.
-        /// </summary>
-        internal static string AlreadyExistsException {
-            get {
-                return ResourceManager.GetString("AlreadyExistsException", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to This service is forbidden..
-        /// </summary>
-        internal static string KKK {
-            get {
-                return ResourceManager.GetString("KKK", resourceCulture);
-            }
-        }
     }
 }

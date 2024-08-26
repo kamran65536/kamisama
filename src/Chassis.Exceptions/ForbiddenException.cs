@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-
-namespace KamiSama.Chassis.HttpExceptions;
+﻿namespace KamiSama.Chassis.HttpExceptions;
 /// <summary>
 /// The request contained valid data and was understood by the server, but the server is refusing action.
 /// </summary>

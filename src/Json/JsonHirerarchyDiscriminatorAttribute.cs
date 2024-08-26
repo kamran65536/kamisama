@@ -1,11 +1,8 @@
-﻿using System.Text.Json.Serialization;
+﻿namespace KamiSama.Extensions.Json;
 
-namespace KamiSama.Extensions.Json
+/// <summary>
+/// Json Discriminator Attribute
+/// </summary>
+public class JsonHirerarchyDiscriminatorAttribute : JsonAttribute
 {
-	/// <summary>
-	/// Json Discriminator Attribute
-	/// </summary>
-	public class JsonHirerarchyDiscriminatorAttribute : JsonAttribute
-	{
-	}
 }

@@ -54,7 +54,7 @@ namespace KamiSama.Repositories.Json
 		/// loads the json file if not loaded already
 		/// </summary>
 		/// <returns></returns>
-		public async Task<bool> TryLoadFileAsync(bool forceReload, CancellationToken cancellationToken = default)
+		public async Task<bool> TryLoadFileAsync(bool forceReload, CancellationToken cancellationToken)
 		{
 			if (forceReload)
 				entities = null;
@@ -96,7 +96,7 @@ namespace KamiSama.Repositories.Json
 		/// <param name="action"></param>
 		/// <param name="cancellationToken"></param>
 		/// <returns></returns>
-		private async Task ModifyAndSaveToFileAsync(Action action, CancellationToken cancellationToken = default)
+		private async Task ModifyAndSaveToFileAsync(Action action, CancellationToken cancellationToken)
 		{
 			if (!await TryLoadFileAsync(false, cancellationToken))
 				return;
@@ -130,16 +130,16 @@ namespace KamiSama.Repositories.Json
 			GC.SuppressFinalize(this);
 		}
 		/// <inheritdoc />
-		public Task AddAsync(TEntity item, CancellationToken cancellationToken = default)
+		public Task AddAsync(TEntity item, CancellationToken cancellationToken)
 			=> ModifyAndSaveToFileAsync(() => entities?.Add(item), cancellationToken);
 		/// <inheritdoc />
-		public Task DeleteAsync(TEntity item, CancellationToken cancellationToken = default)
+		public Task DeleteAsync(TEntity item, CancellationToken cancellationToken)
 			=> ModifyAndSaveToFileAsync(() => entities?.Remove(item), cancellationToken);
 		/// <inheritdoc />
-		public Task UpdateAsync(TEntity item, CancellationToken cancellationToken = default)
+		public Task UpdateAsync(TEntity item, CancellationToken cancellationToken)
 			=> ModifyAndSaveToFileAsync(() => { }, cancellationToken);
 		/// <inheritdoc />
-		public async Task<TEntity?> FindAsync(Expression<Func<TEntity, bool>>? predicate, CancellationToken cancellationToken = default)
+		public async Task<TEntity?> FindAsync(Expression<Func<TEntity, bool>>? predicate, CancellationToken cancellationToken)
 		{
 			if (!await TryLoadFileAsync(false, cancellationToken))
 				return default;
@@ -149,7 +149,7 @@ namespace KamiSama.Repositories.Json
 				return entities!.FirstOrDefault(predicate.Compile());
 		}
 		/// <inheritdoc />
-		public async Task<IQueryable<TEntity>> WhereAsync(Expression<Func<TEntity, bool>>? predicate, CancellationToken cancellationToken = default)
+		public async Task<IQueryable<TEntity>> WhereAsync(Expression<Func<TEntity, bool>>? predicate, CancellationToken cancellationToken)
 		{
 			if (!await TryLoadFileAsync(forceReload:false, cancellationToken))
 				return Empty;

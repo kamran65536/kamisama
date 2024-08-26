@@ -39,7 +39,7 @@ public class EF_DbRepositoryTests
 
 		var repository = new DbRepository<SampleEntity>(context) as IAsyncQueryableRepository<SampleEntity>;
 
-		await repository.AddAsync(entity);
+		await repository.AddAsync(entity, CancellationToken.None);
 
 		CollectionAssert.Contains(context.SampleEntities.ToArray(), entity);
 	}
@@ -63,7 +63,7 @@ public class EF_DbRepositoryTests
 
 		var repository = new DbRepository<SampleEntity>(context) as IAsyncQueryableRepository<SampleEntity>;
 
-		await repository.UpdateAsync(entity);
+		await repository.UpdateAsync(entity, CancellationToken.None);
 
 		Assert.AreEqual(EntityState.Unchanged, context.Entry(entity).State);
 	}

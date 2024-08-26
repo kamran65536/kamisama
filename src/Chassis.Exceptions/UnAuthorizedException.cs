@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Runtime.Serialization;
+﻿using System.Diagnostics.CodeAnalysis;
 
 namespace KamiSama.Chassis.HttpExceptions;
 

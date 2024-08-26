@@ -1,4 +1,6 @@
-﻿namespace KamiSama.Extensions.DependencyInjection;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace KamiSama.Extensions.DependencyInjection;
 
 /// <summary>
 /// AutoInject Scoped Attribute
@@ -21,3 +23,8 @@ public class AutoInjectScopedAttribute : AutoInjectAttributeBase
 	{
 	}
 }
+/// <summary>
+///  AutoInject Scoped Attribute using generic service type
+/// </summary>
+[ExcludeFromCodeCoverage]
+public class AutoInjectScopedAttribute<TServiceType>() : AutoInjectScopedAttribute(typeof(TServiceType));

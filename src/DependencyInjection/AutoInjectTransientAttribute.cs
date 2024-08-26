@@ -1,4 +1,6 @@
-﻿namespace KamiSama.Extensions.DependencyInjection;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace KamiSama.Extensions.DependencyInjection;
 
 /// <summary>
 /// AutoInject Transient Attribute
@@ -21,3 +23,8 @@ public class AutoInjectTransientAttribute : AutoInjectAttributeBase
 	{
 	}
 }
+/// <summary>
+/// AutoInject Transient Attribute with generic service type
+/// </summary>
+[ExcludeFromCodeCoverage]
+public class AutoInjectTransientAttribute<TService>() : AutoInjectTransientAttribute(typeof(TService));

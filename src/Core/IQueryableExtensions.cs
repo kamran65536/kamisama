@@ -1,5 +1,4 @@
 ﻿using KamiSama.Extensions.Paging;
-using System.Linq;
 
 namespace KamiSama.Extensions;
 

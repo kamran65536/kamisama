@@ -27,7 +27,7 @@ namespace KamiSama.Repositories.EntityFramework
 		private readonly DbSet<TEntity> dbSet = context.Set<TEntity>();
 
 		/// <inheritdoc />
-		public virtual Task AddAsync(TEntity item, CancellationToken cancellationToken = default)
+		public virtual Task AddAsync(TEntity item, CancellationToken cancellationToken)
 		{
 			dbSet.Add(item);
 			return Context.SaveChangesAsync(cancellationToken);
@@ -53,7 +53,7 @@ namespace KamiSama.Repositories.EntityFramework
 			Context.SaveChanges();
 		}
 		/// <inheritdoc />
-		public virtual Task UpdateAsync(TEntity item, CancellationToken cancellationToken = default)
+		public virtual Task UpdateAsync(TEntity item, CancellationToken cancellationToken)
 		{
 			var entry = Context.Entry(item);
 
@@ -83,15 +83,21 @@ namespace KamiSama.Repositories.EntityFramework
 		/// </summary>
 		/// <param name="predicate">the predicate to search, if null it returns all items</param>
 		/// <returns></returns>
-		public virtual IQueryable<TEntity> Where(Expression<Func<TEntity, bool>>? predicate)
-			=> dbSet.Where(predicate ?? (x => true));
+		public virtual IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> predicate)
+			=> dbSet.Where(predicate);
+		/// <summary>
+		/// Checks if any entity exists in the repository
+		/// </summary>
+		/// <returns></returns>
+		public virtual Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken)
+			=> dbSet.AnyAsync(predicate, cancellationToken);
 		/// <summary>
 		/// Finds an item in the repository
 		/// </summary>
 		/// <param name="predicate"></param>
 		/// <returns></returns>
-		public virtual TEntity? Find(Expression<Func<TEntity, bool>>? predicate)
-			=> dbSet.FirstOrDefault(predicate ?? (x => true));
+		public virtual TEntity? Find(Expression<Func<TEntity, bool>> predicate)
+			=> dbSet.FirstOrDefault(predicate);
 		/// <inheritdoc />
 		public virtual Task<TEntity?> FindAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken)
 			=> dbSet.FirstOrDefaultAsync(predicate, cancellationToken)!;

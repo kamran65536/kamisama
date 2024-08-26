@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-
-namespace KamiSama.Chassis.HttpExceptions;
+﻿namespace KamiSama.Chassis.HttpExceptions;
 /// <summary>
 /// Indicates that the resource requested was previously in use but is no longer available and will not be available again.
 /// </summary>

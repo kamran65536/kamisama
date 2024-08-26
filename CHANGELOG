@@ -1,33 +1,24 @@
-1403-01-24 4/12/2024	v2.8.4
-- logo is added for all extensions libraries
-- documentations are updated.
-1403-01-24 4/12/2024	v2.8.3
-- KamiSama.Extensions.IQueryableExtensions.MakePaged is added.
-- KamiSama.Repositories.EntityFramework.Histories.HistoricalDbRepository is added.
-- KamiSama.Repositories.EntityFrameworkCore.Histories.HistoricalDbRepository is added.
-- KamiSama.Repositories.EntityFramework.IQueryableExtensions.MakePagedAsync is added.
-- KamiSama.Repositories.EntityFrameworkCore.IQueryableExtensions.MakePagedAsync is added.
-- KamiSama.Extensions.DependencyInjections.ServiceCollectionExtensions.AddNamed methods are deprecated as .net 8 already supports the concept: AddKeyedScope
-1403-01-11 3/30/2024	v2.8.2
-- KamiSama.Repositories.EntityFrameworkCore.DbRepository.UpdateAsync is now virtual.
-- KamiSama.Repositories.EntityFramework.DbRepository.UpdateAsync is now virtual.
-
-1403-03-20 6/9/2024		v2.8.5
-- KamiSama.Testing.NSubstitute is added.
-- Localized exception text is added to KamiSama.Chassis.ProblemDetails
-- ServiceUnavailableException is added to KamiSama.Chassis.HttpExceptions.
-- all warnings will be treated as error for better code quality.
-1403-03-29 6/18/2024	v2.8.6
-- History is supported by KamiSama.Repositories.*
-- DataInitialization is supported by KamiSama.Repositories.*
-- KamiSama.Templates nuget is added, including Core, Repositories template projects.
-1403-03-30 6/19/2024	v2.8.7
-- DatabaseInitializerBase.TryAdd method is added.
-1403-04-20 7/10/2024	v2.8.8
-- OrderBy is added to KamiSama.Extensions.Paging.SearchModel.
-- KamiSama.Extensions.DependencyInjection AutoAddDependenciesFrom<T> method is added.
-- KamiSama.Chassis.HttpExceptions generic NotFoundException<TEntity> and AlreadyExistsException<TEnitty> are added.
-- dependencies are updated.
+1403-06-05 8/26/2024 v2.10.1
+- KamiSama Package references are updated in KamiSama.Templates.
+- KamiSama.Repositories.EntityFrameworkCore .Histories is removed due to improper implementation.
+- KamiSama.Repositories.EntityFramework .Histories is removed due to improper implementation.
+- KamiSama.Testing.NSubstitute TesterBuilderBase.AddScoped, AddSingleton, AddTransient are made public.
+- KamiSama.DependencyInjection.AutoInjectScoped<T>, AutoInjectSingleton<T>, AutoInjectTransient<T> are added.
+- KamiSama.Chassis.Commons IListingRepository<TEntity, TSearchModel, TPagedResult> is added for more extensibility.
+- KamiSama.Chassis.Commons  GenericListFeature<TEntity, TEntityDto, TSearchModel, TRepository, TPagedResult> is added for more extensibility.
+- documents are updated.
+- some code clean up.
+1403-05-25 8/15/2024 v2.10.0
+- Package references are updated, KamiSama.Extensions.NLog vulnurability is fixed.
+- KamiSama.Chassis.Commons.Features IExistsByNameFeature and IExistsByIdFeature are added.
+- (breaking) KamiSama.Chassis.Commons.Features IFindByIdRepository is renamed to ILookupByIdReposiotry, also ExistsByIdAsync method is added.
+- (breaking) KamiSama.Chassis.Commons.Features IFindByNameRepository is renamed to ILookupByNameReposiotry, also ExistsByNameAsync method is added.
+1403-05-23 8/13/2024 v2.9.0.2
+- KamiSama.Chassis.Commons.Features methods are maed virtual.
+- DeleteFeature.CanBeDeleted is added.
+1403-05-11 8/1/2024	v2.9.0
+- KamiSama.Chassis.Commons.IAddFeature and GenericAddFeature now returns TEntityDto
+- bugfix: KamiSama.Chassis.HttpExceptions.NotFoundException<> and AlreadyExistsException<> wrong entity name
 1403-04-22 7/12/2024	v2.8.9
 - KamiSama.Chassis.Commons and KamiSama.Chassis.Commons.Abstractions are added for common CRUD usecases.
 - KamiSama.Extensions.AutoMapper is added, introducing CreatePatchedMap and JustPatchMembers extensions.
@@ -36,14 +27,32 @@
 - KamiSama.Templates.BoundedContext projects are added.
 - KamiSama.Repositories.EntityFrameworkCore.Initialization.DatabaseInitializerBase.InitializeData and InitializeTestData are renamed to InitializeDataAsync and InitializeTestDataAsync.
 - Documentations are updated for KamiSama.Chassis and KamiSama.Templates.
-1403-05-11 8/1/2024	v2.9.0
-- KamiSama.Chassis.Commons.IAddFeature and GenericAddFeature now returns TEntityDto
-- bugfix: KamiSama.Chassis.HttpExceptions.NotFoundException<> and AlreadyExistsException<> wrong entity name
-1403-05-23 8/13/2024 v2.9.0.2
-- KamiSama.Chassis.Commons.Features methods are maed virtual.
-- DeleteFeature.CanBeDeleted is added.
-1403-05-25 8/15/2024 v2.10.0
-- Package references are updated, KamiSama.Extensions.NLog vulnurability is fixed.
-- KamiSama.Chassis.Commons.Features IExistsByNameFeature and IExistsByIdFeature are added.
-- (breaking) KamiSama.Chassis.Commons.Features IFindByIdRepository is renamed to ILookupByIdReposiotry, also ExistsByIdAsync method is added.
-- (breaking) KamiSama.Chassis.Commons.Features IFindByNameRepository is renamed to ILookupByNameReposiotry, also ExistsByNameAsync method is added.
+1403-04-20 7/10/2024	v2.8.8
+- OrderBy is added to KamiSama.Extensions.Paging.SearchModel.
+- KamiSama.Extensions.DependencyInjection AutoAddDependenciesFrom<T> method is added.
+- KamiSama.Chassis.HttpExceptions generic NotFoundException<TEntity> and AlreadyExistsException<TEnitty> are added.
+- dependencies are updated.
+1403-03-30 6/19/2024	v2.8.7
+- DatabaseInitializerBase.TryAdd method is added.
+1403-03-29 6/18/2024	v2.8.6
+- History is supported by KamiSama.Repositories.*
+- DataInitialization is supported by KamiSama.Repositories.*
+- KamiSama.Templates nuget is added, including Core, Repositories template projects.
+1403-03-20 6/9/2024		v2.8.5
+- KamiSama.Testing.NSubstitute is added.
+- Localized exception text is added to KamiSama.Chassis.ProblemDetails
+- ServiceUnavailableException is added to KamiSama.Chassis.HttpExceptions.
+- all warnings will be treated as error for better code quality.
+1403-01-11 3/30/2024	v2.8.2
+- KamiSama.Repositories.EntityFrameworkCore.DbRepository.UpdateAsync is now virtual.
+- KamiSama.Repositories.EntityFramework.DbRepository.UpdateAsync is now virtual.
+1403-01-24 4/12/2024	v2.8.3
+- KamiSama.Extensions.IQueryableExtensions.MakePaged is added.
+- KamiSama.Repositories.EntityFramework.Histories.HistoricalDbRepository is added.
+- KamiSama.Repositories.EntityFrameworkCore.Histories.HistoricalDbRepository is added.
+- KamiSama.Repositories.EntityFramework.IQueryableExtensions.MakePagedAsync is added.
+- KamiSama.Repositories.EntityFrameworkCore.IQueryableExtensions.MakePagedAsync is added.
+- KamiSama.Extensions.DependencyInjections.ServiceCollectionExtensions.AddNamed methods are deprecated as .net 8 already supports the concept: AddKeyedScope
+1403-01-24 4/12/2024	v2.8.4
+- logo is added for all extensions libraries
+- documentations are updated.

@@ -27,7 +27,7 @@ public class TesterBuilderBase
     /// <typeparam name="TService"></typeparam>
     /// <param name="param"></param>
     /// <returns></returns>
-    protected TService AddScoped<TService>(params object[] param) where TService : class
+    public TService AddScoped<TService>(params object[] param) where TService : class
     {
         var service = Substitute.For<TService>(param);
 
@@ -40,7 +40,7 @@ public class TesterBuilderBase
     /// </summary>
     /// <typeparam name="TService"></typeparam>
     /// <returns></returns>
-    protected TService AddSingleton<TService>() where TService : class
+    public TService AddSingleton<TService>() where TService : class
     {
         var service = Substitute.For<TService>();
 
@@ -53,7 +53,7 @@ public class TesterBuilderBase
     /// </summary>
     /// <typeparam name="TService"></typeparam>
     /// <returns></returns>
-    protected TService AddTransient<TService>() where TService : class
+    public TService AddTransient<TService>() where TService : class
     {
         var service = Substitute.For<TService>();
 

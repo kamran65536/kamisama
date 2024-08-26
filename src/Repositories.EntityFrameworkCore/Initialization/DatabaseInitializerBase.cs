@@ -1,15 +1,14 @@
 ﻿using KamiSama.Repositories.Initialization;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace KamiSama.Repositories.EntityFrameworkCore.Initialization;
 
 /// <summary>
 /// Data initializer for Entity Framework Core
 /// </summary>
+[ExcludeFromCodeCoverage]
 public abstract class DatabaseInitializerBase<TDbContext>(TDbContext context) : IDatabaseInitializer<TDbContext>
     where TDbContext : DbContext
 {
