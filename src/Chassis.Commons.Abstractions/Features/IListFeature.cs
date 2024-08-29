@@ -3,10 +3,9 @@
 /// <summary>
 /// Lists the items feature
 /// </summary>
-/// <typeparam name="TEntityDto"></typeparam>
-/// <typeparam name="TSearchModel"></typeparam>
-public interface IListFeature<TEntityDto, TSearchModel>
+public interface IListFeature<TEntityDto, TSearchModel, TPageResult>
 	where TSearchModel : SearchModel
+	where TPageResult : PagedResult<TEntityDto>
 {
 	/// <summary>
 	/// Lists items and page thm
@@ -14,5 +13,12 @@ public interface IListFeature<TEntityDto, TSearchModel>
 	/// <param name="searchModel"></param>
 	/// <param name="cancellationToken"></param>
 	/// <returns></returns>
-	Task<PagedResult<TEntityDto>> ListAsync(TSearchModel searchModel, CancellationToken cancellationToken);
+	Task<TPageResult> ListAsync(TSearchModel searchModel, CancellationToken cancellationToken);
+}
+/// <summary>
+/// Lists the items feature
+/// </summary>
+public interface IListFeature<TEntityDto, TSearchModel> : IListFeature<TEntityDto, TSearchModel, PagedResult<TEntityDto>>
+	where TSearchModel : SearchModel
+{
 }
