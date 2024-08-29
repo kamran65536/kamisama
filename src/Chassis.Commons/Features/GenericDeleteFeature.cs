@@ -13,6 +13,10 @@ public abstract class GenericDeleteFeature<TEntity, TRepository, TKey>(TReposito
 	where TRepository : ILookupByIdRepository<TEntity, TKey>, IDeletableRepository<TEntity>
 {
 	/// <summary>
+	/// Repository field to be used
+	/// </summary>
+	protected TRepository Repository { get => repository; }
+	/// <summary>
 	/// Checks if the entity can be deleted or not. the default behaviour always returns true
 	/// </summary>
 	/// <returns></returns>

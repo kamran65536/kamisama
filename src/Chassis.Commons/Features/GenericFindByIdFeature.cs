@@ -14,13 +14,17 @@ public abstract class GenericFindByIdFeature<TEntity, TEntityDto, TRepository, T
 	where TRepository : ILookupByIdRepository<TEntity, TKey>
 {
 	/// <summary>
+	/// Repository field to be used
+	/// </summary>
+	protected TRepository Repository { get => repository; }
+
+	/// <summary>
 	/// converts an item, the default behaviour uses <see cref="IMapper"/>
 	/// </summary>
 	/// <param name="entity"></param>
 	/// <returns></returns>
 	protected virtual TEntityDto ConvertToDto(TEntity entity)
 		=> mapper.Map<TEntityDto>(entity);
-
 	/// <summary>
 	/// Finds an 
 	/// </summary>

@@ -10,7 +10,7 @@ public abstract class GenericAddFeature<TAddRequest, TRepository, TEntity, TEnti
 	/// <summary>
 	/// repository of <typeparamref name="TEntity"/>
 	/// </summary>
-	protected TRepository Repository { get; } = repository;
+	protected TRepository Repository { get => repository; }
 	/// <summary>
 	/// Checks for duplicate item in the database
 	/// </summary>
@@ -36,7 +36,7 @@ public abstract class GenericAddFeature<TAddRequest, TRepository, TEntity, TEnti
 
 		var entity = await ConvertToEntity(request, cancellationToken);
 
-		await Repository.AddAsync(entity, cancellationToken);
+		await repository.AddAsync(entity, cancellationToken);
 
 		var dto = await ConvertToDto(entity, cancellationToken);
 

@@ -12,7 +12,7 @@ public abstract class GenericListFeature<TEntity, TEntityDto, TSearchModel, TRep
 	where TPagedResult : PagedResult<TEntity>
 {
 	/// <summary>
-	/// repository to be used directly
+	/// Repository field to be used
 	/// </summary>
 	protected TRepository Repository { get => repository; }
 	/// <summary>

@@ -12,7 +12,7 @@ public abstract class GenericUpdateFeature<TUpdateRequest, TEntity, TRepository,
 	/// <summary>
 	/// repository for fearther use
 	/// </summary>
-	protected TRepository Repository { get; } = repository;
+	protected TRepository Repository { get => repository; }
 	/// <summary>
 	/// Checks for duplicate item in the database
 	/// </summary>
@@ -25,7 +25,7 @@ public abstract class GenericUpdateFeature<TUpdateRequest, TEntity, TRepository,
 	/// <inheritdoc />
 	public async virtual Task UpdateAsync(TKey id, TUpdateRequest request, CancellationToken cancellationToken)
 	{
-		var entity = await Repository.FindByIdAsync(id, cancellationToken) ?? throw new NotFoundException(nameof(TEntity), id);
+		var entity = await repository.FindByIdAsync(id, cancellationToken) ?? throw new NotFoundException(nameof(TEntity), id);
 
 		await CheckDuplicateAsync(id, request, cancellationToken);
 

@@ -9,6 +9,10 @@ public abstract class GenericExistsByIdFeature<TEntity, TRepository, TKey>(TRepo
 	where TRepository : ILookupByIdRepository<TEntity, TKey>
 {
 	/// <summary>
+	/// Repository field to be used
+	/// </summary>
+	protected TRepository Repository { get => repository; }
+	/// <summary>
 	/// returns true if entity by such id exists
 	/// </summary>
 	/// <param name="id"></param>
