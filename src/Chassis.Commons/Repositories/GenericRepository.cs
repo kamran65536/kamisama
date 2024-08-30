@@ -3,8 +3,9 @@
 /// <summary>
 /// Generic implementation of <see cref="IGenericRepository{TEntity, TSeaerchModel}"/>
 /// </summary>
-public abstract class GenericRepository<TEntity, TSearchModel, TDbContext>(TDbContext context)
-	: DbRepository<TEntity, TDbContext>(context), IAddableRepository<TEntity>, IUpdatableRepository<TEntity>, IDeletableRepository<TEntity>, IListingRepository<TEntity, TSearchModel>
+public abstract class GenericRepository<TEntity, TSearchModel, TDbContext>(TDbContext context) : 
+	DbRepository<TEntity, TDbContext>(context), 
+	IGenericRepository<TEntity, TSearchModel>
 	where TEntity : class
 	where TSearchModel : SearchModel
 	where TDbContext : DbContext
@@ -20,7 +21,7 @@ public abstract class GenericRepository<TEntity, TSearchModel, TDbContext>(TDbCo
 	/// <inheritdoc />
 	public Task<PagedResult<TEntity>> ListAsync(TSearchModel searchModel, CancellationToken cancellationToken)
 	{
-		var query = base.Where(x => true);
+		var query = base.AsQueryable();
 
 		query = ApplySearchModel(query, searchModel);
 

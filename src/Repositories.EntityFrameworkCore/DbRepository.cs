@@ -70,6 +70,12 @@ namespace KamiSama.Repositories.EntityFrameworkCore
 			dbSet.Remove(item);
 			return Context.SaveChangesAsync(cancellationToken);
 		}
+		/// <summary>
+		/// Returns the db set as queryable
+		/// </summary>
+		/// <returns></returns>
+		public virtual IQueryable<TEntity> AsQueryable()
+			=> dbSet;
 		/// <inheritdoc />
 		public virtual IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> predicate)
 			=> dbSet.Where(predicate);

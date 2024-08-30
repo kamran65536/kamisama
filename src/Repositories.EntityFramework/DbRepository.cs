@@ -79,6 +79,12 @@ namespace KamiSama.Repositories.EntityFramework
 			return Context.SaveChangesAsync(cancellationToken);
 		}
 		/// <summary>
+		/// Returns the db set as queryable
+		/// </summary>
+		/// <returns></returns>
+		public virtual IQueryable<TEntity> AsQueryable()
+			=> dbSet;
+		/// <summary>
 		/// Queries items in repository for the predicate specified
 		/// </summary>
 		/// <param name="predicate">the predicate to search, if null it returns all items</param>

@@ -1,6 +1,7 @@
-1403-06-08 8/29/2024 v2.10.2
+1403-06-08 8/29/2024 v2.10.2.1
 - KamiSama.Chassis.Commons.Abstractions IListFeature<TEntity, TEntity, TSearchModel, TPagedResult> is added for more extensibility.
 - KamiSama.Chassis.Commons Reposiotry property is added to all GenericFeatures for more compatiblity.
+- KamiSama.Chassis.Commons GenericListFeature now supports TPagedResult and TRepositoryResult
 1403-06-05 8/26/2024 v2.10.1
 - KamiSama Package references are updated in KamiSama.Templates.
 - KamiSama.Repositories.EntityFrameworkCore .Histories is removed due to improper implementation.

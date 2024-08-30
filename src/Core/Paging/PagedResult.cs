@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 namespace KamiSama.Extensions.Paging;
@@ -22,6 +23,6 @@ public record PagedResult<T>(int TotalItemsCount, List<T> Items)
 	/// <typeparam name="TOtherType"></typeparam>
 	/// <param name="convertFunc"></param>
 	/// <returns></returns>
-	public PagedResult<TOtherType> ConvertTo<TOtherType>(Func<T, TOtherType> convertFunc)
+	public virtual PagedResult<TOtherType> ConvertTo<TOtherType>(Func<T, TOtherType> convertFunc)
 		=> new(TotalItemsCount, Items.Select(convertFunc).ToList());
 }

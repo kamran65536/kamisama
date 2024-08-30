@@ -1,15 +1,41 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace KamiSama.Chassis.Commons.Features;
+﻿namespace KamiSama.Chassis.Commons.Features;
 
 /// <summary>
 /// Generic implementation of <see cref="IListFeature{TEntityDto, TSearchModel}"/>
 /// </summary>
-public abstract class GenericListFeature<TEntity, TEntityDto, TSearchModel, TRepository, TPagedResult>(TRepository repository, IMapper mapper) :
-	IListFeature<TEntityDto, TSearchModel>
-	where TRepository : IListingRepository<TEntity, TSearchModel, TPagedResult>
+public abstract class GenericListFeature<TEntity, TEntityDto, TSearchModel, TRepository, TPagedResult, TRepositoryPagedResult>(TRepository repository, IMapper mapper) :
+	IListFeature<TEntityDto, TSearchModel, TPagedResult>
+	where TRepository : IListingRepository<TEntity, TSearchModel, TRepositoryPagedResult>
 	where TSearchModel : SearchModel
-	where TPagedResult : PagedResult<TEntity>
+	where TPagedResult : PagedResult<TEntityDto>
+	where TRepositoryPagedResult : PagedResult<TEntity>
+{
+	/// <summary>
+	/// Repository field to be used
+	/// </summary>
+	protected TRepository Repository { get => repository; }
+	/// <summary>
+	/// Converts the repository result into list result
+	/// </summary>
+	/// <param name="repositoryResult"></param>
+	/// <returns></returns>
+	protected virtual TPagedResult ConvertResult(TRepositoryPagedResult repositoryResult)
+		=> mapper.Map<TPagedResult>(repositoryResult);
+	///<inheritdoc />
+	public virtual async Task<TPagedResult> ListAsync(TSearchModel searchModel, CancellationToken cancellationToken)
+	{
+		var result = await repository.ListAsync(searchModel, cancellationToken);
+
+		return ConvertResult(result);
+	}
+}
+/// <summary>
+/// Generic implementation of <see cref="IListFeature{TEntityDto, TSearchModel}"/>
+/// </summary>
+public abstract class GenericListFeature<TEntity, TEntityDto, TSearchModel, TRepository>(TRepository repository, IMapper mapper) :
+	IListFeature<TEntityDto, TSearchModel>
+	where TRepository : IListingRepository<TEntity, TSearchModel>
+	where TSearchModel : SearchModel
 {
 	/// <summary>
 	/// Repository field to be used
@@ -31,10 +57,3 @@ public abstract class GenericListFeature<TEntity, TEntityDto, TSearchModel, TRep
 		return result.ConvertTo(ConvertToDto);
 	}
 }
-/// <summary>
-/// Generic implementation of <see cref="IListFeature{TEntityDto, TSearchModel}"/>
-/// </summary>
-public abstract class GenericListFeature<TEntity, TEntityDto, TSearchModel, TRepository>(TRepository repository, IMapper mapper) :
-	GenericListFeature<TEntity, TEntityDto, TSearchModel, TRepository, PagedResult<TEntity>>(repository, mapper)
-	where TRepository : IListingRepository<TEntity, TSearchModel, PagedResult<TEntity>>
-	where TSearchModel: SearchModel;
