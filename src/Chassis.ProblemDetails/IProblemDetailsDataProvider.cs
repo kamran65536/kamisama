@@ -1,5 +1,6 @@
 ﻿namespace KamiSama.Chassis.ProblemDetails;
 
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Localization;
 using ProblemDetails = Microsoft.AspNetCore.Mvc.ProblemDetails;
 
