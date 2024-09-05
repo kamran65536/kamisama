@@ -1,4 +1,3 @@
-﻿global using Microsoft.AspNetCore.Http;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 
 [assembly: ExcludeFromCodeCoverage]

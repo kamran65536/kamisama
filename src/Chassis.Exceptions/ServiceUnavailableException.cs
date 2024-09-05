@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Http;
-
 namespace KamiSama.Chassis.HttpExceptions;
 
 /// <summary>
@@ -7,8 +5,10 @@ namespace KamiSama.Chassis.HttpExceptions;
 /// </summary>
 public class ServiceUnavailableException : HttpExceptionBase
 {
-    /// <inheritdoc />
-    public ServiceUnavailableException()
+	/// <inheritdoc />
+	public override int StatusCode => 503;
+	/// <inheritdoc />
+	public ServiceUnavailableException()
     {
     }
 
@@ -23,6 +23,4 @@ public class ServiceUnavailableException : HttpExceptionBase
     public ServiceUnavailableException(string messageKey, object?[] args, Exception? innerException) : base(messageKey, args, innerException)
     {
     }
-    /// <inheritdoc />
-    public override int StatusCode => StatusCodes.Status503ServiceUnavailable;
 }

@@ -5,7 +5,7 @@
 public class ForbiddenException : HttpExceptionBase
 {
 	/// <inheritdoc />
-	public override int StatusCode => StatusCodes.Status403Forbidden;
+	public override int StatusCode => 403;
 	/// <inheritdoc />
 	public ForbiddenException()
 	{

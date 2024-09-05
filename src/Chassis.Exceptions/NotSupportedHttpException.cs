@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-namespace KamiSama.Chassis.HttpExceptions;
+﻿namespace KamiSama.Chassis.HttpExceptions;
 
 /// <summary>
 /// he server either does not support the request method, or it lacks the ability to fulfil the request. 
@@ -8,7 +6,7 @@ namespace KamiSama.Chassis.HttpExceptions;
 public class NotSupportedHttpException : HttpExceptionBase
 {
 	/// <inheritdoc />
-	public override int StatusCode => StatusCodes.Status500InternalServerError;
+	public override int StatusCode => 500;
 	/// <inheritdoc />
 	public NotSupportedHttpException()
 	{

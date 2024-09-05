@@ -4,8 +4,10 @@
 /// </summary>
 public class GoneException : HttpExceptionBase
 {
-    /// <inheritdoc />
-    public GoneException()
+	/// <inheritdoc />
+	public override int StatusCode => 401;
+	/// <inheritdoc />
+	public GoneException()
     {
     }
     /// <inheritdoc />
@@ -16,6 +18,4 @@ public class GoneException : HttpExceptionBase
     public GoneException(string messageKey, object?[] args, Exception? innerException) : base(messageKey, args, innerException)
     {
     }
-    /// <inheritdoc />
-    public override int StatusCode => StatusCodes.Status410Gone;
 }

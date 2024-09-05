@@ -9,7 +9,7 @@ namespace KamiSama.Chassis.HttpExceptions;
 public class UnAuthorizedException : HttpExceptionBase
 {
 	/// <inheritdoc />
-	public override int StatusCode => StatusCodes.Status401Unauthorized;
+	public override int StatusCode => 401;
 	/// <inheritdoc />
 	public UnAuthorizedException()
 	{
