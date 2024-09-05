@@ -5,7 +5,7 @@
 public class BadRequestException : HttpExceptionBase
 {
 	/// <inheritdoc />
-	public override int StatusCode => StatusCodes.Status400BadRequest;
+	public override int StatusCode => 400;
 
 	/// <inheritdoc />
 	public BadRequestException()

@@ -6,7 +6,7 @@
 public class ConflictException : HttpExceptionBase
 {
 	/// <inheritdoc />
-	public override int StatusCode => StatusCodes.Status409Conflict;
+	public override int StatusCode => 409;
 	/// <inheritdoc/>
 	public ConflictException()
 	{

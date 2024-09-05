@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Runtime.Serialization;
-
-namespace KamiSama.Chassis.HttpExceptions;
+﻿namespace KamiSama.Chassis.HttpExceptions;
 
 /// <summary>
 /// Equivalant to <see cref="InvalidOperationException" /> but in the http mode
@@ -10,7 +6,7 @@ namespace KamiSama.Chassis.HttpExceptions;
 public class InvalidOperationHttpException : HttpExceptionBase
 {
 	/// <inheritdoc />
-	public override int StatusCode => StatusCodes.Status500InternalServerError;
+	public override int StatusCode => 500;
 	/// <inheritdoc />
 	public InvalidOperationHttpException()
 	{

@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Runtime.Serialization;
+﻿using System.Diagnostics.CodeAnalysis;
 
 namespace KamiSama.Chassis.HttpExceptions;
 /// <summary>
@@ -11,7 +8,7 @@ namespace KamiSama.Chassis.HttpExceptions;
 public class NotImplementedHttpException : HttpExceptionBase
 {
     /// <inheritdoc />
-    public override int StatusCode => StatusCodes.Status501NotImplemented;
+    public override int StatusCode => 501;
     /// <inheritdoc />
     public NotImplementedHttpException()
     {

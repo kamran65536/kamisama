@@ -6,7 +6,7 @@
 public class UnProcessableEntityException : HttpExceptionBase
 {
     /// <inheritdoc />
-    public override int StatusCode => StatusCodes.Status422UnprocessableEntity;
+    public override int StatusCode => 422;
     /// <inheritdoc />
     public UnProcessableEntityException()
     {

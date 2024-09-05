@@ -5,7 +5,4 @@
 		<Title>Http Exceptions for ProblemDetails</Title>
 		<Description>This library provides predefined HTTP exception classes in order to be used in KamiSama.Chassis.ProblemDetails</Description>
 	</PropertyGroup>
-	<ItemGroup>
-		<FrameworkReference Include="Microsoft.AspnetCore.App" />
-	</ItemGroup>
 </Project>

@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-
-namespace KamiSama.Chassis.HttpExceptions;
+﻿namespace KamiSama.Chassis.HttpExceptions;
 
 /// <summary>
 /// The original intention was that this code might be used as part of some form of digital cash or micropayment scheme.
@@ -8,7 +6,7 @@ namespace KamiSama.Chassis.HttpExceptions;
 public class PaymentRequiredException : HttpExceptionBase
 {
 	/// <inheritdoc />
-	public override int StatusCode => StatusCodes.Status402PaymentRequired;
+	public override int StatusCode => 402;
 	/// <inheritdoc />
 	public PaymentRequiredException()
 	{
