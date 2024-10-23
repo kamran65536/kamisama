@@ -37,9 +37,7 @@ namespace KamiSama.Extensions
 		/// </summary>
 		/// <param name="type"></param>
 		/// <returns></returns>
-#pragma warning disable CA1822 // Mark members as static
-		protected Type? GetCollectionItemType(Type type)
-#pragma warning restore CA1822 // Mark members as static
+		protected static Type? GetCollectionItemType(Type type)
 		{
 			if (type.IsArray)
 				return type.GetElementType();

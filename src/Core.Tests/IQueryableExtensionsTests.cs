@@ -3,12 +3,9 @@
 [TestClass]
 public class IQueryableExtensionsTests
 {
-	private static IQueryable<int> GetCollection()
-	{
-#pragma warning disable CA1861 // Avoid constant arrays as arguments
-		return (new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 }).AsQueryable();
-#pragma warning restore CA1861 // Avoid constant arrays as arguments
-	}
+	private static readonly int[] sourceArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+
+	private static IQueryable<int> GetCollection() => sourceArray.AsQueryable();
 	[TestMethod]
 	public void MakePaged_returns_all_items_for_SearchModel_All()
 	{

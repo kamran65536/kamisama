@@ -233,7 +233,7 @@ public class InMemoryRepositoryTests
 		};
 		var repository = new InMemoryRepository<SampleEntity>(initialItems);
 
-		var result = repository.Where(null).ToArray();
+		var result = repository.Where(x => true).ToArray();
 
 		CollectionAssert.Contains(result, initialItems[0]);
 		CollectionAssert.Contains(result, initialItems[1]);

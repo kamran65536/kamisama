@@ -33,7 +33,7 @@ public class XmlAttributeOverridesExtensionsTests
 
 		var overrides = new XmlAttributeOverrides();
 
-		overrides.AddAutoXmlAttributes(parentRoot, new Assembly[] { exampleRoot.Assembly } );			
+		overrides.AddAutoXmlAttributes(parentRoot, [exampleRoot.Assembly] );			
 		
 		var someProperty_elements = overrides[wrapper1, nameof(Wrapper1.SomeProperty)]!.XmlElements;
 		
@@ -73,7 +73,7 @@ public class XmlAttributeOverridesExtensionsTests
 
 		var overrides = new XmlAttributeOverrides();
 
-		overrides.AddAutoXmlAttributes(parentRoot, new Assembly[] { exampleRoot.Assembly });
+		overrides.AddAutoXmlAttributes(parentRoot, [exampleRoot.Assembly]);
 		
 		var serializer = new XmlSerializer(parentRoot, overrides);
 

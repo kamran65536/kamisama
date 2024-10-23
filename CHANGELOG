@@ -1,3 +1,6 @@
+1403-08-02 10/23/2024 v2.10.4
+- package references are updated.
+- (breaking) KamiSama.Repositories.Initialization.DataInitializationOptions configuration names are changed to "migrate", "initialize" and "test-data"
 1403-06-15 9/5/2024 v2.10.3
 - KamiSama.Chassis.HttpExceptions has no dependency now.
 1403-06-08 8/29/2024 v2.10.2.4

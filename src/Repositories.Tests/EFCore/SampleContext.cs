@@ -13,5 +13,5 @@ public class SampleContext : DbContext
 	{
 	}
 
-	public virtual DbSet<SampleEntity> SampleEntities { get; set; }
+	public virtual DbSet<SampleEntity> SampleEntities { get; set; } = default!;
 }
