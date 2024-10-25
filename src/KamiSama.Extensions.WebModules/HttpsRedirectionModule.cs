@@ -21,6 +21,5 @@ public static class HttpsRedirectionExtension
 	/// <param name="builder"></param>
 	/// <returns></returns>
 	public static ExtendedWebApplicationBuilder AddHttpsRedirection(this ExtendedWebApplicationBuilder builder)
-		=> builder.AddModule<HttpsRedirectionModule>();
-}
+		=> builder.AddModule(new HttpsRedirectionModule());
 

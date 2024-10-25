@@ -21,5 +21,5 @@ public static class AuthorizationExtension
 	/// <param name="builder"></param>
 	/// <returns></returns>
 	public static ExtendedWebApplicationBuilder AddAuthorization(this ExtendedWebApplicationBuilder builder)
-		=> builder.AddAuthorization();
+		=> builder.AddModule(new AuthorizationModule());
 }

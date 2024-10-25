@@ -1,7 +1,7 @@
 # 11. Web Modules
 Web Modules are the a way to simplify the process of building web applications and web apis.
 To do so, a class __ExtendedWebApplicationBuilder__ is added which supports modular addition of features.
-
+# 11.1 Usage
 The old web api program would be:
 ```csharp
 public class Program
@@ -75,6 +75,25 @@ internal class Program
 		app.MapControllers();
 
 		app.Run();
+	}
+}
+```
+## 11.2 Extension
+You can easily add new modules as following:
+```csharp
+public class NewModule : WebModule
+{
+	public override void ConfigureServices(IServiceCollection services)
+	{
+		// adds new dependecies to builder.Services
+	}
+	public override void ApplyConfigurationTo(WebApplication app)
+	{
+		// applies configuration for middleware and etc.
+		app.UseHttpsRedirection();
+
+		// you can also use the basic IHostApplicationBuilder functionality directly.
+		var configuration = base.Builder.Configuration;
 	}
 }
 ```
