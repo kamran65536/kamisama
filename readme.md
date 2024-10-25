@@ -22,3 +22,5 @@ Here is the list of libraries:
     helper class to write more cleaner and comprehensible tests using dependency injection.
 10. [KamiSama.Templates](../docs/10-templates.md)
     Template project for most common scenarios like Core (Domain) project, BoundedContext projects, Repository projects...
+11. [KamiSama.Extensions.WebModules](../docs/11-web-modules.md)
+    Web Modules are the a way to simplify the process of building web applications and web apis.
