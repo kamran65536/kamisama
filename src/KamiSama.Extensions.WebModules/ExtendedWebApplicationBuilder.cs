@@ -27,8 +27,6 @@ public class ExtendedWebApplicationBuilder(WebApplicationBuilder internalBuilder
 	/// <inheritdoc />
 	public IServiceCollection Services => internalBuilder.Services;
 
-	private readonly List<WebModule> _beforeModules = [];
-
 	private readonly List<WebModule> _modules = [];
 	/// <summary>
 	/// Adds a new web module to be applied
