@@ -13,18 +13,29 @@ public class SwaggerModule(bool addEndPointInProduction, Action<SwaggerGenOption
 	public override void ConfigureServices(IServiceCollection services)
 		=> services
 			.AddEndpointsApiExplorer()
-			.AddSwaggerGen(genConfigure);
+			.AddSwaggerGen(ConfigureSwaggerGen);
 	/// <inheritdoc />
 	public override void ApplyConfigurationTo(WebApplication app)
 	{
 		if (addEndPointInProduction || app.Environment.IsDevelopment())
 		{
 			app.UseSwagger();
-			if (uiConfigure != null)
-				app.UseSwaggerUI(uiConfigure);
-			else
-				app.UseSwaggerUI();
+			app.UseSwaggerUI(ConfigureUiOptions);
 		}
+	}
+	/// <summary>
+	/// Configures swagger gen for inheritance
+	/// </summary>
+	protected virtual void ConfigureSwaggerGen(SwaggerGenOptions options)
+	{
+		genConfigure?.Invoke(options);
+	}
+	/// <summary>
+	/// Configures swagger ui options for inheritance
+	/// </summary>
+	protected virtual void ConfigureUiOptions(SwaggerUIOptions uiOptions)
+	{
+		uiConfigure?.Invoke(uiOptions);
 	}
 }
 /// <inheritdoc />

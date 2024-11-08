@@ -10,12 +10,18 @@ public class RoutingModule(Action<RouteOptions>? configure) : WebModule
 	/// <inheritdoc />
 	public override void ConfigureServices(IServiceCollection services)
 	{
-		if (configure != null)
-			services.Configure<RouteOptions>(configure);
+		services.Configure<RouteOptions>(ConfigureRouting);
 	}
 	/// <inheritdoc />
 	public override void ApplyConfigurationTo(WebApplication app)
-		=> app.UseRouting();	
+		=> app.UseRouting();
+	/// <summary>
+	/// Configures route options for inheritance
+	/// </summary>
+	protected virtual void ConfigureRouting(RouteOptions routeOptions)
+	{
+		configure?.Invoke(routeOptions);
+	}
 }
 /// <inheritdoc />
 public static class RoutingExtension

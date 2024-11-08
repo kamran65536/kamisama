@@ -11,13 +11,20 @@ public class RequestLocalizationModule(Action<RequestLocalizationOptions> config
 	/// <inheritdoc />
 	public override void ConfigureServices(IServiceCollection services)
 	{
-		services.AddRequestLocalization(configure);
+		services.AddRequestLocalization(ConfigureRequestLocalization);
 		services.AddLocalization();
 	}
 	/// <inheritdoc />
 	public override void ApplyConfigurationTo(WebApplication app)
 	{
 		app.UseRequestLocalization();
+	}
+	/// <summary>
+	/// Configures request localization for inheritance
+	/// </summary>
+	protected virtual void ConfigureRequestLocalization(RequestLocalizationOptions options)
+	{
+		configure(options);
 	}
 }
 /// <inheritdoc />

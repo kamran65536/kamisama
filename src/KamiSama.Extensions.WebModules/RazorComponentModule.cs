@@ -15,6 +15,13 @@ public class RazorComponentModule<TRootComponent>(Action<RazorComponentsEndpoint
 	{
 		var builder = app.MapRazorComponents<TRootComponent>();
 
+		ConfigureRazorComponents(builder);
+	}
+	/// <summary>
+	/// Configures the razor builder for inheritance
+	/// </summary>
+	protected virtual void ConfigureRazorComponents(RazorComponentsEndpointConventionBuilder builder)
+	{
 		configure?.Invoke(builder);
 	}
 }

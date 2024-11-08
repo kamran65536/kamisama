@@ -1,8 +1,9 @@
-1403-08-18 11/8/2024 v2.11.4
+1403-08-18 11/8/2024 v2.11.5
 - KamiSama.Extensions.WebModules.RequestLocalizationExtension is added.
 - KamiSama.Extensions.WebModules.RouteModule::RouteOption action is added.
 - KamiSama.Extensions.WebModules.SwaggerModule::SwaggerUIOptions is added.
 - KamiSama.Extensions.WebModules.CorsModule is added.
+- KamiSama.Extensions.WebModules all modules all enhanced to support inheritence.
 1403-08-04 10/25/2024 v2.11.0
 - KamiSama.Extensions.WebModules is added.
 1403-08-02 10/23/2024 v2.10.4

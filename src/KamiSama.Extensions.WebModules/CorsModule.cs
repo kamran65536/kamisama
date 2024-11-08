@@ -15,10 +15,15 @@ public class CorsModule(Action<CorsPolicyBuilder>? configurePolicy) : WebModule
 	/// <inheritdoc />
 	public override void ApplyConfigurationTo(WebApplication app)
 	{
-		if (configurePolicy != null)
-			app.UseCors(configurePolicy);
-		else
-			app.UseCors();
+		app.UseCors(ConfigureCorsPolicy);
+	}
+	/// <summary>
+	/// Configures the cors builder for inheritance
+	/// </summary>
+	/// <param name="builder"></param>
+	protected virtual void ConfigureCorsPolicy(CorsPolicyBuilder builder)
+	{
+		configurePolicy?.Invoke(builder);
 	}
 }
 /// <inheritdoc />

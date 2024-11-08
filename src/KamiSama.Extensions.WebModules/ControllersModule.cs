@@ -10,11 +10,18 @@ public class ControllersModule(Action<IMvcBuilder>? configure) : WebModule
 	{
 		var mvcBuilder = services.AddControllers();
 
-		configure?.Invoke(mvcBuilder);
+		ConfigureMvcBuilder(mvcBuilder);
 	}
 	/// <inheritdoc />
 	public override void ApplyConfigurationTo(WebApplication app)
 		=> app.MapControllers();
+	/// <summary>
+	/// Configures the mvc builder for inheritance
+	/// </summary>
+	protected virtual void ConfigureMvcBuilder(IMvcBuilder builder)
+	{
+		configure?.Invoke(builder);
+	}
 }
 /// <inheritdoc />
 public static class ControllersModuleExtension

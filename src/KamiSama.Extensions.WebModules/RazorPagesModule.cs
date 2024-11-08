@@ -10,14 +10,18 @@ public class RazorPagesModule(Action<RazorPagesOptions>? configure) : WebModule
 	/// <inheritdoc />
 	public override void ConfigureServices(IServiceCollection services)
 	{
-		if (configure == null)
-			services.AddRazorPages();
-		else
-			services.AddRazorPages(configure);
+		services.AddRazorPages(ConfigureRazorPages);
 	}
 	/// <inheritdoc />
 	public override void ApplyConfigurationTo(WebApplication app)
 		=> app.MapRazorPages();
+	/// <summary>
+	/// Configures the razor pages for inheritance
+	/// </summary>
+	protected virtual void ConfigureRazorPages(RazorPagesOptions options)
+	{
+		configure?.Invoke(options);
+	}
 }
 /// <inheritdoc />
 public static class RazorPagesModuleExtension
