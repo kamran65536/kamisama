@@ -31,6 +31,6 @@ public static class RazorComponentExtension
 	/// <summary>
 	/// Adds Razor component
 	/// </summary>
-	public static ExtendedWebApplicationBuilder AddRazorComponents<TRootComponent>(this ExtendedWebApplicationBuilder builder, Action<RazorComponentsEndpointConventionBuilder>? configure)
+	public static ExtendedWebApplicationBuilder AddRazorComponents<TRootComponent>(this ExtendedWebApplicationBuilder builder, Action<RazorComponentsEndpointConventionBuilder>? configure = null)
 		=> builder.AddModule(new RazorComponentModule<TRootComponent>(configure));
 }

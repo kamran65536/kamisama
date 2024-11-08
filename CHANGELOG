@@ -1,4 +1,4 @@
-1403-08-18 11/8/2024 v2.11.5
+1403-08-18 11/8/2024 v2.11.6
 - KamiSama.Extensions.WebModules.RequestLocalizationExtension is added.
 - KamiSama.Extensions.WebModules.RouteModule::RouteOption action is added.
 - KamiSama.Extensions.WebModules.SwaggerModule::SwaggerUIOptions is added.
