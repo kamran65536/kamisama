@@ -1,4 +1,5 @@
-﻿namespace KamiSama.Extensions.WebModules;
+﻿
+namespace KamiSama.Extensions.WebModules;
 
 /// <summary>
 /// Adds HSTS (HTTP Strict Transport Security)
@@ -10,7 +11,7 @@ public class HstsModule : WebModule
 	{
 	}
 	/// <inheritdoc />
-	public override Task ApplyConfigurationToAsync(WebApplication app)
+	public override Task ApplyConfigurationToAsync(WebApplication app, CancellationToken cancellationToken)
 	{
 		app.UseHsts();
 

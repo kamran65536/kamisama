@@ -13,7 +13,7 @@ public class RoutingModule(Action<RouteOptions>? configure) : WebModule
 		services.Configure<RouteOptions>(ConfigureRouting);
 	}
 	/// <inheritdoc />
-	public override Task ApplyConfigurationToAsync(WebApplication app)
+	public override Task ApplyConfigurationToAsync(WebApplication app, CancellationToken cancellationToken)
 	{
 		app.UseRouting();
 

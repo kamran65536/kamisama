@@ -1,4 +1,5 @@
-﻿namespace KamiSama.Extensions.WebModules;
+﻿
+namespace KamiSama.Extensions.WebModules;
 
 /// <summary>
 /// Adds Static files
@@ -10,7 +11,7 @@ public class StaticFilesModule : WebModule
 	{
 	}
 	/// <inheritdoc />
-	public override Task ApplyConfigurationToAsync(WebApplication app)
+	public override Task ApplyConfigurationToAsync(WebApplication app, CancellationToken cancellationToken)
 	{
 		app.UseStaticFiles();
 

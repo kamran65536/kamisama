@@ -18,6 +18,5 @@ public abstract class WebModule
 	/// <summary>
 	/// Configures the application it self.
 	/// </summary>
-	/// <param name="app"></param>
-	public abstract Task ApplyConfigurationToAsync(WebApplication app);
+	public abstract Task ApplyConfigurationToAsync(WebApplication app, CancellationToken cancellationToken);
 }

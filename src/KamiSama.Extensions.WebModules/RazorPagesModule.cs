@@ -13,7 +13,7 @@ public class RazorPagesModule(Action<RazorPagesOptions>? configure) : WebModule
 		services.AddRazorPages(ConfigureRazorPages);
 	}
 	/// <inheritdoc />
-	public override Task ApplyConfigurationToAsync(WebApplication app)
+	public override Task ApplyConfigurationToAsync(WebApplication app, CancellationToken cancellationToken)
 	{
 		app.MapRazorPages();
 

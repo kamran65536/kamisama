@@ -15,7 +15,7 @@ public class SwaggerModule(bool addEndPointInProduction, Action<SwaggerGenOption
 			.AddEndpointsApiExplorer()
 			.AddSwaggerGen(ConfigureSwaggerGen);
 	/// <inheritdoc />
-	public override Task ApplyConfigurationToAsync(WebApplication app)
+	public override Task ApplyConfigurationToAsync(WebApplication app, CancellationToken cancellationToken)
 	{
 		if (addEndPointInProduction || app.Environment.IsDevelopment())
 		{

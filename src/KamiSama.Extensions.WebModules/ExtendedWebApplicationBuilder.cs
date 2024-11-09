@@ -66,7 +66,7 @@ public class ExtendedWebApplicationBuilder(WebApplicationBuilder internalBuilder
 	/// <summary>
 	/// Builds the application
 	/// </summary>
-	public async Task<WebApplication> BuildAsync()
+	public async Task<WebApplication> BuildAsync(CancellationToken cancellationToken)
 	{
 		foreach (var module in _modules)
 			module.ConfigureServices(internalBuilder.Services);
@@ -74,7 +74,7 @@ public class ExtendedWebApplicationBuilder(WebApplicationBuilder internalBuilder
 		var app = internalBuilder.Build();
 
 		foreach (var module in _modules)
-			await module.ApplyConfigurationToAsync(app);
+			await module.ApplyConfigurationToAsync(app, cancellationToken);
 		
 		return app;
 	}
@@ -83,7 +83,7 @@ public class ExtendedWebApplicationBuilder(WebApplicationBuilder internalBuilder
 	/// </summary>
 	/// <returns></returns>
 	public WebApplication Build()
-		=> BuildAsync().Result;
+		=> BuildAsync(CancellationToken.None).Result;
 }
 /// <inheritdoc />
 public static class WebApplicationBuilderExtension

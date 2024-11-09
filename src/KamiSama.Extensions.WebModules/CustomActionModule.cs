@@ -1,4 +1,5 @@
-﻿namespace KamiSama.Extensions.WebModules;
+﻿
+namespace KamiSama.Extensions.WebModules;
 
 /// <summary>
 /// Adds custom action module
@@ -10,7 +11,7 @@ public class CustomActionModule(Func<WebApplication, Task> action, bool conditio
 	{
 	}
 	///<inheritdoc />
-	public override async Task ApplyConfigurationToAsync(WebApplication app)
+	public override async Task ApplyConfigurationToAsync(WebApplication app, CancellationToken cancellationToken)
 	{
 		if (condition)
 			await action(app);

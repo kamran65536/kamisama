@@ -14,7 +14,7 @@ public class RequestLocalizationModule(Action<RequestLocalizationOptions> config
 		services.AddLocalization();
 	}
 	/// <inheritdoc />
-	public override Task ApplyConfigurationToAsync(WebApplication app)
+	public override Task ApplyConfigurationToAsync(WebApplication app, CancellationToken cancellationToken)
 	{
 		app.UseRequestLocalization();
 

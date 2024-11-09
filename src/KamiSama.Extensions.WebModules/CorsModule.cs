@@ -13,7 +13,7 @@ public class CorsModule(Action<CorsPolicyBuilder>? configurePolicy) : WebModule
 	{
 	}
 	/// <inheritdoc />
-	public override Task ApplyConfigurationToAsync(WebApplication app)
+	public override Task ApplyConfigurationToAsync(WebApplication app, CancellationToken cancellationToken)
 	{
 		app.UseCors(ConfigureCorsPolicy);
 

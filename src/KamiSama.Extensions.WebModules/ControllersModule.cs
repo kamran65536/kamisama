@@ -1,4 +1,5 @@
-﻿namespace KamiSama.Extensions.WebModules;
+﻿
+namespace KamiSama.Extensions.WebModules;
 
 /// <summary>
 /// Api Controllers Module
@@ -13,7 +14,7 @@ public class ControllersModule(Action<IMvcBuilder>? configure) : WebModule
 		ConfigureMvcBuilder(mvcBuilder);
 	}
 	/// <inheritdoc />
-	public override Task ApplyConfigurationToAsync(WebApplication app)
+	public override Task ApplyConfigurationToAsync(WebApplication app, CancellationToken cancellationToken)
 	{
 		app.MapControllers();
 

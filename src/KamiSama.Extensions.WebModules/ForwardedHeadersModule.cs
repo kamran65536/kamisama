@@ -1,4 +1,5 @@
-﻿namespace KamiSama.Extensions.WebModules;
+﻿
+namespace KamiSama.Extensions.WebModules;
 
 /// <summary>
 /// Adds Forwarded headers
@@ -10,7 +11,7 @@ public class ForwardedHeadersModule(Action<ForwardedHeadersOptions>? configure) 
 	{
 	}
 	/// <inheritdoc />
-	public override Task ApplyConfigurationToAsync(WebApplication app)
+	public override Task ApplyConfigurationToAsync(WebApplication app, CancellationToken cancellationToken)
 	{
 		var options = new ForwardedHeadersOptions();
 

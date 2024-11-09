@@ -1,4 +1,5 @@
-﻿namespace KamiSama.Extensions.WebModules;
+﻿
+namespace KamiSama.Extensions.WebModules;
 /// <summary>
 /// Adds Https Redirection
 /// </summary>
@@ -9,7 +10,7 @@ public class HttpsRedirectionModule : WebModule
 	{
 	}
 	/// <inheritdoc />
-	public override Task ApplyConfigurationToAsync(WebApplication app)
+	public override Task ApplyConfigurationToAsync(WebApplication app, CancellationToken cancellationToken)
 	{
 		app.UseHttpsRedirection();
 

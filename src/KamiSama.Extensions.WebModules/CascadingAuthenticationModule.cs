@@ -1,4 +1,5 @@
-﻿namespace KamiSama.Extensions.WebModules;
+﻿
+namespace KamiSama.Extensions.WebModules;
 
 /// <summary>
 /// Adds Cascading Authentication State
@@ -11,7 +12,7 @@ public class CascadingAuthenticationModule : WebModule
 		services.AddCascadingAuthenticationState();
 	}
 	/// <inheritdoc />
-	public override Task ApplyConfigurationToAsync(WebApplication app)
+	public override Task ApplyConfigurationToAsync(WebApplication app, CancellationToken cancellationToken)
 	{
 		return Task.CompletedTask;
 	}

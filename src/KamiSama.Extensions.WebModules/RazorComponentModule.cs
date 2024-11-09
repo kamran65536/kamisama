@@ -1,4 +1,5 @@
 ﻿
+
 namespace KamiSama.Extensions.WebModules;
 /// <summary>
 /// Adds Razor component
@@ -11,7 +12,7 @@ public class RazorComponentModule<TRootComponent>(Action<RazorComponentsEndpoint
 		services.AddRazorComponents();
 	}
 	/// <inheritdoc />
-	public override Task ApplyConfigurationToAsync(WebApplication app)
+	public override Task ApplyConfigurationToAsync(WebApplication app, CancellationToken cancellationToken)
 	{
 		var builder = app.MapRazorComponents<TRootComponent>();
 

@@ -1,4 +1,5 @@
-﻿namespace KamiSama.Extensions.WebModules;
+﻿
+namespace KamiSama.Extensions.WebModules;
 
 /// <summary>
 /// Adds Authorization functionality
@@ -9,7 +10,7 @@ public class AuthorizationModule : WebModule
 	public override void ConfigureServices(IServiceCollection services)
 		=> services.AddAuthorization();
 	/// <inheritdoc />
-	public override Task ApplyConfigurationToAsync(WebApplication app)
+	public override Task ApplyConfigurationToAsync(WebApplication app, CancellationToken cancellationToken)
 	{
 		app.UseAuthorization();
 
