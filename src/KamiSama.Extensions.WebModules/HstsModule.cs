@@ -10,9 +10,11 @@ public class HstsModule : WebModule
 	{
 	}
 	/// <inheritdoc />
-	public override void ApplyConfigurationTo(WebApplication app)
+	public override Task ApplyConfigurationToAsync(WebApplication app)
 	{
 		app.UseHsts();
+
+		return Task.CompletedTask;
 	}
 }
 /// <inheritdoc />

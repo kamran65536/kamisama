@@ -13,8 +13,12 @@ public class ControllersModule(Action<IMvcBuilder>? configure) : WebModule
 		ConfigureMvcBuilder(mvcBuilder);
 	}
 	/// <inheritdoc />
-	public override void ApplyConfigurationTo(WebApplication app)
-		=> app.MapControllers();
+	public override Task ApplyConfigurationToAsync(WebApplication app)
+	{
+		app.MapControllers();
+
+		return Task.CompletedTask;
+	}
 	/// <summary>
 	/// Configures the mvc builder for inheritance
 	/// </summary>

@@ -9,8 +9,12 @@ public class HttpsRedirectionModule : WebModule
 	{
 	}
 	/// <inheritdoc />
-	public override void ApplyConfigurationTo(WebApplication app)
-		=> app.UseHttpsRedirection();
+	public override Task ApplyConfigurationToAsync(WebApplication app)
+	{
+		app.UseHttpsRedirection();
+
+		return Task.CompletedTask;
+	}
 }
 /// <inheritdoc />
 public static class HttpsRedirectionExtension

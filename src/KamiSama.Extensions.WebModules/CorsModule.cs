@@ -13,9 +13,11 @@ public class CorsModule(Action<CorsPolicyBuilder>? configurePolicy) : WebModule
 	{
 	}
 	/// <inheritdoc />
-	public override void ApplyConfigurationTo(WebApplication app)
+	public override Task ApplyConfigurationToAsync(WebApplication app)
 	{
 		app.UseCors(ConfigureCorsPolicy);
+
+		return Task.CompletedTask;
 	}
 	/// <summary>
 	/// Configures the cors builder for inheritance

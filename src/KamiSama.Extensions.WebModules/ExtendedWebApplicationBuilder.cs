@@ -48,11 +48,25 @@ public class ExtendedWebApplicationBuilder(WebApplicationBuilder internalBuilder
 	/// adds a custom action to run
 	/// </summary>
 	public ExtendedWebApplicationBuilder Add(Action<WebApplication> action, bool condition = true)
-		=> AddModule(new CustomActionModule(action, condition));
+		=> this.AddAction(action, condition);
+	/// <summary>
+	/// adds a custom action to run
+	/// </summary>
+	public ExtendedWebApplicationBuilder Add(Func<WebApplication, Task> action, bool condition = true)
+		=> this.AddAction(action, condition);
+	/// <summary>
+	/// Configures services
+	/// </summary>
+	public ExtendedWebApplicationBuilder ConfigureServices(Action<IServiceCollection> configure)
+	{
+		configure(Services);
+
+		return this;
+	}
 	/// <summary>
 	/// Builds the application
 	/// </summary>
-	public WebApplication Build()
+	public async Task<WebApplication> BuildAsync()
 	{
 		foreach (var module in _modules)
 			module.ConfigureServices(internalBuilder.Services);
@@ -60,10 +74,16 @@ public class ExtendedWebApplicationBuilder(WebApplicationBuilder internalBuilder
 		var app = internalBuilder.Build();
 
 		foreach (var module in _modules)
-			module.ApplyConfigurationTo(app);
-
+			await module.ApplyConfigurationToAsync(app);
+		
 		return app;
 	}
+	/// <summary>
+	/// Synchronous 
+	/// </summary>
+	/// <returns></returns>
+	public WebApplication Build()
+		=> BuildAsync().Result;
 }
 /// <inheritdoc />
 public static class WebApplicationBuilderExtension

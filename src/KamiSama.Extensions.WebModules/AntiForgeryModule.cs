@@ -11,8 +11,12 @@ public class AntiForgeryModule : WebModule
 	{
 	}
 	/// <inheritdoc />
-	public override void ApplyConfigurationTo(WebApplication app)
-		=> app.UseAntiforgery();
+	public override Task ApplyConfigurationToAsync(WebApplication app)
+	{
+		app.UseAntiforgery();
+	
+		return Task.CompletedTask;
+	}
 }
 /// <inheritdoc />
 public static class AntiForgeryExtension

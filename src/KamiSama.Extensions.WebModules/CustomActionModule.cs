@@ -3,17 +3,17 @@
 /// <summary>
 /// Adds custom action module
 /// </summary>
-public class CustomActionModule(Action<WebApplication> action, bool condition) : WebModule
+public class CustomActionModule(Func<WebApplication, Task> action, bool condition) : WebModule
 {
 	///<inheritdoc />
 	public override void ConfigureServices(IServiceCollection services)
 	{
 	}
 	///<inheritdoc />
-	public override void ApplyConfigurationTo(WebApplication app)
+	public override async Task ApplyConfigurationToAsync(WebApplication app)
 	{
 		if (condition)
-			action(app);
+			await action(app);
 	}
 }
 /// <inheritdoc />
@@ -23,5 +23,10 @@ public static class CustomActionExtension
 	/// Adds custom action module
 	/// </summary>
 	public static ExtendedWebApplicationBuilder AddAction(this ExtendedWebApplicationBuilder builder, Action<WebApplication> action, bool condition = true)
+		=> builder.AddModule(new CustomActionModule(app => { action(app); return Task.CompletedTask; }, condition));
+	/// <summary>
+	/// Adds custom action module
+	/// </summary>
+	public static ExtendedWebApplicationBuilder AddAction(this ExtendedWebApplicationBuilder builder, Func<WebApplication, Task> action, bool condition = true)
 		=> builder.AddModule(new CustomActionModule(action, condition));
 }

@@ -10,8 +10,12 @@ public class StaticFilesModule : WebModule
 	{
 	}
 	/// <inheritdoc />
-	public override void ApplyConfigurationTo(WebApplication app)
-		=> app.UseStaticFiles();
+	public override Task ApplyConfigurationToAsync(WebApplication app)
+	{
+		app.UseStaticFiles();
+
+		return Task.CompletedTask;
+	}
 }
 /// <inheritdoc />
 public static class StaticFileExtension

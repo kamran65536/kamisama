@@ -13,8 +13,12 @@ public class RoutingModule(Action<RouteOptions>? configure) : WebModule
 		services.Configure<RouteOptions>(ConfigureRouting);
 	}
 	/// <inheritdoc />
-	public override void ApplyConfigurationTo(WebApplication app)
-		=> app.UseRouting();
+	public override Task ApplyConfigurationToAsync(WebApplication app)
+	{
+		app.UseRouting();
+
+		return Task.CompletedTask;
+	}
 	/// <summary>
 	/// Configures route options for inheritance
 	/// </summary>

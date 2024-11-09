@@ -10,13 +10,15 @@ public class ForwardedHeadersModule(Action<ForwardedHeadersOptions>? configure) 
 	{
 	}
 	/// <inheritdoc />
-	public override void ApplyConfigurationTo(WebApplication app)
+	public override Task ApplyConfigurationToAsync(WebApplication app)
 	{
 		var options = new ForwardedHeadersOptions();
 
 		ConfigureForwaredHeadersOptions(options);
 
 		app.UseForwardedHeaders(options);
+
+		return Task.CompletedTask;
 	}
 	/// <summary>
 	/// Configures the forwarded headers options for inheritance

@@ -19,5 +19,5 @@ public abstract class WebModule
 	/// Configures the application it self.
 	/// </summary>
 	/// <param name="app"></param>
-	public abstract void ApplyConfigurationTo(WebApplication app);
+	public abstract Task ApplyConfigurationToAsync(WebApplication app);
 }

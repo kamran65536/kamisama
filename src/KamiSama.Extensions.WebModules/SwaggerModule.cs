@@ -15,13 +15,15 @@ public class SwaggerModule(bool addEndPointInProduction, Action<SwaggerGenOption
 			.AddEndpointsApiExplorer()
 			.AddSwaggerGen(ConfigureSwaggerGen);
 	/// <inheritdoc />
-	public override void ApplyConfigurationTo(WebApplication app)
+	public override Task ApplyConfigurationToAsync(WebApplication app)
 	{
 		if (addEndPointInProduction || app.Environment.IsDevelopment())
 		{
 			app.UseSwagger();
 			app.UseSwaggerUI(ConfigureUiOptions);
 		}
+
+		return Task.CompletedTask;
 	}
 	/// <summary>
 	/// Configures swagger gen for inheritance

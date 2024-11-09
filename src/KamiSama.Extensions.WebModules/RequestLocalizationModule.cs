@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Localization;
-using System.ComponentModel;
 using System.Globalization;
 
 namespace KamiSama.Extensions.WebModules;
@@ -15,9 +14,11 @@ public class RequestLocalizationModule(Action<RequestLocalizationOptions> config
 		services.AddLocalization();
 	}
 	/// <inheritdoc />
-	public override void ApplyConfigurationTo(WebApplication app)
+	public override Task ApplyConfigurationToAsync(WebApplication app)
 	{
 		app.UseRequestLocalization();
+
+		return Task.CompletedTask;
 	}
 	/// <summary>
 	/// Configures request localization for inheritance

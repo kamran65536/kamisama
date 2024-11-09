@@ -11,11 +11,13 @@ public class RazorComponentModule<TRootComponent>(Action<RazorComponentsEndpoint
 		services.AddRazorComponents();
 	}
 	/// <inheritdoc />
-	public override void ApplyConfigurationTo(WebApplication app)
+	public override Task ApplyConfigurationToAsync(WebApplication app)
 	{
 		var builder = app.MapRazorComponents<TRootComponent>();
 
 		ConfigureRazorComponents(builder);
+
+		return Task.CompletedTask;
 	}
 	/// <summary>
 	/// Configures the razor builder for inheritance

@@ -13,8 +13,12 @@ public class RazorPagesModule(Action<RazorPagesOptions>? configure) : WebModule
 		services.AddRazorPages(ConfigureRazorPages);
 	}
 	/// <inheritdoc />
-	public override void ApplyConfigurationTo(WebApplication app)
-		=> app.MapRazorPages();
+	public override Task ApplyConfigurationToAsync(WebApplication app)
+	{
+		app.MapRazorPages();
+
+		return Task.CompletedTask;
+	}
 	/// <summary>
 	/// Configures the razor pages for inheritance
 	/// </summary>

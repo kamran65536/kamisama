@@ -87,13 +87,15 @@ public class NewModule : WebModule
 	{
 		// adds new dependecies to builder.Services
 	}
-	public override void ApplyConfigurationTo(WebApplication app)
+	public override Task ApplyConfigurationTo(WebApplication app)
 	{
 		// applies configuration for middleware and etc.
 		app.UseHttpsRedirection();
 
 		// you can also use the basic IHostApplicationBuilder functionality directly.
 		var configuration = base.Builder.Configuration;
+
+		return Task.CompletedTask;
 	}
 }
 ```

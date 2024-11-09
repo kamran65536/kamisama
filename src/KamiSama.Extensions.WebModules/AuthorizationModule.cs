@@ -9,8 +9,12 @@ public class AuthorizationModule : WebModule
 	public override void ConfigureServices(IServiceCollection services)
 		=> services.AddAuthorization();
 	/// <inheritdoc />
-	public override void ApplyConfigurationTo(WebApplication app)
-		=> app.UseAuthorization();
+	public override Task ApplyConfigurationToAsync(WebApplication app)
+	{
+		app.UseAuthorization();
+
+		return Task.CompletedTask;
+	}
 }
 /// <inheritdoc />
 public static class AuthorizationExtension
