@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using NSubstitute;
+using NSubstitute.Extensions;
 using System.Linq;
 
 namespace KamiSama.Testing.NSubstitute;
@@ -20,6 +21,14 @@ public class TesterBuilderBase
     /// <inheritdoc />
     protected TesterBuilderBase()
     {
+    }
+    /// <summary>
+    /// Configures an Option in the builder
+    /// </summary>
+    public void AddOption<TOption>(Action<TOption> configure)
+        where TOption : class
+    {
+        Services.Configure<TOption>(configure);
     }
     /// <summary>
     /// Adds a scoped service with parameters
