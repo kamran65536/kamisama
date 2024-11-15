@@ -27,7 +27,7 @@ public class InMemoryRepository<TEntity> : IQueryableRepository<TEntity>, IAsync
 		semaphore = new SemaphoreSlim(1, 1);
 
 		if (comparer == null)
-			items = new HashSet<TEntity>(initialItems);
+			items = [.. initialItems];
 		else
 			items = new HashSet<TEntity>(initialItems, comparer);
 	}

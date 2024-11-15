@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<Import Project="../props.xml" />
 	<PropertyGroup>
-		<Nullable>enable</Nullable>
 		<Title>Http Exceptions for ProblemDetails</Title>
 		<Description>This library provides predefined HTTP exception classes in order to be used in KamiSama.Chassis.ProblemDetails</Description>
 	</PropertyGroup>

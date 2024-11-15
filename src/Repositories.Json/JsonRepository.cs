@@ -73,7 +73,7 @@ namespace KamiSama.Repositories.Json
 				var all = (await File.ReadAllTextAsync(filePath, cancellationToken)).DeserializeFromJson<TEntity[]>() ?? [];
 
 				if (equalityComparer == null)
-					entities = new HashSet<TEntity>(all);
+					entities = [.. all];
 				else
 					entities = new HashSet<TEntity>(all, equalityComparer);
 

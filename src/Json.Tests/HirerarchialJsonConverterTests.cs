@@ -113,7 +113,7 @@ namespace KamiSama.Extensions.Json.Tests
 			var result = JsonSerializer.Deserialize<TestClassWithConverter>(json);
 
 			Assert.IsNotNull(result!.Configuration);
-			Assert.IsInstanceOfType(result.Configuration, typeof(SampleClass));
+			Assert.IsInstanceOfType<SampleClass>(result.Configuration);
 		}
 	}
 }

@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using NSubstitute;
 using NSubstitute.Extensions;
-using System.Linq;
 
 namespace KamiSama.Testing.NSubstitute;
 

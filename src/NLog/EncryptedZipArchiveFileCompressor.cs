@@ -1,4 +1,4 @@
-﻿using Ionic.Zip;
+﻿using ICSharpCode.SharpZipLib.Zip;
 using NLog.Targets;
 using System.Diagnostics.CodeAnalysis;
 
@@ -19,8 +19,9 @@ public delegate string PassswordFunc(string fileName, string archiveFileName);
 /// constructor
 /// </remarks>
 /// <param name="passwordFunc">password based on current file name</param>
+/// <param name="compressionMethod">Compression method used by SharpZipLib library</param>
 [ExcludeFromCodeCoverage]
-public class EncryptedZipArchiveFileCompressor(PassswordFunc passwordFunc) : IFileCompressor
+public class EncryptedZipArchiveFileCompressor(PassswordFunc passwordFunc, CompressionMethod compressionMethod = CompressionMethod.BZip2) : IFileCompressor
 {
 	private readonly PassswordFunc passwordFunc = passwordFunc;
 
@@ -29,13 +30,13 @@ public class EncryptedZipArchiveFileCompressor(PassswordFunc passwordFunc) : IFi
 	/// </summary>
 	public void CompressFile(string fileName, string archiveFileName)
 	{
-		using var zipFile = new ZipFile();
-		
+		using var zipFile = File.Exists(archiveFileName) ? new ZipFile(archiveFileName) : ZipFile.Create(archiveFileName);
+
 		zipFile.Password = passwordFunc(fileName, archiveFileName);
-
 		var file = new FileInfo(fileName);
-		zipFile.AddEntry(file.Name, File.ReadAllBytes(file.FullName));
 
-		zipFile.Save(archiveFileName);
+		zipFile.BeginUpdate();
+		zipFile.Add(file.FullName, compressionMethod);
+		zipFile.CommitUpdate();
 	}
 }
