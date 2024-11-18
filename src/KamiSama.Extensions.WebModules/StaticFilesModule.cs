@@ -13,7 +13,7 @@ public class StaticFilesModule : WebModule
 	/// <inheritdoc />
 	public override Task ApplyConfigurationToAsync(WebApplication app, CancellationToken cancellationToken)
 	{
-		app.UseStaticFiles();
+		app.MapStaticAssets();
 
 		return Task.CompletedTask;
 	}

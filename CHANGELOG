@@ -1,3 +1,5 @@
+1493-08-28 11/18/2024 v3.0.2
+- KamiSama.Extensions.WebModules.StaticFilesModule uses .net 9 MapStatisAssets instead of UseStaticFiles.
 1403-08-25 11/15/2024 v3.0.1
 - KamiSama Libraries are migrated to .net 9
 - KamiSama.Testing.NSubstitute.TesterBuilderBase.AddOption is added.

@@ -1,6 +1,6 @@
 image: mcr.microsoft.com/dotnet/sdk:9.0
 variables:
-    PACKAGE_VERSION: "3.0.1"
+    PACKAGE_VERSION: "3.0.2"
 
 stages:
     - build
