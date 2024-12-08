@@ -1,3 +1,7 @@
+1403-09-18 12/8/2024 v3.0.3
+- KamiSama.Extensions.WebModules.ResponseCompression module is added.
+- KamiSama.Extensions.WebModules.ResponseCaching module is added.
+- package reference update.
 1493-08-28 11/18/2024 v3.0.2
 - KamiSama.Extensions.WebModules.StaticFilesModule uses .net 9 MapStatisAssets instead of UseStaticFiles.
 1403-08-25 11/15/2024 v3.0.1
