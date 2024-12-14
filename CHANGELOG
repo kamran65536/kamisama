@@ -1,3 +1,6 @@
+1403-09-24 12/14/2024 v3.0.4
+- KamiSama.Extensions.WebModule.OpenApiModule is added.
+- KamiSama.Extensions.Repositories.ConnectionStringOption is added.
 1403-09-18 12/8/2024 v3.0.3
 - KamiSama.Extensions.WebModules.ResponseCompression module is added.
 - KamiSama.Extensions.WebModules.ResponseCaching module is added.
