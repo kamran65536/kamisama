@@ -5,6 +5,7 @@ namespace KamiSama.Extensions.DependencyInjection;
 /// <summary>
 /// AutoInject Transient Attribute
 /// </summary>
+[AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = true)]
 public class AutoInjectTransientAttribute : AutoInjectAttributeBase
 {
 	/// <summary>

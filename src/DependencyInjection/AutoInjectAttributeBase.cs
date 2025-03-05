@@ -3,12 +3,12 @@
 namespace KamiSama.Extensions.DependencyInjection;
 
 /// <summary>
-/// Base class for autoinject attribtues
+/// Base class for auto-inject attributes
 /// </summary>
 public abstract class AutoInjectAttributeBase : Attribute
 {
 	/// <summary>
-	/// if present, adds the service as keyed and you shuold use it by <see cref="ServiceProviderKeyedServiceExtensions.GetKeyedServices" /> methods
+	/// if present, adds the service as keyed and you should use it by <see cref="ServiceProviderKeyedServiceExtensions.GetKeyedServices" /> methods
 	/// </summary>
 	public object? ServiceKey { get; set; }
 	/// <summary>

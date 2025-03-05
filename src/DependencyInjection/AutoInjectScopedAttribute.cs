@@ -5,6 +5,7 @@ namespace KamiSama.Extensions.DependencyInjection;
 /// <summary>
 /// AutoInject Scoped Attribute
 /// </summary>
+[AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = true)]
 public class AutoInjectScopedAttribute : AutoInjectAttributeBase
 {
 	/// <summary>
