@@ -10,11 +10,10 @@ public class AutoXmlElementTests
 
 		AutoXmlElement<object> a = o;
 
-		Assert.IsNotNull(a);
 		Assert.AreSame(a.Value, o);
 	}
 	[TestMethod]
-	public void Eqials_returns_false_if_other_is_null()
+	public void Equals_returns_false_if_other_is_null()
 	{
 		var element = new AutoXmlElement<object>();
 

@@ -135,4 +135,48 @@ public class EF_DbRepositoryTests
 		CollectionAssert.Contains(result, arr[1]);
 		CollectionAssert.DoesNotContain(result, arr[2]);
 	}
+	[TestMethod]
+	public void AsQueryable_returns_dbset_as_queryable()
+	{
+		var arr = new[]
+		{
+			new SampleEntity { Id = 1, Name = "sample1" },
+			new SampleEntity { Id = 2, Name = "sample2" },
+			new SampleEntity { Id = 3, Name = "-not-found" }
+		};
+		var context = GetDbContext(initialDbSet: arr);
+		var repository = new DbRepository<SampleEntity>(context);
+
+		var queryable = repository.AsQueryable();
+
+		CollectionAssert.AreEquivalent(arr, queryable.ToArray());
+	}
+	[TestMethod]
+	public void AsQueryable_Any_checks_if_entity_exists_in_repository_or_not()
+	{
+		var arr = new[]
+		{
+			new SampleEntity { Id = 1, Name = "sample1" },
+			new SampleEntity { Id = 2, Name = "sample2" },
+		};
+		var context = GetDbContext(initialDbSet: arr);
+		var repository = new DbRepository<SampleEntity>(context);
+
+		Assert.IsTrue(repository.Any(x => x.Name == "sample1"));
+		Assert.IsFalse(repository.Any(x => x.Name == "--not-found"));
+	}
+	[TestMethod]
+	public async Task AsQueryable_AnyAsync_checks_if_entity_exists_in_repository_or_not()
+	{
+		var arr = new[]
+		{
+			new SampleEntity { Id = 1, Name = "sample1" },
+			new SampleEntity { Id = 2, Name = "sample2" },
+		};
+		var context = GetDbContext(initialDbSet: arr);
+		var repository = new DbRepository<SampleEntity>(context);
+
+		Assert.IsTrue(await repository.AnyAsync(x => x.Name == "sample1", CancellationToken.None));
+		Assert.IsFalse(await repository.AnyAsync(x => x.Name == "--not-found", CancellationToken.None));
+	}
 }

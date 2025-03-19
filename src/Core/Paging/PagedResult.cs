@@ -24,5 +24,5 @@ public record PagedResult<T>(int TotalItemsCount, List<T> Items)
 	/// <param name="convertFunc"></param>
 	/// <returns></returns>
 	public virtual PagedResult<TOtherType> ConvertTo<TOtherType>(Func<T, TOtherType> convertFunc)
-		=> new(TotalItemsCount, Items.Select(convertFunc).ToList());
+		=> new(TotalItemsCount, [.. Items.Select(convertFunc)]);
 }

@@ -1,10 +1,19 @@
-﻿using KamiSama.Extensions.DependencyInjection.Tests.DataTypes;
-
-namespace KamiSama.Extensions.DependencyInjection.Tests;
+﻿namespace KamiSama.Extensions.DependencyInjection.Tests;
 
 [TestClass]
 public class ServiceCollectionExtensionsTests
 {
+	[TestMethod]
+	public void AutoAddDependenciesFrom_must_add_current_type_assembly()
+	{
+		var services = new ServiceCollection();
+		services.AutoAddDependenciesFrom<ISampleInterface>();
+
+		var descriptor = services.FirstOrDefault(x => x.ServiceType == typeof(ISampleInterface));
+
+		Assert.AreEqual(ServiceLifetime.Singleton, descriptor!.Lifetime);
+		Assert.AreEqual(typeof(InjectedImplementation), descriptor.ImplementationType);
+	}
 	[TestMethod]
 	public void AutoAddDependencies_must_add_dependencies_based_on_InjectAttribute()
 	{

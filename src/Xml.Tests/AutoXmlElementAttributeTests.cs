@@ -5,14 +5,14 @@ public class AutoXmlElementAttributeTests
 {
 	[TestMethod]
 	[ExpectedException(typeof(InvalidOperationException))]
-	public void VisitType_throws_InvalidOperationExcetpion()
+	public void VisitType_throws_InvalidOperationException()
 	{
 		var attr = new AutoXmlElementAttribute();
 
 		attr.VisitType(default, default, default);
 	}
 	[TestMethod]
-	public void VisitProperty_does_nothing_if_no_compativle_type_is_found()
+	public void VisitProperty_does_nothing_if_no_compatible_type_is_found()
 	{
 		var property = typeof(Wrapper1).GetProperty(nameof(Wrapper1.SomeProperty))!;
 		var overrides = new XmlAttributeOverrides();
@@ -41,7 +41,7 @@ public class AutoXmlElementAttributeTests
 		Assert.IsTrue(elements.Any(x => x.Type == typeof(DerivedClass2)));
 	}
 	[TestMethod]
-	public void VisitField_does_nothing_if_no_compativle_type_is_found()
+	public void VisitField_does_nothing_if_no_compatible_type_is_found()
 	{
 		var field = typeof(Wrapper2).GetField(nameof(Wrapper2.SomeField))!;
 		var overrides = new XmlAttributeOverrides();

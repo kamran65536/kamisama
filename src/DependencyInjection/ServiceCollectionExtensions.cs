@@ -27,12 +27,7 @@ public static class ServiceCollectionExtensions
 			var attrs = type.GetCustomAttributes<AutoInjectAttributeBase>();
 
 			foreach (var attr in attrs)
-			{
-				if (attr == null)
-					continue;
-
 				attr.TryAddInjection(services, type);
-			}
 		}
 
 		return services;

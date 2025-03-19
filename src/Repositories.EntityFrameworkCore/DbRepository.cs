@@ -83,6 +83,12 @@ namespace KamiSama.Repositories.EntityFrameworkCore
 		/// Checks if any entity exists in the repository
 		/// </summary>
 		/// <returns></returns>
+		public virtual bool Any(Expression<Func<TEntity, bool>> predicate)
+			=> dbSet.Any(predicate);
+		/// <summary>
+		/// Checks if any entity exists in the repository
+		/// </summary>
+		/// <returns></returns>
 		public virtual Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken)
 			=> dbSet.AnyAsync(predicate, cancellationToken);
 		/// <inheritdoc />
