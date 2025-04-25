@@ -44,20 +44,20 @@ builder.Services.AddLocalization(); // adding localization
 ```
 
 ## 8.3 KamiSama.Chassis.Commons
-The Commons library privdes some basic functionality for a most Asp.net core proejcts. The KamiSama.Chassis.Commons comes in two libraries:
+The Commons library provides some basic functionality for a most Asp.net core projects. The KamiSama.Chassis.Commons comes in two libraries:
 - KamiSama.Chassis.Commons.Abstractions: provides abstraction for concepts. Use it for your bounded contexts' abstractions.
 - KamiSama.Chassis.Commons: provides implementations for Features and Repositories.
 
 ### 8.3.1 Features
 Features are like services with new name. The KamiSama.Chassis.Commons provides some common CRUD services, like:
-- IAddFeature and GenericAddFeature: adds an entiy based on AddRequest
+- IAddFeature and GenericAddFeature: adds an entity based on AddRequest
 - IUpdateFeature and GenericUpdateFeature: updates an entity based on UpdateRequest and id
 - IDeleteFeature and GenericDeleteFeature: Deletes an entity by id
-- IListFeature and GenericListFeeature: list and pages entities and also provides search and ordering functionality.
+- IListFeature and GenericListFeature: list and pages entities and also provides search and ordering functionality.
 - IFindByIdFeature and GenericFindByIdFeature: finds an entity by key(id)
 - IFindByNameFeature and GenericFindByNameFeature: finds an entity by name
 
-### 8.3.2 Repostories
+### 8.3.2 Repositories
 Repository interfaces and implementation for most CRUD scenarios:
 - IAddableRepository
 - IUpdatableRepository
@@ -66,4 +66,21 @@ Repository interfaces and implementation for most CRUD scenarios:
 - ILookupByIdRepository
 - ILookupByCodeRepository
 
-The library also provides basic implementation named GenericyRepository with CRUD functionality. You should implement IFindByIdRepository and IFindByNameRepository by yourself. See KamiSama.Templates projects.
+The library also provides basic implementation named GenericRepository with CRUD functionality. You should implement IFindByIdRepository and IFindByNameRepository by yourself. See KamiSama.Templates projects.
+
+## 8.3.3 Helper Class
+
+Using generic features (like GenericAddFeature, GenericDeleteFeature, ...) is not developer friendly as they need to repeat generic arguments again and again.
+In order to avoid this, there is FeatureDefinitionBase class to help:
+```csharp
+public interface IAddMyEntity : IAddFeature<AddMyEntityRequst, MyEntityDto>
+public class MyEntityFeatures : FeatureDefinitionBase<MyEntity, MyEntityDto, AddMyEntityRequest, UpdateMyEntityRequest, IMyEntityRpository, MyEntitySearchModel, Guid>
+{
+}
+
+//in implementation
+[AutoInjectScoped<IAddMyEntity>]
+internal class AddMyEntity : MyEntityFeatures.AddFeature, IAddMyEntity
+{
+}
+```
