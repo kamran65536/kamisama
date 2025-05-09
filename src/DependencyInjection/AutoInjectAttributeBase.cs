@@ -20,11 +20,16 @@ public abstract class AutoInjectAttributeBase : Attribute
 	/// </summary>
 	protected ServiceLifetime Lifetime { get; set; } = ServiceLifetime.Transient;
 	/// <summary>
+	/// Gets or sets a value indicating whether multiple instances of the associated attribute are allowed.
+	/// </summary>
+	public bool AllowMultiple { get; set; } = false;
+
+	/// <summary>
 	/// Add binding to the service
 	/// </summary>
 	/// <param name="services"></param>
 	/// <param name="type"></param>
-	public virtual void TryAddInjection(IServiceCollection services, Type type)
+	public virtual void ApplyInjection(IServiceCollection services, Type type)
 	{
 		var serviceType = ServiceType;
 
@@ -44,14 +49,23 @@ public abstract class AutoInjectAttributeBase : Attribute
 			switch (Lifetime)
 			{
 				case ServiceLifetime.Singleton:
-				services.TryAddSingleton(serviceType, type);
+					if (AllowMultiple)
+						services.AddSingleton(serviceType, type);
+					else
+						services.TryAddSingleton(serviceType, type);
 					break;
 				case ServiceLifetime.Scoped:
-					services.TryAddScoped(serviceType, type);
+					if (AllowMultiple)
+						services.AddScoped(serviceType, type); 
+					else
+						services.TryAddScoped(serviceType, type);
 					break;
 				default:
 				case ServiceLifetime.Transient:
-					services.TryAddTransient(serviceType, type);
+					if (AllowMultiple)
+						services.AddTransient(serviceType, type);
+					else
+						services.TryAddTransient(serviceType, type);
 					break;
 			}
 		} else
@@ -59,14 +73,23 @@ public abstract class AutoInjectAttributeBase : Attribute
 			switch (Lifetime)
 			{
 				case ServiceLifetime.Singleton:
-				services.TryAddKeyedSingleton(serviceType, ServiceKey, type);
+					if (AllowMultiple)
+						services.AddKeyedSingleton(serviceType, ServiceKey, type);
+					else
+						services.TryAddKeyedSingleton(serviceType, ServiceKey, type);
 					break;
 				case ServiceLifetime.Scoped:
-					services.TryAddKeyedScoped(serviceType, ServiceKey, type);
+					if (AllowMultiple)
+						services.AddKeyedScoped(serviceType, ServiceKey, type);
+					else
+						services.TryAddKeyedScoped(serviceType, ServiceKey, type);
 					break;
 				default:
 				case ServiceLifetime.Transient:
-					services.TryAddKeyedTransient(serviceType, ServiceKey, type);
+					if (AllowMultiple)
+						services.AddKeyedTransient(serviceType, ServiceKey, type);
+					else
+						services.TryAddKeyedTransient(serviceType, ServiceKey, type);
 					break;
 			}
 		}

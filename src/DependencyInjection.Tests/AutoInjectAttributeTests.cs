@@ -14,7 +14,7 @@ public class AutoInjectAttributeTests
 			Lifetime = ServiceLifetime.Singleton
 		};
 
-		attr.TryAddInjection(services, typeof(MultipleInterfacesImplementation));
+		attr.ApplyInjection(services, typeof(MultipleInterfacesImplementation));
 	}
 	[TestMethod]
 	public void TryAdd_injects_the_type_itself_if_no_default_interface_is_found()
@@ -26,7 +26,7 @@ public class AutoInjectAttributeTests
 			Lifetime = ServiceLifetime.Singleton
 		};
 
-		attr.TryAddInjection(services, typeof(NoImplementation));
+		attr.ApplyInjection(services, typeof(NoImplementation));
 
 		var descriptor = services.FirstOrDefault(x => x.ServiceType == typeof(NoImplementation));
 
@@ -45,7 +45,7 @@ public class AutoInjectAttributeTests
 			Lifetime = expectedLifetime
 		};
 
-		attr.TryAddInjection(services, typeof(SampleImplementation1));
+		attr.ApplyInjection(services, typeof(SampleImplementation1));
 
 		var descriptor = services.FirstOrDefault(x => x.ServiceType == typeof(ISampleInterface))!;
 
@@ -67,7 +67,7 @@ public class AutoInjectAttributeTests
 			Lifetime = expectedLifetime
 		};
 
-		attr.TryAddInjection(services, typeof(SampleImplementation1));
+		attr.ApplyInjection(services, typeof(SampleImplementation1));
 
 		var descriptor = services.FirstOrDefault(x => x.ServiceType == typeof(ISampleInterface))!;
 
@@ -85,7 +85,7 @@ public class AutoInjectAttributeTests
 		var services = new ServiceCollection();
 		var attr = Activator.CreateInstance(autoInjectAttributeType) as AutoInjectAttributeBase;
 
-		attr!.TryAddInjection(services, typeof(SampleImplementation1));
+		attr!.ApplyInjection(services, typeof(SampleImplementation1));
 
 		var descriptor = services.FirstOrDefault(x => x.ServiceType == typeof(ISampleInterface))!;
 

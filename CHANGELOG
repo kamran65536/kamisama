@@ -1,3 +1,6 @@
+1404-02-19 5/09/2025 v3.0.8
+- package upgrade
+- KamiSama.Extensions.DependencyInjection.AutoInjectAttribute*.AllowMultiple is added.
 1404-02-05 4/25/2025 v3.0.7.1
 - package upgrade
 - KmiSama.Chassis.Commons.Features.FeatureDefinitionBase is added.
