@@ -1,5 +1,6 @@
-1404-02-26 5/16/2025 v3.0.9
+1404-02-26 5/16/2025 v3.0.10
 - package upgrade
+- GenericUpdateFeature.PatchEntity is now asynchronous.
 1404-02-19 5/09/2025 v3.0.8
 - package upgrade
 - KamiSama.Extensions.DependencyInjection.AutoInjectAttribute*.AllowMultiple is added.
