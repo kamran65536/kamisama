@@ -10,7 +10,7 @@ public abstract class GenericUpdateFeature<TUpdateRequest, TEntity, TRepository,
 	where TRepository : ILookupByIdRepository<TEntity, TKey>, IUpdatableRepository<TEntity>
 {
 	/// <summary>
-	/// repository for fearther use
+	/// repository for further use
 	/// </summary>
 	protected TRepository Repository { get => repository; }
 	/// <summary>
@@ -18,19 +18,20 @@ public abstract class GenericUpdateFeature<TUpdateRequest, TEntity, TRepository,
 	/// </summary>
 	protected virtual Task CheckDuplicateAsync(TKey id, TUpdateRequest request, CancellationToken cancellationToken) => Task.CompletedTask;
 	/// <summary>
-	/// Patches the entity with the request, the default behaviour uses <see cref="IMapper"/>
+	/// Patches the entity with the request, the default behavior uses <see cref="IMapper"/>
 	/// </summary>
-	protected virtual void PatchEntity(TEntity entity, TUpdateRequest request)
-		=> mapper.Map(request, entity);
+	protected virtual Task PatchEntity(TEntity entity, TUpdateRequest request, CancellationToken cancellationToken)
+	{
+		mapper.Map(request, entity);
+		return Task.CompletedTask;
+	}
 	/// <inheritdoc />
 	public async virtual Task UpdateAsync(TKey id, TUpdateRequest request, CancellationToken cancellationToken)
 	{
 		var entity = await repository.FindByIdAsync(id, cancellationToken) ?? throw new NotFoundException(nameof(TEntity), id);
 
 		await CheckDuplicateAsync(id, request, cancellationToken);
-
-		PatchEntity(entity, request);
-
+		await PatchEntity(entity, request, cancellationToken);
 		await Repository.UpdateAsync(entity, cancellationToken);
 	}
 }
