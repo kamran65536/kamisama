@@ -1,3 +1,6 @@
+1404-03-05 5/26/2025 v3.0.11
+- package upgrade
+- template for Features are added to KamiSama.Templates.
 1404-02-26 5/16/2025 v3.0.10
 - package upgrade
 - GenericUpdateFeature.PatchEntity is now asynchronous.

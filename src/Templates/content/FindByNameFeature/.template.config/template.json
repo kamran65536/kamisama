@@ -1,0 +1,31 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "KamiSama",
+    "classifications": [ "Common", "KamiSama" ],
+    "identity": "KamiSama.Chassis.FindByNameFeature",
+    "name": "Generic FindByName Feature",
+    "description": "Generic FindByName Feature for KamiSama.Chassis.Commons",
+    "shortName": "kamisama-findbyname-feature",
+    "tags": {
+        "language": "C#",
+        "type": "item"
+    },
+    "sourceName": "KamiSamaFindByNameFeature",
+    "symbols": {
+        "Entity": {
+            "type": "parameter",
+            "datatype": "text",
+            "replaces": "{{Entity}}"
+        },
+        "EntityDto": {
+            "type": "parameter",
+            "datatype": "text",
+            "replaces": "{{EntityDto}}"
+        },
+        "Repository": {
+            "type": "parameter",
+            "datatype": "text",
+            "replaces": "{{Repository}}"
+        }
+    }
+}
