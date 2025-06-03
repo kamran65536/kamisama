@@ -30,32 +30,32 @@ public class KamiSamaProblemDetailsProvider : IProblemDetailsDataProvider
 	}
 
 	/// <inheritdoc/>
-	public ProblemDetails ConvertExceptionToProblemDetails(ExceptionContext context)
+	public ProblemDetails ConvertExceptionToProblemDetails(Exception exception)
 	{
-		if (context.Exception is not HttpExceptionBase exception)
-			exception = new InvalidOperationHttpException(context.Exception.Message);
+		if (exception is not HttpExceptionBase httpException)
+			httpException = new InvalidOperationHttpException(exception.Message);
 
 		if (Localizer == null)
 			return new ProblemDetails
 			{
-				Title = exception.Message,
-				Status = exception.StatusCode,
+				Title = httpException.Message,
+				Status = httpException.StatusCode,
 			};
 
-		var args = new object[exception.ExceptionLocalizationArguments.Length];
+		var args = new object[httpException.ExceptionLocalizationArguments.Length];
 
 		for (int i = 0; i < args.Length; i++)
 		{
 			if (this.LocalizeArguments)
-				args[i] = SafeLocalize(exception.ExceptionLocalizationArguments[i]) ?? "";
+				args[i] = SafeLocalize(httpException.ExceptionLocalizationArguments[i]) ?? "";
 			else
-				args[i] = exception.ExceptionLocalizationArguments[i] + "";
+				args[i] = httpException.ExceptionLocalizationArguments[i] + "";
 		}
 		
 		return new ProblemDetails
 		{
-			Title = SafeLocalize(exception.ExceptionLocalizationKey, args) + "",
-			Status = exception.StatusCode,
+			Title = SafeLocalize(httpException.ExceptionLocalizationKey, args) + "",
+			Status = httpException.StatusCode,
 		};
 	}
 }

@@ -16,7 +16,7 @@ public class ProblemDetailsExceptionFilter(IProblemDetailsDataProvider problemDe
     /// <inheritdoc />
     public void OnException(ExceptionContext context)
     {
-        var problemDetails = problemDetailsDataProvider.ConvertExceptionToProblemDetails(context);
+        var problemDetails = problemDetailsDataProvider.ConvertExceptionToProblemDetails(context.Exception);
         context.Result = new ObjectResult(problemDetails);
         context.ExceptionHandled = true;
     }

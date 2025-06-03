@@ -1,6 +1,5 @@
 ﻿namespace KamiSama.Chassis.ProblemDetails;
 
-using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Localization;
 using ProblemDetails = Microsoft.AspNetCore.Mvc.ProblemDetails;
 
@@ -20,7 +19,6 @@ public interface IProblemDetailsDataProvider
 	/// <summary>
 	/// Converts Exception to ProblemDetails
 	/// </summary>
-	/// <param name="context"></param>
 	/// <returns></returns>
-	ProblemDetails ConvertExceptionToProblemDetails(ExceptionContext context);
+	ProblemDetails ConvertExceptionToProblemDetails(Exception exception);
 }
