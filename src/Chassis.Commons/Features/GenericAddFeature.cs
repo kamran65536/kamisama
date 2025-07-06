@@ -3,7 +3,7 @@
 /// <summary>
 /// Generic implementation of <see cref="IAddFeature{TAddRequest, TEntityDto}"/>
 /// </summary>
-public abstract class GenericAddFeature<TAddRequest, TRepository, TEntity, TEntityDto>(TRepository repository, IMapper mapper) : 
+public abstract class GenericAddFeature<TAddRequest, TRepository, TEntity, TEntityDto>(TRepository repository) : 
 	IAddFeature<TAddRequest, TEntityDto>
 	where TRepository : IAddableRepository<TEntity>
 {
@@ -17,18 +17,15 @@ public abstract class GenericAddFeature<TAddRequest, TRepository, TEntity, TEnti
 	protected virtual Task CheckDuplicateAsync(TAddRequest request, CancellationToken cancellationToken) => Task.CompletedTask;
 	/// <summary>
 	/// Converts the request to <typeparamref name="TEntity"/>
-	/// default behaivour uses <see cref="IMapper" />
 	/// </summary>
-	protected virtual Task<TEntity> ConvertToEntity(TAddRequest request, CancellationToken cancellationToken)
-		=> Task.FromResult(mapper.Map<TEntity>(request));
+	protected abstract Task<TEntity> ConvertToEntity(TAddRequest request, CancellationToken cancellationToken);
 	/// <summary>
 	/// Converts the result entity to dto
 	/// </summary>
 	/// <param name="entity"></param>
 	/// <param name="cancellationToken"></param>
 	/// <returns></returns>
-	protected virtual Task<TEntityDto> ConvertToDto(TEntity entity, CancellationToken cancellationToken)
-		=> Task.FromResult(mapper.Map<TEntityDto>(entity));
+	protected abstract Task<TEntityDto> ConvertToDto(TEntity entity, CancellationToken cancellationToken);
 	/// <inheritdoc />
 	public virtual async Task<TEntityDto> AddAsync(TAddRequest request, CancellationToken cancellationToken)
 	{

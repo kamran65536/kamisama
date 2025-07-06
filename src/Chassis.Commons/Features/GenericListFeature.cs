@@ -3,7 +3,7 @@
 /// <summary>
 /// Generic implementation of <see cref="IListFeature{TEntityDto, TSearchModel}"/>
 /// </summary>
-public abstract class GenericListFeature<TEntity, TEntityDto, TSearchModel, TRepository, TPagedResult, TRepositoryPagedResult>(TRepository repository, IMapper mapper) :
+public abstract class GenericListFeature<TEntity, TEntityDto, TSearchModel, TRepository, TPagedResult, TRepositoryPagedResult>(TRepository repository) :
 	IListFeature<TEntityDto, TSearchModel, TPagedResult>
 	where TRepository : IListingRepository<TEntity, TSearchModel, TRepositoryPagedResult>
 	where TSearchModel : SearchModel
@@ -17,22 +17,19 @@ public abstract class GenericListFeature<TEntity, TEntityDto, TSearchModel, TRep
 	/// <summary>
 	/// Converts the repository result into list result
 	/// </summary>
-	/// <param name="repositoryResult"></param>
-	/// <returns></returns>
-	protected virtual TPagedResult ConvertResult(TRepositoryPagedResult repositoryResult)
-		=> mapper.Map<TPagedResult>(repositoryResult);
+	protected abstract Task<TPagedResult> ConvertResult(TRepositoryPagedResult repositoryResult, CancellationToken cancellationToken);
 	///<inheritdoc />
 	public virtual async Task<TPagedResult> ListAsync(TSearchModel searchModel, CancellationToken cancellationToken)
 	{
 		var result = await repository.ListAsync(searchModel, cancellationToken);
 
-		return ConvertResult(result);
+		return await ConvertResult(result, cancellationToken);
 	}
 }
 /// <summary>
 /// Generic implementation of <see cref="IListFeature{TEntityDto, TSearchModel}"/>
 /// </summary>
-public abstract class GenericListFeature<TEntity, TEntityDto, TSearchModel, TRepository>(TRepository repository, IMapper mapper) :
+public abstract class GenericListFeature<TEntity, TEntityDto, TSearchModel, TRepository>(TRepository repository) :
 	IListFeature<TEntityDto, TSearchModel>
 	where TRepository : IListingRepository<TEntity, TSearchModel>
 	where TSearchModel : SearchModel
@@ -42,13 +39,11 @@ public abstract class GenericListFeature<TEntity, TEntityDto, TSearchModel, TRep
 	/// </summary>
 	protected TRepository Repository { get => repository; }
 	/// <summary>
-	/// Covnerts a database <paramref name="entity"/> to <typeparamref name="TEntity"/>
-	/// default behaviour uses <see cref="IMapper" />
+	/// Converts a database <paramref name="entity"/> to <typeparamref name="TEntity"/>
 	/// </summary>
 	/// <param name="entity"></param>
 	/// <returns></returns>
-	protected virtual TEntityDto ConvertToDto(TEntity entity)
-		=> mapper.Map<TEntityDto>(entity);
+	protected abstract TEntityDto ConvertToDto(TEntity entity);
 	///<inheritdoc />
 	public virtual async Task<PagedResult<TEntityDto>> ListAsync(TSearchModel searchModel, CancellationToken cancellationToken)
 	{

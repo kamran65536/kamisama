@@ -8,8 +8,7 @@
 /// <typeparam name="TRepository"></typeparam>
 /// <typeparam name="TKey"></typeparam>
 /// <param name="repository"></param>
-/// <param name="mapper"></param>
-public abstract class GenericFindByIdFeature<TEntity, TEntityDto, TRepository, TKey>(TRepository repository, IMapper mapper) :
+public abstract class GenericFindByIdFeature<TEntity, TEntityDto, TRepository, TKey>(TRepository repository) :
 	IFindByIdFeature<TEntityDto, TKey>
 	where TRepository : ILookupByIdRepository<TEntity, TKey>
 {
@@ -19,12 +18,9 @@ public abstract class GenericFindByIdFeature<TEntity, TEntityDto, TRepository, T
 	protected TRepository Repository { get => repository; }
 
 	/// <summary>
-	/// converts an item, the default behaviour uses <see cref="IMapper"/>
+	/// converts entity to dto
 	/// </summary>
-	/// <param name="entity"></param>
-	/// <returns></returns>
-	protected virtual TEntityDto ConvertToDto(TEntity entity)
-		=> mapper.Map<TEntityDto>(entity);
+	protected abstract Task<TEntityDto> ConvertToDto(TEntity entity, CancellationToken cancellationToken);
 	/// <summary>
 	/// Finds an 
 	/// </summary>
@@ -36,6 +32,6 @@ public abstract class GenericFindByIdFeature<TEntity, TEntityDto, TRepository, T
 	{
 		var entity = await repository.FindByIdAsync(id, cancellationToken) ?? throw new NotFoundException<TEntity>(id);
 
-		return ConvertToDto(entity);
+		return await ConvertToDto(entity, cancellationToken);
 	}
 }

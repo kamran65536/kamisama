@@ -17,7 +17,7 @@ public abstract class GenericDeleteFeature<TEntity, TRepository, TKey>(TReposito
 	/// </summary>
 	protected TRepository Repository { get => repository; }
 	/// <summary>
-	/// Checks if the entity can be deleted or not. the default behaviour always returns true
+	/// Checks if the entity can be deleted or not. the default behavior always returns true
 	/// </summary>
 	/// <returns></returns>
 	protected virtual Task<bool> CanBeDeletedAsync(TRepository repository, TEntity entity)

@@ -14,15 +14,15 @@ public class FeatureDefinitionBase<TEntity, TEntityDto, TAddRequest, TUpdateRequ
 	/// <summary>
 	/// List Feature
 	/// </summary>
-	public abstract class ListFeatureBase(TRepository repository, IMapper mapper) : GenericListFeature<TEntity, TEntityDto, TSearchModel, TRepository>(repository, mapper);
+	public abstract class ListFeatureBase(TRepository repository) : GenericListFeature<TEntity, TEntityDto, TSearchModel, TRepository>(repository);
 	/// <summary>
 	/// Add Feature
 	/// </summary>
-	public abstract class AddFeatureBase(TRepository repository, IMapper mapper) : GenericAddFeature<TAddRequest, TRepository, TEntity, TEntityDto>(repository, mapper);
+	public abstract class AddFeatureBase(TRepository repository) : GenericAddFeature<TAddRequest, TRepository, TEntity, TEntityDto>(repository);
 	/// <summary>
 	/// Update Feature
 	/// </summary>
-	public abstract class UpdateFeatureBase(TRepository repository, IMapper mapper) : GenericUpdateFeature<TUpdateRequest, TEntity, TRepository, TKey>(repository, mapper);
+	public abstract class UpdateFeatureBase(TRepository repository) : GenericUpdateFeature<TUpdateRequest, TEntity, TRepository, TKey>(repository);
 	/// <summary>
 	/// Delete Feature
 	/// </summary>
@@ -30,7 +30,7 @@ public class FeatureDefinitionBase<TEntity, TEntityDto, TAddRequest, TUpdateRequ
 	/// <summary>
 	/// Find By Id Feature
 	/// </summary>
-	public abstract class FindByIdFeatureBase(TRepository repository, IMapper mapper) : GenericFindByIdFeature<TEntity, TEntityDto, TRepository, TKey>(repository, mapper);
+	public abstract class FindByIdFeatureBase(TRepository repository) : GenericFindByIdFeature<TEntity, TEntityDto, TRepository, TKey>(repository);
 	/// <summary>
 	/// Exists by Id Feature
 	/// </summary>

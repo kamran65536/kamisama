@@ -5,7 +5,6 @@
 		<Description>Common features used in most DDD projects and CRUD</Description>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="AutoMapper" Version="14.0.0" />
 		<ProjectReference Include="..\Chassis.Commons.Abstractions\KamiSama.Chassis.Commons.Abstractions.csproj" />
 		<ProjectReference Include="..\Chassis.Exceptions\KamiSama.Chassis.HttpExceptions.csproj" />
 		<ProjectReference Include="..\Repositories.EntityFrameworkCore\KamiSama.Repositories.EntityFrameworkCore.csproj" />

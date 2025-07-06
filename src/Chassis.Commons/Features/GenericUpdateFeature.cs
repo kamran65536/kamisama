@@ -5,7 +5,7 @@ namespace KamiSama.Chassis.Commons.Features;
 /// <summary>
 /// Generic implementation of <see cref="IUpdateFeature{TEntityDto, TKey}"/>
 /// </summary>
-public abstract class GenericUpdateFeature<TUpdateRequest, TEntity, TRepository, TKey>(TRepository repository, IMapper mapper) :
+public abstract class GenericUpdateFeature<TUpdateRequest, TEntity, TRepository, TKey>(TRepository repository) :
 	IUpdateFeature<TUpdateRequest, TKey>
 	where TRepository : ILookupByIdRepository<TEntity, TKey>, IUpdatableRepository<TEntity>
 {
@@ -18,13 +18,8 @@ public abstract class GenericUpdateFeature<TUpdateRequest, TEntity, TRepository,
 	/// </summary>
 	protected virtual Task CheckDuplicateAsync(TKey id, TUpdateRequest request, CancellationToken cancellationToken) => Task.CompletedTask;
 	/// <summary>
-	/// Patches the entity with the request, the default behavior uses <see cref="IMapper"/>
 	/// </summary>
-	protected virtual Task PatchEntityAsync(TEntity entity, TUpdateRequest request, CancellationToken cancellationToken)
-	{
-		mapper.Map(request, entity);
-		return Task.CompletedTask;
-	}
+	protected abstract Task PatchEntityAsync(TEntity entity, TUpdateRequest request, CancellationToken cancellationToken);
 	/// <inheritdoc />
 	public async virtual Task UpdateAsync(TKey id, TUpdateRequest request, CancellationToken cancellationToken)
 	{

@@ -1,9 +1,0 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="../props.xml" />
-	<PropertyGroup>
-		<Description>AutoMapper extension for patching objects (only set if the member is changed)</Description>
-	</PropertyGroup>
-	<ItemGroup>
-	  <PackageReference Include="AutoMapper" Version="14.0.0" />
-	</ItemGroup>
-</Project>
