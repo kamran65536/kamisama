@@ -10,10 +10,10 @@ namespace KamiSama.Extensions.NLog;
 /// <param name="fileName"></param>
 /// <param name="archiveFileName"></param>
 /// <returns></returns>
-public delegate string PassswordFunc(string fileName, string archiveFileName);
+public delegate string PasswordFunc(string fileName, string archiveFileName);
 
 /// <summary>
-/// Encrypted Zip Archive ispired by NLog ZipArchiveFileCompressor
+/// Encrypted Zip Archive inspired by NLog ZipArchiveFileCompressor
 /// </summary>
 /// <remarks>
 /// constructor
@@ -21,9 +21,9 @@ public delegate string PassswordFunc(string fileName, string archiveFileName);
 /// <param name="passwordFunc">password based on current file name</param>
 /// <param name="compressionMethod">Compression method used by SharpZipLib library</param>
 [ExcludeFromCodeCoverage]
-public class EncryptedZipArchiveFileCompressor(PassswordFunc passwordFunc, CompressionMethod compressionMethod = CompressionMethod.BZip2) : IFileCompressor
+public class EncryptedZipArchiveFileCompressor(PasswordFunc passwordFunc, CompressionMethod compressionMethod = CompressionMethod.BZip2) : IFileCompressor
 {
-	private readonly PassswordFunc passwordFunc = passwordFunc;
+	private readonly PasswordFunc passwordFunc = passwordFunc;
 
 	/// <summary>
 	/// Implements <see cref="IFileCompressor.CompressFile(string, string)"/> using the .Net4.5 specific <see cref="System.IO.Compression.ZipArchive"/>
