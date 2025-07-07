@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
+﻿using System.Data;
 
 namespace KamiSama.Extensions.Paging;
 
@@ -25,4 +22,12 @@ public record PagedResult<T>(int TotalItemsCount, List<T> Items)
 	/// <returns></returns>
 	public virtual PagedResult<TOtherType> ConvertTo<TOtherType>(Func<T, TOtherType> convertFunc)
 		=> new(TotalItemsCount, [.. Items.Select(convertFunc)]);
+	/// <summary>
+	/// Converts a paged result to another one asynchronously
+	/// </summary>
+	public virtual async Task<PagedResult<TOtherType>> ConvertToAsync<TOtherType>(Func<T, CancellationToken, Task<TOtherType>> convertFunc, CancellationToken cancellationToken)
+	{
+		var items = await Task.WhenAll(Items.Select(x => convertFunc(x, cancellationToken)));
+		return new PagedResult<TOtherType>(TotalItemsCount, [.. items]);
+	}
 }

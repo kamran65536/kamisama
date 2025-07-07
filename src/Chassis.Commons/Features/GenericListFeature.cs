@@ -41,14 +41,12 @@ public abstract class GenericListFeature<TEntity, TEntityDto, TSearchModel, TRep
 	/// <summary>
 	/// Converts a database <paramref name="entity"/> to <typeparamref name="TEntity"/>
 	/// </summary>
-	/// <param name="entity"></param>
-	/// <returns></returns>
-	protected abstract TEntityDto ConvertToDto(TEntity entity);
+	protected abstract Task<TEntityDto> ConvertToDto(TEntity entity, CancellationToken cancellationToken);
 	///<inheritdoc />
 	public virtual async Task<PagedResult<TEntityDto>> ListAsync(TSearchModel searchModel, CancellationToken cancellationToken)
 	{
 		var result = await repository.ListAsync(searchModel, cancellationToken);
 
-		return result.ConvertTo(ConvertToDto);
+		return await result.ConvertToAsync(ConvertToDto, cancellationToken);
 	}
 }
