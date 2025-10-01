@@ -1,16 +1,16 @@
-﻿
-using Microsoft.AspNetCore.Cors.Infrastructure;
+﻿using Microsoft.AspNetCore.Cors.Infrastructure;
 
 namespace KamiSama.Extensions.WebModules;
 
 /// <summary>
 /// Adds CORS module
 /// </summary>
-public class CorsModule(Action<CorsPolicyBuilder>? configurePolicy) : WebModule
+public class CorsModule(Action<CorsOptions>? configOptions, Action<CorsPolicyBuilder>? configurePolicy) : WebModule
 {
 	/// <inheritdoc />
 	public override void ConfigureServices(IServiceCollection services)
 	{
+		services.AddCors(ConfigureCorsOptions);
 	}
 	/// <inheritdoc />
 	public override Task ApplyConfigurationToAsync(WebApplication app, CancellationToken cancellationToken)
@@ -18,6 +18,14 @@ public class CorsModule(Action<CorsPolicyBuilder>? configurePolicy) : WebModule
 		app.UseCors(ConfigureCorsPolicy);
 
 		return Task.CompletedTask;
+	}
+	/// <summary>
+	/// Configures the cors options for inheritance
+	/// </summary>
+	/// <param name="options"></param>
+	protected virtual void ConfigureCorsOptions(CorsOptions options)
+	{
+		configOptions?.Invoke(options);
 	}
 	/// <summary>
 	/// Configures the cors builder for inheritance
@@ -34,6 +42,6 @@ public static class CorsExtension
 	/// <summary>
 	/// Adds CORS module
 	/// </summary>
-	public static ExtendedWebApplicationBuilder AddCors(this ExtendedWebApplicationBuilder builder, Action<CorsPolicyBuilder>? configurePolicy)
-		=> builder.AddModule(new CorsModule(configurePolicy));
+	public static ExtendedWebApplicationBuilder AddCors(this ExtendedWebApplicationBuilder builder, Action<CorsOptions>? configOptions = null, Action<CorsPolicyBuilder>? configurePolicy = null)
+		=> builder.AddModule(new CorsModule(configOptions, configurePolicy));
 }

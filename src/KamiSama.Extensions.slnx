@@ -1,0 +1,74 @@
+<Solution>
+  <Folder Name="/Chassis/">
+    <Project Path="Chassis.Commons.Abstractions/KamiSama.Chassis.Commons.Abstractions.csproj" />
+    <Project Path="Chassis.Commons/KamiSama.Chassis.Commons.csproj" />
+    <Project Path="Chassis.Exceptions/KamiSama.Chassis.HttpExceptions.csproj" />
+    <Project Path="Chassis.ProblemDetails/KamiSama.Chassis.ProblemDetails.csproj" />
+    <Project Path="ChassisTestProject/ChassisTestProject.csproj" />
+  </Folder>
+  <Folder Name="/Core/">
+    <Project Path="Core.Tests/KamiSama.Extensions.Core.Tests.csproj" />
+    <Project Path="Core/KamiSama.Extensions.Core.csproj" />
+  </Folder>
+  <Folder Name="/DependencyInjection/">
+    <Project Path="DependencyInjection.Tests/KamiSama.Extensions.DependencyInjection.Tests.csproj" />
+    <Project Path="DependencyInjection/KamiSama.Extensions.DependencyInjection.csproj" />
+  </Folder>
+  <Folder Name="/IranSystem/">
+    <Project Path="IranSystem.Tests/KamiSama.IranSystem.Tests.csproj" />
+    <Project Path="IranSystem/KamiSama.IranSystem.csproj" />
+  </Folder>
+  <Folder Name="/Json/">
+    <Project Path="Json.Tests/KamiSama.Extensions.Json.Tests.csproj" />
+    <Project Path="Json/KamiSama.Extensions.Json.csproj" />
+  </Folder>
+  <Folder Name="/NLog/">
+    <Project Path="Nlog.Tests/KamiSama.Extensions.NLog.Tests.csproj" />
+    <Project Path="NLog/KamiSama.Extensions.NLog.csproj" />
+  </Folder>
+  <Folder Name="/Repositories/">
+    <Project Path="Repositories.Core/KamiSama.Repositories.Core.csproj" />
+    <Project Path="Repositories.EntityFramework/KamiSama.Repositories.EntityFramework.csproj" />
+    <Project Path="Repositories.EntityFrameworkCore/KamiSama.Repositories.EntityFrameworkCore.csproj" />
+    <Project Path="Repositories.Json/KamiSama.Repositories.Json.csproj" />
+    <Project Path="Repositories.Tests/KamiSama.Repositories.Tests.csproj" />
+    <Project Path="Repositories.Xml/KamiSama.Repositories.Xml.csproj" />
+  </Folder>
+  <Folder Name="/Templates/">
+    <Project Path="Templates/KamiSama.Templates.csproj" />
+  </Folder>
+  <Folder Name="/Testings/">
+    <Project Path="Testing.NSubstitute/KamiSama.Testing.NSubstitute.csproj" />
+    <Project Path="Testing.Tests/KamiSama.Testing.Tests.csproj" />
+  </Folder>
+  <Folder Name="/WebModules/">
+    <Project Path="KamiSama.Extensions.WebModules/KamiSama.Extensions.WebModules.csproj" />
+  </Folder>
+  <Folder Name="/Xml/">
+    <Project Path="Xml.Tests/KamiSama.Extensions.Xml.Tests.csproj" />
+    <Project Path="Xml/KamiSama.Extensions.Xml.csproj" />
+  </Folder>
+  <Folder Name="/_/">
+    <File Path="../.gitlab-ci.yml" />
+    <File Path="../CHANGELOG" />
+    <File Path=".editorconfig" />
+    <File Path="LICENSE" />
+    <File Path="props-test.xml" />
+    <File Path="props.xml" />
+    <File Path="test-configs.runsettings" />
+  </Folder>
+  <Folder Name="/_/docs/">
+    <File Path="../docs/1-core.md" />
+    <File Path="../docs/10-templates.md" />
+    <File Path="../docs/11-web-modules.md" />
+    <File Path="../docs/2-dependency-injection.md" />
+    <File Path="../docs/3-json.md" />
+    <File Path="../docs/4-xml.md" />
+    <File Path="../docs/5-repositories.md" />
+    <File Path="../docs/6-nlog.md" />
+    <File Path="../docs/7-iran-system.md" />
+    <File Path="../docs/8-chassis.md" />
+    <File Path="../docs/9-testings.md" />
+    <File Path="../readme.md" />
+  </Folder>
+</Solution>
