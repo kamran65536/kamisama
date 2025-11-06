@@ -1,6 +1,4 @@
-﻿using KamiSama.Extensions.Paging;
-
-namespace KamiSama.Chassis.Commons.Repositories;
+﻿namespace KamiSama.Chassis.Commons.Repositories;
 
 /// <summary>
 /// Generic implementation of <see cref="IGenericRepository{TEntity, TSeaerchModel}"/>
@@ -45,5 +43,13 @@ public abstract class GenericRepository<TEntity, TSearchModel, TDbContext, TPage
 		query = ApplySearchModel(query, searchModel);
 
 		return MakeResultAsync(query, searchModel, cancellationToken);
+	}
+	/// <inheritdoc />
+	public Task<int> CountAsync(TSearchModel searchModel, CancellationToken cancellationToken)
+	{
+		var query = base.AsQueryable();
+		query = ApplySearchModel(query, searchModel);
+
+		return query.CountAsync(cancellationToken);
 	}
 }

@@ -10,10 +10,11 @@ public interface IListingRepository<TEntity, TSearchModel, TPagedResult>
 	/// <summary>
 	/// Lists items and page them
 	/// </summary>
-	/// <param name="searchModel"></param>
-	/// <param name="cancellationToken"></param>
-	/// <returns></returns>
 	Task<TPagedResult> ListAsync(TSearchModel searchModel, CancellationToken cancellationToken);
+	/// <summary>
+	/// Counts the item based on the search model
+	/// </summary>
+	Task<int> CountAsync(TSearchModel searchModel, CancellationToken cancellationToken);
 }
 /// <summary>
 /// A repository with listing capability

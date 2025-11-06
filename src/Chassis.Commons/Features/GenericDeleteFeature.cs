@@ -1,6 +1,4 @@
-﻿using KamiSama.Chassis.Commons.Repositories;
-
-namespace KamiSama.Chassis.Commons.Features;
+﻿namespace KamiSama.Chassis.Commons.Features;
 /// <summary>
 /// Generic implementation of <see cref="IDeleteFeature{TKey}"/>
 /// </summary>
