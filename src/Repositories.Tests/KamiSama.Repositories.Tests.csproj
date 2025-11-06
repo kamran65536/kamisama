@@ -5,8 +5,8 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Effort.EF6" Version="2.2.17" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.9" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="9.0.9" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.10" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="9.0.10" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -24,9 +24,9 @@
 
 	<ItemGroup>
 	  <PackageReference Update="coverlet.collector" Version="6.0.4" />
-	  <PackageReference Update="Microsoft.NET.Test.Sdk" Version="17.14.1" />
-	  <PackageReference Update="MSTest.TestAdapter" Version="3.10.5" />
-	  <PackageReference Update="MSTest.TestFramework" Version="3.10.5" />
+	  <PackageReference Update="Microsoft.NET.Test.Sdk" Version="18.0.0" />
+	  <PackageReference Update="MSTest.TestAdapter" Version="4.0.1" />
+	  <PackageReference Update="MSTest.TestFramework" Version="4.0.1" />
 	  <PackageReference Update="NSubstitute" Version="5.3.0" />
 	</ItemGroup>
 

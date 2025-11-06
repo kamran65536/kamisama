@@ -1,5 +1,6 @@
-1404-08-16 11/7/2025 v3.1.5
+1404-08-16 11/7/2025 v3.1.6
 - KamiSama.Chassis.Commons.Repositories.IListingRepository.CountAsync is added.
+- package update
 1404-07-09 10/1/2025 v3.1.4
 - package nuget upgrade
 - bugfix: KamiSama.WebModules.CorsModule service was not added.
