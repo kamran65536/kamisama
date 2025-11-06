@@ -40,10 +40,10 @@ public class JsonRepositoryTests
 		Assert.IsTrue(all.Any(x => x.Id == 22 && x.Name == "--not-found"));
 	}
 	[TestMethod]
-	public void Dispose_releases_items_in_repository()
+	public async Task Dispose_releases_items_in_repository()
 	{
 		var repository = new JsonRepository<SampleEntity>("./Json/sample-entities.json");
-		repository.TryLoadFileAsync(forceReload: true, CancellationToken.None).Wait();
+		await repository.TryLoadFileAsync(forceReload: true, CancellationToken.None);
 
 		((System.IDisposable)repository).Dispose();
 
@@ -64,7 +64,7 @@ public class JsonRepositoryTests
 		File.Delete(tempFileName);
 	}
 	[TestMethod]
-	public void Update_saves_item_into_the_file()
+	public async Task Update_saves_item_into_the_file()
 	{
 		var tempFileName = Path.GetTempFileName();
 
@@ -76,7 +76,7 @@ public class JsonRepositoryTests
 		sample.Name = "item111";
 		repository.Update(sample);
 
-		repository.TryLoadFileAsync(forceReload: true, CancellationToken.None).Wait();
+		await repository.TryLoadFileAsync(forceReload: true, CancellationToken.None);
 
 		Assert.IsFalse(repository.GetAll().Any(x => x.Name == "item1"));
 		Assert.IsTrue(repository.GetAll().Any(x => x.Name == "item111"));
@@ -124,7 +124,7 @@ public class JsonRepositoryTests
 		sample.Name = "item111";
 		await repository.UpdateAsync(sample, CancellationToken.None);
 
-		repository.TryLoadFileAsync(forceReload: true, CancellationToken.None).Wait();
+		await repository.TryLoadFileAsync(forceReload: true, CancellationToken.None);
 
 		Assert.IsFalse(repository.GetAll().Any(x => x.Name == "item1"));
 		Assert.IsTrue(repository.GetAll().Any(x => x.Name == "item111"));

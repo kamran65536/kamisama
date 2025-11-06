@@ -15,10 +15,10 @@ public class JsonSerializationExtensionsTests
 
 		var result = a.SerializeToJson();
 
-		StringAssert.Contains(result, "{");
-		StringAssert.Contains(result, @"""X"":");
-		StringAssert.Contains(result, "10");
-		StringAssert.Contains(result, "}");
+		Assert.Contains("{", result);
+		Assert.Contains(@"""X"":", result);
+		Assert.Contains("10", result);
+		Assert.Contains("}", result);
 	}
 	[TestMethod]
 	public void SerializeToJson_must_configure_if_it_is_null()
@@ -27,10 +27,10 @@ public class JsonSerializationExtensionsTests
 
 		var result = a.SerializeToJson(configure: null);
 
-		StringAssert.Contains(result, "{");
-		StringAssert.Contains(result, @"""X"":");
-		StringAssert.Contains(result, "10");
-		StringAssert.Contains(result, "}");
+		Assert.Contains("{", result);
+		Assert.Contains(@"""X"":", result);
+		Assert.Contains("10", result);
+		Assert.Contains("}", result);
 	}
 	[TestMethod]
 	public void SerializeToJson_must_use_options_if_any()
@@ -42,10 +42,10 @@ public class JsonSerializationExtensionsTests
 			WriteIndented = true
 		});
 
-		StringAssert.Contains(result, "{");
-		StringAssert.Contains(result, @" ""X"":");
-		StringAssert.Contains(result, "10");
-		StringAssert.Contains(result, "}");
+		Assert.Contains("{", result);
+		Assert.Contains(@" ""X"":", result);
+		Assert.Contains("10", result);
+		Assert.Contains("}", result);
 	}
 	[TestMethod]
 	public void SerializeToJson_must_use_optionsFunc_if_any()
@@ -54,10 +54,10 @@ public class JsonSerializationExtensionsTests
 
 		var result = a.SerializeToJson(opt => opt.WriteIndented = true);
 
-		StringAssert.Contains(result, "{");
-		StringAssert.Contains(result, @" ""X"":");
-		StringAssert.Contains(result, "10");
-		StringAssert.Contains(result, "}");
+		Assert.Contains("{", result);
+		Assert.Contains(@" ""X"":", result);
+		Assert.Contains("10", result);
+		Assert.Contains("}", result);
 	}
 	[TestMethod]
 	public void DeserializeFromJson_must_deserialize_object_from_string()

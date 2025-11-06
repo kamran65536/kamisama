@@ -5,3 +5,4 @@ global using System.Globalization;
 using System.Diagnostics.CodeAnalysis;
 
 [assembly: ExcludeFromCodeCoverage]
+[assembly: DoNotParallelize]

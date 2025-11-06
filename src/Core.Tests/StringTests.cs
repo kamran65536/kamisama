@@ -9,10 +9,9 @@ public class StringTests
 		CollectionAssert.AreEqual(Array.Empty<byte>(), (null as string).FromHex());
 	}
 	[TestMethod]
-	[ExpectedException(typeof(Exception), AllowDerivedTypes = true)]
 	public void FromHex_must_throw_exception_on_invalid_string()
 	{
-		"1yyy".FromHex();
+		Assert.Throws<Exception>(() => "1yyy".FromHex());
 	}
 	[TestMethod]
 	public void FromHex_must_strip_escaping_characters_from_string()

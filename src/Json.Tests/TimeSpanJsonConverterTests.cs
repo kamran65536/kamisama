@@ -36,7 +36,7 @@ public class TimeSpanJsonConverterTests
 		var str = ts.SerializeToJson(options => options.Converters.Add(new TimeSpanJsonConverter()));
 		var expected = @"1.12:13:14.777";
 
-		Assert.IsTrue(str.Contains(expected));
+		Assert.Contains(expected, str);
 	}
 	[TestMethod]
 	public void Write_must_write_byte_array_as_hex_value_for_properties()
@@ -49,6 +49,6 @@ public class TimeSpanJsonConverterTests
 		var str = a.SerializeToJson();
 		var expected = @"1.12:13:14.777";
 
-		Assert.IsTrue(str.Contains(expected));
+		Assert.Contains(expected, str);
 	}
 }

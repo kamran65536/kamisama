@@ -29,7 +29,7 @@ public class HierarchicalJsonConverterTests
 	[TestMethod]
 	public void HierarchicalJsonConverter_constructor_must_throw_TypeInitializationException_if_no_JsonHirerarchyDiscriminatorAttribute_exists()
 	{
-		Assert.ThrowsException<TypeInitializationException>(() => new HierarchicalJsonConverter<BaseClassWithoutDiscriminatorProperty>());
+		Assert.ThrowsExactly<TypeInitializationException>(() => new HierarchicalJsonConverter<BaseClassWithoutDiscriminatorProperty>());
 	}
 	[TestMethod]
 	public void Register_must_add_configuration_to_typeMaps()
@@ -82,21 +82,21 @@ public class HierarchicalJsonConverterTests
 		};
 		var json = JsonSerializer.Serialize(testClass);
 
-		Assert.ThrowsException<NotSupportedException>(() => JsonSerializer.Deserialize<TestClassWithConverter>(json));
+		Assert.ThrowsExactly<NotSupportedException>(() => JsonSerializer.Deserialize<TestClassWithConverter>(json));
 	}
 	[TestMethod]
 	public void Read_must_throw_NotSupportedException_if_discriminator_property_is_null_or_empty()
 	{
 		var json = @"{ ""Configuration"" : { ""Discriminator"" : null } }";
 
-		Assert.ThrowsException<NotSupportedException>(() => JsonSerializer.Deserialize<TestClassWithConverter>(json));
+		Assert.ThrowsExactly<NotSupportedException>(() => JsonSerializer.Deserialize<TestClassWithConverter>(json));
 	}
 	[TestMethod]
 	public void Read_must_throw_Exception_if_Configuration_ProviderName_key_not_present()
 	{
 		var json = @"{ ""Configuration"" : { ""Discriminator2"" : ""something"" } }";
 
-		Assert.ThrowsException<Exception>(() => JsonSerializer.Deserialize<TestClassWithConverter>(json));
+		Assert.ThrowsExactly<Exception>(() => JsonSerializer.Deserialize<TestClassWithConverter>(json));
 	}
 	[TestMethod]
 	public void Read_must_read_configuration_types_based_on_ChannelType()

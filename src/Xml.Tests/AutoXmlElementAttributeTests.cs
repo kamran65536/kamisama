@@ -4,12 +4,11 @@
 public class AutoXmlElementAttributeTests
 {
 	[TestMethod]
-	[ExpectedException(typeof(InvalidOperationException))]
 	public void VisitType_throws_InvalidOperationException()
 	{
 		var attr = new AutoXmlElementAttribute();
 
-		attr.VisitType(default, default, default);
+		Assert.ThrowsExactly<InvalidOperationException>(() => attr.VisitType(default, default, default));
 	}
 	[TestMethod]
 	public void VisitProperty_does_nothing_if_no_compatible_type_is_found()

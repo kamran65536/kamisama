@@ -8,3 +8,4 @@ global using System.Linq;
 using System.Diagnostics.CodeAnalysis;
 
 [assembly: ExcludeFromCodeCoverage]
+[assembly: DoNotParallelize]

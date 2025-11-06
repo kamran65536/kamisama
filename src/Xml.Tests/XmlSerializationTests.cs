@@ -15,9 +15,9 @@ public class XmlSerializationTests
 
 		var result = a.SerializeToXml();
 
-		StringAssert.Contains(result, "<A");
-		StringAssert.Contains(result, "<X>10</X>");
-		StringAssert.Contains(result, "</A>");
+		Assert.Contains("<A", result);
+		Assert.Contains("<X>10</X>", result);
+		Assert.Contains("</A>", result);
 	}
 	[TestMethod]
 	public void SerializeToXml_must_use_custom_serializer_if_available()
@@ -26,9 +26,9 @@ public class XmlSerializationTests
 		var serializer = new XmlSerializer(typeof(A), new XmlRootAttribute { ElementName = "B", IsNullable = true });
 		var result = a.SerializeToXml(serializer: serializer);
 
-		StringAssert.Contains(result, "<B");
-		StringAssert.Contains(result, "<X>10</X>");
-		StringAssert.Contains(result, "</B>");
+		Assert.Contains("<B", result);
+		Assert.Contains("<X>10</X>", result);
+		Assert.Contains("</B>", result);
 	}
 	[TestMethod]
 	public void SerializeToXml_must_config_actions_through_settingsAction()
@@ -40,9 +40,9 @@ public class XmlSerializationTests
 			settings.IndentChars = "\t";
 		});
 
-		StringAssert.Contains(result, "<A");
-		StringAssert.Contains(result, "\t<X>10</X>");
-		StringAssert.Contains(result, "</A>");
+		Assert.Contains("<A", result);
+		Assert.Contains("\t<X>10</X>", result);
+		Assert.Contains("</A>", result);
 	}
 	[TestMethod]
 	public void DeserializeFromXml_returns_deserialized_object()

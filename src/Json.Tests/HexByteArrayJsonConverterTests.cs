@@ -52,7 +52,7 @@ public class HexByteArrayJsonConverterTests
 
 		var str = arr.SerializeToJson(options => options.Converters.Add(new HexByteArrayJsonConverter()));
 
-		Assert.IsTrue(str.Contains(@"""0102030405"""));
+		Assert.Contains(@"""0102030405""", str);
 	}
 	[TestMethod]
 	public void Write_must_write_byte_array_as_hex_value_for_properties()
@@ -61,7 +61,7 @@ public class HexByteArrayJsonConverterTests
 
 		var str = a.SerializeToJson();
 
-		Assert.IsTrue(str.Contains(@"""0102030405"""));
+		Assert.Contains(@"""0102030405""", str);
 	}
 	[TestMethod]
 	public void Write_must_write_null_array_to_null()
@@ -79,6 +79,6 @@ public class HexByteArrayJsonConverterTests
 
 		var str = a.SerializeToJson(options => options.Converters.Add(new HexByteArrayJsonConverter()));
 
-		Assert.IsTrue(str.Contains("null"));
+		Assert.Contains("null", str);
 	}
 }

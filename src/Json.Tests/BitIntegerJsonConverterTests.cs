@@ -37,24 +37,22 @@ public class BitIntegerJsonConverterTests
 		Assert.AreEqual(100, x);
 	}
 	[TestMethod]
-	[ExpectedException(typeof(JsonException))]
 	public void Read_throws_exception_if_value_is_neither_string_nor_number()
 	{
 		var str = "true";
 		var options = new JsonSerializerOptions();
 		options.Converters.Add(new BigIntegerJsonConverter());
 
-		str.DeserializeFromJson<BigInteger>(options);
+		Assert.ThrowsExactly<JsonException>(() => str.DeserializeFromJson<BigInteger>(options));
 	}
 	[TestMethod]
-	[ExpectedException(typeof(JsonException))]
 	public void Read_throws_exception_if_value_is_an_invalid_string()
 	{
 		var str = "\"abc\"";
 		var options = new JsonSerializerOptions();
 		options.Converters.Add(new BigIntegerJsonConverter());
 
-		str.DeserializeFromJson<BigInteger>(options);
+		Assert.ThrowsExactly<JsonException>(() => str.DeserializeFromJson<BigInteger>(options));
 	}
 }
 

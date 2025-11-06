@@ -14,12 +14,11 @@ public class ArrayTests
 		Assert.AreEqual("0102030405000000", padded.ToHex());
 	}
 	[TestMethod]
-	[ExpectedException(typeof(ArgumentException))]
 	public void Pad_with_size_smaller_than_original_array_throws_Exception()
 	{
 		var arr = "0102030405".FromHex();
-		
-		arr.Pad(2, (byte)0x00);
+
+		Assert.ThrowsExactly<ArgumentException>(() => arr.Pad(2, (byte)0x00));
 	}
 
 	[TestMethod]

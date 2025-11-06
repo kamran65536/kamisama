@@ -4,15 +4,13 @@
 public class AutoXmlArrayItemAttributeTests
 {
 	[TestMethod]
-	[ExpectedException(typeof(InvalidOperationException))]
 	public void VisitType_throws_InvalidOperationExcetpion()
 	{
 		var attr = new AutoXmlArrayItemAttribute();
 
-		attr.VisitType(default!, default!, default!);
+		Assert.ThrowsExactly<InvalidOperationException>(() => attr.VisitType(default!, default!, default!));
 	}
 	[TestMethod]
-	[ExpectedException(typeof(InvalidOperationException))]
 
 	public void VisitProperty_throws_InvalidOperationException_if_PropertyType_is_not_an_array()
 	{
@@ -22,7 +20,7 @@ public class AutoXmlArrayItemAttributeTests
 
 		var attr = new AutoXmlArrayItemAttribute();
 
-		attr.VisitProperty(property, overrides, allTypes);
+		Assert.ThrowsExactly<InvalidOperationException>(() => attr.VisitProperty(property, overrides, allTypes));
 	}
 	[TestMethod]
 	public void VisitProperty_does_nothing_if_no_compativle_type_is_found()
@@ -54,7 +52,6 @@ public class AutoXmlArrayItemAttributeTests
 		Assert.IsTrue(elements.Any(x => x.Type == typeof(DerivedClass2)));
 	}
 	[TestMethod]
-	[ExpectedException(typeof(InvalidOperationException))]
 
 	public void VisitField_throws_InvalidOperationException_if_FieldType_is_not_an_array()
 	{
@@ -64,7 +61,7 @@ public class AutoXmlArrayItemAttributeTests
 
 		var attr = new AutoXmlArrayItemAttribute();
 
-		attr.VisitField(field, overrides, allTypes);
+		Assert.ThrowsExactly<InvalidOperationException>(() => attr.VisitField(field, overrides, allTypes));
 	}
 	[TestMethod]
 	public void VisitField_does_nothing_if_no_compativle_type_is_found()

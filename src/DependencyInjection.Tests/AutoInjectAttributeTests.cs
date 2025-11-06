@@ -4,7 +4,6 @@
 public class AutoInjectAttributeTests
 {
 	[TestMethod]
-	[ExpectedException(typeof(InvalidOperationException))]
 	public void TryAdd_must_throw_InvalidOperationException_if_multiple_default_interfaces_are_found()
 	{
 		var services = new ServiceCollection();
@@ -14,7 +13,7 @@ public class AutoInjectAttributeTests
 			Lifetime = ServiceLifetime.Singleton
 		};
 
-		attr.ApplyInjection(services, typeof(MultipleInterfacesImplementation));
+		Assert.ThrowsExactly<InvalidOperationException>(() => attr.ApplyInjection(services, typeof(MultipleInterfacesImplementation)));
 	}
 	[TestMethod]
 	public void TryAdd_injects_the_type_itself_if_no_default_interface_is_found()
