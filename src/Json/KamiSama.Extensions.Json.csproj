@@ -16,10 +16,6 @@ v2.0.0
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="System.Text.Json" Version="9.0.10" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <ProjectReference Include="..\Core\KamiSama.Extensions.Core.csproj" />
 	</ItemGroup>
 </Project>

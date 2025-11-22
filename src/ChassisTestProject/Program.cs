@@ -1,7 +1,6 @@
 
 using ChassisTestProject.Properties;
 using KamiSama.Chassis.ProblemDetails;
-using Microsoft.OpenApi.Models;
 
 namespace ChassisTestProject;
 

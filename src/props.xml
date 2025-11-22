@@ -2,12 +2,12 @@
 	<PropertyGroup>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<DebugType>Full</DebugType>
-		<Version>3.0.0</Version>
+		<Version>10.0.0</Version>
 		<PackageProjectUrl>https://gitlab.com/kamran65536/KamiSama</PackageProjectUrl>
 		<RepositoryUrl>https://gitlab.com/kamran65536/KamiSama</RepositoryUrl>
 		<Authors>Kamran Fallah</Authors>
 		<Company>-</Company>
-		<TargetFramework>net9.0</TargetFramework>
+		<TargetFramework>net10.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<PackageReadmeFile>readme.md</PackageReadmeFile>
