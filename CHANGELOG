@@ -1,7 +1,8 @@
-1404-09-01 11/22/2025 v10.0.0
+1404-09-01 11/22/2025 v10.0.1
 - upgraded to .net 10
 - version is changed to 10.x.x to match .net sdk
 - package update
+- swashbuckle version rolled back to 9.0.6
 1404-08-16 11/7/2025 v3.1.6
 - KamiSama.Chassis.Commons.Repositories.IListingRepository.CountAsync is added.
 - package update
