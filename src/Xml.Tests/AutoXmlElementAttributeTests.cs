@@ -36,8 +36,8 @@ public class AutoXmlElementAttributeTests
 
 		var elements = overrides[property.DeclaringType!, property.Name]!.XmlElements.OfType<XmlElementAttribute>().ToArray();
 
-		Assert.IsTrue(elements.Any(x => x.Type == typeof(DerivedClass1)));
-		Assert.IsTrue(elements.Any(x => x.Type == typeof(DerivedClass2)));
+		Assert.Contains(x => x.Type == typeof(DerivedClass1), elements);
+		Assert.Contains(x => x.Type == typeof(DerivedClass2), elements);
 	}
 	[TestMethod]
 	public void VisitField_does_nothing_if_no_compatible_type_is_found()
@@ -65,7 +65,7 @@ public class AutoXmlElementAttributeTests
 
 		var elements = overrides[field.DeclaringType!, field.Name]!.XmlElements.OfType<XmlElementAttribute>().ToArray();
 
-		Assert.IsTrue(elements.Any(x => x.Type == typeof(DerivedClass1)));
-		Assert.IsTrue(elements.Any(x => x.Type == typeof(DerivedClass2)));
+		Assert.Contains(x => x.Type == typeof(DerivedClass1), elements);
+		Assert.Contains(x => x.Type == typeof(DerivedClass2), elements);
 	}
 }

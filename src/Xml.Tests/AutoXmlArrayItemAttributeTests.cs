@@ -48,8 +48,8 @@ public class AutoXmlArrayItemAttributeTests
 
 		var elements = overrides[property.DeclaringType!, property.Name]!.XmlArrayItems.OfType<XmlArrayItemAttribute>().ToArray();
 
-		Assert.IsTrue(elements.Any(x => x.Type == typeof(DerivedClass1)));
-		Assert.IsTrue(elements.Any(x => x.Type == typeof(DerivedClass2)));
+		Assert.Contains(x => x.Type == typeof(DerivedClass1), elements);
+		Assert.Contains(x => x.Type == typeof(DerivedClass2), elements);
 	}
 	[TestMethod]
 
@@ -89,7 +89,7 @@ public class AutoXmlArrayItemAttributeTests
 
 		var elements = overrides[field.DeclaringType!, field.Name]!.XmlArrayItems.OfType<XmlArrayItemAttribute>().ToArray();
 
-		Assert.IsTrue(elements.Any(x => x.Type == typeof(DerivedClass1)));
-		Assert.IsTrue(elements.Any(x => x.Type == typeof(DerivedClass2)));
+		Assert.Contains(x => x.Type == typeof(DerivedClass1), elements);
+		Assert.Contains(x => x.Type == typeof(DerivedClass2), elements);
 	}
 }

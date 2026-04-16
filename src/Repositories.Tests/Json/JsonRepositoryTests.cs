@@ -194,9 +194,9 @@ public class JsonRepositoryTests
 
 		var result = repository.Where(x => x.Name!.StartsWith("item")).ToArray();
 
-		Assert.IsTrue(result.Any(x => x.Name == "item1"));
-		Assert.IsTrue(result.Any(x => x.Name == "item11"));
-		Assert.IsFalse(result.Any(x => x.Name == "--not-found"));
+		Assert.Contains(x => x.Name == "item1", result);
+		Assert.Contains(x => x.Name == "item11", result);
+		Assert.DoesNotContain(x => x.Name == "--not-found", result);
 	}
 	[TestMethod]
 	public void Where_must_return_all_items_if_predicate_is_null()
@@ -205,8 +205,8 @@ public class JsonRepositoryTests
 
 		var result = repository.Where(null).ToArray();
 
-		Assert.IsTrue(result.Any(x => x.Name == "item1"));
-		Assert.IsTrue(result.Any(x => x.Name == "item11"));
-		Assert.IsTrue(result.Any(x => x.Name == "--not-found"));
+		Assert.Contains(x => x.Name == "item1", result);
+		Assert.Contains(x => x.Name == "item11", result);
+		Assert.Contains(x => x.Name == "--not-found", result);
 	}
 }

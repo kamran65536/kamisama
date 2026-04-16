@@ -37,7 +37,7 @@ public class HierarchicalJsonConverterTests
 		HierarchicalJsonConverter<SampleBaseClass>.typeMap.Clear();
 		HierarchicalJsonConverter<SampleBaseClass>.Register<SampleClass>();
 
-		Assert.IsTrue(HierarchicalJsonConverter<SampleBaseClass>.typeMap[new SampleClass().Discriminator] == typeof(SampleClass));
+		Assert.AreEqual(typeof(SampleClass), HierarchicalJsonConverter<SampleBaseClass>.typeMap[new SampleClass().Discriminator]);
 	}
 	[TestMethod]
 	public void Write_must_write_configuration_with_no_change()

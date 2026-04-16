@@ -103,27 +103,27 @@ public class JsonSerializationExtensionsTests
 	{
 		var options = new JsonSerializerOptions();
 
-		Assert.IsFalse(options.Converters.Any(x => x is HierarchicalJsonConverter<SampleBaseClass>));
+		Assert.DoesNotContain(x => x is HierarchicalJsonConverter<SampleBaseClass>, options.Converters);
 		options.AddHierarchicalConverter<SampleBaseClass>();
-		Assert.IsTrue(options.Converters.Any(x => x is HierarchicalJsonConverter<SampleBaseClass>));
+		Assert.Contains(x => x is HierarchicalJsonConverter<SampleBaseClass>, options.Converters);
 	}
 	[TestMethod]
 	public void TimeSpanJsonConverter_must_add_TimeSpanJsonConverter_to_options_Converters()
 	{
 		var options = new JsonSerializerOptions();
 
-		Assert.IsFalse(options.Converters.Any(x => x is TimeSpanJsonConverter));
+		Assert.DoesNotContain(x => x is TimeSpanJsonConverter, options.Converters);
 		options.AddTimeSpanJsonConverter();
-		Assert.IsTrue(options.Converters.Any(x => x is TimeSpanJsonConverter));
+		Assert.Contains(x => x is TimeSpanJsonConverter, options.Converters);
 	}
 	[TestMethod]
 	public void AddHexByteConverter_must_add_HexByteConverter_to_options_Converters()
 	{
 		var options = new JsonSerializerOptions();
 
-		Assert.IsFalse(options.Converters.Any(x => x is HexByteArrayJsonConverter));
+		Assert.DoesNotContain(x => x is HexByteArrayJsonConverter, options.Converters);
 		options.AddHexByteConverter();
-		Assert.IsTrue(options.Converters.Any(x => x is HexByteArrayJsonConverter));
+		Assert.Contains(x => x is HexByteArrayJsonConverter, options.Converters);
 	}
 	[TestMethod]
 	public void ConvertToDynamicObject_must_convert_an_jsonString_to_ExpandoObject()

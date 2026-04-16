@@ -1,3 +1,6 @@
+1405-01-27 4/16/2026 v10.0.6
+- package update
+- minor test improvements
 1404-09-01 11/22/2025 v10.0.1
 - upgraded to .net 10
 - version is changed to 10.x.x to match .net sdk
