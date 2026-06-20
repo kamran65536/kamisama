@@ -1,3 +1,5 @@
+1405-03-30 6/20/2026 v10.0.9
+- package references update
 1405-02-11 5/1/2026 v10.0.7
 - package update
 - KamiSama.Repositories.EntityFrameworkCore.Initialization.DefaultDatabaseInitializer<T> is added.

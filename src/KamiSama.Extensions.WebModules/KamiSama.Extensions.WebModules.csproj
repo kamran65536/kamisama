@@ -2,6 +2,6 @@
 	<Import Project="../props.xml" />
 	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.7" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="10.2.2" />
 	</ItemGroup>
 </Project>
