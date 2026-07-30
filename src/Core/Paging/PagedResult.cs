@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.Collections;
+using System.Data;
 
 namespace KamiSama.Extensions.Paging;
 
@@ -8,7 +9,7 @@ namespace KamiSama.Extensions.Paging;
 /// <typeparam name="T"></typeparam>
 /// <param name="TotalItemsCount"></param>
 /// <param name="Items"></param>
-public record PagedResult<T>(int TotalItemsCount, List<T> Items)
+public record PagedResult<T>(int TotalItemsCount, List<T> Items) : IEnumerable<T>
 {
 	/// <summary>
 	/// Empty Result
@@ -30,4 +31,9 @@ public record PagedResult<T>(int TotalItemsCount, List<T> Items)
 		var items = await Task.WhenAll(Items.Select(x => convertFunc(x, cancellationToken)));
 		return new PagedResult<TOtherType>(TotalItemsCount, [.. items]);
 	}
+	/// <summary>
+	/// Iterates through Items
+	/// </summary>
+	public IEnumerator<T> GetEnumerator() => Items.GetEnumerator();
+	IEnumerator IEnumerable.GetEnumerator() => Items.GetEnumerator();
 }
