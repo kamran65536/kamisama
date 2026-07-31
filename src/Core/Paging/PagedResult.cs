@@ -9,7 +9,7 @@ namespace KamiSama.Extensions.Paging;
 /// <typeparam name="T"></typeparam>
 /// <param name="TotalItemsCount"></param>
 /// <param name="Items"></param>
-public record PagedResult<T>(int TotalItemsCount, List<T> Items) : IEnumerable<T>
+public record PagedResult<T>(int TotalItemsCount, List<T> Items)
 {
 	/// <summary>
 	/// Empty Result
@@ -31,9 +31,4 @@ public record PagedResult<T>(int TotalItemsCount, List<T> Items) : IEnumerable<T
 		var items = await Task.WhenAll(Items.Select(x => convertFunc(x, cancellationToken)));
 		return new PagedResult<TOtherType>(TotalItemsCount, [.. items]);
 	}
-	/// <summary>
-	/// Iterates through Items
-	/// </summary>
-	public IEnumerator<T> GetEnumerator() => Items.GetEnumerator();
-	IEnumerator IEnumerable.GetEnumerator() => Items.GetEnumerator();
 }
