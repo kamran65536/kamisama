@@ -37,6 +37,6 @@ public class ArrayTests
 		var arr = new object?[] {null, null, null};
 		var trimmed = arr.TrimEnd(null as object);
 
-		CollectionAssert.AreEqual(Array.Empty<object>(), trimmed);
+		Assert.AreSequenceEqual([], trimmed);
 	}
 }

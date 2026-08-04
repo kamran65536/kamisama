@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="../props.xml" />
+
+	<PropertyGroup>
+		<NoWarn>$(NoWarn);1591</NoWarn>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Chassis.Commons.Abstractions\KamiSama.Chassis.Commons.Abstractions.csproj" />
+	</ItemGroup>
+</Project>

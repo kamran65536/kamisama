@@ -3,38 +3,131 @@
 	"author": "KamiSama",
 	"classifications": [ "Common", "Code" ],
 	"identity": "KamiSama.Projects.Core",
-	"name": "Core Project",
-	"description": "KamiSama Core Project",
+	"name": "KamiSama Core Project",
+	"description": "KamiSama core project with optional entities, repository/database infrastructure, and options.",
 	"shortName": "kamisama-core",
-	"defaultName": "Example.Core",
+	"defaultName": "ExampleCore",
 	"tags": {
 		"language": "C#",
 		"type": "project"
 	},
-	"sourceName": "Example.Core",
+	"sourceName": "ExampleCore",
 	"symbols": {
-		"AddSamples": {
+		"UseGlobalProjectConfig": {
 			"type": "parameter",
 			"dataType": "bool",
 			"defaultValue": "true",
-			"displayName": "Sample Files",
-			"description": "adds sample files to the project"
+			"displayName": "Use global project config",
+			"description": "Use a shared project configuration file instead of per-project settings."
 		},
-		"UseProps": {
+		"GlobalProjectConfig": {
+			"type": "parameter",
+			"dataType": "string",
+			"defaultValue": "./props.xml",
+			"displayName": "Global project config",
+			"description": "Path to the shared project configuration file.",
+			"isEnabled": "UseGlobalProjectConfig",
+			"replaces": "GlobalProjectConfigPath"
+		},
+		"IncludeEntities": {
 			"type": "parameter",
 			"dataType": "bool",
 			"defaultValue": "true",
-			"displayName": "Use prop.xml",
-			"description": "use prop.xml to unify the process of library versioning"
+			"displayName": "Entities folder",
+			"description": "Add the Entities folder with a sample entity."
+		},
+		"IncludeDatabase": {
+			"type": "parameter",
+			"dataType": "bool",
+			"defaultValue": "true",
+			"displayName": "Repositories and database",
+			"description": "Add repository abstractions, implementations, and database infrastructure."
+		},
+		"IncludePostgresql": {
+			"type": "parameter",
+			"dataType": "bool",
+			"defaultValue": "true",
+			"displayName": "PostgreSQL DbContext",
+			"description": "Add PostgreSQL database context support.",
+			"isEnabled": "IncludeDatabase"
+		},
+		"IncludeSqlite": {
+			"type": "parameter",
+			"dataType": "bool",
+			"defaultValue": "false",
+			"displayName": "SQLite DbContext",
+			"description": "Add SQLite database context support.",
+			"isEnabled": "IncludeDatabase"
+		},
+		"IncludeSqlServer": {
+			"type": "parameter",
+			"dataType": "bool",
+			"defaultValue": "false",
+			"displayName": "SQL Server DbContext",
+			"description": "Add SQL Server database context support.",
+			"isEnabled": "IncludeDatabase"
+		},
+		"IncludeOracle": {
+			"type": "parameter",
+			"dataType": "bool",
+			"defaultValue": "false",
+			"displayName": "Oracle DbContext",
+			"description": "Add Oracle database context support.",
+			"isEnabled": "IncludeDatabase"
+		},
+		"IncludeOptions": {
+			"type": "parameter",
+			"dataType": "bool",
+			"defaultValue": "true",
+			"displayName": "Options class",
+			"description": "Add the project options class."
 		}
 	},
 	"sources": [
 		{
 			"modifiers": [
 				{
-					"condition": "(!AddSamples)",
+					"condition": "(!IncludeEntities)",
 					"exclude": [
-						"Entities/SampleEntity.cs"
+						"Entities/**",
+						"Repositories/Abstractions/ISampleEntityRepository.cs",
+						"Repositories/Implementations/SampleEntityRepository.cs"
+					]
+				},
+				{
+					"condition": "(!IncludeDatabase)",
+					"exclude": [
+						"Repositories/**"
+					]
+				},
+				{
+					"condition": "(!IncludePostgresql)",
+					"exclude": [
+						"Repositories/Database/Postgresql/**"
+					]
+				},
+				{
+					"condition": "(!IncludeSqlite)",
+					"exclude": [
+						"Repositories/Database/Sqlite/**"
+					]
+				},
+				{
+					"condition": "(!IncludeSqlServer)",
+					"exclude": [
+						"Repositories/Database/SqlServer/**"
+					]
+				},
+				{
+					"condition": "(!IncludeOracle)",
+					"exclude": [
+						"Repositories/Database/Oracle/**"
+					]
+				},
+				{
+					"condition": "(!IncludeOptions)",
+					"exclude": [
+						"ExampleCoreOptions.cs"
 					]
 				}
 			]

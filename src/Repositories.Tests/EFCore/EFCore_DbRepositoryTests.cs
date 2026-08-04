@@ -145,9 +145,9 @@ public class EFCore_DbRepositoryTests
 
 		var result = repository.Where(x => x.Name!.StartsWith("sample")).ToArray();
 
-		CollectionAssert.Contains(result, arr[0]);
-		CollectionAssert.Contains(result, arr[1]);
-		CollectionAssert.DoesNotContain(result, arr[2]);
+		Assert.Contains(arr[0], result);
+		Assert.Contains(arr[1], result);
+		Assert.DoesNotContain(arr[2], result);
 	}
 	[TestMethod]
 	public void Where_returns_all_items_if_predicate_is_null()
@@ -163,9 +163,9 @@ public class EFCore_DbRepositoryTests
 
 		var result = repository.Where(x => true).ToArray();
 
-		CollectionAssert.Contains(result, arr[0]);
-		CollectionAssert.Contains(result, arr[1]);
-		CollectionAssert.Contains(result, arr[2]);
+		Assert.Contains(arr[0], result);
+		Assert.Contains(arr[1], result);
+		Assert.Contains(arr[2], result);
 	}
 	[TestMethod]
 	public void AsQueryable_returns_dbset_as_queryable()
@@ -181,7 +181,7 @@ public class EFCore_DbRepositoryTests
 
 		var queryable = repository.AsQueryable();
 
-		CollectionAssert.AreEquivalent(arr, queryable.ToArray());
+		Assert.AreEquivalent(arr, [.. queryable]);
 	}
 	[TestMethod]
 	public void AsQueryable_Any_checks_if_entity_exists_in_repository_or_not()

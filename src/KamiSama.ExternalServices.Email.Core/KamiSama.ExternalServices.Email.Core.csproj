@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="../props.xml" />
+
+	<PropertyGroup>
+		<NoWarn>$(NoWarn);1591</NoWarn>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\KamiSama.Extensions.Logging\KamiSama.Extensions.Logging.csproj" />
+		<ProjectReference Include="..\KamiSama.ExternalServices.Email.Abstractions\KamiSama.ExternalServices.Email.Abstractions.csproj" />
+		<ProjectReference Include="..\KamiSama.ExternalServices.Exceptions\KamiSama.ExternalServices.Exceptions.csproj" />
+		<PackageReference Include="Microsoft.Extensions.Options" Version="10.0.10" />
+		<ProjectReference Include="..\KamiSama.Extensions.WebModules\KamiSama.Extensions.WebModules.csproj" />
+		<ProjectReference Include="..\DependencyInjection\KamiSama.Extensions.DependencyInjection.csproj" />
+	</ItemGroup>
+</Project>

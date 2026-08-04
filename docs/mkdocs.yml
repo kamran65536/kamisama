@@ -1,0 +1,713 @@
+﻿site_name: KamiSama.Extensions
+site_description: Developer documentation for the KamiSama.Extensions libraries.
+docs_dir: content
+site_dir: site
+extra:
+  version: !ENV [KAMISAMA_DOCS_VERSION, "10.0.10"]
+theme:
+  name: readthedocs
+markdown_extensions:
+  - tables
+  - toc:
+      permalink: true
+nav:
+  - Home: index.md
+  - API:
+      - Package Index: api/index.md
+      - Symbol Index: api/symbols.md
+      - "KamiSama.Chassis.Commons":
+          - Overview: api/chassis-commons/index.md
+          - "KamiSama.Chassis.Commons.Features":
+              - Overview: api/chassis-commons/kamisama-chassis-commons-features/index.md
+              - "AddFeatureBase": api/chassis-commons/kamisama-chassis-commons-features/kamisama-chassis-commons-features-featuredefinitionbase-tentity-tentitydto-taddrequest-tupdaterequest-trepository-tsearchmodel-tkey-addfeaturebase/index.md
+              - "DeleteFeatureBase": api/chassis-commons/kamisama-chassis-commons-features/kamisama-chassis-commons-features-featuredefinitionbase-tentity-tentitydto-taddrequest-tupdaterequest-trepository-tsearchmodel-tkey-deletefeaturebase/index.md
+              - "ExistsByIdFeatureBase": api/chassis-commons/kamisama-chassis-commons-features/kamisama-chassis-commons-features-featuredefinitionbase-tentity-tentitydto-taddrequest-tupdaterequest-trepository-tsearchmodel-tkey-existsbyidfeaturebase/index.md
+              - "FeatureDefinitionBase<TEntity, TEntityDto, TAddRequest, TUpdateRequest, TRepository, TSearchModel, TKey>": api/chassis-commons/kamisama-chassis-commons-features/kamisama-chassis-commons-features-featuredefinitionbase-tentity-tentitydto-taddrequest-tupdaterequest-trepository-tsearchmodel-tkey/index.md
+              - "FindByIdFeatureBase": api/chassis-commons/kamisama-chassis-commons-features/kamisama-chassis-commons-features-featuredefinitionbase-tentity-tentitydto-taddrequest-tupdaterequest-trepository-tsearchmodel-tkey-findbyidfeaturebase/index.md
+              - "GenericAddFeature<TAddRequest, TRepository, TEntity, TEntityDto>": api/chassis-commons/kamisama-chassis-commons-features/kamisama-chassis-commons-features-genericaddfeature-taddrequest-trepository-tentity-tentitydto/index.md
+              - "GenericDeleteFeature<TEntity, TRepository, TKey>": api/chassis-commons/kamisama-chassis-commons-features/kamisama-chassis-commons-features-genericdeletefeature-tentity-trepository-tkey/index.md
+              - "GenericExistsByIdFeature<TEntity, TRepository, TKey>": api/chassis-commons/kamisama-chassis-commons-features/kamisama-chassis-commons-features-genericexistsbyidfeature-tentity-trepository-tkey/index.md
+              - "GenericExistsByNameFeature<TEntity, TRepository>": api/chassis-commons/kamisama-chassis-commons-features/kamisama-chassis-commons-features-genericexistsbynamefeature-tentity-trepository/index.md
+              - "GenericFindByIdFeature<TEntity, TEntityDto, TRepository, TKey>": api/chassis-commons/kamisama-chassis-commons-features/kamisama-chassis-commons-features-genericfindbyidfeature-tentity-tentitydto-trepository-tkey/index.md
+              - "GenericFindByNameFeature<TEntity, TEntityDto, TRepository>": api/chassis-commons/kamisama-chassis-commons-features/kamisama-chassis-commons-features-genericfindbynamefeature-tentity-tentitydto-trepository/index.md
+              - "GenericListFeature<TEntity, TEntityDto, TSearchModel, TRepository, TPagedResult, TRepositoryPagedResult>": api/chassis-commons/kamisama-chassis-commons-features/kamisama-chassis-commons-features-genericlistfeature-tentity-tentitydto-tsearchmodel-trepository-tpagedresult-trepositorypagedresult/index.md
+              - "GenericListFeature<TEntity, TEntityDto, TSearchModel, TRepository>": api/chassis-commons/kamisama-chassis-commons-features/kamisama-chassis-commons-features-genericlistfeature-tentity-tentitydto-tsearchmodel-trepository/index.md
+              - "GenericUpdateFeature<TUpdateRequest, TEntity, TRepository, TKey>": api/chassis-commons/kamisama-chassis-commons-features/kamisama-chassis-commons-features-genericupdatefeature-tupdaterequest-tentity-trepository-tkey/index.md
+              - "ListFeatureBase": api/chassis-commons/kamisama-chassis-commons-features/kamisama-chassis-commons-features-featuredefinitionbase-tentity-tentitydto-taddrequest-tupdaterequest-trepository-tsearchmodel-tkey-listfeaturebase/index.md
+              - "UpdateFeatureBase": api/chassis-commons/kamisama-chassis-commons-features/kamisama-chassis-commons-features-featuredefinitionbase-tentity-tentitydto-taddrequest-tupdaterequest-trepository-tsearchmodel-tkey-updatefeaturebase/index.md
+          - "KamiSama.Chassis.Commons.Repositories":
+              - Overview: api/chassis-commons/kamisama-chassis-commons-repositories/index.md
+              - "GenericRepository<TEntity, TSearchModel, TDbContext, TPagedResult>": api/chassis-commons/kamisama-chassis-commons-repositories/kamisama-chassis-commons-repositories-genericrepository-tentity-tsearchmodel-tdbcontext-tpagedresult/index.md
+              - "GenericRepository<TEntity, TSearchModel, TDbContext>": api/chassis-commons/kamisama-chassis-commons-repositories/kamisama-chassis-commons-repositories-genericrepository-tentity-tsearchmodel-tdbcontext/index.md
+      - "KamiSama.Chassis.Commons.Abstractions":
+          - Overview: api/chassis-commons-abstractions/index.md
+          - "KamiSama.Chassis.Commons.Features":
+              - Overview: api/chassis-commons-abstractions/kamisama-chassis-commons-features/index.md
+              - "IAddFeature<TAddRequest, TEntityDto>": api/chassis-commons-abstractions/kamisama-chassis-commons-features/kamisama-chassis-commons-features-iaddfeature-taddrequest-tentitydto/index.md
+              - "IDeleteFeature<TKey>": api/chassis-commons-abstractions/kamisama-chassis-commons-features/kamisama-chassis-commons-features-ideletefeature-tkey/index.md
+              - "IExistsByIdFeature<TKey>": api/chassis-commons-abstractions/kamisama-chassis-commons-features/kamisama-chassis-commons-features-iexistsbyidfeature-tkey/index.md
+              - "IExistsByNameFeature": api/chassis-commons-abstractions/kamisama-chassis-commons-features/kamisama-chassis-commons-features-iexistsbynamefeature/index.md
+              - "IFindByIdFeature<TEntityDto, TKey>": api/chassis-commons-abstractions/kamisama-chassis-commons-features/kamisama-chassis-commons-features-ifindbyidfeature-tentitydto-tkey/index.md
+              - "IFindByNameFeature<TEntityDto>": api/chassis-commons-abstractions/kamisama-chassis-commons-features/kamisama-chassis-commons-features-ifindbynamefeature-tentitydto/index.md
+              - "IListFeature<TEntityDto, TSearchModel, TPageResult>": api/chassis-commons-abstractions/kamisama-chassis-commons-features/kamisama-chassis-commons-features-ilistfeature-tentitydto-tsearchmodel-tpageresult/index.md
+              - "IListFeature<TEntityDto, TSearchModel>": api/chassis-commons-abstractions/kamisama-chassis-commons-features/kamisama-chassis-commons-features-ilistfeature-tentitydto-tsearchmodel/index.md
+              - "IUpdateFeature<TEntityDto, TKey>": api/chassis-commons-abstractions/kamisama-chassis-commons-features/kamisama-chassis-commons-features-iupdatefeature-tentitydto-tkey/index.md
+          - "KamiSama.Chassis.Commons.Repositories":
+              - Overview: api/chassis-commons-abstractions/kamisama-chassis-commons-repositories/index.md
+              - "IAddableRepository<TEntity>": api/chassis-commons-abstractions/kamisama-chassis-commons-repositories/kamisama-chassis-commons-repositories-iaddablerepository-tentity/index.md
+              - "IDeletableRepository<TEntity>": api/chassis-commons-abstractions/kamisama-chassis-commons-repositories/kamisama-chassis-commons-repositories-ideletablerepository-tentity/index.md
+              - "IGenericRepository<TEntity, TSeaerchModel, TPagedResult>": api/chassis-commons-abstractions/kamisama-chassis-commons-repositories/kamisama-chassis-commons-repositories-igenericrepository-tentity-tseaerchmodel-tpagedresult/index.md
+              - "IGenericRepository<TEntity, TSearchModel>": api/chassis-commons-abstractions/kamisama-chassis-commons-repositories/kamisama-chassis-commons-repositories-igenericrepository-tentity-tsearchmodel/index.md
+              - "IListingRepository<TEntity, TSearchModel, TPagedResult>": api/chassis-commons-abstractions/kamisama-chassis-commons-repositories/kamisama-chassis-commons-repositories-ilistingrepository-tentity-tsearchmodel-tpagedresult/index.md
+              - "IListingRepository<TEntity, TSearchModel>": api/chassis-commons-abstractions/kamisama-chassis-commons-repositories/kamisama-chassis-commons-repositories-ilistingrepository-tentity-tsearchmodel/index.md
+              - "ILookupByIdRepository<TEntity, TKey>": api/chassis-commons-abstractions/kamisama-chassis-commons-repositories/kamisama-chassis-commons-repositories-ilookupbyidrepository-tentity-tkey/index.md
+              - "ILookupByNameRepository<TEntity>": api/chassis-commons-abstractions/kamisama-chassis-commons-repositories/kamisama-chassis-commons-repositories-ilookupbynamerepository-tentity/index.md
+              - "IUpdatableRepository<TEntity>": api/chassis-commons-abstractions/kamisama-chassis-commons-repositories/kamisama-chassis-commons-repositories-iupdatablerepository-tentity/index.md
+      - "KamiSama.Chassis.HttpExceptions":
+          - Overview: api/chassis-httpexceptions/index.md
+          - "KamiSama.Chassis.HttpExceptions":
+              - Overview: api/chassis-httpexceptions/kamisama-chassis-httpexceptions/index.md
+              - "AlreadyExistsException": api/chassis-httpexceptions/kamisama-chassis-httpexceptions/kamisama-chassis-httpexceptions-alreadyexistsexception/index.md
+              - "AlreadyExistsException<TEntity>": api/chassis-httpexceptions/kamisama-chassis-httpexceptions/kamisama-chassis-httpexceptions-alreadyexistsexception-tentity/index.md
+              - "BadRequestException": api/chassis-httpexceptions/kamisama-chassis-httpexceptions/kamisama-chassis-httpexceptions-badrequestexception/index.md
+              - "ConflictException": api/chassis-httpexceptions/kamisama-chassis-httpexceptions/kamisama-chassis-httpexceptions-conflictexception/index.md
+              - "ForbiddenException": api/chassis-httpexceptions/kamisama-chassis-httpexceptions/kamisama-chassis-httpexceptions-forbiddenexception/index.md
+              - "GoneException": api/chassis-httpexceptions/kamisama-chassis-httpexceptions/kamisama-chassis-httpexceptions-goneexception/index.md
+              - "HttpExceptionBase": api/chassis-httpexceptions/kamisama-chassis-httpexceptions/kamisama-chassis-httpexceptions-httpexceptionbase/index.md
+              - "InvalidOperationHttpException": api/chassis-httpexceptions/kamisama-chassis-httpexceptions/kamisama-chassis-httpexceptions-invalidoperationhttpexception/index.md
+              - "NotFoundException": api/chassis-httpexceptions/kamisama-chassis-httpexceptions/kamisama-chassis-httpexceptions-notfoundexception/index.md
+              - "NotFoundException<TEntity>": api/chassis-httpexceptions/kamisama-chassis-httpexceptions/kamisama-chassis-httpexceptions-notfoundexception-tentity/index.md
+              - "NotImplementedHttpException": api/chassis-httpexceptions/kamisama-chassis-httpexceptions/kamisama-chassis-httpexceptions-notimplementedhttpexception/index.md
+              - "NotSupportedHttpException": api/chassis-httpexceptions/kamisama-chassis-httpexceptions/kamisama-chassis-httpexceptions-notsupportedhttpexception/index.md
+              - "PaymentRequiredException": api/chassis-httpexceptions/kamisama-chassis-httpexceptions/kamisama-chassis-httpexceptions-paymentrequiredexception/index.md
+              - "ServiceUnavailableException": api/chassis-httpexceptions/kamisama-chassis-httpexceptions/kamisama-chassis-httpexceptions-serviceunavailableexception/index.md
+              - "UnAuthorizedException": api/chassis-httpexceptions/kamisama-chassis-httpexceptions/kamisama-chassis-httpexceptions-unauthorizedexception/index.md
+              - "UnProcessableEntityException": api/chassis-httpexceptions/kamisama-chassis-httpexceptions/kamisama-chassis-httpexceptions-unprocessableentityexception/index.md
+      - "KamiSama.Chassis.ProblemDetails":
+          - Overview: api/chassis-problemdetails/index.md
+          - "KamiSama.Chassis.ProblemDetails":
+              - Overview: api/chassis-problemdetails/kamisama-chassis-problemdetails/index.md
+              - "IProblemDetailsDataProvider": api/chassis-problemdetails/kamisama-chassis-problemdetails/kamisama-chassis-problemdetails-iproblemdetailsdataprovider/index.md
+              - "KamiSamaProblemDetailsOptions": api/chassis-problemdetails/kamisama-chassis-problemdetails/kamisama-chassis-problemdetails-kamisamaproblemdetailsoptions/index.md
+              - "KamiSamaProblemDetailsProvider": api/chassis-problemdetails/kamisama-chassis-problemdetails/kamisama-chassis-problemdetails-kamisamaproblemdetailsprovider/index.md
+              - "ProblemDetailsExceptionFilter": api/chassis-problemdetails/kamisama-chassis-problemdetails/kamisama-chassis-problemdetails-problemdetailsexceptionfilter/index.md
+              - "ServiceCollectionExtension": api/chassis-problemdetails/kamisama-chassis-problemdetails/kamisama-chassis-problemdetails-servicecollectionextension/index.md
+      - "KamiSama.Extensions.Core":
+          - Overview: api/extensions-core/index.md
+          - "KamiSama.Extensions":
+              - Overview: api/extensions-core/kamisama-extensions/index.md
+              - "ArrayExtensions": api/extensions-core/kamisama-extensions/kamisama-extensions-arrayextensions/index.md
+              - "ByteArrayExtensions": api/extensions-core/kamisama-extensions/kamisama-extensions-bytearrayextensions/index.md
+              - "ConversionExtensions": api/extensions-core/kamisama-extensions/kamisama-extensions-conversionextensions/index.md
+              - "CryptographyExtensions": api/extensions-core/kamisama-extensions/kamisama-extensions-cryptographyextensions/index.md
+              - "HashExtensions": api/extensions-core/kamisama-extensions/kamisama-extensions-hashextensions/index.md
+              - "IQueryableExtensions": api/extensions-core/kamisama-extensions/kamisama-extensions-iqueryableextensions/index.md
+              - "PersianDateTimeExtensions": api/extensions-core/kamisama-extensions/kamisama-extensions-persiandatetimeextensions/index.md
+              - "QueueExtensions": api/extensions-core/kamisama-extensions/kamisama-extensions-queueextensions/index.md
+              - "StreamExtensions": api/extensions-core/kamisama-extensions/kamisama-extensions-streamextensions/index.md
+              - "StringExtensions": api/extensions-core/kamisama-extensions/kamisama-extensions-stringextensions/index.md
+              - "TimeSpanExtensions": api/extensions-core/kamisama-extensions/kamisama-extensions-timespanextensions/index.md
+          - "KamiSama.Extensions.Paging":
+              - Overview: api/extensions-core/kamisama-extensions-paging/index.md
+              - "PagedResult<T>": api/extensions-core/kamisama-extensions-paging/kamisama-extensions-paging-pagedresult-t/index.md
+              - "SearchModel": api/extensions-core/kamisama-extensions-paging/kamisama-extensions-paging-searchmodel/index.md
+      - "KamiSama.Extensions.DependencyInjection":
+          - Overview: api/extensions-dependencyinjection/index.md
+          - "KamiSama.Extensions.DependencyInjection":
+              - Overview: api/extensions-dependencyinjection/kamisama-extensions-dependencyinjection/index.md
+              - "AutoInjectAttribute": api/extensions-dependencyinjection/kamisama-extensions-dependencyinjection/kamisama-extensions-dependencyinjection-autoinjectattribute/index.md
+              - "AutoInjectAttributeBase": api/extensions-dependencyinjection/kamisama-extensions-dependencyinjection/kamisama-extensions-dependencyinjection-autoinjectattributebase/index.md
+              - "AutoInjectScopedAttribute": api/extensions-dependencyinjection/kamisama-extensions-dependencyinjection/kamisama-extensions-dependencyinjection-autoinjectscopedattribute/index.md
+              - "AutoInjectScopedAttribute<TServiceType>": api/extensions-dependencyinjection/kamisama-extensions-dependencyinjection/kamisama-extensions-dependencyinjection-autoinjectscopedattribute-tservicetype/index.md
+              - "AutoInjectSingletonAttribute": api/extensions-dependencyinjection/kamisama-extensions-dependencyinjection/kamisama-extensions-dependencyinjection-autoinjectsingletonattribute/index.md
+              - "AutoInjectSingletonAttribute<TService>": api/extensions-dependencyinjection/kamisama-extensions-dependencyinjection/kamisama-extensions-dependencyinjection-autoinjectsingletonattribute-tservice/index.md
+              - "AutoInjectTransientAttribute": api/extensions-dependencyinjection/kamisama-extensions-dependencyinjection/kamisama-extensions-dependencyinjection-autoinjecttransientattribute/index.md
+              - "AutoInjectTransientAttribute<TService>": api/extensions-dependencyinjection/kamisama-extensions-dependencyinjection/kamisama-extensions-dependencyinjection-autoinjecttransientattribute-tservice/index.md
+              - "ServiceCollectionExtensions": api/extensions-dependencyinjection/kamisama-extensions-dependencyinjection/kamisama-extensions-dependencyinjection-servicecollectionextensions/index.md
+      - "KamiSama.Extensions.Logging":
+          - Overview: api/extensions-logging/index.md
+          - "KamiSama.Extensions.Logging":
+              - Overview: api/extensions-logging/kamisama-extensions-logging/index.md
+              - "LoggerExtensions": api/extensions-logging/kamisama-extensions-logging/kamisama-extensions-logging-loggerextensions/index.md
+      - "KamiSama.Extensions.RestSharp":
+          - Overview: api/extensions-restsharp/index.md
+          - "KamiSama.Extensions.RestSharp":
+              - Overview: api/extensions-restsharp/kamisama-extensions-restsharp/index.md
+              - "IRestBuilder": api/extensions-restsharp/kamisama-extensions-restsharp/kamisama-extensions-restsharp-irestbuilder/index.md
+              - "RestBuilder": api/extensions-restsharp/kamisama-extensions-restsharp/kamisama-extensions-restsharp-restbuilder/index.md
+              - "ServiceCollectionExtensions": api/extensions-restsharp/kamisama-extensions-restsharp/kamisama-extensions-restsharp-servicecollectionextensions/index.md
+          - "KamiSama.Extensions.RestSharp.Exceptions":
+              - Overview: api/extensions-restsharp/kamisama-extensions-restsharp-exceptions/index.md
+              - "InvalidResponseFromServerException": api/extensions-restsharp/kamisama-extensions-restsharp-exceptions/kamisama-extensions-restsharp-exceptions-invalidresponsefromserverexception/index.md
+              - "RequestTimedOutException": api/extensions-restsharp/kamisama-extensions-restsharp-exceptions/kamisama-extensions-restsharp-exceptions-requesttimedoutexception/index.md
+      - "KamiSama.ExternalServices.Exceptions":
+          - Overview: api/externalservices-exceptions/index.md
+          - "KamiSama.ExternalServices.Exceptions.Exceptions":
+              - Overview: api/externalservices-exceptions/kamisama-externalservices-exceptions-exceptions/index.md
+              - "CannotFindExternalServiceException": api/externalservices-exceptions/kamisama-externalservices-exceptions-exceptions/kamisama-externalservices-exceptions-exceptions-cannotfindexternalserviceexception/index.md
+              - "ExternalServiceTimedOutException": api/externalservices-exceptions/kamisama-externalservices-exceptions-exceptions/kamisama-externalservices-exceptions-exceptions-externalservicetimedoutexception/index.md
+              - "InvalidResponseForExternalServiceException": api/externalservices-exceptions/kamisama-externalservices-exceptions-exceptions/kamisama-externalservices-exceptions-exceptions-invalidresponseforexternalserviceexception/index.md
+      - "KamiSama.ExternalServices.Email.Abstractions":
+          - Overview: api/externalservices-email-abstractions/index.md
+          - "KamiSama.ExternalServices.Email.Features":
+              - Overview: api/externalservices-email-abstractions/kamisama-externalservices-email-features/index.md
+              - "ISendEmail": api/externalservices-email-abstractions/kamisama-externalservices-email-features/kamisama-externalservices-email-features-isendemail/index.md
+              - "SendEmailRequest": api/externalservices-email-abstractions/kamisama-externalservices-email-features/kamisama-externalservices-email-features-sendemailrequest/index.md
+      - "KamiSama.ExternalServices.Email.Core":
+          - Overview: api/externalservices-email-core/index.md
+          - "KamiSama.ExternalServices.Email":
+              - Overview: api/externalservices-email-core/kamisama-externalservices-email/index.md
+              - "EmailCoreServicesModule": api/externalservices-email-core/kamisama-externalservices-email/kamisama-externalservices-email-emailcoreservicesmodule/index.md
+              - "EmailDefaultsOptions": api/externalservices-email-core/kamisama-externalservices-email/kamisama-externalservices-email-emaildefaultsoptions/index.md
+              - "ExtendedWebApplicationBuilderExtensions": api/externalservices-email-core/kamisama-externalservices-email/kamisama-externalservices-email-extendedwebapplicationbuilderextensions/index.md
+          - "KamiSama.ExternalServices.Email.Features":
+              - Overview: api/externalservices-email-core/kamisama-externalservices-email-features/index.md
+              - "DefaultSendEmail": api/externalservices-email-core/kamisama-externalservices-email-features/kamisama-externalservices-email-features-defaultsendemail/index.md
+              - "MockSendEmail": api/externalservices-email-core/kamisama-externalservices-email-features/kamisama-externalservices-email-features-mocksendemail/index.md
+      - "KamiSama.ExternalServices.Email.Smtp":
+          - Overview: api/externalservices-email-smtp/index.md
+          - "KamiSama.ExternalServices.Email.Smtp":
+              - Overview: api/externalservices-email-smtp/kamisama-externalservices-email-smtp/index.md
+              - "ExtendedWebApplicationBuilderExtensions": api/externalservices-email-smtp/kamisama-externalservices-email-smtp/kamisama-externalservices-email-smtp-extendedwebapplicationbuilderextensions/index.md
+              - "SmtpEmailModule": api/externalservices-email-smtp/kamisama-externalservices-email-smtp/kamisama-externalservices-email-smtp-smtpemailmodule/index.md
+              - "SmtpOptions": api/externalservices-email-smtp/kamisama-externalservices-email-smtp/kamisama-externalservices-email-smtp-smtpoptions/index.md
+              - "SmtpSendEmail": api/externalservices-email-smtp/kamisama-externalservices-email-smtp/kamisama-externalservices-email-smtp-smtpsendemail/index.md
+      - "KamiSama.ExternalServices.Sms.Abstractions":
+          - Overview: api/externalservices-sms-abstractions/index.md
+          - "KamiSama.ExternalServices.Sms.Features":
+              - Overview: api/externalservices-sms-abstractions/kamisama-externalservices-sms-features/index.md
+              - "ISendSms": api/externalservices-sms-abstractions/kamisama-externalservices-sms-features/kamisama-externalservices-sms-features-isendsms/index.md
+              - "SendSmsRequest": api/externalservices-sms-abstractions/kamisama-externalservices-sms-features/kamisama-externalservices-sms-features-sendsmsrequest/index.md
+      - "KamiSama.ExternalServices.Sms.Core":
+          - Overview: api/externalservices-sms-core/index.md
+          - "KamiSama.ExternalServices.Sms":
+              - Overview: api/externalservices-sms-core/kamisama-externalservices-sms/index.md
+              - "ExtendedWebApplicationBuilderExtensions": api/externalservices-sms-core/kamisama-externalservices-sms/kamisama-externalservices-sms-extendedwebapplicationbuilderextensions/index.md
+              - "SmsCoreServicesModule": api/externalservices-sms-core/kamisama-externalservices-sms/kamisama-externalservices-sms-smscoreservicesmodule/index.md
+              - "SmsDefaultsOptions": api/externalservices-sms-core/kamisama-externalservices-sms/kamisama-externalservices-sms-smsdefaultsoptions/index.md
+          - "KamiSama.ExternalServices.Sms.Features":
+              - Overview: api/externalservices-sms-core/kamisama-externalservices-sms-features/index.md
+              - "DefaultSendSms": api/externalservices-sms-core/kamisama-externalservices-sms-features/kamisama-externalservices-sms-features-defaultsendsms/index.md
+              - "MockSendSms": api/externalservices-sms-core/kamisama-externalservices-sms-features/kamisama-externalservices-sms-features-mocksendsms/index.md
+      - "KamiSama.ExternalServices.Sms.Kavenegar":
+          - Overview: api/externalservices-sms-kavenegar/index.md
+          - "KamiSama.ExternalServices.Sms.Kavenegar":
+              - Overview: api/externalservices-sms-kavenegar/kamisama-externalservices-sms-kavenegar/index.md
+              - "ExtendedWebApplicationBuilderExtensions": api/externalservices-sms-kavenegar/kamisama-externalservices-sms-kavenegar/kamisama-externalservices-sms-kavenegar-extendedwebapplicationbuilderextensions/index.md
+              - "KavenegarModule": api/externalservices-sms-kavenegar/kamisama-externalservices-sms-kavenegar/kamisama-externalservices-sms-kavenegar-kavenegarmodule/index.md
+              - "KavenegarSendSms": api/externalservices-sms-kavenegar/kamisama-externalservices-sms-kavenegar/kamisama-externalservices-sms-kavenegar-kavenegarsendsms/index.md
+              - "KavenegarSmsOptions": api/externalservices-sms-kavenegar/kamisama-externalservices-sms-kavenegar/kamisama-externalservices-sms-kavenegar-kavenegarsmsoptions/index.md
+      - "KamiSama.ExternalServices.Sms.NeoZarin":
+          - Overview: api/externalservices-sms-neozarin/index.md
+          - "KamiSama.ExternalServices.Sms.NeoZarin":
+              - Overview: api/externalservices-sms-neozarin/kamisama-externalservices-sms-neozarin/index.md
+              - "ExtendedWebApplicationBuilderExtensions": api/externalservices-sms-neozarin/kamisama-externalservices-sms-neozarin/kamisama-externalservices-sms-neozarin-extendedwebapplicationbuilderextensions/index.md
+              - "NeoSendSms": api/externalservices-sms-neozarin/kamisama-externalservices-sms-neozarin/kamisama-externalservices-sms-neozarin-neosendsms/index.md
+              - "NeoZarinSmsModule": api/externalservices-sms-neozarin/kamisama-externalservices-sms-neozarin/kamisama-externalservices-sms-neozarin-neozarinsmsmodule/index.md
+              - "NeoZarinSmsOptions": api/externalservices-sms-neozarin/kamisama-externalservices-sms-neozarin/kamisama-externalservices-sms-neozarin-neozarinsmsoptions/index.md
+      - "KamiSama.IranSystem":
+          - Overview: api/iransystem/index.md
+          - "KamiSama.IranSystem":
+              - Overview: api/iransystem/kamisama-iransystem/index.md
+              - "IranSystemEncoding": api/iransystem/kamisama-iransystem/kamisama-iransystem-iransystemencoding/index.md
+      - "KamiSama.Extensions.Json":
+          - Overview: api/extensions-json/index.md
+          - "KamiSama.Extensions":
+              - Overview: api/extensions-json/kamisama-extensions/index.md
+              - "JsonSerializationExtensions": api/extensions-json/kamisama-extensions/kamisama-extensions-jsonserializationextensions/index.md
+          - "KamiSama.Extensions.Json":
+              - Overview: api/extensions-json/kamisama-extensions-json/index.md
+              - "BigIntegerJsonConverter": api/extensions-json/kamisama-extensions-json/kamisama-extensions-json-bigintegerjsonconverter/index.md
+              - "DynamicObjectConverter": api/extensions-json/kamisama-extensions-json/kamisama-extensions-json-dynamicobjectconverter/index.md
+              - "HexByteArrayJsonConverter": api/extensions-json/kamisama-extensions-json/kamisama-extensions-json-hexbytearrayjsonconverter/index.md
+              - "HierarchicalJsonConverter<T>": api/extensions-json/kamisama-extensions-json/kamisama-extensions-json-hierarchicaljsonconverter-t/index.md
+              - "JsonHirerarchyDiscriminatorAttribute": api/extensions-json/kamisama-extensions-json/kamisama-extensions-json-jsonhirerarchydiscriminatorattribute/index.md
+              - "TimeSpanJsonConverter": api/extensions-json/kamisama-extensions-json/kamisama-extensions-json-timespanjsonconverter/index.md
+      - "KamiSama.Modules.Identity.Abstractions":
+          - Overview: api/modules-identity-abstractions/index.md
+          - "KamiSama.Modules.Identity.DataTypes":
+              - Overview: api/modules-identity-abstractions/kamisama-modules-identity-datatypes/index.md
+              - "KnownRoles": api/modules-identity-abstractions/kamisama-modules-identity-datatypes/kamisama-modules-identity-datatypes-knownroles/index.md
+          - "KamiSama.Modules.Identity.Exceptions":
+              - Overview: api/modules-identity-abstractions/kamisama-modules-identity-exceptions/index.md
+              - "AddUserFailedException": api/modules-identity-abstractions/kamisama-modules-identity-exceptions/kamisama-modules-identity-exceptions-adduserfailedexception/index.md
+          - "KamiSama.Modules.Identity.Features.AccountSecurity":
+              - Overview: api/modules-identity-abstractions/kamisama-modules-identity-features-accountsecurity/index.md
+              - "ActiveSessionDto": api/modules-identity-abstractions/kamisama-modules-identity-features-accountsecurity/kamisama-modules-identity-features-accountsecurity-activesessiondto/index.md
+              - "ChangePasswordRequest": api/modules-identity-abstractions/kamisama-modules-identity-features-accountsecurity/kamisama-modules-identity-features-accountsecurity-changepasswordrequest/index.md
+              - "IChangePassword": api/modules-identity-abstractions/kamisama-modules-identity-features-accountsecurity/kamisama-modules-identity-features-accountsecurity-ichangepassword/index.md
+              - "IGetAuthenticatorSecret": api/modules-identity-abstractions/kamisama-modules-identity-features-accountsecurity/kamisama-modules-identity-features-accountsecurity-igetauthenticatorsecret/index.md
+              - "IIsTwoFactorAuthenticationEnabled": api/modules-identity-abstractions/kamisama-modules-identity-features-accountsecurity/kamisama-modules-identity-features-accountsecurity-iistwofactorauthenticationenabled/index.md
+              - "IListActiveSessions": api/modules-identity-abstractions/kamisama-modules-identity-features-accountsecurity/kamisama-modules-identity-features-accountsecurity-ilistactivesessions/index.md
+              - "ISetTwoFactorAuthenticationEnabled": api/modules-identity-abstractions/kamisama-modules-identity-features-accountsecurity/kamisama-modules-identity-features-accountsecurity-isettwofactorauthenticationenabled/index.md
+              - "ITerminateAllOtherSessions": api/modules-identity-abstractions/kamisama-modules-identity-features-accountsecurity/kamisama-modules-identity-features-accountsecurity-iterminateallothersessions/index.md
+              - "ITerminateSession": api/modules-identity-abstractions/kamisama-modules-identity-features-accountsecurity/kamisama-modules-identity-features-accountsecurity-iterminatesession/index.md
+              - "IValidateAuthenticatorCode": api/modules-identity-abstractions/kamisama-modules-identity-features-accountsecurity/kamisama-modules-identity-features-accountsecurity-ivalidateauthenticatorcode/index.md
+              - "ValidateAuthenticatorCodeRequest": api/modules-identity-abstractions/kamisama-modules-identity-features-accountsecurity/kamisama-modules-identity-features-accountsecurity-validateauthenticatorcoderequest/index.md
+          - "KamiSama.Modules.Identity.Features.Password":
+              - Overview: api/modules-identity-abstractions/kamisama-modules-identity-features-password/index.md
+              - "IResetPassword": api/modules-identity-abstractions/kamisama-modules-identity-features-password/kamisama-modules-identity-features-password-iresetpassword/index.md
+              - "IValidatePassword": api/modules-identity-abstractions/kamisama-modules-identity-features-password/kamisama-modules-identity-features-password-ivalidatepassword/index.md
+              - "PasswordValidationError": api/modules-identity-abstractions/kamisama-modules-identity-features-password/kamisama-modules-identity-features-password-passwordvalidationerror/index.md
+              - "ResetPasswordRequest": api/modules-identity-abstractions/kamisama-modules-identity-features-password/kamisama-modules-identity-features-password-resetpasswordrequest/index.md
+              - "ValidatePasswordRequest": api/modules-identity-abstractions/kamisama-modules-identity-features-password/kamisama-modules-identity-features-password-validatepasswordrequest/index.md
+          - "KamiSama.Modules.Identity.Features.Users":
+              - Overview: api/modules-identity-abstractions/kamisama-modules-identity-features-users/index.md
+              - "AddUserRequest": api/modules-identity-abstractions/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-adduserrequest/index.md
+              - "AuthenticateUserRequest": api/modules-identity-abstractions/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-authenticateuserrequest/index.md
+              - "Enable2faRequest": api/modules-identity-abstractions/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-enable2farequest/index.md
+              - "IAddUser": api/modules-identity-abstractions/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-iadduser/index.md
+              - "IAuthenticateUser": api/modules-identity-abstractions/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-iauthenticateuser/index.md
+              - "IDeleteUser": api/modules-identity-abstractions/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-ideleteuser/index.md
+              - "IDisable2fa": api/modules-identity-abstractions/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-idisable2fa/index.md
+              - "IDisableUser": api/modules-identity-abstractions/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-idisableuser/index.md
+              - "IEnable2fa": api/modules-identity-abstractions/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-ienable2fa/index.md
+              - "IEnableUser": api/modules-identity-abstractions/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-ienableuser/index.md
+              - "IExistsUserByEmail": api/modules-identity-abstractions/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-iexistsuserbyemail/index.md
+              - "IExistsUserById": api/modules-identity-abstractions/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-iexistsuserbyid/index.md
+              - "IExistsUserByName": api/modules-identity-abstractions/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-iexistsuserbyname/index.md
+              - "IFindCurrentUser": api/modules-identity-abstractions/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-ifindcurrentuser/index.md
+              - "IFindUserByEmail": api/modules-identity-abstractions/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-ifinduserbyemail/index.md
+              - "IFindUserById": api/modules-identity-abstractions/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-ifinduserbyid/index.md
+              - "IFindUserByName": api/modules-identity-abstractions/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-ifinduserbyname/index.md
+              - "IListUsers": api/modules-identity-abstractions/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-ilistusers/index.md
+              - "IRefreshAccessToken": api/modules-identity-abstractions/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-irefreshaccesstoken/index.md
+              - "ITokenService": api/modules-identity-abstractions/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-itokenservice/index.md
+              - "IUpdateUser": api/modules-identity-abstractions/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-iupdateuser/index.md
+              - "RefreshAccessTokenRequest": api/modules-identity-abstractions/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-refreshaccesstokenrequest/index.md
+              - "RefreshAccessTokenResponse": api/modules-identity-abstractions/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-refreshaccesstokenresponse/index.md
+              - "TokenPairDto": api/modules-identity-abstractions/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-tokenpairdto/index.md
+              - "UpdateUserRequest": api/modules-identity-abstractions/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-updateuserrequest/index.md
+              - "UserDto": api/modules-identity-abstractions/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-userdto/index.md
+              - "UserSearchModel": api/modules-identity-abstractions/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-usersearchmodel/index.md
+      - "KamiSama.Modules.Identity.Core":
+          - Overview: api/modules-identity-core/index.md
+          - "KamiSama.Modules.Identity":
+              - Overview: api/modules-identity-core/kamisama-modules-identity/index.md
+              - "DtoMappings": api/modules-identity-core/kamisama-modules-identity/kamisama-modules-identity-dtomappings/index.md
+              - "ExtendedWebApplicationBuilderExtensions": api/modules-identity-core/kamisama-modules-identity/kamisama-modules-identity-extendedwebapplicationbuilderextensions/index.md
+              - "JwtOptions": api/modules-identity-core/kamisama-modules-identity/kamisama-modules-identity-jwtoptions/index.md
+              - "KamiSamaIdentityWebModule": api/modules-identity-core/kamisama-modules-identity/kamisama-modules-identity-kamisamaidentitywebmodule/index.md
+          - "KamiSama.Modules.Identity.Entities":
+              - Overview: api/modules-identity-core/kamisama-modules-identity-entities/index.md
+              - "ApplicationRole": api/modules-identity-core/kamisama-modules-identity-entities/kamisama-modules-identity-entities-applicationrole/index.md
+              - "ApplicationSession": api/modules-identity-core/kamisama-modules-identity-entities/kamisama-modules-identity-entities-applicationsession/index.md
+              - "ApplicationUser": api/modules-identity-core/kamisama-modules-identity-entities/kamisama-modules-identity-entities-applicationuser/index.md
+          - "KamiSama.Modules.Identity.Features.AccountSecurity":
+              - Overview: api/modules-identity-core/kamisama-modules-identity-features-accountsecurity/index.md
+              - "ApplicationSessionCookieEvents": api/modules-identity-core/kamisama-modules-identity-features-accountsecurity/kamisama-modules-identity-features-accountsecurity-applicationsessioncookieevents/index.md
+              - "ApplicationSessionJwtBearerEvents": api/modules-identity-core/kamisama-modules-identity-features-accountsecurity/kamisama-modules-identity-features-accountsecurity-applicationsessionjwtbearerevents/index.md
+              - "ApplicationSessionManager": api/modules-identity-core/kamisama-modules-identity-features-accountsecurity/kamisama-modules-identity-features-accountsecurity-applicationsessionmanager/index.md
+              - "ApplicationSignInManager": api/modules-identity-core/kamisama-modules-identity-features-accountsecurity/kamisama-modules-identity-features-accountsecurity-applicationsigninmanager/index.md
+              - "ChangePassword": api/modules-identity-core/kamisama-modules-identity-features-accountsecurity/kamisama-modules-identity-features-accountsecurity-changepassword/index.md
+              - "GetAuthenticatorSecret": api/modules-identity-core/kamisama-modules-identity-features-accountsecurity/kamisama-modules-identity-features-accountsecurity-getauthenticatorsecret/index.md
+              - "IApplicationSessionManager": api/modules-identity-core/kamisama-modules-identity-features-accountsecurity/kamisama-modules-identity-features-accountsecurity-iapplicationsessionmanager/index.md
+              - "IsTwoFactorAuthenticationEnabled": api/modules-identity-core/kamisama-modules-identity-features-accountsecurity/kamisama-modules-identity-features-accountsecurity-istwofactorauthenticationenabled/index.md
+              - "ListActiveSessions": api/modules-identity-core/kamisama-modules-identity-features-accountsecurity/kamisama-modules-identity-features-accountsecurity-listactivesessions/index.md
+              - "SessionClaims": api/modules-identity-core/kamisama-modules-identity-features-accountsecurity/kamisama-modules-identity-features-accountsecurity-sessionclaims/index.md
+              - "SetTwoFactorAuthenticationEnabled": api/modules-identity-core/kamisama-modules-identity-features-accountsecurity/kamisama-modules-identity-features-accountsecurity-settwofactorauthenticationenabled/index.md
+              - "TerminateAllOtherSessions": api/modules-identity-core/kamisama-modules-identity-features-accountsecurity/kamisama-modules-identity-features-accountsecurity-terminateallothersessions/index.md
+              - "TerminateSession": api/modules-identity-core/kamisama-modules-identity-features-accountsecurity/kamisama-modules-identity-features-accountsecurity-terminatesession/index.md
+              - "ValidateAuthenticatorCode": api/modules-identity-core/kamisama-modules-identity-features-accountsecurity/kamisama-modules-identity-features-accountsecurity-validateauthenticatorcode/index.md
+          - "KamiSama.Modules.Identity.Features.Email":
+              - Overview: api/modules-identity-core/kamisama-modules-identity-features-email/index.md
+              - "EmailSender": api/modules-identity-core/kamisama-modules-identity-features-email/kamisama-modules-identity-features-email-emailsender/index.md
+          - "KamiSama.Modules.Identity.Features.Password":
+              - Overview: api/modules-identity-core/kamisama-modules-identity-features-password/index.md
+              - "Res": api/modules-identity-core/kamisama-modules-identity-features-password/kamisama-modules-identity-features-password-res/index.md
+              - "ValidatePassword": api/modules-identity-core/kamisama-modules-identity-features-password/kamisama-modules-identity-features-password-validatepassword/index.md
+          - "KamiSama.Modules.Identity.Features.Users":
+              - Overview: api/modules-identity-core/kamisama-modules-identity-features-users/index.md
+              - "AddUser": api/modules-identity-core/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-adduser/index.md
+              - "AuthenticateUser": api/modules-identity-core/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-authenticateuser/index.md
+              - "DeleteUser": api/modules-identity-core/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-deleteuser/index.md
+              - "Disable2fa": api/modules-identity-core/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-disable2fa/index.md
+              - "DisableUser": api/modules-identity-core/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-disableuser/index.md
+              - "Enable2fa": api/modules-identity-core/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-enable2fa/index.md
+              - "EnableUser": api/modules-identity-core/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-enableuser/index.md
+              - "ExistsUserByEmail": api/modules-identity-core/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-existsuserbyemail/index.md
+              - "ExistsUserByName": api/modules-identity-core/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-existsuserbyname/index.md
+              - "FindCurrentUser": api/modules-identity-core/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-findcurrentuser/index.md
+              - "FindUserByEmail": api/modules-identity-core/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-finduserbyemail/index.md
+              - "FindUserById": api/modules-identity-core/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-finduserbyid/index.md
+              - "FindUserByName": api/modules-identity-core/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-finduserbyname/index.md
+              - "IResolveAuthenticationUser": api/modules-identity-core/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-iresolveauthenticationuser/index.md
+              - "IValidateAuthenticationPassword": api/modules-identity-core/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-ivalidateauthenticationpassword/index.md
+              - "IValidateAuthenticatorCodeIfEnabled": api/modules-identity-core/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-ivalidateauthenticatorcodeifenabled/index.md
+              - "ListUsers": api/modules-identity-core/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-listusers/index.md
+              - "RefreshAccessToken": api/modules-identity-core/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-refreshaccesstoken/index.md
+              - "RefreshTokenPurposeFactory": api/modules-identity-core/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-refreshtokenpurposefactory/index.md
+              - "ResolveAuthenticationUser": api/modules-identity-core/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-resolveauthenticationuser/index.md
+              - "TokenService": api/modules-identity-core/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-tokenservice/index.md
+              - "UpdateUser": api/modules-identity-core/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-updateuser/index.md
+              - "ValidateAuthenticationPassword": api/modules-identity-core/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-validateauthenticationpassword/index.md
+              - "ValidateAuthenticatorCodeIfEnabled": api/modules-identity-core/kamisama-modules-identity-features-users/kamisama-modules-identity-features-users-validateauthenticatorcodeifenabled/index.md
+          - "KamiSama.Modules.Identity.Repositories.Abstractions":
+              - Overview: api/modules-identity-core/kamisama-modules-identity-repositories-abstractions/index.md
+              - "IApplicationRoleRepository": api/modules-identity-core/kamisama-modules-identity-repositories-abstractions/kamisama-modules-identity-repositories-abstractions-iapplicationrolerepository/index.md
+              - "IApplicationSessionRepository": api/modules-identity-core/kamisama-modules-identity-repositories-abstractions/kamisama-modules-identity-repositories-abstractions-iapplicationsessionrepository/index.md
+              - "IApplicationUserRepository": api/modules-identity-core/kamisama-modules-identity-repositories-abstractions/kamisama-modules-identity-repositories-abstractions-iapplicationuserrepository/index.md
+          - "KamiSama.Modules.Identity.Repositories.Database":
+              - Overview: api/modules-identity-core/kamisama-modules-identity-repositories-database/index.md
+              - "KamiSamaIdentityDbContext": api/modules-identity-core/kamisama-modules-identity-repositories-database/kamisama-modules-identity-repositories-database-kamisamaidentitydbcontext/index.md
+          - "KamiSama.Modules.Identity.Repositories.Implementations":
+              - Overview: api/modules-identity-core/kamisama-modules-identity-repositories-implementations/index.md
+              - "ApplicationRoleRepository": api/modules-identity-core/kamisama-modules-identity-repositories-implementations/kamisama-modules-identity-repositories-implementations-applicationrolerepository/index.md
+              - "ApplicationSessionRepository": api/modules-identity-core/kamisama-modules-identity-repositories-implementations/kamisama-modules-identity-repositories-implementations-applicationsessionrepository/index.md
+              - "ApplicationUserRepository": api/modules-identity-core/kamisama-modules-identity-repositories-implementations/kamisama-modules-identity-repositories-implementations-applicationuserrepository/index.md
+          - "KamiSama.Modules.Identity.Wrappers":
+              - Overview: api/modules-identity-core/kamisama-modules-identity-wrappers/index.md
+              - "IUserManager": api/modules-identity-core/kamisama-modules-identity-wrappers/kamisama-modules-identity-wrappers-iusermanager/index.md
+              - "LocalizedIdentityErrorDescriber": api/modules-identity-core/kamisama-modules-identity-wrappers/kamisama-modules-identity-wrappers-localizedidentityerrordescriber/index.md
+              - "WrappedUserManager": api/modules-identity-core/kamisama-modules-identity-wrappers/kamisama-modules-identity-wrappers-wrappedusermanager/index.md
+      - "KamiSama.Modules.Identity.Postgresql":
+          - Overview: api/modules-identity-postgresql/index.md
+          - "KamiSama.Modules.Identity":
+              - Overview: api/modules-identity-postgresql/kamisama-modules-identity/index.md
+              - "IdentityPostgresqlDbContextBuilderExtensions": api/modules-identity-postgresql/kamisama-modules-identity/kamisama-modules-identity-identitypostgresqldbcontextbuilderextensions/index.md
+          - "KamiSama.Modules.Identity.Repositories.Database.Postgresql":
+              - Overview: api/modules-identity-postgresql/kamisama-modules-identity-repositories-database-postgresql/index.md
+              - "PostgresqlKamiSamaIdentityDbContext": api/modules-identity-postgresql/kamisama-modules-identity-repositories-database-postgresql/kamisama-modules-identity-repositories-database-postgresql-postgresqlkamisamaidentitydbcontext/index.md
+      - "KamiSama.Modules.Identity.Sqlite":
+          - Overview: api/modules-identity-sqlite/index.md
+          - "KamiSama.Modules.Identity":
+              - Overview: api/modules-identity-sqlite/kamisama-modules-identity/index.md
+              - "IdentitySqliteDbContextBuilderExtensions": api/modules-identity-sqlite/kamisama-modules-identity/kamisama-modules-identity-identitysqlitedbcontextbuilderextensions/index.md
+          - "KamiSama.Modules.Identity.Repositories.Database.Sqlite":
+              - Overview: api/modules-identity-sqlite/kamisama-modules-identity-repositories-database-sqlite/index.md
+              - "SqliteKamiSamaIdentityDbContext": api/modules-identity-sqlite/kamisama-modules-identity-repositories-database-sqlite/kamisama-modules-identity-repositories-database-sqlite-sqlitekamisamaidentitydbcontext/index.md
+      - "KamiSama.Modules.Localization.Abstractions":
+          - Overview: api/modules-localization-abstractions/index.md
+          - "KamiSama.Modules.Localization.Features":
+              - Overview: api/modules-localization-abstractions/kamisama-modules-localization-features/index.md
+              - "CultureInfoDto": api/modules-localization-abstractions/kamisama-modules-localization-features/kamisama-modules-localization-features-cultureinfodto/index.md
+              - "IGetCurrentCulture": api/modules-localization-abstractions/kamisama-modules-localization-features/kamisama-modules-localization-features-igetcurrentculture/index.md
+              - "IListAvailableCultures": api/modules-localization-abstractions/kamisama-modules-localization-features/kamisama-modules-localization-features-ilistavailablecultures/index.md
+              - "ISetCulture": api/modules-localization-abstractions/kamisama-modules-localization-features/kamisama-modules-localization-features-isetculture/index.md
+      - "KamiSama.Modules.Localization.Core":
+          - Overview: api/modules-localization-core/index.md
+          - "KamiSama.Modules.Localization":
+              - Overview: api/modules-localization-core/kamisama-modules-localization/index.md
+              - "ExtendedWebApplicationBuilderExtensions": api/modules-localization-core/kamisama-modules-localization/kamisama-modules-localization-extendedwebapplicationbuilderextensions/index.md
+              - "LocalizationModule": api/modules-localization-core/kamisama-modules-localization/kamisama-modules-localization-localizationmodule/index.md
+              - "LocalizationOptions": api/modules-localization-core/kamisama-modules-localization/kamisama-modules-localization-localizationoptions/index.md
+          - "KamiSama.Modules.Localization.Features":
+              - Overview: api/modules-localization-core/kamisama-modules-localization-features/index.md
+              - "GetCurrentCulture": api/modules-localization-core/kamisama-modules-localization-features/kamisama-modules-localization-features-getcurrentculture/index.md
+              - "ListAvailableCultures": api/modules-localization-core/kamisama-modules-localization-features/kamisama-modules-localization-features-listavailablecultures/index.md
+              - "SetCulture": api/modules-localization-core/kamisama-modules-localization-features/kamisama-modules-localization-features-setculture/index.md
+      - "KamiSama.Modules.Locations.Abstractions":
+          - Overview: api/modules-locations-abstractions/index.md
+          - "KamiSama.Modules.Locations.Features":
+              - Overview: api/modules-locations-abstractions/kamisama-modules-locations-features/index.md
+              - "AddCityRequest": api/modules-locations-abstractions/kamisama-modules-locations-features/kamisama-modules-locations-features-addcityrequest/index.md
+              - "AddProvinceRequest": api/modules-locations-abstractions/kamisama-modules-locations-features/kamisama-modules-locations-features-addprovincerequest/index.md
+              - "CityDto": api/modules-locations-abstractions/kamisama-modules-locations-features/kamisama-modules-locations-features-citydto/index.md
+              - "CitySearchModel": api/modules-locations-abstractions/kamisama-modules-locations-features/kamisama-modules-locations-features-citysearchmodel/index.md
+              - "IAddCity": api/modules-locations-abstractions/kamisama-modules-locations-features/kamisama-modules-locations-features-iaddcity/index.md
+              - "IAddProvince": api/modules-locations-abstractions/kamisama-modules-locations-features/kamisama-modules-locations-features-iaddprovince/index.md
+              - "IDeleteCity": api/modules-locations-abstractions/kamisama-modules-locations-features/kamisama-modules-locations-features-ideletecity/index.md
+              - "IDeleteProvince": api/modules-locations-abstractions/kamisama-modules-locations-features/kamisama-modules-locations-features-ideleteprovince/index.md
+              - "IFindCityById": api/modules-locations-abstractions/kamisama-modules-locations-features/kamisama-modules-locations-features-ifindcitybyid/index.md
+              - "IFindProvinceById": api/modules-locations-abstractions/kamisama-modules-locations-features/kamisama-modules-locations-features-ifindprovincebyid/index.md
+              - "IListCities": api/modules-locations-abstractions/kamisama-modules-locations-features/kamisama-modules-locations-features-ilistcities/index.md
+              - "IListCitiesByProvinceName": api/modules-locations-abstractions/kamisama-modules-locations-features/kamisama-modules-locations-features-ilistcitiesbyprovincename/index.md
+              - "IListProvinces": api/modules-locations-abstractions/kamisama-modules-locations-features/kamisama-modules-locations-features-ilistprovinces/index.md
+              - "IUpdateCity": api/modules-locations-abstractions/kamisama-modules-locations-features/kamisama-modules-locations-features-iupdatecity/index.md
+              - "IUpdateProvince": api/modules-locations-abstractions/kamisama-modules-locations-features/kamisama-modules-locations-features-iupdateprovince/index.md
+              - "ProvinceDto": api/modules-locations-abstractions/kamisama-modules-locations-features/kamisama-modules-locations-features-provincedto/index.md
+              - "ProvinceSearchModel": api/modules-locations-abstractions/kamisama-modules-locations-features/kamisama-modules-locations-features-provincesearchmodel/index.md
+              - "UpdateCityRequest": api/modules-locations-abstractions/kamisama-modules-locations-features/kamisama-modules-locations-features-updatecityrequest/index.md
+              - "UpdateProvinceRequest": api/modules-locations-abstractions/kamisama-modules-locations-features/kamisama-modules-locations-features-updateprovincerequest/index.md
+      - "KamiSama.Modules.Locations.Core":
+          - Overview: api/modules-locations-core/index.md
+          - "KamiSama.Modules.Locations":
+              - Overview: api/modules-locations-core/kamisama-modules-locations/index.md
+              - "DtoMappings": api/modules-locations-core/kamisama-modules-locations/kamisama-modules-locations-dtomappings/index.md
+              - "ExtendedWebApplicationBuilderExtensions": api/modules-locations-core/kamisama-modules-locations/kamisama-modules-locations-extendedwebapplicationbuilderextensions/index.md
+              - "LocationsModule": api/modules-locations-core/kamisama-modules-locations/kamisama-modules-locations-locationsmodule/index.md
+          - "KamiSama.Modules.Locations.Entities":
+              - Overview: api/modules-locations-core/kamisama-modules-locations-entities/index.md
+              - "City": api/modules-locations-core/kamisama-modules-locations-entities/kamisama-modules-locations-entities-city/index.md
+              - "Province": api/modules-locations-core/kamisama-modules-locations-entities/kamisama-modules-locations-entities-province/index.md
+          - "KamiSama.Modules.Locations.Features":
+              - Overview: api/modules-locations-core/kamisama-modules-locations-features/index.md
+              - "AddCity": api/modules-locations-core/kamisama-modules-locations-features/kamisama-modules-locations-features-addcity/index.md
+              - "AddProvince": api/modules-locations-core/kamisama-modules-locations-features/kamisama-modules-locations-features-addprovince/index.md
+              - "DeleteCity": api/modules-locations-core/kamisama-modules-locations-features/kamisama-modules-locations-features-deletecity/index.md
+              - "DeleteProvince": api/modules-locations-core/kamisama-modules-locations-features/kamisama-modules-locations-features-deleteprovince/index.md
+              - "FindCityById": api/modules-locations-core/kamisama-modules-locations-features/kamisama-modules-locations-features-findcitybyid/index.md
+              - "FindProvinceById": api/modules-locations-core/kamisama-modules-locations-features/kamisama-modules-locations-features-findprovincebyid/index.md
+              - "ListCities": api/modules-locations-core/kamisama-modules-locations-features/kamisama-modules-locations-features-listcities/index.md
+              - "UpdateCity": api/modules-locations-core/kamisama-modules-locations-features/kamisama-modules-locations-features-updatecity/index.md
+              - "UpdateProvince": api/modules-locations-core/kamisama-modules-locations-features/kamisama-modules-locations-features-updateprovince/index.md
+          - "KamiSama.Modules.Locations.Repositories.Abstractions":
+              - Overview: api/modules-locations-core/kamisama-modules-locations-repositories-abstractions/index.md
+              - "ICityRepository": api/modules-locations-core/kamisama-modules-locations-repositories-abstractions/kamisama-modules-locations-repositories-abstractions-icityrepository/index.md
+              - "IProvinceRepository": api/modules-locations-core/kamisama-modules-locations-repositories-abstractions/kamisama-modules-locations-repositories-abstractions-iprovincerepository/index.md
+          - "KamiSama.Modules.Locations.Repositories.Database":
+              - Overview: api/modules-locations-core/kamisama-modules-locations-repositories-database/index.md
+              - "LocationsDbContext": api/modules-locations-core/kamisama-modules-locations-repositories-database/kamisama-modules-locations-repositories-database-locationsdbcontext/index.md
+          - "KamiSama.Modules.Locations.Repositories.Implementations":
+              - Overview: api/modules-locations-core/kamisama-modules-locations-repositories-implementations/index.md
+              - "CityRepository": api/modules-locations-core/kamisama-modules-locations-repositories-implementations/kamisama-modules-locations-repositories-implementations-cityrepository/index.md
+              - "ProvinceRepository": api/modules-locations-core/kamisama-modules-locations-repositories-implementations/kamisama-modules-locations-repositories-implementations-provincerepository/index.md
+          - "KamiSama.Modules.Locations.Services":
+              - Overview: api/modules-locations-core/kamisama-modules-locations-services/index.md
+              - "ListCitiesByProvinceName": api/modules-locations-core/kamisama-modules-locations-services/kamisama-modules-locations-services-listcitiesbyprovincename/index.md
+              - "ListProvinces": api/modules-locations-core/kamisama-modules-locations-services/kamisama-modules-locations-services-listprovinces/index.md
+      - "KamiSama.Modules.Locations.Postgresql":
+          - Overview: api/modules-locations-postgresql/index.md
+          - "KamiSama.Modules.Locations":
+              - Overview: api/modules-locations-postgresql/kamisama-modules-locations/index.md
+              - "LocationsPostgresqlDbContextBuilderExtensions": api/modules-locations-postgresql/kamisama-modules-locations/kamisama-modules-locations-locationspostgresqldbcontextbuilderextensions/index.md
+          - "KamiSama.Modules.Locations.Repositories.Database.Postgresql":
+              - Overview: api/modules-locations-postgresql/kamisama-modules-locations-repositories-database-postgresql/index.md
+              - "PostgresqlLocationsDbContext": api/modules-locations-postgresql/kamisama-modules-locations-repositories-database-postgresql/kamisama-modules-locations-repositories-database-postgresql-postgresqllocationsdbcontext/index.md
+      - "KamiSama.Modules.Locations.Sqlite":
+          - Overview: api/modules-locations-sqlite/index.md
+          - "KamiSama.Modules.Locations":
+              - Overview: api/modules-locations-sqlite/kamisama-modules-locations/index.md
+              - "LocationsSqliteDbContextBuilderExtensions": api/modules-locations-sqlite/kamisama-modules-locations/kamisama-modules-locations-locationssqlitedbcontextbuilderextensions/index.md
+          - "KamiSama.Modules.Locations.Repositories.Database.Sqlite":
+              - Overview: api/modules-locations-sqlite/kamisama-modules-locations-repositories-database-sqlite/index.md
+              - "SqliteLocationsDbContext": api/modules-locations-sqlite/kamisama-modules-locations-repositories-database-sqlite/kamisama-modules-locations-repositories-database-sqlite-sqlitelocationsdbcontext/index.md
+      - "KamiSama.Modules.Ticketing.Abstractions":
+          - Overview: api/modules-ticketing-abstractions/index.md
+          - "KamiSama.Modules.Ticketing.DataTypes":
+              - Overview: api/modules-ticketing-abstractions/kamisama-modules-ticketing-datatypes/index.md
+              - "TicketCommentSide": api/modules-ticketing-abstractions/kamisama-modules-ticketing-datatypes/kamisama-modules-ticketing-datatypes-ticketcommentside/index.md
+              - "TicketPriority": api/modules-ticketing-abstractions/kamisama-modules-ticketing-datatypes/kamisama-modules-ticketing-datatypes-ticketpriority/index.md
+              - "TicketStatus": api/modules-ticketing-abstractions/kamisama-modules-ticketing-datatypes/kamisama-modules-ticketing-datatypes-ticketstatus/index.md
+          - "KamiSama.Modules.Ticketing.Features.TicketCategories":
+              - Overview: api/modules-ticketing-abstractions/kamisama-modules-ticketing-features-ticketcategories/index.md
+              - "AddTicketCategoryRequest": api/modules-ticketing-abstractions/kamisama-modules-ticketing-features-ticketcategories/kamisama-modules-ticketing-features-ticketcategories-addticketcategoryrequest/index.md
+              - "IAddTicketCategory": api/modules-ticketing-abstractions/kamisama-modules-ticketing-features-ticketcategories/kamisama-modules-ticketing-features-ticketcategories-iaddticketcategory/index.md
+              - "IDeleteTicketCategory": api/modules-ticketing-abstractions/kamisama-modules-ticketing-features-ticketcategories/kamisama-modules-ticketing-features-ticketcategories-ideleteticketcategory/index.md
+              - "IExistsTicketCategoryById": api/modules-ticketing-abstractions/kamisama-modules-ticketing-features-ticketcategories/kamisama-modules-ticketing-features-ticketcategories-iexiststicketcategorybyid/index.md
+              - "IExistsTicketCategoryByName": api/modules-ticketing-abstractions/kamisama-modules-ticketing-features-ticketcategories/kamisama-modules-ticketing-features-ticketcategories-iexiststicketcategorybyname/index.md
+              - "IFindTicketCategoryById": api/modules-ticketing-abstractions/kamisama-modules-ticketing-features-ticketcategories/kamisama-modules-ticketing-features-ticketcategories-ifindticketcategorybyid/index.md
+              - "IFindTicketCategoryByName": api/modules-ticketing-abstractions/kamisama-modules-ticketing-features-ticketcategories/kamisama-modules-ticketing-features-ticketcategories-ifindticketcategorybyname/index.md
+              - "IListTicketCategories": api/modules-ticketing-abstractions/kamisama-modules-ticketing-features-ticketcategories/kamisama-modules-ticketing-features-ticketcategories-ilistticketcategories/index.md
+              - "IUpdateTicketCategory": api/modules-ticketing-abstractions/kamisama-modules-ticketing-features-ticketcategories/kamisama-modules-ticketing-features-ticketcategories-iupdateticketcategory/index.md
+              - "TicketCategoryDto": api/modules-ticketing-abstractions/kamisama-modules-ticketing-features-ticketcategories/kamisama-modules-ticketing-features-ticketcategories-ticketcategorydto/index.md
+              - "TicketCategoryListItemDto": api/modules-ticketing-abstractions/kamisama-modules-ticketing-features-ticketcategories/kamisama-modules-ticketing-features-ticketcategories-ticketcategorylistitemdto/index.md
+              - "TicketCategorySearchModel": api/modules-ticketing-abstractions/kamisama-modules-ticketing-features-ticketcategories/kamisama-modules-ticketing-features-ticketcategories-ticketcategorysearchmodel/index.md
+              - "UpdateTicketCategoryRequest": api/modules-ticketing-abstractions/kamisama-modules-ticketing-features-ticketcategories/kamisama-modules-ticketing-features-ticketcategories-updateticketcategoryrequest/index.md
+          - "KamiSama.Modules.Ticketing.Features.Tickets":
+              - Overview: api/modules-ticketing-abstractions/kamisama-modules-ticketing-features-tickets/index.md
+              - "AddAttachmentToTicketCommentRequest": api/modules-ticketing-abstractions/kamisama-modules-ticketing-features-tickets/kamisama-modules-ticketing-features-tickets-addattachmenttoticketcommentrequest/index.md
+              - "AddTicketCommentRequest": api/modules-ticketing-abstractions/kamisama-modules-ticketing-features-tickets/kamisama-modules-ticketing-features-tickets-addticketcommentrequest/index.md
+              - "AddTicketRequest": api/modules-ticketing-abstractions/kamisama-modules-ticketing-features-tickets/kamisama-modules-ticketing-features-tickets-addticketrequest/index.md
+              - "IAddAttachmentToTicketComment": api/modules-ticketing-abstractions/kamisama-modules-ticketing-features-tickets/kamisama-modules-ticketing-features-tickets-iaddattachmenttoticketcomment/index.md
+              - "IAddCommentToTicket": api/modules-ticketing-abstractions/kamisama-modules-ticketing-features-tickets/kamisama-modules-ticketing-features-tickets-iaddcommenttoticket/index.md
+              - "IAddTicket": api/modules-ticketing-abstractions/kamisama-modules-ticketing-features-tickets/kamisama-modules-ticketing-features-tickets-iaddticket/index.md
+              - "IFindTicketById": api/modules-ticketing-abstractions/kamisama-modules-ticketing-features-tickets/kamisama-modules-ticketing-features-tickets-ifindticketbyid/index.md
+              - "IListTickets": api/modules-ticketing-abstractions/kamisama-modules-ticketing-features-tickets/kamisama-modules-ticketing-features-tickets-ilisttickets/index.md
+              - "IRemoveAttachementFromTicketComment": api/modules-ticketing-abstractions/kamisama-modules-ticketing-features-tickets/kamisama-modules-ticketing-features-tickets-iremoveattachementfromticketcomment/index.md
+              - "IUpdateTicketComment": api/modules-ticketing-abstractions/kamisama-modules-ticketing-features-tickets/kamisama-modules-ticketing-features-tickets-iupdateticketcomment/index.md
+              - "IUpdateTicketState": api/modules-ticketing-abstractions/kamisama-modules-ticketing-features-tickets/kamisama-modules-ticketing-features-tickets-iupdateticketstate/index.md
+              - "TicketAttachmentDto": api/modules-ticketing-abstractions/kamisama-modules-ticketing-features-tickets/kamisama-modules-ticketing-features-tickets-ticketattachmentdto/index.md
+              - "TicketCommentDto": api/modules-ticketing-abstractions/kamisama-modules-ticketing-features-tickets/kamisama-modules-ticketing-features-tickets-ticketcommentdto/index.md
+              - "TicketDto": api/modules-ticketing-abstractions/kamisama-modules-ticketing-features-tickets/kamisama-modules-ticketing-features-tickets-ticketdto/index.md
+              - "TicketListItemDto": api/modules-ticketing-abstractions/kamisama-modules-ticketing-features-tickets/kamisama-modules-ticketing-features-tickets-ticketlistitemdto/index.md
+              - "TicketSearchModel": api/modules-ticketing-abstractions/kamisama-modules-ticketing-features-tickets/kamisama-modules-ticketing-features-tickets-ticketsearchmodel/index.md
+              - "UpdateTicketCommentRequest": api/modules-ticketing-abstractions/kamisama-modules-ticketing-features-tickets/kamisama-modules-ticketing-features-tickets-updateticketcommentrequest/index.md
+              - "UpdateTicketStateRequest": api/modules-ticketing-abstractions/kamisama-modules-ticketing-features-tickets/kamisama-modules-ticketing-features-tickets-updateticketstaterequest/index.md
+      - "KamiSama.Modules.Ticketing.Core":
+          - Overview: api/modules-ticketing-core/index.md
+          - "KamiSama.Modules.Ticketing":
+              - Overview: api/modules-ticketing-core/kamisama-modules-ticketing/index.md
+              - "DtoMappings": api/modules-ticketing-core/kamisama-modules-ticketing/kamisama-modules-ticketing-dtomappings/index.md
+              - "ExtendedWebApplicationBuilderExtensions": api/modules-ticketing-core/kamisama-modules-ticketing/kamisama-modules-ticketing-extendedwebapplicationbuilderextensions/index.md
+              - "TicketingModule": api/modules-ticketing-core/kamisama-modules-ticketing/kamisama-modules-ticketing-ticketingmodule/index.md
+          - "KamiSama.Modules.Ticketing.Entities":
+              - Overview: api/modules-ticketing-core/kamisama-modules-ticketing-entities/index.md
+              - "Ticket": api/modules-ticketing-core/kamisama-modules-ticketing-entities/kamisama-modules-ticketing-entities-ticket/index.md
+              - "TicketAttachment": api/modules-ticketing-core/kamisama-modules-ticketing-entities/kamisama-modules-ticketing-entities-ticketattachment/index.md
+              - "TicketCategory": api/modules-ticketing-core/kamisama-modules-ticketing-entities/kamisama-modules-ticketing-entities-ticketcategory/index.md
+              - "TicketComment": api/modules-ticketing-core/kamisama-modules-ticketing-entities/kamisama-modules-ticketing-entities-ticketcomment/index.md
+          - "KamiSama.Modules.Ticketing.Features.Categories":
+              - Overview: api/modules-ticketing-core/kamisama-modules-ticketing-features-categories/index.md
+              - "AddTicketCategory": api/modules-ticketing-core/kamisama-modules-ticketing-features-categories/kamisama-modules-ticketing-features-categories-addticketcategory/index.md
+              - "DeleteTicketCategory": api/modules-ticketing-core/kamisama-modules-ticketing-features-categories/kamisama-modules-ticketing-features-categories-deleteticketcategory/index.md
+              - "ExistsTicketCategoryById": api/modules-ticketing-core/kamisama-modules-ticketing-features-categories/kamisama-modules-ticketing-features-categories-existsticketcategorybyid/index.md
+              - "ExistsTicketCategoryByName": api/modules-ticketing-core/kamisama-modules-ticketing-features-categories/kamisama-modules-ticketing-features-categories-existsticketcategorybyname/index.md
+              - "FindTicketCategoryById": api/modules-ticketing-core/kamisama-modules-ticketing-features-categories/kamisama-modules-ticketing-features-categories-findticketcategorybyid/index.md
+              - "FindTicketCategoryByName": api/modules-ticketing-core/kamisama-modules-ticketing-features-categories/kamisama-modules-ticketing-features-categories-findticketcategorybyname/index.md
+              - "ListTicketCategories": api/modules-ticketing-core/kamisama-modules-ticketing-features-categories/kamisama-modules-ticketing-features-categories-listticketcategories/index.md
+              - "UpdateTicketCategory": api/modules-ticketing-core/kamisama-modules-ticketing-features-categories/kamisama-modules-ticketing-features-categories-updateticketcategory/index.md
+          - "KamiSama.Modules.Ticketing.Features.Tickets":
+              - Overview: api/modules-ticketing-core/kamisama-modules-ticketing-features-tickets/index.md
+              - "AddAttachmentToTicketComment": api/modules-ticketing-core/kamisama-modules-ticketing-features-tickets/kamisama-modules-ticketing-features-tickets-addattachmenttoticketcomment/index.md
+              - "AddCommentToTicket": api/modules-ticketing-core/kamisama-modules-ticketing-features-tickets/kamisama-modules-ticketing-features-tickets-addcommenttoticket/index.md
+              - "AddTicket": api/modules-ticketing-core/kamisama-modules-ticketing-features-tickets/kamisama-modules-ticketing-features-tickets-addticket/index.md
+              - "FindTicketById": api/modules-ticketing-core/kamisama-modules-ticketing-features-tickets/kamisama-modules-ticketing-features-tickets-findticketbyid/index.md
+              - "ListTickets": api/modules-ticketing-core/kamisama-modules-ticketing-features-tickets/kamisama-modules-ticketing-features-tickets-listtickets/index.md
+              - "RemoveAttachementFromTicketComment": api/modules-ticketing-core/kamisama-modules-ticketing-features-tickets/kamisama-modules-ticketing-features-tickets-removeattachementfromticketcomment/index.md
+              - "UpdateTicketComment": api/modules-ticketing-core/kamisama-modules-ticketing-features-tickets/kamisama-modules-ticketing-features-tickets-updateticketcomment/index.md
+              - "UpdateTicketState": api/modules-ticketing-core/kamisama-modules-ticketing-features-tickets/kamisama-modules-ticketing-features-tickets-updateticketstate/index.md
+          - "KamiSama.Modules.Ticketing.Repositories.Abstractions":
+              - Overview: api/modules-ticketing-core/kamisama-modules-ticketing-repositories-abstractions/index.md
+              - "ITicketCategoryRepository": api/modules-ticketing-core/kamisama-modules-ticketing-repositories-abstractions/kamisama-modules-ticketing-repositories-abstractions-iticketcategoryrepository/index.md
+              - "ITicketRepository": api/modules-ticketing-core/kamisama-modules-ticketing-repositories-abstractions/kamisama-modules-ticketing-repositories-abstractions-iticketrepository/index.md
+          - "KamiSama.Modules.Ticketing.Repositories.Database":
+              - Overview: api/modules-ticketing-core/kamisama-modules-ticketing-repositories-database/index.md
+              - "TicketingDbContext": api/modules-ticketing-core/kamisama-modules-ticketing-repositories-database/kamisama-modules-ticketing-repositories-database-ticketingdbcontext/index.md
+          - "KamiSama.Modules.Ticketing.Repositories.Implementations":
+              - Overview: api/modules-ticketing-core/kamisama-modules-ticketing-repositories-implementations/index.md
+              - "TicketCategoryRepository": api/modules-ticketing-core/kamisama-modules-ticketing-repositories-implementations/kamisama-modules-ticketing-repositories-implementations-ticketcategoryrepository/index.md
+              - "TicketRepository": api/modules-ticketing-core/kamisama-modules-ticketing-repositories-implementations/kamisama-modules-ticketing-repositories-implementations-ticketrepository/index.md
+      - "KamiSama.Modules.Ticketing.Postgresql":
+          - Overview: api/modules-ticketing-postgresql/index.md
+          - "KamiSama.Modules.Ticketing":
+              - Overview: api/modules-ticketing-postgresql/kamisama-modules-ticketing/index.md
+              - "TicketingPostgresqlDbContextBuilderExtensions": api/modules-ticketing-postgresql/kamisama-modules-ticketing/kamisama-modules-ticketing-ticketingpostgresqldbcontextbuilderextensions/index.md
+          - "KamiSama.Modules.Ticketing.Repositories.Database.Postgresql":
+              - Overview: api/modules-ticketing-postgresql/kamisama-modules-ticketing-repositories-database-postgresql/index.md
+              - "PostgresqlTicketingDbContext": api/modules-ticketing-postgresql/kamisama-modules-ticketing-repositories-database-postgresql/kamisama-modules-ticketing-repositories-database-postgresql-postgresqlticketingdbcontext/index.md
+      - "KamiSama.Modules.Ticketing.Sqlite":
+          - Overview: api/modules-ticketing-sqlite/index.md
+          - "KamiSama.Modules.Ticketing":
+              - Overview: api/modules-ticketing-sqlite/kamisama-modules-ticketing/index.md
+              - "TicketingSqliteDbContextBuilderExtensions": api/modules-ticketing-sqlite/kamisama-modules-ticketing/kamisama-modules-ticketing-ticketingsqlitedbcontextbuilderextensions/index.md
+          - "KamiSama.Modules.Ticketing.Repositories.Database.Sqlite":
+              - Overview: api/modules-ticketing-sqlite/kamisama-modules-ticketing-repositories-database-sqlite/index.md
+              - "SqliteTicketingDbContext": api/modules-ticketing-sqlite/kamisama-modules-ticketing-repositories-database-sqlite/kamisama-modules-ticketing-repositories-database-sqlite-sqliteticketingdbcontext/index.md
+      - "KamiSama.Extensions.NLog":
+          - Overview: api/extensions-nlog/index.md
+          - "KamiSama.Extensions.NLog":
+              - Overview: api/extensions-nlog/kamisama-extensions-nlog/index.md
+              - "EncryptedZipArchiveFileCompressor": api/extensions-nlog/kamisama-extensions-nlog/kamisama-extensions-nlog-encryptedziparchivefilecompressor/index.md
+              - "PasswordFunc": api/extensions-nlog/kamisama-extensions-nlog/kamisama-extensions-nlog-passwordfunc/index.md
+              - "PersianDateLayoutRenderer": api/extensions-nlog/kamisama-extensions-nlog/kamisama-extensions-nlog-persiandatelayoutrenderer/index.md
+              - "PersianLongDateLayoutRenderer": api/extensions-nlog/kamisama-extensions-nlog/kamisama-extensions-nlog-persianlongdatelayoutrenderer/index.md
+              - "PersianShortDateLayoutRenderer": api/extensions-nlog/kamisama-extensions-nlog/kamisama-extensions-nlog-persianshortdatelayoutrenderer/index.md
+              - "StringBuilderEx": api/extensions-nlog/kamisama-extensions-nlog/kamisama-extensions-nlog-stringbuilderex/index.md
+      - "KamiSama.Repositories.Core":
+          - Overview: api/repositories-core/index.md
+          - "KamiSama.Repositories":
+              - Overview: api/repositories-core/kamisama-repositories/index.md
+              - "ConnectionStringOption": api/repositories-core/kamisama-repositories/kamisama-repositories-connectionstringoption/index.md
+              - "IAsyncQueryableRepository<TEntity>": api/repositories-core/kamisama-repositories/kamisama-repositories-iasyncqueryablerepository-tentity/index.md
+              - "IAsyncRepository<_EntityType>": api/repositories-core/kamisama-repositories/kamisama-repositories-iasyncrepository-entitytype/index.md
+              - "InMemoryRepository<TEntity>": api/repositories-core/kamisama-repositories/kamisama-repositories-inmemoryrepository-tentity/index.md
+              - "IQueryableRepository<TEntity>": api/repositories-core/kamisama-repositories/kamisama-repositories-iqueryablerepository-tentity/index.md
+              - "IRepository<TEntity>": api/repositories-core/kamisama-repositories/kamisama-repositories-irepository-tentity/index.md
+              - "RepositoriesExtensions": api/repositories-core/kamisama-repositories/kamisama-repositories-repositoriesextensions/index.md
+          - "KamiSama.Repositories.Initialization":
+              - Overview: api/repositories-core/kamisama-repositories-initialization/index.md
+              - "DataInitializationOptions": api/repositories-core/kamisama-repositories-initialization/kamisama-repositories-initialization-datainitializationoptions/index.md
+              - "IDatabaseInitializer<TDbContext>": api/repositories-core/kamisama-repositories-initialization/kamisama-repositories-initialization-idatabaseinitializer-tdbcontext/index.md
+      - "KamiSama.Repositories.EntityFramework":
+          - Overview: api/repositories-entityframework/index.md
+          - "KamiSama.Repositories.EntityFramework":
+              - Overview: api/repositories-entityframework/kamisama-repositories-entityframework/index.md
+              - "DbRepository<TEntity, TDbContext>": api/repositories-entityframework/kamisama-repositories-entityframework/kamisama-repositories-entityframework-dbrepository-tentity-tdbcontext/index.md
+              - "DbRepository<TEntity>": api/repositories-entityframework/kamisama-repositories-entityframework/kamisama-repositories-entityframework-dbrepository-tentity/index.md
+              - "IOrderedQueryableExtensions": api/repositories-entityframework/kamisama-repositories-entityframework/kamisama-repositories-entityframework-iorderedqueryableextensions/index.md
+      - "KamiSama.Repositories.EntityFrameworkCore":
+          - Overview: api/repositories-entityframeworkcore/index.md
+          - "KamiSama.Repositories.EntityFrameworkCore":
+              - Overview: api/repositories-entityframeworkcore/kamisama-repositories-entityframeworkcore/index.md
+              - "DbRepository<TEntity, TDbContext>": api/repositories-entityframeworkcore/kamisama-repositories-entityframeworkcore/kamisama-repositories-entityframeworkcore-dbrepository-tentity-tdbcontext/index.md
+              - "DbRepository<TEntity>": api/repositories-entityframeworkcore/kamisama-repositories-entityframeworkcore/kamisama-repositories-entityframeworkcore-dbrepository-tentity/index.md
+              - "IMultiProviderDbContextBuilder": api/repositories-entityframeworkcore/kamisama-repositories-entityframeworkcore/kamisama-repositories-entityframeworkcore-imultiproviderdbcontextbuilder/index.md
+              - "IMultiProviderDbContextBuilder<TBaseContext>": api/repositories-entityframeworkcore/kamisama-repositories-entityframeworkcore/kamisama-repositories-entityframeworkcore-imultiproviderdbcontextbuilder-tbasecontext/index.md
+              - "IQueryableExtensions": api/repositories-entityframeworkcore/kamisama-repositories-entityframeworkcore/kamisama-repositories-entityframeworkcore-iqueryableextensions/index.md
+              - "MultiProviderDbContextBuilder<TBaseContext>": api/repositories-entityframeworkcore/kamisama-repositories-entityframeworkcore/kamisama-repositories-entityframeworkcore-multiproviderdbcontextbuilder-tbasecontext/index.md
+              - "ServiceCollectionExtensions": api/repositories-entityframeworkcore/kamisama-repositories-entityframeworkcore/kamisama-repositories-entityframeworkcore-servicecollectionextensions/index.md
+          - "KamiSama.Repositories.EntityFrameworkCore.Initialization":
+              - Overview: api/repositories-entityframeworkcore/kamisama-repositories-entityframeworkcore-initialization/index.md
+              - "DatabaseInitializerBase<TDbContext>": api/repositories-entityframeworkcore/kamisama-repositories-entityframeworkcore-initialization/kamisama-repositories-entityframeworkcore-initialization-databaseinitializerbase-tdbcontext/index.md
+              - "DefaultDatabaseInitializer<TDbContext>": api/repositories-entityframeworkcore/kamisama-repositories-entityframeworkcore-initialization/kamisama-repositories-entityframeworkcore-initialization-defaultdatabaseinitializer-tdbcontext/index.md
+      - "KamiSama.Repositories.EntityFrameworkCore.Postgresql":
+          - Overview: api/repositories-entityframeworkcore-postgresql/index.md
+          - "KamiSama.Repositories.EntityFrameworkCore.Postgresql":
+              - Overview: api/repositories-entityframeworkcore-postgresql/kamisama-repositories-entityframeworkcore-postgresql/index.md
+              - "MultiProviderDbContextBuilderPostgresqlExtensions": api/repositories-entityframeworkcore-postgresql/kamisama-repositories-entityframeworkcore-postgresql/kamisama-repositories-entityframeworkcore-postgresql-multiproviderdbcontextbuilderpostgresqlextensions/index.md
+      - "KamiSama.Repositories.EntityFrameworkCore.Sqlite":
+          - Overview: api/repositories-entityframeworkcore-sqlite/index.md
+          - "KamiSama.Repositories.EntityFrameworkCore.Sqlite":
+              - Overview: api/repositories-entityframeworkcore-sqlite/kamisama-repositories-entityframeworkcore-sqlite/index.md
+              - "MultiProviderDbContextBuilderSqliteExtensions": api/repositories-entityframeworkcore-sqlite/kamisama-repositories-entityframeworkcore-sqlite/kamisama-repositories-entityframeworkcore-sqlite-multiproviderdbcontextbuildersqliteextensions/index.md
+      - "KamiSama.Repositories.Json":
+          - Overview: api/repositories-json/index.md
+          - "KamiSama.Repositories.Json":
+              - Overview: api/repositories-json/kamisama-repositories-json/index.md
+              - "JsonRepository<TEntity>": api/repositories-json/kamisama-repositories-json/kamisama-repositories-json-jsonrepository-tentity/index.md
+      - "KamiSama.Repositories.Xml":
+          - Overview: api/repositories-xml/index.md
+          - "KamiSama.Repositories.Xml":
+              - Overview: api/repositories-xml/kamisama-repositories-xml/index.md
+              - "XmlDirectoryRepository<TEntity>": api/repositories-xml/kamisama-repositories-xml/kamisama-repositories-xml-xmldirectoryrepository-tentity/index.md
+              - "XmlFileRepository<TEntity>": api/repositories-xml/kamisama-repositories-xml/kamisama-repositories-xml-xmlfilerepository-tentity/index.md
+      - "KamiSama.Testing.NSubstitute":
+          - Overview: api/testing-nsubstitute/index.md
+          - "KamiSama.Testing.NSubstitute":
+              - Overview: api/testing-nsubstitute/kamisama-testing-nsubstitute/index.md
+              - "TesterBuilderBase": api/testing-nsubstitute/kamisama-testing-nsubstitute/kamisama-testing-nsubstitute-testerbuilderbase/index.md
+      - "KamiSama.Extensions.WebModules":
+          - Overview: api/extensions-webmodules/index.md
+          - "KamiSama.Extensions.WebModules":
+              - Overview: api/extensions-webmodules/kamisama-extensions-webmodules/index.md
+              - "AntiForgeryExtension": api/extensions-webmodules/kamisama-extensions-webmodules/kamisama-extensions-webmodules-antiforgeryextension/index.md
+              - "AntiForgeryModule": api/extensions-webmodules/kamisama-extensions-webmodules/kamisama-extensions-webmodules-antiforgerymodule/index.md
+              - "AuthorizationExtension": api/extensions-webmodules/kamisama-extensions-webmodules/kamisama-extensions-webmodules-authorizationextension/index.md
+              - "AuthorizationModule": api/extensions-webmodules/kamisama-extensions-webmodules/kamisama-extensions-webmodules-authorizationmodule/index.md
+              - "CascadingAuthenticationExtension": api/extensions-webmodules/kamisama-extensions-webmodules/kamisama-extensions-webmodules-cascadingauthenticationextension/index.md
+              - "CascadingAuthenticationModule": api/extensions-webmodules/kamisama-extensions-webmodules/kamisama-extensions-webmodules-cascadingauthenticationmodule/index.md
+              - "ControllersModule": api/extensions-webmodules/kamisama-extensions-webmodules/kamisama-extensions-webmodules-controllersmodule/index.md
+              - "ControllersModuleExtension": api/extensions-webmodules/kamisama-extensions-webmodules/kamisama-extensions-webmodules-controllersmoduleextension/index.md
+              - "CorsExtension": api/extensions-webmodules/kamisama-extensions-webmodules/kamisama-extensions-webmodules-corsextension/index.md
+              - "CorsModule": api/extensions-webmodules/kamisama-extensions-webmodules/kamisama-extensions-webmodules-corsmodule/index.md
+              - "CustomActionExtension": api/extensions-webmodules/kamisama-extensions-webmodules/kamisama-extensions-webmodules-customactionextension/index.md
+              - "CustomActionModule": api/extensions-webmodules/kamisama-extensions-webmodules/kamisama-extensions-webmodules-customactionmodule/index.md
+              - "ExtendedWebApplicationBuilder": api/extensions-webmodules/kamisama-extensions-webmodules/kamisama-extensions-webmodules-extendedwebapplicationbuilder/index.md
+              - "ForwardedHeadersExtension": api/extensions-webmodules/kamisama-extensions-webmodules/kamisama-extensions-webmodules-forwardedheadersextension/index.md
+              - "ForwardedHeadersModule": api/extensions-webmodules/kamisama-extensions-webmodules/kamisama-extensions-webmodules-forwardedheadersmodule/index.md
+              - "HstsExtension": api/extensions-webmodules/kamisama-extensions-webmodules/kamisama-extensions-webmodules-hstsextension/index.md
+              - "HstsModule": api/extensions-webmodules/kamisama-extensions-webmodules/kamisama-extensions-webmodules-hstsmodule/index.md
+              - "HttpsRedirectionExtension": api/extensions-webmodules/kamisama-extensions-webmodules/kamisama-extensions-webmodules-httpsredirectionextension/index.md
+              - "HttpsRedirectionModule": api/extensions-webmodules/kamisama-extensions-webmodules/kamisama-extensions-webmodules-httpsredirectionmodule/index.md
+              - "OpenApiModule": api/extensions-webmodules/kamisama-extensions-webmodules/kamisama-extensions-webmodules-openapimodule/index.md
+              - "RazorComponentExtension": api/extensions-webmodules/kamisama-extensions-webmodules/kamisama-extensions-webmodules-razorcomponentextension/index.md
+              - "RazorComponentModule<TRootComponent>": api/extensions-webmodules/kamisama-extensions-webmodules/kamisama-extensions-webmodules-razorcomponentmodule-trootcomponent/index.md
+              - "RazorPagesModule": api/extensions-webmodules/kamisama-extensions-webmodules/kamisama-extensions-webmodules-razorpagesmodule/index.md
+              - "RazorPagesModuleExtension": api/extensions-webmodules/kamisama-extensions-webmodules/kamisama-extensions-webmodules-razorpagesmoduleextension/index.md
+              - "RequestLocalizationExtension": api/extensions-webmodules/kamisama-extensions-webmodules/kamisama-extensions-webmodules-requestlocalizationextension/index.md
+              - "RequestLocalizationModule": api/extensions-webmodules/kamisama-extensions-webmodules/kamisama-extensions-webmodules-requestlocalizationmodule/index.md
+              - "ResponseCachingExtension": api/extensions-webmodules/kamisama-extensions-webmodules/kamisama-extensions-webmodules-responsecachingextension/index.md
+              - "ResponseCachingModule": api/extensions-webmodules/kamisama-extensions-webmodules/kamisama-extensions-webmodules-responsecachingmodule/index.md
+              - "ResponseCompressionExtension": api/extensions-webmodules/kamisama-extensions-webmodules/kamisama-extensions-webmodules-responsecompressionextension/index.md
+              - "ResponseCompressionModule": api/extensions-webmodules/kamisama-extensions-webmodules/kamisama-extensions-webmodules-responsecompressionmodule/index.md
+              - "RoutingExtension": api/extensions-webmodules/kamisama-extensions-webmodules/kamisama-extensions-webmodules-routingextension/index.md
+              - "RoutingModule": api/extensions-webmodules/kamisama-extensions-webmodules/kamisama-extensions-webmodules-routingmodule/index.md
+              - "StaticFileExtension": api/extensions-webmodules/kamisama-extensions-webmodules/kamisama-extensions-webmodules-staticfileextension/index.md
+              - "StaticFilesModule": api/extensions-webmodules/kamisama-extensions-webmodules/kamisama-extensions-webmodules-staticfilesmodule/index.md
+              - "SwaggerModule": api/extensions-webmodules/kamisama-extensions-webmodules/kamisama-extensions-webmodules-swaggermodule/index.md
+              - "SwaggerModuleExtension": api/extensions-webmodules/kamisama-extensions-webmodules/kamisama-extensions-webmodules-swaggermoduleextension/index.md
+              - "WebApplicationBuilderExtension": api/extensions-webmodules/kamisama-extensions-webmodules/kamisama-extensions-webmodules-webapplicationbuilderextension/index.md
+              - "WebModule": api/extensions-webmodules/kamisama-extensions-webmodules/kamisama-extensions-webmodules-webmodule/index.md
+      - "KamiSama.Extensions.Xml":
+          - Overview: api/extensions-xml/index.md
+          - "KamiSama.Extensions":
+              - Overview: api/extensions-xml/kamisama-extensions/index.md
+              - "AutoXmlArrayItemAttribute": api/extensions-xml/kamisama-extensions/kamisama-extensions-autoxmlarrayitemattribute/index.md
+              - "AutoXmlAttribute": api/extensions-xml/kamisama-extensions/kamisama-extensions-autoxmlattribute/index.md
+              - "AutoXmlElement<TValue>": api/extensions-xml/kamisama-extensions/kamisama-extensions-autoxmlelement-tvalue/index.md
+              - "AutoXmlElementAttribute": api/extensions-xml/kamisama-extensions/kamisama-extensions-autoxmlelementattribute/index.md
+              - "XmlAttributeOverridesExtensions": api/extensions-xml/kamisama-extensions/kamisama-extensions-xmlattributeoverridesextensions/index.md
+              - "XmlSerializationExtensions": api/extensions-xml/kamisama-extensions/kamisama-extensions-xmlserializationextensions/index.md
+  - Topic Guides:
+      - "1-core": topics/1-core.md
+      - "10-templates": topics/10-templates.md
+      - "11-web-modules": topics/11-web-modules.md
+      - "2-dependency-injection": topics/2-dependency-injection.md
+      - "3-json": topics/3-json.md
+      - "4-xml": topics/4-xml.md
+      - "5-repositories": topics/5-repositories.md
+      - "6-nlog": topics/6-nlog.md
+      - "7-iran-system": topics/7-iran-system.md
+      - "8-chassis": topics/8-chassis.md
+      - "9-testings": topics/9-testings.md

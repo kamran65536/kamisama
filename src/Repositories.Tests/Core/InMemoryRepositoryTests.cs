@@ -22,7 +22,7 @@ public class InMemoryRepositoryTests
 
 		var repository = new InMemoryRepository<SampleEntity>(initialItems);
 
-		CollectionAssert.AreEqual(initialItems, repository.GetAll().ToArray());
+		Assert.AreSequenceEqual(initialItems, [.. repository.GetAll()]);
 	}
 	[TestMethod]
 	public void Ctor_must_initialize_empty_repository_if_initialItems_are_null()
@@ -219,9 +219,9 @@ public class InMemoryRepositoryTests
 
 		var result = repository.Where(x => x.Name!.StartsWith("sample")).ToArray();
 
-		CollectionAssert.Contains(result, initialItems[0]);
-		CollectionAssert.Contains(result, initialItems[1]);
-		CollectionAssert.DoesNotContain(result, initialItems[2]);
+		Assert.Contains(initialItems[0], result);
+		Assert.Contains(initialItems[1], result);
+		Assert.DoesNotContain(initialItems[2], result);
 	}
 	[TestMethod]
 	public void Where_must_return_all_items_if_predicate_is_null()
@@ -235,8 +235,8 @@ public class InMemoryRepositoryTests
 
 		var result = repository.Where(x => true).ToArray();
 
-		CollectionAssert.Contains(result, initialItems[0]);
-		CollectionAssert.Contains(result, initialItems[1]);
-		CollectionAssert.Contains(result, initialItems[2]);
+		Assert.Contains(initialItems[0], result);
+		Assert.Contains(initialItems[1], result);
+		Assert.Contains(initialItems[2], result);
 	}
 }

@@ -1,10 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
-namespace Example.Core.Entities;
+namespace ExampleCore.Entities;
 
 public class SampleEntity
 {
-    public Guid Id { get; set; }
-    [MaxLength(100)]
-    public required string Name { get; set; }
+	public Guid Id { get; set; }
+
+	[MaxLength(200)]
+	public required string Name { get; set; }
+
+	public required DateTime CreatedAt { get; set; }
+
+	public required DateTime UpdatedAt { get; set; }
 }

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Kamisama Libraries"
+  short_description: "Use KamiSama.Extensions library docs and cached symbols."
+  default_prompt: "Use the KamiSama library docs and cached symbols to answer or implement against the repository APIs."

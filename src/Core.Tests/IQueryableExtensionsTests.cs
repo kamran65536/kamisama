@@ -13,7 +13,7 @@ public class IQueryableExtensionsTests
 
 		var paged = query.MakePaged(SearchModel.All);
 
-		CollectionAssert.AreEqual(query.ToArray(), paged.Items);
+		Assert.AreSequenceEqual([.. query], paged.Items);
 		Assert.AreEqual(query.Count(), paged.TotalItemsCount);
 	}
 	[TestMethod]
@@ -23,7 +23,7 @@ public class IQueryableExtensionsTests
 
 		var paged = query.MakePaged(SearchModel.FromPage(1, 0));
 
-		CollectionAssert.AreEqual(query.ToArray(), paged.Items);
+		Assert.AreSequenceEqual([.. query], paged.Items);
 		Assert.AreEqual(query.Count(), paged.TotalItemsCount);
 	}
 	[TestMethod]
@@ -33,7 +33,7 @@ public class IQueryableExtensionsTests
 
 		var paged = query.MakePaged(SearchModel.FromPage(1, 10));
 
-		CollectionAssert.AreEqual(query.Take(10).ToArray(), paged.Items);
+		Assert.AreSequenceEqual([.. query.Take(10)], paged.Items);
 		Assert.AreEqual(query.Count(), paged.TotalItemsCount);
 	}
 	[TestMethod]
@@ -43,7 +43,7 @@ public class IQueryableExtensionsTests
 
 		var paged = query.MakePaged(SearchModel.FromPage(2, 10));
 
-		CollectionAssert.AreEqual(query.Skip(10).Take(10).ToArray(), paged.Items);
+		Assert.AreSequenceEqual([.. query.Skip(10).Take(10)], paged.Items);
 		Assert.AreEqual(query.Count(), paged.TotalItemsCount);
 	}
 }

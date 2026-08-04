@@ -1,0 +1,13 @@
+﻿# KamiSama.Repositories
+
+[Back to KamiSama.Repositories.Core](../index.md)
+
+| Type | Kind | Description | Source |
+| --- | --- | --- | --- |
+| [ConnectionStringOption](kamisama-repositories-connectionstringoption/index.md) | Class | Configuration object for database provider and connection-string settings. Bind it from configuration when wiring repository or DbContext provider packages. | [source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Repositories.Core/ConnectionStringOption.cs#L8) |
+| [IAsyncQueryableRepository<TEntity>](kamisama-repositories-iasyncqueryablerepository-tentity/index.md) | Interface | IAsyncQueryable Repository. Use it with the surrounding package APIs when composing application code. | [source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Repositories.Core/IAsyncQueryableRepository.cs#L9) |
+| [IAsyncRepository<_EntityType>](kamisama-repositories-iasyncrepository-entitytype/index.md) | Interface | IAsyncRepository is the same as IRepository. Use it with the surrounding package APIs when composing application code. | [source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Repositories.Core/IAsyncRepository.cs#L7) |
+| [InMemoryRepository<TEntity>](kamisama-repositories-inmemoryrepository-tentity/index.md) | Class | The internal memory repository, this class can be used for testing The class operations are thread safe. Use it with the surrounding package APIs when composing application code. | [source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Repositories.Core/InMemoryRepository.cs#L11) |
+| [IQueryableRepository<TEntity>](kamisama-repositories-iqueryablerepository-tentity/index.md) | Interface | Queryable Repository Interface, these repositories can be searched throughout. Use it with the surrounding package APIs when composing application code. | [source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Repositories.Core/IQueryableRepository.cs#L9) |
+| [IRepository<TEntity>](kamisama-repositories-irepository-tentity/index.md) | Interface | Repository implementation or contract for `IRepository<TEntity>`. Use it behind feature services to keep persistence access behind the KamiSama repository abstraction. | [source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Repositories.Core/IRepository.cs#L10) |
+| [RepositoriesExtensions](kamisama-repositories-repositoriesextensions/index.md) | Class | Provides the `RepositoriesExtensions` API for the surrounding package. Use this type with the members listed below to compose the feature in an application. | [source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Repositories.Core/RepositoriesExtensions.cs#L10) |

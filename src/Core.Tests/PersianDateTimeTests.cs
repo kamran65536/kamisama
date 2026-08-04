@@ -5,10 +5,9 @@ public class PersianDateTimeTests
 {
 	private static readonly PersianCalendar persianCalendar = new();
 	[TestMethod]
-	[Ignore]
+	[Ignore("Platform OS Specific Test")]
 	public void ToPersianString_must_return_similar_as_DateTime_ToString()
 	{
-		// This test is OS dependant
 		var dt = new DateTime(1, 1, 1, 13, 0, 0, persianCalendar);
 
 		Assert.AreEqual("01/01/0001 01:00:00 ب.ظ", dt.ToPersianString());
@@ -21,10 +20,9 @@ public class PersianDateTimeTests
 		Assert.AreEqual("0001/01/01 13:00:00", dt.ToPersianString("yyyy/MM/dd HH:mm:ss"));
 	}
 	[TestMethod]
-	[Ignore]
+	[Ignore("Platform OS Specific Test")]
 	public void ParsePerstringString_must_parse_persian_date_time()
 	{
-		// This test is OS dependant
 		var str = "01/01/0001 01:00:00 ب.ظ";
 		var expected = new DateTime(1, 1, 1, 13, 0, 0, persianCalendar);
 
@@ -43,7 +41,7 @@ public class PersianDateTimeTests
 		Assert.AreEqual(expected, parsed);
 	}
 	[TestMethod]
-	[Ignore]
+	[Ignore("Platform OS Specific Test")]
 	public void TryParsePerstringString_must_parse_persian_date_time()
 	{
 		// This test is OS dependant

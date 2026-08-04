@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="../props.xml" />
+
+	<PropertyGroup>
+		<NoWarn>$(NoWarn);1591</NoWarn>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\KamiSama.Extensions.Logging\KamiSama.Extensions.Logging.csproj" />
+		<ProjectReference Include="..\KamiSama.ExternalServices.Email.Abstractions\KamiSama.ExternalServices.Email.Abstractions.csproj" />
+		<ProjectReference Include="..\KamiSama.Modules.Identity.Abstractions\KamiSama.Modules.Identity.Abstractions.csproj" />
+		<ProjectReference Include="..\Chassis.Commons\KamiSama.Chassis.Commons.csproj" />
+		<ProjectReference Include="..\DependencyInjection\KamiSama.Extensions.DependencyInjection.csproj" />
+		<ProjectReference Include="..\KamiSama.Extensions.WebModules\KamiSama.Extensions.WebModules.csproj" />
+		<ProjectReference Include="..\Repositories.EntityFrameworkCore\KamiSama.Repositories.EntityFrameworkCore.csproj" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.10" />
+		<PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.22.0" />
+		<PackageReference Include="Riok.Mapperly" Version="4.3.1" />
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.22.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.10" />
+	</ItemGroup>
+</Project>

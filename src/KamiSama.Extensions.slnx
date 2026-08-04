@@ -14,6 +14,10 @@
     <Project Path="DependencyInjection.Tests/KamiSama.Extensions.DependencyInjection.Tests.csproj" />
     <Project Path="DependencyInjection/KamiSama.Extensions.DependencyInjection.csproj" />
   </Folder>
+  <Folder Name="/Extensions/">
+    <Project Path="KamiSama.Extensions.Logging/KamiSama.Extensions.Logging.csproj" />
+    <Project Path="KamiSama.Extensions.RestSharp/KamiSama.Extensions.RestSharp.csproj" />
+  </Folder>
   <Folder Name="/IranSystem/">
     <Project Path="IranSystem.Tests/KamiSama.IranSystem.Tests.csproj" />
     <Project Path="IranSystem/KamiSama.IranSystem.csproj" />
@@ -22,6 +26,43 @@
     <Project Path="Json.Tests/KamiSama.Extensions.Json.Tests.csproj" />
     <Project Path="Json/KamiSama.Extensions.Json.csproj" />
   </Folder>
+  <Folder Name="/Modules/" />
+  <Folder Name="/Modules/ExternalServices/">
+    <Project Path="KamiSama.ExternalServices.Exceptions/KamiSama.ExternalServices.Exceptions.csproj" />
+  </Folder>
+  <Folder Name="/Modules/ExternalServices/Email/">
+    <Project Path="KamiSama.ExternalServices.Email.Abstractions/KamiSama.ExternalServices.Email.Abstractions.csproj" />
+    <Project Path="KamiSama.ExternalServices.Email.Core/KamiSama.ExternalServices.Email.Core.csproj" />
+    <Project Path="KamiSama.ExternalServices.Email.Smtp/KamiSama.ExternalServices.Email.Smtp.csproj" />
+  </Folder>
+  <Folder Name="/Modules/ExternalServices/Sms/">
+    <Project Path="KamiSama.ExternalServices.Sms.Abstractions/KamiSama.ExternalServices.Sms.Abstractions.csproj" />
+    <Project Path="KamiSama.ExternalServices.Sms.Core/KamiSama.ExternalServices.Sms.Core.csproj" />
+    <Project Path="KamiSama.ExternalServices.Sms.Kavenegar/KamiSama.ExternalServices.Sms.Kavenegar.csproj" />
+    <Project Path="KamiSama.ExternalServices.Sms.NeoZarin/KamiSama.ExternalServices.Sms.NeoZarin.csproj" />
+  </Folder>
+  <Folder Name="/Modules/Identity/">
+    <Project Path="KamiSama.Modules.Identity.Abstractions/KamiSama.Modules.Identity.Abstractions.csproj" />
+    <Project Path="KamiSama.Modules.Identity.Core/KamiSama.Modules.Identity.Core.csproj" />
+    <Project Path="KamiSama.Modules.Identity.Postgresql/KamiSama.Modules.Identity.Postgresql.csproj" />
+    <Project Path="KamiSama.Modules.Identity.Sqlite/KamiSama.Modules.Identity.Sqlite.csproj" />
+  </Folder>
+  <Folder Name="/Modules/Localization/">
+    <Project Path="KamiSama.Modules.Localization.Abstractions/KamiSama.Modules.Localization.Abstractions.csproj" />
+    <Project Path="KamiSama.Modules.Localization.Core/KamiSama.Modules.Localization.Core.csproj" />
+  </Folder>
+  <Folder Name="/Modules/Locations/">
+    <Project Path="KamiSama.Modules.Locations.Abstractions/KamiSama.Modules.Locations.Abstractions.csproj" />
+    <Project Path="KamiSama.Modules.Locations.Core/KamiSama.Modules.Locations.Core.csproj" />
+    <Project Path="KamiSama.Modules.Locations.Postgresql/KamiSama.Modules.Locations.Postgresql.csproj" />
+    <Project Path="KamiSama.Modules.Locations.Sqlite/KamiSama.Modules.Locations.Sqlite.csproj" />
+  </Folder>
+  <Folder Name="/Modules/Ticketing/">
+    <Project Path="KamiSama.Modules.Ticketing.Abstractions/KamiSama.Modules.Ticketing.Abstractions.csproj" />
+    <Project Path="KamiSama.Modules.Ticketing.Core/KamiSama.Modules.Ticketing.Core.csproj" />
+    <Project Path="KamiSama.Modules.Ticketing.Postgresql/KamiSama.Modules.Ticketing.Postgresql.csproj" />
+    <Project Path="KamiSama.Modules.Ticketing.Sqlite/KamiSama.Modules.Ticketing.Sqlite.csproj" />
+  </Folder>
   <Folder Name="/NLog/">
     <Project Path="Nlog.Tests/KamiSama.Extensions.NLog.Tests.csproj" />
     <Project Path="NLog/KamiSama.Extensions.NLog.csproj" />
@@ -29,6 +70,8 @@
   <Folder Name="/Repositories/">
     <Project Path="Repositories.Core/KamiSama.Repositories.Core.csproj" />
     <Project Path="Repositories.EntityFramework/KamiSama.Repositories.EntityFramework.csproj" />
+    <Project Path="Repositories.EntityFrameworkCore.Postgresql/KamiSama.Repositories.EntityFrameworkCore.Postgresql.csproj" />
+    <Project Path="Repositories.EntityFrameworkCore.Sqlite/KamiSama.Repositories.EntityFrameworkCore.Sqlite.csproj" />
     <Project Path="Repositories.EntityFrameworkCore/KamiSama.Repositories.EntityFrameworkCore.csproj" />
     <Project Path="Repositories.Json/KamiSama.Repositories.Json.csproj" />
     <Project Path="Repositories.Tests/KamiSama.Repositories.Tests.csproj" />
@@ -56,19 +99,5 @@
     <File Path="props-test.xml" />
     <File Path="props.xml" />
     <File Path="test-configs.runsettings" />
-  </Folder>
-  <Folder Name="/_/docs/">
-    <File Path="../docs/1-core.md" />
-    <File Path="../docs/10-templates.md" />
-    <File Path="../docs/11-web-modules.md" />
-    <File Path="../docs/2-dependency-injection.md" />
-    <File Path="../docs/3-json.md" />
-    <File Path="../docs/4-xml.md" />
-    <File Path="../docs/5-repositories.md" />
-    <File Path="../docs/6-nlog.md" />
-    <File Path="../docs/7-iran-system.md" />
-    <File Path="../docs/8-chassis.md" />
-    <File Path="../docs/9-testings.md" />
-    <File Path="../readme.md" />
   </Folder>
 </Solution>

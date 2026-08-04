@@ -15,7 +15,7 @@ public class HexByteArrayJsonConverterTests
 
 		var arr = str.DeserializeFromJson<byte[]>(options => options.Converters.Add(new HexByteArrayJsonConverter()));
 
-		CollectionAssert.AreEqual(new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05 }, arr);
+		Assert.AreSequenceEqual(new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05 }, arr);
 	}
 	[TestMethod]
 	public void Read_must_read_hex_string_as_byte_array_for_properties()
@@ -24,7 +24,7 @@ public class HexByteArrayJsonConverterTests
 
 		var a = str.DeserializeFromJson<A>();
 
-		CollectionAssert.AreEqual(new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05 }, a!.Arr);
+		Assert.AreSequenceEqual(new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05 }, a!.Arr);
 	}
 	[TestMethod]
 	public void Read_must_read_null_as_null_byte_array()

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Maintain KamiSama docs"
+  short_description: "Maintain developer-focused KamiSama MkDocs API docs."
+  default_prompt: "Update the KamiSama MkDocs API documentation with developer-understandable descriptions, backlinks, version placeholders, and examples."

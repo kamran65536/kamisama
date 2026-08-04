@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="../props.xml" />
+
+	<PropertyGroup>
+		<NoWarn>$(NoWarn);1591</NoWarn>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\KamiSama.Modules.Ticketing.Core\KamiSama.Modules.Ticketing.Core.csproj" />
+		<ProjectReference Include="..\Repositories.EntityFrameworkCore.Sqlite\KamiSama.Repositories.EntityFrameworkCore.Sqlite.csproj" />
+	</ItemGroup>
+</Project>

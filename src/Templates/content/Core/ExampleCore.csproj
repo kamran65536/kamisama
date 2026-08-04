@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<!--#if (UseGlobalProjectConfig)-->
+	<Import Project="GlobalProjectConfigPath" />
+	<!--#else-->
+	<PropertyGroup>
+		<TargetFramework>net10.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+	<!--#endif-->
+
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+		<PackageReference Include="KamiSama.Extensions.WebModules" Version="10.0.10.1" />
+		<PackageReference Include="KamiSama.Extensions.DependencyInjection" Version="10.0.10.1" />
+		<!--#if (IncludeDatabase)-->
+		<PackageReference Include="KamiSama.Chassis.Commons" Version="10.0.10.1" />
+		<PackageReference Include="KamiSama.Repositories.EntityFrameworkCore" Version="10.0.10.1" />
+		<PackageReference Include="SQLitePCLRaw.lib.e_sqlite3" Version="3.53.3" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.10" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="10.0.10" />
+		<!--#if (IncludePostgresql)-->
+		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.3" />
+		<!--#endif-->
+		<!--#if (IncludeSqlite)-->
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.10" />
+		<!--#endif-->
+		<!--#if (IncludeSqlServer)-->
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.10" />
+		<!--#endif-->
+		<!--#if (IncludeOracle)-->
+		<PackageReference Include="Oracle.EntityFrameworkCore" Version="10.23.26300" />
+		<!--#endif-->
+		<!--#endif-->
+	</ItemGroup>
+</Project>

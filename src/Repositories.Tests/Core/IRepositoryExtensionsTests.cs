@@ -28,6 +28,6 @@ public class IRepositoryExtensionsTests
 
 		var result = repository.GetAll();
 
-		CollectionAssert.AreEqual(sampleCollection, result.ToArray());
+		Assert.AreSequenceEqual(sampleCollection, [.. result]);
 	}
 }

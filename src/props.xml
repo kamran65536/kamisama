@@ -14,6 +14,7 @@
 		<PackageIcon>KamiSama-logo-small.png</PackageIcon>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 		<ImplicitUsings>true</ImplicitUsings>
+		<NoWarn>1701;1702;CA1862;CA1859;CA1822;CA1873;NU1900;NETSDK1057</NoWarn>
 	</PropertyGroup>
 	<ItemGroup>
 		<None Include="..\LICENSE">

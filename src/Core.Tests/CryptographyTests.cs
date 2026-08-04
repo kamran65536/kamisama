@@ -16,16 +16,16 @@ public class CryptographyTests
 
 		var result = "6ACC204F8EFBCCC7A2099E1EEB445D9A9FBC1B9AC763E51B".FromHex();
 
-		CollectionAssert.AreEqual(result, encrypted);
+		Assert.AreSequenceEqual(result, encrypted);
 
 		var decrypted = result
 			.DesDecrypt(key,  cipherMode: CipherMode.CBC, padding: PaddingMode.None);
 
-		CollectionAssert.AreEqual(data, decrypted);
+		Assert.AreSequenceEqual(data, decrypted);
 		
 		var sign = data.DesSign(key);
 
-		CollectionAssert.AreEqual("9FBC1B9AC763E51B".FromHex(), sign);
+		Assert.AreSequenceEqual("9FBC1B9AC763E51B".FromHex(), sign);
 	}
 	[TestMethod]
 	public void TripleDesTest()
@@ -39,16 +39,16 @@ public class CryptographyTests
 			.TripleDesEncrypt(key, padding: PaddingMode.Zeros, cipherMode: CipherMode.CBC);
 		var result = "8E86D9125D3E07413286D13A197DCDD2B17312AA9D593ABC".FromHex();
 
-		CollectionAssert.AreEqual(result, encrypted);
+		Assert.AreSequenceEqual(result, encrypted);
 
 		var decrypted = result
 			.TripleDesDecrypt(key, padding: PaddingMode.None);
 
-		CollectionAssert.AreEqual(data, decrypted);
+		Assert.AreSequenceEqual(data, decrypted);
 
 		var sign = data.TripleDesSign(key);
 
-		CollectionAssert.AreEqual("B17312AA9D593ABC".FromHex(), sign);
+		Assert.AreSequenceEqual("B17312AA9D593ABC".FromHex(), sign);
 	}
 	[TestMethod]
 	public void AesTest()
@@ -63,16 +63,16 @@ public class CryptographyTests
 
 		var result = "E30F86A64FD1BD77137E07DBE1E592583975CD440B3B29B608E9F56EFB779DA0".FromHex();
 
-		CollectionAssert.AreEqual(result, encrypted);
+		Assert.AreSequenceEqual(result, encrypted);
 
 		var decrypted = encrypted
 			.AesDecrypt(key, padding: PaddingMode.None);
 
-		CollectionAssert.AreEqual(data, decrypted);
+		Assert.AreSequenceEqual(data, decrypted);
 
 		var sign = data.AesSign(key);
 
-		CollectionAssert.AreEqual("3975CD440B3B29B608E9F56EFB779DA0".FromHex(), sign);
+		Assert.AreSequenceEqual("3975CD440B3B29B608E9F56EFB779DA0".FromHex(), sign);
 	}
 	[TestMethod]
 	public void RsaTest()
@@ -82,6 +82,6 @@ public class CryptographyTests
 		var encrypted = data.RsaEncrypt(key, RSAEncryptionPadding.Pkcs1);
 		var decrypted = encrypted.RsaDecrypt(key, RSAEncryptionPadding.Pkcs1);
 
-		CollectionAssert.AreEqual(data, decrypted);
+		Assert.AreSequenceEqual(data, decrypted);
 	}
 }

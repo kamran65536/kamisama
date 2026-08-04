@@ -29,7 +29,7 @@ public class EF_DbRepositoryTests
 
 		repository.Add(entity);
 
-		CollectionAssert.Contains(context.SampleEntities.ToArray(), entity);
+		Assert.Contains(entity, [.. context.SampleEntities]);
 	}
 	[TestMethod]
 	public async Task AddAsync_must_add_to_dbSet()
@@ -41,7 +41,7 @@ public class EF_DbRepositoryTests
 
 		await repository.AddAsync(entity, CancellationToken.None);
 
-		CollectionAssert.Contains(context.SampleEntities.ToArray(), entity);
+		Assert.Contains(entity, [.. context.SampleEntities]);
 	}
 	[TestMethod]
 	public void Update_must_update_status_in_context()
@@ -53,7 +53,7 @@ public class EF_DbRepositoryTests
 
 		repository.Update(entity);
 
-		CollectionAssert.Contains(context.SampleEntities.ToArray(), entity);
+		Assert.Contains(entity, [.. context.SampleEntities]);
 	}
 	[TestMethod]
 	public async Task UpdateAsync_must_update_status_in_context()
@@ -77,7 +77,7 @@ public class EF_DbRepositoryTests
 
 		repository.Delete(entity);
 
-		CollectionAssert.DoesNotContain(context.SampleEntities.ToArray(), entity);
+		Assert.DoesNotContain(entity, [.. context.SampleEntities]);
 	}
 	[TestMethod]
 	public async Task DeleteAsync_must_remove_dbSet()
@@ -89,7 +89,7 @@ public class EF_DbRepositoryTests
 
 		await repository.DeleteAsync(entity, CancellationToken.None);
 
-		CollectionAssert.DoesNotContain(context.SampleEntities.ToArray(), entity);
+		Assert.DoesNotContain(entity, [.. context.SampleEntities]);
 	}
 	[TestMethod]
 	public void Find_must_find_items_in_dbSet()
@@ -131,9 +131,9 @@ public class EF_DbRepositoryTests
 
 		var result = repository.Where(x => x.Name!.StartsWith("sample")).ToArray();
 
-		CollectionAssert.Contains(result, arr[0]);
-		CollectionAssert.Contains(result, arr[1]);
-		CollectionAssert.DoesNotContain(result, arr[2]);
+		Assert.Contains(arr[0], result);
+		Assert.Contains(arr[1], result);
+		Assert.DoesNotContain(arr[2], result);
 	}
 	[TestMethod]
 	public void AsQueryable_returns_dbset_as_queryable()
@@ -149,7 +149,7 @@ public class EF_DbRepositoryTests
 
 		var queryable = repository.AsQueryable();
 
-		CollectionAssert.AreEquivalent(arr, queryable.ToArray());
+		Assert.AreSequenceEqual(arr, [.. queryable]);
 	}
 	[TestMethod]
 	public void AsQueryable_Any_checks_if_entity_exists_in_repository_or_not()
