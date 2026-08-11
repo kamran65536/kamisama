@@ -23,11 +23,30 @@
 		"GlobalProjectConfig": {
 			"type": "parameter",
 			"dataType": "string",
-			"defaultValue": "./props.xml",
+			"defaultValue": "../props.xml",
 			"displayName": "Global project config",
 			"description": "Path to the shared project configuration file.",
 			"isEnabled": "UseGlobalProjectConfig",
 			"replaces": "GlobalProjectConfigPath"
+		},
+		"MainNamespace": {
+			"type": "generated",
+			"generator": "regex",
+			"dataType": "string",
+			"replaces": "ExampleNamespace",
+			"parameters": {
+				"source": "name",
+				"steps": [
+					{
+						"regex": "\\.Abstractions$",
+						"replacement": ""
+					},
+					{
+						"regex": "\\.Core$",
+						"replacement": ""
+					}
+				]
+			}
 		},
 		"IncludeResources": {
 			"type": "parameter",

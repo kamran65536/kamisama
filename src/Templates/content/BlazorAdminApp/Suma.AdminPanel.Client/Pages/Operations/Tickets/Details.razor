@@ -1,0 +1,190 @@
+@page "/operations/tickets/details/{TicketId:guid}"
+@using Suma.AdminPanel.Services.Tickets
+
+@inject IFindTicketById FindTicketByIdService
+@inject IAnswerTicket AnswerTicketService
+@inject IUpdateTicketState UpdateTicketStateService
+@inject SafeRunner SafeRunner
+
+<PageTitle>@localizer["TicketDetails"]</PageTitle>
+
+<PageHeader Title='@localizer["TicketDetails"]' Icon="IconName.TicketDetailed" />
+
+@if (ticket is null)
+{
+	<p>@localizer["Loading..."]</p>
+}
+else
+{
+	<div class="row g-3">
+		<div class="col-lg-8">
+			<Card Class="shadow-sm mb-3">
+				<CardHeader>
+					<CardTitle>@ticket.Subject</CardTitle>
+				</CardHeader>
+				<CardBody>
+					<div class="row g-3">
+						<div class="col-md-6"><CopyableLabel Label="@localizer["TicketId"]" Value="@ticket.Id.ToString()" /></div>
+						<div class="col-md-6"><CopyableLabel Label="@localizer["AuthorUserId"]" Value="@ticket.AuthorUserId.ToString()" /></div>
+						<div class="col-md-4"><strong>@localizer[nameof(Resources.Status)]:</strong> <span class="badge @GetStatusBadgeClass(ticket.Status)">@localizer[ticket.Status.ToString()]</span></div>
+						<div class="col-md-4"><strong>@localizer["Priority"]:</strong> @localizer[ticket.Priority.ToString()]</div>
+						<div class="col-md-4"><strong>@localizer[nameof(Resources.DateTime)]:</strong> @FormatDateTime(ticket.CreatedAt)</div>
+					</div>
+				</CardBody>
+			</Card>
+
+			<h5 class="mb-2">@localizer["Comments"]</h5>
+			@foreach (var comment in ticket.Comments.OrderBy(x => x.CreatedAt))
+			{
+				<Card Class="shadow-sm mb-2">
+					<CardBody>
+						<div class="d-flex justify-content-between align-items-center mb-2">
+							<span class="badge @(comment.Side == TicketCommentSide.Operator ? "text-bg-primary" : "text-bg-secondary")">@localizer[comment.Side.ToString()]</span>
+							<small class="text-body-secondary">@FormatDateTime(comment.CreatedAt)</small>
+						</div>
+						<p class="mb-2">@comment.Description</p>
+						@if (comment.Attachments.Count > 0)
+						{
+							<div class="d-flex flex-wrap gap-2">
+								@foreach (var attachment in comment.Attachments)
+								{
+									<span class="badge text-bg-light border">@attachment.ContentId</span>
+								}
+							</div>
+						}
+					</CardBody>
+				</Card>
+			}
+		</div>
+
+		<div class="col-lg-4">
+			<Card Class="shadow-sm mb-3">
+				<CardHeader>
+					<CardTitle>@localizer["OperatorAnswer"]</CardTitle>
+				</CardHeader>
+				<CardBody>
+					<div class="mb-3">
+						<label class="form-label">@localizer["Description"]</label>
+						<TextAreaInput Rows="5" @bind-Value="answerDescription" />
+					</div>
+					<div class="mb-3">
+						<label class="form-label">@localizer["StatusAfterAnswer"]</label>
+						<EnumInput TEnum="TicketingStatus" @bind-Text="answerStatus" />
+					</div>
+					<Button Color="ButtonColor.Primary" @onclick="SubmitAnswerAsync">
+						<Icon Name="IconName.Send" Class="me-1" />
+						@localizer["Answer"]
+					</Button>
+				</CardBody>
+			</Card>
+
+			<Card Class="shadow-sm">
+				<CardHeader>
+					<CardTitle>@localizer["TicketState"]</CardTitle>
+				</CardHeader>
+				<CardBody>
+					<div class="mb-3">
+						<label class="form-label">@localizer["Subject"]</label>
+						<TextInput @bind-Value="stateSubject" />
+					</div>
+					<div class="mb-3">
+						<label class="form-label">@localizer[nameof(Resources.Status)]</label>
+						<EnumInput TEnum="TicketingStatus" @bind-Text="stateStatus" />
+					</div>
+					<div class="mb-3">
+						<label class="form-label">@localizer["Priority"]</label>
+						<EnumInput TEnum="TicketPriority" @bind-Text="statePriority" />
+					</div>
+					<Button Color="ButtonColor.Primary" @onclick="UpdateStateAsync">
+						<Icon Name="IconName.PencilSquare" Class="me-1" />
+						@localizer["Edit"]
+					</Button>
+				</CardBody>
+			</Card>
+		</div>
+	</div>
+
+	<div class="mt-3">
+		<Button Type="ButtonType.Link" Color="ButtonColor.Secondary" To="/operations/tickets">
+			@localizer["Back"]
+		</Button>
+	</div>
+}
+
+@code {
+	[Parameter]
+	public Guid TicketId { get; set; }
+
+	private TicketDto? ticket;
+	private string? answerDescription;
+	private string? answerStatus;
+	private string? stateSubject;
+	private string? stateStatus;
+	private string? statePriority;
+
+	protected override async Task OnInitializedAsync()
+	{
+		await LoadTicketAsync();
+	}
+
+	private async Task LoadTicketAsync()
+	{
+		await SafeRunner.RunSafeAsync(async () =>
+		{
+			ticket = await FindTicketByIdService.FindByIdAsync(TicketId, CancellationToken.None);
+			stateSubject = ticket.Subject;
+			stateStatus = ticket.Status.ToString();
+			statePriority = ticket.Priority.ToString();
+			answerStatus ??= TicketingStatus.Resolved.ToString();
+		});
+	}
+
+	private async Task SubmitAnswerAsync()
+	{
+		var status = Enum.TryParse<TicketingStatus>(answerStatus, true, out var parsedStatus) ? parsedStatus : default(TicketingStatus?);
+		var isSuccess = await SafeRunner.RunSafeAsync(async () =>
+		{
+			ticket = await AnswerTicketService.AnswerAsync(
+				TicketId,
+				new AnswerTicketRequest(answerDescription ?? string.Empty, status),
+				CancellationToken.None);
+		});
+
+		if (!isSuccess)
+			return;
+
+		answerDescription = null;
+		await LoadTicketAsync();
+	}
+
+	private async Task UpdateStateAsync()
+	{
+		if (!Enum.TryParse<TicketingStatus>(stateStatus, true, out var status))
+			return;
+		if (!Enum.TryParse<TicketPriority>(statePriority, true, out var priority))
+			return;
+
+		var isSuccess = await SafeRunner.RunSafeAsync(async () =>
+		{
+			await UpdateTicketStateService.UpdateAsync(
+				TicketId,
+				new UpdateTicketStateRequest(stateSubject ?? string.Empty, status, priority),
+				CancellationToken.None);
+		});
+
+		if (isSuccess)
+			await LoadTicketAsync();
+	}
+
+	private static string FormatDateTime(DateTime value)
+		=> value.ToString("yyyy-MM-dd HH:mm");
+
+	private static string GetStatusBadgeClass(TicketingStatus status)
+		=> status switch
+		{
+			TicketingStatus.Resolved => "text-bg-success",
+			TicketingStatus.Closed => "text-bg-secondary",
+			TicketingStatus.Reopened => "text-bg-warning",
+			_ => "text-bg-info",
+		};
+}

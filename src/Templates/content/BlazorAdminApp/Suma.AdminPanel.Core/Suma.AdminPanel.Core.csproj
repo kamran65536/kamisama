@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<!--#if (UseGlobalConfig)-->
+	<Import Project="GlobalConfigPathPlaceholder" />
+	<!--#else-->
+	<PropertyGroup>
+		<TargetFramework>net10.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+	<!--#endif-->
+	<ItemGroup>
+		<PackageReference Include="Polareum.Commons.Logging" Version="1.1.6" />
+		<PackageReference Include="Polareum.Identity.Abstractions" Version="1.1.6" />
+		<PackageReference Include="Polareum.Localization.Core" Version="1.1.6" />
+		<!--#if (Ticketing)-->
+		<PackageReference Include="Polareum.Ticketing.Abstractions" Version="1.1.9" />
+		<!--#endif-->
+		<PackageReference Include="KamiSama.Chassis.Commons" Version="10.0.10" />
+		<PackageReference Include="KamiSama.Extensions.DependencyInjection" Version="10.0.10" />
+		<PackageReference Include="KamiSama.Extensions.WebModules" Version="10.0.10" />
+		<ProjectReference Include="..\Suma.AdminPanel.Abstractions\Suma.AdminPanel.Abstractions.csproj" />
+	</ItemGroup>
+</Project>

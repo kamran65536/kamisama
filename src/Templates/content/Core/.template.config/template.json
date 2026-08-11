@@ -6,12 +6,12 @@
 	"name": "KamiSama Core Project",
 	"description": "KamiSama core project with optional entities, repository/database infrastructure, and options.",
 	"shortName": "kamisama-core",
-	"defaultName": "ExampleCore",
+	"defaultName": "Example.Core",
 	"tags": {
 		"language": "C#",
 		"type": "project"
 	},
-	"sourceName": "ExampleCore",
+	"sourceName": "Example.Core",
 	"symbols": {
 		"UseGlobalProjectConfig": {
 			"type": "parameter",
@@ -23,11 +23,71 @@
 		"GlobalProjectConfig": {
 			"type": "parameter",
 			"dataType": "string",
-			"defaultValue": "./props.xml",
+			"defaultValue": "../props.xml",
 			"displayName": "Global project config",
 			"description": "Path to the shared project configuration file.",
 			"isEnabled": "UseGlobalProjectConfig",
 			"replaces": "GlobalProjectConfigPath"
+		},
+		"ContextName": {
+			"type": "parameter",
+			"dataType": "string",
+			"defaultValue": "",
+			"displayName": "Context name",
+			"description": "Name used for context-specific types and module identifiers. When omitted, it is calculated from the project name by removing dot separators and Core/Abstractions segments."
+		},
+		"MainNamespace": {
+			"type": "generated",
+			"generator": "regex",
+			"dataType": "string",
+			"replaces": "ExampleNamespace",
+			"parameters": {
+				"source": "name",
+				"steps": [
+					{
+						"regex": "\\.Core$",
+						"replacement": ""
+					},
+					{
+						"regex": "\\.Abstractions$",
+						"replacement": ""
+					}
+				]
+			}
+		},
+		"SuggestedContextName": {
+			"type": "generated",
+			"generator": "regex",
+			"dataType": "string",
+			"parameters": {
+				"source": "name",
+				"steps": [
+					{
+						"regex": "(^|\\.)Core(?=\\.|$)",
+						"replacement": ""
+					},
+					{
+						"regex": "(^|\\.)Abstractions(?=\\.|$)",
+						"replacement": ""
+					},
+					{
+						"regex": "\\.",
+						"replacement": ""
+					}
+				]
+			}
+		},
+		"EffectiveContextName": {
+			"type": "generated",
+			"generator": "coalesce",
+			"dataType": "string",
+			"replaces": "ExampleContext",
+			"fileRename": "ExampleContext",
+			"parameters": {
+				"sourceVariableName": "ContextName",
+				"fallbackVariableName": "SuggestedContextName",
+				"defaultValue": ""
+			}
 		},
 		"IncludeEntities": {
 			"type": "parameter",
@@ -127,7 +187,7 @@
 				{
 					"condition": "(!IncludeOptions)",
 					"exclude": [
-						"ExampleCoreOptions.cs"
+						"ExampleContextOptions.cs"
 					]
 				}
 			]

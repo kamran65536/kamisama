@@ -1,5 +1,5 @@
 using KamiSama.Chassis.Commons.Repositories;
-using KamiSama.Modules.Identity.Features.Users;
+using KamiSama.Modules.Identity.Services.Users;
 namespace KamiSama.Modules.Identity.Repositories.Abstractions;
 
 public interface IApplicationUserRepository : IGenericRepository<ApplicationUser, UserSearchModel>

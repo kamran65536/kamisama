@@ -1,0 +1,12 @@
+<h1 class="admin-page-title">
+	<Icon Name="@Icon" />
+	<span>@Title</span>
+</h1>
+
+@code {
+	[Parameter]
+	public string Title { get; set; } = string.Empty;
+
+	[Parameter]
+	public IconName Icon { get; set; }
+}

@@ -1,5 +1,5 @@
 using KamiSama.Modules.Identity.DataTypes;
-using KamiSama.Modules.Identity.Features.Users;
+using KamiSama.Modules.Identity.Services.Users;
 using KamiSama.Chassis.Commons.Repositories;
 using KamiSama.Modules.Identity.Repositories.Database;
 

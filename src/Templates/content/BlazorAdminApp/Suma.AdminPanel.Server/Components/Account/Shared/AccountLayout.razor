@@ -1,0 +1,25 @@
+﻿@inherits LayoutComponentBase
+
+<style>
+    .account-page{
+        background-image: url('/images/background/@($"{(int) DateTime.UtcNow.TimeOfDay.TotalMinutes % 6}.jpg")');
+        background-size: 100% 100%;
+        background-position: top center;
+        background-repeat: no-repeat;
+    }
+</style>
+
+<div class="account-page vh-100 vw-100 d-flex flex-column">
+    <div class="d-flex flex-fill">
+        @Body
+    </div>
+    <div class="px-3 py-2 small text-end text-body-secondary">
+        @FooterVersion
+    </div>
+</div>
+
+@code {
+    private string FooterVersion => $"{AdminVersion} {RendererInfo.Name}";
+
+    private string AdminVersion => typeof(AccountLayout).Assembly.GetName().Version?.ToString(3) ?? "0.0.0";
+}

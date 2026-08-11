@@ -1,4 +1,4 @@
-namespace ExampleCore;
+namespace ExampleNamespace;
 
 public static class DtoMappings
 {

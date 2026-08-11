@@ -10,8 +10,8 @@
 		<ProjectReference Include="..\KamiSama.Extensions.RestSharp\KamiSama.Extensions.RestSharp.csproj" />
 		<ProjectReference Include="..\KamiSama.ExternalServices.Sms.Abstractions\KamiSama.ExternalServices.Sms.Abstractions.csproj" />
 		<PackageReference Include="Kavenegar" Version="1.2.5" />
-		<PackageReference Include="Microsoft.Extensions.Localization" Version="10.0.10" />
-		<PackageReference Include="Microsoft.Extensions.Options" Version="10.0.10" />
+		<PackageReference Include="Microsoft.Extensions.Localization" Version="10.0.11" />
+		<PackageReference Include="Microsoft.Extensions.Options" Version="10.0.11" />
 		<ProjectReference Include="..\KamiSama.Extensions.WebModules\KamiSama.Extensions.WebModules.csproj" />
 		<ProjectReference Include="..\DependencyInjection\KamiSama.Extensions.DependencyInjection.csproj" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />

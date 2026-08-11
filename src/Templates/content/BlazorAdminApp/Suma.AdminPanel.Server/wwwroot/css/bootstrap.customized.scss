@@ -1,0 +1,61 @@
+// Custom theme variables
+
+$white: #fff;
+$gray-100: #f8f9fa;
+$gray-200: #eee;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #bbb;
+$gray-600: #666;
+$gray-700: #444;
+$gray-800: #222;
+$gray-900: #212121;
+$black: #000;
+$blue: #2F6B8A;
+$indigo: #6610f2;
+$purple: #6f42c1;
+$pink: #e83e8c;
+$red: #B85C5C;
+$orange: #fd7e14;
+$yellow: #C8A96B;
+$green: #4F8A5B;
+$teal: #20c997;
+$cyan: #5B8FAE;
+$primary: $blue;
+$secondary: #526B5C;
+$success: $green;
+$info: $cyan;
+$warning: $yellow;
+$danger: $red;
+$light: #F7F6F2;
+$dark: #2F3A35;
+$body-color: $gray-700;
+$navbar-dark-bg: rgb(19, 109, 55);
+$navbar-dark-color: rgba($white,.75);
+$navbar-dark-hover-color: $white;
+$min-contrast-ratio: 3;
+
+@import "../libs/bootstrap/scss/bootstrap";
+@import "account-page";
+@import "blazor-bootstrap.customized";
+
+:root {
+	--bb-sidebar-top-row-background-color: rgb(19, 109, 55);
+	--bb-sidebar-top-row-border-color: rgb(19, 109, 55);
+	--bb-sidebar-navbar-toggler-icon-color: rgb(19, 109, 55);
+	--bb-sidebar-navbar-toggler-background-color: rgba(255, 255, 255, 0.9);
+	--bb-sidebar2-top-row-background-color: rgb(19, 109, 55);
+	--bb-sidebar2-top-row-border-color: rgb(19, 109, 55);
+	--bb-sidebar2-title-text-color: rgba(255, 255, 255, 0.9);
+	--bb-sidebar2-brand-icon-color: rgba(255, 255, 255, 0.9);
+	--bb-sidebar2-title-badge-text-color: rgb(19, 109, 55);
+	--bb-sidebar2-title-badge-background-color: rgba(255, 255, 255, 0.9);
+	--bb-sidebar2-navbar-toggler-icon-color: rgb(19, 109, 55);
+	--bb-sidebar2-navbar-toggler-background-color: rgba(255, 255, 255, 0.9);
+}
+
+.bb-top-row,
+.top-row {
+	background-color: rgb(19, 109, 55);
+	border-bottom-color: rgb(19, 109, 55);
+}

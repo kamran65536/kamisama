@@ -1,11 +1,11 @@
-using ExampleCore.Repositories.Abstractions;
+using ExampleNamespace.Repositories.Abstractions;
 
-namespace ExampleCore.Repositories.Implementations;
+namespace ExampleNamespace.Repositories.Implementations;
 
 [ExcludeFromCodeCoverage]
 [AutoInjectScoped<ISampleEntityRepository>]
-internal class SampleEntityRepository(ExampleCoreDbContext context) :
-	GenericRepository<SampleEntity, SearchModel, ExampleCoreDbContext>(context),
+internal class SampleEntityRepository(ExampleContextDbContext context) :
+	GenericRepository<SampleEntity, SearchModel, ExampleContextDbContext>(context),
 	ISampleEntityRepository
 {
 	public Task<SampleEntity?> FindByIdAsync(Guid id, CancellationToken cancellationToken)

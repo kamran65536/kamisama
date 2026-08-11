@@ -1,0 +1,62 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+	<!--#if (UseGlobalConfig)-->
+	<Import Project="GlobalConfigPathPlaceholder" />
+	<!--#else-->
+	<PropertyGroup>
+		<TargetFramework>net10.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+	<!--#endif-->
+
+	<PropertyGroup>
+		<UserSecretsId>aspnet-Suma.AdminPanel.Server-fb3a996e-2fe8-43dd-9984-8a0a7a1086e8</UserSecretsId>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Content Remove="compilerconfig.json" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="compilerconfig.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="KamiSama.Chassis.ProblemDetails" Version="10.0.10" />
+		<PackageReference Include="KamiSama.Extensions.WebModules" Version="10.0.10" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="10.0.10" />
+		<PackageReference Include="Blazor.Bootstrap" Version="3.5.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="10.0.10" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.10">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Polareum.Localization.Core" Version="1.1.6" />
+		<PackageReference Include="Polareum.Identity.Core" Version="1.1.6" />
+		<!--#if (Ticketing)-->
+		<PackageReference Include="Polareum.Ticketing.Core" Version="1.1.9" />
+		<!--#endif-->
+		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="10.0.10" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.23.0" />
+		<PackageReference Include="Serilog.AspNetCore" Version="10.0.0" />
+		<PackageReference Include="Serilog.Enrichers.Environment" Version="3.0.1" />
+		<PackageReference Include="Serilog.Enrichers.Thread" Version="4.0.0" />
+		<PackageReference Include="Serilog.Formatting.Compact" Version="3.0.0" />
+		<PackageReference Include="Serilog.Settings.Configuration" Version="10.0.1" />
+		<PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
+		<PackageReference Include="Serilog.Sinks.Console" Version="6.1.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Suma.AdminPanel.Client\Suma.AdminPanel.Client.csproj" />
+	  <ProjectReference Include="..\Suma.AdminPanel.Core\Suma.AdminPanel.Core.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="Data\ReadMe.md">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+</Project>

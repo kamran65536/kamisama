@@ -1,0 +1,55 @@
+@page "/settings/users/details/{UserId:guid}"
+@using Suma.AdminPanel.Services.Users
+@inject IFindUserById FindUserByIdService
+@inject SafeRunner SafeRunner
+
+<PageTitle>@localizer["UserDetails"]</PageTitle>
+
+<h1>@localizer["UserDetails"]</h1>
+
+@if (userDto is null)
+{
+	<p>@localizer["Loading..."]</p>
+}
+else
+{
+	<Card Class="shadow-sm">
+		<CardBody>
+			<div class="row g-3">
+				<div class="col-md-6"><CopyableLabel Label="@localizer[nameof(Resources.Username)]" Value="@userDto.Username" /></div>
+				<div class="col-md-6"><CopyableLabel Label="@localizer[nameof(Resources.Email)]" Value="@userDto.Email" /></div>
+				<div class="col-md-6"><strong>@localizer["Status"]:</strong> @(userDto.IsEnabled ? localizer["Enabled"] : localizer["Disabled"])</div>
+				<div class="col-12"><strong>@localizer["Roles"]:</strong> @string.Join(", ", userDto.Roles)</div>
+			</div>
+		</CardBody>
+	</Card>
+
+	<div class="mt-3 d-flex gap-2">
+		@if (userDto.IsEditable)
+		{
+			<Button Type="ButtonType.Link" Color="ButtonColor.Primary" To="@($"/settings/users/save/{UserId}")">
+				<Icon Name="IconName.PencilSquare" Class="me-1" />
+				@localizer["Edit"]
+			</Button>
+		}
+		<Button Type="ButtonType.Link" Color="ButtonColor.Secondary" To="/settings/users">
+			@localizer["Back"]
+		</Button>
+	</div>
+}
+
+@code {
+	[Parameter]
+	public Guid UserId { get; set; }
+
+	private UserDto? userDto;
+
+	protected override async Task OnInitializedAsync()
+	{
+		await SafeRunner.RunSafeAsync(async () =>
+		{
+			userDto = await FindUserByIdService.FindByIdAsync(UserId, CancellationToken.None);
+		});
+	}
+}
+

@@ -6,7 +6,7 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Chassis.Exceptions\KamiSama.Chassis.HttpExceptions.csproj" />
-		<PackageReference Include="Microsoft.Extensions.Localization" Version="10.0.10" />
+		<PackageReference Include="Microsoft.Extensions.Localization" Version="10.0.11" />
 		<PackageReference Include="RestSharp" Version="114.0.0" />
 		<ProjectReference Include="..\DependencyInjection\KamiSama.Extensions.DependencyInjection.csproj" />
 		<ProjectReference Include="..\Json\KamiSama.Extensions.Json.csproj" />

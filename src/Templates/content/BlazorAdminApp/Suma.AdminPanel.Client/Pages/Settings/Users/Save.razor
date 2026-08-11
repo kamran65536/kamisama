@@ -1,0 +1,120 @@
+@page "/settings/users/save/{UserId:guid?}"
+@using Suma.AdminPanel.Services.Users
+@inject NavigationManager NavigationManager
+@inject IFindUserById FindUserByIdService
+@inject IAddUser AddUserService
+@inject IUpdateUser UpdateUserService
+@inject IEnableUser EnableUserService
+@inject IDisableUser DisableUserService
+@inject IResetUserPassword ResetUserPasswordService
+@inject SafeRunner SafeRunner
+@inject ToastService ToastService
+
+<div class="row">
+	<div class="col">
+		<Card Class="shadow-sm">
+			<CardHeader>
+				@if (EditMode)
+				{
+					<CardTitle>@localizer["UpdateUser"]</CardTitle>
+				}
+				else
+				{
+					<CardTitle>@localizer["AddUser"]</CardTitle>
+				}
+			</CardHeader>
+			<CardBody>
+				<EditForm Model="model" OnValidSubmit="OnSubmitAsync">
+					<DataAnnotationsValidator />
+
+					<div class="row mb-3">
+						<div class="col-md">
+							<label class="form-label">@localizer[nameof(Resources.Username)]</label>
+							<TextInput @bind-Value="model.Username" />
+							<ValidationMessage For="() => model.Username" class="text-danger" />
+						</div>
+						<div class="col-md">
+							<label class="form-label">@localizer[nameof(Resources.Email)]</label>
+							<TextInput @bind-Value="model.Email" />
+							<ValidationMessage For="() => model.Email" class="text-danger" />
+						</div>
+					</div>
+					@if (InsertMode)
+					{
+						<div class="row mb-3">
+							<div class="col-md">
+								<label class="form-label">@localizer[nameof(Resources.Password)]</label>
+								<PasswordInput @bind-Value="model.Password" />
+								<ValidationMessage For="() => model.Password" class="text-danger" />
+							</div>
+							<div class="col-md">
+								<label class="form-label">@localizer["ConfirmPassword"]</label>
+								<PasswordInput @bind-Value="model.ConfirmPassword" />
+								<ValidationMessage For="() => model.ConfirmPassword" class="text-danger" />
+							</div>
+						</div>
+					}
+
+					<div class="row mb-3">
+						<div class="col-md">
+							@if (InsertMode)
+							{
+								<button type="submit" class="btn btn-primary me-2">
+									<Icon Name="IconName.PlusCircleFill" Class="me-1" />
+									@localizer["Add"]
+								</button>
+							}
+							else
+							{
+								<button type="submit" class="btn btn-primary me-2">
+									<Icon Name="IconName.PencilSquare" Class="me-1" />
+									@localizer["Edit"]
+								</button>
+							}
+							<Button Type="ButtonType.Link" Color="ButtonColor.Secondary" To="/settings/users">@localizer["Cancel"]</Button>
+						</div>
+					</div>
+				</EditForm>
+			</CardBody>
+		</Card>
+	</div>
+	@if (EditMode)
+	{
+		<div class="col-md-3">
+			<Card Class="shadow-sm">
+				<CardHeader Class="bg-dark-subtle text-center">@localizer["Actions"]</CardHeader>
+				<CardBody>
+					<div>
+						@if (userDto?.IsEnabled == true)
+						{
+							<Button Type="ButtonType.Button" Class="d-flex" @onclick="DisableUserClicked">
+								<Icon Name="IconName.XSquareFill" Size="IconSize.x4" Class="color-red-900" />
+								<CardLink class="align-middle lh-lg ms-3 link-underline-primary">@localizer["Disable"]</CardLink>
+							</Button>
+						}
+						else
+						{
+							<Button Type="ButtonType.Button" Class="d-flex" @onclick="EnableUserClicked">
+								<Icon Name="IconName.CheckSquareFill" Size="IconSize.x4" Class="color-green-900" />
+								<CardLink class="align-middle lh-lg ms-3 link-underline-primary">@localizer["Enable"]</CardLink>
+							</Button>
+						}
+					</div>
+					<div>
+						<Button Type="ButtonType.Button" Class="d-flex" @onclick="ResetPasswordClicked">
+							<Icon Name="IconName.Key" Size="IconSize.x4" Class="color-orange-900" />
+							<CardLink class="align-middle lh-lg ms-3 link-underline-primary">@localizer["ResetPassword"]</CardLink>
+						</Button>
+					</div>
+				</CardBody>
+			</Card>
+		</div>
+	}
+</div>
+
+<Modal @ref="resetPasswordModal" Title="@localizer["ResetPassword"]" IsVerticallyCentered>
+	<BodyTemplate>
+		<Save_ResetUserPassword User="userDto" OnResetPasswordClicked="ResetUserPassword_ResetClicked" />
+	</BodyTemplate>
+</Modal>
+

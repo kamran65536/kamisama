@@ -1,4 +1,4 @@
-namespace Example.Abstractions.DataTypes;
+namespace ExampleNamespace.DataTypes;
 
 public enum SampleDataType
 {

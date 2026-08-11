@@ -1,4 +1,4 @@
-namespace ExampleCore.Repositories.Abstractions;
+namespace ExampleNamespace.Repositories.Abstractions;
 
 internal interface ISampleEntityRepository :
 	IGenericRepository<SampleEntity, SearchModel>,

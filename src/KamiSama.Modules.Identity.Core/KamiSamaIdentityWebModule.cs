@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using KamiSama.Modules.Identity.Features.AccountSecurity;
+using KamiSama.Modules.Identity.Services.AccountSecurity;
 using KamiSama.Modules.Identity.Repositories.Database;
 using System.Text;
 

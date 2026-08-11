@@ -1,0 +1,80 @@
+﻿@inherits LayoutComponentBase
+
+<div class="bb-page">
+    <Toasts class="p-3" AutoHide="true" Delay="2000" Placement="ToastsPlacement.MiddleCenter" />
+    <Sidebar2 @ref="sidebar"
+              ImageSrc="/images/logo/logo.png"
+              ImageWidth="35"
+              Class="border-end-0"
+              Title=@localizer[nameof(Resources.AdminPanelTitle)]
+              DataProvider="SidebarDataProvider" />
+    <small class="position-fixed start-0 bottom-0 ms-3 mb-2 text-muted" style="font-size: 0.65rem; z-index: 1031;">
+        @RenderModeName
+    </small>
+
+    <main class="bb-scrollbar min-vh-100">
+        <div class="bb-top-row bb-top-row-sticky px-4 d-flex justify-content-end text-white">
+            <AuthorizeView>
+                <Dropdown>
+                    <DropdownToggleButton Class="text-white"><Icon Name="IconName.PersonFill" /> @context.User.Identity?.Name</DropdownToggleButton>
+                    <DropdownMenu>
+                        <DropdownItem>
+                            <form action="Account/Logout" method="post" class="p-0 m-0">
+                                <AntiforgeryToken />
+                                <Button Type=ButtonType.Submit Class="bg-none">
+                                    <Icon Name="IconName.DoorOpenFill" />
+                                    @localizer[nameof(Resources.SignOut)]
+                                </Button>
+                                <input type="hidden" name="ReturnUrl" value="" />
+                            </form>
+                        </DropdownItem>
+                    </DropdownMenu>
+                </Dropdown>
+            </AuthorizeView>
+            <ThemeSwitcher Position="DropdownMenuPosition.End" />
+        </div>
+        <article class="content px-4">
+            <div class="py-2">
+                @Body
+            </div>
+        </article>
+    </main>
+</div>
+
+@code {
+    private Sidebar2 sidebar = default!;
+    private IEnumerable<NavItem> navItems = default!;
+    private string RenderModeName => AssignedRenderMode?.GetType().Name ?? "Static";
+
+
+    private async Task<Sidebar2DataProviderResult> SidebarDataProvider(Sidebar2DataProviderRequest request)
+    {
+        if (navItems is null)
+            navItems = GetNavItems();
+
+        return await Task.FromResult(request.ApplyTo(navItems));
+    }
+
+    private IEnumerable<NavItem> GetNavItems()
+    {
+        navItems =
+        [
+            new NavItem { Id = "dashboard", IconName = IconName.HouseDoorFill, Text = localizer[nameof(Resources.Dashboard)], Match = NavLinkMatch.All, Href = "/" },
+			@*#if (Ticketing)*@
+			new NavItem { Id = "operations", IconName = IconName.BarChart, Text = localizer["Operations"] },
+			new NavItem { Id = "tickets", IconName = IconName.TicketDetailed, Text = localizer["Tickets"], ParentId = "operations", Href = "/operations/tickets" },
+			@*#endif*@
+			@*#if (SettingsManagement)*@
+			new NavItem { Id = "settings", IconName = IconName.Gear, Text = localizer[nameof(Resources.Settings)] },
+			@*#endif*@
+			@*#if (UserManagement)*@
+			new NavItem { Id = "users", IconName = IconName.People, Text = localizer[nameof(Resources.Users)], ParentId = "settings", Href = "/settings/users" },
+			@*#endif*@
+			@*#if (OperatorManagement)*@
+			new NavItem { Id = "operators", IconName = IconName.PersonBadge, Text = localizer["Operators"], ParentId = "settings", Href = "/settings/operators" },
+			@*#endif*@
+        ];
+
+        return navItems;
+    }
+}

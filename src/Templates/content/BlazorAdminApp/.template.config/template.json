@@ -1,0 +1,132 @@
+{
+	"$schema": "http://json.schemastore.org/template",
+	"author": "KamiSama",
+	"classifications": [ "Blazor", "Admin", "Web" ],
+	"identity": "KamiSama.Projects.BlazorAdminApp",
+	"name": "KamiSama Blazor Admin App",
+	"description": "A hosted Blazor WebAssembly admin application with optional user, operator, and ticketing management modules.",
+	"shortName": "kamisama-blazor-admin",
+	"defaultName": "Example",
+	"tags": {
+		"language": "C#",
+		"type": "solution"
+	},
+	"sourceName": "Suma",
+	"symbols": {
+		"UseGlobalConfig": {
+			"type": "parameter",
+			"dataType": "bool",
+			"defaultValue": "false",
+			"displayName": "Use global config",
+			"description": "Use a shared project configuration file instead of per-project settings."
+		},
+		"GlobalConfigPath": {
+			"type": "parameter",
+			"dataType": "string",
+			"defaultValue": "../props.xml",
+			"displayName": "Global config path",
+			"description": "Path to the shared project configuration file.",
+			"isEnabled": "UseGlobalConfig",
+			"replaces": "GlobalConfigPathPlaceholder"
+		},
+		"Title": {
+			"type": "parameter",
+			"dataType": "string",
+			"defaultValue": "",
+			"displayName": "Title",
+			"description": "Admin panel title. Defaults to the project name."
+		},
+		"SuggestedTitle": {
+			"type": "generated",
+			"generator": "regex",
+			"dataType": "string",
+			"parameters": {
+				"source": "name",
+				"steps": [
+					{
+						"regex": "^(.+)$",
+						"replacement": "$1"
+					}
+				]
+			}
+		},
+		"EffectiveTitle": {
+			"type": "generated",
+			"generator": "coalesce",
+			"dataType": "string",
+			"replaces": "KamiSama Blazor Admin App",
+			"parameters": {
+				"sourceVariableName": "Title",
+				"fallbackVariableName": "SuggestedTitle",
+				"defaultValue": ""
+			}
+		},
+		"UserManagement": {
+			"type": "parameter",
+			"dataType": "bool",
+			"defaultValue": "true",
+			"displayName": "User management",
+			"description": "Include user management services, endpoints, and pages."
+		},
+		"OperatorManagement": {
+			"type": "parameter",
+			"dataType": "bool",
+			"defaultValue": "false",
+			"displayName": "Operator management",
+			"description": "Include operator management services, endpoints, and pages."
+		},
+		"Ticketing": {
+			"type": "parameter",
+			"dataType": "bool",
+			"defaultValue": "false",
+			"displayName": "Ticketing",
+			"description": "Include ticketing services, endpoints, pages, and module registration."
+		},
+		"IdentityManagement": {
+			"type": "computed",
+			"value": "(UserManagement || OperatorManagement || Ticketing)"
+		},
+		"SettingsManagement": {
+			"type": "computed",
+			"value": "(UserManagement || OperatorManagement)"
+		}
+	},
+	"sources": [
+		{
+			"modifiers": [
+				{
+					"condition": "(!UserManagement)",
+					"exclude": [
+						"Suma.AdminPanel.Abstractions/Services/Users/**",
+						"Suma.AdminPanel.Core/Services/Users/**",
+						"Suma.AdminPanel.Client/Services/Users/**",
+						"Suma.AdminPanel.Client/Pages/Settings/Users/**",
+						"Suma.AdminPanel.Server/Controllers/UsersController.cs"
+					]
+				},
+				{
+					"condition": "(!OperatorManagement)",
+					"exclude": [
+						"Suma.AdminPanel.Abstractions/Services/Operators/**",
+						"Suma.AdminPanel.Core/Services/Operators/**",
+						"Suma.AdminPanel.Client/Services/Operators/**",
+						"Suma.AdminPanel.Client/Pages/Settings/Operators/**",
+						"Suma.AdminPanel.Server/Controllers/OperatorsController.cs"
+					]
+				},
+				{
+					"condition": "(!Ticketing)",
+					"exclude": [
+						"Suma.AdminPanel.Abstractions/DataTypes/TicketPriority.cs",
+						"Suma.AdminPanel.Abstractions/DataTypes/TicketingStatus.cs",
+						"Suma.AdminPanel.Abstractions/Services/Tickets/**",
+						"Suma.AdminPanel.Core/Services/Tickets/**",
+						"Suma.AdminPanel.Client/Services/Tickets/**",
+						"Suma.AdminPanel.Client/Pages/Operations/Tickets/**",
+						"Suma.AdminPanel.Server/Controllers/TicketsController.cs"
+					]
+				}
+			]
+		}
+	]
+}

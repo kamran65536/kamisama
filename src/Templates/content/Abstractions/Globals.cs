@@ -1,5 +1,5 @@
 //#if (IncludeDataTypes)
-global using Example.Abstractions.DataTypes;
+global using ExampleNamespace.DataTypes;
 //#endif
 global using KamiSama.Chassis.Commons.Features;
 global using KamiSama.Extensions.Paging;

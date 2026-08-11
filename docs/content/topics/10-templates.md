@@ -9,8 +9,10 @@ dotnet new kamisama-props
 ## 10.1 Core Project
 This project includes a core module scaffold with optional entities, repositories/database infrastructure, provider-specific DbContexts, and options.
 ```bash
-dotnet new kamisama-core -n projectName
+dotnet new kamisama-core -n KamiSama.Modules.Payments.Core
+dotnet new kamisama-core -n KamiSama.Modules.Payments.Core --ContextName Payments
 ```
+The project name and context name are separate. When `--ContextName` is omitted, the template suggests it from the project name by removing dots plus `Core` and `Abstractions` segments. A project named `X.Core` or `X.Abstractions` uses `X` as the main namespace in generated code.
 
 ## 10.2 Repository Projects
 This project provides classic repository, search model, dbcontext and .... The library will soon be upgraded to new handling model which is more cleaner and compact.
@@ -43,5 +45,6 @@ dotnet new kamisama-boundedcontext -n projectName
 Project template for shared abstractions with optional resources, data types, services, and exceptions folders.
 
 ```bash
-dotnet new kamisama-abstractions -n projectName
+dotnet new kamisama-abstractions -n KamiSama.Modules.Payments.Abstractions
 ```
+A project named `X.Abstractions` uses `X` as the main namespace in generated code.
