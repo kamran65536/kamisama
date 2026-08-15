@@ -29,8 +29,8 @@ Use this skill when code should integrate with the libraries in this repository 
 
 ## Important Caveats
 
-- `KamiSama.Extensions.WebModules.ResponseCachingModule.ApplyConfigurationToAsync` currently throws `NotImplementedException`; do not assume it wires middleware.
-- `KamiSama.Extensions.WebModules.OpenApiModule` is internal and effectively a placeholder; use `SwaggerModule` instead.
+- `KamiSama.Modules.ResponseCachingModule.ApplyConfigurationToAsync` currently throws `NotImplementedException`; do not assume it wires middleware.
+- `KamiSama.Modules.OpenApiModule` is internal and effectively a placeholder; use `SwaggerModule` instead.
 - Some exception status codes reflect the source code rather than conventional HTTP semantics:
   - `GoneException` returns `401`
   - `NotSupportedHttpException` returns `500`

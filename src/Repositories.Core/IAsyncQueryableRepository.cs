@@ -3,15 +3,15 @@
 namespace KamiSama.Repositories;
 
 /// <summary>
-/// IAsyncQueryable Repository
+/// Combines asynchronous repository operations with a synchronous query-returning <c>Where</c> method.
 /// </summary>
-/// <typeparam name="TEntity"></typeparam>
+/// <typeparam name="TEntity">The entity type exposed by the query.</typeparam>
 public interface IAsyncQueryableRepository<TEntity> : IAsyncRepository<TEntity>
 {
 	/// <summary>
-	/// the same as Where, just to indicate async behavior
+	/// Returns a query for entities that satisfy the predicate; this method itself is synchronous.
 	/// </summary>
-	/// <param name="predicate"></param>
-	/// <returns></returns>
+	/// <param name="predicate">The predicate used to filter entities. Implementations may accept <see langword="null"/> to return all entities.</param>
+	/// <returns>A query containing matching entities.</returns>
 	IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> predicate);
 }

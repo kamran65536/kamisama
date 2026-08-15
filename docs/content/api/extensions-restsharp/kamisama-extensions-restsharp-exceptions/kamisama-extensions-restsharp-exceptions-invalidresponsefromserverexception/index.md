@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Extensions.RestSharp](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.Extensions.RestSharp/Exceptions/InvalidResponseFromServerException.cs:7](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Extensions.RestSharp/Exceptions/InvalidResponseFromServerException.cs#L7)
+Source: [src/KamiSama.Extensions.RestSharp/Exceptions/InvalidResponseFromServerException.cs:9](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Extensions.RestSharp/Exceptions/InvalidResponseFromServerException.cs#L9)
 
 Namespace: `KamiSama.Extensions.RestSharp.Exceptions`
 
@@ -12,7 +12,7 @@ Kind: `Class`
 
 ## Description
 
-This is a UI response exception and should not be used in backend. Use it with the surrounding package APIs when composing application code.
+Represents an invalid response received by a UI client from a remote server. This exception uses the application-specific status code `-2` and is not intended for backend HTTP responses.
 
 ## Declaration
 
@@ -24,9 +24,9 @@ public class InvalidResponseFromServerException(params object[] args) : HttpExce
 
 ### Primary constructor
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Extensions.RestSharp/Exceptions/InvalidResponseFromServerException.cs#L7)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Extensions.RestSharp/Exceptions/InvalidResponseFromServerException.cs#L9)
 
-This is a UI response exception and should not be used in backend. Use it with the surrounding package APIs when composing application code.
+Represents an invalid response received by a UI client from a remote server. This exception uses the application-specific status code `-2` and is not intended for backend HTTP responses.
 
 ```csharp
 public class InvalidResponseFromServerException(params object[] args) : HttpExceptionBase(nameof(InvalidResponseFromServerException), args)
@@ -36,7 +36,7 @@ public class InvalidResponseFromServerException(params object[] args) : HttpExce
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `args` | `object[]` | `-` | The `args` value passed to this member. |
+| `args` | `object[]` | `-` | Values stored as localization arguments for the exception key. |
 
 ## Members
 
@@ -44,5 +44,5 @@ public class InvalidResponseFromServerException(params object[] args) : HttpExce
 
 | Member | Description |
 | --- | --- |
-| [StatusCode](property-statuscode-9.md) | Exposes the `StatusCode` value on `InvalidResponseFromServerException`. Read or set it as part of configuring or using the type. |
+| [StatusCode](property-statuscode-14.md) | Gets the application-specific invalid-response status code `-2`. Use it with the surrounding package APIs when composing application code. |
 

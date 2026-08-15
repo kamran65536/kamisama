@@ -1,12 +1,13 @@
 ﻿namespace KamiSama.Extensions;
 
 /// <summary>
-/// Array Extensions
+/// Provides extension methods for padding arrays and removing matching trailing elements.
+/// Use these helpers when an array must be resized or normalized without mutating the original instance.
 /// </summary>
 public static class ArrayExtensions
 {
 	/// <summary>
-	/// Pads an array until criteria is meets
+	/// Returns an array padded to the first length that satisfies the specified predicate.
 	/// </summary>
 	/// <typeparam name="TArrayItem"></typeparam>
 	/// <param name="arr">the array to be padded</param>
@@ -22,7 +23,7 @@ public static class ArrayExtensions
 		return arr.Pad(newSize, paddingValue);
 	}
 	/// <summary>
-	/// Pads an array until criteria
+	/// Returns an array padded to the specified length.
 	/// </summary>
 	/// <typeparam name="TArrayItem"></typeparam>
 	/// <param name="arr">the array to be padded</param>
@@ -47,7 +48,7 @@ public static class ArrayExtensions
 		return result;
 	}
 	/// <summary>
-	/// Trims end of the array with the specified criteria
+	/// Returns an array with consecutive trailing elements that satisfy the predicate removed.
 	/// </summary>
 	/// <typeparam name="TArrayItem"></typeparam>
 	/// <param name="arr">the array to be trimmed</param>
@@ -70,7 +71,7 @@ public static class ArrayExtensions
 		return result;
 	}
 	/// <summary>
-	/// Trims end of an array for the item
+	/// Returns an array with consecutive trailing elements equal to the specified value removed.
 	/// </summary>
 	/// <typeparam name="TArrayItem"></typeparam>
 	/// <param name="arr">the array to be trimmed</param>

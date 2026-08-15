@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Chassis.Commons](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/Chassis.Commons/Repositories/GenericRepository.cs:6](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Commons/Repositories/GenericRepository.cs#L6)
+Source: [src/Chassis.Commons/Repositories/GenericRepository.cs:10](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Commons/Repositories/GenericRepository.cs#L10)
 
 Namespace: `KamiSama.Chassis.Commons.Repositories`
 
@@ -43,9 +43,9 @@ public sealed class ProductRepository(AppDbContext context)
 
 ### Primary constructor
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Commons/Repositories/GenericRepository.cs#L6)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Commons/Repositories/GenericRepository.cs#L10)
 
-Generic implementation of `IGenericRepository{TEntity, TSeaerchModel}`. Use it with the surrounding package APIs when composing application code.
+Provides an EF Core CRUD repository whose standard page result is built with `MakePagedAsync`. Use it with the surrounding package APIs when composing application code.
 
 ```csharp
 public abstract class GenericRepository<TEntity, TSearchModel, TDbContext>(TDbContext context) : 
@@ -60,7 +60,7 @@ public abstract class GenericRepository<TEntity, TSearchModel, TDbContext>(TDbCo
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `context` | `TDbContext` | `-` | The `context` value passed to this member. |
+| `context` | `TDbContext` | `-` | The context used for CRUD and query operations. |
 
 ## Members
 
@@ -68,5 +68,5 @@ public abstract class GenericRepository<TEntity, TSearchModel, TDbContext>(TDbCo
 
 | Member | Description |
 | --- | --- |
-| [MakeResultAsync](method-makeresultasync-14.md) | Creates the paged result object after the filtered query is materialized. |
+| [MakeResultAsync](method-makeresultasync-22.md) | Creates the paged result object after the filtered query is materialized. |
 

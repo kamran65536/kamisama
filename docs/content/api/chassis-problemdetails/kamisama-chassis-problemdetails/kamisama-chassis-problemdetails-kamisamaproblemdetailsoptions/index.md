@@ -41,15 +41,15 @@ This type does not declare a non-private constructor in source.
 
 | Member | Description |
 | --- | --- |
-| [UseDefaultProblemDetailsProvider](method-usedefaultproblemdetailsprovider-29.md) | Uses `KamiSamaProblemDetailsProvider` as default Problem Details Provider. Use it with the surrounding package APIs when composing application code. |
-| [UseProblemDetailsProvider](method-useproblemdetailsprovider-44.md) | Uses customer provider as Problem Details Provider. Use it with the surrounding package APIs when composing application code. |
-| [UseResourceLocalizer<ResourceType>](method-useresourcelocalizer-resourcetype-64.md) | Uses Resource String Localizer. Use it with the surrounding package APIs when composing application code. |
+| [UseDefaultProblemDetailsProvider](method-usedefaultproblemdetailsprovider-29.md) | Selects `KamiSamaProblemDetailsProvider` and applies this instance&apos;s localization settings when it is resolved. Use it with the surrounding package APIs when composing application code. |
+| [UseProblemDetailsProvider](method-useproblemdetailsprovider-45.md) | Selects a custom provider factory for exception conversion. Use it with the surrounding package APIs when composing application code. |
+| [UseResourceLocalizer<ResourceType>](method-useresourcelocalizer-resourcetype-55.md) | Configures a resource-based string localizer for the default provider. Use it with the surrounding package APIs when composing application code. |
 
 ### Properties
 
 | Member | Description |
 | --- | --- |
-| [LocalizeArguments](property-localizearguments-24.md) | Localize argument parameters or not. Use it with the surrounding package APIs when composing application code. |
-| [ProblemDetailsDataProviderFunc](property-problemdetailsdataproviderfunc-16.md) | Problem details provider factory function. Use it with the surrounding package APIs when composing application code. |
-| [StringLocalizerFunc](property-stringlocalizerfunc-20.md) | Exposes the `StringLocalizerFunc` value on `KamiSamaProblemDetailsOptions`. Read or set it as part of configuring or using the type. |
+| [LocalizeArguments](property-localizearguments-24.md) | Gets or sets whether the default provider localizes message arguments before formatting the title. Use it with the surrounding package APIs when composing application code. |
+| [ProblemDetailsDataProviderFunc](property-problemdetailsdataproviderfunc-16.md) | Gets or sets the dependency-injection factory that creates the scoped conversion provider. Use it with the surrounding package APIs when composing application code. |
+| [StringLocalizerFunc](property-stringlocalizerfunc-20.md) | Gets or sets the factory that resolves the optional string localizer. Use it with the surrounding package APIs when composing application code. |
 

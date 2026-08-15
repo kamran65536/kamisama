@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Modules.Locations.Abstractions](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.Modules.Locations.Abstractions/Features/Dtos.cs:20](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Locations.Abstractions/Features/Dtos.cs#L20)
+Source: [src/KamiSama.Modules.Locations.Abstractions/Features/Dtos.cs:64](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Locations.Abstractions/Features/Dtos.cs#L64)
 
 Namespace: `KamiSama.Modules.Locations.Features`
 
@@ -12,7 +12,7 @@ Kind: `Record`
 
 ## Description
 
-Provides the `UpdateProvinceRequest` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
+Carries the replacement name for an existing province. The name has a 100-character data-annotation limit, while uniqueness is not enforced by the Core update feature.
 
 ## Declaration
 
@@ -24,9 +24,9 @@ public record UpdateProvinceRequest([property: MaxLength(100)] string Name);
 
 ### Primary constructor
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Locations.Abstractions/Features/Dtos.cs#L20)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Locations.Abstractions/Features/Dtos.cs#L64)
 
-Initializes the type with the values required by its declaration. Use it with the surrounding package APIs when composing application code.
+Supplies the replacement name for an existing province. Use it with the surrounding package APIs when composing application code.
 
 ```csharp
 public record UpdateProvinceRequest([property: MaxLength(100)] string Name);
@@ -36,7 +36,7 @@ public record UpdateProvinceRequest([property: MaxLength(100)] string Name);
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `Name` | `string` | `-` | The `Name` value passed to this member. |
+| `Name` | `string` | `-` | The province name, limited to 100 characters by data annotations and the Core EF model. |
 
 ## Members
 

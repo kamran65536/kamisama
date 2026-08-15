@@ -3,16 +3,16 @@
 namespace KamiSama.Repositories
 {
 	/// <summary>
-	/// Queryable Repository Interface, these repositories can be searched throughout
+	/// Defines predicate-based querying in addition to synchronous repository operations.
 	/// </summary>
-	/// <typeparam name="TEntity"></typeparam>
+	/// <typeparam name="TEntity">The entity type exposed by the query.</typeparam>
 	public interface IQueryableRepository<TEntity> : IRepository<TEntity>
 	{
 		/// <summary>
-		/// Queries items in repository for the predicate specified
+		/// Returns a query for entities that satisfy the predicate.
 		/// </summary>
-		/// <param name="predicate">the predicate to search, if null it returns all items</param>
-		/// <returns></returns>
+		/// <param name="predicate">The predicate used to filter entities. Implementations may accept <see langword="null"/> to return all entities.</param>
+		/// <returns>A query containing matching entities.</returns>
 		IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> predicate);
 	}
 }

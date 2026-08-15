@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Modules.Ticketing.Abstractions](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Dtos.cs:14](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Dtos.cs#L14)
+Source: [src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Dtos.cs:89](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Dtos.cs#L89)
 
 Namespace: `KamiSama.Modules.Ticketing.Features.Tickets`
 
@@ -12,7 +12,7 @@ Kind: `Record`
 
 ## Description
 
-Provides the `UpdateTicketCommentRequest` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
+Carries the actual comment identifier, claimed author identifier, and replacement text used by Core. Core ignores the separate update-method key and authorizes only by equality with the stored author identifier.
 
 ## Declaration
 
@@ -24,9 +24,9 @@ public record UpdateTicketCommentRequest(Guid CommentId, Guid AuthorUserId, stri
 
 ### Primary constructor
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Dtos.cs#L14)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Dtos.cs#L89)
 
-Initializes the type with the values required by its declaration. Use it with the surrounding package APIs when composing application code.
+Supplies the comment identifier, claimed author, and replacement text for a comment update. Current Core uses &lt;paramref name=&quot;CommentId&quot;/&gt; instead of the separate update-method key and authorizes only by identifier equality.
 
 ```csharp
 public record UpdateTicketCommentRequest(Guid CommentId, Guid AuthorUserId, string Comment);
@@ -36,9 +36,9 @@ public record UpdateTicketCommentRequest(Guid CommentId, Guid AuthorUserId, stri
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `CommentId` | `Guid` | `-` | The `CommentId` value passed to this member. |
-| `AuthorUserId` | `Guid` | `-` | The `AuthorUserId` value passed to this member. |
-| `Comment` | `string` | `-` | The `Comment` value passed to this member. |
+| `CommentId` | `Guid` | `-` | The identifier of the comment to update. |
+| `AuthorUserId` | `Guid` | `-` | The claimed author identifier used by Core&apos;s ownership check. |
+| `Comment` | `string` | `-` | The replacement comment text. |
 
 ## Members
 

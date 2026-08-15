@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.ExternalServices.Sms.Abstractions](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.ExternalServices.Sms.Abstractions/Features/Dtos.cs:8](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.ExternalServices.Sms.Abstractions/Features/Dtos.cs#L8)
+Source: [src/KamiSama.ExternalServices.Sms.Abstractions/Features/Dtos.cs:9](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.ExternalServices.Sms.Abstractions/Features/Dtos.cs#L9)
 
 Namespace: `KamiSama.ExternalServices.Sms.Features`
 
@@ -12,7 +12,7 @@ Kind: `Record`
 
 ## Description
 
-Represents a request to send an SMS message. Use it with the surrounding package APIs when composing application code.
+Contains the destination phone number and text for one provider-neutral SMS request. Pass it to `ISendSms.SendSmsAsync`; an external implementation determines delivery behavior.
 
 ## Declaration
 
@@ -24,9 +24,9 @@ public record SendSmsRequest(string PhoneNumber, string Message);
 
 ### Primary constructor
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.ExternalServices.Sms.Abstractions/Features/Dtos.cs#L8)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.ExternalServices.Sms.Abstractions/Features/Dtos.cs#L9)
 
-Represents a request to send an SMS message. Use it with the surrounding package APIs when composing application code.
+Contains the provider-neutral destination and message text for one SMS request. Pass it to `ISendSms.SendSmsAsync`; delivery behavior belongs to the selected provider implementation.
 
 ```csharp
 public record SendSmsRequest(string PhoneNumber, string Message);
@@ -36,8 +36,8 @@ public record SendSmsRequest(string PhoneNumber, string Message);
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `PhoneNumber` | `string` | `-` | Gets or sets the phone number associated with the entity. |
-| `Message` | `string` | `-` | Gets or sets the message to be sent via SMS. |
+| `PhoneNumber` | `string` | `-` | The destination phone number in the format expected by the provider. |
+| `Message` | `string` | `-` | The text to send. |
 
 ## Members
 

@@ -5,12 +5,13 @@ using System.Runtime.CompilerServices;
 namespace KamiSama.Extensions;
 
 /// <summary>
-/// extensionbs for <see cref="ILogger"/>
+/// Provides diagnostic logging extensions for <see cref="ILogger"/>.
+/// Use them to emit consistent trace-level method-entry messages.
 /// </summary>
 public static class LoggerExtensions
 {
 	/// <summary>
-	/// Logs the method entry and it's argument (if sent)
+	/// Logs a trace-level method-entry message containing the caller name and any supplied argument values.
 	/// </summary>
 	/// <param name="logger"></param>
 	/// <param name="caller"></param>

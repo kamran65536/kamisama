@@ -12,12 +12,23 @@ Kind: `Interface`
 
 ## Description
 
-Repository implementation or contract for `IRepository<TEntity>`. Use it behind feature services to keep persistence access behind the KamiSama repository abstraction.
+Defines synchronous add, update, delete, and first-match lookup operations. Implementations determine persistence, transaction, duplicate, and missing-entity behavior.
 
 ## Declaration
 
 ```csharp
 public interface IRepository<TEntity> : IDisposable
+```
+
+## Example
+
+```csharp
+using KamiSama.Repositories;
+
+public sealed class UserService(IRepository<User> users)
+{
+    public User? FindByEmail(string email) => users.Find(user => user.Email == email);
+}
 ```
 
 ## Constructors
@@ -30,8 +41,8 @@ This type does not declare a non-private constructor in source.
 
 | Member | Description |
 | --- | --- |
-| [Add](method-add-16.md) | Adds a new item in the repository. Use it with the surrounding package APIs when composing application code. |
-| [Delete](method-delete-26.md) | Deletes an item from repository. Use it with the surrounding package APIs when composing application code. |
-| [Find](method-find-32.md) | Finds an single item in the repository. Use it with the surrounding package APIs when composing application code. |
-| [Update](method-update-21.md) | Update method, does nothing. Use it with the surrounding package APIs when composing application code. |
+| [Add](method-add-16.md) | Adds an entity according to the implementation's persistence and duplicate rules. |
+| [Delete](method-delete-26.md) | Deletes an entity according to the implementation's matching and persistence rules. |
+| [Find](method-find-32.md) | Returns the first entity matching the predicate, or `null` when none matches. |
+| [Update](method-update-21.md) | Updates an entity according to the implementation's matching and persistence rules; the contract does not require replacement or merging. |
 

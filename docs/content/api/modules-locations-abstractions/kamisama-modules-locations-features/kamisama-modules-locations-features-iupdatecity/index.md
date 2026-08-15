@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Modules.Locations.Abstractions](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.Modules.Locations.Abstractions/Features/Features.cs:15](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Locations.Abstractions/Features/Features.cs#L15)
+Source: [src/KamiSama.Modules.Locations.Abstractions/Features/Features.cs:42](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Locations.Abstractions/Features/Features.cs#L42)
 
 Namespace: `KamiSama.Modules.Locations.Features`
 
@@ -12,12 +12,18 @@ Kind: `Interface`
 
 ## Description
 
-Defines the contract for `IUpdateCity` behavior. Implement this interface when you need to plug your own code into the surrounding KamiSama package.
+Defines updating a city's name and parent province. Core requires the new parent to exist and saves the tracked entity immediately.
 
 ## Declaration
 
 ```csharp
 public interface IUpdateCity : IUpdateFeature<UpdateCityRequest, Guid>;
+```
+
+## Example
+
+```csharp
+await updateCity.UpdateAsync(cityId, new UpdateCityRequest(provinceId, "New Springfield"), cancellationToken);
 ```
 
 ## Constructors

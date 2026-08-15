@@ -4,4 +4,4 @@
 
 | Type | Kind | Description | Source |
 | --- | --- | --- | --- |
-| [AddUserFailedException](kamisama-modules-identity-exceptions-adduserfailedexception/index.md) | Class | Provides the `AddUserFailedException` API for the surrounding package. Use this type with the members listed below to compose the feature in an application. | [source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Identity.Abstractions/Exceptions/AddUserFailedException.cs#L6) |
+| [AddUserFailedException](kamisama-modules-identity-exceptions-adduserfailedexception/index.md) | Class | Reports an Identity user-creation failure as HTTP 500 and retains only the first Identity error description as localization metadata. | [source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Identity.Abstractions/Exceptions/AddUserFailedException.cs#L11) |

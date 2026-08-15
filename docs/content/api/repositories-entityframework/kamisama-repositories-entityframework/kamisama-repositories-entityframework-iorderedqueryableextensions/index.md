@@ -12,7 +12,7 @@ Kind: `Class`
 
 ## Description
 
-Provides the `IOrderedQueryableExtensions` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
+Pages ordered EF6 queries by synchronously counting all matches and asynchronously materializing one page. Cancellation does not cover the count, and count and data are separate queries.
 
 ## Declaration
 
@@ -30,5 +30,5 @@ This type does not declare a non-private constructor in source.
 
 | Member | Description |
 | --- | --- |
-| [MakePagedAsync<T>](method-makepagedasync-t-22.md) | Makes the query paged, used for user interface and apis paging. Use it with the surrounding package APIs when composing application code. |
+| [MakePagedAsync<T>](method-makepagedasync-t-26.md) | Counts the complete query and materializes the requested page. Use it with the surrounding package APIs when composing application code. |
 

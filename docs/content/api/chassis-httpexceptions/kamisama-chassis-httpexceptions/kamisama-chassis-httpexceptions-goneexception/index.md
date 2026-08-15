@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Chassis.HttpExceptions](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/Chassis.Exceptions/GoneException.cs:5](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Exceptions/GoneException.cs#L5)
+Source: [src/Chassis.Exceptions/GoneException.cs:6](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Exceptions/GoneException.cs#L6)
 
 Namespace: `KamiSama.Chassis.HttpExceptions`
 
@@ -12,7 +12,7 @@ Kind: `Class`
 
 ## Description
 
-Indicates that the resource requested was previously in use but is no longer available and will not be available again. Use it with the surrounding package APIs when composing application code.
+Represents a resource that is no longer available. Use it with the surrounding package APIs when composing application code.
 
 ## Declaration
 
@@ -20,13 +20,17 @@ Indicates that the resource requested was previously in use but is no longer ava
 public class GoneException : HttpExceptionBase
 ```
 
+## Remarks
+
+The current implementation reports status code 401 rather than the conventional 410 Gone status.
+
 ## Constructors
 
 ### GoneException
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Exceptions/GoneException.cs#L10)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Exceptions/GoneException.cs#L11)
 
-Initializes a new `GoneException` instance. Use it with the surrounding package APIs when composing application code.
+Initializes an exception using the exception type name as its localization key. Use it with the surrounding package APIs when composing application code.
 
 ```csharp
 public GoneException();
@@ -38,9 +42,9 @@ This member does not declare parameters.
 
 ### GoneException
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Exceptions/GoneException.cs#L14)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Exceptions/GoneException.cs#L17)
 
-Initializes a new `GoneException` instance. Use it with the surrounding package APIs when composing application code.
+Initializes an exception with a localization key and formatting arguments. Use it with the surrounding package APIs when composing application code.
 
 ```csharp
 public GoneException(string message, params object? [] args) : base(message, args);
@@ -50,14 +54,14 @@ public GoneException(string message, params object? [] args) : base(message, arg
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `message` | `string` | `-` | The `message` value passed to this member. |
-| `args` | `object?[]` | `-` | The `args` value passed to this member. |
+| `message` | `string` | `-` | The localization key, also used as the fallback message format. |
+| `args` | `object?[]` | `-` | Values used to format and later localize the message. |
 
 ### GoneException
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Exceptions/GoneException.cs#L18)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Exceptions/GoneException.cs#L24)
 
-Initializes a new `GoneException` instance. Use it with the surrounding package APIs when composing application code.
+Initializes an exception with localization metadata and an underlying exception. Use it with the surrounding package APIs when composing application code.
 
 ```csharp
 public GoneException(string messageKey, object? [] args, Exception? innerException) : base(messageKey, args, innerException);
@@ -67,9 +71,9 @@ public GoneException(string messageKey, object? [] args, Exception? innerExcepti
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `messageKey` | `string` | `-` | The `messageKey` value passed to this member. |
-| `args` | `object?[]` | `-` | The `args` value passed to this member. |
-| `innerException` | `Exception?` | `-` | The `innerException` value passed to this member. |
+| `messageKey` | `string` | `-` | The localization key, also used as the fallback message format. |
+| `args` | `object?[]` | `-` | Values used to format and later localize the message. |
+| `innerException` | `Exception?` | `-` | The exception that caused this failure, or . |
 
 ## Members
 
@@ -77,5 +81,5 @@ public GoneException(string messageKey, object? [] args, Exception? innerExcepti
 
 | Member | Description |
 | --- | --- |
-| [StatusCode](property-statuscode-8.md) | Exposes the `StatusCode` value on `GoneException`. Read or set it as part of configuring or using the type. |
+| [StatusCode](property-statuscode-9.md) | Gets the current HTTP status code value, 401. Use it with the surrounding package APIs when composing application code. |
 

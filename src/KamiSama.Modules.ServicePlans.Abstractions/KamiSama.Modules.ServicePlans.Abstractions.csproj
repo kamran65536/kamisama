@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageDocumentationRoot>../../docs/content/api/modules-serviceplans-abstractions</PackageDocumentationRoot>
+	</PropertyGroup>
+	<Import Project="../props.xml" />
+	<PropertyGroup>
+		<Description>Provider-neutral ServicePlans feature contracts, requests, DTOs, search models, and subscription data types. Reference this package from callers or alternative implementations that should not depend on EF Core, ASP.NET Core module setup, or a database provider.</Description>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Chassis.Commons.Abstractions\KamiSama.Chassis.Commons.Abstractions.csproj" />
+	</ItemGroup>
+</Project>

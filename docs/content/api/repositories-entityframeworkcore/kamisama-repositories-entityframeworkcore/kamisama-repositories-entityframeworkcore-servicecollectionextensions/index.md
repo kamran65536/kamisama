@@ -12,12 +12,25 @@ Kind: `Class`
 
 ## Description
 
-Provides EF Core service registration extensions. Use it with the surrounding package APIs when composing application code.
+Binds `provider` and `connection-string`, then adds scoped keyed resolution for an application-facing base context. Concrete provider packages must register the lowercased configured key.
 
 ## Declaration
 
 ```csharp
 public static class ServiceCollectionExtensions
+```
+
+## Example
+
+```csharp
+using KamiSama.Repositories.EntityFrameworkCore;
+using KamiSama.Repositories.EntityFrameworkCore.Postgresql;
+using KamiSama.Repositories.EntityFrameworkCore.Sqlite;
+
+services.AddMultiProviderDbContext<AppDbContext>(configuration.GetSection("Database"))
+    .WithMigrationHistoryTable("__AppMigrationsHistory")
+    .AddPostgresql<PostgresqlAppDbContext>()
+    .AddSqlite<SqliteAppDbContext>();
 ```
 
 ## Constructors
@@ -30,5 +43,5 @@ This type does not declare a non-private constructor in source.
 
 | Member | Description |
 | --- | --- |
-| [AddMultiProviderDbContext<TBaseContext>](method-addmultiproviderdbcontext-tbasecontext-20.md) | Adds provider-neutral keyed DbContext resolution for a configured database provider. Use it with the surrounding package APIs when composing application code. |
+| [AddMultiProviderDbContext<TBaseContext>](method-addmultiproviderdbcontext-tbasecontext-25.md) | Binds database settings and adds scoped resolution of a base DbContext through a configured keyed provider. Use it with the surrounding package APIs when composing application code. |
 

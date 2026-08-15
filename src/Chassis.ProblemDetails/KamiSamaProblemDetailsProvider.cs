@@ -8,14 +8,15 @@ using System.Linq;
 using ProblemDetails = Microsoft.AspNetCore.Mvc.ProblemDetails;
 
 /// <summary>
-/// Converts <see cref="HttpExceptionBase" /> to <see cref="ProblemDetails"/>
+/// Converts KamiSama HTTP exceptions into ASP.NET Core problem details payloads.
 /// </summary>
+/// <remarks>Non-HTTP exceptions are represented as status 500 using their message. The current conversion does not copy <see cref="HttpExceptionBase.ExtendedProperties"/> to the payload.</remarks>
 [ExcludeFromCodeCoverage]
 public class KamiSamaProblemDetailsProvider : IProblemDetailsDataProvider
 {
-	/// <inheritdoc	/>
+	/// <summary>Gets or sets the optional localizer used for the title and its arguments.</summary>
 	public IStringLocalizer? Localizer { get; set; }
-	/// <inheritdoc />
+	/// <summary>Gets or sets whether each localization argument is localized before title formatting.</summary>
 	public bool LocalizeArguments { get; set; }
 
 	private object? SafeLocalize(object? obj, params object[] args)
@@ -29,7 +30,9 @@ public class KamiSamaProblemDetailsProvider : IProblemDetailsDataProvider
 			return localized.Value;
 	}
 
-	/// <inheritdoc/>
+	/// <summary>Converts an exception to a problem details title and status.</summary>
+	/// <param name="exception">The exception to convert. Non-HTTP exceptions are wrapped as internal-operation failures.</param>
+	/// <returns>A problem details payload containing the resolved title and HTTP status value.</returns>
 	public ProblemDetails ConvertExceptionToProblemDetails(Exception exception)
 	{
 		if (exception is not HttpExceptionBase httpException)

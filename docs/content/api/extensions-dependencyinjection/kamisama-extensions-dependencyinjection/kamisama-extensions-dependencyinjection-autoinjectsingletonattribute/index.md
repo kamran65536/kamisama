@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Extensions.DependencyInjection](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/DependencyInjection/AutoInjectSingletonAttribute.cs:8](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/DependencyInjection/AutoInjectSingletonAttribute.cs#L8)
+Source: [src/DependencyInjection/AutoInjectSingletonAttribute.cs:9](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/DependencyInjection/AutoInjectSingletonAttribute.cs#L9)
 
 Namespace: `KamiSama.Extensions.DependencyInjection`
 
@@ -25,7 +25,7 @@ public class AutoInjectSingletonAttribute : AutoInjectAttributeBase
 ```csharp
 using KamiSama.Extensions.DependencyInjection;
 
-[AutoInjectSingleton<ICacheService>]
+[AutoInjectSingleton(typeof(ICacheService))]
 public sealed class MemoryCacheService : ICacheService;
 ```
 
@@ -33,9 +33,9 @@ public sealed class MemoryCacheService : ICacheService;
 
 ### AutoInjectSingletonAttribute
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/DependencyInjection/AutoInjectSingletonAttribute.cs#L17)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/DependencyInjection/AutoInjectSingletonAttribute.cs#L23)
 
-Initializes a new `AutoInjectSingletonAttribute` instance. Use it with the surrounding package APIs when composing application code.
+Initializes a singleton registration attribute with an optional explicit service contract. Passing enables service-type inference during assembly scanning.
 
 ```csharp
 public AutoInjectSingletonAttribute(Type? serviceType);
@@ -45,13 +45,13 @@ public AutoInjectSingletonAttribute(Type? serviceType);
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `serviceType` | `Type?` | `-` | The `serviceType` value passed to this member. |
+| `serviceType` | `Type?` | `-` | The service contract to register, or to infer it. |
 
 ### AutoInjectSingletonAttribute
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/DependencyInjection/AutoInjectSingletonAttribute.cs#L23)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/DependencyInjection/AutoInjectSingletonAttribute.cs#L32)
 
-Initializes a new `AutoInjectSingletonAttribute` instance. Use it with the surrounding package APIs when composing application code.
+Initializes a singleton registration attribute that infers its service contract during assembly scanning. The decorated implementation is shared by the dependency injection container.
 
 ```csharp
 public AutoInjectSingletonAttribute() : this(null);
@@ -67,5 +67,5 @@ This member does not declare parameters.
 
 | Member | Description |
 | --- | --- |
-| [ServiceType](property-servicetype-14.md) | Exposes the `ServiceType` value on `AutoInjectSingletonAttribute`. Read or set it as part of configuring or using the type. |
+| [ServiceType](property-servicetype-16.md) | Gets or sets the service contract used for the singleton registration. When it is , the contract is inferred from the implementation type and its interfaces. |
 

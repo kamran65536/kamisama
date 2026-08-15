@@ -2,31 +2,47 @@
 
 [Back to package index](../index.md)
 
-Version: `10.0.10`
+Version: `10.0.0`
 
 ## Description
 
-Repository implementation, paging helpers, database initialization, and multi-provider DbContext registration for Entity Framework Core. Use it with the surrounding package APIs when composing application code.
+Entity Framework Core repositories, paging, database initialization, and multi-provider DbContext registration. Use it for tracked repository access, migration and seed workflows, or configuration-selected provider contexts.
 
-## Install
+## How to use
 
 ```shell
-dotnet add package KamiSama.Repositories.EntityFrameworkCore --version 10.0.10
+dotnet add package KamiSama.Repositories.EntityFrameworkCore --version 10.0.0
 ```
+
+Register the base context from configuration, set one shared migration-history table, and add each installed concrete provider context through its generic extension:
+
+```csharp
+using KamiSama.Repositories.EntityFrameworkCore;
+using KamiSama.Repositories.EntityFrameworkCore.Postgresql;
+using KamiSama.Repositories.EntityFrameworkCore.Sqlite;
+
+services.AddMultiProviderDbContext<AppDbContext>(configuration.GetSection("Database"))
+    .WithMigrationHistoryTable("__AppMigrationsHistory")
+    .AddPostgresql<PostgresqlAppDbContext>()
+    .AddSqlite<SqliteAppDbContext>();
+```
+
+Configuration uses the `provider` and `connection-string` keys. Provider lookup lowercases the configured value, and installed providers register exact `postgresql` or `sqlite` keys. Contexts and the keyed base-context alias are scoped. Provider packages enable lazy-loading proxies and apply the configured migration-history table.
+
+`DbRepository<TEntity>` borrows its context, does not dispose it, tracks queries by default, and saves every mutation immediately. `MakePagedAsync<T>` requires caller-supplied deterministic ordering, counts synchronously without cancellation, then materializes asynchronously in a separate query. Initializer stages run sequentially without a transaction supplied by the base class.
 
 ## Namespaces
 
-- [KamiSama.Repositories.EntityFrameworkCore](kamisama-repositories-entityframeworkcore/index.md) (7 types)
+- [KamiSama.Repositories.EntityFrameworkCore](kamisama-repositories-entityframeworkcore/index.md) (6 types)
 - [KamiSama.Repositories.EntityFrameworkCore.Initialization](kamisama-repositories-entityframeworkcore-initialization/index.md) (2 types)
 
 ## Types
 
-- [KamiSama.Repositories.EntityFrameworkCore.DbRepository<TEntity, TDbContext>](kamisama-repositories-entityframeworkcore/kamisama-repositories-entityframeworkcore-dbrepository-tentity-tdbcontext/index.md) - Repository wrapper around an EF DbContext. Use it when you want the standard KamiSama repository methods over a DbSet without writing the same CRUD code in each repository.
-- [KamiSama.Repositories.EntityFrameworkCore.DbRepository<TEntity>](kamisama-repositories-entityframeworkcore/kamisama-repositories-entityframeworkcore-dbrepository-tentity/index.md) - Repository wrapper around an EF DbContext. Use it when you want the standard KamiSama repository methods over a DbSet without writing the same CRUD code in each repository.
-- [KamiSama.Repositories.EntityFrameworkCore.IMultiProviderDbContextBuilder](kamisama-repositories-entityframeworkcore/kamisama-repositories-entityframeworkcore-imultiproviderdbcontextbuilder/index.md) - Defines the provider-neutral state needed to register a DbContext for multiple database providers. Use it with the surrounding package APIs when composing application code.
-- [KamiSama.Repositories.EntityFrameworkCore.IMultiProviderDbContextBuilder<TBaseContext>](kamisama-repositories-entityframeworkcore/kamisama-repositories-entityframeworkcore-imultiproviderdbcontextbuilder-tbasecontext/index.md) - Defines provider-neutral DbContext registration for a base context type. Use it with the surrounding package APIs when composing application code.
-- [KamiSama.Repositories.EntityFrameworkCore.IQueryableExtensions](kamisama-repositories-entityframeworkcore/kamisama-repositories-entityframeworkcore-iqueryableextensions/index.md) - Provides the `IQueryableExtensions` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
-- [KamiSama.Repositories.EntityFrameworkCore.MultiProviderDbContextBuilder<TBaseContext>](kamisama-repositories-entityframeworkcore/kamisama-repositories-entityframeworkcore-multiproviderdbcontextbuilder-tbasecontext/index.md) - Provides the `MultiProviderDbContextBuilder<TBaseContext>` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
-- [KamiSama.Repositories.EntityFrameworkCore.ServiceCollectionExtensions](kamisama-repositories-entityframeworkcore/kamisama-repositories-entityframeworkcore-servicecollectionextensions/index.md) - Provides EF Core service registration extensions. Use it with the surrounding package APIs when composing application code.
-- [KamiSama.Repositories.EntityFrameworkCore.Initialization.DatabaseInitializerBase<TDbContext>](kamisama-repositories-entityframeworkcore-initialization/kamisama-repositories-entityframeworkcore-initialization-databaseinitializerbase-tdbcontext/index.md) - Base EF Core database initializer with migration and seed hooks. Derive from it to centralize production seed data and optional test seed data for one DbContext.
-- [KamiSama.Repositories.EntityFrameworkCore.Initialization.DefaultDatabaseInitializer<TDbContext>](kamisama-repositories-entityframeworkcore-initialization/kamisama-repositories-entityframeworkcore-initialization-defaultdatabaseinitializer-tdbcontext/index.md) - Default Initializer, applies migration based on options. Use it with the surrounding package APIs when composing application code.
+- [KamiSama.Repositories.EntityFrameworkCore.DbRepository<TEntity, TDbContext>](kamisama-repositories-entityframeworkcore/kamisama-repositories-entityframeworkcore-dbrepository-tentity-tdbcontext/index.md) - EF Core repository over a borrowed `DbContext`. Queries track by default, every mutation saves immediately, and repository disposal does not dispose the context.
+- [KamiSama.Repositories.EntityFrameworkCore.DbRepository<TEntity>](kamisama-repositories-entityframeworkcore/kamisama-repositories-entityframeworkcore-dbrepository-tentity/index.md) - EF Core repository over a borrowed `DbContext`. Queries track by default, every mutation saves immediately, and repository disposal does not dispose the context.
+- [KamiSama.Repositories.EntityFrameworkCore.IMultiProviderDbContextBuilder](kamisama-repositories-entityframeworkcore/kamisama-repositories-entityframeworkcore-imultiproviderdbcontextbuilder/index.md) - Carries the services, configuration-selected provider, base context type, and migration-history table used by concrete provider registration extensions.
+- [KamiSama.Repositories.EntityFrameworkCore.IMultiProviderDbContextBuilder<TBaseContext>](kamisama-repositories-entityframeworkcore/kamisama-repositories-entityframeworkcore-imultiproviderdbcontextbuilder-tbasecontext/index.md) - Carries the services, configuration-selected provider, base context type, and migration-history table used by concrete provider registration extensions.
+- [KamiSama.Repositories.EntityFrameworkCore.IQueryableExtensions](kamisama-repositories-entityframeworkcore/kamisama-repositories-entityframeworkcore-iqueryableextensions/index.md) - Pages EF Core queries using caller-supplied ordering. It synchronously counts all matches before cancellable asynchronous materialization, using two separate database queries.
+- [KamiSama.Repositories.EntityFrameworkCore.ServiceCollectionExtensions](kamisama-repositories-entityframeworkcore/kamisama-repositories-entityframeworkcore-servicecollectionextensions/index.md) - Binds `provider` and `connection-string`, then adds scoped keyed resolution for an application-facing base context. Concrete provider packages must register the lowercased configured key.
+- [KamiSama.Repositories.EntityFrameworkCore.Initialization.DatabaseInitializerBase<TDbContext>](kamisama-repositories-entityframeworkcore-initialization/kamisama-repositories-entityframeworkcore-initialization-databaseinitializerbase-tdbcontext/index.md) - Runs selected migration, application-data, and test-data stages sequentially for an EF Core context. Derived initializers implement both seed hooks and can use `TryAdd` for immediate conditional persistence.
+- [KamiSama.Repositories.EntityFrameworkCore.Initialization.DefaultDatabaseInitializer<TDbContext>](kamisama-repositories-entityframeworkcore-initialization/kamisama-repositories-entityframeworkcore-initialization-defaultdatabaseinitializer-tdbcontext/index.md) - Migration-only EF Core initializer. Migration runs when selected, while application-data and test-data stages complete without performing work.

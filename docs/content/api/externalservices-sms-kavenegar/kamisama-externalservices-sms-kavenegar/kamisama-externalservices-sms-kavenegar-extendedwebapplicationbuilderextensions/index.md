@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.ExternalServices.Sms.Kavenegar](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.ExternalServices.Sms.Kavenegar/KavenegarModule.cs:22](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.ExternalServices.Sms.Kavenegar/KavenegarModule.cs#L22)
+Source: [src/KamiSama.ExternalServices.Sms.Kavenegar/KavenegarModule.cs:32](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.ExternalServices.Sms.Kavenegar/KavenegarModule.cs#L32)
 
 Namespace: `KamiSama.ExternalServices.Sms.Kavenegar`
 
@@ -12,12 +12,27 @@ Kind: `Class`
 
 ## Description
 
-Provides the `ExtendedWebApplicationBuilderExtensions` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
+Adds Kavenegar options binding and the scoped keyed `kavenegar` SMS provider. The current provider has an inverted validation defect and rejects a configured API key before sending.
 
 ## Declaration
 
 ```csharp
 public static class ExtendedWebApplicationBuilderExtensions
+```
+
+## Example
+
+```csharp
+using KamiSama.ExternalServices.Sms;
+using KamiSama.ExternalServices.Sms.Kavenegar;
+using KamiSama.Modules;
+
+var webBuilder = WebApplication.CreateBuilder(args);
+var builder = webBuilder.Extend()
+    .AddSmsCoreServicesModule(webBuilder.Configuration.GetSection("SmsDefaults"))
+    .AddKavenegarSmsServiceModule(webBuilder.Configuration.GetSection("Sms:Kavenegar"));
+
+var app = await builder.BuildAsync(CancellationToken.None);
 ```
 
 ## Constructors
@@ -30,5 +45,5 @@ This type does not declare a non-private constructor in source.
 
 | Member | Description |
 | --- | --- |
-| [AddKavenegarSmsServiceModule](method-addkavenegarsmsservicemodule-24.md) | Runs the `AddKavenegarSmsServiceModule` operation on `ExtendedWebApplicationBuilderExtensions`. Use it when your code needs this specific behavior from the package. |
+| [AddKavenegarSmsServiceModule](method-addkavenegarsmsservicemodule-40.md) | Adds the Kavenegar SMS module; its services are registered when `Build` or `BuildAsync` is called on the extended builder. Use it with the surrounding package APIs when composing application code. |
 

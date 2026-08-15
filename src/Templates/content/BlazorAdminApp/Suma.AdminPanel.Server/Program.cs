@@ -1,5 +1,5 @@
 ﻿using KamiSama.Chassis.ProblemDetails;
-using KamiSama.Extensions.WebModules;
+using KamiSama.Modules;
 using Microsoft.AspNetCore.Components.Authorization;
 using Polareum.Identity;
 using Polareum.Localization;

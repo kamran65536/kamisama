@@ -1,7 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="../props.xml" />
-
 	<PropertyGroup>
-		<NoWarn>$(NoWarn);1591</NoWarn>
+		<PackageDocumentationRoot>../../docs/content/api/externalservices-sms-abstractions</PackageDocumentationRoot>
+	</PropertyGroup>
+	<Import Project="../props.xml" />
+	<PropertyGroup>
+		<Description>Provider-neutral SMS sending contracts and request data. This package contains abstractions only and does not send messages or register an SMS provider.</Description>
 	</PropertyGroup>
 </Project>

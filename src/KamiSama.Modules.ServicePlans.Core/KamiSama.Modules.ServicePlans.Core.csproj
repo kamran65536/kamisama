@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageDocumentationRoot>../../docs/content/api/modules-serviceplans-core</PackageDocumentationRoot>
+	</PropertyGroup>
+	<Import Project="../props.xml" />
+	<PropertyGroup>
+		<Description>ASP.NET Core ServicePlans implementation with EF Core plan, offer, subscriber, and subscription entities, scoped CRUD features, modular registration, and startup initialization. Install one provider, provision the schema separately, and enforce authorization and domain validation in the host.</Description>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\KamiSama.Modules.ServicePlans.Abstractions\KamiSama.Modules.ServicePlans.Abstractions.csproj" />
+		<ProjectReference Include="..\Chassis.Commons\KamiSama.Chassis.Commons.csproj" />
+		<ProjectReference Include="..\DependencyInjection\KamiSama.Extensions.DependencyInjection.csproj" />
+		<ProjectReference Include="..\KamiSama.Modules\KamiSama.Modules.csproj" />
+		<ProjectReference Include="..\Repositories.EntityFrameworkCore\KamiSama.Repositories.EntityFrameworkCore.csproj" />
+		<PackageReference Include="Riok.Mapperly" Version="4.3.1" />
+	</ItemGroup>
+</Project>

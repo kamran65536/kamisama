@@ -7,33 +7,34 @@ using System.Xml.Serialization;
 namespace KamiSama.Extensions
 {
 	/// <summary>
-	/// base class for all Auto...Attributes like AutoXmlElement, AutoXmlArrayItem
+	/// Defines the base contract for attributes that add member-specific entries to an <see cref="XmlAttributeOverrides"/> collection.
+	/// Concrete attributes control polymorphic element or array-item mappings.
 	/// </summary>
 	public abstract class AutoXmlAttribute  : Attribute
 	{
 		/// <summary>
-		/// Called when a type is visited to add proper items to <see cref="XmlAttributeOverrides"/>
+		/// Applies this attribute's XML overrides while visiting the specified type.
 		/// </summary>
 		/// <param name="type"></param>
 		/// <param name="overrides"></param>
 		/// <param name="allTypes"></param>
 		public abstract void VisitType(Type type, XmlAttributeOverrides overrides, Type[] allTypes);
 		/// <summary>
-		/// Called when a property is visited to add proper items to <see cref="XmlAttributeOverrides"/>
+		/// Adds this attribute's XML overrides for the specified property.
 		/// </summary>
 		/// <param name="property"></param>
 		/// <param name="overrides"></param>
 		/// <param name="allTypes"></param>
 		public abstract void VisitProperty(PropertyInfo property, XmlAttributeOverrides overrides, Type[] allTypes);
 		/// <summary>
-		/// Called when a field is visited to add proper items to <see cref="XmlAttributeOverrides"/>
+		/// Adds this attribute's XML overrides for the specified field.
 		/// </summary>
 		/// <param name="field"></param>
 		/// <param name="overrides"></param>
 		/// <param name="allTypes"></param>
 		public abstract void VisitField(FieldInfo field, XmlAttributeOverrides overrides, Type[] allTypes);
 		/// <summary>
-		/// returns collection item type if the <paramref name="type"/> is <see cref="Array"/> or <see cref="ICollection{T}"/>
+		/// Returns an array element type or the item type of an implemented <see cref="ICollection{T}"/> interface; otherwise, returns the supplied type unchanged.
 		/// </summary>
 		/// <param name="type"></param>
 		/// <returns></returns>

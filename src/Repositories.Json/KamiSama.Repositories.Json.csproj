@@ -1,10 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageDocumentationRoot>../../docs/content/api/repositories-json</PackageDocumentationRoot>
+	</PropertyGroup>
 	<Import Project="..\props.xml" />
 	<PropertyGroup>
-		<Description>Json Repository uses System.Text.Json</Description>
-		<PackageReleaseNotes>99-10-18 v2.2.8
-- Reimplementation of JsonRepository. SaveFailed is added.
-99-04-31 JsonRepository is added</PackageReleaseNotes>
+		<Description>Lazy-loading JSON file repository with synchronous and asynchronous query and mutation APIs.</Description>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 	</PropertyGroup>
 	<ItemGroup>

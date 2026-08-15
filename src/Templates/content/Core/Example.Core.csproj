@@ -11,7 +11,7 @@
 
 	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
-		<PackageReference Include="KamiSama.Extensions.WebModules" Version="10.0.10.1" />
+		<PackageReference Include="KamiSama.Modules" Version="10.0.10.1" />
 		<PackageReference Include="KamiSama.Extensions.DependencyInjection" Version="10.0.10.1" />
 		<!--#if (IncludeDatabase)-->
 		<PackageReference Include="KamiSama.Chassis.Commons" Version="10.0.10.1" />

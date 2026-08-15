@@ -1,15 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="../props.xml" />
-
 	<PropertyGroup>
-		<NoWarn>$(NoWarn);1591</NoWarn>
+		<PackageDocumentationRoot>../../docs/content/api/externalservices-sms-core</PackageDocumentationRoot>
+	</PropertyGroup>
+	<Import Project="../props.xml" />
+	<PropertyGroup>
+		<Description>Provider-selecting SMS registration for ASP.NET Core applications, including default-provider options and a scoped mock provider. Use it to route unkeyed ISendSms calls to scoped keyed providers.</Description>
 	</PropertyGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\KamiSama.Extensions.Logging\KamiSama.Extensions.Logging.csproj" />
 		<ProjectReference Include="..\KamiSama.ExternalServices.Exceptions\KamiSama.ExternalServices.Exceptions.csproj" />
 		<ProjectReference Include="..\KamiSama.ExternalServices.Sms.Abstractions\KamiSama.ExternalServices.Sms.Abstractions.csproj" />
 		<PackageReference Include="Microsoft.Extensions.Options" Version="10.0.11" />
-		<ProjectReference Include="..\KamiSama.Extensions.WebModules\KamiSama.Extensions.WebModules.csproj" />
+		<ProjectReference Include="..\KamiSama.Modules\KamiSama.Modules.csproj" />
 		<ProjectReference Include="..\DependencyInjection\KamiSama.Extensions.DependencyInjection.csproj" />
 	</ItemGroup>
 </Project>

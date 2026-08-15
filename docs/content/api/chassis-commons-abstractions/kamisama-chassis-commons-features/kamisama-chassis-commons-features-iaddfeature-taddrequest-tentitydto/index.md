@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Chassis.Commons.Abstractions](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/Chassis.Commons.Abstractions/Features/IAddFeature.cs:6](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Commons.Abstractions/Features/IAddFeature.cs#L6)
+Source: [src/Chassis.Commons.Abstractions/Features/IAddFeature.cs:8](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Commons.Abstractions/Features/IAddFeature.cs#L8)
 
 Namespace: `KamiSama.Chassis.Commons.Features`
 
@@ -12,12 +12,19 @@ Kind: `Interface`
 
 ## Description
 
-Adds an entity from a request. Use it with the surrounding package APIs when composing application code.
+Defines a create use case that accepts a request and returns the created entity DTO. Use it with the surrounding package APIs when composing application code.
 
 ## Declaration
 
 ```csharp
 public interface IAddFeature<TAddRequest, TEntityDto>
+```
+
+## Example
+
+```csharp
+ProductDto created = await addProduct.AddAsync(
+    new AddProductRequest("Keyboard", 120m), cancellationToken);
 ```
 
 ## Constructors
@@ -30,5 +37,5 @@ This type does not declare a non-private constructor in source.
 
 | Member | Description |
 | --- | --- |
-| [AddAsync](method-addasync-11.md) | Runs the `AddAsync` operation on `IAddFeature<TAddRequest, TEntityDto>`. Use it when your code needs this specific behavior from the package. |
+| [AddAsync](method-addasync-16.md) | Creates an entity from the request and returns its DTO representation. Use it with the surrounding package APIs when composing application code. |
 

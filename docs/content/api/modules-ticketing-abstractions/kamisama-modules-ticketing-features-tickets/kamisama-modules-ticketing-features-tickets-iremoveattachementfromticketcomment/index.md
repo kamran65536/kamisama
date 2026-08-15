@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Modules.Ticketing.Abstractions](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Features.cs:12](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Features.cs#L12)
+Source: [src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Features.cs:45](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Features.cs#L45)
 
 Namespace: `KamiSama.Modules.Ticketing.Features.Tickets`
 
@@ -12,12 +12,18 @@ Kind: `Interface`
 
 ## Description
 
-Defines the contract for `IRemoveAttachementFromTicketComment` behavior. Implement this interface when you need to plug your own code into the surrounding KamiSama package.
+Removes a ticket attachment by attachment identifier. The misspelling in this public contract name is retained by the current API.
 
 ## Declaration
 
 ```csharp
 public interface IRemoveAttachementFromTicketComment : IDeleteFeature<Guid>;
+```
+
+## Example
+
+```csharp
+await removeAttachment.DeleteAsync(attachmentId, cancellationToken);
 ```
 
 ## Constructors

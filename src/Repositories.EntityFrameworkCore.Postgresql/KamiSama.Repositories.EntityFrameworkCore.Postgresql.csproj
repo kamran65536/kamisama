@@ -1,8 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageDocumentationRoot>../../docs/content/api/repositories-entityframeworkcore-postgresql</PackageDocumentationRoot>
+	</PropertyGroup>
 	<Import Project="..\props.xml" />
 
 	<PropertyGroup>
-		<Description>PostgreSQL provider extensions for Entity Framework Core repository registration</Description>
+		<Description>PostgreSQL registration for KamiSama multi-provider Entity Framework Core DbContexts.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>

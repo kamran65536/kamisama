@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Modules.Ticketing.Abstractions](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.Modules.Ticketing.Abstractions/Features/TicketCategories/Features.cs:10](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/TicketCategories/Features.cs#L10)
+Source: [src/KamiSama.Modules.Ticketing.Abstractions/Features/TicketCategories/Features.cs:34](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/TicketCategories/Features.cs#L34)
 
 Namespace: `KamiSama.Modules.Ticketing.Features.TicketCategories`
 
@@ -12,12 +12,18 @@ Kind: `Interface`
 
 ## Description
 
-Defines the contract for `IFindTicketCategoryByName` behavior. Implement this interface when you need to plug your own code into the surrounding KamiSama package.
+Finds a ticket category by name. Core performs a case-insensitive exact comparison.
 
 ## Declaration
 
 ```csharp
 public interface IFindTicketCategoryByName : IFindByNameFeature<TicketCategoryDto>;
+```
+
+## Example
+
+```csharp
+TicketCategoryDto category = await findCategory.FindByNameAsync("Billing", cancellationToken);
 ```
 
 ## Constructors

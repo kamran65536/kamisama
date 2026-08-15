@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.ExternalServices.Sms.Kavenegar](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.ExternalServices.Sms.Kavenegar/KavenegarSmsOptions.cs:5](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.ExternalServices.Sms.Kavenegar/KavenegarSmsOptions.cs#L5)
+Source: [src/KamiSama.ExternalServices.Sms.Kavenegar/KavenegarSmsOptions.cs:11](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.ExternalServices.Sms.Kavenegar/KavenegarSmsOptions.cs#L11)
 
 Namespace: `KamiSama.ExternalServices.Sms.Kavenegar`
 
@@ -12,12 +12,31 @@ Kind: `Class`
 
 ## Description
 
-Configuration object for `KavenegarSmsOptions`. Use it when binding settings or configuring the related package services.
+Contains the Kavenegar sender number and API key. `IsValid` checks for an API key, but the current internal sender incorrectly throws when that check succeeds.
 
 ## Declaration
 
 ```csharp
 public class KavenegarSmsOptions
+```
+
+## Remarks
+
+The current Kavenegar sender has a known inverted validation check: settings for which `IsValid` returns are rejected before sending. This type documents the existing behavior; it does not correct that runtime defect.
+
+## Example
+
+```csharp
+using KamiSama.ExternalServices.Sms.Kavenegar;
+
+var options = new KavenegarSmsOptions
+{
+    SenderPhoneNumber = "+15551230000",
+    ApiKey = Environment.GetEnvironmentVariable("KAVENEGAR_API_KEY")
+};
+
+bool apiKeyIsPresent = options.IsValid();
+// Known defect: the current internal sender throws when this value is true.
 ```
 
 ## Constructors
@@ -30,12 +49,12 @@ This type does not declare a non-private constructor in source.
 
 | Member | Description |
 | --- | --- |
-| [IsValid](method-isvalid-12.md) | Runs the `IsValid` operation on `KavenegarSmsOptions`. Use it when your code needs this specific behavior from the package. |
+| [IsValid](method-isvalid-25.md) | Returns when `ApiKey` is non-null. Use it with the surrounding package APIs when composing application code. |
 
 ### Properties
 
 | Member | Description |
 | --- | --- |
-| [ApiKey](property-apikey-9.md) | Exposes the `ApiKey` value on `KavenegarSmsOptions`. Read or set it as part of configuring or using the type. |
-| [SenderPhoneNumber](property-senderphonenumber-7.md) | Exposes the `SenderPhoneNumber` value on `KavenegarSmsOptions`. Read or set it as part of configuring or using the type. |
+| [ApiKey](property-apikey-17.md) | Gets or sets the Kavenegar API key. Load this secret from protected configuration rather than source control. |
+| [SenderPhoneNumber](property-senderphonenumber-14.md) | Gets or sets the optional sender number supplied to Kavenegar. Use it with the surrounding package APIs when composing application code. |
 

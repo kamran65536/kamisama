@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Chassis.Commons](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/Chassis.Commons/Features/FeatureDefinitionBase.cs:25](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Commons/Features/FeatureDefinitionBase.cs#L25)
+Source: [src/Chassis.Commons/Features/FeatureDefinitionBase.cs:35](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Commons/Features/FeatureDefinitionBase.cs#L35)
 
 Namespace: `KamiSama.Chassis.Commons.Features`
 
@@ -42,9 +42,9 @@ public sealed class ProductFeatures
 
 ### Primary constructor
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Commons/Features/FeatureDefinitionBase.cs#L25)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Commons/Features/FeatureDefinitionBase.cs#L35)
 
-Initializes the type with the values required by its declaration. Use it with the surrounding package APIs when composing application code.
+Provides the standard update workflow for the bound feature types. Use it with the surrounding package APIs when composing application code.
 
 ```csharp
 public abstract class UpdateFeatureBase(TRepository repository) : GenericUpdateFeature<TUpdateRequest, TEntity, TRepository, TKey>(repository);
@@ -54,7 +54,7 @@ public abstract class UpdateFeatureBase(TRepository repository) : GenericUpdateF
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `repository` | `TRepository` | `-` | The `repository` value passed to this member. |
+| `repository` | `TRepository` | `-` | The repository used to find and update entities. |
 
 ## Members
 

@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageDocumentationRoot>../../docs/content/api/modules-serviceplans-sqlite</PackageDocumentationRoot>
+	</PropertyGroup>
+	<Import Project="../props.xml" />
+	<PropertyGroup>
+		<Description>SQLite EF Core context registration for ServicePlans Core under the `sqlite` provider key. It configures SQLite and lazy loading but currently ships no ServicePlans migrations.</Description>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\KamiSama.Modules.ServicePlans.Core\KamiSama.Modules.ServicePlans.Core.csproj" />
+		<ProjectReference Include="..\Repositories.EntityFrameworkCore.Sqlite\KamiSama.Repositories.EntityFrameworkCore.Sqlite.csproj" />
+	</ItemGroup>
+</Project>

@@ -10,7 +10,7 @@ Kind: `Property`
 
 ## Description
 
-Exposes the `StringLocalizerFunc` value on `KamiSamaProblemDetailsOptions`. Read or set it as part of configuring or using the type.
+Gets or sets the factory that resolves the optional string localizer. Use it with the surrounding package APIs when composing application code.
 
 ## Declaration
 

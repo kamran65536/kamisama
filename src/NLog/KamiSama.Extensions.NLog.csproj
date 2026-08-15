@@ -1,20 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageDocumentationRoot>../../docs/content/api/extensions-nlog</PackageDocumentationRoot>
+	</PropertyGroup>
 	<Import Project="..\props.xml" />
 	<PropertyGroup>
-		<PackageReleaseNotes>
-			v2.2.0
-			- PersianDateLayoutRenderer is added.
-			- PersianLongDateLayoutRenderer is added.
-			- PersianShortDateLayoutRenderer is added.
-			- EncryptedZipArchiveFileCompressor is added.
-		</PackageReleaseNotes>
-		<Description>
-			Uilities for famous logging library (NLog):
-			- PersianDateLayoutRenderer
-			- PersianLongDateLayoutRenderer
-			- PersianShortDateLayoutRenderer
-			- EncryptedZipArchiFileCompressor (archieve file with password)
-		</Description>
+		<Description>NLog extensions for rendering Persian-calendar timestamps and archiving log files in password-protected ZIP files using SharpZipLib.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>

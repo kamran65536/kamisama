@@ -4,10 +4,13 @@ using System.Linq.Expressions;
 namespace KamiSama.Repositories;
 
 /// <summary>
-/// The internal memory repository, this class can be used for testing
-/// The class operations are thread safe
+/// Stores entities in an in-process <see cref="HashSet{T}"/> for tests and lightweight transient scenarios.
 /// </summary>
-/// <typeparam name="TEntity"></typeparam>
+/// <remarks>
+/// Add and delete operations are serialized per repository instance, but reads and returned queries are not locked.
+/// Do not enumerate a query while another operation mutates the repository. Duplicate and removal matching follow the configured equality comparer, and update operations intentionally do nothing.
+/// </remarks>
+/// <typeparam name="TEntity">The entity type stored in memory.</typeparam>
 public class InMemoryRepository<TEntity> : IQueryableRepository<TEntity>, IAsyncQueryableRepository<TEntity>
 {
 	/// <summary>
@@ -16,10 +19,10 @@ public class InMemoryRepository<TEntity> : IQueryableRepository<TEntity>, IAsync
 	private readonly HashSet<TEntity> items;
 	private readonly SemaphoreSlim semaphore;
 	/// <summary>
-	/// Constructor with initial items
+	/// Initializes the repository with optional entities and an optional equality comparer.
 	/// </summary>
-	/// <param name="initialItems"></param>
-	/// <param name="comparer"></param>
+	/// <param name="initialItems">The entities copied into the internal set, or <see langword="null"/> for an empty repository.</param>
+	/// <param name="comparer">The comparer that controls duplicate and removal semantics, or <see langword="null"/> to use the default comparer.</param>
 	public InMemoryRepository(IEnumerable<TEntity>? initialItems,
 						IEqualityComparer<TEntity>? comparer = null)
 	{
@@ -32,14 +35,14 @@ public class InMemoryRepository<TEntity> : IQueryableRepository<TEntity>, IAsync
 			items = new HashSet<TEntity>(initialItems, comparer);
 	}
 	/// <summary>
-	/// Constructor with no parameter (generally used for dependency injection)
+	/// Initializes an empty repository using the default equality comparer.
 	/// </summary>
 	public InMemoryRepository()
 		: this(initialItems: null, comparer: null)
 	{
 	}
 	/// <summary>
-	/// Dispose method, clears internal cache
+	/// Clears the in-memory entity set. The instance must not be used after disposal.
 	/// </summary>
 	[ExcludeFromCodeCoverage]
 	void IDisposable.Dispose()
@@ -48,9 +51,9 @@ public class InMemoryRepository<TEntity> : IQueryableRepository<TEntity>, IAsync
 		GC.SuppressFinalize(this);
 	}
 	/// <summary>
-	/// Adds a new item in the repository
+	/// Adds an entity when the set does not already contain an equal entity.
 	/// </summary>
-	/// <param name="item"></param>
+	/// <param name="item">The entity to add. Equal duplicates are ignored by <see cref="HashSet{T}"/>.</param>
 	public virtual void Add(TEntity item)
 	{
 		semaphore.Wait();
@@ -58,16 +61,16 @@ public class InMemoryRepository<TEntity> : IQueryableRepository<TEntity>, IAsync
 		semaphore.Release();
 	}
 	/// <summary>
-	/// Update method, does nothing
+	/// Performs no operation; callers must mutate a stored reference directly when appropriate.
 	/// </summary>
-	/// <param name="item"></param>
+	/// <param name="item">The entity value, which is ignored.</param>
 	public virtual void Update(TEntity item)
 	{
 	}
 	/// <summary>
-	/// Deletes an item from repository
+	/// Removes the entity equal to the supplied value when one exists.
 	/// </summary>
-	/// <param name="item"></param>
+	/// <param name="item">The entity used for equality-based removal.</param>
 	public virtual void Delete(TEntity item)
 	{
 		semaphore.Wait();
@@ -75,36 +78,57 @@ public class InMemoryRepository<TEntity> : IQueryableRepository<TEntity>, IAsync
 		semaphore.Release();
 	}
 	/// <summary>
-	/// Queries items in repository for the predicate specified
+	/// Returns a live query over all entities or those matching the predicate.
 	/// </summary>
-	/// <param name="predicate">the predicate to search, if null it returns all items</param>
-	/// <returns></returns>
+	/// <remarks>The returned query is not a snapshot and is not synchronized with mutations.</remarks>
+	/// <param name="predicate">The predicate to compile and apply, or <see langword="null"/> to return all entities.</param>
+	/// <returns>A live query over the internal set.</returns>
 	public virtual IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> predicate)
 		=> (predicate == null) ? items.AsQueryable() : items.Where(predicate.Compile()).AsQueryable();
 	/// <summary>
-	/// Finds an single item in the repository
+	/// Returns the first matching entity, or the default value when the predicate is <see langword="null"/> or no entity matches.
 	/// </summary>
-	/// <param name="predicate">the predicate to search, if null it returns null</param>
-	/// <returns></returns>
+	/// <param name="predicate">The predicate to compile and apply.</param>
+	/// <returns>The first matching entity, or the default value for <typeparamref name="TEntity"/>.</returns>
 	public virtual TEntity? Find(Expression<Func<TEntity, bool>>? predicate)
 		=> (predicate == null) ? default : items.FirstOrDefault(predicate.Compile());
-	///
+	/// <summary>
+	/// Asynchronously waits for mutation access and adds an entity unless an equal entity already exists.
+	/// </summary>
+	/// <param name="item">The entity to add.</param>
+	/// <param name="cancellationToken">A token that can cancel the semaphore wait.</param>
+	/// <returns>A task that represents the in-memory add operation.</returns>
 	public virtual async Task AddAsync(TEntity item, CancellationToken cancellationToken)
 	{
 		await semaphore.WaitAsync(cancellationToken);
 		items.Add(item);
 		semaphore.Release();
 	}
-	/// <inheritdoc />
+	/// <summary>
+	/// Completes immediately without changing the repository.
+	/// </summary>
+	/// <param name="item">The entity value, which is ignored.</param>
+	/// <param name="cancellationToken">A token that is not observed because no work is performed.</param>
+	/// <returns>An already-completed task.</returns>
 	public Task UpdateAsync(TEntity item, CancellationToken cancellationToken) => Task.CompletedTask;
-	/// <inheritdoc />
+	/// <summary>
+	/// Asynchronously waits for mutation access and removes an equal entity when one exists.
+	/// </summary>
+	/// <param name="item">The entity used for equality-based removal.</param>
+	/// <param name="cancellationToken">A token that can cancel the semaphore wait.</param>
+	/// <returns>A task that represents the in-memory delete operation.</returns>
 	public virtual async Task DeleteAsync(TEntity item, CancellationToken cancellationToken)
 	{
 		await semaphore.WaitAsync(cancellationToken);
 		items.Remove(item);
 		semaphore.Release();
 	}
-	/// <inheritdoc />
+	/// <summary>
+	/// Returns a completed task containing the first matching entity.
+	/// </summary>
+	/// <param name="predicate">The predicate to compile and apply, or <see langword="null"/> to return the default value.</param>
+	/// <param name="cancellationToken">A token that is not observed because the lookup runs synchronously.</param>
+	/// <returns>A task containing the first matching entity, or the default value for <typeparamref name="TEntity"/>.</returns>
 	public virtual Task<TEntity?> FindAsync(Expression<Func<TEntity, bool>>? predicate, CancellationToken cancellationToken)
 		=> Task.FromResult(Find(predicate));
 }

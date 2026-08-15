@@ -1,5 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageDocumentationRoot>../../docs/content/api/testing-nsubstitute</PackageDocumentationRoot>
+	</PropertyGroup>
 	<Import Project="../props.xml" />
+	<PropertyGroup>
+		<Description>A DI-first test builder that registers configured substitutes and creates NSubstitute doubles for missing constructor dependencies. Use it to build focused service tests through a scoped Microsoft.Extensions.DependencyInjection container.</Description>
+	</PropertyGroup>
 	
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.11" />

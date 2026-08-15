@@ -24,7 +24,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="KamiSama.Chassis.ProblemDetails" Version="10.0.10" />
-		<PackageReference Include="KamiSama.Extensions.WebModules" Version="10.0.10" />
+		<PackageReference Include="KamiSama.Modules" Version="10.0.10" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="10.0.10" />
 		<PackageReference Include="Blazor.Bootstrap" Version="3.5.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="10.0.10" />

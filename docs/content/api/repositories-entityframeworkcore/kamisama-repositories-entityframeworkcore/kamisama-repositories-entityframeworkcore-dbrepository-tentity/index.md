@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Repositories.EntityFrameworkCore](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/Repositories.EntityFrameworkCore/DbRepository.cs:19](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Repositories.EntityFrameworkCore/DbRepository.cs#L19)
+Source: [src/Repositories.EntityFrameworkCore/DbRepository.cs:20](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Repositories.EntityFrameworkCore/DbRepository.cs#L20)
 
 Namespace: `KamiSama.Repositories.EntityFrameworkCore`
 
@@ -12,7 +12,7 @@ Kind: `Class`
 
 ## Description
 
-Repository wrapper around an EF DbContext. Use it when you want the standard KamiSama repository methods over a DbSet without writing the same CRUD code in each repository.
+EF Core repository over a borrowed `DbContext`. Queries track by default, every mutation saves immediately, and repository disposal does not dispose the context.
 
 ## Declaration
 
@@ -23,15 +23,26 @@ public class DbRepository<TEntity>(DbContext context) : IQueryableRepository<TEn
 
 ## Remarks
 
-initiates an db repository
+Every mutation immediately calls `DbContext.SaveChanges()` or `DbContext.SaveChangesAsync(CancellationToken)`. Queries use EF Core&apos;s default tracking behavior. The repository borrows the supplied context and does not dispose it.
+
+## Example
+
+```csharp
+using KamiSama.Repositories.EntityFrameworkCore;
+
+var repository = new DbRepository<User>(dbContext);
+await repository.AddAsync(new User { Name = "Ada" }, cancellationToken);
+User? user = await repository.FindAsync(x => x.Id == userId, cancellationToken);
+// The repository saves immediately and does not own dbContext.
+```
 
 ## Constructors
 
 ### Primary constructor
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Repositories.EntityFrameworkCore/DbRepository.cs#L19)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Repositories.EntityFrameworkCore/DbRepository.cs#L20)
 
-Database Repository for entity framework. Use it with the surrounding package APIs when composing application code.
+Implements synchronous and asynchronous repository operations over an EF Core `DbSet{TEntity}`. Use it with the surrounding package APIs when composing application code.
 
 ```csharp
 public class DbRepository<TEntity>(DbContext context) : IQueryableRepository<TEntity>, IAsyncQueryableRepository<TEntity>
@@ -42,7 +53,7 @@ public class DbRepository<TEntity>(DbContext context) : IQueryableRepository<TEn
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `context` | `DbContext` | `-` | The `context` value passed to this member. |
+| `context` | `DbContext` | `-` | The context that owns the entity set and its lifetime. |
 
 ## Members
 
@@ -50,23 +61,23 @@ public class DbRepository<TEntity>(DbContext context) : IQueryableRepository<TEn
 
 | Member | Description |
 | --- | --- |
-| [Add](method-add-36.md) | Runs the `Add` operation on `DbRepository<TEntity>`. Use it when your code needs this specific behavior from the package. |
-| [AddAsync](method-addasync-30.md) | Runs the `AddAsync` operation on `DbRepository<TEntity>`. Use it when your code needs this specific behavior from the package. |
-| [Any](method-any-86.md) | Checks if any entity exists in the repository. Use it with the surrounding package APIs when composing application code. |
-| [AnyAsync](method-anyasync-92.md) | Checks if any entity exists in the repository. Use it with the surrounding package APIs when composing application code. |
-| [AsQueryable](method-asqueryable-77.md) | Returns the db set as queryable. Use it with the surrounding package APIs when composing application code. |
-| [Delete](method-delete-62.md) | Runs the `Delete` operation on `DbRepository<TEntity>`. Use it when your code needs this specific behavior from the package. |
-| [DeleteAsync](method-deleteasync-68.md) | Runs the `DeleteAsync` operation on `DbRepository<TEntity>`. Use it when your code needs this specific behavior from the package. |
-| [Dispose](method-dispose-103.md) | Dispose method, does nothing. Use it with the surrounding package APIs when composing application code. |
-| [Find](method-find-95.md) | Runs the `Find` operation on `DbRepository<TEntity>`. Use it when your code needs this specific behavior from the package. |
-| [FindAsync](method-findasync-98.md) | Runs the `FindAsync` operation on `DbRepository<TEntity>`. Use it when your code needs this specific behavior from the package. |
-| [Update](method-update-42.md) | Runs the `Update` operation on `DbRepository<TEntity>`. Use it when your code needs this specific behavior from the package. |
-| [UpdateAsync](method-updateasync-52.md) | Runs the `UpdateAsync` operation on `DbRepository<TEntity>`. Use it when your code needs this specific behavior from the package. |
-| [Where](method-where-80.md) | Runs the `Where` operation on `DbRepository<TEntity>`. Use it when your code needs this specific behavior from the package. |
+| [Add](method-add-42.md) | Adds an entity to the set and immediately saves the context. Use it with the surrounding package APIs when composing application code. |
+| [AddAsync](method-addasync-35.md) | Adds an entity to the set and immediately saves the context asynchronously. Use it with the surrounding package APIs when composing application code. |
+| [Any](method-any-103.md) | Determines synchronously whether any entity matches a predicate. Use it with the surrounding package APIs when composing application code. |
+| [AnyAsync](method-anyasync-111.md) | Determines asynchronously whether any entity matches a predicate. Use it with the surrounding package APIs when composing application code. |
+| [AsQueryable](method-asqueryable-91.md) | Returns the tracked entity set as a deferred query. Use it with the surrounding package APIs when composing application code. |
+| [Delete](method-delete-73.md) | Marks an entity for deletion and immediately saves the context. Use it with the surrounding package APIs when composing application code. |
+| [DeleteAsync](method-deleteasync-82.md) | Marks an entity for deletion and immediately saves the context asynchronously. Use it with the surrounding package APIs when composing application code. |
+| [Dispose](method-dispose-128.md) | Releases no resources because the repository does not own the injected context. Use it with the surrounding package APIs when composing application code. |
+| [Find](method-find-116.md) | Returns the first tracked entity matching a predicate. Use it with the surrounding package APIs when composing application code. |
+| [FindAsync](method-findasync-122.md) | Asynchronously returns the first tracked entity matching a predicate. Use it with the surrounding package APIs when composing application code. |
+| [Update](method-update-49.md) | Marks an entity as modified and immediately saves the context. Use it with the surrounding package APIs when composing application code. |
+| [UpdateAsync](method-updateasync-62.md) | Marks an entity as modified and immediately saves the context asynchronously. Use it with the surrounding package APIs when composing application code. |
+| [Where](method-where-96.md) | Creates a tracked, deferred query filtered by a predicate. Use it with the surrounding package APIs when composing application code. |
 
 ### Properties
 
 | Member | Description |
 | --- | --- |
-| [Context](property-context-26.md) | Exposes the `Context` value on `DbRepository<TEntity>`. Read or set it as part of configuring or using the type. |
+| [Context](property-context-28.md) | Gets the borrowed context used for queries and persistence. Use it with the surrounding package APIs when composing application code. |
 

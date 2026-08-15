@@ -1,8 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="../props.xml" />
-
 	<PropertyGroup>
-		<NoWarn>$(NoWarn);1591</NoWarn>
+		<PackageDocumentationRoot>../../docs/content/api/modules-localization-abstractions</PackageDocumentationRoot>
+	</PropertyGroup>
+	<Import Project="../props.xml" />
+	<PropertyGroup>
+		<Description>Provider-neutral localization feature contracts and culture metadata for listing, reading, and selecting application cultures. Reference this package when callers or implementations should not depend on the ASP.NET Core localization module.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>

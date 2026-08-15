@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Chassis.HttpExceptions](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/Chassis.Exceptions/AlreadyExistsException.cs:7](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Exceptions/AlreadyExistsException.cs#L7)
+Source: [src/Chassis.Exceptions/AlreadyExistsException.cs:9](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Exceptions/AlreadyExistsException.cs#L9)
 
 Namespace: `KamiSama.Chassis.HttpExceptions`
 
@@ -12,7 +12,7 @@ Kind: `Class`
 
 ## Description
 
-The entity already exists exception. Use it with the surrounding package APIs when composing application code.
+Represents a conflict in which an entity with the supplied key already exists. Use it with the surrounding package APIs when composing application code.
 
 ## Declaration
 
@@ -25,9 +25,9 @@ public class AlreadyExistsException(string entityName, object entityKey, string 
 
 ### Primary constructor
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Exceptions/AlreadyExistsException.cs#L7)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Exceptions/AlreadyExistsException.cs#L9)
 
-The entity already exists exception. Use it with the surrounding package APIs when composing application code.
+Represents a conflict in which an entity with the supplied key already exists. Use it with the surrounding package APIs when composing application code.
 
 ```csharp
 public class AlreadyExistsException(string entityName, object entityKey, string keyType = "key") : 
@@ -38,9 +38,9 @@ public class AlreadyExistsException(string entityName, object entityKey, string 
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `entityName` | `string` | `-` | The `entityName` value passed to this member. |
-| `entityKey` | `object` | `-` | The `entityKey` value passed to this member. |
-| `keyType` | `string` | `"key"` | The `keyType` value passed to this member. |
+| `entityName` | `string` | `-` | The entity type or display name included in localization arguments. |
+| `entityKey` | `object` | `-` | The duplicate key value. |
+| `keyType` | `string` | `"key"` | The name of the key, such as `id` or `name`. |
 
 ## Members
 

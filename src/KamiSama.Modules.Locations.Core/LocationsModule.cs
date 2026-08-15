@@ -1,4 +1,4 @@
-using KamiSama.Extensions.WebModules;
+using KamiSama.Modules;
 using KamiSama.Repositories.EntityFrameworkCore;
 using KamiSama.Repositories.EntityFrameworkCore.Initialization;
 using KamiSama.Repositories.Initialization;
@@ -42,8 +42,24 @@ internal class LocationsModule(
 	}
 }
 
+/// <summary>
+/// Provides modular ASP.NET Core registration for the province and city implementation.
+/// </summary>
 public static class ExtendedWebApplicationBuilderExtensions
 {
+	/// <summary>
+	/// Adds Locations memory caching, scoped feature and repository discovery, provider-neutral DbContext registration, and post-build database initialization.
+	/// </summary>
+	/// <param name="builder">The extended application builder that queues the Locations module.</param>
+	/// <param name="moduleSection">The Locations module section; its <c>initialization</c> child binds the named migration and seed options.</param>
+	/// <param name="databaseSection">The section containing required <c>provider</c> and <c>connection-string</c> values.</param>
+	/// <param name="configureDbContext">The provider-registration callback. Although nullable for API compatibility, it is required in a normal host so the configured keyed <see cref="LocationsDbContext"/> can be resolved.</param>
+	/// <returns>The same extended builder for fluent module composition.</returns>
+	/// <remarks>
+	/// Register the PostgreSQL or SQLite provider matching the configured provider key, then call <c>BuildAsync</c> before resolving Locations features.
+	/// During the post-build phase the module resolves a custom named <c>IDatabaseInitializer&lt;LocationsDbContext&gt;</c>, or falls back to migration-only initialization.
+	/// This module registers services only; it does not add controllers, endpoints, or authorization.
+	/// </remarks>
 	public static ExtendedWebApplicationBuilder AddLocationsModule(
 		this ExtendedWebApplicationBuilder builder,
 		IConfigurationSection moduleSection,

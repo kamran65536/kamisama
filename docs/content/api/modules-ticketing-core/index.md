@@ -2,55 +2,77 @@
 
 [Back to package index](../index.md)
 
-Version: `10.0.10`
+Version: `10.0.0`
 
 ## Description
 
-Ticketing module implementation with entities, repositories, feature services, and web-module setup. Use it with the surrounding package APIs when composing application code.
+ASP.NET Core Ticketing implementation with EF Core entities, validated ticket workflows, repositories, scoped features, modular registration, and startup database initialization. Install it with at least the selected PostgreSQL or SQLite provider and review the documented registration and authorization limitations before exposing its features.
 
-## Install
+## How to use
 
 ```shell
-dotnet add package KamiSama.Modules.Ticketing.Core --version 10.0.10
+dotnet add package KamiSama.Modules.Ticketing.Core --version 10.0.0
 ```
+
+**Publication mismatch:** `10.0.0` in the required install command is the current workspace/root documentation version. NuGet exposed `10.0.11` as the latest package when this surface was reviewed; `10.0.0` itself was not available.
+
+Install Core plus at least the selected provider package. Configure one provider key and connection string, pass the matching provider callback, and finish through `BuildAsync` before resolving Ticketing features:
+
+```json
+{
+  "Ticketing": {
+    "initialization": {
+      "migrate": true,
+      "initialize": false,
+      "test-data": false
+    },
+    "database": {
+      "provider": "postgresql",
+      "connection-string": "Host=localhost;Database=ticketing;Username=app;Password=..."
+    }
+  }
+}
+```
+
+```csharp
+using KamiSama.Modules;
+using KamiSama.Modules.Ticketing;
+
+var webBuilder = WebApplication.CreateBuilder(args);
+IConfigurationSection ticketing = webBuilder.Configuration.GetSection("Ticketing");
+
+ExtendedWebApplicationBuilder builder = webBuilder.Extend()
+    .AddTicketingModule(
+        ticketing,
+        ticketing.GetSection("database"),
+        database => database.AddPostgresqlTicketingDbContext());
+
+WebApplication app = await builder.BuildAsync(CancellationToken.None);
+```
+
+`AddTicketingModule` only queues work. During `BuildAsync`, `ConfigureServices` binds named `ConnectionStringOption` and `DataInitializationOptions`, scans the Core assembly for attributed scoped services, creates `IMultiProviderDbContextBuilder<TicketingDbContext>`, selects `__EFMigrationsHistory_Ticketing`, and invokes the provider callback. The callback may register both installed providers, but the lowercased configured key selects one base-context alias. Although nullable in the signature, the callback is required in a normal host unless an equivalent keyed context registration already exists.
+
+After the application is built, Ticketing creates a scope, resolves `IDatabaseInitializer<TicketingDbContext>` or a migration-only default initializer, reads the named initialization options, and runs selected stages. The default initializer migrates when `migrate` is true; `initialize` and `test-data` do no work unless the host registers a custom initializer. Startup therefore needs database connectivity, schema privileges, and compatible provider migrations. Core maps no controllers, endpoints, middleware, authentication, or authorization.
+
+**Registration limitation:** `DeleteTicketCategory`, `ListTicketCategories`, and `ExistsTicketCategoryByName` carry scoped auto-registration attributes for specialized contracts they do not implement. These descriptors cannot create the requested service. Service-provider validation can therefore fail during `BuildAsync`; without validation, resolving `IDeleteTicketCategory`, `IListTicketCategories`, or `IExistsTicketCategoryByName` fails. The other attributed features and both repositories are assignable registrations.
+
+**Query and mutation limitations:** ticket search applies text across title/comments, status, priority, and ticket-or-comment author filters but ignores `TicketCategoryId`. It recognizes `priority`, `status`, and `updatedat`; every other token orders by priority then update time. Category name lookup/filtering lowercases both operands, category names have no unique database index, and duplicate checks are separate read-before-write operations. Repository mutations save immediately with no cross-operation transaction supplied by these features.
+
+`UpdateTicketComment.UpdateAsync` ignores its method key and targets `request.CommentId`. Comment and attachment additions trust caller-supplied author identifiers, and comment addition also trusts the requested user/operator side. Comment update and attachment addition compare only author identifiers; attachment removal and ticket-state update perform no ownership check. Ticket-state updates permit unchanged status, open or reopened to resolved, and resolved to reopened or closed; invalid transitions throw `ConflictException`. Other mutation features do not consistently call `Ticket.IsEditable`. Add authenticated endpoint authorization, ownership and side checks, and identifier-consistency validation before exposing these services.
+
+Entities store external attachment content IDs only. Provider migrations create required category-to-ticket, ticket-to-comment, and comment-to-attachment relationships with cascading deletes, non-unique relationship indexes, 50/100/400 character limits, and integer enums. Provider registration enables lazy-loading proxies; list and lookup queries are tracked, so complete DTO mapping depends on navigations being available. No controllers exist in this package.
 
 ## Namespaces
 
-- [KamiSama.Modules.Ticketing](kamisama-modules-ticketing/index.md) (3 types)
+- [KamiSama.Modules.Ticketing](kamisama-modules-ticketing/index.md) (1 types)
 - [KamiSama.Modules.Ticketing.Entities](kamisama-modules-ticketing-entities/index.md) (4 types)
-- [KamiSama.Modules.Ticketing.Features.Categories](kamisama-modules-ticketing-features-categories/index.md) (8 types)
-- [KamiSama.Modules.Ticketing.Features.Tickets](kamisama-modules-ticketing-features-tickets/index.md) (8 types)
-- [KamiSama.Modules.Ticketing.Repositories.Abstractions](kamisama-modules-ticketing-repositories-abstractions/index.md) (2 types)
 - [KamiSama.Modules.Ticketing.Repositories.Database](kamisama-modules-ticketing-repositories-database/index.md) (1 types)
-- [KamiSama.Modules.Ticketing.Repositories.Implementations](kamisama-modules-ticketing-repositories-implementations/index.md) (2 types)
 
 ## Types
 
-- [KamiSama.Modules.Ticketing.DtoMappings](kamisama-modules-ticketing/kamisama-modules-ticketing-dtomappings/index.md) - Provides the `DtoMappings` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
-- [KamiSama.Modules.Ticketing.ExtendedWebApplicationBuilderExtensions](kamisama-modules-ticketing/kamisama-modules-ticketing-extendedwebapplicationbuilderextensions/index.md) - Provides the `ExtendedWebApplicationBuilderExtensions` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
-- [KamiSama.Modules.Ticketing.TicketingModule](kamisama-modules-ticketing/kamisama-modules-ticketing-ticketingmodule/index.md) - ASP.NET Core web-module implementation for `TicketingModule`. Add it through the extended web application builder to register services and apply the related middleware or endpoints.
-- [KamiSama.Modules.Ticketing.Entities.Ticket](kamisama-modules-ticketing-entities/kamisama-modules-ticketing-entities-ticket/index.md) - Provides the `Ticket` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
-- [KamiSama.Modules.Ticketing.Entities.TicketAttachment](kamisama-modules-ticketing-entities/kamisama-modules-ticketing-entities-ticketattachment/index.md) - Provides the `TicketAttachment` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
-- [KamiSama.Modules.Ticketing.Entities.TicketCategory](kamisama-modules-ticketing-entities/kamisama-modules-ticketing-entities-ticketcategory/index.md) - Provides the `TicketCategory` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
-- [KamiSama.Modules.Ticketing.Entities.TicketComment](kamisama-modules-ticketing-entities/kamisama-modules-ticketing-entities-ticketcomment/index.md) - Provides the `TicketComment` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
-- [KamiSama.Modules.Ticketing.Features.Categories.AddTicketCategory](kamisama-modules-ticketing-features-categories/kamisama-modules-ticketing-features-categories-addticketcategory/index.md) - Provides the `AddTicketCategory` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
-- [KamiSama.Modules.Ticketing.Features.Categories.DeleteTicketCategory](kamisama-modules-ticketing-features-categories/kamisama-modules-ticketing-features-categories-deleteticketcategory/index.md) - Provides the `DeleteTicketCategory` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
-- [KamiSama.Modules.Ticketing.Features.Categories.ExistsTicketCategoryById](kamisama-modules-ticketing-features-categories/kamisama-modules-ticketing-features-categories-existsticketcategorybyid/index.md) - Provides the `ExistsTicketCategoryById` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
-- [KamiSama.Modules.Ticketing.Features.Categories.ExistsTicketCategoryByName](kamisama-modules-ticketing-features-categories/kamisama-modules-ticketing-features-categories-existsticketcategorybyname/index.md) - Provides the `ExistsTicketCategoryByName` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
-- [KamiSama.Modules.Ticketing.Features.Categories.FindTicketCategoryById](kamisama-modules-ticketing-features-categories/kamisama-modules-ticketing-features-categories-findticketcategorybyid/index.md) - Provides the `FindTicketCategoryById` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
-- [KamiSama.Modules.Ticketing.Features.Categories.FindTicketCategoryByName](kamisama-modules-ticketing-features-categories/kamisama-modules-ticketing-features-categories-findticketcategorybyname/index.md) - Provides the `FindTicketCategoryByName` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
-- [KamiSama.Modules.Ticketing.Features.Categories.ListTicketCategories](kamisama-modules-ticketing-features-categories/kamisama-modules-ticketing-features-categories-listticketcategories/index.md) - Provides the `ListTicketCategories` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
-- [KamiSama.Modules.Ticketing.Features.Categories.UpdateTicketCategory](kamisama-modules-ticketing-features-categories/kamisama-modules-ticketing-features-categories-updateticketcategory/index.md) - Provides the `UpdateTicketCategory` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
-- [KamiSama.Modules.Ticketing.Features.Tickets.AddAttachmentToTicketComment](kamisama-modules-ticketing-features-tickets/kamisama-modules-ticketing-features-tickets-addattachmenttoticketcomment/index.md) - Provides the `AddAttachmentToTicketComment` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
-- [KamiSama.Modules.Ticketing.Features.Tickets.AddCommentToTicket](kamisama-modules-ticketing-features-tickets/kamisama-modules-ticketing-features-tickets-addcommenttoticket/index.md) - Provides the `AddCommentToTicket` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
-- [KamiSama.Modules.Ticketing.Features.Tickets.AddTicket](kamisama-modules-ticketing-features-tickets/kamisama-modules-ticketing-features-tickets-addticket/index.md) - Provides the `AddTicket` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
-- [KamiSama.Modules.Ticketing.Features.Tickets.FindTicketById](kamisama-modules-ticketing-features-tickets/kamisama-modules-ticketing-features-tickets-findticketbyid/index.md) - Provides the `FindTicketById` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
-- [KamiSama.Modules.Ticketing.Features.Tickets.ListTickets](kamisama-modules-ticketing-features-tickets/kamisama-modules-ticketing-features-tickets-listtickets/index.md) - Provides the `ListTickets` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
-- [KamiSama.Modules.Ticketing.Features.Tickets.RemoveAttachementFromTicketComment](kamisama-modules-ticketing-features-tickets/kamisama-modules-ticketing-features-tickets-removeattachementfromticketcomment/index.md) - Provides the `RemoveAttachementFromTicketComment` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
-- [KamiSama.Modules.Ticketing.Features.Tickets.UpdateTicketComment](kamisama-modules-ticketing-features-tickets/kamisama-modules-ticketing-features-tickets-updateticketcomment/index.md) - Provides the `UpdateTicketComment` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
-- [KamiSama.Modules.Ticketing.Features.Tickets.UpdateTicketState](kamisama-modules-ticketing-features-tickets/kamisama-modules-ticketing-features-tickets-updateticketstate/index.md) - Provides the `UpdateTicketState` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
-- [KamiSama.Modules.Ticketing.Repositories.Abstractions.ITicketCategoryRepository](kamisama-modules-ticketing-repositories-abstractions/kamisama-modules-ticketing-repositories-abstractions-iticketcategoryrepository/index.md) - Repository implementation or contract for `ITicketCategoryRepository`. Use it behind feature services to keep persistence access behind the KamiSama repository abstraction.
-- [KamiSama.Modules.Ticketing.Repositories.Abstractions.ITicketRepository](kamisama-modules-ticketing-repositories-abstractions/kamisama-modules-ticketing-repositories-abstractions-iticketrepository/index.md) - Repository implementation or contract for `ITicketRepository`. Use it behind feature services to keep persistence access behind the KamiSama repository abstraction.
-- [KamiSama.Modules.Ticketing.Repositories.Database.TicketingDbContext](kamisama-modules-ticketing-repositories-database/kamisama-modules-ticketing-repositories-database-ticketingdbcontext/index.md) - Provides the `TicketingDbContext` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
-- [KamiSama.Modules.Ticketing.Repositories.Implementations.TicketCategoryRepository](kamisama-modules-ticketing-repositories-implementations/kamisama-modules-ticketing-repositories-implementations-ticketcategoryrepository/index.md) - Repository implementation or contract for `TicketCategoryRepository`. Use it behind feature services to keep persistence access behind the KamiSama repository abstraction.
-- [KamiSama.Modules.Ticketing.Repositories.Implementations.TicketRepository](kamisama-modules-ticketing-repositories-implementations/kamisama-modules-ticketing-repositories-implementations-ticketrepository/index.md) - Repository implementation or contract for `TicketRepository`. Use it behind feature services to keep persistence access behind the KamiSama repository abstraction.
+- [KamiSama.Modules.Ticketing.ExtendedWebApplicationBuilderExtensions](kamisama-modules-ticketing/kamisama-modules-ticketing-extendedwebapplicationbuilderextensions/index.md) - Adds Ticketing service discovery, multi-provider context setup, and named database initialization to an extended builder. A matching provider callback is required in normal hosts; the module maps no controllers or endpoints.
+- [KamiSama.Modules.Ticketing.Entities.Ticket](kamisama-modules-ticketing-entities/kamisama-modules-ticketing-entities-ticket/index.md) - EF Core ticket aggregate root with a required category, comments, attachment references, workflow state, priority, author, and timestamps. `CanTransitionTo` exposes Core's transition table, while `IsEditable` identifies open and reopened tickets.
+- [KamiSama.Modules.Ticketing.Entities.TicketAttachment](kamisama-modules-ticketing-entities/kamisama-modules-ticketing-entities-ticketattachment/index.md) - EF Core reference from a ticket comment to an external content identifier. It stores no content bytes or metadata and is cascade-deleted with its comment.
+- [KamiSama.Modules.Ticketing.Entities.TicketCategory](kamisama-modules-ticketing-entities/kamisama-modules-ticketing-entities-ticketcategory/index.md) - EF Core ticket category with a required 50-character name and timestamps. Duplicate checks occur in feature code, while provider migrations create no unique name index.
+- [KamiSama.Modules.Ticketing.Entities.TicketComment](kamisama-modules-ticketing-entities/kamisama-modules-ticketing-entities-ticketcomment/index.md) - EF Core comment belonging to one ticket, with caller-attributed side and author, 400-character text, timestamps, and attachment references. Provider migrations cascade its deletion to attachments.
+- [KamiSama.Modules.Ticketing.Repositories.Database.TicketingDbContext](kamisama-modules-ticketing-repositories-database/kamisama-modules-ticketing-repositories-database-ticketingdbcontext/index.md) - Provider-neutral EF Core context consumed by Ticketing repositories and startup initialization. It exposes tracked aggregate sets; a concrete provider must be registered under the configured keyed context for normal module use.

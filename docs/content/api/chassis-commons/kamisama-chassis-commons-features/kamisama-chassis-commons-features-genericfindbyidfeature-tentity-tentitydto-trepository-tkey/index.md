@@ -22,13 +22,24 @@ public abstract class GenericFindByIdFeature<TEntity, TEntityDto, TRepository, T
 	where TRepository : ILookupByIdRepository<TEntity, TKey>
 ```
 
+## Example
+
+```csharp
+public sealed class FindProductById(IProductRepository repository)
+    : GenericFindByIdFeature<Product, ProductDto, IProductRepository, Guid>(repository)
+{
+    protected override Task<ProductDto> ConvertToDto(Product entity, CancellationToken cancellationToken)
+        => Task.FromResult(new ProductDto(entity.Id, entity.Name, entity.Price));
+}
+```
+
 ## Constructors
 
 ### Primary constructor
 
 [source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Commons/Features/GenericFindByIdFeature.cs#L11)
 
-Generic implementation of `IFindByIdFeature{TEntityDto, TKey}`. Use it with the surrounding package APIs when composing application code.
+Implements lookup by identifier, missing-entity handling, and entity-to-DTO mapping. Use it with the surrounding package APIs when composing application code.
 
 ```csharp
 public abstract class GenericFindByIdFeature<TEntity, TEntityDto, TRepository, TKey>(TRepository repository) :
@@ -40,7 +51,7 @@ public abstract class GenericFindByIdFeature<TEntity, TEntityDto, TRepository, T
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `repository` | `TRepository` | `-` | The `repository` value passed to this member. |
+| `repository` | `TRepository` | `-` | The repository used by the lookup workflow. |
 
 ## Members
 
@@ -48,8 +59,8 @@ public abstract class GenericFindByIdFeature<TEntity, TEntityDto, TRepository, T
 
 | Member | Description |
 | --- | --- |
-| [ConvertToDto](method-converttodto-23.md) | Mapping hook called after the entity is found. Override it to return the DTO shape expected by callers. |
-| [FindByIdAsync](method-findbyidasync-31.md) | Loads an entity by key through the repository, throws `NotFoundException<TEntity>` when no entity exists, and maps the entity to a DTO. |
+| [ConvertToDto](method-converttodto-26.md) | Mapping hook called after the entity is found. Override it to return the DTO shape expected by callers. |
+| [FindByIdAsync](method-findbyidasync-34.md) | Loads an entity by key through the repository, throws `NotFoundException<TEntity>` when no entity exists, and maps the entity to a DTO. |
 
 ### Properties
 

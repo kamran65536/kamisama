@@ -4,16 +4,22 @@ using Microsoft.Extensions.DependencyInjection;
 namespace KamiSama.Repositories.EntityFrameworkCore.Postgresql;
 
 /// <summary>
-/// Provides PostgreSQL registrations for multi-provider DbContext builders.
+/// Registers PostgreSQL contexts with the KamiSama multi-provider DbContext workflow.
 /// </summary>
 public static class MultiProviderDbContextBuilderPostgresqlExtensions
 {
 	/// <summary>
-	/// Registers a PostgreSQL DbContext implementation for the builder base context.
+	/// Registers a scoped PostgreSQL context and exposes it under the <c>postgresql</c> keyed base-context service.
 	/// </summary>
 	/// <typeparam name="TInheritedContext">The provider-specific DbContext implementation.</typeparam>
-	/// <param name="builder">The multi-provider DbContext builder.</param>
-	/// <returns>The current builder.</returns>
+	/// <param name="builder">The builder containing services, connection settings, base context type, and history table.</param>
+	/// <returns>The same builder, enabling additional provider registrations.</returns>
+	/// <remarks>
+	/// Enables lazy-loading proxies, uses the configured migration-history table, and sets
+	/// <c>Npgsql.EnableLegacyTimestampBehavior</c> and <c>Npgsql.DisableDateTimeInfinityConversions</c> process-wide.
+	/// Configure the provider as exactly <c>postgresql</c> (case-insensitive before key lookup). Registrations are scoped.
+	/// </remarks>
+	/// <exception cref="InvalidOperationException"><typeparamref name="TInheritedContext"/> does not derive from the builder base context.</exception>
 	public static IMultiProviderDbContextBuilder AddPostgresql<TInheritedContext>(
 		this IMultiProviderDbContextBuilder builder)
 		where TInheritedContext : DbContext

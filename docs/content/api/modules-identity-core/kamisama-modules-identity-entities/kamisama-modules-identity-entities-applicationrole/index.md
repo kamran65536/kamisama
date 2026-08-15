@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Modules.Identity.Core](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.Modules.Identity.Core/Entities/ApplicationRole.cs:3](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Identity.Core/Entities/ApplicationRole.cs#L3)
+Source: [src/KamiSama.Modules.Identity.Core/Entities/ApplicationRole.cs:4](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Identity.Core/Entities/ApplicationRole.cs#L4)
 
 Namespace: `KamiSama.Modules.Identity.Entities`
 
@@ -12,7 +12,7 @@ Kind: `Class`
 
 ## Description
 
-Provides the `ApplicationRole` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
+ASP.NET Core Identity role with a `Guid` key. Use it with the Core Identity store and role feature implementations.
 
 ## Declaration
 
@@ -20,13 +20,22 @@ Provides the `ApplicationRole` API for the surrounding package. Use this type wi
 public class ApplicationRole : IdentityRole<Guid>
 ```
 
+## Example
+
+```csharp
+var role = new ApplicationRole(KnownRoles.Operator)
+{
+    Id = Guid.NewGuid()
+};
+```
+
 ## Constructors
 
 ### ApplicationRole
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Identity.Core/Entities/ApplicationRole.cs#L5)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Identity.Core/Entities/ApplicationRole.cs#L7)
 
-Initializes a new `ApplicationRole` instance. Use it with the surrounding package APIs when composing application code.
+Initializes an empty role for Identity and Entity Framework Core materialization. Use it with the surrounding package APIs when composing application code.
 
 ```csharp
 public ApplicationRole();
@@ -38,9 +47,9 @@ This member does not declare parameters.
 
 ### ApplicationRole
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Identity.Core/Entities/ApplicationRole.cs#L6)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Identity.Core/Entities/ApplicationRole.cs#L10)
 
-Initializes a new `ApplicationRole` instance. Use it with the surrounding package APIs when composing application code.
+Initializes a role with the supplied name. Use it with the surrounding package APIs when composing application code.
 
 ```csharp
 public ApplicationRole(string roleName) : base(roleName);
@@ -50,7 +59,7 @@ public ApplicationRole(string roleName) : base(roleName);
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `roleName` | `string` | `-` | The `roleName` value passed to this member. |
+| `roleName` | `string` | `-` | The initial role name. |
 
 ## Members
 

@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Modules.Identity.Core](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.Modules.Identity.Core/Repositories/Abstractions/IApplicationRoleRepository.cs:4](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Identity.Core/Repositories/Abstractions/IApplicationRoleRepository.cs#L4)
+Source: [src/KamiSama.Modules.Identity.Core/Repositories/Abstractions/IApplicationRoleRepository.cs:10](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Identity.Core/Repositories/Abstractions/IApplicationRoleRepository.cs#L10)
 
 Namespace: `KamiSama.Modules.Identity.Repositories.Abstractions`
 
@@ -12,12 +12,21 @@ Kind: `Interface`
 
 ## Description
 
-Repository implementation or contract for `IApplicationRoleRepository`. Use it behind feature services to keep persistence access behind the KamiSama repository abstraction.
+Combines Core role mutation, paging, and identifier/name lookup contracts. Concrete repository behavior determines normalization and save boundaries.
 
 ## Declaration
 
 ```csharp
-public interface IApplicationRoleRepository
+public interface IApplicationRoleRepository :
+	IGenericRepository<ApplicationRole, RoleSearchModel>,
+	ILookupByIdRepository<ApplicationRole, Guid>,
+	ILookupByNameRepository<ApplicationRole>
+```
+
+## Example
+
+```csharp
+ApplicationRole? role = await repository.FindByNameAsync("Operator", cancellationToken);
 ```
 
 ## Constructors
@@ -26,13 +35,5 @@ This type does not declare a non-private constructor in source.
 
 ## Members
 
-### Methods
-
-| Member | Description |
-| --- | --- |
-| [AddAsync](method-addasync-6.md) | Runs the `AddAsync` operation on `IApplicationRoleRepository`. Use it when your code needs this specific behavior from the package. |
-| [DeleteAsync](method-deleteasync-7.md) | Runs the `DeleteAsync` operation on `IApplicationRoleRepository`. Use it when your code needs this specific behavior from the package. |
-| [FindByIdAsync](method-findbyidasync-8.md) | Runs the `FindByIdAsync` operation on `IApplicationRoleRepository`. Use it when your code needs this specific behavior from the package. |
-| [ListAsync](method-listasync-10.md) | Runs the `ListAsync` operation on `IApplicationRoleRepository`. Use it when your code needs this specific behavior from the package. |
-| [UpdateAsync](method-updateasync-9.md) | Runs the `UpdateAsync` operation on `IApplicationRoleRepository`. Use it when your code needs this specific behavior from the package. |
+No non-private methods, properties, fields, events, operators, or enum values are declared directly on this type.
 

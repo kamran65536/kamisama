@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageDocumentationRoot>../../docs/content/api/modules-policyengine-sqlite</PackageDocumentationRoot>
+	</PropertyGroup>
+	<Import Project="../props.xml" />
+
+	<PropertyGroup>
+		<Description>SQLite EF Core context registration for PolicyEngine data management; this package currently contains no PolicyEngine migrations.</Description>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\KamiSama.Modules.PolicyEngine.Core\KamiSama.Modules.PolicyEngine.Core.csproj" />
+		<ProjectReference Include="..\Repositories.EntityFrameworkCore.Sqlite\KamiSama.Repositories.EntityFrameworkCore.Sqlite.csproj" />
+	</ItemGroup>
+</Project>

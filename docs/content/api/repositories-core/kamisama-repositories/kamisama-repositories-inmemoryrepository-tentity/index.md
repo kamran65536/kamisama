@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Repositories.Core](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/Repositories.Core/InMemoryRepository.cs:11](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Repositories.Core/InMemoryRepository.cs#L11)
+Source: [src/Repositories.Core/InMemoryRepository.cs:14](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Repositories.Core/InMemoryRepository.cs#L14)
 
 Namespace: `KamiSama.Repositories`
 
@@ -12,7 +12,7 @@ Kind: `Class`
 
 ## Description
 
-The internal memory repository, this class can be used for testing The class operations are thread safe. Use it with the surrounding package APIs when composing application code.
+Stores entities in an in-process `HashSet<TEntity>` for tests and transient scenarios. Add and delete are serialized per instance, update is a no-op, duplicate semantics follow the comparer, and reads or live queries are not synchronized with mutations.
 
 ## Declaration
 
@@ -20,13 +20,29 @@ The internal memory repository, this class can be used for testing The class ope
 public class InMemoryRepository<TEntity> : IQueryableRepository<TEntity>, IAsyncQueryableRepository<TEntity>
 ```
 
+## Remarks
+
+Add and delete operations are serialized per repository instance, but reads and returned queries are not locked. Do not enumerate a query while another operation mutates the repository. Duplicate and removal matching follow the configured equality comparer, and update operations intentionally do nothing.
+
+## Example
+
+```csharp
+using KamiSama.Repositories;
+
+using var repository = new InMemoryRepository<User>(users, UserIdComparer.Instance);
+repository.Add(new User { Id = 42, Name = "Ada" });
+
+User? user = repository.Find(x => x.Id == 42);
+List<User> allUsers = repository.GetAll().ToList();
+```
+
 ## Constructors
 
 ### InMemoryRepository
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Repositories.Core/InMemoryRepository.cs#L23)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Repositories.Core/InMemoryRepository.cs#L26)
 
-Constructor with initial items. Use it with the surrounding package APIs when composing application code.
+Initializes the repository with optional entities and an optional equality comparer. Use it with the surrounding package APIs when composing application code.
 
 ```csharp
 public InMemoryRepository(IEnumerable<TEntity>? initialItems, IEqualityComparer<TEntity>? comparer = null);
@@ -36,14 +52,14 @@ public InMemoryRepository(IEnumerable<TEntity>? initialItems, IEqualityComparer<
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `initialItems` | `IEnumerable<TEntity>?` | `-` | The `initialItems` value passed to this member. |
-| `comparer` | `IEqualityComparer<TEntity>?` | `null` | The `comparer` value passed to this member. |
+| `initialItems` | `IEnumerable<TEntity>?` | `-` | The entities copied into the internal set, or for an empty repository. |
+| `comparer` | `IEqualityComparer<TEntity>?` | `null` | The comparer that controls duplicate and removal semantics, or to use the default comparer. |
 
 ### InMemoryRepository
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Repositories.Core/InMemoryRepository.cs#L37)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Repositories.Core/InMemoryRepository.cs#L40)
 
-Constructor with no parameter (generally used for dependency injection). Use it with the surrounding package APIs when composing application code.
+Initializes an empty repository using the default equality comparer. Use it with the surrounding package APIs when composing application code.
 
 ```csharp
 public InMemoryRepository() : this(initialItems: null, comparer: null);
@@ -59,13 +75,13 @@ This member does not declare parameters.
 
 | Member | Description |
 | --- | --- |
-| [Add](method-add-54.md) | Adds a new item in the repository. Use it with the surrounding package APIs when composing application code. |
-| [AddAsync](method-addasync-92.md) | Runs the `AddAsync` operation on `InMemoryRepository<TEntity>`. Use it when your code needs this specific behavior from the package. |
-| [Delete](method-delete-71.md) | Deletes an item from repository. Use it with the surrounding package APIs when composing application code. |
-| [DeleteAsync](method-deleteasync-101.md) | Runs the `DeleteAsync` operation on `InMemoryRepository<TEntity>`. Use it when your code needs this specific behavior from the package. |
-| [Find](method-find-89.md) | Finds an single item in the repository. Use it with the surrounding package APIs when composing application code. |
-| [FindAsync](method-findasync-108.md) | Runs the `FindAsync` operation on `InMemoryRepository<TEntity>`. Use it when your code needs this specific behavior from the package. |
-| [Update](method-update-64.md) | Update method, does nothing. Use it with the surrounding package APIs when composing application code. |
-| [UpdateAsync](method-updateasync-99.md) | Runs the `UpdateAsync` operation on `InMemoryRepository<TEntity>`. Use it when your code needs this specific behavior from the package. |
-| [Where](method-where-82.md) | Queries items in repository for the predicate specified. Use it with the surrounding package APIs when composing application code. |
+| [Add](method-add-57.md) | Adds the entity to the in-memory set unless an equal entity already exists. Mutation is serialized per instance, but concurrent reads are not locked. |
+| [AddAsync](method-addasync-101.md) | Adds the entity to the in-memory set unless an equal entity already exists. Mutation is serialized per instance, but concurrent reads are not locked. |
+| [Delete](method-delete-74.md) | Removes an equal entity from the in-memory set when present. Mutation is serialized per instance, but concurrent reads are not locked. |
+| [DeleteAsync](method-deleteasync-120.md) | Removes an equal entity from the in-memory set when present. Mutation is serialized per instance, but concurrent reads are not locked. |
+| [Find](method-find-93.md) | Returns the first in-memory entity matching the compiled predicate, or the default value when no predicate or match is available. |
+| [FindAsync](method-findasync-132.md) | Returns the first in-memory entity matching the compiled predicate, or the default value when no predicate or match is available. |
+| [Update](method-update-67.md) | Performs no operation; this repository does not replace or merge entities. |
+| [UpdateAsync](method-updateasync-113.md) | Performs no operation; this repository does not replace or merge entities. |
+| [Where](method-where-86.md) | Returns a live, unsynchronized query over the in-memory set. Do not enumerate it concurrently with add, delete, or disposal. |
 

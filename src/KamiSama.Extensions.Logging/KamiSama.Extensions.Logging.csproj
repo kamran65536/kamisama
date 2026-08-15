@@ -1,8 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="../props.xml" />
-
 	<PropertyGroup>
-		<NoWarn>$(NoWarn);1591</NoWarn>
+		<PackageDocumentationRoot>../../docs/content/api/extensions-logging</PackageDocumentationRoot>
+	</PropertyGroup>
+	<Import Project="../props.xml" />
+	<PropertyGroup>
+		<Description>Microsoft.Extensions.Logging helpers for tracing method entry and arguments.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>

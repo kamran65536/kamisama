@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Modules.Localization.Abstractions](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.Modules.Localization.Abstractions/Features/Features.cs:3](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Localization.Abstractions/Features/Features.cs#L3)
+Source: [src/KamiSama.Modules.Localization.Abstractions/Features/Features.cs:6](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Localization.Abstractions/Features/Features.cs#L6)
 
 Namespace: `KamiSama.Modules.Localization.Features`
 
@@ -12,12 +12,18 @@ Kind: `Interface`
 
 ## Description
 
-Defines the contract for `IListAvailableCultures` behavior. Implement this interface when you need to plug your own code into the surrounding KamiSama package.
+Defines provider-neutral culture discovery. Implementations decide storage, cancellation, and whether returned arrays are mutable or copied.
 
 ## Declaration
 
 ```csharp
 public interface IListAvailableCultures
+```
+
+## Example
+
+```csharp
+CultureInfoDto[] cultures = await listAvailableCultures.ListAsync(cancellationToken);
 ```
 
 ## Constructors
@@ -30,5 +36,5 @@ This type does not declare a non-private constructor in source.
 
 | Member | Description |
 | --- | --- |
-| [ListAsync](method-listasync-5.md) | Runs the `ListAsync` operation on `IListAvailableCultures`. Use it when your code needs this specific behavior from the package. |
+| [ListAsync](method-listasync-13.md) | Returns the cultures exposed by the implementation. Use it with the surrounding package APIs when composing application code. |
 

@@ -4,15 +4,20 @@ using System.Xml.Serialization;
 namespace KamiSama.Extensions
 {
 	/// <summary>
-	/// Automatically adds xml array items
+	/// Marks an array field or property so XML array-item overrides are added for its concrete derived element types.
+	/// Candidate derived types are supplied when the object graph's overrides are built.
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
 	public class AutoXmlArrayItemAttribute : AutoXmlAttribute
 	{
-		/// <inheritdoc />
+		/// <summary>
+		/// Throws because <see cref="AutoXmlArrayItemAttribute"/> can be applied only to fields and properties, not types.
+		/// </summary>
 		public override void VisitType(Type rootType, XmlAttributeOverrides overrides, Type[] allTypes)
-			=> throw new InvalidOperationException("This method cannot be called for AutoXmlElement");
-		/// <inheritdoc />
+			=> throw new InvalidOperationException("This method cannot be called for AutoXmlArrayItemAttribute");
+		/// <summary>
+		/// Adds an <see cref="XmlArrayItemAttribute"/> override for each non-abstract subclass of the property's array element type.
+		/// </summary>
 		public override void VisitProperty(PropertyInfo property, XmlAttributeOverrides overrides, Type[] allTypes)
 		{
 			if (!property.PropertyType.IsArray)
@@ -33,7 +38,9 @@ namespace KamiSama.Extensions
 			foreach (var type in validTypes)
 				attributes.XmlArrayItems.Add(new XmlArrayItemAttribute { Type = type });
 		}
-		/// <inheritdoc />
+		/// <summary>
+		/// Adds an <see cref="XmlArrayItemAttribute"/> override for each non-abstract subclass of the field's array element type.
+		/// </summary>
 		public override void VisitField(FieldInfo field, XmlAttributeOverrides overrides, Type[] allTypes)
 		{
 			if (!field.FieldType.IsArray)

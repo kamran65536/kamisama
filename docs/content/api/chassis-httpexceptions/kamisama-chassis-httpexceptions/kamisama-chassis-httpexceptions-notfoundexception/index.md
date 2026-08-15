@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Chassis.HttpExceptions](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/Chassis.Exceptions/NotFoundException.cs:7](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Exceptions/NotFoundException.cs#L7)
+Source: [src/Chassis.Exceptions/NotFoundException.cs:9](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Exceptions/NotFoundException.cs#L9)
 
 Namespace: `KamiSama.Chassis.HttpExceptions`
 
@@ -12,7 +12,7 @@ Kind: `Class`
 
 ## Description
 
-Provides the `NotFoundException` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
+Represents a request for an entity that could not be found. Use it with the surrounding package APIs when composing application code.
 
 ## Declaration
 
@@ -25,9 +25,9 @@ public class NotFoundException(string entityName, object? entityKey, string keyT
 
 ### Primary constructor
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Exceptions/NotFoundException.cs#L7)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Exceptions/NotFoundException.cs#L9)
 
-Initializes the type with the values required by its declaration. Use it with the surrounding package APIs when composing application code.
+Represents a request for an entity that could not be found. Use it with the surrounding package APIs when composing application code.
 
 ```csharp
 public class NotFoundException(string entityName, object? entityKey, string keyType = "key") : 
@@ -38,9 +38,9 @@ public class NotFoundException(string entityName, object? entityKey, string keyT
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `entityName` | `string` | `-` | The `entityName` value passed to this member. |
-| `entityKey` | `object?` | `-` | The `entityKey` value passed to this member. |
-| `keyType` | `string` | `"key"` | The `keyType` value passed to this member. |
+| `entityName` | `string` | `-` | The entity type or display name included in localization arguments. |
+| `entityKey` | `object?` | `-` | The key value that was not found. |
+| `keyType` | `string` | `"key"` | The name of the key, such as `id` or `name`. |
 
 ## Members
 
@@ -48,5 +48,5 @@ public class NotFoundException(string entityName, object? entityKey, string keyT
 
 | Member | Description |
 | --- | --- |
-| [StatusCode](property-statuscode-11.md) | Exposes the `StatusCode` value on `NotFoundException`. Read or set it as part of configuring or using the type. |
+| [StatusCode](property-statuscode-13.md) | Gets HTTP status code 404. Use it with the surrounding package APIs when composing application code. |
 

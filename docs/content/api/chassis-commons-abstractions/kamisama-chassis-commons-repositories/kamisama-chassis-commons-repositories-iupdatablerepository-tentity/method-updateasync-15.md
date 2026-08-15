@@ -10,7 +10,7 @@ Kind: `Method`
 
 ## Description
 
-Updates an item in the database. Use it with the surrounding package APIs when composing application code.
+Updates an entity in the underlying store. Use it with the surrounding package APIs when composing application code.
 
 ## Declaration
 
@@ -22,25 +22,28 @@ Task UpdateAsync(TEntity entity, CancellationToken cancellationToken);
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `entity` | `TEntity` | `-` | The `entity` value passed to this member. |
-| `cancellationToken` | `CancellationToken` | `-` | The `cancellationToken` value passed to this member. |
+| `entity` | `TEntity` | `-` | The entity containing updated values. |
+| `cancellationToken` | `CancellationToken` | `-` | A token that can cancel the operation. |
 
 ## Returns
 
 | Type | Description |
 | --- | --- |
-| `Task` | Returns a `Task` value. |
+| `Task` | A task that represents the asynchronous update. |
 
 ## Example
 
 ```csharp
-var sample = new SampleEntity { Id = 1, Name = "sample" };
-var repository = new InMemoryRepository<SampleEntity>([sample]);
+ITicketRepository repository = Substitute.For<ITicketRepository>();
+Ticket ticket = CreateTicket(TicketStatus.Open);
+repository.FindByIdAsync(ticket.Id, Arg.Any<CancellationToken>()).Returns(ticket);
+var feature = new UpdateTicketState(repository);
 
-sample.Name = "sample2";
+await feature.UpdateAsync(
+ticket.Id,
+new UpdateTicketStateRequest("Changed", TicketStatus.Resolved, TicketPriority.High),
+CancellationToken.None);
 
-await repository.UpdateAsync(sample, CancellationToken.None);
-
-var retrieved = repository.Find(x => x.Name == "sample2");
+await repository.Received(1).UpdateAsync(ticket, Arg.Any<CancellationToken>());
 ```
 

@@ -1,12 +1,13 @@
 ﻿namespace KamiSama.Extensions;
 
 /// <summary>
-/// Stream Extensions
+/// Provides synchronous and asynchronous helpers for reading an exact number of bytes from a stream.
+/// The helpers fail when the requested byte count cannot be obtained.
 /// </summary>
 public static class StreamExtensions
 {
 	/// <summary>
-	/// Read exact bytes as specified
+	/// Reads exactly the requested number of bytes, failing if that count is not reached within the allowed read attempts.
 	/// </summary>
 	/// <param name="stream">the stream</param>
 	/// <param name="length">length of bytes to be read</param>
@@ -36,7 +37,7 @@ public static class StreamExtensions
 		return buffer;
 	}
 	/// <summary>
-	/// Read exact bytes as specified
+	/// Asynchronously reads exactly the requested number of bytes unless the operation is canceled or the required count cannot be reached.
 	/// </summary>
 	/// <param name="stream">the stream</param>
 	/// <param name="length">length of bytes to be read</param>

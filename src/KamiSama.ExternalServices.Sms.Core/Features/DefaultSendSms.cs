@@ -9,6 +9,13 @@ namespace KamiSama.ExternalServices.Sms.Features;
 [AutoInjectScoped<ISendSms>]
 internal class DefaultSendSms(ILoggerFactory loggerFactory, IServiceProvider serviceProvider, IOptions<SmsDefaultsOptions> options) : ISendSms
 {
+	/// <summary>
+	/// Resolves the configured scoped keyed provider and returns its send task.
+	/// </summary>
+	/// <param name="request">The destination phone number and message to send.</param>
+	/// <param name="cancellationToken">The token forwarded to the selected provider.</param>
+	/// <returns>The task returned by the selected provider.</returns>
+	/// <remarks>An unknown key causes <see cref="InvalidOperationException"/> during keyed resolution. Because the provider task is returned without being awaited, only synchronous invocation exceptions are logged and wrapped.</remarks>
 	public Task SendSmsAsync(SendSmsRequest request, CancellationToken cancellationToken)
 	{
 		var serviceType = options.Value.Sms;

@@ -1,8 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageDocumentationRoot>../../docs/content/api/iransystem</PackageDocumentationRoot>
+	</PropertyGroup>
 	<Import Project="..\props.xml" />
 	<PropertyGroup>
-		<Description>IranSystem encoding for .net standard</Description>
-		<PackageReleaseNotes>v2.2.5
-IranSystemEncoding is added.</PackageReleaseNotes>
+		<Description>A System.Text.Encoding implementation for decoding and encoding legacy single-byte Iran System Persian data.</Description>
 	</PropertyGroup>
 </Project>

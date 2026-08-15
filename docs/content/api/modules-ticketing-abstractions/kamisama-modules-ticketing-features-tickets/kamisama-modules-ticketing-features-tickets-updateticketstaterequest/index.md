@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Modules.Ticketing.Abstractions](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Dtos.cs:15](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Dtos.cs#L15)
+Source: [src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Dtos.cs:97](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Dtos.cs#L97)
 
 Namespace: `KamiSama.Modules.Ticketing.Features.Tickets`
 
@@ -12,7 +12,7 @@ Kind: `Record`
 
 ## Description
 
-Provides the `UpdateTicketStateRequest` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
+Carries replacement title, status, and priority values. Core accepts unchanged status, open or reopened to resolved, and resolved to reopened or closed; every other transition produces an HTTP 409 conflict.
 
 ## Declaration
 
@@ -24,9 +24,9 @@ public record UpdateTicketStateRequest(string Title, TicketStatus Status, Ticket
 
 ### Primary constructor
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Dtos.cs#L15)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Dtos.cs#L97)
 
-Initializes the type with the values required by its declaration. Use it with the surrounding package APIs when composing application code.
+Supplies replacement title, status, and priority values for a ticket update. Core permits unchanged status, open or reopened to resolved, and resolved to reopened or closed; it rejects every other transition.
 
 ```csharp
 public record UpdateTicketStateRequest(string Title, TicketStatus Status, TicketPriority Priority);
@@ -36,9 +36,9 @@ public record UpdateTicketStateRequest(string Title, TicketStatus Status, Ticket
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `Title` | `string` | `-` | The `Title` value passed to this member. |
-| `Status` | `TicketStatus` | `-` | The `Status` value passed to this member. |
-| `Priority` | `TicketPriority` | `-` | The `Priority` value passed to this member. |
+| `Title` | `string` | `-` | The replacement ticket title. |
+| `Status` | `TicketStatus` | `-` | The replacement workflow status, which must be reachable from the ticket&apos;s current status. |
+| `Priority` | `TicketPriority` | `-` | The replacement urgency. |
 
 ## Members
 

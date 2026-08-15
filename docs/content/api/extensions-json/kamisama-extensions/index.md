@@ -4,4 +4,4 @@
 
 | Type | Kind | Description | Source |
 | --- | --- | --- | --- |
-| [JsonSerializationExtensions](kamisama-extensions-jsonserializationextensions/index.md) | Class | Json Serialization Extensions. Use it with the surrounding package APIs when composing application code. | [source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Json/JsonSerializationExtensions.cs#L9) |
+| [JsonSerializationExtensions](kamisama-extensions-jsonserializationextensions/index.md) | Class | Provides extensions for JSON serialization, deserialization, dynamic conversion, and converter registration. The registration helpers mutate and return the supplied `JsonSerializerOptions` instance. | [source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Json/JsonSerializationExtensions.cs#L10) |

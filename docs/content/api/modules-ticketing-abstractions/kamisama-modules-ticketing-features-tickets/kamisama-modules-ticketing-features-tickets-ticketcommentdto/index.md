@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Modules.Ticketing.Abstractions](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Dtos.cs:11](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Dtos.cs#L11)
+Source: [src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Dtos.cs:56](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Dtos.cs#L56)
 
 Namespace: `KamiSama.Modules.Ticketing.Features.Tickets`
 
@@ -12,7 +12,7 @@ Kind: `Record`
 
 ## Description
 
-Provides the `TicketCommentDto` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
+Carries one ticket comment, its author and side, attachment references, and timestamps. Attachment values contain external content identifiers rather than content bytes.
 
 ## Declaration
 
@@ -24,9 +24,9 @@ public record TicketCommentDto(Guid Id, Guid AuthorUserId, string Comment, Ticke
 
 ### Primary constructor
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Dtos.cs#L11)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Dtos.cs#L56)
 
-Initializes the type with the values required by its declaration. Use it with the surrounding package APIs when composing application code.
+Carries one ticket comment, its author and side, attachment references, and timestamps. Attachment values contain external content identifiers rather than content bytes.
 
 ```csharp
 public record TicketCommentDto(Guid Id, Guid AuthorUserId, string Comment, TicketCommentSide Side, List<TicketAttachmentDto> Attachments, DateTime CreatedAt, DateTime UpdatedAt);
@@ -36,13 +36,13 @@ public record TicketCommentDto(Guid Id, Guid AuthorUserId, string Comment, Ticke
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `Id` | `Guid` | `-` | The `Id` value passed to this member. |
-| `AuthorUserId` | `Guid` | `-` | The `AuthorUserId` value passed to this member. |
-| `Comment` | `string` | `-` | The `Comment` value passed to this member. |
-| `Side` | `TicketCommentSide` | `-` | The `Side` value passed to this member. |
-| `Attachments` | `List<TicketAttachmentDto>` | `-` | The `Attachments` value passed to this member. |
-| `CreatedAt` | `DateTime` | `-` | The `CreatedAt` value passed to this member. |
-| `UpdatedAt` | `DateTime` | `-` | The `UpdatedAt` value passed to this member. |
+| `Id` | `Guid` | `-` | The comment identifier. |
+| `AuthorUserId` | `Guid` | `-` | The comment author&apos;s user identifier. |
+| `Comment` | `string` | `-` | The comment text. |
+| `Side` | `TicketCommentSide` | `-` | Whether the comment belongs to the user or operator side. |
+| `Attachments` | `List<TicketAttachmentDto>` | `-` | The attachment references associated with the comment. |
+| `CreatedAt` | `DateTime` | `-` | The comment creation timestamp. |
+| `UpdatedAt` | `DateTime` | `-` | The comment&apos;s latest update timestamp. |
 
 ## Members
 

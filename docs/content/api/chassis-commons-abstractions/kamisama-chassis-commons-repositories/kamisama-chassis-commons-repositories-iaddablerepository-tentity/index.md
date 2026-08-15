@@ -12,12 +12,18 @@ Kind: `Interface`
 
 ## Description
 
-The repository with add capability. Use it with the surrounding package APIs when composing application code.
+Defines persistence of new entities. Use it with the surrounding package APIs when composing application code.
 
 ## Declaration
 
 ```csharp
 public interface IAddableRepository<TEntity>
+```
+
+## Example
+
+```csharp
+await products.AddAsync(product, cancellationToken);
 ```
 
 ## Constructors
@@ -30,5 +36,5 @@ This type does not declare a non-private constructor in source.
 
 | Member | Description |
 | --- | --- |
-| [AddAsync](method-addasync-15.md) | Adds an item to the database. Use it with the surrounding package APIs when composing application code. |
+| [AddAsync](method-addasync-15.md) | Adds an entity to the underlying store. Use it with the surrounding package APIs when composing application code. |
 

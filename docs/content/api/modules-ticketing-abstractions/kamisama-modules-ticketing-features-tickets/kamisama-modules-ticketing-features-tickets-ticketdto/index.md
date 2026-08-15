@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Modules.Ticketing.Abstractions](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Dtos.cs:12](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Dtos.cs#L12)
+Source: [src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Dtos.cs:70](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Dtos.cs#L70)
 
 Namespace: `KamiSama.Modules.Ticketing.Features.Tickets`
 
@@ -12,7 +12,7 @@ Kind: `Record`
 
 ## Description
 
-Provides the `TicketDto` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
+Carries a complete ticket aggregate with category, comments, and attachment references. Core mapping relies on the corresponding EF Core navigations being available.
 
 ## Declaration
 
@@ -24,9 +24,9 @@ public record TicketDto(Guid Id, Guid AuthorUserId, TicketCategoryListItemDto Ca
 
 ### Primary constructor
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Dtos.cs#L12)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Dtos.cs#L70)
 
-Initializes the type with the values required by its declaration. Use it with the surrounding package APIs when composing application code.
+Carries a complete ticket aggregate with category, comments, and attachment references. Core mapping relies on the corresponding EF Core navigations being available.
 
 ```csharp
 public record TicketDto(Guid Id, Guid AuthorUserId, TicketCategoryListItemDto Category, string Title, TicketStatus Status, TicketPriority Priority, List<TicketCommentDto> Comments, DateTime CreatedAt, DateTime UpdatedAt);
@@ -36,15 +36,15 @@ public record TicketDto(Guid Id, Guid AuthorUserId, TicketCategoryListItemDto Ca
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `Id` | `Guid` | `-` | The `Id` value passed to this member. |
-| `AuthorUserId` | `Guid` | `-` | The `AuthorUserId` value passed to this member. |
-| `Category` | `TicketCategoryListItemDto` | `-` | The `Category` value passed to this member. |
-| `Title` | `string` | `-` | The `Title` value passed to this member. |
-| `Status` | `TicketStatus` | `-` | The `Status` value passed to this member. |
-| `Priority` | `TicketPriority` | `-` | The `Priority` value passed to this member. |
-| `Comments` | `List<TicketCommentDto>` | `-` | The `Comments` value passed to this member. |
-| `CreatedAt` | `DateTime` | `-` | The `CreatedAt` value passed to this member. |
-| `UpdatedAt` | `DateTime` | `-` | The `UpdatedAt` value passed to this member. |
+| `Id` | `Guid` | `-` | The ticket identifier. |
+| `AuthorUserId` | `Guid` | `-` | The identifier of the user who opened the ticket. |
+| `Category` | `TicketCategoryListItemDto` | `-` | The ticket category. |
+| `Title` | `string` | `-` | The ticket title. |
+| `Status` | `TicketStatus` | `-` | The current workflow status. |
+| `Priority` | `TicketPriority` | `-` | The current urgency. |
+| `Comments` | `List<TicketCommentDto>` | `-` | The ticket comments and their attachment references. |
+| `CreatedAt` | `DateTime` | `-` | The ticket creation timestamp. |
+| `UpdatedAt` | `DateTime` | `-` | The ticket&apos;s latest update timestamp. |
 
 ## Members
 

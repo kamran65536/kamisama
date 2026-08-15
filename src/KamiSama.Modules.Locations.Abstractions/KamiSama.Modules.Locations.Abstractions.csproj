@@ -1,8 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="../props.xml" />
-
 	<PropertyGroup>
-		<NoWarn>$(NoWarn);1591</NoWarn>
+		<PackageDocumentationRoot>../../docs/content/api/modules-locations-abstractions</PackageDocumentationRoot>
+	</PropertyGroup>
+	<Import Project="../props.xml" />
+	<PropertyGroup>
+		<Description>Provider-neutral province and city feature contracts, requests, DTOs, and paging search models for the KamiSama Locations module.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>

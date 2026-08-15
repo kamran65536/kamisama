@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.ExternalServices.Email.Smtp](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.ExternalServices.Email.Smtp/SmtpEmailModule.cs:22](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.ExternalServices.Email.Smtp/SmtpEmailModule.cs#L22)
+Source: [src/KamiSama.ExternalServices.Email.Smtp/SmtpEmailModule.cs:26](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.ExternalServices.Email.Smtp/SmtpEmailModule.cs#L26)
 
 Namespace: `KamiSama.ExternalServices.Email.Smtp`
 
@@ -12,12 +12,21 @@ Kind: `Class`
 
 ## Description
 
-Provides the `ExtendedWebApplicationBuilderExtensions` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
+Adds SMTP options binding and the keyed `smtp` email provider registration to an `ExtendedWebApplicationBuilder`. The current provider has a known inverted validation defect and rejects complete settings before sending.
 
 ## Declaration
 
 ```csharp
 public static class ExtendedWebApplicationBuilderExtensions
+```
+
+## Example
+
+```csharp
+using KamiSama.ExternalServices.Email.Smtp;
+
+builder.AddSmtpEmailServiceModule(
+    webBuilder.Configuration.GetSection("Email:Smtp"));
 ```
 
 ## Constructors
@@ -30,5 +39,5 @@ This type does not declare a non-private constructor in source.
 
 | Member | Description |
 | --- | --- |
-| [AddSmtpEmailServiceModule](method-addsmtpemailservicemodule-24.md) | Runs the `AddSmtpEmailServiceModule` operation on `ExtendedWebApplicationBuilderExtensions`. Use it when your code needs this specific behavior from the package. |
+| [AddSmtpEmailServiceModule](method-addsmtpemailservicemodule-34.md) | Binds SMTP settings and registers the keyed `smtp` email provider. Use it with the surrounding package APIs when composing application code. |
 

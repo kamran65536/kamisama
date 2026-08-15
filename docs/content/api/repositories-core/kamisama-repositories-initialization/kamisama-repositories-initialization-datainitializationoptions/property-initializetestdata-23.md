@@ -10,7 +10,7 @@ Kind: `Property`
 
 ## Description
 
-Adds test data (for test purposes). Use it with the surrounding package APIs when composing application code.
+Gets or sets whether the initializer should create test data; production callers normally leave this disabled.
 
 ## Declaration
 
@@ -26,5 +26,12 @@ public bool InitializeTestData { get; set; }
 
 ## Example
 
-No concise standalone example is available yet.
+```csharp
+var options = new DataInitializationOptions
+{
+    Migrate = true,
+    InitializeData = true,
+    InitializeTestData = false
+};
+```
 

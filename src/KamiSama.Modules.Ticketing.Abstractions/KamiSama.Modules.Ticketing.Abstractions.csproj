@@ -1,8 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="../props.xml" />
-
 	<PropertyGroup>
-		<NoWarn>$(NoWarn);1591</NoWarn>
+		<PackageDocumentationRoot>../../docs/content/api/modules-ticketing-abstractions</PackageDocumentationRoot>
+	</PropertyGroup>
+	<Import Project="../props.xml" />
+	<PropertyGroup>
+		<Description>Provider-neutral Ticketing feature contracts, requests, DTOs, search models, statuses, priorities, and comment sides.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>

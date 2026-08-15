@@ -12,12 +12,18 @@ Kind: `Interface`
 
 ## Description
 
-Repository with Delete feature. Use it with the surrounding package APIs when composing application code.
+Defines deletion of persisted entities. Use it with the surrounding package APIs when composing application code.
 
 ## Declaration
 
 ```csharp
 public interface IDeletableRepository<TEntity>
+```
+
+## Example
+
+```csharp
+await products.DeleteAsync(product, cancellationToken);
 ```
 
 ## Constructors
@@ -30,5 +36,5 @@ This type does not declare a non-private constructor in source.
 
 | Member | Description |
 | --- | --- |
-| [DeleteAsync](method-deleteasync-15.md) | Deletes an item from the database. Use it with the surrounding package APIs when composing application code. |
+| [DeleteAsync](method-deleteasync-15.md) | Deletes an entity from the underlying store. Use it with the surrounding package APIs when composing application code. |
 

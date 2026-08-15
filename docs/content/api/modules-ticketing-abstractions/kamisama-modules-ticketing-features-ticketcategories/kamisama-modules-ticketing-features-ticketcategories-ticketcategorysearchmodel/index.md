@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Modules.Ticketing.Abstractions](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.Modules.Ticketing.Abstractions/Features/TicketCategories/Dtos.cs:3](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/TicketCategories/Dtos.cs#L3)
+Source: [src/KamiSama.Modules.Ticketing.Abstractions/Features/TicketCategories/Dtos.cs:11](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/TicketCategories/Dtos.cs#L11)
 
 Namespace: `KamiSama.Modules.Ticketing.Features.TicketCategories`
 
@@ -12,7 +12,7 @@ Kind: `Record`
 
 ## Description
 
-Provides the `TicketCategorySearchModel` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
+Carries paging, optional name filtering, and ordering for ticket-category lists. Core performs a case-insensitive exact name comparison and recognizes `id`, `name`, `createdat`, and `updatedat` ordering tokens.
 
 ## Declaration
 
@@ -24,9 +24,9 @@ public record TicketCategorySearchModel(int Page, int PageSize, string? Name, st
 
 ### Primary constructor
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/TicketCategories/Dtos.cs#L3)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/TicketCategories/Dtos.cs#L11)
 
-Initializes the type with the values required by its declaration. Use it with the surrounding package APIs when composing application code.
+Carries paging, optional name filtering, and ordering for ticket-category lists. Core performs a case-insensitive exact name comparison and recognizes `id`, `name`, `createdat`, and `updatedat` ordering tokens.
 
 ```csharp
 public record TicketCategorySearchModel(int Page, int PageSize, string? Name, string? OrderBy) : SearchModel(Page, PageSize, OrderBy)
@@ -36,10 +36,10 @@ public record TicketCategorySearchModel(int Page, int PageSize, string? Name, st
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `Page` | `int` | `-` | The `Page` value passed to this member. |
-| `PageSize` | `int` | `-` | The `PageSize` value passed to this member. |
-| `Name` | `string?` | `-` | The `Name` value passed to this member. |
-| `OrderBy` | `string?` | `-` | The `OrderBy` value passed to this member. |
+| `Page` | `int` | `-` | The one-based page number, or the implementation-defined all-results value. |
+| `PageSize` | `int` | `-` | The maximum number of rows in a page, or the implementation-defined all-results value. |
+| `Name` | `string?` | `-` | An optional category name filter. |
+| `OrderBy` | `string?` | `-` | An optional implementation-specific ordering token. |
 
 ## Members
 
@@ -47,5 +47,5 @@ public record TicketCategorySearchModel(int Page, int PageSize, string? Name, st
 
 | Member | Description |
 | --- | --- |
-| [All](property-all-5.md) | Exposes the `All` value on `TicketCategorySearchModel`. Read or set it as part of configuring or using the type. |
+| [All](property-all-17.md) | Gets or sets the shared mutable search model requesting all categories without a name or ordering filter. Replace it only when application-wide callers intentionally need different all-results defaults. |
 

@@ -1,7 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="../props.xml" />
-
 	<PropertyGroup>
-		<NoWarn>$(NoWarn);1591</NoWarn>
+		<PackageDocumentationRoot>../../docs/content/api/externalservices-email-abstractions</PackageDocumentationRoot>
+	</PropertyGroup>
+	<Import Project="../props.xml" />
+	<PropertyGroup>
+		<Description>Provider-neutral contract and request model for sending email through KamiSama external-service implementations. Reference it from callers and providers that need to exchange recipient, subject, body, and HTML-format data without depending on SMTP or another transport.</Description>
 	</PropertyGroup>
 </Project>

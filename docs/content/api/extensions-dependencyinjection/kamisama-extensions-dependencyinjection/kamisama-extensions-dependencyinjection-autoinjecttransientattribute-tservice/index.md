@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Extensions.DependencyInjection](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/DependencyInjection/AutoInjectTransientAttribute.cs:30](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/DependencyInjection/AutoInjectTransientAttribute.cs#L30)
+Source: [src/DependencyInjection/AutoInjectTransientAttribute.cs:41](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/DependencyInjection/AutoInjectTransientAttribute.cs#L41)
 
 Namespace: `KamiSama.Extensions.DependencyInjection`
 
@@ -33,9 +33,9 @@ public sealed class MessageFactory : IMessageFactory;
 
 ### Primary constructor
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/DependencyInjection/AutoInjectTransientAttribute.cs#L30)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/DependencyInjection/AutoInjectTransientAttribute.cs#L41)
 
-AutoInject Transient Attribute with generic service type. Use it with the surrounding package APIs when composing application code.
+Marks an implementation for automatic transient registration under &lt;typeparamref name=&quot;TService&quot;/&gt;. The generic argument supplies the service contract without a `Type` constructor argument.
 
 ```csharp
 public class AutoInjectTransientAttribute<TService>() : AutoInjectTransientAttribute(typeof(TService));

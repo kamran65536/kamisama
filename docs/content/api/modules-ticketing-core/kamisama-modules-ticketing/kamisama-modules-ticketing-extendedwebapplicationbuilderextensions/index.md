@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Modules.Ticketing.Core](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.Modules.Ticketing.Core/TicketingModule.cs:46](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Core/TicketingModule.cs#L46)
+Source: [src/KamiSama.Modules.Ticketing.Core/TicketingModule.cs:70](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Core/TicketingModule.cs#L70)
 
 Namespace: `KamiSama.Modules.Ticketing`
 
@@ -12,7 +12,7 @@ Kind: `Class`
 
 ## Description
 
-Provides the `ExtendedWebApplicationBuilderExtensions` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
+Adds Ticketing service discovery, multi-provider context setup, and named database initialization to an extended builder. A matching provider callback is required in normal hosts; the module maps no controllers or endpoints.
 
 ## Declaration
 
@@ -30,5 +30,5 @@ This type does not declare a non-private constructor in source.
 
 | Member | Description |
 | --- | --- |
-| [AddTicketingModule](method-addticketingmodule-48.md) | Runs the `AddTicketingModule` operation on `ExtendedWebApplicationBuilderExtensions`. Use it when your code needs this specific behavior from the package. |
+| [AddTicketingModule](method-addticketingmodule-81.md) | Queues Ticketing service discovery, keyed context setup, and post-build database initialization. The callback must register the lowercased configured provider key; `BuildAsync` can fail during service validation because three current category-feature registrations are non-assignable. |
 

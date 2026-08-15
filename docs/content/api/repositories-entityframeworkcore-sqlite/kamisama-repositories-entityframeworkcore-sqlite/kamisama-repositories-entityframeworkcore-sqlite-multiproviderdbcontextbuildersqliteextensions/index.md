@@ -12,7 +12,7 @@ Kind: `Class`
 
 ## Description
 
-Provides SQLite registrations for multi-provider DbContext builders. Use it with the surrounding package APIs when composing application code.
+Registers a scoped SQLite context under the exact `sqlite` key, enables lazy-loading proxies, and configures the provider migration-history table.
 
 ## Declaration
 
@@ -30,5 +30,5 @@ This type does not declare a non-private constructor in source.
 
 | Member | Description |
 | --- | --- |
-| [AddSqlite<TInheritedContext>](method-addsqlite-tinheritedcontext-17.md) | Registers a SQLite DbContext implementation for the builder base context. Use it with the surrounding package APIs when composing application code. |
+| [AddSqlite<TInheritedContext>](method-addsqlite-tinheritedcontext-22.md) | Registers a scoped SQLite context and exposes it under the `sqlite` keyed base-context service. Use it with the surrounding package APIs when composing application code. |
 

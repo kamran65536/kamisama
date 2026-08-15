@@ -10,7 +10,7 @@ Kind: `Method`
 
 ## Description
 
-Initialize and migrates the database if necessary. Use it with the surrounding package APIs when composing application code.
+Runs the migration and seed stages selected by `DataInitializationOptions`; the implementation owns ordering, idempotency, persistence, and failure behavior.
 
 ## Declaration
 
@@ -22,16 +22,18 @@ Task InitializeAsync(DataInitializationOptions options, CancellationToken cancel
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `options` | `DataInitializationOptions` | `-` | The `options` value passed to this member. |
-| `cancellationToken` | `CancellationToken` | `-` | The `cancellationToken` value passed to this member. |
+| `options` | `DataInitializationOptions` | `-` | The stages the initializer should run. |
+| `cancellationToken` | `CancellationToken` | `-` | A token that can cancel initialization. |
 
 ## Returns
 
 | Type | Description |
 | --- | --- |
-| `Task` | Returns a `Task` value. |
+| `Task` | A task that represents database initialization. |
 
 ## Example
 
-No concise standalone example is available yet.
+```csharp
+await initializer.InitializeAsync(options, cancellationToken);
+```
 

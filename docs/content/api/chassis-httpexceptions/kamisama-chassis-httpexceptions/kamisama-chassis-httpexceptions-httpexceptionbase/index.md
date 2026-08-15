@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Chassis.HttpExceptions](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/Chassis.Exceptions/HttpExceptionBase.cs:11](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Exceptions/HttpExceptionBase.cs#L11)
+Source: [src/Chassis.Exceptions/HttpExceptionBase.cs:12](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Exceptions/HttpExceptionBase.cs#L12)
 
 Namespace: `KamiSama.Chassis.HttpExceptions`
 
@@ -12,7 +12,7 @@ Kind: `Class`
 
 ## Description
 
-base Exception class for all Janus Services. Use it with the surrounding package APIs when composing application code.
+Provides the common HTTP status and localization metadata carried by KamiSama HTTP exceptions. Use it with the surrounding package APIs when composing application code.
 
 ## Declaration
 
@@ -20,13 +20,34 @@ base Exception class for all Janus Services. Use it with the surrounding package
 public abstract class HttpExceptionBase : Exception
 ```
 
+## Remarks
+
+The exception itself does not write an HTTP response. A transport adapter such as KamiSama.Chassis.ProblemDetails must convert it at the application boundary.
+
+## Example
+
+```csharp
+using KamiSama.Chassis.HttpExceptions;
+
+public sealed class TooManyRequestsException : HttpExceptionBase
+{
+    public override int StatusCode => 429;
+
+    public TooManyRequestsException(TimeSpan retryAfter)
+        : base(nameof(TooManyRequestsException), retryAfter)
+    {
+        ExtendedProperties["retryAfterSeconds"] = retryAfter.TotalSeconds;
+    }
+}
+```
+
 ## Constructors
 
 ### HttpExceptionBase
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Exceptions/HttpExceptionBase.cs#L31)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Exceptions/HttpExceptionBase.cs#L32)
 
-Initializes a new `HttpExceptionBase` instance. Use it with the surrounding package APIs when composing application code.
+Initializes an exception whose localization key is the runtime exception type name. Use it with the surrounding package APIs when composing application code.
 
 ```csharp
 protected HttpExceptionBase();
@@ -38,9 +59,9 @@ This member does not declare parameters.
 
 ### HttpExceptionBase
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Exceptions/HttpExceptionBase.cs#L36)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Exceptions/HttpExceptionBase.cs#L39)
 
-Initializes a new `HttpExceptionBase` instance. Use it with the surrounding package APIs when composing application code.
+Initializes an exception with a localization key and formatting arguments. Use it with the surrounding package APIs when composing application code.
 
 ```csharp
 protected HttpExceptionBase(string messageKey, params object? [] args) : base(TryFormatString(messageKey, args));
@@ -50,14 +71,14 @@ protected HttpExceptionBase(string messageKey, params object? [] args) : base(Tr
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `messageKey` | `string` | `-` | The `messageKey` value passed to this member. |
-| `args` | `object?[]` | `-` | The `args` value passed to this member. |
+| `messageKey` | `string` | `-` | The localization key, also used as the fallback message format. |
+| `args` | `object?[]` | `-` | Values used to format and later localize the message. |
 
 ### HttpExceptionBase
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Exceptions/HttpExceptionBase.cs#L42)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Exceptions/HttpExceptionBase.cs#L48)
 
-Initializes a new `HttpExceptionBase` instance. Use it with the surrounding package APIs when composing application code.
+Initializes an exception with localization metadata and an underlying exception. Use it with the surrounding package APIs when composing application code.
 
 ```csharp
 protected HttpExceptionBase(string messageKey, object? [] args, Exception? innerException) : base(TryFormatString(messageKey, args), innerException);
@@ -67,9 +88,9 @@ protected HttpExceptionBase(string messageKey, object? [] args, Exception? inner
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `messageKey` | `string` | `-` | The `messageKey` value passed to this member. |
-| `args` | `object?[]` | `-` | The `args` value passed to this member. |
-| `innerException` | `Exception?` | `-` | The `innerException` value passed to this member. |
+| `messageKey` | `string` | `-` | The localization key, also used as the fallback message format. |
+| `args` | `object?[]` | `-` | Values used to format and later localize the message. |
+| `innerException` | `Exception?` | `-` | The exception that caused this failure, or . |
 
 ## Members
 
@@ -77,14 +98,14 @@ protected HttpExceptionBase(string messageKey, object? [] args, Exception? inner
 
 | Member | Description |
 | --- | --- |
-| [TryFormatString](method-tryformatstring-53.md) | Runs the `TryFormatString` operation on `HttpExceptionBase`. Use it when your code needs this specific behavior from the package. |
+| [TryFormatString](method-tryformatstring-59.md) | Formats a message without allowing an invalid composite format string to throw. Use it with the surrounding package APIs when composing application code. |
 
 ### Properties
 
 | Member | Description |
 | --- | --- |
-| [ExceptionLocalizationArguments](property-exceptionlocalizationarguments-25.md) | Exception localization arguments. Use it with the surrounding package APIs when composing application code. |
-| [ExceptionLocalizationKey](property-exceptionlocalizationkey-21.md) | Exception localization key for localization. Use it with the surrounding package APIs when composing application code. |
-| [ExtendedProperties](property-extendedproperties-29.md) | Extended properties for Problem Details error handling. Use it with the surrounding package APIs when composing application code. |
-| [StatusCode](property-statuscode-17.md) | HTTP Status code to return. Use it with the surrounding package APIs when composing application code. |
+| [ExceptionLocalizationArguments](property-exceptionlocalizationarguments-26.md) | Gets the values supplied when formatting the localized exception message. Use it with the surrounding package APIs when composing application code. |
+| [ExceptionLocalizationKey](property-exceptionlocalizationkey-22.md) | Gets the resource key used to localize the exception message. Use it with the surrounding package APIs when composing application code. |
+| [ExtendedProperties](property-extendedproperties-30.md) | Gets or sets additional values that an error-response adapter may expose. Use it with the surrounding package APIs when composing application code. |
+| [StatusCode](property-statuscode-18.md) | Gets the HTTP status code associated with the failure. Use it with the surrounding package APIs when composing application code. |
 

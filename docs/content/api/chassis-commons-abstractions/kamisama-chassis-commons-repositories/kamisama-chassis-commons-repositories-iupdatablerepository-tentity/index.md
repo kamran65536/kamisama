@@ -12,12 +12,19 @@ Kind: `Interface`
 
 ## Description
 
-Repository with update capability. Use it with the surrounding package APIs when composing application code.
+Defines persistence of changes to existing entities. Use it with the surrounding package APIs when composing application code.
 
 ## Declaration
 
 ```csharp
 public interface IUpdatableRepository<TEntity>
+```
+
+## Example
+
+```csharp
+product.Name = "Mechanical Keyboard";
+await products.UpdateAsync(product, cancellationToken);
 ```
 
 ## Constructors
@@ -30,5 +37,5 @@ This type does not declare a non-private constructor in source.
 
 | Member | Description |
 | --- | --- |
-| [UpdateAsync](method-updateasync-15.md) | Updates an item in the database. Use it with the surrounding package APIs when composing application code. |
+| [UpdateAsync](method-updateasync-15.md) | Updates an entity in the underlying store. Use it with the surrounding package APIs when composing application code. |
 

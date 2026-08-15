@@ -2,25 +2,34 @@
 
 [Back to package index](../index.md)
 
-Version: `10.0.10`
+Version: `10.0.0`
 
 ## Description
 
-SMTP email service implementation and module registration. Use it with the surrounding package APIs when composing application code.
+SMTP transport registration and configuration for KamiSama email services. The current implementation contains a known inverted validation defect that rejects complete SMTP settings before sending.
 
-## Install
+## How to use
 
 ```shell
-dotnet add package KamiSama.ExternalServices.Email.Smtp --version 10.0.10
+dotnet add package KamiSama.ExternalServices.Email.Smtp --version 10.0.0
 ```
+
+Add the SMTP module with the section that contains `host`, `port`, `username`, `password`, `use-ssl`, `sender-address`, and `sender-name`:
+
+```csharp
+using KamiSama.ExternalServices.Email.Smtp;
+
+builder.AddSmtpEmailServiceModule(
+    webBuilder.Configuration.GetSection("Email:Smtp"));
+```
+
+**Known runtime defect:** the internal SMTP sender currently throws `InvalidOperationHttpException` when `SmtpOptions.IsValid()` returns `true`. Complete settings are therefore rejected before any SMTP send is attempted, while incomplete settings continue and fail later. This documentation does not claim successful delivery; the runtime condition must be corrected in a future code change before relying on this provider.
 
 ## Namespaces
 
-- [KamiSama.ExternalServices.Email.Smtp](kamisama-externalservices-email-smtp/index.md) (4 types)
+- [KamiSama.ExternalServices.Email.Smtp](kamisama-externalservices-email-smtp/index.md) (2 types)
 
 ## Types
 
-- [KamiSama.ExternalServices.Email.Smtp.ExtendedWebApplicationBuilderExtensions](kamisama-externalservices-email-smtp/kamisama-externalservices-email-smtp-extendedwebapplicationbuilderextensions/index.md) - Provides the `ExtendedWebApplicationBuilderExtensions` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
-- [KamiSama.ExternalServices.Email.Smtp.SmtpEmailModule](kamisama-externalservices-email-smtp/kamisama-externalservices-email-smtp-smtpemailmodule/index.md) - ASP.NET Core web-module implementation for `SmtpEmailModule`. Add it through the extended web application builder to register services and apply the related middleware or endpoints.
-- [KamiSama.ExternalServices.Email.Smtp.SmtpOptions](kamisama-externalservices-email-smtp/kamisama-externalservices-email-smtp-smtpoptions/index.md) - Configuration object for `SmtpOptions`. Use it when binding settings or configuring the related package services.
-- [KamiSama.ExternalServices.Email.Smtp.SmtpSendEmail](kamisama-externalservices-email-smtp/kamisama-externalservices-email-smtp-smtpsendemail/index.md) - Provides the `SmtpSendEmail` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
+- [KamiSama.ExternalServices.Email.Smtp.ExtendedWebApplicationBuilderExtensions](kamisama-externalservices-email-smtp/kamisama-externalservices-email-smtp-extendedwebapplicationbuilderextensions/index.md) - Adds SMTP options binding and the keyed `smtp` email provider registration to an `ExtendedWebApplicationBuilder`. The current provider has a known inverted validation defect and rejects complete settings before sending.
+- [KamiSama.ExternalServices.Email.Smtp.SmtpOptions](kamisama-externalservices-email-smtp/kamisama-externalservices-email-smtp-smtpoptions/index.md) - Contains SMTP connection, credential, TLS, and sender settings. `IsValid` checks required value presence, but the current internal sender incorrectly throws when that check succeeds.

@@ -3,11 +3,14 @@
 namespace KamiSama.Extensions.Json;
 
 /// <summary>
-/// Big Integer Json Converter
+/// Converts <see cref="BigInteger"/> values to and from JSON, writing values as decimal strings.
+/// String tokens preserve arbitrary precision; numeric tokens are limited to the <see cref="decimal"/> range.
 /// </summary>
 public class BigIntegerJsonConverter : JsonConverter<BigInteger>
 {
-	/// <inheritdoc />
+	/// <summary>
+	/// Reads a <see cref="BigInteger"/> from a JSON string or number token.
+	/// </summary>
 	public override BigInteger Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		=> reader.TokenType switch
 		{
@@ -15,7 +18,9 @@ public class BigIntegerJsonConverter : JsonConverter<BigInteger>
 			JsonTokenType.Number => new BigInteger(reader.GetDecimal()),
 			_ => throw new JsonException($"Does not support token type of {reader.TokenType}")
 		};
-	/// <inheritdoc />
+	/// <summary>
+	/// Writes the <see cref="BigInteger"/> as a JSON string containing its decimal representation.
+	/// </summary>
 	public override void Write(Utf8JsonWriter writer, BigInteger value, JsonSerializerOptions options)
 	{
 		writer.WriteStringValue(value.ToString());

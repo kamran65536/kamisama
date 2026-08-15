@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Modules.Locations.Postgresql](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.Modules.Locations.Postgresql/Repositories/Database/Postgresql/PostgresqlLocationsDbContext.cs:6](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Locations.Postgresql/Repositories/Database/Postgresql/PostgresqlLocationsDbContext.cs#L6)
+Source: [src/KamiSama.Modules.Locations.Postgresql/Repositories/Database/Postgresql/PostgresqlLocationsDbContext.cs:10](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Locations.Postgresql/Repositories/Database/Postgresql/PostgresqlLocationsDbContext.cs#L10)
 
 Namespace: `KamiSama.Modules.Locations.Repositories.Database.Postgresql`
 
@@ -12,7 +12,7 @@ Kind: `Class`
 
 ## Description
 
-Provides the `PostgresqlLocationsDbContext` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
+Concrete PostgreSQL Locations context targeted by this provider package's migrations. Normal hosts register it through `AddPostgresqlLocationsDbContext` rather than constructing it directly.
 
 ## Declaration
 
@@ -20,13 +20,21 @@ Provides the `PostgresqlLocationsDbContext` API for the surrounding package. Use
 public class PostgresqlLocationsDbContext(DbContextOptions<PostgresqlLocationsDbContext> options) : LocationsDbContext(options)
 ```
 
+## Example
+
+```csharp
+ExtendedWebApplicationBuilder builder = webBuilder.Extend().AddLocationsModule(
+    locationsSection, databaseSection,
+    database => database.AddPostgresqlLocationsDbContext());
+```
+
 ## Constructors
 
 ### Primary constructor
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Locations.Postgresql/Repositories/Database/Postgresql/PostgresqlLocationsDbContext.cs#L6)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Locations.Postgresql/Repositories/Database/Postgresql/PostgresqlLocationsDbContext.cs#L10)
 
-Initializes the type with the values required by its declaration. Use it with the surrounding package APIs when composing application code.
+Provides the PostgreSQL EF Core context targeted by the Locations PostgreSQL migrations. Use it with the surrounding package APIs when composing application code.
 
 ```csharp
 public class PostgresqlLocationsDbContext(DbContextOptions<PostgresqlLocationsDbContext> options) : LocationsDbContext(options)
@@ -36,7 +44,7 @@ public class PostgresqlLocationsDbContext(DbContextOptions<PostgresqlLocationsDb
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `options` | `DbContextOptions<PostgresqlLocationsDbContext>` | `-` | The `options` value passed to this member. |
+| `options` | `DbContextOptions<PostgresqlLocationsDbContext>` | `-` | The PostgreSQL options configured by `AddPostgresqlLocationsDbContext`. |
 
 ## Members
 

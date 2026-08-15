@@ -1,6 +1,6 @@
-# `KamiSama.Extensions.WebModules`
+# `KamiSama.Modules`
 
-## `KamiSama.Extensions.WebModules`
+## `KamiSama.Modules`
 
 ### `WebModule`
 Base abstraction for modular ASP.NET configuration.
@@ -12,7 +12,7 @@ Registers services before the app is built.
 Applies middleware or endpoint configuration after the app is built.
 
 ```csharp
-using KamiSama.Extensions.WebModules;
+using KamiSama.Modules;
 
 public sealed class MyModule : WebModule
 {
@@ -21,7 +21,7 @@ public sealed class MyModule : WebModule
 }
 ```
 
-## `KamiSama.Extensions.WebModules`
+## `KamiSama.Modules`
 
 ### `ExtendedWebApplicationBuilder`
 Composable wrapper around `WebApplicationBuilder` that accumulates `WebModule` instances.
@@ -48,7 +48,7 @@ Builds the app after applying all modules.
 Synchronous wrapper over `BuildAsync`.
 
 ```csharp
-using KamiSama.Extensions.WebModules;
+using KamiSama.Modules;
 
 var builder = WebApplication.CreateBuilder(args)
     .Extend()
@@ -58,7 +58,7 @@ var builder = WebApplication.CreateBuilder(args)
 var app = await builder.BuildAsync(CancellationToken.None);
 ```
 
-## `KamiSama.Extensions.WebModules`
+## `KamiSama.Modules`
 
 ### `WebApplicationBuilderExtension`
 Entry point for the modular builder.
@@ -67,12 +67,12 @@ Entry point for the modular builder.
 Wraps a standard builder as `ExtendedWebApplicationBuilder`.
 
 ```csharp
-using KamiSama.Extensions.WebModules;
+using KamiSama.Modules;
 
 var builder = WebApplication.CreateBuilder(args).Extend();
 ```
 
-## `KamiSama.Extensions.WebModules`
+## `KamiSama.Modules`
 
 ### `ControllersModule`
 Adds MVC controllers and maps them.
@@ -87,12 +87,12 @@ Calls `app.MapControllers()`.
 Convenience extension for the module.
 
 ```csharp
-using KamiSama.Extensions.WebModules;
+using KamiSama.Modules;
 
 var builder = WebApplication.CreateBuilder(args).Extend().AddControllers();
 ```
 
-## `KamiSama.Extensions.WebModules`
+## `KamiSama.Modules`
 
 ### `SwaggerModule`
 Adds Swagger generation and Swagger UI.
@@ -107,14 +107,14 @@ Enables Swagger middleware in development or optionally production.
 Convenience extension for the module.
 
 ```csharp
-using KamiSama.Extensions.WebModules;
+using KamiSama.Modules;
 
 var builder = WebApplication.CreateBuilder(args)
     .Extend()
     .AddSwagger(addEndPointInProduction: true);
 ```
 
-## `KamiSama.Extensions.WebModules`
+## `KamiSama.Modules`
 
 ### `CorsModule`
 Adds CORS services and middleware.
@@ -129,12 +129,12 @@ Calls `app.UseCors(...)`.
 Convenience extension for the module.
 
 ```csharp
-using KamiSama.Extensions.WebModules;
+using KamiSama.Modules;
 
 builder.AddCors(configurePolicy: policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 ```
 
-## `KamiSama.Extensions.WebModules`
+## `KamiSama.Modules`
 
 ### `AuthorizationModule`
 Adds authorization services and middleware.
@@ -146,7 +146,7 @@ Convenience extension for the module.
 builder.AddAuthorization();
 ```
 
-## `KamiSama.Extensions.WebModules`
+## `KamiSama.Modules`
 
 ### `AntiForgeryModule`
 Applies antiforgery middleware.
@@ -158,7 +158,7 @@ Convenience extension for the module.
 builder.AddAntiForgery();
 ```
 
-## `KamiSama.Extensions.WebModules`
+## `KamiSama.Modules`
 
 ### `CascadingAuthenticationModule`
 Registers Blazor cascading authentication state.
@@ -170,7 +170,7 @@ Convenience extension for the module.
 builder.AddCascadingAuthentication();
 ```
 
-## `KamiSama.Extensions.WebModules`
+## `KamiSama.Modules`
 
 ### `CustomActionModule`
 Runs a custom action after the app is built.
@@ -185,7 +185,7 @@ Convenience extensions for sync and async custom actions.
 builder.AddAction(app => app.MapGet("/health", () => Results.Ok()));
 ```
 
-## `KamiSama.Extensions.WebModules`
+## `KamiSama.Modules`
 
 ### `ForwardedHeadersModule`
 Applies forwarded headers middleware.
@@ -197,7 +197,7 @@ Convenience extension for the module.
 builder.AddForwardedHeaders(options => options.ForwardedHeaders = ForwardedHeaders.All);
 ```
 
-## `KamiSama.Extensions.WebModules`
+## `KamiSama.Modules`
 
 ### `HstsModule`
 Applies HSTS middleware.
@@ -209,7 +209,7 @@ Convenience extension for the module.
 builder.AddHsts();
 ```
 
-## `KamiSama.Extensions.WebModules`
+## `KamiSama.Modules`
 
 ### `HttpsRedirectionModule`
 Applies HTTPS redirection middleware.
@@ -221,7 +221,7 @@ Convenience extension for the module.
 builder.AddHttpsRedirection();
 ```
 
-## `KamiSama.Extensions.WebModules`
+## `KamiSama.Modules`
 
 ### `RazorComponentModule<TRootComponent>`
 Registers Razor components and maps the root component.
@@ -233,7 +233,7 @@ Convenience extension for the module.
 builder.AddRazorComponents<App>();
 ```
 
-## `KamiSama.Extensions.WebModules`
+## `KamiSama.Modules`
 
 ### `RazorPagesModule`
 Registers Razor Pages and maps them.
@@ -245,7 +245,7 @@ Convenience extension for the module.
 builder.AddRazorPages(options => { });
 ```
 
-## `KamiSama.Extensions.WebModules`
+## `KamiSama.Modules`
 
 ### `RequestLocalizationModule`
 Adds localization services and request localization middleware.
@@ -263,7 +263,7 @@ using System.Globalization;
 builder.AddRequestLocalization(new RequestCulture("fa-IR"), new CultureInfo("fa-IR"), new CultureInfo("en-US"));
 ```
 
-## `KamiSama.Extensions.WebModules`
+## `KamiSama.Modules`
 
 ### `ResponseCompressionModule`
 Registers response compression and applies middleware.
@@ -275,7 +275,7 @@ Convenience extension for the module.
 builder.AddResponseCompression();
 ```
 
-## `KamiSama.Extensions.WebModules`
+## `KamiSama.Modules`
 
 ### `ResponseCachingModule`
 Registers response caching options but currently throws `NotImplementedException` during apply.
@@ -287,7 +287,7 @@ Convenience extension for the module.
 builder.AddResponseCaching();
 ```
 
-## `KamiSama.Extensions.WebModules`
+## `KamiSama.Modules`
 
 ### `RoutingModule`
 Registers route options and applies `UseRouting()`.
@@ -299,7 +299,7 @@ Convenience extension for the module.
 builder.AddRouting(options => options.LowercaseUrls = true);
 ```
 
-## `KamiSama.Extensions.WebModules`
+## `KamiSama.Modules`
 
 ### `StaticFilesModule`
 Maps static assets.

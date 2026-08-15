@@ -10,7 +10,7 @@ Kind: `Property`
 
 ## Description
 
-Problem details provider factory function. Use it with the surrounding package APIs when composing application code.
+Gets or sets the dependency-injection factory that creates the scoped conversion provider. Use it with the surrounding package APIs when composing application code.
 
 ## Declaration
 

@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Extensions.RestSharp](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.Extensions.RestSharp/ServiceCollectionExtensions.cs:7](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Extensions.RestSharp/ServiceCollectionExtensions.cs#L7)
+Source: [src/KamiSama.Extensions.RestSharp/ServiceCollectionExtensions.cs:11](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Extensions.RestSharp/ServiceCollectionExtensions.cs#L11)
 
 Namespace: `KamiSama.Extensions.RestSharp`
 
@@ -12,12 +12,23 @@ Kind: `Class`
 
 ## Description
 
-Provides the `ServiceCollectionExtensions` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
+Registers the RestSharp client and fluent request builder used by this package. Call `AddKamiSamaRestSharp` during service configuration after making `HttpClient` available from dependency injection.
 
 ## Declaration
 
 ```csharp
 public static class ServiceCollectionExtensions
+```
+
+## Example
+
+```csharp
+using KamiSama.Extensions.RestSharp;
+using Microsoft.Extensions.DependencyInjection;
+
+var services = new ServiceCollection();
+services.AddHttpClient();
+services.AddKamiSamaRestSharp();
 ```
 
 ## Constructors
@@ -30,5 +41,5 @@ This type does not declare a non-private constructor in source.
 
 | Member | Description |
 | --- | --- |
-| [AddKamiSamaRestSharp](method-addkamisamarestsharp-9.md) | Runs the `AddKamiSamaRestSharp` operation on `ServiceCollectionExtensions`. Use it when your code needs this specific behavior from the package. |
+| [AddKamiSamaRestSharp](method-addkamisamarestsharp-18.md) | Registers `IRestClient` and `IRestBuilder` as scoped services. Use it with the surrounding package APIs when composing application code. |
 

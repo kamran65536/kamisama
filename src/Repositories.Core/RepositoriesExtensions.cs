@@ -5,26 +5,26 @@ using System.Linq.Expressions;
 namespace KamiSama.Repositories
 {
 	/// <summary>
-	/// Repositories Extensions
+	/// Provides convenience queries for <see cref="IQueryableRepository{TEntity}"/> implementations.
 	/// </summary>
 	public static class RepositoriesExtensions
     {
 		/// <summary>
-		/// Returns first or default item for IQueryableRepository
+		/// Returns the first entity matching the predicate, or the default value when none matches.
 		/// </summary>
-		/// <remarks>if you want to search on IRepository, you can also use Find method</remarks>
-		/// <typeparam name="TEntity"></typeparam>
-		/// <param name="repository"></param>
-		/// <param name="predicate"></param>
-		/// <returns></returns>
+		/// <remarks>This delegates filtering to <see cref="IQueryableRepository{TEntity}.Where"/> and then applies LINQ <c>FirstOrDefault</c>.</remarks>
+		/// <typeparam name="TEntity">The entity type exposed by the repository.</typeparam>
+		/// <param name="repository">The queryable repository to search.</param>
+		/// <param name="predicate">The predicate used to select an entity.</param>
+		/// <returns>The first matching entity, or the default value for <typeparamref name="TEntity"/>.</returns>
 		public static TEntity? FirstOrDefault< TEntity>(this IQueryableRepository<TEntity> repository, Expression<Func<TEntity, bool>> predicate)
 			=> repository.Where(predicate).FirstOrDefault();
 		/// <summary>
-		/// Returns all Items in the repository
+		/// Returns all entities by querying the repository with an always-true predicate.
 		/// </summary>
-		/// <typeparam name="TEntity"></typeparam>
-		/// <param name="repository"></param>
-		/// <returns></returns>
+		/// <typeparam name="TEntity">The entity type exposed by the repository.</typeparam>
+		/// <param name="repository">The queryable repository to enumerate.</param>
+		/// <returns>A query containing all repository entities.</returns>
 		public static IQueryable<TEntity> GetAll<TEntity>(this IQueryableRepository<TEntity> repository)
 			=> repository.Where(x => true);
 	}

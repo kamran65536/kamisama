@@ -12,7 +12,7 @@ Kind: `Class`
 
 ## Description
 
-Options object that controls database initialization work. Use it to turn migration, normal seed data, and test seed data on or off.
+Selects whether a database initializer should migrate, create required application data, or create test data. The `IDatabaseInitializer<TDbContext>` implementation defines the actual work and ordering.
 
 ## Declaration
 
@@ -43,7 +43,7 @@ This type does not declare a non-private constructor in source.
 
 | Member | Description |
 | --- | --- |
-| [InitializeData](property-initializedata-18.md) | Initialize necessary data to the database. Use it with the surrounding package APIs when composing application code. |
-| [InitializeTestData](property-initializetestdata-23.md) | Adds test data (for test purposes). Use it with the surrounding package APIs when composing application code. |
-| [Migrate](property-migrate-13.md) | Migrate database to the latest version. Use it with the surrounding package APIs when composing application code. |
+| [InitializeData](property-initializedata-18.md) | Gets or sets whether the initializer should create required application data. |
+| [InitializeTestData](property-initializetestdata-23.md) | Gets or sets whether the initializer should create test data; production callers normally leave this disabled. |
+| [Migrate](property-migrate-13.md) | Gets or sets whether the initializer should run its database migration stage. |
 

@@ -2,17 +2,32 @@
 
 [Back to package index](../index.md)
 
-Version: `10.0.10`
+Version: `10.0.0`
 
 ## Description
 
-Repository implementation and paging helpers for classic Entity Framework projects. Use it with the surrounding package APIs when composing application code.
+Entity Framework 6 repositories with immediate persistence and ordered-query paging. Use this package to expose tracked EF6 queries through KamiSama repository contracts and produce paged UI or API results.
 
-## Install
+## How to use
 
 ```shell
-dotnet add package KamiSama.Repositories.EntityFramework --version 10.0.10
+dotnet add package KamiSama.Repositories.EntityFramework --version 10.0.0
 ```
+
+Construct a repository with an application-owned EF6 context. Mutations save immediately, while queries remain tracked and deferred:
+
+```csharp
+using KamiSama.Extensions.Paging;
+using KamiSama.Repositories.EntityFramework;
+
+var repository = new DbRepository<User, AppDbContext>(dbContext);
+await repository.AddAsync(new User { Name = "Ada" }, cancellationToken);
+PagedResult<User> page = await repository.AsQueryable()
+    .OrderBy(user => user.Id)
+    .MakePagedAsync(SearchModel.FromPage(1, 20), cancellationToken);
+```
+
+The repository does not own or dispose the context. Each add, update, or delete calls `SaveChanges` immediately rather than participating in a repository-level unit of work. Queries track entities by default. Paging requires an ordered query, performs a synchronous uncancellable count before cancellable asynchronous materialization, and uses separate count and data queries.
 
 ## Namespaces
 
@@ -20,6 +35,6 @@ dotnet add package KamiSama.Repositories.EntityFramework --version 10.0.10
 
 ## Types
 
-- [KamiSama.Repositories.EntityFramework.DbRepository<TEntity, TDbContext>](kamisama-repositories-entityframework/kamisama-repositories-entityframework-dbrepository-tentity-tdbcontext/index.md) - Repository wrapper around an EF DbContext. Use it when you want the standard KamiSama repository methods over a DbSet without writing the same CRUD code in each repository.
-- [KamiSama.Repositories.EntityFramework.DbRepository<TEntity>](kamisama-repositories-entityframework/kamisama-repositories-entityframework-dbrepository-tentity/index.md) - Repository wrapper around an EF DbContext. Use it when you want the standard KamiSama repository methods over a DbSet without writing the same CRUD code in each repository.
-- [KamiSama.Repositories.EntityFramework.IOrderedQueryableExtensions](kamisama-repositories-entityframework/kamisama-repositories-entityframework-iorderedqueryableextensions/index.md) - Provides the `IOrderedQueryableExtensions` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
+- [KamiSama.Repositories.EntityFramework.DbRepository<TEntity, TDbContext>](kamisama-repositories-entityframework/kamisama-repositories-entityframework-dbrepository-tentity-tdbcontext/index.md) - EF6 repository over a borrowed `DbContext`. Queries track by default, every mutation saves immediately, and repository disposal does not dispose the context.
+- [KamiSama.Repositories.EntityFramework.DbRepository<TEntity>](kamisama-repositories-entityframework/kamisama-repositories-entityframework-dbrepository-tentity/index.md) - EF6 repository over a borrowed `DbContext`. Queries track by default, every mutation saves immediately, and repository disposal does not dispose the context.
+- [KamiSama.Repositories.EntityFramework.IOrderedQueryableExtensions](kamisama-repositories-entityframework/kamisama-repositories-entityframework-iorderedqueryableextensions/index.md) - Pages ordered EF6 queries by synchronously counting all matches and asynchronously materializing one page. Cancellation does not cover the count, and count and data are separate queries.

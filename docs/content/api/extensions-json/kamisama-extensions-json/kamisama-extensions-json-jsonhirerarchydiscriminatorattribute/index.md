@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Extensions.Json](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/Json/JsonHirerarchyDiscriminatorAttribute.cs:6](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Json/JsonHirerarchyDiscriminatorAttribute.cs#L6)
+Source: [src/Json/JsonHirerarchyDiscriminatorAttribute.cs:7](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Json/JsonHirerarchyDiscriminatorAttribute.cs#L7)
 
 Namespace: `KamiSama.Extensions.Json`
 
@@ -12,12 +12,26 @@ Kind: `Class`
 
 ## Description
 
-Json Discriminator Attribute. Use it with the surrounding package APIs when composing application code.
+Marks the property used by `HierarchicalJsonConverter{T}` as the polymorphic type discriminator. Apply it to exactly one public property on the base type.
 
 ## Declaration
 
 ```csharp
 public class JsonHirerarchyDiscriminatorAttribute : JsonAttribute
+```
+
+## Example
+
+```csharp
+using System.Text.Json.Serialization;
+using KamiSama.Extensions.Json;
+
+public abstract record Message
+{
+    [JsonHirerarchyDiscriminator]
+    [JsonPropertyName("kind")]
+    public abstract string Kind { get; }
+}
 ```
 
 ## Constructors

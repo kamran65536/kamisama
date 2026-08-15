@@ -10,7 +10,7 @@ Kind: `Method`
 
 ## Description
 
-Uses `KamiSamaProblemDetailsProvider` as default Problem Details Provider. Use it with the surrounding package APIs when composing application code.
+Selects `KamiSamaProblemDetailsProvider` and applies this instance&apos;s localization settings when it is resolved. Use it with the surrounding package APIs when composing application code.
 
 ## Declaration
 
@@ -26,7 +26,7 @@ This member does not declare parameters.
 
 | Type | Description |
 | --- | --- |
-| `KamiSamaProblemDetailsOptions` | Returns a `KamiSamaProblemDetailsOptions` value. |
+| `KamiSamaProblemDetailsOptions` | This options instance for fluent configuration. |
 
 ## Example
 

@@ -10,7 +10,7 @@ Kind: `Method`
 
 ## Description
 
-Checks that entity exists by name or not. Use it with the surrounding package APIs when composing application code.
+Determines whether an entity with the supplied name exists. Use it with the surrounding package APIs when composing application code.
 
 ## Declaration
 
@@ -22,14 +22,14 @@ Task<bool> ExistsByNameAsync(string name, CancellationToken cancellationToken);
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `name` | `string` | `-` | The `name` value passed to this member. |
-| `cancellationToken` | `CancellationToken` | `-` | The `cancellationToken` value passed to this member. |
+| `name` | `string` | `-` | The name to test. |
+| `cancellationToken` | `CancellationToken` | `-` | A token that can cancel the operation. |
 
 ## Returns
 
 | Type | Description |
 | --- | --- |
-| `Task<bool>` | Returns a `Task<bool>` value. |
+| `Task<bool>` | when the entity exists; otherwise, . |
 
 ## Example
 

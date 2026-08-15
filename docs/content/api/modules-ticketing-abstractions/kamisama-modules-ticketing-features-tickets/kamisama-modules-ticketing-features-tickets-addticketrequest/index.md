@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Modules.Ticketing.Abstractions](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Dtos.cs:13](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Dtos.cs#L13)
+Source: [src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Dtos.cs:81](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Dtos.cs#L81)
 
 Namespace: `KamiSama.Modules.Ticketing.Features.Tickets`
 
@@ -12,7 +12,7 @@ Kind: `Record`
 
 ## Description
 
-Provides the `AddTicketRequest` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
+Supplies the data used to open a ticket, create its initial user-side comment, and attach external content references. Core requires the category to exist and forces the initial status to `TicketStatus.Open`.
 
 ## Declaration
 
@@ -24,9 +24,9 @@ public record AddTicketRequest(Guid AuthorUserId, string Title, Guid CategoryId,
 
 ### Primary constructor
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Dtos.cs#L13)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Dtos.cs#L81)
 
-Initializes the type with the values required by its declaration. Use it with the surrounding package APIs when composing application code.
+Supplies the data used to open a ticket, create its initial user-side comment, and attach external content references. Core requires the category to exist and forces the initial status to `TicketStatus.Open`.
 
 ```csharp
 public record AddTicketRequest(Guid AuthorUserId, string Title, Guid CategoryId, string InitialComment, TicketPriority Priority, List<Guid> InitialAttachmentContentIds);
@@ -36,12 +36,12 @@ public record AddTicketRequest(Guid AuthorUserId, string Title, Guid CategoryId,
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `AuthorUserId` | `Guid` | `-` | The `AuthorUserId` value passed to this member. |
-| `Title` | `string` | `-` | The `Title` value passed to this member. |
-| `CategoryId` | `Guid` | `-` | The `CategoryId` value passed to this member. |
-| `InitialComment` | `string` | `-` | The `InitialComment` value passed to this member. |
-| `Priority` | `TicketPriority` | `-` | The `Priority` value passed to this member. |
-| `InitialAttachmentContentIds` | `List<Guid>` | `-` | The `InitialAttachmentContentIds` value passed to this member. |
+| `AuthorUserId` | `Guid` | `-` | The identifier of the user opening the ticket and authoring its initial comment. |
+| `Title` | `string` | `-` | The ticket title. |
+| `CategoryId` | `Guid` | `-` | The identifier of an existing ticket category. |
+| `InitialComment` | `string` | `-` | The initial user-side comment text. |
+| `Priority` | `TicketPriority` | `-` | The initial ticket priority. |
+| `InitialAttachmentContentIds` | `List<Guid>` | `-` | External content identifiers to attach to the initial comment. |
 
 ## Members
 

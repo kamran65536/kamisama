@@ -1,5 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageDocumentationRoot>../../docs/content/api/chassis-problemdetails</PackageDocumentationRoot>
+	</PropertyGroup>
 	<Import Project="../props.xml" />
+	<PropertyGroup>
+		<Description>ASP.NET Core ProblemDetails integration for converting KamiSama HTTP exceptions into standardized API error responses.</Description>
+	</PropertyGroup>
 	<ItemGroup>
 	  <None Remove="KamiSama.ico" />
 	</ItemGroup>
@@ -15,6 +21,7 @@
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>
 	    <DependentUpon>Resources.resx</DependentUpon>
+	    <NoWarn>$(NoWarn);1591</NoWarn>
 	  </Compile>
 	</ItemGroup>
 	<ItemGroup>

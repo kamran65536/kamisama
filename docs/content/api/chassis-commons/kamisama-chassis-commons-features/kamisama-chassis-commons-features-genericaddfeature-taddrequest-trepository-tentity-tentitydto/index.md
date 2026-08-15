@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Chassis.Commons](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/Chassis.Commons/Features/GenericAddFeature.cs:6](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Commons/Features/GenericAddFeature.cs#L6)
+Source: [src/Chassis.Commons/Features/GenericAddFeature.cs:11](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Commons/Features/GenericAddFeature.cs#L11)
 
 Namespace: `KamiSama.Chassis.Commons.Features`
 
@@ -49,9 +49,9 @@ public sealed class AddProductFeature(IProductRepository repository)
 
 ### Primary constructor
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Commons/Features/GenericAddFeature.cs#L6)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Commons/Features/GenericAddFeature.cs#L11)
 
-Generic implementation of `IAddFeature{TAddRequest, TEntityDto}`. Use it with the surrounding package APIs when composing application code.
+Implements the create workflow by validating, mapping, persisting, and returning a DTO. Use it with the surrounding package APIs when composing application code.
 
 ```csharp
 public abstract class GenericAddFeature<TAddRequest, TRepository, TEntity, TEntityDto>(TRepository repository) : 
@@ -63,7 +63,7 @@ public abstract class GenericAddFeature<TAddRequest, TRepository, TEntity, TEnti
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `repository` | `TRepository` | `-` | The `repository` value passed to this member. |
+| `repository` | `TRepository` | `-` | The repository used by the workflow and derived hooks. |
 
 ## Members
 
@@ -71,14 +71,14 @@ public abstract class GenericAddFeature<TAddRequest, TRepository, TEntity, TEnti
 
 | Member | Description |
 | --- | --- |
-| [AddAsync](method-addasync-30.md) | Runs the complete create flow: check duplicates, convert the request to an entity, add it through the repository, convert the saved entity to a DTO, and return it. |
-| [CheckDuplicateAsync](method-checkduplicateasync-17.md) | Validation hook called at the start of `AddAsync`. Override it to detect duplicate or conflicting data and throw a domain or HTTP exception before the entity is created. |
-| [ConvertToDto](method-converttodto-28.md) | Mapping hook called after the repository add succeeds. Override it to return the DTO shape expected by callers. |
-| [ConvertToEntity](method-converttoentity-21.md) | Mapping hook called after duplicate validation. Override it to create the entity that will be persisted from the incoming add request. |
+| [AddAsync](method-addasync-44.md) | Runs the complete create flow: check duplicates, convert the request to an entity, add it through the repository, convert the saved entity to a DTO, and return it. |
+| [CheckDuplicateAsync](method-checkduplicateasync-25.md) | Validation hook called at the start of `AddAsync`. Override it to detect duplicate or conflicting data and throw a domain or HTTP exception before the entity is created. |
+| [ConvertToDto](method-converttodto-39.md) | Mapping hook called after the repository add succeeds. Override it to return the DTO shape expected by callers. |
+| [ConvertToEntity](method-converttoentity-32.md) | Mapping hook called after duplicate validation. Override it to create the entity that will be persisted from the incoming add request. |
 
 ### Properties
 
 | Member | Description |
 | --- | --- |
-| [Repository](property-repository-13.md) | Protected repository used by derived feature implementations. Use it inside mapping and validation hooks when the feature needs data access beyond the base add flow. |
+| [Repository](property-repository-18.md) | Protected repository used by derived feature implementations. Use it inside mapping and validation hooks when the feature needs data access beyond the base add flow. |
 

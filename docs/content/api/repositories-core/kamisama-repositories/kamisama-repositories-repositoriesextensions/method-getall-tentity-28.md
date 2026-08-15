@@ -10,7 +10,7 @@ Kind: `Method`
 
 ## Description
 
-Returns all Items in the repository. Use it with the surrounding package APIs when composing application code.
+Returns all entities by calling the repository's `Where` method with an always-true predicate.
 
 ## Declaration
 
@@ -22,19 +22,19 @@ public static IQueryable<TEntity> GetAll<TEntity>(this IQueryableRepository<TEnt
 
 | Name | Description |
 | --- | --- |
-| `TEntity` |  |
+| `TEntity` | The entity type exposed by the repository. |
 
 ## Parameters
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `repository (extension receiver)` | `IQueryableRepository<TEntity>` | `-` | The `repository` value passed to this member. |
+| `repository (extension receiver)` | `IQueryableRepository<TEntity>` | `-` | The queryable repository to enumerate. |
 
 ## Returns
 
 | Type | Description |
 | --- | --- |
-| `IQueryable<TEntity>` | Returns a `IQueryable<TEntity>` value. |
+| `IQueryable<TEntity>` | A query containing all repository entities. |
 
 ## Example
 

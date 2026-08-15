@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Repositories.EntityFramework](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/Repositories.EntityFramework/DbRepository.cs:130](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Repositories.EntityFramework/DbRepository.cs#L130)
+Source: [src/Repositories.EntityFramework/DbRepository.cs:145](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Repositories.EntityFramework/DbRepository.cs#L145)
 
 Namespace: `KamiSama.Repositories.EntityFramework`
 
@@ -12,7 +12,7 @@ Kind: `Class`
 
 ## Description
 
-Repository wrapper around an EF DbContext. Use it when you want the standard KamiSama repository methods over a DbSet without writing the same CRUD code in each repository.
+EF6 repository over a borrowed `DbContext`. Queries track by default, every mutation saves immediately, and repository disposal does not dispose the context.
 
 ## Declaration
 
@@ -24,15 +24,27 @@ public class DbRepository<TEntity, TDbContext>(TDbContext context) : DbRepositor
 
 ## Remarks
 
-constructor
+Mutations save immediately, queries track by default, and disposal does not dispose the supplied context.
+
+## Example
+
+```csharp
+using KamiSama.Repositories.EntityFramework;
+
+public sealed class UserRepository(AppDbContext context)
+    : DbRepository<User, AppDbContext>(context)
+{
+    public IQueryable<User> Active() => Context.Users.Where(user => user.IsActive);
+}
+```
 
 ## Constructors
 
 ### Primary constructor
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Repositories.EntityFramework/DbRepository.cs#L130)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Repositories.EntityFramework/DbRepository.cs#L145)
 
-Database Repository with context type. Use it with the surrounding package APIs when composing application code.
+Exposes a strongly typed protected context while retaining the EF6 repository behavior. Use it with the surrounding package APIs when composing application code.
 
 ```csharp
 public class DbRepository<TEntity, TDbContext>(TDbContext context) : DbRepository<TEntity>(context)
@@ -44,7 +56,7 @@ public class DbRepository<TEntity, TDbContext>(TDbContext context) : DbRepositor
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `context` | `TDbContext` | `-` | The `context` value passed to this member. |
+| `context` | `TDbContext` | `-` | The concrete context that owns the entity set and its lifetime. |
 
 ## Members
 
@@ -52,5 +64,5 @@ public class DbRepository<TEntity, TDbContext>(TDbContext context) : DbRepositor
 
 | Member | Description |
 | --- | --- |
-| [Context](property-context-138.md) | Exposes the `Context` value on `DbRepository<TEntity, TDbContext>`. Read or set it as part of configuring or using the type. |
+| [Context](property-context-154.md) | Gets the borrowed context as &lt;typeparamref name=&quot;TDbContext&quot;/&gt; for derived repositories. Use it with the surrounding package APIs when composing application code. |
 

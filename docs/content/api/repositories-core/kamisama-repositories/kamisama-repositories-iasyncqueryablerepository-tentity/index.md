@@ -12,12 +12,22 @@ Kind: `Interface`
 
 ## Description
 
-IAsyncQueryable Repository. Use it with the surrounding package APIs when composing application code.
+Combines asynchronous repository operations with a synchronous `Where` method returning `IQueryable<TEntity>`. The interface name does not make query creation or enumeration asynchronous.
 
 ## Declaration
 
 ```csharp
 public interface IAsyncQueryableRepository<TEntity> : IAsyncRepository<TEntity>
+```
+
+## Example
+
+```csharp
+using KamiSama.Repositories;
+
+// Where returns IQueryable<TEntity> synchronously even on this async repository contract.
+IQueryable<User> activeUsers = repository.Where(user => user.IsActive);
+User? user = await repository.FindAsync(user => user.Id == userId, cancellationToken);
 ```
 
 ## Constructors
@@ -30,5 +40,5 @@ This type does not declare a non-private constructor in source.
 
 | Member | Description |
 | --- | --- |
-| [Where](method-where-16.md) | the same as Where, just to indicate async behavior. Use it with the surrounding package APIs when composing application code. |
+| [Where](method-where-16.md) | Returns an `IQueryable<TEntity>` filtered by the predicate. The implementation determines whether the query is translated, deferred, live, or a snapshot; this method is synchronous on both interfaces. |
 

@@ -15,7 +15,7 @@ using KamiSama.Repositories;
 using KamiSama.Repositories.EntityFrameworkCore.Initialization;
 using KamiSama.Repositories.Initialization;
 //#endif
-using KamiSama.Extensions.WebModules;
+using KamiSama.Modules;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

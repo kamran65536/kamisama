@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageDocumentationRoot>../../docs/content/api/modules-policyengine-abstractions</PackageDocumentationRoot>
+	</PropertyGroup>
+	<Import Project="../props.xml" />
+
+	<PropertyGroup>
+		<Description>Provider-neutral policy definition CRUD contracts, DTOs, search models, and evaluation data shapes; it does not include a policy evaluator or authorization integration.</Description>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Chassis.Commons.Abstractions\KamiSama.Chassis.Commons.Abstractions.csproj" />
+	</ItemGroup>
+</Project>

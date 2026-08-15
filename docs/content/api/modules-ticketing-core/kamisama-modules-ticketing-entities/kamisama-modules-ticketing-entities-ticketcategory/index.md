@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Modules.Ticketing.Core](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.Modules.Ticketing.Core/Entities/TicketCategory.cs:3](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Core/Entities/TicketCategory.cs#L3)
+Source: [src/KamiSama.Modules.Ticketing.Core/Entities/TicketCategory.cs:7](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Core/Entities/TicketCategory.cs#L7)
 
 Namespace: `KamiSama.Modules.Ticketing.Entities`
 
@@ -12,12 +12,24 @@ Kind: `Class`
 
 ## Description
 
-Provides the `TicketCategory` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
+EF Core ticket category with a required 50-character name and timestamps. Duplicate checks occur in feature code, while provider migrations create no unique name index.
 
 ## Declaration
 
 ```csharp
 public class TicketCategory
+```
+
+## Example
+
+```csharp
+var category = new TicketCategory
+{
+    Id = Guid.NewGuid(),
+    Name = "Billing",
+    CreatedAt = DateTime.UtcNow,
+    UpdatedAt = DateTime.UtcNow
+};
 ```
 
 ## Constructors
@@ -30,8 +42,8 @@ This type does not declare a non-private constructor in source.
 
 | Member | Description |
 | --- | --- |
-| [CreatedAt](property-createdat-8.md) | Exposes the `CreatedAt` value on `TicketCategory`. Read or set it as part of configuring or using the type. |
-| [Id](property-id-5.md) | Exposes the `Id` value on `TicketCategory`. Read or set it as part of configuring or using the type. |
-| [Name](property-name-6.md) | Exposes the `Name` value on `TicketCategory`. Read or set it as part of configuring or using the type. |
-| [UpdatedAt](property-updatedat-9.md) | Exposes the `UpdatedAt` value on `TicketCategory`. Read or set it as part of configuring or using the type. |
+| [CreatedAt](property-createdat-15.md) | Gets or sets the category creation timestamp. Use it with the surrounding package APIs when composing application code. |
+| [Id](property-id-10.md) | Gets or sets the category identifier. Use it with the surrounding package APIs when composing application code. |
+| [Name](property-name-12.md) | Gets or sets the required category name, limited to 50 characters by the EF Core model. Use it with the surrounding package APIs when composing application code. |
+| [UpdatedAt](property-updatedat-17.md) | Gets or sets the latest category update timestamp. Use it with the surrounding package APIs when composing application code. |
 

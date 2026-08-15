@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Modules.Ticketing.Abstractions](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.Modules.Ticketing.Abstractions/Features/TicketCategories/Features.cs:11](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/TicketCategories/Features.cs#L11)
+Source: [src/KamiSama.Modules.Ticketing.Abstractions/Features/TicketCategories/Features.cs:39](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/TicketCategories/Features.cs#L39)
 
 Namespace: `KamiSama.Modules.Ticketing.Features.TicketCategories`
 
@@ -12,12 +12,18 @@ Kind: `Interface`
 
 ## Description
 
-Defines the contract for `IExistsTicketCategoryById` behavior. Implement this interface when you need to plug your own code into the surrounding KamiSama package.
+Tests whether a ticket category exists for a `Guid` identifier. Implementations define the underlying lookup behavior.
 
 ## Declaration
 
 ```csharp
 public interface IExistsTicketCategoryById : IExistsByIdFeature<Guid>;
+```
+
+## Example
+
+```csharp
+bool exists = await categoryExists.ExistsByIdAsync(categoryId, cancellationToken);
 ```
 
 ## Constructors

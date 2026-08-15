@@ -3,7 +3,8 @@
 namespace KamiSama.Extensions.Json
 {
 	/// <summary>
-	/// Generic Json Hierarchical Json Converter
+	/// Deserializes instances of a base type as registered derived types selected by a discriminator property.
+	/// Mark the base type's discriminator property and register every supported discriminator value before deserialization.
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
 	public class HierarchicalJsonConverter<T> : JsonConverter<T>
@@ -17,14 +18,14 @@ namespace KamiSama.Extensions.Json
 		/// </summary>
 		internal static readonly Dictionary<string, Type> typeMap = new(StringComparer.InvariantCultureIgnoreCase);
 		/// <summary>
-		/// Registers a child type to a key
+		/// Associates a discriminator value with the derived type <typeparamref name="TChild"/>.
 		/// </summary>
 		/// <typeparam name="TChild"></typeparam>
 		/// <param name="discriminatorKeyValue"></param>
 		public static void Register<TChild>(string discriminatorKeyValue) where TChild : T
 			=> typeMap[discriminatorKeyValue] = typeof(TChild);
 		/// <summary>
-		/// Registers a child type based on default discriminator value
+		/// Registers <typeparamref name="TChild"/> using the discriminator value obtained from a newly constructed instance.
 		/// </summary>
 		/// <typeparam name="TChild"></typeparam>
 		public static void Register<TChild>() where TChild : T, new()
@@ -33,7 +34,7 @@ namespace KamiSama.Extensions.Json
 			Register<TChild>(discriminatorProperty.GetValue(instance) + "");
 		}
 		/// <summary>
-		/// Registers a child type to a key
+		/// Associates a discriminator value with the specified runtime type.
 		/// </summary>
 		/// <param name="discriminatorKeyValue"></param>
 		/// <param name="type"></param>
@@ -57,7 +58,7 @@ namespace KamiSama.Extensions.Json
 			discriminatorMapKeyName = attr?.Name ?? discriminatorProperty.Name;
 		}
 		/// <summary>
-		/// Writes a channel configuration (basically this method simply calls JsonSerializer.Serialize method)
+		/// Serializes the value using its runtime type.
 		/// </summary>
 		/// <param name="writer"></param>
 		/// <param name="value"></param>
@@ -65,7 +66,7 @@ namespace KamiSama.Extensions.Json
 		public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
 			=> JsonSerializer.Serialize(writer, value, value?.GetType() ?? typeof(object), options);
 		/// <summary>
-		/// Reads a <typeparamref name="T"/> from an input json and converts based on key
+		/// Deserializes a JSON object as the derived type registered for its discriminator value.
 		/// </summary>
 		/// <param name="reader">JsonReader</param>
 		/// <param name="typeToConvert"></param>

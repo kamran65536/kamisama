@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Modules.Ticketing.Abstractions](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.Modules.Ticketing.Abstractions/Features/TicketCategories/Dtos.cs:9](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/TicketCategories/Dtos.cs#L9)
+Source: [src/KamiSama.Modules.Ticketing.Abstractions/Features/TicketCategories/Dtos.cs:42](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/TicketCategories/Dtos.cs#L42)
 
 Namespace: `KamiSama.Modules.Ticketing.Features.TicketCategories`
 
@@ -12,7 +12,7 @@ Kind: `Record`
 
 ## Description
 
-Provides the `AddTicketCategoryRequest` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
+Supplies the name for a new ticket category. Core checks the name for a case-insensitive duplicate before saving.
 
 ## Declaration
 
@@ -24,9 +24,9 @@ public record AddTicketCategoryRequest(string Name);
 
 ### Primary constructor
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/TicketCategories/Dtos.cs#L9)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/TicketCategories/Dtos.cs#L42)
 
-Initializes the type with the values required by its declaration. Use it with the surrounding package APIs when composing application code.
+Supplies the name for a new ticket category. Core checks the name for a case-insensitive duplicate before saving.
 
 ```csharp
 public record AddTicketCategoryRequest(string Name);
@@ -36,7 +36,7 @@ public record AddTicketCategoryRequest(string Name);
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `Name` | `string` | `-` | The `Name` value passed to this member. |
+| `Name` | `string` | `-` | The category name to create. |
 
 ## Members
 

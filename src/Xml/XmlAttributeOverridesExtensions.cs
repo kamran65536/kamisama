@@ -4,12 +4,13 @@ using System.Xml.Serialization;
 namespace KamiSama.Extensions
 {
 	/// <summary>
-	/// Adds AutoXmlInclude, AutoXmlElement, AutoXmlArrayItem attributes to XmlOverrides
+	/// Provides extension methods that populate <see cref="XmlAttributeOverrides"/> from <see cref="AutoXmlElementAttribute"/> and <see cref="AutoXmlArrayItemAttribute"/> annotations.
+	/// Use the resulting overrides to construct an <see cref="XmlSerializer"/> for polymorphic object graphs.
 	/// </summary>
 	public static class XmlAttributeOverridesExtensions
 	{
 		/// <summary>
-		/// Adds AutoXmlAttributes for root type <paramref name="rootType"/> and necessary overrides
+		/// Populates the overrides for the root object graph using concrete derived types discovered in the specified assemblies.
 		/// </summary>
 		/// <param name="overrides"></param>
 		/// <param name="assemblies"></param>
@@ -26,7 +27,7 @@ namespace KamiSama.Extensions
 			AddAutoXmlAttributes(overrides, rootType, allTypes);
 		}
 		/// <summary>
-		/// Adds AutoXmlAttributes for root type <paramref name="rootType"/> and necessary overrides
+		/// Populates the overrides for the root object graph using the supplied types as candidates for polymorphic members.
 		/// </summary>
 		public static void AddAutoXmlAttributes(this XmlAttributeOverrides overrides, Type rootType, Type[] allTypes)
 		{

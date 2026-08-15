@@ -22,14 +22,14 @@ Task<TEntity?> FindByNameAsync(string name, CancellationToken cancellationToken)
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `name` | `string` | `-` | The `name` value passed to this member. |
-| `cancellationToken` | `CancellationToken` | `-` | The `cancellationToken` value passed to this member. |
+| `name` | `string` | `-` | The name to find. |
+| `cancellationToken` | `CancellationToken` | `-` | A token that can cancel the operation. |
 
 ## Returns
 
 | Type | Description |
 | --- | --- |
-| `Task<TEntity?>` | Returns a `Task<TEntity?>` value. |
+| `Task<TEntity?>` | The matching entity, or when none exists. |
 
 ## Example
 

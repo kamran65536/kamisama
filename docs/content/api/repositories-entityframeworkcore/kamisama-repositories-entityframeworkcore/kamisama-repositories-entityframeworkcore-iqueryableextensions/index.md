@@ -12,12 +12,24 @@ Kind: `Class`
 
 ## Description
 
-Provides the `IQueryableExtensions` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
+Pages EF Core queries using caller-supplied ordering. It synchronously counts all matches before cancellable asynchronous materialization, using two separate database queries.
 
 ## Declaration
 
 ```csharp
 public static class IQueryableExtensions
+```
+
+## Example
+
+```csharp
+using KamiSama.Extensions.Paging;
+using KamiSama.Repositories.EntityFrameworkCore;
+
+PagedResult<User> page = await dbContext.Users
+    .AsNoTracking()
+    .OrderBy(user => user.Id)
+    .MakePagedAsync(SearchModel.FromPage(1, 20), cancellationToken);
 ```
 
 ## Constructors
@@ -30,5 +42,5 @@ This type does not declare a non-private constructor in source.
 
 | Member | Description |
 | --- | --- |
-| [MakePagedAsync<T>](method-makepagedasync-t-22.md) | Makes the query paged, used for user interface and apis paging. Use it with the surrounding package APIs when composing application code. |
+| [MakePagedAsync<T>](method-makepagedasync-t-27.md) | Counts the complete query and materializes the requested page. Use it with the surrounding package APIs when composing application code. |
 

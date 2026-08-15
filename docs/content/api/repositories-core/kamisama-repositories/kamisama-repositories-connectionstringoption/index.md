@@ -12,7 +12,7 @@ Kind: `Class`
 
 ## Description
 
-Configuration object for database provider and connection-string settings. Bind it from configuration when wiring repository or DbContext provider packages.
+Contains the provider identifier and connection string bound from configuration. Provider packages decide which identifiers they accept and how the connection string is used.
 
 ## Declaration
 
@@ -25,9 +25,11 @@ public class ConnectionStringOption
 ```csharp
 using KamiSama.Repositories;
 
-var database = configuration
-    .GetSection("Database")
-    .Get<ConnectionStringOption>();
+var database = new ConnectionStringOption
+{
+    Provider = "sqlite",
+    ConnectionString = "Data Source=app.db"
+};
 ```
 
 ## Constructors
@@ -40,6 +42,6 @@ This type does not declare a non-private constructor in source.
 
 | Member | Description |
 | --- | --- |
-| [ConnectionString](property-connectionstring-13.md) | Exposes the `ConnectionString` value on `ConnectionStringOption`. Read or set it as part of configuring or using the type. |
-| [Provider](property-provider-18.md) | the database provider used for this configuration. Use it with the surrounding package APIs when composing application code. |
+| [ConnectionString](property-connectionstring-13.md) | Gets or sets the database connection string bound from the `connection-string` configuration key. |
+| [Provider](property-provider-18.md) | Gets or sets the provider identifier bound from the `provider` configuration key; a provider package defines accepted values. |
 

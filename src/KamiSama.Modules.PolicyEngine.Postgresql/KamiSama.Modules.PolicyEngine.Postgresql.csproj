@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageDocumentationRoot>../../docs/content/api/modules-policyengine-postgresql</PackageDocumentationRoot>
+	</PropertyGroup>
+	<Import Project="../props.xml" />
+
+	<PropertyGroup>
+		<Description>PostgreSQL EF Core context registration for PolicyEngine data management; this package currently contains no PolicyEngine migrations.</Description>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\KamiSama.Modules.PolicyEngine.Core\KamiSama.Modules.PolicyEngine.Core.csproj" />
+		<ProjectReference Include="..\Repositories.EntityFrameworkCore.Postgresql\KamiSama.Repositories.EntityFrameworkCore.Postgresql.csproj" />
+	</ItemGroup>
+</Project>

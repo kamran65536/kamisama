@@ -10,7 +10,7 @@ Kind: `Method`
 
 ## Description
 
-Adds a new item in the repository. Use it with the surrounding package APIs when composing application code.
+Adds an entity according to the implementation's persistence and duplicate rules.
 
 ## Declaration
 
@@ -22,15 +22,11 @@ void Add(TEntity item);
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `item` | `TEntity` | `-` | The `item` value passed to this member. |
+| `item` | `TEntity` | `-` | The entity to add. |
 
 ## Example
 
 ```csharp
-var options = new JsonSerializerOptions();
-options.Converters.Add(new BigIntegerJsonConverter());
-
-var x = new BigInteger(100);
-var result = x.SerializeToJson(options);
+repository.Add(user);
 ```
 

@@ -10,7 +10,7 @@ Kind: `Method`
 
 ## Description
 
-Queries items in repository for the predicate specified. Use it with the surrounding package APIs when composing application code.
+Returns an `IQueryable<TEntity>` filtered by the predicate. The implementation determines whether the query is translated, deferred, live, or a snapshot; this method is synchronous on both interfaces.
 
 ## Declaration
 
@@ -22,25 +22,17 @@ IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> predicate);
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `predicate` | `Expression<Func<TEntity, bool>>` | `-` | the predicate to search, if null it returns all items |
+| `predicate` | `Expression<Func<TEntity, bool>>` | `-` | The predicate used to filter entities. Implementations may accept to return all entities. |
 
 ## Returns
 
 | Type | Description |
 | --- | --- |
-| `IQueryable<TEntity>` | Returns a `IQueryable<TEntity>` value. |
+| `IQueryable<TEntity>` | A query containing matching entities. |
 
 ## Example
 
 ```csharp
-var sampleCollection = new [] { new SampleEntity()};
-Expression<Func<SampleEntity, bool>> predicate = se => true;
-
-var repository = Substitute.For<IQueryableRepository<SampleEntity>>();
-repository.Where(Arg.Any<Expression<Func<SampleEntity, bool>>>()).Returns(sampleCollection.AsQueryable());
-
-var result = repository.FirstOrDefault(predicate);
-
-repository.Received().Where(predicate);
+IQueryable<User> activeUsers = repository.Where(user => user.IsActive);
 ```
 

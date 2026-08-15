@@ -10,7 +10,7 @@ Kind: `Method`
 
 ## Description
 
-Finds an item in the repository. Use it with the surrounding package APIs when composing application code.
+Asynchronously returns the first entity matching the predicate, or `null` when none matches.
 
 ## Declaration
 
@@ -22,24 +22,18 @@ Task<_EntityType?> FindAsync(Expression<Func<_EntityType, bool>> predicate, Canc
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `predicate` | `Expression<Func<_EntityType, bool>>` | `-` | The `predicate` value passed to this member. |
-| `cancellationToken` | `CancellationToken` | `-` | The `cancellationToken` value passed to this member. |
+| `predicate` | `Expression<Func<_EntityType, bool>>` | `-` | The predicate used to select an entity. |
+| `cancellationToken` | `CancellationToken` | `-` | A token that can cancel the operation. |
 
 ## Returns
 
 | Type | Description |
 | --- | --- |
-| `Task<_EntityType?>` | Returns a `Task<_EntityType?>` value. |
+| `Task<_EntityType?>` | A task containing the first matching entity, or . |
 
 ## Example
 
 ```csharp
-var entity = new SampleEntity { Id = 1, Name = "Test" };
-var context = GetDbContext(initialDbSet: [entity]);
-var repository = new DbRepository<SampleEntity>(context);
-
-var result = await repository.FindAsync(x => x.Id == 1, CancellationToken.None);
-
-var result2 = await repository.FindAsync(x => x.Id == 2, CancellationToken.None);
+User? user = await repository.FindAsync(x => x.Id == userId, cancellationToken);
 ```
 

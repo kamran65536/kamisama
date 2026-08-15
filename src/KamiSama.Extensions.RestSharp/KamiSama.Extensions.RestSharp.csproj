@@ -1,8 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="../props.xml" />
-
 	<PropertyGroup>
-		<NoWarn>$(NoWarn);1591</NoWarn>
+		<PackageDocumentationRoot>../../docs/content/api/extensions-restsharp</PackageDocumentationRoot>
+	</PropertyGroup>
+	<Import Project="../props.xml" />
+	<PropertyGroup>
+		<Description>Fluent RestSharp request construction and dependency injection registration for HTTP integrations. Build GET, POST, PUT, and DELETE requests with parameters, headers, URL segments, files, or JSON bodies, then deserialize successful responses.</Description>
 	</PropertyGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Chassis.Exceptions\KamiSama.Chassis.HttpExceptions.csproj" />

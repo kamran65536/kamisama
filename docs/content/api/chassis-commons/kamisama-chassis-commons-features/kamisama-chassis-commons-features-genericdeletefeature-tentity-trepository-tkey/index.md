@@ -39,7 +39,7 @@ public sealed class DeleteProductFeature(IProductRepository repository)
 
 [source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Commons/Features/GenericDeleteFeature.cs#L9)
 
-Generic implementation of `IDeleteFeature{TKey}`. Use it with the surrounding package APIs when composing application code.
+Implements the delete workflow by loading an entity, applying a deletion guard, and deleting it when allowed. Use it with the surrounding package APIs when composing application code.
 
 ```csharp
 public abstract class GenericDeleteFeature<TEntity, TRepository, TKey>(TRepository repository) :
@@ -51,7 +51,7 @@ public abstract class GenericDeleteFeature<TEntity, TRepository, TKey>(TReposito
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `repository` | `TRepository` | `-` | The `repository` value passed to this member. |
+| `repository` | `TRepository` | `-` | The repository used by the workflow and deletion guard. |
 
 ## Members
 
@@ -59,8 +59,8 @@ public abstract class GenericDeleteFeature<TEntity, TRepository, TKey>(TReposito
 
 | Member | Description |
 | --- | --- |
-| [CanBeDeletedAsync](method-canbedeletedasync-21.md) | Deletion guard called after the entity is loaded and before deletion. Override it to prevent deletes for entities that are still referenced or otherwise protected. |
-| [DeleteAsync](method-deleteasync-25.md) | Runs the complete delete flow: load the entity by id, throw when missing, ask `CanBeDeletedAsync`, and delete through the repository only when allowed. |
+| [CanBeDeletedAsync](method-canbedeletedasync-23.md) | Deletion guard called after the entity is loaded and before deletion. Override it to prevent deletes for entities that are still referenced or otherwise protected. |
+| [DeleteAsync](method-deleteasync-30.md) | Runs the complete delete flow: load the entity by id, throw when missing, ask `CanBeDeletedAsync`, and delete through the repository only when allowed. |
 
 ### Properties
 

@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Modules.Localization.Core](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.Modules.Localization.Core/LocalizationModule.cs:32](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Localization.Core/LocalizationModule.cs#L32)
+Source: [src/KamiSama.Modules.Localization.Core/LocalizationModule.cs:51](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Localization.Core/LocalizationModule.cs#L51)
 
 Namespace: `KamiSama.Modules.Localization`
 
@@ -12,7 +12,7 @@ Kind: `Class`
 
 ## Description
 
-Provides the `ExtendedWebApplicationBuilderExtensions` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
+Adds request localization and the localization core module in the required order. Provider insertion produces Accept-Language, query-string, then cookie precedence.
 
 ## Declaration
 
@@ -30,5 +30,5 @@ This type does not declare a non-private constructor in source.
 
 | Member | Description |
 | --- | --- |
-| [AddLocalizationModule](method-addlocalizationmodule-34.md) | Runs the `AddLocalizationModule` operation on `ExtendedWebApplicationBuilderExtensions`. Use it when your code needs this specific behavior from the package. |
+| [AddLocalizationModule](method-addlocalizationmodule-59.md) | Reads localization settings immediately, configures supported cultures, and queues request localization before `LocalizationModule`. Provider insertion yields effective precedence of Accept-Language header, query string, then cookie. |
 

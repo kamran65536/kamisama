@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Chassis.Commons](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/Chassis.Commons/Features/FeatureDefinitionBase.cs:10](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Commons/Features/FeatureDefinitionBase.cs#L10)
+Source: [src/Chassis.Commons/Features/FeatureDefinitionBase.cs:17](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Commons/Features/FeatureDefinitionBase.cs#L17)
 
 Namespace: `KamiSama.Chassis.Commons.Features`
 

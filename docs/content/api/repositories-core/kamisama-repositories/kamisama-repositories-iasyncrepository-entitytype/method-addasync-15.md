@@ -10,7 +10,7 @@ Kind: `Method`
 
 ## Description
 
-Adds an item into the repository. Use it with the surrounding package APIs when composing application code.
+Asynchronously adds an entity according to the implementation's persistence, duplicate, cancellation, and failure rules.
 
 ## Declaration
 
@@ -22,21 +22,18 @@ Task AddAsync(_EntityType item, CancellationToken cancellationToken);
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `item` | `_EntityType` | `-` | The `item` value passed to this member. |
-| `cancellationToken` | `CancellationToken` | `-` | The `cancellationToken` value passed to this member. |
+| `item` | `_EntityType` | `-` | The entity to add. |
+| `cancellationToken` | `CancellationToken` | `-` | A token that can cancel the operation. |
 
 ## Returns
 
 | Type | Description |
 | --- | --- |
-| `Task` | Returns a `Task` value. |
+| `Task` | A task that represents the add operation. |
 
 ## Example
 
 ```csharp
-var sample = new SampleEntity { Id = 1, Name = "sample" };
-var repository = new InMemoryRepository<SampleEntity>();
-
-await repository.AddAsync(sample, CancellationToken.None);
+await repository.AddAsync(user, cancellationToken);
 ```
 

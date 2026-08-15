@@ -12,7 +12,7 @@ Kind: `Delegate`
 
 ## Description
 
-Password function delegate. Use it with the surrounding package APIs when composing application code.
+Resolves the password used when a log file is added to a ZIP archive. Use it with the surrounding package APIs when composing application code.
 
 ## Declaration
 

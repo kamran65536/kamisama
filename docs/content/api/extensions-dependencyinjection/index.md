@@ -2,16 +2,27 @@
 
 [Back to package index](../index.md)
 
-Version: `10.0.10`
+Version: `10.0.0`
 
 ## Description
 
-Attribute-based dependency injection helpers for automatically registering services from assemblies. Use it to mark implementations with scoped, transient, or singleton service lifetimes.
+Automatically register attributed service implementations with Microsoft.Extensions.DependencyInjection by scanning selected assemblies. Choose transient, scoped, or singleton lifetimes, keyed or unkeyed registrations, explicit or inferred service types, and single or multiple registrations.
 
-## Install
+## How to use
 
 ```shell
-dotnet add package KamiSama.Extensions.DependencyInjection --version 10.0.10
+dotnet add package KamiSama.Extensions.DependencyInjection --version 10.0.0
+```
+
+Decorate each implementation with the appropriate registration attribute, then scan its assembly during service configuration:
+
+```csharp
+using KamiSama.Extensions.DependencyInjection;
+
+[AutoInjectScoped<IProductService>]
+public sealed class ProductService : IProductService;
+
+services.AutoAddDependenciesFrom<Program>();
 ```
 
 ## Namespaces
@@ -28,4 +39,4 @@ dotnet add package KamiSama.Extensions.DependencyInjection --version 10.0.10
 - [KamiSama.Extensions.DependencyInjection.AutoInjectSingletonAttribute<TService>](kamisama-extensions-dependencyinjection/kamisama-extensions-dependencyinjection-autoinjectsingletonattribute-tservice/index.md) - Dependency injection attribute for singleton services. Use it on implementations that should be shared for the application lifetime.
 - [KamiSama.Extensions.DependencyInjection.AutoInjectTransientAttribute](kamisama-extensions-dependencyinjection/kamisama-extensions-dependencyinjection-autoinjecttransientattribute/index.md) - Dependency injection attribute for transient services. Use it on implementations that should be created each time they are requested.
 - [KamiSama.Extensions.DependencyInjection.AutoInjectTransientAttribute<TService>](kamisama-extensions-dependencyinjection/kamisama-extensions-dependencyinjection-autoinjecttransientattribute-tservice/index.md) - Dependency injection attribute for transient services. Use it on implementations that should be created each time they are requested.
-- [KamiSama.Extensions.DependencyInjection.ServiceCollectionExtensions](kamisama-extensions-dependencyinjection/kamisama-extensions-dependencyinjection-servicecollectionextensions/index.md) - Service Collection Extension for named implementations. Use it with the surrounding package APIs when composing application code.
+- [KamiSama.Extensions.DependencyInjection.ServiceCollectionExtensions](kamisama-extensions-dependencyinjection/kamisama-extensions-dependencyinjection-servicecollectionextensions/index.md) - Assembly-scanning extensions for registering implementations decorated with `AutoInjectAttributeBase`. Scan explicit assemblies or use marker types to select one or two assemblies.

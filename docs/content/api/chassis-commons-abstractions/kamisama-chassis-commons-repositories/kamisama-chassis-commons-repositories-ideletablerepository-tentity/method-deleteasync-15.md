@@ -10,7 +10,7 @@ Kind: `Method`
 
 ## Description
 
-Deletes an item from the database. Use it with the surrounding package APIs when composing application code.
+Deletes an entity from the underlying store. Use it with the surrounding package APIs when composing application code.
 
 ## Declaration
 
@@ -22,14 +22,14 @@ Task DeleteAsync(TEntity entity, CancellationToken cancellationToken);
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `entity` | `TEntity` | `-` | The `entity` value passed to this member. |
-| `cancellationToken` | `CancellationToken` | `-` | The `cancellationToken` value passed to this member. |
+| `entity` | `TEntity` | `-` | The entity to delete. |
+| `cancellationToken` | `CancellationToken` | `-` | A token that can cancel the operation. |
 
 ## Returns
 
 | Type | Description |
 | --- | --- |
-| `Task` | Returns a `Task` value. |
+| `Task` | A task that represents the asynchronous deletion. |
 
 ## Example
 

@@ -1,7 +1,8 @@
 ﻿namespace KamiSama.Extensions;
 
 /// <summary>
-/// Hashing Extensions
+/// Provides hash-computation helpers for byte arrays and strings, including hexadecimal MD5 and SHA-1 output.
+/// Prefer a modern hash algorithm for new security-sensitive applications.
 /// </summary>
 public static class HashExtensions
 {
@@ -10,7 +11,7 @@ public static class HashExtensions
 
 	#region Generic Hashing
 	/// <summary>
-	/// Computes hash for an hashing algorithm
+	/// Computes the hash of the byte array using the specified algorithm.
 	/// </summary>
 	/// <param name="data">the data to be hashed</param>
 	/// <param name="algorithm">the hashing algorithm</param>
@@ -18,7 +19,7 @@ public static class HashExtensions
 	public static byte[] ComputeHash(this byte[] data, HashAlgorithm algorithm)
 		=> algorithm.ComputeHash(data);
 	/// <summary>
-	/// Computes hash and then converts it to hexadecimal
+	/// Computes the hash of the byte array and returns it as an uppercase hexadecimal string.
 	/// </summary>
 	/// <param name="data">the data to be hashed</param>
 	/// <param name="algorithm">the hashing algorithm</param>
@@ -26,7 +27,7 @@ public static class HashExtensions
 	public static string ComputeHashHex(this byte[] data, HashAlgorithm algorithm)
 		=> data.ComputeHash(algorithm).ToHex();
 	/// <summary>
-	/// Computes hash for byte array equivalent string data
+	/// Encodes the string and computes its hash using the specified algorithm.
 	/// </summary>
 	/// <param name="data">the data to be hashed</param>
 	/// <param name="algorithm">the hashing algorithm</param>
@@ -35,7 +36,7 @@ public static class HashExtensions
 	public static byte[] ComputeHash(this string data, HashAlgorithm algorithm, Encoding? encoding = null)
 		=> data.ToBytes(encoding ?? Encoding.UTF8).ComputeHash(algorithm);
 	/// <summary>
-	/// Computes hash for byte array equivalent string data and then converts it to hexadecimal
+	/// Encodes the string, computes its hash, and returns the result as an uppercase hexadecimal string.
 	/// </summary>
 	/// <param name="data">the data to be hashed</param>
 	/// <param name="algorithm">the hashing algorithm</param>
@@ -46,21 +47,21 @@ public static class HashExtensions
 	#endregion
 	#region MD5
 	/// <summary>
-	/// returns MD5 hash for data
+	/// Computes the MD5 hash of the byte array.
 	/// </summary>
 	/// <param name="data">data to be hashed</param>
 	/// <returns></returns>
 	public static byte[] GetMd5(this byte[] data)
 		=> data.ComputeHash(md5);
 	/// <summary>
-	/// returns MD5 hash for data
+	/// Computes the MD5 hash of the byte array and returns it as an uppercase hexadecimal string.
 	/// </summary>
 	/// <param name="data">data to be hashed</param>
 	/// <returns></returns>
 	public static string GetMd5Hex(this byte[] data)
 		=> data.ComputeHashHex(md5);
 	/// <summary>
-	/// returns MD5 hash for data
+	/// Encodes the string and computes its MD5 hash.
 	/// </summary>
 	/// <param name="data">data to be hashed</param>
 	/// <param name="encoding">encoding used to convert string to byte array, default is UTF8</param>
@@ -68,7 +69,7 @@ public static class HashExtensions
 	public static byte[] GetMd5(this string data, Encoding? encoding = null)
 		=> data.ComputeHash(md5, encoding);
 	/// <summary>
-	/// returns MD5 hash for data
+	/// Encodes the string and returns its MD5 hash as an uppercase hexadecimal string.
 	/// </summary>
 	/// <param name="data">data to be hashed</param>
 	/// <param name="encoding">encoding used to convert string to byte array, default is UTF8</param>
@@ -78,20 +79,20 @@ public static class HashExtensions
 	#endregion
 	#region Sha1
 	/// <summary>
-	/// returns SHA1 hash for data
+	/// Computes the SHA-1 hash of the byte array.
 	/// </summary>
 	/// <param name="data">data to be hashed</param>
 	/// <returns></returns>
 	public static byte[] GetSha1(this byte[] data)
 		=> data.ComputeHash(sha1);
 	/// <summary>
-	/// returns SHA1 hash for data
+	/// Computes the SHA-1 hash of the byte array and returns it as an uppercase hexadecimal string.
 	/// </summary>
 	/// <param name="data">data to be hashed</param>
 	public static string GetSha1Hex(this byte[] data)
 		=> data.ComputeHashHex(sha1);
 	/// <summary>
-	/// returns SHA1 hash for data
+	/// Encodes the string and computes its SHA-1 hash.
 	/// </summary>
 	/// <param name="data">data to be hashed</param>
 	/// <param name="encoding">encoding used to convert string to byte array, default is UTF8</param>
@@ -99,7 +100,7 @@ public static class HashExtensions
 	public static byte[] GetSha1(this string data, Encoding? encoding = null)
 		=> data.ComputeHash(sha1, encoding);
 	/// <summary>
-	/// returns SHA1 hash for data
+	/// Encodes the string and returns its SHA-1 hash as an uppercase hexadecimal string.
 	/// </summary>
 	/// <param name="data">data to be hashed</param>
 	/// <param name="encoding">encoding used to convert string to byte array, default is UTF8</param>

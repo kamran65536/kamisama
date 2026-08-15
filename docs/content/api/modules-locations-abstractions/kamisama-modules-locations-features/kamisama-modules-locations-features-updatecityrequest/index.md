@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Modules.Locations.Abstractions](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.Modules.Locations.Abstractions/Features/Dtos.cs:22](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Locations.Abstractions/Features/Dtos.cs#L22)
+Source: [src/KamiSama.Modules.Locations.Abstractions/Features/Dtos.cs:76](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Locations.Abstractions/Features/Dtos.cs#L76)
 
 Namespace: `KamiSama.Modules.Locations.Features`
 
@@ -12,7 +12,7 @@ Kind: `Record`
 
 ## Description
 
-Provides the `UpdateCityRequest` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
+Carries the parent-province identifier and replacement city name. Core loads the requested parent before assigning both values and throws when that province does not exist.
 
 ## Declaration
 
@@ -24,9 +24,9 @@ public record UpdateCityRequest(Guid ProvinceId, [property: MaxLength(100)] stri
 
 ### Primary constructor
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Locations.Abstractions/Features/Dtos.cs#L22)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Locations.Abstractions/Features/Dtos.cs#L76)
 
-Initializes the type with the values required by its declaration. Use it with the surrounding package APIs when composing application code.
+Supplies the parent province and replacement name for an existing city. Use it with the surrounding package APIs when composing application code.
 
 ```csharp
 public record UpdateCityRequest(Guid ProvinceId, [property: MaxLength(100)] string Name);
@@ -36,8 +36,8 @@ public record UpdateCityRequest(Guid ProvinceId, [property: MaxLength(100)] stri
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `ProvinceId` | `Guid` | `-` | The `ProvinceId` value passed to this member. |
-| `Name` | `string` | `-` | The `Name` value passed to this member. |
+| `ProvinceId` | `Guid` | `-` | The identifier of an existing province to assign as the parent. |
+| `Name` | `string` | `-` | The city name, limited to 100 characters by data annotations and the Core EF model. |
 
 ## Members
 

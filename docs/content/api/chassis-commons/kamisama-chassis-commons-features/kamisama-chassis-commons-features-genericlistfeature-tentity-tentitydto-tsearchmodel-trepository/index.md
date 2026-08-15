@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Chassis.Commons](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/Chassis.Commons/Features/GenericListFeature.cs:32](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Commons/Features/GenericListFeature.cs#L32)
+Source: [src/Chassis.Commons/Features/GenericListFeature.cs:50](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Commons/Features/GenericListFeature.cs#L50)
 
 Namespace: `KamiSama.Chassis.Commons.Features`
 
@@ -40,9 +40,9 @@ public sealed class ListProductsFeature(IProductRepository repository)
 
 ### Primary constructor
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Commons/Features/GenericListFeature.cs#L32)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Commons/Features/GenericListFeature.cs#L50)
 
-Generic implementation of `IListFeature{TEntityDto, TSearchModel}`. Use it with the surrounding package APIs when composing application code.
+Implements a paged list workflow using standard `PagedResult{T}` result shapes. Use it with the surrounding package APIs when composing application code.
 
 ```csharp
 public abstract class GenericListFeature<TEntity, TEntityDto, TSearchModel, TRepository>(TRepository repository) :
@@ -55,7 +55,7 @@ public abstract class GenericListFeature<TEntity, TEntityDto, TSearchModel, TRep
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `repository` | `TRepository` | `-` | The `repository` value passed to this member. |
+| `repository` | `TRepository` | `-` | The repository used by the list workflow. |
 
 ## Members
 
@@ -63,13 +63,13 @@ public abstract class GenericListFeature<TEntity, TEntityDto, TSearchModel, TRep
 
 | Member | Description |
 | --- | --- |
-| [ConvertToDto](method-converttodto-44.md) | Mapping hook called for each entity in the repository page. Override it to produce the DTO returned to callers. |
-| [ConvertToPagedResultAsync](method-converttopagedresultasync-48.md) | Result-shaping hook that converts a repository `PagedResult<TEntity>` into a `PagedResult<TEntityDto>`. Override it only when the default item-by-item DTO mapping is not enough. |
-| [ListAsync](method-listasync-51.md) | Runs the list flow: request a page from the repository and convert the repository result into the DTO result returned to callers. |
+| [ConvertToDto](method-converttodto-65.md) | Mapping hook called for each entity in the repository page. Override it to produce the DTO returned to callers. |
+| [ConvertToPagedResultAsync](method-converttopagedresultasync-72.md) | Result-shaping hook that converts a repository `PagedResult<TEntity>` into a `PagedResult<TEntityDto>`. Override it only when the default item-by-item DTO mapping is not enough. |
+| [ListAsync](method-listasync-78.md) | Runs the list flow: request a page from the repository and convert the repository result into the DTO result returned to callers. |
 
 ### Properties
 
 | Member | Description |
 | --- | --- |
-| [Repository](property-repository-40.md) | Protected repository used by derived list features. The base list flow delegates paging to this repository. |
+| [Repository](property-repository-58.md) | Protected repository used by derived list features. The base list flow delegates paging to this repository. |
 

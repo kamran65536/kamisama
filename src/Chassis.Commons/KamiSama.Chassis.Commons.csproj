@@ -1,8 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageDocumentationRoot>../../docs/content/api/chassis-commons</PackageDocumentationRoot>
+	</PropertyGroup>
 	<Import Project="../props.xml" />
 
 	<PropertyGroup>
-		<Description>Common features used in most DDD projects and CRUD</Description>
+		<Description>Reusable feature and repository base classes for common CRUD-style application flows. Use this package when building service-layer features around entities, DTOs, repositories, and paged results.</Description>
 	</PropertyGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Chassis.Commons.Abstractions\KamiSama.Chassis.Commons.Abstractions.csproj" />

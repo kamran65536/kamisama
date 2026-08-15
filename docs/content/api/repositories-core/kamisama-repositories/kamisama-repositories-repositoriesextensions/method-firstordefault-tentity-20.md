@@ -10,7 +10,7 @@ Kind: `Method`
 
 ## Description
 
-Returns first or default item for IQueryableRepository. Use it with the surrounding package APIs when composing application code.
+Delegates filtering to the repository's `Where` method and returns the first result or the default value.
 
 ## Declaration
 
@@ -22,31 +22,30 @@ public static TEntity? FirstOrDefault<TEntity>(this IQueryableRepository<TEntity
 
 | Name | Description |
 | --- | --- |
-| `TEntity` |  |
+| `TEntity` | The entity type exposed by the repository. |
 
 ## Parameters
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `repository (extension receiver)` | `IQueryableRepository<TEntity>` | `-` | The `repository` value passed to this member. |
-| `predicate` | `Expression<Func<TEntity, bool>>` | `-` | The `predicate` value passed to this member. |
+| `repository (extension receiver)` | `IQueryableRepository<TEntity>` | `-` | The queryable repository to search. |
+| `predicate` | `Expression<Func<TEntity, bool>>` | `-` | The predicate used to select an entity. |
 
 ## Returns
 
 | Type | Description |
 | --- | --- |
-| `TEntity?` | Returns a `TEntity?` value. |
+| `TEntity?` | The first matching entity, or the default value for &lt;typeparamref name=&quot;TEntity&quot;/&gt;. |
 
 ## Remarks
 
-if you want to search on IRepository, you can also use Find method
+This delegates filtering to `IQueryableRepository{TEntity}.Where` and then applies LINQ `FirstOrDefault`.
 
 ## Example
 
 ```csharp
-var services = new ServiceCollection();
-services.AutoAddDependenciesFrom<ISampleInterface>();
+using KamiSama.Repositories;
 
-var descriptor = services.FirstOrDefault(x => x.ServiceType == typeof(ISampleInterface));
+User? admin = repository.FirstOrDefault(user => user.IsAdmin);
 ```
 

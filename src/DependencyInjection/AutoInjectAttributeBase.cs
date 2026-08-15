@@ -3,32 +3,38 @@
 namespace KamiSama.Extensions.DependencyInjection;
 
 /// <summary>
-/// Base class for auto-inject attributes
+/// Defines the registration settings and application behavior shared by automatic injection attributes.
+/// Derived attributes select a service contract, lifetime, optional key, and duplicate-registration policy.
 /// </summary>
 public abstract class AutoInjectAttributeBase : Attribute
 {
 	/// <summary>
-	/// if present, adds the service as keyed and you should use it by <see cref="ServiceProviderKeyedServiceExtensions.GetKeyedServices" /> methods
+	/// Gets or sets the key used to create a keyed service registration.
+	/// A <see langword="null"/> value creates an ordinary unkeyed registration.
 	/// </summary>
 	public object? ServiceKey { get; set; }
 	/// <summary>
-	/// Service Type, it null the 
+	/// Gets or sets the service contract used for registration by a derived attribute.
+	/// When it is <see langword="null"/>, the contract is inferred from the implementation type and its interfaces.
 	/// </summary>
 	protected Type? ServiceType { get; set; }
 	/// <summary>
-	/// Service Lifetime (default is Transient)
+	/// Gets or sets the lifetime used by the generated service registration.
+	/// The default lifetime is <see cref="ServiceLifetime.Transient"/>.
 	/// </summary>
 	protected ServiceLifetime Lifetime { get; set; } = ServiceLifetime.Transient;
 	/// <summary>
-	/// Gets or sets a value indicating whether multiple instances of the associated attribute are allowed.
+	/// Gets or sets whether the registration is always appended instead of added only when the service contract and key are absent.
+	/// Set it to <see langword="true"/> when multiple implementations of the same service must be resolvable.
 	/// </summary>
 	public bool AllowMultiple { get; set; } = false;
 
 	/// <summary>
-	/// Add binding to the service
+	/// Registers the implementation using the configured service type, lifetime, key, and multiple-registration policy.
+	/// If no service type is configured, the method uses the implementation itself, its sole interface, or throws when multiple interfaces make inference ambiguous.
 	/// </summary>
-	/// <param name="services"></param>
-	/// <param name="type"></param>
+	/// <param name="services">The service collection that receives the generated registration.</param>
+	/// <param name="type">The attributed implementation type to register.</param>
 	public virtual void ApplyInjection(IServiceCollection services, Type type)
 	{
 		var serviceType = ServiceType;

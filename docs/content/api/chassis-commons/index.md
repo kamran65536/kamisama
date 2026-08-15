@@ -2,17 +2,32 @@
 
 [Back to package index](../index.md)
 
-Version: `10.0.10`
+Version: `10.0.0`
 
 ## Description
 
 Reusable feature and repository base classes for common CRUD-style application flows. Use this package when building service-layer features around entities, DTOs, repositories, and paged results.
 
-## Install
+## How to use
 
 ```shell
-dotnet add package KamiSama.Chassis.Commons --version 10.0.10
+dotnet add package KamiSama.Chassis.Commons --version 10.0.0
 ```
+
+Derive a focused feature from a generic workflow, implement its validation or mapping hooks, and register the concrete feature and repository with your application:
+
+```csharp
+using KamiSama.Chassis.Commons.Features;
+
+public sealed class FindProduct(IProductRepository repository)
+    : GenericFindByIdFeature<Product, ProductDto, IProductRepository, Guid>(repository)
+{
+    protected override Task<ProductDto> ConvertToDto(Product entity, CancellationToken cancellationToken)
+        => Task.FromResult(new ProductDto(entity.Id, entity.Name));
+}
+```
+
+Create and update hooks run around repository mutation; find and delete workflows throw HTTP not-found exceptions for missing entities; exists workflows delegate directly. `GenericRepository` is EF Core based, applies the same search hook to list and count queries, and relies on the injected `DbContext` lifetime and save behavior inherited from `DbRepository`. The delete guard returns without deleting when it yields false and does not report why.
 
 ## Namespaces
 

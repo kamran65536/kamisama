@@ -1,12 +1,13 @@
 ﻿namespace KamiSama.Extensions;
 
 /// <summary>
-/// Queue Extensions
+/// Provides extensions for safely dequeuing a value or returning a fallback when a queue is empty.
+/// Use them when an empty queue is an expected condition rather than an error.
 /// </summary>
 public static class QueueExtensions
 {
 	/// <summary>
-	/// Dequeues or return default value for item
+	/// Dequeues and returns the next item, or returns the specified fallback when the queue is empty.
 	/// </summary>
 	/// <typeparam name="TItem"></typeparam>
 	/// <param name="queue"></param>

@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Modules.Ticketing.Abstractions](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Dtos.cs:9](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Dtos.cs#L9)
+Source: [src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Dtos.cs:36](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Dtos.cs#L36)
 
 Namespace: `KamiSama.Modules.Ticketing.Features.Tickets`
 
@@ -12,7 +12,7 @@ Kind: `Record`
 
 ## Description
 
-Provides the `TicketListItemDto` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
+Carries the ticket fields returned by list operations without category, comment, or attachment data. Use a find operation when the complete aggregate is required.
 
 ## Declaration
 
@@ -24,9 +24,9 @@ public record TicketListItemDto(Guid Id, Guid AuthorUserId, string Title, Ticket
 
 ### Primary constructor
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Dtos.cs#L9)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Dtos.cs#L36)
 
-Initializes the type with the values required by its declaration. Use it with the surrounding package APIs when composing application code.
+Carries the ticket fields returned by list operations without category, comment, or attachment data. Use a find operation when the complete aggregate is required.
 
 ```csharp
 public record TicketListItemDto(Guid Id, Guid AuthorUserId, string Title, TicketStatus Status, TicketPriority Priority, DateTime CreatedAt, DateTime UpdatedAt);
@@ -36,13 +36,13 @@ public record TicketListItemDto(Guid Id, Guid AuthorUserId, string Title, Ticket
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `Id` | `Guid` | `-` | The `Id` value passed to this member. |
-| `AuthorUserId` | `Guid` | `-` | The `AuthorUserId` value passed to this member. |
-| `Title` | `string` | `-` | The `Title` value passed to this member. |
-| `Status` | `TicketStatus` | `-` | The `Status` value passed to this member. |
-| `Priority` | `TicketPriority` | `-` | The `Priority` value passed to this member. |
-| `CreatedAt` | `DateTime` | `-` | The `CreatedAt` value passed to this member. |
-| `UpdatedAt` | `DateTime` | `-` | The `UpdatedAt` value passed to this member. |
+| `Id` | `Guid` | `-` | The ticket identifier. |
+| `AuthorUserId` | `Guid` | `-` | The identifier of the user who opened the ticket. |
+| `Title` | `string` | `-` | The ticket title. |
+| `Status` | `TicketStatus` | `-` | The current workflow status. |
+| `Priority` | `TicketPriority` | `-` | The current urgency. |
+| `CreatedAt` | `DateTime` | `-` | The ticket creation timestamp. |
+| `UpdatedAt` | `DateTime` | `-` | The ticket&apos;s latest update timestamp. |
 
 ## Members
 

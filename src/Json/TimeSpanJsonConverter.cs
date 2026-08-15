@@ -1,12 +1,13 @@
 ﻿namespace KamiSama.Extensions.Json;
 
 /// <summary>
-/// Time Span converter for system.text.json as it sucks displaying timespan values by now!
+/// Converts <see cref="TimeSpan"/> values to and from their standard JSON string representation.
+/// Use it when an application needs this package's explicit string-format compatibility behavior.
 /// </summary>
 public class TimeSpanJsonConverter : JsonConverter<TimeSpan>
 {
 	/// <summary>
-	/// parses string as timespan
+	/// Reads a JSON string token and parses it as a <see cref="TimeSpan"/>.
 	/// </summary>
 	/// <param name="reader"></param>
 	/// <param name="typeToConvert"></param>
@@ -15,7 +16,7 @@ public class TimeSpanJsonConverter : JsonConverter<TimeSpan>
 	public override TimeSpan Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		=> TimeSpan.Parse(reader.GetString()!);
 	/// <summary>
-	/// Writes timespan string
+	/// Writes the <see cref="TimeSpan"/> as a JSON string using its standard representation.
 	/// </summary>
 	/// <param name="writer"></param>
 	/// <param name="value"></param>

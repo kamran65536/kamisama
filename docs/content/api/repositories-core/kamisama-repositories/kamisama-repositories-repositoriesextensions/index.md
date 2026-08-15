@@ -12,7 +12,7 @@ Kind: `Class`
 
 ## Description
 
-Provides the `RepositoriesExtensions` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
+Provides first-match and all-entity convenience queries for `IQueryableRepository<TEntity>`. Both methods delegate to the repository's `Where` implementation and preserve its query and concurrency semantics.
 
 ## Declaration
 
@@ -30,6 +30,6 @@ This type does not declare a non-private constructor in source.
 
 | Member | Description |
 | --- | --- |
-| [FirstOrDefault<TEntity>](method-firstordefault-tentity-20.md) | Returns first or default item for IQueryableRepository. Use it with the surrounding package APIs when composing application code. |
-| [GetAll<TEntity>](method-getall-tentity-28.md) | Returns all Items in the repository. Use it with the surrounding package APIs when composing application code. |
+| [FirstOrDefault<TEntity>](method-firstordefault-tentity-20.md) | Delegates filtering to the repository's `Where` method and returns the first result or the default value. |
+| [GetAll<TEntity>](method-getall-tentity-28.md) | Returns all entities by calling the repository's `Where` method with an always-true predicate. |
 

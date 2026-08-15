@@ -121,10 +121,10 @@ public sealed class ProductFeatures
 
 ### Web Modules
 
-Use `KamiSama.Extensions.WebModules` to compose ASP.NET Core service registration and middleware setup.
+Use `KamiSama.Modules` to compose ASP.NET Core service registration and middleware setup.
 
 ```csharp
-using KamiSama.Extensions.WebModules;
+using KamiSama.Modules;
 
 var builder = WebApplication.CreateBuilder(args)
     .Extend()

@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Repositories.EntityFrameworkCore](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/Repositories.EntityFrameworkCore/Initialization/DefaultDatabaseInitializer.cs:8](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Repositories.EntityFrameworkCore/Initialization/DefaultDatabaseInitializer.cs#L8)
+Source: [src/Repositories.EntityFrameworkCore/Initialization/DefaultDatabaseInitializer.cs:11](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Repositories.EntityFrameworkCore/Initialization/DefaultDatabaseInitializer.cs#L11)
 
 Namespace: `KamiSama.Repositories.EntityFrameworkCore.Initialization`
 
@@ -12,7 +12,7 @@ Kind: `Class`
 
 ## Description
 
-Default Initializer, applies migration based on options. Use it with the surrounding package APIs when composing application code.
+Migration-only EF Core initializer. Migration runs when selected, while application-data and test-data stages complete without performing work.
 
 ## Declaration
 
@@ -21,13 +21,28 @@ public class DefaultDatabaseInitializer<TDbContext>(TDbContext context) : Databa
     where TDbContext : DbContext
 ```
 
+## Remarks
+
+Set `Migrate` to run migrations; the application-data and test-data options perform no work.
+
+## Example
+
+```csharp
+using KamiSama.Repositories.EntityFrameworkCore.Initialization;
+using KamiSama.Repositories.Initialization;
+
+var initializer = new DefaultDatabaseInitializer<AppDbContext>(dbContext);
+await initializer.InitializeAsync(
+    new DataInitializationOptions { Migrate = true }, cancellationToken);
+```
+
 ## Constructors
 
 ### Primary constructor
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Repositories.EntityFrameworkCore/Initialization/DefaultDatabaseInitializer.cs#L8)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Repositories.EntityFrameworkCore/Initialization/DefaultDatabaseInitializer.cs#L11)
 
-Default Initializer, applies migration based on options. Use it with the surrounding package APIs when composing application code.
+Provides migration-only initialization while treating both seed-data stages as completed no-ops. Use it with the surrounding package APIs when composing application code.
 
 ```csharp
 public class DefaultDatabaseInitializer<TDbContext>(TDbContext context) : DatabaseInitializerBase<TDbContext>(context)
@@ -38,7 +53,7 @@ public class DefaultDatabaseInitializer<TDbContext>(TDbContext context) : Databa
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `context` | `TDbContext` | `-` | The `context` value passed to this member. |
+| `context` | `TDbContext` | `-` | The scoped context used for migration. |
 
 ## Members
 
@@ -46,6 +61,6 @@ public class DefaultDatabaseInitializer<TDbContext>(TDbContext context) : Databa
 
 | Member | Description |
 | --- | --- |
-| [InitializeDataAsync](method-initializedataasync-12.md) | Runs the `InitializeDataAsync` operation on `DefaultDatabaseInitializer<TDbContext>`. Use it when your code needs this specific behavior from the package. |
-| [InitializeTestDataAsync](method-initializetestdataasync-17.md) | Runs the `InitializeTestDataAsync` operation on `DefaultDatabaseInitializer<TDbContext>`. Use it when your code needs this specific behavior from the package. |
+| [InitializeDataAsync](method-initializedataasync-17.md) | Completes without creating application data. Use it with the surrounding package APIs when composing application code. |
+| [InitializeTestDataAsync](method-initializetestdataasync-24.md) | Completes without creating test data. Use it with the surrounding package APIs when composing application code. |
 

@@ -11,7 +11,10 @@ internal class ChangePassword(
 	public async Task ChangeAsync(ChangePasswordRequest request, CancellationToken cancellationToken)
 	{
 		var userDto = await authenticateUser.AuthenticateAsync(
-			new AuthenticateUserRequest(request.UserId, request.Username, request.Email, request.CurrentPassword),
+			request.UserId,
+			string.IsNullOrWhiteSpace(request.Email) ? request.Username : request.Email,
+			request.CurrentPassword,
+			null,
 			cancellationToken);
 
 		await resetPassword.ResetPasswordAsync(

@@ -4,4 +4,4 @@
 
 | Type | Kind | Description | Source |
 | --- | --- | --- | --- |
-| [KnownRoles](kamisama-modules-identity-datatypes-knownroles/index.md) | Class | Provides the `KnownRoles` API for the surrounding package. Use this type with the members listed below to compose the feature in an application. | [source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Identity.Abstractions/DataTypes/KnownRoles.cs#L3) |
+| [KnownRoles](kamisama-modules-identity-datatypes-knownroles/index.md) | Class | Defines the canonical `SuperAdmin`, `Operator`, and `User` role-name strings. These constants neither seed roles nor grant authorization. | [source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Identity.Abstractions/DataTypes/KnownRoles.cs#L8) |

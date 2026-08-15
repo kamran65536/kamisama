@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Modules.Locations.Abstractions](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.Modules.Locations.Abstractions/Features/Features.cs:16](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Locations.Abstractions/Features/Features.cs#L16)
+Source: [src/KamiSama.Modules.Locations.Abstractions/Features/Features.cs:46](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Locations.Abstractions/Features/Features.cs#L46)
 
 Namespace: `KamiSama.Modules.Locations.Features`
 
@@ -12,12 +12,18 @@ Kind: `Interface`
 
 ## Description
 
-Defines the contract for `IDeleteCity` behavior. Implement this interface when you need to plug your own code into the surrounding KamiSama package.
+Defines city deletion by `Guid`. Core loads the row and saves its deletion immediately.
 
 ## Declaration
 
 ```csharp
 public interface IDeleteCity : IDeleteFeature<Guid>;
+```
+
+## Example
+
+```csharp
+await deleteCity.DeleteAsync(cityId, cancellationToken);
 ```
 
 ## Constructors

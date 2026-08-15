@@ -12,12 +12,18 @@ Kind: `Interface`
 
 ## Description
 
-Defines the contract for `IExistsByNameFeature` behavior. Implement this interface when you need to plug your own code into the surrounding KamiSama package.
+Defines an existence check for an entity name. Use it with the surrounding package APIs when composing application code.
 
 ## Declaration
 
 ```csharp
 public interface IExistsByNameFeature
+```
+
+## Example
+
+```csharp
+bool exists = await productExists.ExistsByNameAsync("Keyboard", cancellationToken);
 ```
 
 ## Constructors
@@ -30,5 +36,5 @@ This type does not declare a non-private constructor in source.
 
 | Member | Description |
 | --- | --- |
-| [ExistsByNameAsync](method-existsbynameasync-12.md) | checks if entity exists or not. Use it with the surrounding package APIs when composing application code. |
+| [ExistsByNameAsync](method-existsbynameasync-14.md) | Determines whether an entity with the supplied name exists. Use it with the surrounding package APIs when composing application code. |
 

@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Chassis.Commons](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/Chassis.Commons/Features/GenericListFeature.cs:6](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Commons/Features/GenericListFeature.cs#L6)
+Source: [src/Chassis.Commons/Features/GenericListFeature.cs:13](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Commons/Features/GenericListFeature.cs#L13)
 
 Namespace: `KamiSama.Chassis.Commons.Features`
 
@@ -28,13 +28,11 @@ public abstract class GenericListFeature<TEntity, TEntityDto, TSearchModel, TRep
 ## Example
 
 ```csharp
-using KamiSama.Extensions.Paging;
-
 public sealed class ListProductsFeature(IProductRepository repository)
-    : GenericListFeature<Product, ProductDto, SearchModel, IProductRepository>(repository)
+    : GenericListFeature<Product, ProductDto, ProductSearch, IProductRepository, ProductPage, ProductEntityPage>(repository)
 {
-    protected override Task<ProductDto> ConvertToDto(Product entity, CancellationToken cancellationToken)
-        => Task.FromResult(new ProductDto(entity.Id, entity.Name, entity.Price));
+    protected override Task<ProductPage> ConvertResult(ProductEntityPage result, CancellationToken cancellationToken)
+        => Task.FromResult(new ProductPage(result.Items.Select(ProductDto.FromEntity), result.TotalCount));
 }
 ```
 
@@ -42,9 +40,9 @@ public sealed class ListProductsFeature(IProductRepository repository)
 
 ### Primary constructor
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Commons/Features/GenericListFeature.cs#L6)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Commons/Features/GenericListFeature.cs#L13)
 
-Generic implementation of `IListFeature{TEntityDto, TSearchModel}`. Use it with the surrounding package APIs when composing application code.
+Implements a paged list workflow with custom repository and feature result shapes. Use it with the surrounding package APIs when composing application code.
 
 ```csharp
 public abstract class GenericListFeature<TEntity, TEntityDto, TSearchModel, TRepository, TPagedResult, TRepositoryPagedResult>(TRepository repository) :
@@ -59,7 +57,7 @@ public abstract class GenericListFeature<TEntity, TEntityDto, TSearchModel, TRep
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `repository` | `TRepository` | `-` | The `repository` value passed to this member. |
+| `repository` | `TRepository` | `-` | The repository used by the list workflow. |
 
 ## Members
 
@@ -67,12 +65,12 @@ public abstract class GenericListFeature<TEntity, TEntityDto, TSearchModel, TRep
 
 | Member | Description |
 | --- | --- |
-| [ConvertResult](method-convertresult-20.md) | Result-shaping hook for custom paged result types. Override it to translate the repository result into the result type exposed by the feature. |
-| [ListAsync](method-listasync-22.md) | Runs the list flow: request a page from the repository and convert the repository result into the DTO result returned to callers. |
+| [ConvertResult](method-convertresult-30.md) | Result-shaping hook for custom paged result types. Override it to translate the repository result into the result type exposed by the feature. |
+| [ListAsync](method-listasync-35.md) | Runs the list flow: request a page from the repository and convert the repository result into the DTO result returned to callers. |
 
 ### Properties
 
 | Member | Description |
 | --- | --- |
-| [Repository](property-repository-16.md) | Protected repository used by derived list features. The base list flow delegates paging to this repository. |
+| [Repository](property-repository-23.md) | Protected repository used by derived list features. The base list flow delegates paging to this repository. |
 

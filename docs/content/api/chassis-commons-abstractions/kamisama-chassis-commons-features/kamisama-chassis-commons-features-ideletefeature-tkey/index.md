@@ -12,12 +12,18 @@ Kind: `Interface`
 
 ## Description
 
-Deletes an entity by key feature. Use it with the surrounding package APIs when composing application code.
+Defines a use case that deletes an entity identified by a key. Use it with the surrounding package APIs when composing application code.
 
 ## Declaration
 
 ```csharp
 public interface IDeleteFeature<TKey>
+```
+
+## Example
+
+```csharp
+await deleteProduct.DeleteAsync(productId, cancellationToken);
 ```
 
 ## Constructors
@@ -30,5 +36,5 @@ This type does not declare a non-private constructor in source.
 
 | Member | Description |
 | --- | --- |
-| [DeleteAsync](method-deleteasync-11.md) | Runs the `DeleteAsync` operation on `IDeleteFeature<TKey>`. Use it when your code needs this specific behavior from the package. |
+| [DeleteAsync](method-deleteasync-14.md) | Deletes the entity identified by the supplied key. Use it with the surrounding package APIs when composing application code. |
 

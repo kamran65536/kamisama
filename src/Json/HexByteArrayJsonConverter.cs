@@ -1,12 +1,13 @@
 ﻿namespace KamiSama.Extensions.Json;
 
 /// <summary>
-/// Hexadecimal byte array
+/// Converts byte arrays to and from hexadecimal JSON strings.
+/// Use it when binary values should be represented as hexadecimal text instead of Base64.
 /// </summary>
 public class HexByteArrayJsonConverter : JsonConverter<byte[]>
 {
 	/// <summary>
-	/// Reads hex value as byte array from input
+	/// Reads a hexadecimal JSON string as a byte array, or returns <see langword="null"/> for a null token.
 	/// </summary>
 	/// <param name="reader"></param>
 	/// <param name="typeToConvert"></param>
@@ -21,7 +22,7 @@ public class HexByteArrayJsonConverter : JsonConverter<byte[]>
 			return reader.GetString()?.FromHex();
 	}
 	/// <summary>
-	/// Writes byte array as hex to output
+	/// Writes the byte array as an uppercase hexadecimal JSON string.
 	/// </summary>
 	/// <param name="writer"></param>
 	/// <param name="value"></param>

@@ -1,3 +1,9 @@
+1405-05-23 8/14/2026 v10.0.11.1
+- KamiSama.Extensions.WebModules is renamed to KamiSama.Modules.
+- KamiSama.ServicePlans Module is added.
+- KamiSama.PolicyEngine Module is added.
+- NuGet package descriptions are refined and obsolete package release notes are removed.
+- Package API documentation is included as the NuGet README when available.
 1405-05-20 v10.0.11
 - packages are updated.
 - identity role services are added.

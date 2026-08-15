@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Chassis.Commons.Abstractions](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/Chassis.Commons.Abstractions/Repositories/IListingRepository.cs:22](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Commons.Abstractions/Repositories/IListingRepository.cs#L22)
+Source: [src/Chassis.Commons.Abstractions/Repositories/IListingRepository.cs:33](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Commons.Abstractions/Repositories/IListingRepository.cs#L33)
 
 Namespace: `KamiSama.Chassis.Commons.Repositories`
 
@@ -12,7 +12,7 @@ Kind: `Interface`
 
 ## Description
 
-A repository with listing capability. Use it with the surrounding package APIs when composing application code.
+Defines paged listing and counting using the standard `PagedResult{T}` shape. Use it with the surrounding package APIs when composing application code.
 
 ## Declaration
 

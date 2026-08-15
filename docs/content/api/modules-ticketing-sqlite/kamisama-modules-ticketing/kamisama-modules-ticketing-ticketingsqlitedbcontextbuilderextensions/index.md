@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Modules.Ticketing.Sqlite](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.Modules.Ticketing.Sqlite/TicketingSqliteDbContextBuilderExtensions.cs:8](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Sqlite/TicketingSqliteDbContextBuilderExtensions.cs#L8)
+Source: [src/KamiSama.Modules.Ticketing.Sqlite/TicketingSqliteDbContextBuilderExtensions.cs:12](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Sqlite/TicketingSqliteDbContextBuilderExtensions.cs#L12)
 
 Namespace: `KamiSama.Modules.Ticketing`
 
@@ -12,7 +12,7 @@ Kind: `Class`
 
 ## Description
 
-Provides the `TicketingSqliteDbContextBuilderExtensions` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
+Registers the SQLite Ticketing context under the exact `sqlite` keyed base-context service. Use it from the callback passed to `AddTicketingModule`.
 
 ## Declaration
 
@@ -30,5 +30,5 @@ This type does not declare a non-private constructor in source.
 
 | Member | Description |
 | --- | --- |
-| [AddSqliteTicketingDbContext](method-addsqliteticketingdbcontext-10.md) | Runs the `AddSqliteTicketingDbContext` operation on `TicketingSqliteDbContextBuilderExtensions`. Use it when your code needs this specific behavior from the package. |
+| [AddSqliteTicketingDbContext](method-addsqliteticketingdbcontext-20.md) | Registers `SqliteTicketingDbContext` and its exact `sqlite` keyed `TicketingDbContext` alias with lazy-loading proxies and the Ticketing migration-history table. |
 

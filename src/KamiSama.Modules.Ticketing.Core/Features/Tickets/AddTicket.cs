@@ -5,6 +5,13 @@ internal class AddTicket(ITicketRepository repository, ITicketCategoryRepository
     GenericAddFeature<AddTicketRequest, ITicketRepository, Ticket, TicketDto>(repository),
     IAddTicket
 {
+	/// <summary>
+	/// Loads the requested category and creates an open ticket with an initial user comment and attachment references.
+	/// Identifiers are left at their default values for EF Core value generation, and timestamps use the current UTC time.
+	/// </summary>
+	/// <param name="request">The complete ticket creation request.</param>
+	/// <param name="cancellationToken">The token forwarded to category lookup.</param>
+	/// <returns>The new ticket aggregate ready for repository persistence.</returns>
 	protected override async Task<Ticket> ConvertToEntity(AddTicketRequest request, CancellationToken cancellationToken)
 	{
 		var category = await ticketCategoryRepository.FindByIdAsync(request.CategoryId, cancellationToken) ?? throw new NotFoundException<TicketCategory>(request.CategoryId, nameof(request.CategoryId));
@@ -46,6 +53,10 @@ internal class AddTicket(ITicketRepository repository, ITicketCategoryRepository
 
 		return ticket;
     }
+	/// <summary>Maps the persisted ticket aggregate to its complete public DTO.</summary>
+	/// <param name="entity">The ticket entity to map.</param>
+	/// <param name="cancellationToken">The unused operation token.</param>
+	/// <returns>A completed task containing the mapped ticket.</returns>
 	protected override Task<TicketDto> ConvertToDto(Ticket entity, CancellationToken cancellationToken)
 		=> Task.FromResult(entity.ToDto());
 }

@@ -1,12 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageDocumentationRoot>../../docs/content/api/repositories-entityframeworkcore</PackageDocumentationRoot>
+	</PropertyGroup>
 	<Import Project="..\props.xml" />
 
 	<PropertyGroup>
-		<Description>Entity Framework Core Repository Pattern</Description>
-		<PackageReleaseNotes>
-			v2.0.0
-			- Refactored from old KamiSama.Repositories.EntityFrameworkCore library
-		</PackageReleaseNotes>
+		<Description>Entity Framework Core repositories, paging, database initialization, and multi-provider DbContext registration.</Description>
 		<RepositoryUrl>https://gitlab.com/kamran65536/KamiSama</RepositoryUrl>
 	</PropertyGroup>
 

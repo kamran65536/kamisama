@@ -9,36 +9,43 @@ using System.Threading.Tasks;
 namespace KamiSama.Repositories.EntityFrameworkCore
 {
 	/// <summary>
-	/// Database Repository for entity framework
+	/// Implements synchronous and asynchronous repository operations over an EF Core <see cref="DbSet{TEntity}"/>.
 	/// </summary>
-	/// <typeparam name="TEntity"></typeparam>
+	/// <typeparam name="TEntity">The tracked entity type.</typeparam>
 	/// <remarks>
-	/// initiates an db repository
+	/// Every mutation immediately calls <see cref="DbContext.SaveChanges()"/> or <see cref="DbContext.SaveChangesAsync(CancellationToken)"/>.
+	/// Queries use EF Core's default tracking behavior. The repository borrows the supplied context and does not dispose it.
 	/// </remarks>
-	/// <param name="context"></param>
+	/// <param name="context">The context that owns the entity set and its lifetime.</param>
 	public class DbRepository<TEntity>(DbContext context) : IQueryableRepository<TEntity>, IAsyncQueryableRepository<TEntity>
 		where TEntity : class
 
 	{
 		/// <summary>
-		/// context class
+		/// Gets the borrowed context used for queries and persistence.
 		/// </summary>
+		/// <value>The context supplied to the constructor.</value>
 		protected DbContext Context { get; } = context;
 		private readonly DbSet<TEntity> dbSet = context.Set<TEntity>();
 
-		/// <inheritdoc />
+		/// <summary>Adds an entity to the set and immediately saves the context asynchronously.</summary>
+		/// <param name="item">The entity to add and track.</param>
+		/// <param name="cancellationToken">A token that can cancel the save operation.</param>
+		/// <returns>A task that completes after EF Core saves the context.</returns>
 		public virtual Task AddAsync(TEntity item, CancellationToken cancellationToken)
 		{
 			dbSet.Add(item);
 			return Context.SaveChangesAsync(cancellationToken);
 		}
-		/// <inheritdoc />
+		/// <summary>Adds an entity to the set and immediately saves the context.</summary>
+		/// <param name="item">The entity to add and track.</param>
 		public virtual void Add(TEntity item)
 		{
 			dbSet.Add(item);
 			Context.SaveChanges();
 		}
-		/// <inheritdoc />
+		/// <summary>Marks an entity as modified and immediately saves the context.</summary>
+		/// <param name="item">The entity whose complete mapped state should be treated as modified.</param>
 		public virtual void Update(TEntity item)
 		{
 			var entry = Context.Entry(item);
@@ -48,7 +55,10 @@ namespace KamiSama.Repositories.EntityFrameworkCore
 
 			Context.SaveChanges();
 		}
-		/// <inheritdoc />
+		/// <summary>Marks an entity as modified and immediately saves the context asynchronously.</summary>
+		/// <param name="item">The entity whose complete mapped state should be treated as modified.</param>
+		/// <param name="cancellationToken">A token that can cancel the save operation.</param>
+		/// <returns>A task that completes after EF Core saves the context.</returns>
 		public virtual Task UpdateAsync(TEntity item, CancellationToken cancellationToken)
 		{
 			var entry = Context.Entry(item);
@@ -58,48 +68,63 @@ namespace KamiSama.Repositories.EntityFrameworkCore
 
 			return Context.SaveChangesAsync(cancellationToken);
 		}
-		/// <inheritdoc />
+		/// <summary>Marks an entity for deletion and immediately saves the context.</summary>
+		/// <param name="item">The entity to remove.</param>
 		public virtual void Delete(TEntity item)
 		{
 			dbSet.Remove(item);
 			Context.SaveChanges();
 		}
-		/// <inheritdoc />
+		/// <summary>Marks an entity for deletion and immediately saves the context asynchronously.</summary>
+		/// <param name="item">The entity to remove.</param>
+		/// <param name="cancellationToken">A token that can cancel the save operation.</param>
+		/// <returns>A task that completes after EF Core saves the context.</returns>
 		public virtual Task DeleteAsync(TEntity item, CancellationToken cancellationToken)
 		{
 			dbSet.Remove(item);
 			return Context.SaveChangesAsync(cancellationToken);
 		}
 		/// <summary>
-		/// Returns the db set as queryable
+		/// Returns the tracked entity set as a deferred query.
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>The underlying <see cref="DbSet{TEntity}"/> as an <see cref="IQueryable{TEntity}"/>.</returns>
 		public virtual IQueryable<TEntity> AsQueryable()
 			=> dbSet;
-		/// <inheritdoc />
+		/// <summary>Creates a tracked, deferred query filtered by a predicate.</summary>
+		/// <param name="predicate">The expression translated by the EF Core query provider.</param>
+		/// <returns>A deferred query over matching entities.</returns>
 		public virtual IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> predicate)
 			=> dbSet.Where(predicate);
 		/// <summary>
-		/// Checks if any entity exists in the repository
+		/// Determines synchronously whether any entity matches a predicate.
 		/// </summary>
-		/// <returns></returns>
+		/// <param name="predicate">The expression translated by the EF Core query provider.</param>
+		/// <returns><see langword="true"/> when at least one entity matches; otherwise, <see langword="false"/>.</returns>
 		public virtual bool Any(Expression<Func<TEntity, bool>> predicate)
 			=> dbSet.Any(predicate);
 		/// <summary>
-		/// Checks if any entity exists in the repository
+		/// Determines asynchronously whether any entity matches a predicate.
 		/// </summary>
-		/// <returns></returns>
+		/// <param name="predicate">The expression translated by the EF Core query provider.</param>
+		/// <param name="cancellationToken">A token that can cancel query execution.</param>
+		/// <returns>A task containing <see langword="true"/> when at least one entity matches; otherwise, <see langword="false"/>.</returns>
 		public virtual Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken)
 			=> dbSet.AnyAsync(predicate, cancellationToken);
-		/// <inheritdoc />
+		/// <summary>Returns the first tracked entity matching a predicate.</summary>
+		/// <param name="predicate">The expression translated by the EF Core query provider.</param>
+		/// <returns>The first matching entity, or <see langword="null"/> when no entity matches.</returns>
 		public virtual TEntity? Find(Expression<Func<TEntity, bool>> predicate)
 			=> dbSet.FirstOrDefault(predicate);
-		/// <inheritdoc />
+		/// <summary>Asynchronously returns the first tracked entity matching a predicate.</summary>
+		/// <param name="predicate">The expression translated by the EF Core query provider.</param>
+		/// <param name="cancellationToken">A token that can cancel query execution.</param>
+		/// <returns>A task containing the first matching entity, or <see langword="null"/> when no entity matches.</returns>
 		public virtual Task<TEntity?> FindAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken)
 			=> dbSet.FirstOrDefaultAsync(predicate, cancellationToken)!;
 		/// <summary>
-		/// Dispose method, does nothing
+		/// Releases no resources because the repository does not own the injected context.
 		/// </summary>
+		/// <remarks>The context owner remains responsible for disposing the context.</remarks>
 		[ExcludeFromCodeCoverage]
 		public virtual void Dispose()
 		{
@@ -107,22 +132,21 @@ namespace KamiSama.Repositories.EntityFrameworkCore
 		}
 	}
 	/// <summary>
-	/// Database Repository with context type
+	/// Exposes a strongly typed protected context while retaining the EF Core repository behavior.
 	/// </summary>
-	/// <typeparam name="TEntity"></typeparam>
-	/// <typeparam name="TDbContext"></typeparam>
-	/// <remarks>
-	/// constructor
-	/// </remarks>
-	/// <param name="context"></param>
+	/// <typeparam name="TEntity">The tracked entity type.</typeparam>
+	/// <typeparam name="TDbContext">The concrete EF Core context type.</typeparam>
+	/// <param name="context">The concrete context that owns the entity set and its lifetime.</param>
+	/// <remarks>Mutations save immediately, queries track by default, and disposal does not dispose the supplied context.</remarks>
 	[ExcludeFromCodeCoverage]
 	public class DbRepository<TEntity, TDbContext>(TDbContext context) : DbRepository<TEntity>(context)
 		where TDbContext : DbContext
 		where TEntity : class
 	{
         /// <summary>
-        /// Inner Context
+        /// Gets the borrowed context as <typeparamref name="TDbContext"/> for derived repositories.
         /// </summary>
+        /// <value>The context supplied to the constructor.</value>
         protected new TDbContext Context => (TDbContext)base.Context;
 	}
 }

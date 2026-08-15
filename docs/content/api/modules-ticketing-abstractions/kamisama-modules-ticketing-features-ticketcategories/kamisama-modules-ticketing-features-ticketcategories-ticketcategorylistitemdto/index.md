@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Modules.Ticketing.Abstractions](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.Modules.Ticketing.Abstractions/Features/TicketCategories/Dtos.cs:7](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/TicketCategories/Dtos.cs#L7)
+Source: [src/KamiSama.Modules.Ticketing.Abstractions/Features/TicketCategories/Dtos.cs:27](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/TicketCategories/Dtos.cs#L27)
 
 Namespace: `KamiSama.Modules.Ticketing.Features.TicketCategories`
 
@@ -12,7 +12,7 @@ Kind: `Record`
 
 ## Description
 
-Provides the `TicketCategoryListItemDto` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
+Carries the category fields returned in ticket-category list results and nested ticket data. It contains no ticket collection.
 
 ## Declaration
 
@@ -24,9 +24,9 @@ public record TicketCategoryListItemDto(Guid Id, string Name, DateTime CreatedAt
 
 ### Primary constructor
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/TicketCategories/Dtos.cs#L7)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/TicketCategories/Dtos.cs#L27)
 
-Initializes the type with the values required by its declaration. Use it with the surrounding package APIs when composing application code.
+Carries the category fields returned in ticket-category list results and nested ticket data. It contains no ticket collection.
 
 ```csharp
 public record TicketCategoryListItemDto(Guid Id, string Name, DateTime CreatedAt, DateTime UpdatedAt);
@@ -36,10 +36,10 @@ public record TicketCategoryListItemDto(Guid Id, string Name, DateTime CreatedAt
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `Id` | `Guid` | `-` | The `Id` value passed to this member. |
-| `Name` | `string` | `-` | The `Name` value passed to this member. |
-| `CreatedAt` | `DateTime` | `-` | The `CreatedAt` value passed to this member. |
-| `UpdatedAt` | `DateTime` | `-` | The `UpdatedAt` value passed to this member. |
+| `Id` | `Guid` | `-` | The category identifier. |
+| `Name` | `string` | `-` | The category name. |
+| `CreatedAt` | `DateTime` | `-` | The category creation timestamp. |
+| `UpdatedAt` | `DateTime` | `-` | The category&apos;s latest update timestamp. |
 
 ## Members
 

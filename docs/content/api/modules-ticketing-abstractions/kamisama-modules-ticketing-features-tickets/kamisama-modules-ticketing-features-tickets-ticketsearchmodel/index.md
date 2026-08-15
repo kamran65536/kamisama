@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Modules.Ticketing.Abstractions](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Dtos.cs:5](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Dtos.cs#L5)
+Source: [src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Dtos.cs:17](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Dtos.cs#L17)
 
 Namespace: `KamiSama.Modules.Ticketing.Features.Tickets`
 
@@ -12,7 +12,7 @@ Kind: `Record`
 
 ## Description
 
-Provides the `TicketSearchModel` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
+Carries ticket paging, text, category, author, status, priority, and ordering criteria. Current Core ignores the category identifier and recognizes only `priority`, `status`, and `updatedat` ordering tokens.
 
 ## Declaration
 
@@ -24,9 +24,9 @@ public record TicketSearchModel(int Page, int PageSize, string? Comment, Guid? T
 
 ### Primary constructor
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Dtos.cs#L5)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Dtos.cs#L17)
 
-Initializes the type with the values required by its declaration. Use it with the surrounding package APIs when composing application code.
+Carries paging and optional ticket-list filters for text, category, author, status, priority, and ordering. Core currently ignores &lt;paramref name=&quot;TicketCategoryId&quot;/&gt; and recognizes `priority`, `status`, and `updatedat` ordering tokens.
 
 ```csharp
 public record TicketSearchModel(int Page, int PageSize, string? Comment, Guid? TicketCategoryId, Guid? AuthorUserId, TicketStatus[]? Statuses, TicketPriority[]? Priorities, string? OrderBy) : SearchModel(Page, PageSize, OrderBy)
@@ -36,14 +36,14 @@ public record TicketSearchModel(int Page, int PageSize, string? Comment, Guid? T
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `Page` | `int` | `-` | The `Page` value passed to this member. |
-| `PageSize` | `int` | `-` | The `PageSize` value passed to this member. |
-| `Comment` | `string?` | `-` | The `Comment` value passed to this member. |
-| `TicketCategoryId` | `Guid?` | `-` | The `TicketCategoryId` value passed to this member. |
-| `AuthorUserId` | `Guid?` | `-` | The `AuthorUserId` value passed to this member. |
-| `Statuses` | `TicketStatus[]?` | `-` | The `Statuses` value passed to this member. |
-| `Priorities` | `TicketPriority[]?` | `-` | The `Priorities` value passed to this member. |
-| `OrderBy` | `string?` | `-` | The `OrderBy` value passed to this member. |
+| `Page` | `int` | `-` | The one-based page number, or the implementation-defined all-results value. |
+| `PageSize` | `int` | `-` | The maximum number of rows in a page, or the implementation-defined all-results value. |
+| `Comment` | `string?` | `-` | Optional case-insensitive text matched against ticket titles and comment bodies by Core. |
+| `TicketCategoryId` | `Guid?` | `-` | An optional category identifier; the current Core repository does not apply it. |
+| `AuthorUserId` | `Guid?` | `-` | An optional user identifier matched against ticket or comment authors by Core. |
+| `Statuses` | `TicketStatus[]?` | `-` | Optional accepted ticket statuses. |
+| `Priorities` | `TicketPriority[]?` | `-` | Optional accepted ticket priorities. |
+| `OrderBy` | `string?` | `-` | An optional implementation-specific ordering token. |
 
 ## Members
 
@@ -51,5 +51,5 @@ public record TicketSearchModel(int Page, int PageSize, string? Comment, Guid? T
 
 | Member | Description |
 | --- | --- |
-| [All](property-all-7.md) | Exposes the `All` value on `TicketSearchModel`. Read or set it as part of configuring or using the type. |
+| [All](property-all-23.md) | Gets or sets the shared mutable search model requesting all tickets without filters or explicit ordering. Replace it only when application-wide callers intentionally need different all-results defaults. |
 

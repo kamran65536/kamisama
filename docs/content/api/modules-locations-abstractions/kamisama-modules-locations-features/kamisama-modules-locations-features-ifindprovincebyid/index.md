@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Modules.Locations.Abstractions](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.Modules.Locations.Abstractions/Features/Features.cs:7](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Locations.Abstractions/Features/Features.cs#L7)
+Source: [src/KamiSama.Modules.Locations.Abstractions/Features/Features.cs:13](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Locations.Abstractions/Features/Features.cs#L13)
 
 Namespace: `KamiSama.Modules.Locations.Features`
 
@@ -12,12 +12,18 @@ Kind: `Interface`
 
 ## Description
 
-Defines the contract for `IFindProvinceById` behavior. Implement this interface when you need to plug your own code into the surrounding KamiSama package.
+Defines province lookup by `Guid`. Core throws the generic province not-found HTTP exception when no row matches.
 
 ## Declaration
 
 ```csharp
 public interface IFindProvinceById : IFindByIdFeature<ProvinceDto, Guid>;
+```
+
+## Example
+
+```csharp
+ProvinceDto province = await findProvinceById.FindByIdAsync(provinceId, cancellationToken);
 ```
 
 ## Constructors

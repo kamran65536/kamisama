@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Modules.Localization.Abstractions](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.Modules.Localization.Abstractions/Features/Dtos.cs:3](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Localization.Abstractions/Features/Dtos.cs#L3)
+Source: [src/KamiSama.Modules.Localization.Abstractions/Features/Dtos.cs:9](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Localization.Abstractions/Features/Dtos.cs#L9)
 
 Namespace: `KamiSama.Modules.Localization.Features`
 
@@ -12,7 +12,7 @@ Kind: `Record`
 
 ## Description
 
-Provides the `CultureInfoDto` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
+Carries a display label, application-defined flag representation, and .NET culture name. It is shared by localization contracts and implementations.
 
 ## Declaration
 
@@ -24,9 +24,9 @@ public record CultureInfoDto(string DisplayName, string RepresentedFlag, string 
 
 ### Primary constructor
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Localization.Abstractions/Features/Dtos.cs#L3)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Localization.Abstractions/Features/Dtos.cs#L9)
 
-Initializes the type with the values required by its declaration. Use it with the surrounding package APIs when composing application code.
+Carries display text, flag representation, and a .NET culture name between localization callers and implementations. Use it with the surrounding package APIs when composing application code.
 
 ```csharp
 public record CultureInfoDto(string DisplayName, string RepresentedFlag, string Culture);
@@ -36,9 +36,9 @@ public record CultureInfoDto(string DisplayName, string RepresentedFlag, string 
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `DisplayName` | `string` | `-` | The `DisplayName` value passed to this member. |
-| `RepresentedFlag` | `string` | `-` | The `RepresentedFlag` value passed to this member. |
-| `Culture` | `string` | `-` | The `Culture` value passed to this member. |
+| `DisplayName` | `string` | `-` | The human-readable culture label. |
+| `RepresentedFlag` | `string` | `-` | The application-defined flag code or representation. |
+| `Culture` | `string` | `-` | The culture name used to construct or compare `System.Globalization.CultureInfo` values. |
 
 ## Members
 

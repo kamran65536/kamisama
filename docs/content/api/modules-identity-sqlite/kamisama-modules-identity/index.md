@@ -4,4 +4,4 @@
 
 | Type | Kind | Description | Source |
 | --- | --- | --- | --- |
-| [IdentitySqliteDbContextBuilderExtensions](kamisama-modules-identity-identitysqlitedbcontextbuilderextensions/index.md) | Class | Provides the `IdentitySqliteDbContextBuilderExtensions` API for the surrounding package. Use this type with the members listed below to compose the feature in an application. | [source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Identity.Sqlite/IdentitySqliteDbContextBuilderExtensions.cs#L8) |
+| [IdentitySqliteDbContextBuilderExtensions](kamisama-modules-identity-identitysqlitedbcontextbuilderextensions/index.md) | Class | Registers the internal SQLite Identity context under the shared multi-provider infrastructure's `sqlite` key. | [source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Identity.Sqlite/IdentitySqliteDbContextBuilderExtensions.cs#L9) |

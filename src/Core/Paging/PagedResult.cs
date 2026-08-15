@@ -4,19 +4,20 @@ using System.Data;
 namespace KamiSama.Extensions.Paging;
 
 /// <summary>
-/// Paged Result
+/// Represents one materialized page of items together with the total number of matching items.
+/// Use it to return page data without losing the count needed by callers to render pagination.
 /// </summary>
-/// <typeparam name="T"></typeparam>
-/// <param name="TotalItemsCount"></param>
-/// <param name="Items"></param>
+/// <typeparam name="T">The item type.</typeparam>
+/// <param name="TotalItemsCount">The total number of matching items across all pages.</param>
+/// <param name="Items">The items materialized for this page.</param>
 public record PagedResult<T>(int TotalItemsCount, List<T> Items)
 {
 	/// <summary>
-	/// Empty Result
+	/// Gets an empty paged result with a total count of zero.
 	/// </summary>
 	public static PagedResult<T> Empty { get; } = new PagedResult<T>(0, []);
 	/// <summary>
-	/// Converts a paged result to another one
+	/// Projects each item to another type while preserving the total item count.
 	/// </summary>
 	/// <typeparam name="TOtherType"></typeparam>
 	/// <param name="convertFunc"></param>
@@ -24,7 +25,7 @@ public record PagedResult<T>(int TotalItemsCount, List<T> Items)
 	public virtual PagedResult<TOtherType> ConvertTo<TOtherType>(Func<T, TOtherType> convertFunc)
 		=> new(TotalItemsCount, [.. Items.Select(convertFunc)]);
 	/// <summary>
-	/// Converts a paged result to another one asynchronously
+	/// Asynchronously projects each item to another type while preserving the total item count.
 	/// </summary>
 	public virtual async Task<PagedResult<TOtherType>> ConvertToAsync<TOtherType>(Func<T, CancellationToken, Task<TOtherType>> convertFunc, CancellationToken cancellationToken)
 	{

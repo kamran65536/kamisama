@@ -12,7 +12,7 @@ Kind: `Class`
 
 ## Description
 
-The request contained valid data and was understood by the server, but the server is refusing action. Use it with the surrounding package APIs when composing application code.
+Represents an understood request that the server refuses to perform and should be reported with HTTP status code 403. Use it with the surrounding package APIs when composing application code.
 
 ## Declaration
 
@@ -26,7 +26,7 @@ public class ForbiddenException : HttpExceptionBase
 
 [source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Exceptions/ForbiddenException.cs#L10)
 
-Initializes a new `ForbiddenException` instance. Use it with the surrounding package APIs when composing application code.
+Initializes an exception using the exception type name as its localization key. Use it with the surrounding package APIs when composing application code.
 
 ```csharp
 public ForbiddenException();
@@ -38,9 +38,9 @@ This member does not declare parameters.
 
 ### ForbiddenException
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Exceptions/ForbiddenException.cs#L14)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Exceptions/ForbiddenException.cs#L16)
 
-Initializes a new `ForbiddenException` instance. Use it with the surrounding package APIs when composing application code.
+Initializes an exception with a localization key and formatting arguments. Use it with the surrounding package APIs when composing application code.
 
 ```csharp
 public ForbiddenException(string messageKey, params object? [] args) : base(messageKey, args);
@@ -50,14 +50,14 @@ public ForbiddenException(string messageKey, params object? [] args) : base(mess
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `messageKey` | `string` | `-` | The `messageKey` value passed to this member. |
-| `args` | `object?[]` | `-` | The `args` value passed to this member. |
+| `messageKey` | `string` | `-` | The localization key, also used as the fallback message format. |
+| `args` | `object?[]` | `-` | Values used to format and later localize the message. |
 
 ### ForbiddenException
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Exceptions/ForbiddenException.cs#L18)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Exceptions/ForbiddenException.cs#L23)
 
-Initializes a new `ForbiddenException` instance. Use it with the surrounding package APIs when composing application code.
+Initializes an exception with localization metadata and an underlying exception. Use it with the surrounding package APIs when composing application code.
 
 ```csharp
 public ForbiddenException(string messageKey, object? [] args, Exception? innerException) : base(messageKey, args, innerException);
@@ -67,9 +67,9 @@ public ForbiddenException(string messageKey, object? [] args, Exception? innerEx
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `messageKey` | `string` | `-` | The `messageKey` value passed to this member. |
-| `args` | `object?[]` | `-` | The `args` value passed to this member. |
-| `innerException` | `Exception?` | `-` | The `innerException` value passed to this member. |
+| `messageKey` | `string` | `-` | The localization key, also used as the fallback message format. |
+| `args` | `object?[]` | `-` | Values used to format and later localize the message. |
+| `innerException` | `Exception?` | `-` | The exception that caused this failure, or . |
 
 ## Members
 
@@ -77,5 +77,5 @@ public ForbiddenException(string messageKey, object? [] args, Exception? innerEx
 
 | Member | Description |
 | --- | --- |
-| [StatusCode](property-statuscode-8.md) | Exposes the `StatusCode` value on `ForbiddenException`. Read or set it as part of configuring or using the type. |
+| [StatusCode](property-statuscode-8.md) | Gets HTTP status code 403. Use it with the surrounding package APIs when composing application code. |
 

@@ -1,8 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="../props.xml" />
-
 	<PropertyGroup>
-		<NoWarn>$(NoWarn);1591</NoWarn>
+		<PackageDocumentationRoot>../../docs/content/api/modules-ticketing-sqlite</PackageDocumentationRoot>
+	</PropertyGroup>
+	<Import Project="../props.xml" />
+	<PropertyGroup>
+		<Description>SQLite EF Core context, provider registration, and migrations for KamiSama.Modules.Ticketing.Core.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>

@@ -10,7 +10,7 @@ Kind: `Method`
 
 ## Description
 
-Update method, does nothing. Use it with the surrounding package APIs when composing application code.
+Updates an entity according to the implementation's matching and persistence rules; the contract does not require replacement or merging.
 
 ## Declaration
 
@@ -22,18 +22,11 @@ void Update(TEntity item);
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `item` | `TEntity` | `-` | The `item` value passed to this member. |
+| `item` | `TEntity` | `-` | The entity to update. |
 
 ## Example
 
 ```csharp
-var sample = new SampleEntity { Id = 1, Name = "sample" };
-var repository = new InMemoryRepository<SampleEntity>([sample]);
-
-sample.Name = "sample2";
-
-repository.Update(sample);
-
-var retrieved = repository.Find(x => x.Name == "sample2");
+repository.Update(user); // Persistence semantics depend on the implementation.
 ```
 

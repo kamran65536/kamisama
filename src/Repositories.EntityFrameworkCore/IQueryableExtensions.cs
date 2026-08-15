@@ -7,18 +7,23 @@ using System.Threading.Tasks;
 namespace KamiSama.Repositories.EntityFrameworkCore;
 
 /// <summary>
-/// IQueryable Extensions
+/// Provides Entity Framework Core paging for database queries.
 /// </summary>
 public static class IQueryableExtensions
 {
 	/// <summary>
-	/// Makes the query paged, used for user interface and apis paging
+	/// Counts the complete query and materializes the requested page.
 	/// </summary>
-	/// <typeparam name="T"></typeparam>
-	/// <param name="query"></param>
-	/// <param name="searchModel"></param>
-	/// <param name="cancellationToken"></param>
-	/// <returns></returns>
+	/// <typeparam name="T">The element type returned by the query.</typeparam>
+	/// <param name="query">The EF Core query to page. Apply a deterministic ordering before calling this method.</param>
+	/// <param name="searchModel">The one-based page number and page size; a page size of zero returns all items.</param>
+	/// <param name="cancellationToken">A token that can cancel list materialization but not the synchronous count.</param>
+	/// <returns>A result containing the unpaged count and the requested items.</returns>
+	/// <remarks>
+	/// The method does not add ordering. The count executes synchronously and does not observe
+	/// <paramref name="cancellationToken"/>. Count and materialization are separate queries, so concurrent changes can
+	/// make the count and items inconsistent.
+	/// </remarks>
 	public static async Task<PagedResult<T>> MakePagedAsync<T>(this IQueryable<T> query, SearchModel searchModel, CancellationToken cancellationToken)
 	{
 

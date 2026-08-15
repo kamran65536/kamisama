@@ -1,17 +1,18 @@
 ﻿namespace KamiSama.Extensions.NLog;
 
 /// <summary>
-/// Persian Long Date Layout, same functionality as LongDate but using Persian Calender
+/// Renders an NLog event timestamp as a Persian-calendar date with time and four fractional-second digits.
+/// The fixed output format is <c>yyyy-MM-dd HH:mm:ss.ffff</c>.
 /// </summary>
 [LayoutRenderer("persian-longDate")]
 public class PersianLongDateLayoutRenderer : LayoutRenderer
 {
 	private static readonly PersianCalendar persianCalendar = new();
 	/// <summary>
-	/// appends long date with persian date time into it
+	/// Appends the event timestamp in the fixed Persian-calendar long-date format.
 	/// </summary>
-	/// <param name="builder"></param>
-	/// <param name="logEvent"></param>
+	/// <param name="builder">The buffer that receives the rendered timestamp.</param>
+	/// <param name="logEvent">The NLog event whose timestamp is rendered.</param>
 	protected override void Append(StringBuilder builder, LogEventInfo logEvent)
 	{
 		DateTime dt = logEvent.TimeStamp;

@@ -2,27 +2,39 @@
 
 [Back to package index](../index.md)
 
-Version: `10.0.10`
+Version: `10.0.0`
 
 ## Description
 
-Core email service registrations and shared email behavior. Use it with the surrounding package APIs when composing application code.
+Provider-selecting email registration for ASP.NET Core applications, including default-provider options and a built-in mock provider. Use it to route `ISendEmail` calls to keyed transport implementations.
 
-## Install
+## How to use
 
 ```shell
-dotnet add package KamiSama.ExternalServices.Email.Core --version 10.0.10
+dotnet add package KamiSama.ExternalServices.Email.Core --version 10.0.0
 ```
+
+Add the core module with a configuration section whose `email` value names the keyed provider. The built-in `mock` provider only logs method entry; add a transport package and use its key for real delivery:
+
+```csharp
+using KamiSama.ExternalServices.Email;
+using KamiSama.Modules;
+
+var webBuilder = WebApplication.CreateBuilder(args);
+var builder = webBuilder.Extend()
+    .AddCoreEmailServices(webBuilder.Configuration.GetSection("EmailDefaults"));
+
+var app = await builder.BuildAsync(CancellationToken.None);
+```
+
+Configure `EmailDefaults:email` as `mock` for the built-in no-delivery implementation or as the key registered by an installed provider. If no keyed `ISendEmail` exists for that value, the dispatcher throws `CannotFindExternalServiceException`.
 
 ## Namespaces
 
 - [KamiSama.ExternalServices.Email](kamisama-externalservices-email/index.md) (3 types)
-- [KamiSama.ExternalServices.Email.Features](kamisama-externalservices-email-features/index.md) (2 types)
 
 ## Types
 
-- [KamiSama.ExternalServices.Email.EmailCoreServicesModule](kamisama-externalservices-email/kamisama-externalservices-email-emailcoreservicesmodule/index.md) - ASP.NET Core web-module implementation for `EmailCoreServicesModule`. Add it through the extended web application builder to register services and apply the related middleware or endpoints.
-- [KamiSama.ExternalServices.Email.EmailDefaultsOptions](kamisama-externalservices-email/kamisama-externalservices-email-emaildefaultsoptions/index.md) - Configuration object for `EmailDefaultsOptions`. Use it when binding settings or configuring the related package services.
-- [KamiSama.ExternalServices.Email.ExtendedWebApplicationBuilderExtensions](kamisama-externalservices-email/kamisama-externalservices-email-extendedwebapplicationbuilderextensions/index.md) - Provides the `ExtendedWebApplicationBuilderExtensions` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
-- [KamiSama.ExternalServices.Email.Features.DefaultSendEmail](kamisama-externalservices-email-features/kamisama-externalservices-email-features-defaultsendemail/index.md) - Provides the `DefaultSendEmail` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
-- [KamiSama.ExternalServices.Email.Features.MockSendEmail](kamisama-externalservices-email-features/kamisama-externalservices-email-features-mocksendemail/index.md) - Provides the `MockSendEmail` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
+- [KamiSama.ExternalServices.Email.EmailCoreServicesModule](kamisama-externalservices-email/kamisama-externalservices-email-emailcoreservicesmodule/index.md) - Registers the default-provider options and scans the core email package for service implementations. Add it when `ISendEmail` should dispatch to the keyed provider selected by configuration.
+- [KamiSama.ExternalServices.Email.EmailDefaultsOptions](kamisama-externalservices-email/kamisama-externalservices-email-emaildefaultsoptions/index.md) - Selects the keyed email provider used by the core dispatcher. The default `mock` provider performs no delivery; set `Email` to a key registered by a transport package for another implementation.
+- [KamiSama.ExternalServices.Email.ExtendedWebApplicationBuilderExtensions](kamisama-externalservices-email/kamisama-externalservices-email-extendedwebapplicationbuilderextensions/index.md) - Adds core email provider selection and service registrations to an `ExtendedWebApplicationBuilder`. Pass the configuration section that contains the `email` provider key.

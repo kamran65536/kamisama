@@ -6,15 +6,20 @@ using System.Xml.Serialization;
 namespace KamiSama.Extensions
 {
 	/// <summary>
-	/// Automatically adds xml element attributes to the current type
+	/// Marks a field or property so XML-element overrides are added for its concrete derived value types.
+	/// Collection members are mapped using their item type.
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
 	public class AutoXmlElementAttribute : AutoXmlAttribute
 	{
-		/// <inheritdoc />
+		/// <summary>
+		/// Throws because <see cref="AutoXmlElementAttribute"/> can be applied only to fields and properties, not types.
+		/// </summary>
 		public override void VisitType(Type? rootType, XmlAttributeOverrides? overrides, Type[]? allTypes)
 			=> throw new InvalidOperationException("This method cannot be called for AutoXmlElement");
-		/// <inheritdoc />
+		/// <summary>
+		/// Adds a named <see cref="XmlElementAttribute"/> override for each non-abstract subclass of the property's value or collection-item type.
+		/// </summary>
 		public override void VisitProperty(PropertyInfo property, XmlAttributeOverrides overrides, Type[] allTypes)
 		{
 			var elementType = GetCollectionItemType(property.PropertyType);
@@ -32,7 +37,9 @@ namespace KamiSama.Extensions
 			foreach (var type in validTypes)
 				attributes.XmlElements.Add(new XmlElementAttribute { Type = type, ElementName = type.Name });
 		}
-		/// <inheritdoc />
+		/// <summary>
+		/// Adds a named <see cref="XmlElementAttribute"/> override for each non-abstract subclass of the field's value or collection-item type.
+		/// </summary>
 		public override void VisitField(FieldInfo field, XmlAttributeOverrides overrides, Type[] allTypes)
 		{
 			var elementType = GetCollectionItemType(field.FieldType);

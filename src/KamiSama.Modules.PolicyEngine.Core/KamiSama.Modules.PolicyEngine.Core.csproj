@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageDocumentationRoot>../../docs/content/api/modules-policyengine-core</PackageDocumentationRoot>
+	</PropertyGroup>
+	<Import Project="../props.xml" />
+
+	<PropertyGroup>
+		<Description>EF Core entities, repositories, CRUD features, and modular startup registration for policy definitions; it stores policy data but does not evaluate or authorize policies.</Description>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\KamiSama.Modules.PolicyEngine.Abstractions\KamiSama.Modules.PolicyEngine.Abstractions.csproj" />
+		<ProjectReference Include="..\Chassis.Commons\KamiSama.Chassis.Commons.csproj" />
+		<ProjectReference Include="..\DependencyInjection\KamiSama.Extensions.DependencyInjection.csproj" />
+		<ProjectReference Include="..\KamiSama.Modules\KamiSama.Modules.csproj" />
+		<ProjectReference Include="..\Repositories.EntityFrameworkCore\KamiSama.Repositories.EntityFrameworkCore.csproj" />
+		<PackageReference Include="Riok.Mapperly" Version="4.3.1" />
+	</ItemGroup>
+</Project>

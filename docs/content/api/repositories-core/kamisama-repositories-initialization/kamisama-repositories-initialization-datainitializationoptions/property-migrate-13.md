@@ -10,7 +10,7 @@ Kind: `Property`
 
 ## Description
 
-Migrate database to the latest version. Use it with the surrounding package APIs when composing application code.
+Gets or sets whether the initializer should run its database migration stage.
 
 ## Declaration
 
@@ -26,5 +26,12 @@ public bool Migrate { get; set; }
 
 ## Example
 
-No concise standalone example is available yet.
+```csharp
+var options = new DataInitializationOptions
+{
+    Migrate = true,
+    InitializeData = true,
+    InitializeTestData = false
+};
+```
 

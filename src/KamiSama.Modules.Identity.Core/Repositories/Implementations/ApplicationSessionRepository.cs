@@ -32,6 +32,23 @@ internal class ApplicationSessionRepository(KamiSamaIdentityDbContext context) :
 		await context.SaveChangesAsync(cancellationToken);
 	}
 
+	public async Task RevokeAllAsync(Guid userId, CancellationToken cancellationToken)
+	{
+		var utcNow = DateTime.UtcNow;
+		var sessions = await context.ApplicationSessions
+			.Where(x => x.UserId == userId && !x.IsRevoked)
+			.ToListAsync(cancellationToken);
+
+		foreach (var session in sessions)
+		{
+			session.IsRevoked = true;
+			session.RevokedAt = utcNow;
+			session.LastConnection = utcNow;
+		}
+
+		await context.SaveChangesAsync(cancellationToken);
+	}
+
 	public async Task RevokeAllExceptAsync(Guid userId, string currentSessionKey, CancellationToken cancellationToken)
 	{
 		var utcNow = DateTime.UtcNow;

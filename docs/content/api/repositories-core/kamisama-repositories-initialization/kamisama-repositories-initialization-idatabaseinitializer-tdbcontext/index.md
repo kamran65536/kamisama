@@ -12,12 +12,24 @@ Kind: `Interface`
 
 ## Description
 
-Generic Data Initialization interface. Use it with the surrounding package APIs when composing application code.
+Defines migration and seed-data initialization for one database context type. Implementations interpret `DataInitializationOptions` and own ordering, idempotency, persistence, and failure behavior.
 
 ## Declaration
 
 ```csharp
 public interface IDatabaseInitializer<TDbContext>
+```
+
+## Example
+
+```csharp
+using KamiSama.Repositories.Initialization;
+
+public sealed class StartupDatabase(AppDbContext context) : IDatabaseInitializer<AppDbContext>
+{
+    public Task InitializeAsync(DataInitializationOptions options, CancellationToken cancellationToken)
+        => options.InitializeData ? SeedAsync(context, cancellationToken) : Task.CompletedTask;
+}
 ```
 
 ## Constructors
@@ -30,5 +42,5 @@ This type does not declare a non-private constructor in source.
 
 | Member | Description |
 | --- | --- |
-| [InitializeAsync](method-initializeasync-18.md) | Initialize and migrates the database if necessary. Use it with the surrounding package APIs when composing application code. |
+| [InitializeAsync](method-initializeasync-18.md) | Runs the migration and seed stages selected by `DataInitializationOptions`; the implementation owns ordering, idempotency, persistence, and failure behavior. |
 

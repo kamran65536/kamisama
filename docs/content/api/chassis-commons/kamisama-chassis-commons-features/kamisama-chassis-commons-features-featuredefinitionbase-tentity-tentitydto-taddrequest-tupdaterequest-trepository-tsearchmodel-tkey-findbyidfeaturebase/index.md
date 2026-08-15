@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Chassis.Commons](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/Chassis.Commons/Features/FeatureDefinitionBase.cs:33](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Commons/Features/FeatureDefinitionBase.cs#L33)
+Source: [src/Chassis.Commons/Features/FeatureDefinitionBase.cs:45](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Commons/Features/FeatureDefinitionBase.cs#L45)
 
 Namespace: `KamiSama.Chassis.Commons.Features`
 
@@ -38,9 +38,9 @@ public sealed class ProductFeatures
 
 ### Primary constructor
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Commons/Features/FeatureDefinitionBase.cs#L33)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Commons/Features/FeatureDefinitionBase.cs#L45)
 
-Initializes the type with the values required by its declaration. Use it with the surrounding package APIs when composing application code.
+Provides the standard find-by-identifier workflow for the bound feature types. Use it with the surrounding package APIs when composing application code.
 
 ```csharp
 public abstract class FindByIdFeatureBase(TRepository repository) : GenericFindByIdFeature<TEntity, TEntityDto, TRepository, TKey>(repository);
@@ -50,7 +50,7 @@ public abstract class FindByIdFeatureBase(TRepository repository) : GenericFindB
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `repository` | `TRepository` | `-` | The `repository` value passed to this member. |
+| `repository` | `TRepository` | `-` | The repository used to find entities. |
 
 ## Members
 

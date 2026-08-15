@@ -3,22 +3,22 @@
 namespace KamiSama.Repositories.Initialization;
 
 /// <summary>
-/// Data Initialization Options
+/// Selects which migration and seed-data stages a database initializer should run.
 /// </summary>
 public class DataInitializationOptions
 {
     /// <summary>
-    /// Migrate database to the latest version
+    /// Gets or sets whether the initializer should migrate the database.
     /// </summary>
     [ConfigurationKeyName("migrate")]
     public bool Migrate { get; set; }
     /// <summary>
-    /// Initialize necessary data to the database
+    /// Gets or sets whether the initializer should create required application data.
     /// </summary>
     [ConfigurationKeyName("initialize")]
     public bool InitializeData { get; set; }
     /// <summary>
-    /// Adds test data (for test purposes)
+    /// Gets or sets whether the initializer should create test data.
     /// </summary>
     [ConfigurationKeyName("test-data")]
     public bool InitializeTestData { get; set; }

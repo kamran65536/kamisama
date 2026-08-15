@@ -12,7 +12,7 @@ Kind: `Class`
 
 ## Description
 
-Provides PostgreSQL registrations for multi-provider DbContext builders. Use it with the surrounding package APIs when composing application code.
+Registers a scoped PostgreSQL context under the exact `postgresql` key, enables lazy-loading proxies, configures migration history, and sets two process-wide Npgsql compatibility switches.
 
 ## Declaration
 
@@ -30,5 +30,5 @@ This type does not declare a non-private constructor in source.
 
 | Member | Description |
 | --- | --- |
-| [AddPostgresql<TInheritedContext>](method-addpostgresql-tinheritedcontext-17.md) | Registers a PostgreSQL DbContext implementation for the builder base context. Use it with the surrounding package APIs when composing application code. |
+| [AddPostgresql<TInheritedContext>](method-addpostgresql-tinheritedcontext-23.md) | Registers a scoped PostgreSQL context and exposes it under the `postgresql` keyed base-context service. Use it with the surrounding package APIs when composing application code. |
 

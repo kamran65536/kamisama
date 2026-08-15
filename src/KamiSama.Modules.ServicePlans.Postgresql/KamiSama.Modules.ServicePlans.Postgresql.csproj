@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageDocumentationRoot>../../docs/content/api/modules-serviceplans-postgresql</PackageDocumentationRoot>
+	</PropertyGroup>
+	<Import Project="../props.xml" />
+	<PropertyGroup>
+		<Description>PostgreSQL EF Core context registration for ServicePlans Core under the `postgresql` provider key. It configures Npgsql and lazy loading but currently ships no ServicePlans migrations.</Description>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\KamiSama.Modules.ServicePlans.Core\KamiSama.Modules.ServicePlans.Core.csproj" />
+		<ProjectReference Include="..\Repositories.EntityFrameworkCore.Postgresql\KamiSama.Repositories.EntityFrameworkCore.Postgresql.csproj" />
+	</ItemGroup>
+</Project>

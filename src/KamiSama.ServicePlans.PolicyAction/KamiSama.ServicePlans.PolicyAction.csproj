@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageDocumentationRoot>../../docs/content/api/serviceplans-policyaction</PackageDocumentationRoot>
+	</PropertyGroup>
+	<Import Project="../props.xml" />
+
+	<PropertyGroup>
+		<Description>ASP.NET Core registration and contracts for a ServicePlans-oriented handler over PolicyEngine contexts. The registered handler is currently unimplemented, and the package does not dispatch resolved actions or call ServicePlans features.</Description>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\KamiSama.Modules.ServicePlans.Abstractions\KamiSama.Modules.ServicePlans.Abstractions.csproj" />
+		<ProjectReference Include="..\KamiSama.Modules.PolicyEngine.Abstractions\KamiSama.Modules.PolicyEngine.Abstractions.csproj" />
+		<ProjectReference Include="..\DependencyInjection\KamiSama.Extensions.DependencyInjection.csproj" />
+		<ProjectReference Include="..\KamiSama.Modules\KamiSama.Modules.csproj" />
+	</ItemGroup>
+</Project>

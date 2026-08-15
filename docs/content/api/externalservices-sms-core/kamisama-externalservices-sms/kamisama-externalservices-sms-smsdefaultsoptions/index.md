@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.ExternalServices.Sms.Core](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.ExternalServices.Sms.Core/SmsDefaultsOptions.cs:5](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.ExternalServices.Sms.Core/SmsDefaultsOptions.cs#L5)
+Source: [src/KamiSama.ExternalServices.Sms.Core/SmsDefaultsOptions.cs:9](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.ExternalServices.Sms.Core/SmsDefaultsOptions.cs#L9)
 
 Namespace: `KamiSama.ExternalServices.Sms`
 
@@ -12,12 +12,23 @@ Kind: `Class`
 
 ## Description
 
-Configuration object for `SmsDefaultsOptions`. Use it when binding settings or configuring the related package services.
+Selects the scoped keyed provider used by the unkeyed SMS dispatcher. The exact keys supplied by these packages are `mock`, `kavenegar`, and `neo-zarin`.
 
 ## Declaration
 
 ```csharp
 public class SmsDefaultsOptions
+```
+
+## Example
+
+```csharp
+using KamiSama.ExternalServices.Sms;
+
+var defaults = new SmsDefaultsOptions
+{
+    Sms = "mock"
+};
 ```
 
 ## Constructors
@@ -30,5 +41,5 @@ This type does not declare a non-private constructor in source.
 
 | Member | Description |
 | --- | --- |
-| [Sms](property-sms-7.md) | Exposes the `Sms` value on `SmsDefaultsOptions`. Read or set it as part of configuring or using the type. |
+| [Sms](property-sms-14.md) | Gets or sets the provider key. Supported keys supplied by these packages are `mock`, `kavenegar`, and `neo-zarin`; the default is `mock`. |
 

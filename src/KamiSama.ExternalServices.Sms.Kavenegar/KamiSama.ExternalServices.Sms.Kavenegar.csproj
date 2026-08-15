@@ -1,8 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="../props.xml" />
-
 	<PropertyGroup>
-		<NoWarn>$(NoWarn);1591</NoWarn>
+		<PackageDocumentationRoot>../../docs/content/api/externalservices-sms-kavenegar</PackageDocumentationRoot>
+	</PropertyGroup>
+	<Import Project="../props.xml" />
+	<PropertyGroup>
+		<Description>Scoped Kavenegar SMS provider registration and configuration for KamiSama SMS services. The current sender has an inverted validation defect that rejects a configured API key before sending.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -12,7 +14,7 @@
 		<PackageReference Include="Kavenegar" Version="1.2.5" />
 		<PackageReference Include="Microsoft.Extensions.Localization" Version="10.0.11" />
 		<PackageReference Include="Microsoft.Extensions.Options" Version="10.0.11" />
-		<ProjectReference Include="..\KamiSama.Extensions.WebModules\KamiSama.Extensions.WebModules.csproj" />
+		<ProjectReference Include="..\KamiSama.Modules\KamiSama.Modules.csproj" />
 		<ProjectReference Include="..\DependencyInjection\KamiSama.Extensions.DependencyInjection.csproj" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
 	</ItemGroup>

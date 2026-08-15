@@ -1,7 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageDocumentationRoot>../../docs/content/api/chassis-httpexceptions</PackageDocumentationRoot>
+	</PropertyGroup>
 	<Import Project="../props.xml" />
 	<PropertyGroup>
 		<Title>Http Exceptions for ProblemDetails</Title>
-		<Description>This library provides predefined HTTP exception classes in order to be used in KamiSama.Chassis.ProblemDetails</Description>
+		<Description>HTTP-oriented exception types with status codes, localization keys, and extra problem details. Use these exceptions to keep application errors consistent across ASP.NET Core APIs.</Description>
 	</PropertyGroup>
 </Project>

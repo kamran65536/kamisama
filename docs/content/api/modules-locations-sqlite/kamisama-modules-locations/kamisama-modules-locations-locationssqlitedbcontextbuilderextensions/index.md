@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Modules.Locations.Sqlite](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.Modules.Locations.Sqlite/LocationsSqliteDbContextBuilderExtensions.cs:8](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Locations.Sqlite/LocationsSqliteDbContextBuilderExtensions.cs#L8)
+Source: [src/KamiSama.Modules.Locations.Sqlite/LocationsSqliteDbContextBuilderExtensions.cs:11](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Locations.Sqlite/LocationsSqliteDbContextBuilderExtensions.cs#L11)
 
 Namespace: `KamiSama.Modules.Locations`
 
@@ -12,7 +12,7 @@ Kind: `Class`
 
 ## Description
 
-Provides the `LocationsSqliteDbContextBuilderExtensions` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
+Registers the SQLite Locations context under the exact `sqlite` keyed base-context service. Use it from the callback passed to `AddLocationsModule`.
 
 ## Declaration
 
@@ -30,5 +30,5 @@ This type does not declare a non-private constructor in source.
 
 | Member | Description |
 | --- | --- |
-| [AddSqliteLocationsDbContext](method-addsqlitelocationsdbcontext-10.md) | Runs the `AddSqliteLocationsDbContext` operation on `LocationsSqliteDbContextBuilderExtensions`. Use it when your code needs this specific behavior from the package. |
+| [AddSqliteLocationsDbContext](method-addsqlitelocationsdbcontext-19.md) | Registers `SqliteLocationsDbContext` and its exact `sqlite` keyed `LocationsDbContext` alias, using the configured connection string, lazy-loading proxies, and Locations migration-history table. |
 

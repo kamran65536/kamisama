@@ -3,12 +3,13 @@
 namespace KamiSama.Extensions;
 
 /// <summary>
-/// IQueryable Extensions
+/// Provides extensions for materializing <see cref="IQueryable{T}"/> sequences as paged results.
+/// Use them after applying filtering and ordering to a query.
 /// </summary>
 public static class IQueryableExtensions
 {
 	/// <summary>
-	/// Makes the query paged, used for user interface and apis paging
+	/// Counts and materializes the requested page of the query, or all items when the page size is zero.
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
 	/// <param name="query"></param>

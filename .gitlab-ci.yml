@@ -1,6 +1,6 @@
 image: mcr.microsoft.com/dotnet/sdk:10.0
 variables:
-    PACKAGE_VERSION: "10.0.11"
+    PACKAGE_VERSION: "10.0.11.1"
 
 stages:
     - build
@@ -8,22 +8,22 @@ stages:
     - publish
 
 before_script:
-    - dotnet restore src/KamiSama.Extensions.slnx
+    - dotnet restore src/kamisama.slnx
     
 build:
     stage: build
     script:
-        - dotnet build src/KamiSama.Extensions.slnx
+        - dotnet build src/kamisama.slnx
 
 test:
     stage: test
     script: 
-        - dotnet test src/KamiSama.Extensions.slnx
+        - dotnet test src/kamisama.slnx
 
 publish:
     stage: publish
     script:
-        - dotnet pack src/KamiSama.Extensions.slnx -o nupkgs -p:PackageVersion=$PACKAGE_VERSION
+        - dotnet pack src/kamisama.slnx -o nupkgs -p:PackageVersion=$PACKAGE_VERSION
         - find nupkgs -name '*.nupkg' | xargs -i dotnet nuget push {} -k $nuget_apikey -s https://api.nuget.org/v3/index.json --skip-duplicate
         - rm -rf nupkgs
     when: manual

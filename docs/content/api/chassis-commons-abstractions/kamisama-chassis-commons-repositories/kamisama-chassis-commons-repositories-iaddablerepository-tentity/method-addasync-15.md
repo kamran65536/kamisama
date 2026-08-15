@@ -10,7 +10,7 @@ Kind: `Method`
 
 ## Description
 
-Adds an item to the database. Use it with the surrounding package APIs when composing application code.
+Adds an entity to the underlying store. Use it with the surrounding package APIs when composing application code.
 
 ## Declaration
 
@@ -22,14 +22,14 @@ Task AddAsync(TEntity entity, CancellationToken cancellationToken);
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `entity` | `TEntity` | `-` | The `entity` value passed to this member. |
-| `cancellationToken` | `CancellationToken` | `-` | The `cancellationToken` value passed to this member. |
+| `entity` | `TEntity` | `-` | The entity to add. |
+| `cancellationToken` | `CancellationToken` | `-` | A token that can cancel the operation. |
 
 ## Returns
 
 | Type | Description |
 | --- | --- |
-| `Task` | Returns a `Task` value. |
+| `Task` | A task that represents the asynchronous add. |
 
 ## Example
 

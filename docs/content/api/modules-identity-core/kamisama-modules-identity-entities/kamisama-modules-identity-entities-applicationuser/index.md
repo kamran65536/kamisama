@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Modules.Identity.Core](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.Modules.Identity.Core/Entities/ApplicationUser.cs:3](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Identity.Core/Entities/ApplicationUser.cs#L3)
+Source: [src/KamiSama.Modules.Identity.Core/Entities/ApplicationUser.cs:7](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Identity.Core/Entities/ApplicationUser.cs#L7)
 
 Namespace: `KamiSama.Modules.Identity.Entities`
 
@@ -12,7 +12,7 @@ Kind: `Class`
 
 ## Description
 
-Provides the `ApplicationUser` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
+ASP.NET Core Identity user with a `Guid` key and application-session navigation. Inherited Identity state stores credentials, confirmation, and lockout data.
 
 ## Declaration
 
@@ -20,13 +20,23 @@ Provides the `ApplicationUser` API for the surrounding package. Use this type wi
 public class ApplicationUser : IdentityUser<Guid>
 ```
 
+## Example
+
+```csharp
+var user = new ApplicationUser("ada")
+{
+    Id = Guid.NewGuid(),
+    Email = "ada@example.com"
+};
+```
+
 ## Constructors
 
 ### ApplicationUser
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Identity.Core/Entities/ApplicationUser.cs#L5)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Identity.Core/Entities/ApplicationUser.cs#L10)
 
-Initializes a new `ApplicationUser` instance. Use it with the surrounding package APIs when composing application code.
+Initializes an empty user for Identity and Entity Framework Core materialization. Use it with the surrounding package APIs when composing application code.
 
 ```csharp
 public ApplicationUser();
@@ -38,9 +48,9 @@ This member does not declare parameters.
 
 ### ApplicationUser
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Identity.Core/Entities/ApplicationUser.cs#L6)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Identity.Core/Entities/ApplicationUser.cs#L13)
 
-Initializes a new `ApplicationUser` instance. Use it with the surrounding package APIs when composing application code.
+Initializes a user with the supplied user name. Use it with the surrounding package APIs when composing application code.
 
 ```csharp
 public ApplicationUser(string userName) : base(userName);
@@ -50,7 +60,7 @@ public ApplicationUser(string userName) : base(userName);
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `userName` | `string` | `-` | The `userName` value passed to this member. |
+| `userName` | `string` | `-` | The initial user name. |
 
 ## Members
 
@@ -58,5 +68,5 @@ public ApplicationUser(string userName) : base(userName);
 
 | Member | Description |
 | --- | --- |
-| [Sessions](property-sessions-9.md) | Exposes the `Sessions` value on `ApplicationUser`. Read or set it as part of configuring or using the type. |
+| [Sessions](property-sessions-17.md) | Gets or sets the sessions associated with this user. Use it with the surrounding package APIs when composing application code. |
 

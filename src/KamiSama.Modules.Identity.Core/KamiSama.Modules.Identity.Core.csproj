@@ -1,8 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="../props.xml" />
-
 	<PropertyGroup>
-		<NoWarn>$(NoWarn);1591</NoWarn>
+		<PackageDocumentationRoot>../../docs/content/api/modules-identity-core</PackageDocumentationRoot>
+	</PropertyGroup>
+	<Import Project="../props.xml" />
+	<PropertyGroup>
+		<Description>ASP.NET Core Identity implementation for KamiSama login, token refresh, logout, user, role, password, two-factor, and session feature contracts, with revocable JWT sessions, EF Core persistence, mappings, and modular startup registration. Install it with exactly one Identity database provider and review the documented security and runtime limitations before exposing its features.</Description>
 	</PropertyGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\KamiSama.Extensions.Logging\KamiSama.Extensions.Logging.csproj" />
@@ -10,7 +12,7 @@
 		<ProjectReference Include="..\KamiSama.Modules.Identity.Abstractions\KamiSama.Modules.Identity.Abstractions.csproj" />
 		<ProjectReference Include="..\Chassis.Commons\KamiSama.Chassis.Commons.csproj" />
 		<ProjectReference Include="..\DependencyInjection\KamiSama.Extensions.DependencyInjection.csproj" />
-		<ProjectReference Include="..\KamiSama.Extensions.WebModules\KamiSama.Extensions.WebModules.csproj" />
+		<ProjectReference Include="..\KamiSama.Modules\KamiSama.Modules.csproj" />
 		<ProjectReference Include="..\Repositories.EntityFrameworkCore\KamiSama.Repositories.EntityFrameworkCore.csproj" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.11" />
 		<PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.22.0" />

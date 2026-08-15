@@ -10,7 +10,7 @@ Kind: `Method`
 
 ## Description
 
-Finds an single item in the repository. Use it with the surrounding package APIs when composing application code.
+Returns the first entity matching the predicate, or `null` when none matches.
 
 ## Declaration
 
@@ -22,24 +22,17 @@ TEntity? Find(Expression<Func<TEntity, bool>> predicate);
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `predicate` | `Expression<Func<TEntity, bool>>` | `-` | the predicate to search |
+| `predicate` | `Expression<Func<TEntity, bool>>` | `-` | The predicate used to select an entity. |
 
 ## Returns
 
 | Type | Description |
 | --- | --- |
-| `TEntity?` | Returns a `TEntity?` value. |
+| `TEntity?` | The first matching entity, or . |
 
 ## Example
 
 ```csharp
-var sample = new SampleEntity { Id = 1, Name = "sample" };
-var repository = new InMemoryRepository<SampleEntity>([sample]);
-
-sample.Name = "sample2";
-
-repository.Update(sample);
-
-var retrieved = repository.Find(x => x.Name == "sample2");
+User? user = repository.Find(x => x.Id == userId);
 ```
 

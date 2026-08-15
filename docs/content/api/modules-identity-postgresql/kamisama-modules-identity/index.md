@@ -4,4 +4,4 @@
 
 | Type | Kind | Description | Source |
 | --- | --- | --- | --- |
-| [IdentityPostgresqlDbContextBuilderExtensions](kamisama-modules-identity-identitypostgresqldbcontextbuilderextensions/index.md) | Class | Provides the `IdentityPostgresqlDbContextBuilderExtensions` API for the surrounding package. Use this type with the members listed below to compose the feature in an application. | [source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Identity.Postgresql/IdentityPostgresqlDbContextBuilderExtensions.cs#L8) |
+| [IdentityPostgresqlDbContextBuilderExtensions](kamisama-modules-identity-identitypostgresqldbcontextbuilderextensions/index.md) | Class | Registers the internal PostgreSQL Identity context under the shared multi-provider infrastructure's `postgresql` key. | [source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Identity.Postgresql/IdentityPostgresqlDbContextBuilderExtensions.cs#L9) |

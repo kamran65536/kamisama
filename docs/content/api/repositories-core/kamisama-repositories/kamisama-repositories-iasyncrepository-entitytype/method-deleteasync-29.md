@@ -10,7 +10,7 @@ Kind: `Method`
 
 ## Description
 
-Deletes an item from repository. Use it with the surrounding package APIs when composing application code.
+Asynchronously deletes an entity according to the implementation's matching, persistence, cancellation, and failure rules.
 
 ## Declaration
 
@@ -22,23 +22,18 @@ Task DeleteAsync(_EntityType item, CancellationToken cancellation);
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `item` | `_EntityType` | `-` | The `item` value passed to this member. |
-| `cancellation` | `CancellationToken` | `-` | The `cancellation` value passed to this member. |
+| `item` | `_EntityType` | `-` | The entity to delete. |
+| `cancellation` | `CancellationToken` | `-` | A token that can cancel the operation. |
 
 ## Returns
 
 | Type | Description |
 | --- | --- |
-| `Task` | Returns a `Task` value. |
+| `Task` | A task that represents the delete operation. |
 
 ## Example
 
 ```csharp
-var entity = new SampleEntity { Id = 1, Name = "Test" };
-var context = GetDbContext(initialDbSet: [entity]);
-
-var repository = new DbRepository<SampleEntity>(context);
-
-await repository.DeleteAsync(entity, CancellationToken.None);
+await repository.DeleteAsync(user, cancellationToken);
 ```
 

@@ -1,8 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="../props.xml" />
-
 	<PropertyGroup>
-		<NoWarn>$(NoWarn);1591</NoWarn>
+		<PackageDocumentationRoot>../../docs/content/api/externalservices-email-smtp</PackageDocumentationRoot>
+	</PropertyGroup>
+	<Import Project="../props.xml" />
+	<PropertyGroup>
+		<Description>SMTP transport registration and configuration for KamiSama email services. The current implementation contains a known inverted validation defect that rejects complete SMTP settings; see package documentation before use.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -11,7 +13,7 @@
 		<ProjectReference Include="..\KamiSama.ExternalServices.Email.Abstractions\KamiSama.ExternalServices.Email.Abstractions.csproj" />
 		<PackageReference Include="Microsoft.Extensions.Localization" Version="10.0.11" />
 		<PackageReference Include="Microsoft.Extensions.Options" Version="10.0.11" />
-		<ProjectReference Include="..\KamiSama.Extensions.WebModules\KamiSama.Extensions.WebModules.csproj" />
+		<ProjectReference Include="..\KamiSama.Modules\KamiSama.Modules.csproj" />
 		<ProjectReference Include="..\DependencyInjection\KamiSama.Extensions.DependencyInjection.csproj" />
 	</ItemGroup>
 </Project>

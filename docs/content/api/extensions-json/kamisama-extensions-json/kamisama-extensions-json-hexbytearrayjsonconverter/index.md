@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Extensions.Json](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/Json/HexByteArrayJsonConverter.cs:6](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Json/HexByteArrayJsonConverter.cs#L6)
+Source: [src/Json/HexByteArrayJsonConverter.cs:7](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Json/HexByteArrayJsonConverter.cs#L7)
 
 Namespace: `KamiSama.Extensions.Json`
 
@@ -12,12 +12,23 @@ Kind: `Class`
 
 ## Description
 
-Provides the `HexByteArrayJsonConverter` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
+Converts byte arrays to and from hexadecimal JSON strings. Use it when binary values should be represented as hexadecimal text instead of Base64.
 
 ## Declaration
 
 ```csharp
 public class HexByteArrayJsonConverter : JsonConverter<byte[]>
+```
+
+## Example
+
+```csharp
+using System.Text.Json;
+using KamiSama.Extensions;
+
+var options = new JsonSerializerOptions().AddHexByteConverter();
+string json = JsonSerializer.Serialize(new byte[] { 0xCA, 0xFE }, options); // "CAFE"
+byte[]? value = JsonSerializer.Deserialize<byte[]>(json, options);
 ```
 
 ## Constructors
@@ -30,6 +41,6 @@ This type does not declare a non-private constructor in source.
 
 | Member | Description |
 | --- | --- |
-| [Read](method-read-15.md) | Reads hex value as byte array from input. Use it with the surrounding package APIs when composing application code. |
-| [Write](method-write-29.md) | Writes byte array as hex to output. Use it with the surrounding package APIs when composing application code. |
+| [Read](method-read-16.md) | Reads a hexadecimal JSON string as a byte array, or returns for a null token. Use it with the surrounding package APIs when composing application code. |
+| [Write](method-write-30.md) | Writes the byte array as an uppercase hexadecimal JSON string. Use it with the surrounding package APIs when composing application code. |
 

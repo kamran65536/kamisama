@@ -3,17 +3,17 @@
 namespace KamiSama.Repositories;
 
 /// <summary>
-/// ConnectionString configuration
+/// Holds the provider name and connection string bound from a configuration section.
 /// </summary>
 public class ConnectionStringOption
 {
 	/// <summary>
-	/// the Connection String
+	/// Gets or sets the database connection string bound from the <c>connection-string</c> key.
 	/// </summary>
 	[ConfigurationKeyName("connection-string")]
 	public string? ConnectionString { get; set; }
 	/// <summary>
-	/// the database provider used for this configuration
+	/// Gets or sets the provider identifier bound from the <c>provider</c> key.
 	/// </summary>
 	[ConfigurationKeyName("provider")]
 	public string? Provider { get; set; }

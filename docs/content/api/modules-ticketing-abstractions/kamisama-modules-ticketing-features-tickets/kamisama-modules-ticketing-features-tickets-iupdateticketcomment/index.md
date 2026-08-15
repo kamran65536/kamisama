@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Modules.Ticketing.Abstractions](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Features.cs:10](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Features.cs#L10)
+Source: [src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Features.cs:35](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Features.cs#L35)
 
 Namespace: `KamiSama.Modules.Ticketing.Features.Tickets`
 
@@ -12,12 +12,20 @@ Kind: `Interface`
 
 ## Description
 
-Defines the contract for `IUpdateTicketComment` behavior. Implement this interface when you need to plug your own code into the surrounding KamiSama package.
+Defines comment update through a method key plus a request that contains another comment identifier. Current Core uses only the request identifier, so callers must not assume the key selects or validates the target.
 
 ## Declaration
 
 ```csharp
 public interface IUpdateTicketComment : IUpdateFeature<UpdateTicketCommentRequest, Guid>;
+```
+
+## Example
+
+```csharp
+await updateComment.UpdateAsync(commentId,
+    new UpdateTicketCommentRequest(commentId, userId, "Corrected details."), cancellationToken);
+// Current Core ignores the first commentId and uses the request value.
 ```
 
 ## Constructors

@@ -1,8 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageDocumentationRoot>../../docs/content/api/repositories-entityframeworkcore-sqlite</PackageDocumentationRoot>
+	</PropertyGroup>
 	<Import Project="..\props.xml" />
 
 	<PropertyGroup>
-		<Description>SQLite provider extensions for Entity Framework Core repository registration</Description>
+		<Description>SQLite registration for KamiSama multi-provider Entity Framework Core DbContexts.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>

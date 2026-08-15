@@ -1,0 +1,11 @@
+﻿# KamiSama.Modules.Identity.Services.Password
+
+[Back to KamiSama.Modules.Identity.Abstractions](../index.md)
+
+| Type | Kind | Description | Source |
+| --- | --- | --- | --- |
+| [IResetPassword](kamisama-modules-identity-services-password-iresetpassword/index.md) | Interface | Resets a user&apos;s password according to implementation-defined identity lookup and token validation rules. Use it with the surrounding package APIs when composing application code. | [source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Identity.Abstractions/Services/Password/Features.cs#L13) |
+| [IValidatePassword](kamisama-modules-identity-services-password-ivalidatepassword/index.md) | Interface | Validates a candidate password against an implementation&apos;s configured password policy. Use it with the surrounding package APIs when composing application code. | [source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Identity.Abstractions/Services/Password/Features.cs#L4) |
+| [PasswordValidationError](kamisama-modules-identity-services-password-passwordvalidationerror/index.md) | Record | Describes one password-policy validation failure. Use it with the surrounding package APIs when composing application code. | [source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Identity.Abstractions/Services/Password/Dtos.cs#L12) |
+| [ResetPasswordRequest](kamisama-modules-identity-services-password-resetpasswordrequest/index.md) | Record | Supplies an identity lookup value and replacement password to a reset implementation. Use it with the surrounding package APIs when composing application code. | [source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Identity.Abstractions/Services/Password/Dtos.cs#L16) |
+| [ValidatePasswordRequest](kamisama-modules-identity-services-password-validatepasswordrequest/index.md) | Record | Supplies optional identity context and a candidate password for policy validation. Use it with the surrounding package APIs when composing application code. | [source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Identity.Abstractions/Services/Password/Dtos.cs#L8) |

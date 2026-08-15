@@ -4,12 +4,13 @@ using System.Dynamic;
 namespace KamiSama.Extensions;
 
 /// <summary>
-/// Json Serialization Extensions
+/// Provides extensions for JSON serialization, deserialization, dynamic conversion, and converter registration.
+/// The registration helpers mutate and return the supplied <see cref="JsonSerializerOptions"/> instance.
 /// </summary>
 public static class JsonSerializationExtensions
 {
 	/// <summary>
-	/// Serializes to Json using <see cref="JsonSerializer"/>
+	/// Serializes the object to JSON using <see cref="JsonSerializer"/> and the supplied options.
 	/// </summary>
 	/// <param name="obj"></param>
 	/// <param name="options"></param>
@@ -17,7 +18,7 @@ public static class JsonSerializationExtensions
 	public static string SerializeToJson(this object obj, JsonSerializerOptions? options = null)
 		=> JsonSerializer.Serialize(obj, options);
 	/// <summary>
-	/// Converts an element to dynamic object (using expando object)
+	/// Converts a JSON element to an <c>ExpandoObject</c>, object array, scalar CLR value, or <see langword="null"/>.
 	/// </summary>
 	/// <param name="element"></param>
 	/// <returns></returns>
@@ -62,7 +63,7 @@ public static class JsonSerializationExtensions
 		}
 	}
 	/// <summary>
-	/// Converts an json string to dynamic object (using expando object)
+	/// Parses a JSON string with the specified document options and converts it to a dynamic CLR object graph.
 	/// </summary>
 	/// <param name="jsonStr"></param>
 	/// <param name="options"></param>
@@ -74,7 +75,7 @@ public static class JsonSerializationExtensions
 		return doc.RootElement.ConvertJsonToDynamicObject();
 	}
 	/// <summary>
-	/// Converts an json string to dynamic object (using expando object)
+	/// Parses a JSON string using configured document options and converts it to a dynamic CLR object graph.
 	/// </summary>
 	/// <param name="jsonStr"></param>
 	/// <param name="config"></param>
@@ -88,7 +89,7 @@ public static class JsonSerializationExtensions
 		return jsonStr.ConvertJsonToDynamicObject(options);
 	}
 	/// <summary>
-	/// Serializes to Json using <see cref="JsonSerializer"/>
+	/// Serializes the object to JSON using serializer options configured by the supplied callback.
 	/// </summary>
 	/// <param name="obj"></param>
 	/// <param name="configure"></param>
@@ -106,7 +107,7 @@ public static class JsonSerializationExtensions
 			return JsonSerializer.Serialize(obj);
 	}
 	/// <summary>
-	/// Deserializes from json string using <see cref="JsonSerializer"/>
+	/// Deserializes the JSON string as <typeparamref name="TObject"/> using the supplied options.
 	/// </summary>
 	/// <typeparam name="TObject"></typeparam>
 	/// <param name="str"></param>
@@ -115,7 +116,7 @@ public static class JsonSerializationExtensions
 	public static TObject? DeserializeFromJson<TObject>(this string str, JsonSerializerOptions? options = null)
 		=> JsonSerializer.Deserialize<TObject>(str, options);
 	/// <summary>
-	/// Deserializes from json string using <see cref="JsonSerializer"/>
+	/// Deserializes the JSON string as <typeparamref name="TObject"/> using options configured by the supplied callback.
 	/// </summary>
 	/// <typeparam name="TObject"></typeparam>
 	/// <param name="str"></param>
@@ -134,7 +135,7 @@ public static class JsonSerializationExtensions
 			return JsonSerializer.Deserialize<TObject>(str);
 	}
 	/// <summary>
-	/// Adds a hierarchical converter based on <see cref="HierarchicalJsonConverter{T}"/> to the options
+	/// Adds a <see cref="HierarchicalJsonConverter{T}"/> to these serializer options.
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
 	/// <param name="options"></param>
@@ -146,7 +147,7 @@ public static class JsonSerializationExtensions
 		return options;
 	}
 	/// <summary>
-	/// Adds TimeSpanJsonConverter as default converter for json
+	/// Adds a <see cref="TimeSpanJsonConverter"/> to these serializer options.
 	/// </summary>
 	/// <param name="options"></param>
 	/// <returns></returns>
@@ -157,7 +158,7 @@ public static class JsonSerializationExtensions
 		return options;
 	}
 	/// <summary>
-	/// Adds TimeSpanJsonConverter as default converter for json
+	/// Adds a <see cref="HexByteArrayJsonConverter"/> to these serializer options.
 	/// </summary>
 	/// <param name="options"></param>
 	/// <returns></returns>

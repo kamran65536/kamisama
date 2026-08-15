@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Modules.Ticketing.Abstractions](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Features.cs:6](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Features.cs#L6)
+Source: [src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Features.cs:14](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Abstractions/Features/Tickets/Features.cs#L14)
 
 Namespace: `KamiSama.Modules.Ticketing.Features.Tickets`
 
@@ -12,12 +12,20 @@ Kind: `Interface`
 
 ## Description
 
-Defines the contract for `IAddTicket` behavior. Implement this interface when you need to plug your own code into the surrounding KamiSama package.
+Creates a ticket with an initial user comment and optional attachment content identifiers. Implementations determine identifier generation and persistence behavior.
 
 ## Declaration
 
 ```csharp
 public interface IAddTicket : IAddFeature<AddTicketRequest, TicketDto>;
+```
+
+## Example
+
+```csharp
+TicketDto ticket = await addTicket.AddAsync(new AddTicketRequest(
+    userId, "Cannot sign in", categoryId, "The login form rejects my password.",
+    TicketPriority.High, []), cancellationToken);
 ```
 
 ## Constructors

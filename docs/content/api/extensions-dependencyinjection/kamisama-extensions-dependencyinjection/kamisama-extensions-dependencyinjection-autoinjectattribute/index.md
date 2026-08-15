@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Extensions.DependencyInjection](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/DependencyInjection/AutoInjectAttribute.cs:6](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/DependencyInjection/AutoInjectAttribute.cs#L6)
+Source: [src/DependencyInjection/AutoInjectAttribute.cs:7](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/DependencyInjection/AutoInjectAttribute.cs#L7)
 
 Namespace: `KamiSama.Extensions.DependencyInjection`
 
@@ -40,6 +40,6 @@ This type does not declare a non-private constructor in source.
 
 | Member | Description |
 | --- | --- |
-| [Lifetime](property-lifetime-16.md) | Service Lifetime (default is Transient). Use it with the surrounding package APIs when composing application code. |
-| [ServiceType](property-servicetype-12.md) | Exposes the `ServiceType` value on `AutoInjectAttribute`. Read or set it as part of configuring or using the type. |
+| [Lifetime](property-lifetime-19.md) | Gets or sets the lifetime of the generated service registration. The default lifetime is `ServiceLifetime.Transient`. |
+| [ServiceType](property-servicetype-14.md) | Gets or sets the service contract used for registration. When it is , the contract is inferred from the implementation type and its interfaces. |
 

@@ -10,7 +10,7 @@ Kind: `Property`
 
 ## Description
 
-Initialize necessary data to the database. Use it with the surrounding package APIs when composing application code.
+Gets or sets whether the initializer should create required application data.
 
 ## Declaration
 
@@ -26,5 +26,12 @@ public bool InitializeData { get; set; }
 
 ## Example
 
-No concise standalone example is available yet.
+```csharp
+var options = new DataInitializationOptions
+{
+    Migrate = true,
+    InitializeData = true,
+    InitializeTestData = false
+};
+```
 

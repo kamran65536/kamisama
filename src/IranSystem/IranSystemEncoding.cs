@@ -3,8 +3,20 @@
 namespace KamiSama.IranSystem;
 
 /// <summary>
-/// IranSystem Encoding see <see href="https://en.wikipedia.org/wiki/Iran_System_encoding" />
+/// Provides a <see cref="Encoding" /> implementation for legacy single-byte Iran System Persian data.
+/// Use its complete-buffer string methods when exchanging data with legacy Persian systems.
 /// </summary>
+/// <remarks>
+/// Iran System stores contextual Persian glyph shapes. Decoding therefore produces Arabic presentation-form
+/// characters, and encoding expects those exact presentation-form code points rather than normalized Persian text.
+/// </remarks>
+/// <example>
+/// <code>
+/// var encoding = new IranSystemEncoding();
+/// string text = encoding.GetString([0x80, 0x81, 0x82]);
+/// byte[] bytes = encoding.GetBytes(text);
+/// </code>
+/// </example>
 public class IranSystemEncoding : Encoding
 {
 	/// <summary>
@@ -44,7 +56,12 @@ public class IranSystemEncoding : Encoding
 			lowCharToByte[low] = (byte)(i);
 		}
 	}
-	/// <inheritdoc />
+	/// <summary>
+	/// Decodes every byte in the supplied array using the Iran System byte-to-character table.
+	/// Each input byte produces exactly one output character.
+	/// </summary>
+	/// <param name="bytes">The complete Iran System byte sequence to decode.</param>
+	/// <returns>A string containing ASCII characters or the mapped Persian glyph presentation forms.</returns>
 	public override string GetString(byte[] bytes)
 	{
 		var sb = new StringBuilder();
@@ -54,7 +71,16 @@ public class IranSystemEncoding : Encoding
 		}
 		return sb.ToString();
 	}
-	/// <inheritdoc />
+	/// <summary>
+	/// Encodes every character in the supplied string using the Iran System character-to-byte table.
+	/// Each input character produces exactly one output byte.
+	/// </summary>
+	/// <param name="str">The string containing ASCII or mapped Persian presentation-form characters to encode.</param>
+	/// <returns>An array containing one Iran System byte for each input character.</returns>
+	/// <remarks>
+	/// Characters absent from the mapping, including normalized Persian letters and the null character, are emitted
+	/// as <c>0xFF</c>. The <c>0xFF</c> byte decodes as a non-breaking space and is not a round-trip replacement marker.
+	/// </remarks>
 	public override byte[] GetBytes(string str)
 	{
 		var mem = new MemoryStream();
@@ -73,16 +99,62 @@ public class IranSystemEncoding : Encoding
 		}
 		return mem.ToArray();
 	}
-	/// <inheritdoc />
+	/// <summary>
+	/// Returns the requested character count because this encoding uses one byte per character.
+	/// This method reports the supplied count without examining the requested range.
+	/// </summary>
+	/// <param name="chars">The character array that would be measured.</param>
+	/// <param name="index">The nominal starting index in <c>chars</c>.</param>
+	/// <param name="count">The number of characters requested.</param>
+	/// <returns>The supplied <c>count</c> value.</returns>
+	/// <remarks>The current implementation does not inspect the array, index, or character values.</remarks>
 	public override int GetByteCount(char[] chars, int index, int count) => count;
-	/// <inheritdoc />
+	/// <summary>
+	/// Returns the requested character count without encoding or writing to the destination byte array.
+	/// Do not use this overload when output bytes are required.
+	/// </summary>
+	/// <param name="chars">The character array that is currently not read.</param>
+	/// <param name="charIndex">The nominal starting index in <c>chars</c>.</param>
+	/// <param name="charCount">The number returned as though that many characters had been encoded.</param>
+	/// <param name="bytes">The destination array that is currently left unchanged.</param>
+	/// <param name="byteIndex">The nominal starting index in <c>bytes</c>.</param>
+	/// <returns>The supplied <c>charCount</c> value, although no bytes are written.</returns>
+	/// <remarks>This overload currently reports success without reading, validating, encoding, or writing any data.</remarks>
 	public override int GetBytes(char[] chars, int charIndex, int charCount, byte[] bytes, int byteIndex) => charCount;
-	/// <inheritdoc />
+	/// <summary>
+	/// Returns the requested byte count because this encoding maps each byte to one character.
+	/// This method reports the supplied count without examining the requested range.
+	/// </summary>
+	/// <param name="bytes">The byte array that would be measured.</param>
+	/// <param name="index">The nominal starting index in <c>bytes</c>.</param>
+	/// <param name="count">The number of bytes requested.</param>
+	/// <returns>The supplied <c>count</c> value.</returns>
+	/// <remarks>The current implementation does not inspect the array, index, or byte values.</remarks>
 	public override int GetCharCount(byte[] bytes, int index, int count) => count;
-	/// <inheritdoc />
+	/// <summary>
+	/// Returns the requested byte count without decoding or writing to the destination character array.
+	/// Do not use this overload when output characters are required.
+	/// </summary>
+	/// <param name="bytes">The byte array that is currently not read.</param>
+	/// <param name="byteIndex">The nominal starting index in <c>bytes</c>.</param>
+	/// <param name="byteCount">The number returned as though that many bytes had been decoded.</param>
+	/// <param name="chars">The destination array that is currently left unchanged.</param>
+	/// <param name="charIndex">The nominal starting index in <c>chars</c>.</param>
+	/// <returns>The supplied <c>byteCount</c> value, although no characters are written.</returns>
+	/// <remarks>This overload currently reports success without reading, validating, decoding, or writing any data.</remarks>
 	public override int GetChars(byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex) => byteCount;
-	/// <inheritdoc />
+	/// <summary>
+	/// Returns the supplied character count as the maximum byte count for this single-byte encoding.
+	/// No fallback expansion is included in the result.
+	/// </summary>
+	/// <param name="charCount">The number of characters to size for.</param>
+	/// <returns>The supplied <c>charCount</c> value.</returns>
 	public override int GetMaxByteCount(int charCount) => charCount;
-	/// <inheritdoc />
+	/// <summary>
+	/// Returns the supplied byte count as the maximum character count for this single-byte encoding.
+	/// Every encoded byte corresponds to one table entry.
+	/// </summary>
+	/// <param name="byteCount">The number of bytes to size for.</param>
+	/// <returns>The supplied <c>byteCount</c> value.</returns>
 	public override int GetMaxCharCount(int byteCount) => byteCount;
 }

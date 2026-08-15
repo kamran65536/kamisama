@@ -1,7 +1,8 @@
 ﻿namespace KamiSama.Extensions;
 
 /// <summary>
-/// String Extensions
+/// Provides extensions for encoding strings and decoding hexadecimal and Base64 text.
+/// Use them to move between textual representations and byte arrays.
 /// </summary>
 public static class StringExtensions
 {

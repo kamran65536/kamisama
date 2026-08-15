@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Modules.Ticketing.Core](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.Modules.Ticketing.Core/Entities/Ticket.cs:3](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Core/Entities/Ticket.cs#L3)
+Source: [src/KamiSama.Modules.Ticketing.Core/Entities/Ticket.cs:7](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Core/Entities/Ticket.cs#L7)
 
 Namespace: `KamiSama.Modules.Ticketing.Entities`
 
@@ -12,12 +12,20 @@ Kind: `Class`
 
 ## Description
 
-Provides the `Ticket` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
+EF Core ticket aggregate root with a required category, comments, attachment references, workflow state, priority, author, and timestamps. `CanTransitionTo` exposes Core's transition table, while `IsEditable` identifies open and reopened tickets.
 
 ## Declaration
 
 ```csharp
 public class Ticket
+```
+
+## Example
+
+```csharp
+bool mayResolve = ticket.CanTransitionTo(TicketStatus.Resolved);
+bool mayEdit = ticket.IsEditable();
+// Endpoint policy must still authorize the caller before a mutation.
 ```
 
 ## Constructors
@@ -30,19 +38,20 @@ This type does not declare a non-private constructor in source.
 
 | Member | Description |
 | --- | --- |
-| [IsEditable](method-iseditable-15.md) | Runs the `IsEditable` operation on `Ticket`. Use it when your code needs this specific behavior from the package. |
+| [CanTransitionTo](method-cantransitionto-41.md) | Returns whether the requested status is unchanged or follows Core's workflow table: open or reopened to resolved, or resolved to reopened or closed. Undefined enum values and every other transition return `false`. |
+| [IsEditable](method-iseditable-33.md) | Determines whether the current status permits editing under the entity&apos;s workflow rule. Current feature services do not consistently invoke this rule before mutations. |
 
 ### Properties
 
 | Member | Description |
 | --- | --- |
-| [AuthorUserId](property-authoruserid-8.md) | Exposes the `AuthorUserId` value on `Ticket`. Read or set it as part of configuring or using the type. |
-| [Category](property-category-13.md) | Exposes the `Category` value on `Ticket`. Read or set it as part of configuring or using the type. |
-| [Comments](property-comments-14.md) | Exposes the `Comments` value on `Ticket`. Read or set it as part of configuring or using the type. |
-| [CreatedAt](property-createdat-11.md) | Exposes the `CreatedAt` value on `Ticket`. Read or set it as part of configuring or using the type. |
-| [Id](property-id-5.md) | Exposes the `Id` value on `Ticket`. Read or set it as part of configuring or using the type. |
-| [Priority](property-priority-10.md) | Exposes the `Priority` value on `Ticket`. Read or set it as part of configuring or using the type. |
-| [Status](property-status-9.md) | Exposes the `Status` value on `Ticket`. Read or set it as part of configuring or using the type. |
-| [Title](property-title-6.md) | Exposes the `Title` value on `Ticket`. Read or set it as part of configuring or using the type. |
-| [UpdatedAt](property-updatedat-12.md) | Exposes the `UpdatedAt` value on `Ticket`. Read or set it as part of configuring or using the type. |
+| [AuthorUserId](property-authoruserid-15.md) | Gets or sets the identifier of the user who opened the ticket. Use it with the surrounding package APIs when composing application code. |
+| [Category](property-category-25.md) | Gets or sets the required category navigation. Use it with the surrounding package APIs when composing application code. |
+| [Comments](property-comments-27.md) | Gets or sets the comments belonging to the ticket. Use it with the surrounding package APIs when composing application code. |
+| [CreatedAt](property-createdat-21.md) | Gets or sets the ticket creation timestamp. Use it with the surrounding package APIs when composing application code. |
+| [Id](property-id-10.md) | Gets or sets the ticket identifier. Use it with the surrounding package APIs when composing application code. |
+| [Priority](property-priority-19.md) | Gets or sets the current urgency. Use it with the surrounding package APIs when composing application code. |
+| [Status](property-status-17.md) | Gets or sets the current workflow status. Use it with the surrounding package APIs when composing application code. |
+| [Title](property-title-12.md) | Gets or sets the required ticket title, limited to 100 characters by the EF Core model. Use it with the surrounding package APIs when composing application code. |
+| [UpdatedAt](property-updatedat-23.md) | Gets or sets the latest ticket update timestamp. Use it with the surrounding package APIs when composing application code. |
 

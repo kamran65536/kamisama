@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Modules.Ticketing.Core](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.Modules.Ticketing.Core/Entities/TicketAttachment.cs:3](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Core/Entities/TicketAttachment.cs#L3)
+Source: [src/KamiSama.Modules.Ticketing.Core/Entities/TicketAttachment.cs:7](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Ticketing.Core/Entities/TicketAttachment.cs#L7)
 
 Namespace: `KamiSama.Modules.Ticketing.Entities`
 
@@ -12,12 +12,23 @@ Kind: `Class`
 
 ## Description
 
-Provides the `TicketAttachment` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
+EF Core reference from a ticket comment to an external content identifier. It stores no content bytes or metadata and is cascade-deleted with its comment.
 
 ## Declaration
 
 ```csharp
 public class TicketAttachment
+```
+
+## Example
+
+```csharp
+var attachment = new TicketAttachment
+{
+    Comment = comment,
+    ContentId = contentId,
+    AuthorUserId = userId
+};
 ```
 
 ## Constructors
@@ -30,8 +41,8 @@ This type does not declare a non-private constructor in source.
 
 | Member | Description |
 | --- | --- |
-| [AuthorUserId](property-authoruserid-8.md) | Exposes the `AuthorUserId` value on `TicketAttachment`. Read or set it as part of configuring or using the type. |
-| [Comment](property-comment-6.md) | Exposes the `Comment` value on `TicketAttachment`. Read or set it as part of configuring or using the type. |
-| [ContentId](property-contentid-7.md) | Exposes the `ContentId` value on `TicketAttachment`. Read or set it as part of configuring or using the type. |
-| [Id](property-id-5.md) | Exposes the `Id` value on `TicketAttachment`. Read or set it as part of configuring or using the type. |
+| [AuthorUserId](property-authoruserid-16.md) | Gets or sets the identifier of the user who attached the content. Use it with the surrounding package APIs when composing application code. |
+| [Comment](property-comment-12.md) | Gets or sets the required owning-comment navigation. Use it with the surrounding package APIs when composing application code. |
+| [ContentId](property-contentid-14.md) | Gets or sets the external content identifier. Use it with the surrounding package APIs when composing application code. |
+| [Id](property-id-10.md) | Gets or sets the ticket attachment identifier. Use it with the surrounding package APIs when composing application code. |
 

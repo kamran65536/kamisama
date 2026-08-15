@@ -4,21 +4,23 @@ using Microsoft.Extensions.Localization;
 using ProblemDetails = Microsoft.AspNetCore.Mvc.ProblemDetails;
 
 /// <summary>
-/// The interface provides information for problem details
+/// Converts exceptions into ASP.NET Core problem details for the MVC exception filter.
 /// </summary>
+/// <remarks>Implementations control the response payload. The filter treats every converted exception as handled.</remarks>
 public interface IProblemDetailsDataProvider
 {
 	/// <summary>
-	/// String Localizer to be used
+	/// Gets or sets the optional localizer used to resolve exception keys and arguments.
 	/// </summary>
 	IStringLocalizer? Localizer { get; set; }
 	/// <summary>
-	/// try to localize arguments or not
+	/// Gets or sets whether localization arguments are localized before formatting the title.
 	/// </summary>
 	bool LocalizeArguments { get; set; }
 	/// <summary>
-	/// Converts Exception to ProblemDetails
+	/// Converts an exception into the problem details payload returned to the client.
 	/// </summary>
-	/// <returns></returns>
+	/// <param name="exception">The exception raised while MVC processes the request.</param>
+	/// <returns>A problem details instance describing the failure.</returns>
 	ProblemDetails ConvertExceptionToProblemDetails(Exception exception);
 }

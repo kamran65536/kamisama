@@ -1,8 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="../props.xml" />
-
 	<PropertyGroup>
-		<NoWarn>$(NoWarn);1591</NoWarn>
+		<PackageDocumentationRoot>../../docs/content/api/externalservices-exceptions</PackageDocumentationRoot>
+	</PropertyGroup>
+	<Import Project="../props.xml" />
+	<PropertyGroup>
+		<Description>HTTP-oriented exceptions for external-service discovery failures, timeouts, and invalid provider responses. Use them at integration boundaries to expose consistent localization keys, arguments, and 500 or 504 status codes.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>

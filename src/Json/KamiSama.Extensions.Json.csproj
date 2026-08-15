@@ -1,18 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageDocumentationRoot>../../docs/content/api/extensions-json</PackageDocumentationRoot>
+	</PropertyGroup>
 	<Import Project="..\props.xml" />
 	<PropertyGroup>
-		<PackageReleaseNotes>v2.8.0
-- BigIntegerJsonConverter is added. 
-v2.1.3
-- HexByteArrayConverter is added.
-v2.1.0
-- HirerarchialJsonConverter is added.
-v2.0.0
-- Refactored from old KamiSama.Extenders.Serialization library and now using System.Text.Json instead of Newtonsoft.</PackageReleaseNotes>
-		<Description>Utilities for System.Text.Json such as:
-- hirerachyJsonConverter
-- TimeSpanJsonConverter
-- HexByteArrayJsonConverter</Description>
+		<Description>System.Text.Json extensions and converters for dynamic JSON, BigInteger, hexadecimal byte arrays, TimeSpan, and discriminator-based polymorphism.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>

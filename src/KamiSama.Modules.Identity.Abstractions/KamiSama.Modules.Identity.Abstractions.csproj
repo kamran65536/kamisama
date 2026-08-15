@@ -1,8 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="../props.xml" />
-
 	<PropertyGroup>
-		<NoWarn>$(NoWarn);1591</NoWarn>
+		<PackageDocumentationRoot>../../docs/content/api/modules-identity-abstractions</PackageDocumentationRoot>
+	</PropertyGroup>
+	<Import Project="../props.xml" />
+	<PropertyGroup>
+		<Description>Provider-neutral Identity feature contracts, requests, responses, search models, role constants, and failure metadata for login, token refresh, logout, user, role, password, session, and two-factor workflows. Reference this package from callers or alternative implementations that should not depend on ASP.NET Core Identity, Entity Framework Core, or a database provider.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>

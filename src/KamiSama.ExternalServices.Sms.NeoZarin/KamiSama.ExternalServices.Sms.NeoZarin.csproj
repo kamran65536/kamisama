@@ -1,8 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="../props.xml" />
-
 	<PropertyGroup>
-		<NoWarn>$(NoWarn);1591</NoWarn>
+		<PackageDocumentationRoot>../../docs/content/api/externalservices-sms-neozarin</PackageDocumentationRoot>
+	</PropertyGroup>
+	<Import Project="../props.xml" />
+	<PropertyGroup>
+		<Description>Scoped NeoZarin HTTP SMS provider registration and configuration for KamiSama SMS services. Requires KamiSama RestSharp and HttpClient registration and currently has an inverted validation defect.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -10,7 +12,7 @@
 		<ProjectReference Include="..\KamiSama.Extensions.RestSharp\KamiSama.Extensions.RestSharp.csproj" />
 		<ProjectReference Include="..\KamiSama.ExternalServices.Sms.Abstractions\KamiSama.ExternalServices.Sms.Abstractions.csproj" />
 		<PackageReference Include="Microsoft.Extensions.Options" Version="10.0.11" />
-		<ProjectReference Include="..\KamiSama.Extensions.WebModules\KamiSama.Extensions.WebModules.csproj" />
+		<ProjectReference Include="..\KamiSama.Modules\KamiSama.Modules.csproj" />
 		<ProjectReference Include="..\DependencyInjection\KamiSama.Extensions.DependencyInjection.csproj" />
 	</ItemGroup>
 </Project>

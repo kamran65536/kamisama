@@ -1,7 +1,0 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="../props.xml" />
-	<ItemGroup>
-		<FrameworkReference Include="Microsoft.AspNetCore.App" />
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="10.2.3" />
-	</ItemGroup>
-</Project>

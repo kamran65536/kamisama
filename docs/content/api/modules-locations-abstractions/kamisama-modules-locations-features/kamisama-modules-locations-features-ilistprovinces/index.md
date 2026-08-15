@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Modules.Locations.Abstractions](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.Modules.Locations.Abstractions/Features/Features.cs:6](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Locations.Abstractions/Features/Features.cs#L6)
+Source: [src/KamiSama.Modules.Locations.Abstractions/Features/Features.cs:9](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Locations.Abstractions/Features/Features.cs#L9)
 
 Namespace: `KamiSama.Modules.Locations.Features`
 
@@ -12,12 +12,19 @@ Kind: `Interface`
 
 ## Description
 
-Defines the contract for `IListProvinces` behavior. Implement this interface when you need to plug your own code into the surrounding KamiSama package.
+Defines paged province listing through `ProvinceSearchModel`. Core filters by a case-normalized name substring and always orders by name.
 
 ## Declaration
 
 ```csharp
 public interface IListProvinces : IListFeature<ProvinceDto, ProvinceSearchModel>;
+```
+
+## Example
+
+```csharp
+PagedResult<ProvinceDto> provinces = await listProvinces.ListAsync(
+    new ProvinceSearchModel(1, 20, "north", null), cancellationToken);
 ```
 
 ## Constructors

@@ -10,7 +10,7 @@ Kind: `Method`
 
 ## Description
 
-Updates an item in the repository. Use it with the surrounding package APIs when composing application code.
+Asynchronously updates an entity according to the implementation's matching, persistence, cancellation, and failure rules.
 
 ## Declaration
 
@@ -22,25 +22,18 @@ Task UpdateAsync(_EntityType item, CancellationToken cancellationToken);
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `item` | `_EntityType` | `-` | The `item` value passed to this member. |
-| `cancellationToken` | `CancellationToken` | `-` | The `cancellationToken` value passed to this member. |
+| `item` | `_EntityType` | `-` | The entity to update. |
+| `cancellationToken` | `CancellationToken` | `-` | A token that can cancel the operation. |
 
 ## Returns
 
 | Type | Description |
 | --- | --- |
-| `Task` | Returns a `Task` value. |
+| `Task` | A task that represents the update operation. |
 
 ## Example
 
 ```csharp
-var sample = new SampleEntity { Id = 1, Name = "sample" };
-var repository = new InMemoryRepository<SampleEntity>([sample]);
-
-sample.Name = "sample2";
-
-await repository.UpdateAsync(sample, CancellationToken.None);
-
-var retrieved = repository.Find(x => x.Name == "sample2");
+await repository.UpdateAsync(user, cancellationToken);
 ```
 

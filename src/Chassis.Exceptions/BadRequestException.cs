@@ -1,17 +1,19 @@
 ﻿namespace KamiSama.Chassis.HttpExceptions;
 /// <summary>
-/// The server cannot or will not process the request due to an apparent client error (e.g., malformed request syntax, size too large, invalid request message framing, or deceptive request routing).
+/// Represents a client request that cannot be processed and should be reported with HTTP status code 400.
 /// </summary>
 public class BadRequestException : HttpExceptionBase
 {
-	/// <inheritdoc />
+	/// <summary>Gets HTTP status code 400.</summary>
 	public override int StatusCode => 400;
 
-	/// <inheritdoc />
+	/// <summary>Initializes an exception using the exception type name as its localization key.</summary>
 	public BadRequestException()
 	{
 	}
-	/// <inheritdoc />
+	/// <summary>Initializes an exception with a localization key and formatting arguments.</summary>
+	/// <param name="messageKey">The localization key, also used as the fallback message format.</param>
+	/// <param name="args">Values used to format and later localize the message.</param>
 	public BadRequestException(string messageKey, params object?[] args) : base(messageKey, args)
 	{
 	}

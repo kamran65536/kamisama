@@ -1,12 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageDocumentationRoot>../../docs/content/api/repositories-entityframework</PackageDocumentationRoot>
+	</PropertyGroup>
 	<Import Project="..\props.xml" />
 
 	<PropertyGroup>
-		<Description>Entity Framework Repository Pattern</Description>
-		<PackageReleaseNotes>
-			v2.0.0
-			- Refactored from old KamiSama.Repositories.EntityFramework library
-		</PackageReleaseNotes>
+		<Description>Entity Framework 6 repositories with immediate persistence and ordered-query paging.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>

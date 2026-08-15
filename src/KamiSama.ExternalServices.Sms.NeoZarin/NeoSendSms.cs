@@ -11,6 +11,13 @@ namespace KamiSama.ExternalServices.Sms.NeoZarin;
 [AutoInjectScoped<ISendSms>(ServiceKey = "neo-zarin")]
 internal class NeoSendSms(IRestBuilder restBuilder, IOptions<NeoZarinSmsOptions> options, ILogger<NeoSendSms> logger) : ISendSms
 {
+	/// <summary>
+	/// Attempts to post an SMS request to the configured NeoZarin endpoint.
+	/// </summary>
+	/// <param name="request">The destination phone number and message to send.</param>
+	/// <param name="cancellationToken">The token forwarded to the RestSharp request.</param>
+	/// <returns>A task that represents the HTTP request.</returns>
+	/// <remarks>The current validation condition is inverted and rejects settings when <see cref="NeoZarinSmsOptions.IsValidForSms"/> returns <see langword="true"/>.</remarks>
 	public async Task SendSmsAsync(SendSmsRequest request, CancellationToken cancellationToken)
 	{
 		logger.LogMethodEntry();

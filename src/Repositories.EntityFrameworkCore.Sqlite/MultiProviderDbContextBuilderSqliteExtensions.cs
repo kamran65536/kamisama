@@ -4,16 +4,21 @@ using Microsoft.Extensions.DependencyInjection;
 namespace KamiSama.Repositories.EntityFrameworkCore.Sqlite;
 
 /// <summary>
-/// Provides SQLite registrations for multi-provider DbContext builders.
+/// Registers SQLite contexts with the KamiSama multi-provider DbContext workflow.
 /// </summary>
 public static class MultiProviderDbContextBuilderSqliteExtensions
 {
 	/// <summary>
-	/// Registers a SQLite DbContext implementation for the builder base context.
+	/// Registers a scoped SQLite context and exposes it under the <c>sqlite</c> keyed base-context service.
 	/// </summary>
 	/// <typeparam name="TInheritedContext">The provider-specific DbContext implementation.</typeparam>
-	/// <param name="builder">The multi-provider DbContext builder.</param>
-	/// <returns>The current builder.</returns>
+	/// <param name="builder">The builder containing services, connection settings, base context type, and history table.</param>
+	/// <returns>The same builder, enabling additional provider registrations.</returns>
+	/// <remarks>
+	/// Enables lazy-loading proxies and uses the configured migration-history table. Configure the provider as exactly
+	/// <c>sqlite</c> (case-insensitive before key lookup). Registrations are scoped.
+	/// </remarks>
+	/// <exception cref="InvalidOperationException"><typeparamref name="TInheritedContext"/> does not derive from the builder base context.</exception>
 	public static IMultiProviderDbContextBuilder AddSqlite<TInheritedContext>(
 		this IMultiProviderDbContextBuilder builder)
 		where TInheritedContext : DbContext

@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Extensions.DependencyInjection](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/DependencyInjection/AutoInjectAttributeBase.cs:8](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/DependencyInjection/AutoInjectAttributeBase.cs#L8)
+Source: [src/DependencyInjection/AutoInjectAttributeBase.cs:9](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/DependencyInjection/AutoInjectAttributeBase.cs#L9)
 
 Namespace: `KamiSama.Extensions.DependencyInjection`
 
@@ -20,6 +20,25 @@ Base attribute for convention-based dependency injection registration. Derived a
 public abstract class AutoInjectAttributeBase : Attribute
 ```
 
+## Example
+
+```csharp
+using KamiSama.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
+
+public sealed class AutoInjectPerRequestAttribute : AutoInjectAttributeBase
+{
+    public AutoInjectPerRequestAttribute(Type serviceType)
+    {
+        ServiceType = serviceType;
+        Lifetime = ServiceLifetime.Scoped;
+    }
+}
+
+[AutoInjectPerRequest(typeof(IProductService))]
+public sealed class ProductService : IProductService;
+```
+
 ## Constructors
 
 This type does not declare a non-private constructor in source.
@@ -30,14 +49,14 @@ This type does not declare a non-private constructor in source.
 
 | Member | Description |
 | --- | --- |
-| [ApplyInjection](method-applyinjection-32.md) | Add binding to the service. Use it with the surrounding package APIs when composing application code. |
+| [ApplyInjection](method-applyinjection-38.md) | Registers the implementation using the configured service type, lifetime, key, and multiple-registration policy. If no service type is configured, the method uses the implementation itself, its sole interface, or throws when multiple interfaces make inference ambiguous. |
 
 ### Properties
 
 | Member | Description |
 | --- | --- |
-| [AllowMultiple](property-allowmultiple-25.md) | Gets or sets a value indicating whether multiple instances of the associated attribute are allowed. Use it with the surrounding package APIs when composing application code. |
-| [Lifetime](property-lifetime-21.md) | Service Lifetime (default is Transient). Use it with the surrounding package APIs when composing application code. |
-| [ServiceKey](property-servicekey-13.md) | if present, adds the service as keyed and you should use it by `ServiceProviderKeyedServiceExtensions.GetKeyedServices` methods. Use it with the surrounding package APIs when composing application code. |
-| [ServiceType](property-servicetype-17.md) | Service Type, it null the. Use it with the surrounding package APIs when composing application code. |
+| [AllowMultiple](property-allowmultiple-30.md) | Gets or sets whether the registration is always appended instead of added only when the service contract and key are absent. Set it to when multiple implementations of the same service must be resolvable. |
+| [Lifetime](property-lifetime-25.md) | Gets or sets the lifetime used by the generated service registration. The default lifetime is `ServiceLifetime.Transient`. |
+| [ServiceKey](property-servicekey-15.md) | Gets or sets the key used to create a keyed service registration. A value creates an ordinary unkeyed registration. |
+| [ServiceType](property-servicetype-20.md) | Gets or sets the service contract used for registration by a derived attribute. When it is , the contract is inferred from the implementation type and its interfaces. |
 

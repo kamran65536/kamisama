@@ -1,13 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageDocumentationRoot>../../docs/content/api/extensions-core</PackageDocumentationRoot>
+	</PropertyGroup>
 	<Import Project="..\props.xml" />
 
 	<PropertyGroup>
-		<Description>Useful extenders suchas ToBytes, ToHex, ...</Description>
-		<PackageReleaseNotes>v2.4.0
-- XmlSerialization is moved to KamiSama.Extensions.Xml
-- supported .net is changed to .net standard 2.1
-v2.0.0
-- Refactored from old KamiSama.Extenders library</PackageReleaseNotes>
+		<Description>Extension methods for conversions, encoding, hashing, cryptography, Persian dates, streams, arrays, queues, logging, and TimeSpan creation, plus IQueryable paging models and helpers.</Description>
 		<AssemblyName>KamiSama.Extensions.Core</AssemblyName>
 		<RootNamespace>KamiSama.Extensions</RootNamespace>
 	</PropertyGroup>

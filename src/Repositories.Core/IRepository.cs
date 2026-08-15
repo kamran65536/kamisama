@@ -4,31 +4,31 @@ using System.Linq.Expressions;
 namespace KamiSama.Repositories
 {
 	/// <summary>
-	/// Repository interface
+	/// Defines synchronous mutation and single-item lookup operations for a repository.
 	/// </summary>
-	/// <typeparam name="TEntity"></typeparam>
+	/// <typeparam name="TEntity">The entity type stored by the repository.</typeparam>
 	public interface IRepository<TEntity> : IDisposable
     {
 		/// <summary>
-		/// Adds a new item in the repository
+		/// Adds an entity according to the implementation's persistence and duplicate rules.
 		/// </summary>
-		/// <param name="item"></param>
+		/// <param name="item">The entity to add.</param>
 		void Add(TEntity item);
 		/// <summary>
-		/// Update method, does nothing
+		/// Updates an entity according to the implementation's persistence rules.
 		/// </summary>
-		/// <param name="item"></param>
+		/// <param name="item">The entity to update.</param>
 		void Update(TEntity item);
 		/// <summary>
-		/// Deletes an item from repository
+		/// Deletes an entity according to the implementation's matching and persistence rules.
 		/// </summary>
-		/// <param name="item"></param>
+		/// <param name="item">The entity to delete.</param>
 		void Delete(TEntity item);
 		/// <summary>
-		/// Finds an single item in the repository
+		/// Returns the first entity that satisfies the predicate, or <see langword="null"/> when none matches.
 		/// </summary>
-		/// <param name="predicate">the predicate to search</param>
-		/// <returns></returns>
+		/// <param name="predicate">The predicate used to select an entity.</param>
+		/// <returns>The first matching entity, or <see langword="null"/>.</returns>
 		TEntity? Find(Expression<Func<TEntity, bool>> predicate);
     }
 }

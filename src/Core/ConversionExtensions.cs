@@ -1,12 +1,13 @@
 ﻿namespace KamiSama.Extensions;
 
 /// <summary>
-/// Conversion Extensions
+/// Provides fallback-based conversion of objects to runtime or generic target types.
+/// Failed conversions return the caller-provided default value instead of throwing.
 /// </summary>
 public static class ConversionExtensions
 {
 	/// <summary>
-	/// Converts an object to another type
+	/// Converts an object to the specified runtime type, returning a fallback when conversion fails.
 	/// </summary>
 	/// <param name="obj">the source object</param>
 	/// <param name="type">the desired type for conversion</param>
@@ -33,7 +34,7 @@ public static class ConversionExtensions
 		}
 	}
 	/// <summary>
-	/// Converts an object to another type
+	/// Converts an object to the specified generic type, returning a fallback when conversion fails.
 	/// </summary>
 	/// <typeparam name="T">the desired type for conversion</typeparam>
 	/// <param name="obj">the source object</param>

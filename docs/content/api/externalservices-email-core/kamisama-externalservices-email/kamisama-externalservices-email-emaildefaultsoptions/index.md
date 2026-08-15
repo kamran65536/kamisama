@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.ExternalServices.Email.Core](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.ExternalServices.Email.Core/EmailDefaultsOptions.cs:5](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.ExternalServices.Email.Core/EmailDefaultsOptions.cs#L5)
+Source: [src/KamiSama.ExternalServices.Email.Core/EmailDefaultsOptions.cs:9](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.ExternalServices.Email.Core/EmailDefaultsOptions.cs#L9)
 
 Namespace: `KamiSama.ExternalServices.Email`
 
@@ -12,12 +12,23 @@ Kind: `Class`
 
 ## Description
 
-Configuration object for `EmailDefaultsOptions`. Use it when binding settings or configuring the related package services.
+Selects the keyed email provider used by the core dispatcher. The default `mock` provider performs no delivery; set `Email` to a key registered by a transport package for another implementation.
 
 ## Declaration
 
 ```csharp
 public class EmailDefaultsOptions
+```
+
+## Example
+
+```csharp
+using KamiSama.ExternalServices.Email;
+
+var defaults = new EmailDefaultsOptions
+{
+    Email = "mock"
+};
 ```
 
 ## Constructors
@@ -30,5 +41,5 @@ This type does not declare a non-private constructor in source.
 
 | Member | Description |
 | --- | --- |
-| [Email](property-email-7.md) | Exposes the `Email` value on `EmailDefaultsOptions`. Read or set it as part of configuring or using the type. |
+| [Email](property-email-14.md) | Gets or sets the keyed provider name. The built-in default is `mock`; SMTP is registered under `smtp` when its provider module is added. |
 

@@ -17,7 +17,7 @@
 		<!--#endif-->
 		<PackageReference Include="KamiSama.Chassis.Commons" Version="10.0.10" />
 		<PackageReference Include="KamiSama.Extensions.DependencyInjection" Version="10.0.10" />
-		<PackageReference Include="KamiSama.Extensions.WebModules" Version="10.0.10" />
+		<PackageReference Include="KamiSama.Modules" Version="10.0.10" />
 		<ProjectReference Include="..\Suma.AdminPanel.Abstractions\Suma.AdminPanel.Abstractions.csproj" />
 	</ItemGroup>
 </Project>

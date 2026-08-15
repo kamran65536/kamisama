@@ -12,7 +12,7 @@ Kind: `Class`
 
 ## Description
 
-The request was well-formed but was unable to be followed due to semantic errors. Use it with the surrounding package APIs when composing application code.
+Represents a semantically invalid request that should be reported with HTTP status code 422. Use it with the surrounding package APIs when composing application code.
 
 ## Declaration
 
@@ -26,7 +26,7 @@ public class UnProcessableEntityException : HttpExceptionBase
 
 [source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Exceptions/UnProcessableEntityException.cs#L11)
 
-Initializes a new `UnProcessableEntityException` instance. Use it with the surrounding package APIs when composing application code.
+Initializes an exception using the exception type name as its localization key. Use it with the surrounding package APIs when composing application code.
 
 ```csharp
 public UnProcessableEntityException();
@@ -38,9 +38,9 @@ This member does not declare parameters.
 
 ### UnProcessableEntityException
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Exceptions/UnProcessableEntityException.cs#L15)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Exceptions/UnProcessableEntityException.cs#L17)
 
-Initializes a new `UnProcessableEntityException` instance. Use it with the surrounding package APIs when composing application code.
+Initializes an exception with a localization key and formatting arguments. Use it with the surrounding package APIs when composing application code.
 
 ```csharp
 public UnProcessableEntityException(string messageKey, params object? [] args) : base(messageKey, args);
@@ -50,14 +50,14 @@ public UnProcessableEntityException(string messageKey, params object? [] args) :
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `messageKey` | `string` | `-` | The `messageKey` value passed to this member. |
-| `args` | `object?[]` | `-` | The `args` value passed to this member. |
+| `messageKey` | `string` | `-` | The localization key, also used as the fallback message format. |
+| `args` | `object?[]` | `-` | Values used to format and later localize the message. |
 
 ### UnProcessableEntityException
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Exceptions/UnProcessableEntityException.cs#L19)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Exceptions/UnProcessableEntityException.cs#L24)
 
-Initializes a new `UnProcessableEntityException` instance. Use it with the surrounding package APIs when composing application code.
+Initializes an exception with localization metadata and an underlying exception. Use it with the surrounding package APIs when composing application code.
 
 ```csharp
 public UnProcessableEntityException(string messageKey, object? [] args, Exception? innerException) : base(messageKey, args, innerException);
@@ -67,9 +67,9 @@ public UnProcessableEntityException(string messageKey, object? [] args, Exceptio
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `messageKey` | `string` | `-` | The `messageKey` value passed to this member. |
-| `args` | `object?[]` | `-` | The `args` value passed to this member. |
-| `innerException` | `Exception?` | `-` | The `innerException` value passed to this member. |
+| `messageKey` | `string` | `-` | The localization key, also used as the fallback message format. |
+| `args` | `object?[]` | `-` | Values used to format and later localize the message. |
+| `innerException` | `Exception?` | `-` | The exception that caused this failure, or . |
 
 ## Members
 
@@ -77,5 +77,5 @@ public UnProcessableEntityException(string messageKey, object? [] args, Exceptio
 
 | Member | Description |
 | --- | --- |
-| [StatusCode](property-statuscode-9.md) | Exposes the `StatusCode` value on `UnProcessableEntityException`. Read or set it as part of configuring or using the type. |
+| [StatusCode](property-statuscode-9.md) | Gets HTTP status code 422. Use it with the surrounding package APIs when composing application code. |
 

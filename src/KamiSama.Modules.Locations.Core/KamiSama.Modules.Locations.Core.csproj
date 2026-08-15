@@ -1,14 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="../props.xml" />
-
 	<PropertyGroup>
-		<NoWarn>$(NoWarn);1591</NoWarn>
+		<PackageDocumentationRoot>../../docs/content/api/modules-locations-core</PackageDocumentationRoot>
+	</PropertyGroup>
+	<Import Project="../props.xml" />
+	<PropertyGroup>
+		<Description>ASP.NET Core Locations implementation with EF Core province and city persistence, scoped feature services, modular registration, and startup database initialization.</Description>
 	</PropertyGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\KamiSama.Modules.Locations.Abstractions\KamiSama.Modules.Locations.Abstractions.csproj" />
 		<ProjectReference Include="..\Chassis.Commons\KamiSama.Chassis.Commons.csproj" />
 		<ProjectReference Include="..\DependencyInjection\KamiSama.Extensions.DependencyInjection.csproj" />
-		<ProjectReference Include="..\KamiSama.Extensions.WebModules\KamiSama.Extensions.WebModules.csproj" />
+		<ProjectReference Include="..\KamiSama.Modules\KamiSama.Modules.csproj" />
 		<ProjectReference Include="..\Repositories.EntityFrameworkCore\KamiSama.Repositories.EntityFrameworkCore.csproj" />
 	</ItemGroup>
 </Project>

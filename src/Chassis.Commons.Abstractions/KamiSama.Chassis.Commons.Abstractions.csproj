@@ -1,8 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageDocumentationRoot>../../docs/content/api/chassis-commons-abstractions</PackageDocumentationRoot>
+	</PropertyGroup>
 	<Import Project="../props.xml" />
 	<PropertyGroup>
 		<RootNamespace>$(MSBuildProjectName.Replace(" ", "_").Replace(".Abstractions", ""))</RootNamespace>
-		<Description>Common features used in most DDD projects and CRUD</Description>
+		<Description>Feature and repository contracts for the KamiSama chassis layer. Reference this package from application or module projects that need to depend on abstractions instead of concrete implementations.</Description>
 	</PropertyGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\Core\KamiSama.Extensions.Core.csproj" />

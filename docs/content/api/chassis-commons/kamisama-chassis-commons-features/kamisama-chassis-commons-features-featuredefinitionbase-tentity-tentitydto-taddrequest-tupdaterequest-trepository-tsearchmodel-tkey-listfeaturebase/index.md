@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Chassis.Commons](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/Chassis.Commons/Features/FeatureDefinitionBase.cs:17](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Commons/Features/FeatureDefinitionBase.cs#L17)
+Source: [src/Chassis.Commons/Features/FeatureDefinitionBase.cs:25](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Commons/Features/FeatureDefinitionBase.cs#L25)
 
 Namespace: `KamiSama.Chassis.Commons.Features`
 
@@ -38,9 +38,9 @@ public sealed class ProductFeatures
 
 ### Primary constructor
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Commons/Features/FeatureDefinitionBase.cs#L17)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Commons/Features/FeatureDefinitionBase.cs#L25)
 
-Initializes the type with the values required by its declaration. Use it with the surrounding package APIs when composing application code.
+Provides the standard paged-list workflow for the bound feature types. Use it with the surrounding package APIs when composing application code.
 
 ```csharp
 public abstract class ListFeatureBase(TRepository repository) : GenericListFeature<TEntity, TEntityDto, TSearchModel, TRepository>(repository);
@@ -50,7 +50,7 @@ public abstract class ListFeatureBase(TRepository repository) : GenericListFeatu
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `repository` | `TRepository` | `-` | The `repository` value passed to this member. |
+| `repository` | `TRepository` | `-` | The repository used to load entities. |
 
 ## Members
 

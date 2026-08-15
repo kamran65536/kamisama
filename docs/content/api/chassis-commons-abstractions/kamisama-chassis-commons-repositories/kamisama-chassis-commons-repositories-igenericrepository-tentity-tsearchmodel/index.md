@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Chassis.Commons.Abstractions](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/Chassis.Commons.Abstractions/Repositories/IGenericRepository.cs:17](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Commons.Abstractions/Repositories/IGenericRepository.cs#L17)
+Source: [src/Chassis.Commons.Abstractions/Repositories/IGenericRepository.cs:22](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/Chassis.Commons.Abstractions/Repositories/IGenericRepository.cs#L22)
 
 Namespace: `KamiSama.Chassis.Commons.Repositories`
 
@@ -12,7 +12,7 @@ Kind: `Interface`
 
 ## Description
 
-A common scenario CRUD repository with add, delete, list, update capabilities. Use it with the surrounding package APIs when composing application code.
+Combines add, update, delete, and paged-list repository capabilities using the standard page result. Use it with the surrounding package APIs when composing application code.
 
 ## Declaration
 

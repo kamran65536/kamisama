@@ -6,12 +6,13 @@ using System.Xml.Serialization;
 namespace KamiSama.Extensions
 {
 	/// <summary>
-	/// Xml Serialization Extensions
+	/// Provides extension methods for serializing objects to XML strings and deserializing XML strings.
+	/// Custom serializers support polymorphic models and other specialized XML mappings.
 	/// </summary>
 	public static class XmlSerializationExtensions
 	{
 		/// <summary>
-		/// Serializes the object into Xml using XmlSerializer
+		/// Serializes an object to an XML string using an optional custom serializer and XML-writer configuration.
 		/// </summary>
 		/// <param name="obj">object to be serialized</param>
 		/// <param name="settingsAction">action to configure xml serializer</param>
@@ -36,7 +37,7 @@ namespace KamiSama.Extensions
 			return writer.ToString();
 		}
 		/// <summary>
-		/// Deserializes a string into an object
+		/// Deserializes an XML string into an instance of <typeparamref name="TObject"/> using an optional custom serializer.
 		/// </summary>
 		/// <typeparam name="TObject">result object type</typeparam>
 		/// <param name="str">string to be deserialized</param>

@@ -1,11 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageDocumentationRoot>../../docs/content/api/repositories-xml</PackageDocumentationRoot>
+	</PropertyGroup>
 	<Import Project="..\props.xml" />
 	<PropertyGroup>
-		<PackageReleaseNotes>
-			99-11-15 v2.3.1
-			- Xml Repository is added.
-		</PackageReleaseNotes>
-		<Description>Xml implementation for repository pattern for general usage</Description>
+		<Description>Read-oriented XML directory repository implementations with known serializer and mutation limitations.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>

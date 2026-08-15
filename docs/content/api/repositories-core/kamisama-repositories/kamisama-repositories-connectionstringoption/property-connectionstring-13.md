@@ -10,7 +10,7 @@ Kind: `Property`
 
 ## Description
 
-Exposes the `ConnectionString` value on `ConnectionStringOption`. Read or set it as part of configuring or using the type.
+Gets or sets the database connection string bound from the `connection-string` configuration key.
 
 ## Declaration
 
@@ -26,5 +26,11 @@ public string? ConnectionString { get; set; }
 
 ## Example
 
-No concise standalone example is available yet.
+```csharp
+var options = new ConnectionStringOption
+{
+    Provider = "sqlite",
+    ConnectionString = "Data Source=app.db"
+};
+```
 

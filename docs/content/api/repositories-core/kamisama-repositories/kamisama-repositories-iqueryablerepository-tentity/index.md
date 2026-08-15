@@ -12,12 +12,20 @@ Kind: `Interface`
 
 ## Description
 
-Queryable Repository Interface, these repositories can be searched throughout. Use it with the surrounding package APIs when composing application code.
+Adds predicate-based query access to the synchronous repository contract. The implementation decides whether the returned `IQueryable<TEntity>` is translated, deferred, live, or an in-memory snapshot.
 
 ## Declaration
 
 ```csharp
 public interface IQueryableRepository<TEntity> : IRepository<TEntity>
+```
+
+## Example
+
+```csharp
+using KamiSama.Repositories;
+
+IQueryable<User> activeUsers = repository.Where(user => user.IsActive);
 ```
 
 ## Constructors
@@ -30,5 +38,5 @@ This type does not declare a non-private constructor in source.
 
 | Member | Description |
 | --- | --- |
-| [Where](method-where-16.md) | Queries items in repository for the predicate specified. Use it with the surrounding package APIs when composing application code. |
+| [Where](method-where-16.md) | Returns an `IQueryable<TEntity>` filtered by the predicate. The implementation determines whether the query is translated, deferred, live, or a snapshot; this method is synchronous on both interfaces. |
 

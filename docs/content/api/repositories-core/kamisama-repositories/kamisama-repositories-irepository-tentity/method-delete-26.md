@@ -10,7 +10,7 @@ Kind: `Method`
 
 ## Description
 
-Deletes an item from repository. Use it with the surrounding package APIs when composing application code.
+Deletes an entity according to the implementation's matching and persistence rules.
 
 ## Declaration
 
@@ -22,16 +22,11 @@ void Delete(TEntity item);
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `item` | `TEntity` | `-` | The `item` value passed to this member. |
+| `item` | `TEntity` | `-` | The entity to delete. |
 
 ## Example
 
 ```csharp
-var entity = new SampleEntity { Id = 1, Name = "Test" };
-var context = GetDbContext(initialDbSet: [entity]);
-
-var repository = new DbRepository<SampleEntity>(context);
-
-repository.Delete(entity);
+repository.Delete(user);
 ```
 

@@ -1,7 +1,8 @@
 ﻿namespace KamiSama.Extensions;
 
 /// <summary>
-/// TimeSpan Extensions
+/// Provides fluent numeric extensions for constructing <see cref="TimeSpan"/> values in common units.
+/// Both integer and fractional values are supported.
 /// </summary>
 public static class TimeSpanExtensions
 {

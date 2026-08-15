@@ -6,17 +6,22 @@ using Microsoft.Extensions.DependencyInjection;
 namespace KamiSama.Repositories.EntityFrameworkCore;
 
 /// <summary>
-/// Provides EF Core service registration extensions.
+/// Provides provider-neutral EF Core service registration extensions.
 /// </summary>
 public static class ServiceCollectionExtensions
 {
 	/// <summary>
-	/// Adds provider-neutral keyed DbContext resolution for a configured database provider.
+	/// Binds database settings and adds scoped resolution of a base DbContext through a configured keyed provider.
 	/// </summary>
 	/// <typeparam name="TBaseContext">The base DbContext type consumed by application code.</typeparam>
 	/// <param name="services">The service collection.</param>
-	/// <param name="section">The configuration section containing provider and connection string values.</param>
-	/// <returns>A builder that provider packages can extend.</returns>
+	/// <param name="section">The section containing the <c>provider</c> and <c>connection-string</c> keys.</param>
+	/// <returns>A builder used to set the migration-history table and register one or more concrete provider contexts.</returns>
+	/// <remarks>
+	/// The configured provider is lowercased for keyed resolution. The installed provider extension must register that
+	/// exact key. Both the base-context alias and provider contexts are scoped.
+	/// </remarks>
+	/// <exception cref="ArgumentNullException">The provider or connection string is null, empty, or whitespace.</exception>
 	public static IMultiProviderDbContextBuilder<TBaseContext> AddMultiProviderDbContext<TBaseContext>(
 		this IServiceCollection services,
 		IConfigurationSection section)

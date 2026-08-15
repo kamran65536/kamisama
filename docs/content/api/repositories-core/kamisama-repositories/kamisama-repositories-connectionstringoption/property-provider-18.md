@@ -10,7 +10,7 @@ Kind: `Property`
 
 ## Description
 
-the database provider used for this configuration. Use it with the surrounding package APIs when composing application code.
+Gets or sets the provider identifier bound from the `provider` configuration key; a provider package defines accepted values.
 
 ## Declaration
 
@@ -26,5 +26,11 @@ public string? Provider { get; set; }
 
 ## Example
 
-No concise standalone example is available yet.
+```csharp
+var options = new ConnectionStringOption
+{
+    Provider = "sqlite",
+    ConnectionString = "Data Source=app.db"
+};
+```
 

@@ -4,4 +4,4 @@
 
 | Type | Kind | Description | Source |
 | --- | --- | --- | --- |
-| [PostgresqlLocationsDbContext](kamisama-modules-locations-repositories-database-postgresql-postgresqllocationsdbcontext/index.md) | Class | Provides the `PostgresqlLocationsDbContext` API for the surrounding package. Use this type with the members listed below to compose the feature in an application. | [source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Locations.Postgresql/Repositories/Database/Postgresql/PostgresqlLocationsDbContext.cs#L6) |
+| [PostgresqlLocationsDbContext](kamisama-modules-locations-repositories-database-postgresql-postgresqllocationsdbcontext/index.md) | Class | Concrete PostgreSQL Locations context targeted by this provider package's migrations. Normal hosts register it through `AddPostgresqlLocationsDbContext` rather than constructing it directly. | [source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Locations.Postgresql/Repositories/Database/Postgresql/PostgresqlLocationsDbContext.cs#L10) |

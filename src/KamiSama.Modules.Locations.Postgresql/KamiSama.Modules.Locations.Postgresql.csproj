@@ -1,8 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="../props.xml" />
-
 	<PropertyGroup>
-		<NoWarn>$(NoWarn);1591</NoWarn>
+		<PackageDocumentationRoot>../../docs/content/api/modules-locations-postgresql</PackageDocumentationRoot>
+	</PropertyGroup>
+	<Import Project="../props.xml" />
+	<PropertyGroup>
+		<Description>PostgreSQL EF Core context and provider registration for KamiSama.Modules.Locations.Core, including Locations migrations and keyed context resolution.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>

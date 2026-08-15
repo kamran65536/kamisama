@@ -12,7 +12,7 @@ Kind: `Class`
 
 ## Description
 
-Service Collection Extension for adding exception handing to AspNetCore apps. Use it with the surrounding package APIs when composing application code.
+Registers the KamiSama ProblemDetails provider and global MVC exception filter. Use it with the surrounding package APIs when composing application code.
 
 ## Declaration
 
@@ -30,5 +30,5 @@ This type does not declare a non-private constructor in source.
 
 | Member | Description |
 | --- | --- |
-| [AddExceptionFilterForProblemDetails](method-addexceptionfilterforproblemdetails-18.md) | Adds Exception Filter for problem details. Use it with the surrounding package APIs when composing application code. |
+| [AddExceptionFilterForProblemDetails](method-addexceptionfilterforproblemdetails-21.md) | Adds the scoped conversion services and configures MVC to resolve the exception filter globally. Use it with the surrounding package APIs when composing application code. |
 

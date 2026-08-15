@@ -1,12 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageDocumentationRoot>../../docs/content/api/extensions-xml</PackageDocumentationRoot>
+	</PropertyGroup>
 	<Import Project="..\props.xml" />
 
 	<PropertyGroup>
 		<RootNamespace>KamiSama.Extensions</RootNamespace>
-		<Description>
-			v2.4.0
-			AutoXmlIncludeAttribute is added.
-			XmlSerialization is moved to KamiSama.Extensions.Xml
-		</Description>
+		<Description>XML serialization helpers for strings, with configurable serializers and attribute-driven overrides for polymorphic elements and array items.</Description>
 	</PropertyGroup>
 </Project>

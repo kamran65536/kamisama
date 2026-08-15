@@ -1,11 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageDocumentationRoot>../../docs/content/api/extensions-dependencyinjection</PackageDocumentationRoot>
+	</PropertyGroup>
 	<Import Project="..\props.xml" />
 	<PropertyGroup>
-		<Description>Extension for Microsoft.Extensions.DependencyInjection supporting named injection</Description>
-		<PackageReleaseNotes>v2.2.7
-- InjectAttribute is added.
-v2.0.0
-- Refactored from old KamiSama.Extenders.DependencyInjection library</PackageReleaseNotes>
+		<Description>Attribute-based Microsoft.Extensions.DependencyInjection registration with assembly scanning, configurable lifetimes, keyed services, and explicit or inferred service types.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>

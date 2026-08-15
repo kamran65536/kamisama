@@ -10,7 +10,7 @@ Kind: `Property`
 
 ## Description
 
-Localize argument parameters or not. Use it with the surrounding package APIs when composing application code.
+Gets or sets whether the default provider localizes message arguments before formatting the title. Use it with the surrounding package APIs when composing application code.
 
 ## Declaration
 

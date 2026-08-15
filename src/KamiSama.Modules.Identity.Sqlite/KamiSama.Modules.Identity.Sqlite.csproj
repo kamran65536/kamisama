@@ -1,8 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="../props.xml" />
-
 	<PropertyGroup>
-		<NoWarn>$(NoWarn);1591</NoWarn>
+		<PackageDocumentationRoot>../../docs/content/api/modules-identity-sqlite</PackageDocumentationRoot>
+	</PropertyGroup>
+	<Import Project="../props.xml" />
+	<PropertyGroup>
+		<Description>SQLite EF Core provider registration for KamiSama.Modules.Identity.Core. Install it in an Identity host and select the required provider callback so the module can resolve its database context and run startup migrations.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>

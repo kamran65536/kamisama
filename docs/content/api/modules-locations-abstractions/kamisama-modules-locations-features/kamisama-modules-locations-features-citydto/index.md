@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.Modules.Locations.Abstractions](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.Modules.Locations.Abstractions/Features/Dtos.cs:17](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Locations.Abstractions/Features/Dtos.cs#L17)
+Source: [src/KamiSama.Modules.Locations.Abstractions/Features/Dtos.cs:53](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Locations.Abstractions/Features/Dtos.cs#L53)
 
 Namespace: `KamiSama.Modules.Locations.Features`
 
@@ -12,7 +12,7 @@ Kind: `Record`
 
 ## Description
 
-Provides the `CityDto` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
+Returns a city together with the identifier and name of its parent province. Parent values are copied from the loaded province navigation when Core creates the DTO.
 
 ## Declaration
 
@@ -24,9 +24,9 @@ public record CityDto(Guid Id, Guid ProvinceId, string ProvinceName, string Name
 
 ### Primary constructor
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Locations.Abstractions/Features/Dtos.cs#L17)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.Modules.Locations.Abstractions/Features/Dtos.cs#L53)
 
-Initializes the type with the values required by its declaration. Use it with the surrounding package APIs when composing application code.
+Represents a city and its parent province across the provider-neutral Locations feature boundary. Use it with the surrounding package APIs when composing application code.
 
 ```csharp
 public record CityDto(Guid Id, Guid ProvinceId, string ProvinceName, string Name);
@@ -36,10 +36,10 @@ public record CityDto(Guid Id, Guid ProvinceId, string ProvinceName, string Name
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `Id` | `Guid` | `-` | The `Id` value passed to this member. |
-| `ProvinceId` | `Guid` | `-` | The `ProvinceId` value passed to this member. |
-| `ProvinceName` | `string` | `-` | The `ProvinceName` value passed to this member. |
-| `Name` | `string` | `-` | The `Name` value passed to this member. |
+| `Id` | `Guid` | `-` | The city identifier. |
+| `ProvinceId` | `Guid` | `-` | The parent province identifier. |
+| `ProvinceName` | `string` | `-` | The parent province name captured when the DTO is created. |
+| `Name` | `string` | `-` | The city name. |
 
 ## Members
 

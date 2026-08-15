@@ -10,7 +10,7 @@ Kind: `Property`
 
 ## Description
 
-Exposes the `StatusCode` value on `InvalidOperationHttpException`. Read or set it as part of configuring or using the type.
+Gets HTTP status code 500. Use it with the surrounding package APIs when composing application code.
 
 ## Declaration
 

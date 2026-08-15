@@ -1,13 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="../props.xml" />
-
 	<PropertyGroup>
-		<NoWarn>$(NoWarn);1591</NoWarn>
+		<PackageDocumentationRoot>../../docs/content/api/modules-localization-core</PackageDocumentationRoot>
+	</PropertyGroup>
+	<Import Project="../props.xml" />
+	<PropertyGroup>
+		<Description>ASP.NET Core localization registration and scoped features for configured culture discovery, current-culture lookup, and culture-selection cookies. Use it to bind localization settings and compose request localization through KamiSama.Modules.</Description>
 	</PropertyGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\KamiSama.Modules.Localization.Abstractions\KamiSama.Modules.Localization.Abstractions.csproj" />
 		<ProjectReference Include="..\Chassis.Commons\KamiSama.Chassis.Commons.csproj" />
 		<ProjectReference Include="..\DependencyInjection\KamiSama.Extensions.DependencyInjection.csproj" />
-		<ProjectReference Include="..\KamiSama.Extensions.WebModules\KamiSama.Extensions.WebModules.csproj" />
+		<ProjectReference Include="..\KamiSama.Modules\KamiSama.Modules.csproj" />
 	</ItemGroup>
 </Project>

@@ -4,7 +4,7 @@
 
 [Back to namespace](../index.md) | [Back to KamiSama.ExternalServices.Sms.Core](../../index.md) | [Back to package index](../../../index.md)
 
-Source: [src/KamiSama.ExternalServices.Sms.Core/SmsCoreServicesModule.cs:9](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.ExternalServices.Sms.Core/SmsCoreServicesModule.cs#L9)
+Source: [src/KamiSama.ExternalServices.Sms.Core/SmsCoreServicesModule.cs:14](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.ExternalServices.Sms.Core/SmsCoreServicesModule.cs#L14)
 
 Namespace: `KamiSama.ExternalServices.Sms`
 
@@ -12,7 +12,7 @@ Kind: `Class`
 
 ## Description
 
-ASP.NET Core web-module implementation for `SmsCoreServicesModule`. Add it through the extended web application builder to register services and apply the related middleware or endpoints.
+Registers the scoped unkeyed SMS dispatcher, scoped keyed `mock` provider, and default-provider options. Its registrations run when the containing `ExtendedWebApplicationBuilder` is built.
 
 ## Declaration
 
@@ -20,13 +20,27 @@ ASP.NET Core web-module implementation for `SmsCoreServicesModule`. Add it throu
 public class SmsCoreServicesModule(IConfigurationSection defaultsSection) : WebModule
 ```
 
+## Example
+
+```csharp
+using KamiSama.ExternalServices.Sms;
+using KamiSama.Modules;
+
+var webBuilder = WebApplication.CreateBuilder(args);
+var builder = webBuilder.Extend();
+builder.AddModule(new SmsCoreServicesModule(
+    webBuilder.Configuration.GetSection("SmsDefaults")));
+
+var app = await builder.BuildAsync(CancellationToken.None);
+```
+
 ## Constructors
 
 ### Primary constructor
 
-[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.ExternalServices.Sms.Core/SmsCoreServicesModule.cs#L9)
+[source](https://gitlab.com/kamran65536/KamiSama/-/blob/master/src/KamiSama.ExternalServices.Sms.Core/SmsCoreServicesModule.cs#L14)
 
-Initializes the type with the values required by its declaration. Use it with the surrounding package APIs when composing application code.
+Registers the scoped, unkeyed SMS dispatcher, the scoped keyed `mock` provider, and default-provider options. Add this module when application code should resolve `ISendSms` without a key and dispatch through the configured provider key.
 
 ```csharp
 public class SmsCoreServicesModule(IConfigurationSection defaultsSection) : WebModule
@@ -36,7 +50,7 @@ public class SmsCoreServicesModule(IConfigurationSection defaultsSection) : WebM
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `defaultsSection` | `IConfigurationSection` | `-` | The `defaultsSection` value passed to this member. |
+| `defaultsSection` | `IConfigurationSection` | `-` | The configuration section containing the `sms` provider key. |
 
 ## Members
 
@@ -44,6 +58,6 @@ public class SmsCoreServicesModule(IConfigurationSection defaultsSection) : WebM
 
 | Member | Description |
 | --- | --- |
-| [ApplyConfigurationToAsync](method-applyconfigurationtoasync-17.md) | Runs the `ApplyConfigurationToAsync` operation on `SmsCoreServicesModule`. Use it when your code needs this specific behavior from the package. |
-| [ConfigureServices](method-configureservices-11.md) | Runs the `ConfigureServices` operation on `SmsCoreServicesModule`. Use it when your code needs this specific behavior from the package. |
+| [ApplyConfigurationToAsync](method-applyconfigurationtoasync-32.md) | Completes the module lifecycle without applying middleware or endpoints. Use it with the surrounding package APIs when composing application code. |
+| [ConfigureServices](method-configureservices-20.md) | Binds `SmsDefaultsOptions` and scans this package for its scoped keyed and unkeyed SMS registrations. Use it with the surrounding package APIs when composing application code. |
 

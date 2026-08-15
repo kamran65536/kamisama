@@ -2,17 +2,21 @@
 
 [Back to package index](../index.md)
 
-Version: `10.0.10`
+Version: `10.0.0`
 
 ## Description
 
-SQLite provider registration for the KamiSama Locations module. Use it with the surrounding package APIs when composing application code.
+SQLite EF Core context and provider registration for KamiSama.Modules.Locations.Core, including Locations migrations and keyed context resolution. Select it from the Core provider callback when the configured database provider is `sqlite`.
 
-## Install
+## How to use
 
 ```shell
-dotnet add package KamiSama.Modules.Locations.Sqlite --version 10.0.10
+dotnet add package KamiSama.Modules.Locations.Sqlite --version 10.0.0
 ```
+
+**Publication mismatch:** `10.0.0` in the required install command is the current workspace/root documentation version. NuGet exposed `10.0.11` as the latest provider package when reviewed; `10.0.0` itself was not available.
+
+Install this package with Locations Core, configure the database provider as `sqlite`, and pass `database => database.AddSqliteLocationsDbContext()` to `AddLocationsModule`. The callback registers `SqliteLocationsDbContext` under the exact `sqlite` key, enables lazy-loading proxies, uses `__EFMigrationsHistory_Locations`, and supplies this package's migrations. `BuildAsync` can apply pending migrations during startup, so the process needs write access to the SQLite database file and its directory.
 
 ## Namespaces
 
@@ -21,5 +25,5 @@ dotnet add package KamiSama.Modules.Locations.Sqlite --version 10.0.10
 
 ## Types
 
-- [KamiSama.Modules.Locations.LocationsSqliteDbContextBuilderExtensions](kamisama-modules-locations/kamisama-modules-locations-locationssqlitedbcontextbuilderextensions/index.md) - Provides the `LocationsSqliteDbContextBuilderExtensions` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
-- [KamiSama.Modules.Locations.Repositories.Database.Sqlite.SqliteLocationsDbContext](kamisama-modules-locations-repositories-database-sqlite/kamisama-modules-locations-repositories-database-sqlite-sqlitelocationsdbcontext/index.md) - Provides the `SqliteLocationsDbContext` API for the surrounding package. Use this type with the members listed below to compose the feature in an application.
+- [KamiSama.Modules.Locations.LocationsSqliteDbContextBuilderExtensions](kamisama-modules-locations/kamisama-modules-locations-locationssqlitedbcontextbuilderextensions/index.md) - Registers the SQLite Locations context under the exact `sqlite` keyed base-context service. Use it from the callback passed to `AddLocationsModule`.
+- [KamiSama.Modules.Locations.Repositories.Database.Sqlite.SqliteLocationsDbContext](kamisama-modules-locations-repositories-database-sqlite/kamisama-modules-locations-repositories-database-sqlite-sqlitelocationsdbcontext/index.md) - Concrete SQLite Locations context targeted by this provider package's migrations. Normal hosts register it through `AddSqliteLocationsDbContext` rather than constructing it directly.
