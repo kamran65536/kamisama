@@ -4,6 +4,14 @@
 - KamiSama.PolicyEngine Module is added.
 - NuGet package descriptions are refined and obsolete package release notes are removed.
 - Package API documentation is included as the NuGet README when available.
+- (breaking) Identity authentication contracts are moved from Services.Users to Services.Authentication and replaced by ILogin, IRefreshToken, ILogout, and ILogoutAll.
+- Identity login now accepts one user name or email value and returns the authenticated user with revocable session tokens and the access-token expiration.
+- Low-level Identity token issuance is internalized, current-session and all-session logout are added, and the Identity API documentation, descriptions, and examples are updated.
+- API documentation for all 52 packages is reviewed and expanded with package-specific installation, setup, usage, examples, and verified runtime and publication caveats.
+- Public and protected API XML documentation, NuGet package descriptions, and generated namespace, type, and member guidance are completed across the library families.
+- The API documentation generator now reads the canonical root version, excludes non-public APIs, and preserves per-package review snapshots and approved example exemptions during regeneration.
+- The complete generated documentation is regenerated and validated with a strict MkDocs build.
+- Ticketing now validates status transitions: open or reopened tickets can be resolved, resolved tickets can be reopened or closed, closed tickets are terminal, and invalid transitions return an HTTP 409 conflict. Ticketing documentation, examples, and transition tests are updated accordingly.
 1405-05-20 v10.0.11
 - packages are updated.
 - identity role services are added.
