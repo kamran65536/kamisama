@@ -17,10 +17,10 @@ public static class TicketingSqliteDbContextBuilderExtensions
 	/// </summary>
 	/// <param name="builder">The provider-neutral Ticketing context builder created by Core.</param>
 	/// <returns>The same builder for additional provider registrations.</returns>
-	public static IMultiProviderDbContextBuilder<TicketingDbContext> AddSqliteTicketingDbContext(
+	public static IMultiProviderDbContextBuilder<TicketingDbContext> AddSqlite(
 		this IMultiProviderDbContextBuilder<TicketingDbContext> builder)
 	{
-		builder.AddSqlite<SqliteTicketingDbContext>();
+		builder.AddSqlite<TicketingDbContext, SqliteTicketingDbContext>();
 		return builder;
 	}
 }

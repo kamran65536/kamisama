@@ -1,7 +1,7 @@
 using Suma.AdminPanel.Services.Users;
 using KamiSama.Extensions.Paging;
 using KamiSama.Extensions.DependencyInjection;
-using Polareum.Commons.RestSharp;
+using KamiSama.Modules.Commons.RestSharp;
 
 namespace Suma.AdminPanel.Client.Services.Users;
 

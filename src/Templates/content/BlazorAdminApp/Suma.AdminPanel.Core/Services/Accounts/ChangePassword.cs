@@ -1,5 +1,5 @@
-using Polareum.Identity.Features.Password;
-using Polareum.Identity.Features.Users;
+using KamiSama.Modules.Identity.Features.Password;
+using KamiSama.Modules.Identity.Features.Users;
 
 namespace Suma.AdminPanel.Services.Accounts;
 

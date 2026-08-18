@@ -1,5 +1,5 @@
-﻿using Polareum.Identity.DataTypes;
-using Polareum.Localization.Features;
+﻿using KamiSama.Modules.Identity.DataTypes;
+using KamiSama.Modules.Localization.Features;
 using Suma.AdminPanel.Services.Localization;
 //#if (OperatorManagement)
 using Suma.AdminPanel.Services.Operators;
@@ -16,7 +16,7 @@ internal static partial class DtoMappings
 			dto.RepresentedFlag,
 			dto.Culture);
 	//#if (OperatorManagement)
-	public static OperatorListItemDto ToOperatorListItemDto(this Polareum.Identity.Features.Users.UserDto dto, Guid currentUserId)
+	public static OperatorListItemDto ToOperatorListItemDto(this KamiSama.Modules.Identity.Features.Users.UserDto dto, Guid currentUserId)
 	{
 		var isEditable = !dto.Roles.Contains(KnownRoles.SuperAdmin) && dto.Id != currentUserId;
 
@@ -29,7 +29,7 @@ internal static partial class DtoMappings
 			dto.Roles);
 	}
 
-	public static OperatorDto ToOperatorDto(this Polareum.Identity.Features.Users.UserDto dto, Guid currentUserId)
+	public static OperatorDto ToOperatorDto(this KamiSama.Modules.Identity.Features.Users.UserDto dto, Guid currentUserId)
 	{
 		var isEditable = !dto.Roles.Contains(KnownRoles.SuperAdmin) && dto.Id != currentUserId;
 
@@ -44,7 +44,7 @@ internal static partial class DtoMappings
 	//#endif
 
 	//#if (UserManagement)
-	public static UserListItemDto ToUserListItemDto(this Polareum.Identity.Features.Users.UserDto dto, Guid currentUserId)
+	public static UserListItemDto ToUserListItemDto(this KamiSama.Modules.Identity.Features.Users.UserDto dto, Guid currentUserId)
 	{
 		var isEditable = !dto.Roles.Contains(KnownRoles.SuperAdmin) && dto.Id != currentUserId;
 
@@ -57,7 +57,7 @@ internal static partial class DtoMappings
 			dto.Roles);
 	}
 
-	public static UserDto ToUserDto(this Polareum.Identity.Features.Users.UserDto dto, Guid currentUserId)
+	public static UserDto ToUserDto(this KamiSama.Modules.Identity.Features.Users.UserDto dto, Guid currentUserId)
 	{
 		var isEditable = !dto.Roles.Contains(KnownRoles.SuperAdmin) && dto.Id != currentUserId;
 

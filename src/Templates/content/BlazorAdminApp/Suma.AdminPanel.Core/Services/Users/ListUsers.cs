@@ -1,12 +1,12 @@
-using Polareum.Identity.DataTypes;
-using Polareum.Identity.Features.Users;
+using KamiSama.Modules.Identity.DataTypes;
+using KamiSama.Modules.Identity.Features.Users;
 
 namespace Suma.AdminPanel.Services.Users;
 
 [AutoInjectScoped<IListUsers>]
 internal class ListUsers(
 	ILogger<ListUsers> logger,
-	Polareum.Identity.Features.Users.IListUsers identityListUsers,
+	KamiSama.Modules.Identity.Features.Users.IListUsers identityListUsers,
 	IFindCurrentUser findCurrentUser) : IListUsers
 {
 	public async Task<PagedResult<UserListItemDto>> ListAsync(UserSearchModel searchModel, CancellationToken cancellationToken)
@@ -20,7 +20,7 @@ internal class ListUsers(
 			var usernameOrEmail = string.IsNullOrWhiteSpace(searchModel.Username)
 				? searchModel.Email
 				: searchModel.Username;
-			var identitySearchModel = new Polareum.Identity.Features.Users.UserSearchModel(
+			var identitySearchModel = new KamiSama.Modules.Identity.Features.Users.UserSearchModel(
 				searchModel.Page,
 				searchModel.PageSize,
 				KnownRoles.User,

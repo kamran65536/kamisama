@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageDocumentationRoot>../../docs/content/api/modules-contents-sqlite</PackageDocumentationRoot>
+	</PropertyGroup>
+	<Import Project="../props.xml" />
+	<PropertyGroup>
+		<Description>SQLite EF Core context and provider registration for KamiSama.Modules.Contents.Core, including Contents migrations and keyed context resolution.</Description>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\KamiSama.Modules.Contents.Core\KamiSama.Modules.Contents.Core.csproj" />
+		<ProjectReference Include="..\Repositories.EntityFrameworkCore.Sqlite\KamiSama.Repositories.EntityFrameworkCore.Sqlite.csproj" />
+	</ItemGroup>
+</Project>

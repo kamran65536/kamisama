@@ -1,10 +1,10 @@
 ﻿using KamiSama.Chassis.ProblemDetails;
 using KamiSama.Modules;
 using Microsoft.AspNetCore.Components.Authorization;
-using Polareum.Identity;
-using Polareum.Localization;
+using KamiSama.Modules.Identity;
+using KamiSama.Modules.Localization;
 //#if (Ticketing)
-using Polareum.Ticketing;
+using KamiSama.Modules.Ticketing;
 //#endif
 using Suma.AdminPanel.Properties;
 using Suma.AdminPanel.Server.Components;

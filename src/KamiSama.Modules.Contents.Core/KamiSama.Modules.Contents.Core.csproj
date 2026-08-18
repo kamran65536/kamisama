@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageDocumentationRoot>../../docs/content/api/modules-contents-core</PackageDocumentationRoot>
+	</PropertyGroup>
+	<Import Project="../props.xml" />
+	<PropertyGroup>
+		<Description>ASP.NET Core Contents implementation with EF Core content-file persistence, scoped feature services, modular registration, and startup database initialization.</Description>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\KamiSama.Modules.Contents.Abstractions\KamiSama.Modules.Contents.Abstractions.csproj" />
+		<ProjectReference Include="..\Chassis.Commons\KamiSama.Chassis.Commons.csproj" />
+		<ProjectReference Include="..\DependencyInjection\KamiSama.Extensions.DependencyInjection.csproj" />
+		<ProjectReference Include="..\KamiSama.Modules\KamiSama.Modules.csproj" />
+		<ProjectReference Include="..\Repositories.EntityFrameworkCore\KamiSama.Repositories.EntityFrameworkCore.csproj" />
+		<PackageReference Include="Riok.Mapperly" Version="4.3.1" />
+	</ItemGroup>
+</Project>

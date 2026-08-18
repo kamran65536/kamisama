@@ -20,10 +20,10 @@ public static class PolicyEnginePostgresqlDbContextBuilderExtensions
 	/// Registration enables lazy-loading proxies and the shared PostgreSQL compatibility switches. This provider package
 	/// currently contains no PolicyEngine migrations, so <c>MigrateAsync</c> cannot create the PolicyEngine schema.
 	/// </remarks>
-	public static IMultiProviderDbContextBuilder<PolicyEngineDbContext> AddPostgresqlPolicyEngineDbContext(
+	public static IMultiProviderDbContextBuilder<PolicyEngineDbContext> AddPostgresql(
 		this IMultiProviderDbContextBuilder<PolicyEngineDbContext> builder)
 	{
-		builder.AddPostgresql<PostgresqlPolicyEngineDbContext>();
+		builder.AddPostgresql<PolicyEngineDbContext, PostgresqlPolicyEngineDbContext>();
 		return builder;
 	}
 }

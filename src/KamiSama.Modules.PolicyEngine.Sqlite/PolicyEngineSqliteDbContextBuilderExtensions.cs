@@ -20,10 +20,10 @@ public static class PolicyEngineSqliteDbContextBuilderExtensions
 	/// Registration enables lazy-loading proxies. This provider package currently contains no PolicyEngine migrations,
 	/// so <c>MigrateAsync</c> cannot create the PolicyEngine schema.
 	/// </remarks>
-	public static IMultiProviderDbContextBuilder<PolicyEngineDbContext> AddSqlitePolicyEngineDbContext(
+	public static IMultiProviderDbContextBuilder<PolicyEngineDbContext> AddSqlite(
 		this IMultiProviderDbContextBuilder<PolicyEngineDbContext> builder)
 	{
-		builder.AddSqlite<SqlitePolicyEngineDbContext>();
+		builder.AddSqlite<PolicyEngineDbContext, SqlitePolicyEngineDbContext>();
 		return builder;
 	}
 }

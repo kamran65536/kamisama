@@ -5,10 +5,12 @@ using Microsoft.Extensions.DependencyInjection;
 namespace KamiSama.Repositories.EntityFrameworkCore;
 
 /// <summary>
-/// Defines the provider-neutral state needed to register a DbContext for multiple database providers.
+/// Defines provider-neutral DbContext registration for a base context type.
 /// </summary>
-/// <remarks>Provider extensions add scoped concrete contexts and keyed scoped aliases for <see cref="BaseContextType"/>.</remarks>
-public interface IMultiProviderDbContextBuilder
+/// <typeparam name="TBaseContext">The base DbContext type consumed by repositories and modules.</typeparam>
+/// <remarks>Install provider packages and call their generic registration methods with concrete derived contexts.</remarks>
+public interface IMultiProviderDbContextBuilder<TBaseContext>
+	where TBaseContext : DbContext
 {
 	/// <summary>
 	/// Gets the service collection receiving DbContext registrations.
@@ -33,16 +35,6 @@ public interface IMultiProviderDbContextBuilder
 	/// </summary>
 	/// <value>The application-facing DbContext base type.</value>
 	Type BaseContextType { get; }
-}
-
-/// <summary>
-/// Defines provider-neutral DbContext registration for a base context type.
-/// </summary>
-/// <typeparam name="TBaseContext">The base DbContext type consumed by repositories and modules.</typeparam>
-/// <remarks>Install provider packages and call their generic registration methods with concrete derived contexts.</remarks>
-public interface IMultiProviderDbContextBuilder<TBaseContext> : IMultiProviderDbContextBuilder
-	where TBaseContext : DbContext
-{
 	/// <summary>
 	/// Sets the EF Core migrations history table used by provider registrations.
 	/// </summary>

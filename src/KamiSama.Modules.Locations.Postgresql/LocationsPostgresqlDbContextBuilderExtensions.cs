@@ -16,10 +16,10 @@ public static class LocationsPostgresqlDbContextBuilderExtensions
 	/// <param name="builder">The Locations context builder created during <c>AddLocationsModule</c> service configuration.</param>
 	/// <returns>The same builder for fluent registration.</returns>
 	/// <remarks>The underlying provider enables lazy-loading proxies, applies the Locations migration-history table, and uses the configured connection string.</remarks>
-	public static IMultiProviderDbContextBuilder<LocationsDbContext> AddPostgresqlLocationsDbContext(
+	public static IMultiProviderDbContextBuilder<LocationsDbContext> AddPostgresql(
 		this IMultiProviderDbContextBuilder<LocationsDbContext> builder)
 	{
-		builder.AddPostgresql<PostgresqlLocationsDbContext>();
+		builder.AddPostgresql<LocationsDbContext, PostgresqlLocationsDbContext>();
 		return builder;
 	}
 }

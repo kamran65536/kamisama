@@ -1,6 +1,6 @@
-using Polareum.Identity.Features.Users;
-using TicketingDataTypes = Polareum.Ticketing.DataTypes;
-using TicketingFeatures = Polareum.Ticketing.Features.Tickets;
+using KamiSama.Modules.Identity.Features.Users;
+using TicketingDataTypes = KamiSama.Modules.Ticketing.DataTypes;
+using TicketingFeatures = KamiSama.Modules.Ticketing.Features.Tickets;
 
 namespace Suma.AdminPanel.Services.Tickets;
 

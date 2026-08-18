@@ -1,17 +1,17 @@
 using KamiSama.Chassis.HttpExceptions;
-using Polareum.Identity.DataTypes;
-using Polareum.Identity.Features.Users;
+using KamiSama.Modules.Identity.DataTypes;
+using KamiSama.Modules.Identity.Features.Users;
 
 namespace Suma.AdminPanel.Services.Users;
 
 [AutoInjectScoped<IUpdateUser>]
 internal class UpdateUser(
 	ILogger<UpdateUser> logger,
-	Polareum.Identity.Features.Users.IFindUserById identityFindUserById,
+	KamiSama.Modules.Identity.Features.Users.IFindUserById identityFindUserById,
 	IFindCurrentUser findCurrentUser,
-	Polareum.Identity.Features.Users.IUpdateUser identityUpdateUser,
-	Polareum.Identity.Features.Users.IEnableUser identityEnableUser,
-	Polareum.Identity.Features.Users.IDisableUser identityDisableUser) : IUpdateUser
+	KamiSama.Modules.Identity.Features.Users.IUpdateUser identityUpdateUser,
+	KamiSama.Modules.Identity.Features.Users.IEnableUser identityEnableUser,
+	KamiSama.Modules.Identity.Features.Users.IDisableUser identityDisableUser) : IUpdateUser
 {
 	public async Task UpdateAsync(Guid userId, UpdateUserRequest request, CancellationToken cancellationToken)
 	{
@@ -28,7 +28,7 @@ internal class UpdateUser(
 
 			await identityUpdateUser.UpdateAsync(
 				userId,
-				new Polareum.Identity.Features.Users.UpdateUserRequest(
+				new KamiSama.Modules.Identity.Features.Users.UpdateUserRequest(
 					request.Username,
 					request.Email,
 					string.Empty,

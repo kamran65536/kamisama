@@ -15,10 +15,10 @@ public static class ServicePlansSqliteDbContextBuilderExtensions
 	/// </summary>
 	/// <param name="builder">The ServicePlans multi-provider context builder.</param>
 	/// <returns>The same builder for fluent provider configuration.</returns>
-	public static IMultiProviderDbContextBuilder<ServicePlansDbContext> AddSqliteServicePlansDbContext(
+	public static IMultiProviderDbContextBuilder<ServicePlansDbContext> AddSqlite(
 		this IMultiProviderDbContextBuilder<ServicePlansDbContext> builder)
 	{
-		builder.AddSqlite<SqliteServicePlansDbContext>();
+		builder.AddSqlite<ServicePlansDbContext, SqliteServicePlansDbContext>();
 		return builder;
 	}
 }

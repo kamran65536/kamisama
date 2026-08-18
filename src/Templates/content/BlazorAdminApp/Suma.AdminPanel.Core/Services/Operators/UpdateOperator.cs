@@ -1,6 +1,6 @@
 using KamiSama.Chassis.HttpExceptions;
-using Polareum.Identity.DataTypes;
-using Polareum.Identity.Features.Users;
+using KamiSama.Modules.Identity.DataTypes;
+using KamiSama.Modules.Identity.Features.Users;
 
 namespace Suma.AdminPanel.Services.Operators;
 
@@ -28,7 +28,7 @@ internal class UpdateOperator(
 
 			await updateUser.UpdateAsync(
 				operatorId,
-				new Polareum.Identity.Features.Users.UpdateUserRequest(
+				new KamiSama.Modules.Identity.Features.Users.UpdateUserRequest(
 					request.Username,
 					request.Email,
 					string.Empty,

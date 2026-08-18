@@ -1,6 +1,6 @@
 using KamiSama.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Polareum.Commons.RestSharp;
+using KamiSama.Modules.Commons.RestSharp;
 using Suma.AdminPanel.Client.Utilities;
 using System.Net.Http;
 

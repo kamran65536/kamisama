@@ -16,10 +16,10 @@ public static class LocationsSqliteDbContextBuilderExtensions
 	/// <param name="builder">The Locations context builder created during <c>AddLocationsModule</c> service configuration.</param>
 	/// <returns>The same builder for fluent registration.</returns>
 	/// <remarks>The underlying provider enables lazy-loading proxies, applies the Locations migration-history table, and uses the configured connection string.</remarks>
-	public static IMultiProviderDbContextBuilder<LocationsDbContext> AddSqliteLocationsDbContext(
+	public static IMultiProviderDbContextBuilder<LocationsDbContext> AddSqlite(
 		this IMultiProviderDbContextBuilder<LocationsDbContext> builder)
 	{
-		builder.AddSqlite<SqliteLocationsDbContext>();
+		builder.AddSqlite<LocationsDbContext, SqliteLocationsDbContext>();
 		return builder;
 	}
 }

@@ -22,13 +22,13 @@ namespace KamiSama.Modules.Identity;
 /// <param name="databaseSection">The database section containing <c>provider</c> and <c>connection-string</c>.</param>
 /// <param name="registerIdentity">Whether to register ASP.NET Core Identity stores, managers, sign-in manager, and token providers.</param>
 /// <param name="useJwtAuth">Whether to configure JWT bearer authentication instead of Identity application-scheme defaults.</param>
-/// <param name="configureDbContext">The callback that must add an installed provider to the multi-provider context builder.</param>
+/// <param name="configure">The callback that must add an installed provider to the multi-provider context builder.</param>
 public class KamiSamaIdentityWebModule(
 	IConfigurationSection moduleSection,
 	IConfigurationSection databaseSection,
 	bool registerIdentity,
 	bool useJwtAuth,
-	Action<IMultiProviderDbContextBuilder<KamiSamaIdentityDbContext>>? configureDbContext = null) : WebModule
+	Action<IMultiProviderDbContextBuilder<KamiSamaIdentityDbContext>>? configure = null) : WebModule
 {
 	/// <summary>Gets the name used for named options and migration-history configuration.</summary>
 	public const string ModuleName = "Identity";
@@ -101,7 +101,7 @@ public class KamiSamaIdentityWebModule(
 		var dbContextBuilder = services
 			.AddMultiProviderDbContext<KamiSamaIdentityDbContext>(databaseSection)
 			.WithMigrationHistoryTable($"{HistoryRepository.DefaultTableName}_{ModuleName}");
-		configureDbContext?.Invoke(dbContextBuilder);
+		configure?.Invoke(dbContextBuilder);
 	}
 	
 	/// <summary>Creates a startup scope and runs migration and seed stages selected by the named initialization options.</summary>

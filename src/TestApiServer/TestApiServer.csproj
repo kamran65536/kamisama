@@ -6,12 +6,32 @@
 		<IsPackable>false</IsPackable>
 	</PropertyGroup>
 	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.11">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="10.2.3" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\Chassis.Exceptions\KamiSama.Chassis.HttpExceptions.csproj" />
 		<ProjectReference Include="..\Chassis.ProblemDetails\KamiSama.Chassis.ProblemDetails.csproj" />
+		<ProjectReference Include="..\KamiSama.Modules.Contents.Postgresql\KamiSama.Modules.Contents.Postgresql.csproj" />
+		<ProjectReference Include="..\KamiSama.Modules.Contents.Sqlite\KamiSama.Modules.Contents.Sqlite.csproj" />
+		<ProjectReference Include="..\KamiSama.Modules.Identity.Postgresql\KamiSama.Modules.Identity.Postgresql.csproj" />
+		<ProjectReference Include="..\KamiSama.Modules.Identity.Sqlite\KamiSama.Modules.Identity.Sqlite.csproj" />
+		<ProjectReference Include="..\KamiSama.Modules.Localization.Core\KamiSama.Modules.Localization.Core.csproj" />
+		<ProjectReference Include="..\KamiSama.Modules.Locations.Postgresql\KamiSama.Modules.Locations.Postgresql.csproj" />
+		<ProjectReference Include="..\KamiSama.Modules.Locations.Sqlite\KamiSama.Modules.Locations.Sqlite.csproj" />
+		<ProjectReference Include="..\KamiSama.Modules.Otp.Postgresql\KamiSama.Modules.Otp.Postgresql.csproj" />
+		<ProjectReference Include="..\KamiSama.Modules.Otp.Sqlite\KamiSama.Modules.Otp.Sqlite.csproj" />
+		<ProjectReference Include="..\KamiSama.Modules.PolicyEngine.Postgresql\KamiSama.Modules.PolicyEngine.Postgresql.csproj" />
+		<ProjectReference Include="..\KamiSama.Modules.PolicyEngine.Sqlite\KamiSama.Modules.PolicyEngine.Sqlite.csproj" />
+		<ProjectReference Include="..\KamiSama.Modules.ServicePlans.Postgresql\KamiSama.Modules.ServicePlans.Postgresql.csproj" />
+		<ProjectReference Include="..\KamiSama.Modules.ServicePlans.Sqlite\KamiSama.Modules.ServicePlans.Sqlite.csproj" />
+		<ProjectReference Include="..\KamiSama.Modules.Ticketing.Postgresql\KamiSama.Modules.Ticketing.Postgresql.csproj" />
+		<ProjectReference Include="..\KamiSama.Modules.Ticketing.Sqlite\KamiSama.Modules.Ticketing.Sqlite.csproj" />
+		<ProjectReference Include="..\KamiSama.Modules\KamiSama.Modules.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

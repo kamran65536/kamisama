@@ -1,4 +1,4 @@
-using TicketingFeatures = Polareum.Ticketing.Features.Tickets;
+using TicketingFeatures = KamiSama.Modules.Ticketing.Features.Tickets;
 
 namespace Suma.AdminPanel.Services.Tickets;
 

@@ -1,7 +1,7 @@
 using Suma.AdminPanel.Services.Tickets;
 using KamiSama.Extensions.DependencyInjection;
 using KamiSama.Extensions.Paging;
-using Polareum.Commons.RestSharp;
+using KamiSama.Modules.Commons.RestSharp;
 
 namespace Suma.AdminPanel.Client.Services.Tickets;
 

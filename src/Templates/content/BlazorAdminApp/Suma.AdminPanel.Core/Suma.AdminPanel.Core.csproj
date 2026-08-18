@@ -9,11 +9,11 @@
 	</PropertyGroup>
 	<!--#endif-->
 	<ItemGroup>
-		<PackageReference Include="Polareum.Commons.Logging" Version="1.1.6" />
-		<PackageReference Include="Polareum.Identity.Abstractions" Version="1.1.6" />
-		<PackageReference Include="Polareum.Localization.Core" Version="1.1.6" />
+		<PackageReference Include="KamiSama.Modules.Commons.Logging" Version="1.1.6" />
+		<PackageReference Include="KamiSama.Modules.Identity.Abstractions" Version="1.1.6" />
+		<PackageReference Include="KamiSama.Modules.Localization.Core" Version="1.1.6" />
 		<!--#if (Ticketing)-->
-		<PackageReference Include="Polareum.Ticketing.Abstractions" Version="1.1.9" />
+		<PackageReference Include="KamiSama.Modules.Ticketing.Abstractions" Version="1.1.9" />
 		<!--#endif-->
 		<PackageReference Include="KamiSama.Chassis.Commons" Version="10.0.10" />
 		<PackageReference Include="KamiSama.Extensions.DependencyInjection" Version="10.0.10" />

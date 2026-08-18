@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageDocumentationRoot>../../docs/content/api/modules-contents-postgresql</PackageDocumentationRoot>
+	</PropertyGroup>
+	<Import Project="../props.xml" />
+	<PropertyGroup>
+		<Description>PostgreSQL EF Core context and provider registration for KamiSama.Modules.Contents.Core, including Contents migrations and keyed context resolution.</Description>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\KamiSama.Modules.Contents.Core\KamiSama.Modules.Contents.Core.csproj" />
+		<ProjectReference Include="..\Repositories.EntityFrameworkCore.Postgresql\KamiSama.Repositories.EntityFrameworkCore.Postgresql.csproj" />
+	</ItemGroup>
+</Project>

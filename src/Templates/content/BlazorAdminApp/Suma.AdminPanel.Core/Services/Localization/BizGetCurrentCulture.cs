@@ -1,4 +1,4 @@
-﻿using Polareum.Localization.Features;
+﻿using KamiSama.Modules.Localization.Features;
 
 namespace Suma.AdminPanel.Services.Localization;
 

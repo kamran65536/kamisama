@@ -11,10 +11,10 @@ public static class IdentitySqliteDbContextBuilderExtensions
 	/// <summary>Registers the SQLite Identity context under the provider key used by the shared multi-provider infrastructure.</summary>
 	/// <param name="builder">The Identity context builder returned by the Core module.</param>
 	/// <returns>The same builder for fluent configuration.</returns>
-	public static IMultiProviderDbContextBuilder<KamiSamaIdentityDbContext> AddSqliteIdentityDbContext(
+	public static IMultiProviderDbContextBuilder<KamiSamaIdentityDbContext> AddSqlite(
 		this IMultiProviderDbContextBuilder<KamiSamaIdentityDbContext> builder)
 	{
-		builder.AddSqlite<SqliteKamiSamaIdentityDbContext>();
+		builder.AddSqlite<KamiSamaIdentityDbContext, SqliteKamiSamaIdentityDbContext>();
 		return builder;
 	}
 }

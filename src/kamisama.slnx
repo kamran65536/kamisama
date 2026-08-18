@@ -22,6 +22,12 @@
   <Folder Name="/Modules/">
     <Project Path="KamiSama.Modules/KamiSama.Modules.csproj" />
   </Folder>
+  <Folder Name="/Modules/Contents/">
+    <Project Path="KamiSama.Modules.Contents.Abstractions/KamiSama.Modules.Contents.Abstractions.csproj" />
+    <Project Path="KamiSama.Modules.Contents.Core/KamiSama.Modules.Contents.Core.csproj" />
+    <Project Path="KamiSama.Modules.Contents.Postgresql/KamiSama.Modules.Contents.Postgresql.csproj" />
+    <Project Path="KamiSama.Modules.Contents.Sqlite/KamiSama.Modules.Contents.Sqlite.csproj" />
+  </Folder>
   <Folder Name="/Modules/ExternalServicess/">
     <Project Path="KamiSama.ExternalServices.Exceptions/KamiSama.ExternalServices.Exceptions.csproj" />
   </Folder>
@@ -92,7 +98,6 @@
     <Project Path="DependencyInjection.Tests/KamiSama.Extensions.DependencyInjection.Tests.csproj" />
     <Project Path="IranSystem.Tests/KamiSama.IranSystem.Tests.csproj" />
     <Project Path="Json.Tests/KamiSama.Extensions.Json.Tests.csproj" />
-    <Project Path="KamiSama.Modules.Ticketing.Tests/KamiSama.Modules.Ticketing.Tests.csproj" />
     <Project Path="Nlog.Tests/KamiSama.Extensions.NLog.Tests.csproj" />
     <Project Path="TestApiServer/TestApiServer.csproj" />
     <Project Path="Testing.Tests/KamiSama.Testing.Tests.csproj" />
@@ -103,6 +108,7 @@
     <File Path="../CHANGELOG" />
     <File Path=".editorconfig" />
     <File Path="LICENSE" />
+    <File Path="migrate.ps1" />
     <File Path="pack-and-push.ps1" />
     <File Path="props-test.xml" />
     <File Path="props.xml" />

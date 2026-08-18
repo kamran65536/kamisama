@@ -11,10 +11,10 @@ public static class IdentityPostgresqlDbContextBuilderExtensions
 	/// <summary>Registers the PostgreSQL Identity context under the provider key used by the shared multi-provider infrastructure.</summary>
 	/// <param name="builder">The Identity context builder returned by the Core module.</param>
 	/// <returns>The same builder for fluent configuration.</returns>
-	public static IMultiProviderDbContextBuilder<KamiSamaIdentityDbContext> AddPostgresqlIdentityDbContext(
+	public static IMultiProviderDbContextBuilder<KamiSamaIdentityDbContext> AddPostgresql(
 		this IMultiProviderDbContextBuilder<KamiSamaIdentityDbContext> builder)
 	{
-		builder.AddPostgresql<PostgresqlKamiSamaIdentityDbContext>();
+		builder.AddPostgresql<KamiSamaIdentityDbContext, PostgresqlKamiSamaIdentityDbContext>();
 		return builder;
 	}
 }

@@ -16,10 +16,10 @@ public static class OtpSqliteDbContextBuilderExtensions
 	/// <param name="builder">The Otp context builder created during <c>AddOtpModule</c> service configuration.</param>
 	/// <returns>The same builder for fluent registration.</returns>
 	/// <remarks>The underlying provider enables lazy-loading proxies, applies the Otp migration-history table, and uses the configured connection string.</remarks>
-	public static IMultiProviderDbContextBuilder<OtpDbContext> AddSqliteOtpDbContext(
+	public static IMultiProviderDbContextBuilder<OtpDbContext> AddSqlite(
 		this IMultiProviderDbContextBuilder<OtpDbContext> builder)
 	{
-		builder.AddSqlite<SqliteOtpDbContext>();
+		builder.AddSqlite<OtpDbContext, SqliteOtpDbContext>();
 		return builder;
 	}
 }

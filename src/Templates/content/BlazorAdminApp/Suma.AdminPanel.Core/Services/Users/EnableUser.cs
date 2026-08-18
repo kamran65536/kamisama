@@ -1,15 +1,15 @@
 using KamiSama.Chassis.HttpExceptions;
-using Polareum.Identity.DataTypes;
-using Polareum.Identity.Features.Users;
+using KamiSama.Modules.Identity.DataTypes;
+using KamiSama.Modules.Identity.Features.Users;
 
 namespace Suma.AdminPanel.Services.Users;
 
 [AutoInjectScoped<IEnableUser>]
 internal class EnableUser(
 	ILogger<EnableUser> logger,
-	Polareum.Identity.Features.Users.IFindUserById identityFindUserById,
+	KamiSama.Modules.Identity.Features.Users.IFindUserById identityFindUserById,
 	IFindCurrentUser findCurrentUser,
-	Polareum.Identity.Features.Users.IEnableUser identityEnableUser) : IEnableUser
+	KamiSama.Modules.Identity.Features.Users.IEnableUser identityEnableUser) : IEnableUser
 {
 	public async Task EnableAsync(Guid userId, CancellationToken cancellationToken)
 	{

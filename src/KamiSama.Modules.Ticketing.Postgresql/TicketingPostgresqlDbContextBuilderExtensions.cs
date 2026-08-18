@@ -17,10 +17,10 @@ public static class TicketingPostgresqlDbContextBuilderExtensions
 	/// </summary>
 	/// <param name="builder">The provider-neutral Ticketing context builder created by Core.</param>
 	/// <returns>The same builder for additional provider registrations.</returns>
-	public static IMultiProviderDbContextBuilder<TicketingDbContext> AddPostgresqlTicketingDbContext(
+	public static IMultiProviderDbContextBuilder<TicketingDbContext> AddPostgresql(
 		this IMultiProviderDbContextBuilder<TicketingDbContext> builder)
 	{
-		builder.AddPostgresql<PostgresqlTicketingDbContext>();
+		builder.AddPostgresql<TicketingDbContext, PostgresqlTicketingDbContext>();
 		return builder;
 	}
 }

@@ -1,6 +1,0 @@
-@ChassisTestProject_HostAddress = http://localhost:5185
-
-GET {{ChassisTestProject_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

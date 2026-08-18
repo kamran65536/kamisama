@@ -1,5 +1,5 @@
-using Polareum.Identity.DataTypes;
-using Polareum.Identity.Features.Users;
+using KamiSama.Modules.Identity.DataTypes;
+using KamiSama.Modules.Identity.Features.Users;
 
 namespace Suma.AdminPanel.Services.Operators;
 
@@ -15,7 +15,7 @@ internal class AddOperator(
 		try
 		{
 			await addUser.AddAsync(
-				new Polareum.Identity.Features.Users.AddUserRequest(
+				new KamiSama.Modules.Identity.Features.Users.AddUserRequest(
 					request.Username,
 					request.Email,
 					string.Empty,

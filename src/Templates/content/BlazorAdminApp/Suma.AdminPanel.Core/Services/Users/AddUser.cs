@@ -1,12 +1,12 @@
-using Polareum.Identity.DataTypes;
-using Polareum.Identity.Features.Users;
+using KamiSama.Modules.Identity.DataTypes;
+using KamiSama.Modules.Identity.Features.Users;
 
 namespace Suma.AdminPanel.Services.Users;
 
 [AutoInjectScoped<IAddUser>]
 internal class AddUser(
 	ILogger<AddUser> logger,
-	Polareum.Identity.Features.Users.IAddUser identityAddUser) : IAddUser
+	KamiSama.Modules.Identity.Features.Users.IAddUser identityAddUser) : IAddUser
 {
 	public async Task AddAsync(AddUserRequest request, CancellationToken cancellationToken)
 	{
@@ -15,7 +15,7 @@ internal class AddUser(
 		try
 		{
 			await identityAddUser.AddAsync(
-				new Polareum.Identity.Features.Users.AddUserRequest(
+				new KamiSama.Modules.Identity.Features.Users.AddUserRequest(
 					request.Username,
 					request.Email,
 					string.Empty,

@@ -21,7 +21,7 @@
 		<PackageReference Include="KamiSama.Chassis.HttpExceptions" Version="10.0.10" />
 		<PackageReference Include="KamiSama.Extensions.DependencyInjection" Version="10.0.10" />
 		<PackageReference Include="Microsoft.Extensions.Localization" Version="10.0.10" />
-		<PackageReference Include="Polareum.Commons.RestSharp" Version="1.1.6" />
+		<PackageReference Include="KamiSama.Modules.Commons.RestSharp" Version="1.1.6" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -15,10 +15,10 @@ public static class ServicePlansPostgresqlDbContextBuilderExtensions
 	/// </summary>
 	/// <param name="builder">The ServicePlans multi-provider context builder.</param>
 	/// <returns>The same builder for fluent provider configuration.</returns>
-	public static IMultiProviderDbContextBuilder<ServicePlansDbContext> AddPostgresqlServicePlansDbContext(
+	public static IMultiProviderDbContextBuilder<ServicePlansDbContext> AddPostgresql(
 		this IMultiProviderDbContextBuilder<ServicePlansDbContext> builder)
 	{
-		builder.AddPostgresql<PostgresqlServicePlansDbContext>();
+		builder.AddPostgresql<ServicePlansDbContext, PostgresqlServicePlansDbContext>();
 		return builder;
 	}
 }
