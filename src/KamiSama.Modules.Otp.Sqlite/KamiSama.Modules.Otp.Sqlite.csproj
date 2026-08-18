@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageDocumentationRoot>../../docs/content/api/modules-otp-sqlite</PackageDocumentationRoot>
+	</PropertyGroup>
+	<Import Project="../props.xml" />
+	<PropertyGroup>
+		<Description>SQLite EF Core context and provider registration for KamiSama.Modules.Otp.Core, including keyed context resolution for the Otp module.</Description>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\KamiSama.Modules.Otp.Core\KamiSama.Modules.Otp.Core.csproj" />
+		<ProjectReference Include="..\Repositories.EntityFrameworkCore.Sqlite\KamiSama.Repositories.EntityFrameworkCore.Sqlite.csproj" />
+	</ItemGroup>
+</Project>

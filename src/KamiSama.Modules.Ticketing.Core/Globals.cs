@@ -9,5 +9,5 @@ global using KamiSama.Modules.Ticketing.Repositories.Database;
 global using System.ComponentModel.DataAnnotations;
 global using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("KamiSama.Modules.Ticketing.Core.Tests")]
+[assembly: InternalsVisibleTo("KamiSama.Modules.Ticketing.Tests")]
 [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]

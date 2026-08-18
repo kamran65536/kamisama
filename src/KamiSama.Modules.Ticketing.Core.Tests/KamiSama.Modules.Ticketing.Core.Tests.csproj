@@ -1,6 +1,0 @@
-<Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="../props-test.xml" />
-	<ItemGroup>
-		<ProjectReference Include="..\KamiSama.Modules.Ticketing.Core\KamiSama.Modules.Ticketing.Core.csproj" />
-	</ItemGroup>
-</Project>

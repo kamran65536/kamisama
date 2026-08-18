@@ -1,6 +1,5 @@
-
-using ChassisTestProject.Properties;
 using KamiSama.Chassis.ProblemDetails;
+using TestApiServer.Properties;
 
 namespace ChassisTestProject;
 

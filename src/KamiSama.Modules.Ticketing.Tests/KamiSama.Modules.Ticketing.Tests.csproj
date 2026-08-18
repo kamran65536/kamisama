@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="../props-test.xml" />
+	<ItemGroup>
+		<ProjectReference Include="..\KamiSama.Modules.Ticketing.Core\KamiSama.Modules.Ticketing.Core.csproj" />
+	  <PackageReference Update="coverlet.collector" Version="10.0.1" />
+	  <PackageReference Update="Microsoft.NET.Test.Sdk" Version="18.9.0" />
+	  <PackageReference Update="MSTest.TestAdapter" Version="4.3.3" />
+	  <PackageReference Update="MSTest.TestFramework" Version="4.3.3" />
+	  <PackageReference Update="NSubstitute" Version="6.2.0" />
+	</ItemGroup>
+</Project>

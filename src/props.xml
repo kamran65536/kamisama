@@ -1,8 +1,16 @@
 <Project>
 	<PropertyGroup>
+		<RootNamespace>$(MSBuildProjectName
+			.Replace(".Abstractions", "")
+			.Replace(".Services", "")
+			.Replace(".Tests", "")
+			.Replace(".Http", "")
+			.Replace(".Core", "")
+			.Replace(".Sqlite", "")
+			.Replace(".Postgresql", ""))</RootNamespace>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<DebugType>Full</DebugType>
-		<Version>10.0.0</Version>
+		<Version>10.0.11.2</Version>
 		<PackageProjectUrl>https://gitlab.com/kamran65536/KamiSama</PackageProjectUrl>
 		<RepositoryUrl>https://gitlab.com/kamran65536/KamiSama</RepositoryUrl>
 		<Authors>Kamran Fallah</Authors>

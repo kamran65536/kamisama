@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageDocumentationRoot>../../docs/content/api/modules-otp-abstractions</PackageDocumentationRoot>
+	</PropertyGroup>
+	<Import Project="../props.xml" />
+	<PropertyGroup>
+		<Description>Provider-neutral one-time-password (OTP) feature contracts, requests, DTOs, and paging search models for the KamiSama Otp module.</Description>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Chassis.Commons.Abstractions\KamiSama.Chassis.Commons.Abstractions.csproj" />
+	</ItemGroup>
+</Project>

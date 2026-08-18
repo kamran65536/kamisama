@@ -5,12 +5,12 @@ using KamiSama.Modules.Ticketing.Features.Tickets;
 using KamiSama.Modules.Ticketing.Repositories.Abstractions;
 using NSubstitute;
 
-namespace KamiSama.Modules.Ticketing.Core.Tests;
+namespace KamiSama.Modules.Ticketing.Tests;
 
 [TestClass]
 public class TicketStatusTransitionTests
 {
-	[DataTestMethod]
+	[TestMethod]
 	[DataRow(TicketStatus.Open, TicketStatus.Open, true)]
 	[DataRow(TicketStatus.Open, TicketStatus.Resolved, true)]
 	[DataRow(TicketStatus.Open, TicketStatus.Reopened, false)]
@@ -63,7 +63,7 @@ public class TicketStatusTransitionTests
 		repository.FindByIdAsync(ticket.Id, Arg.Any<CancellationToken>()).Returns(ticket);
 		var feature = new UpdateTicketState(repository);
 
-		await Assert.ThrowsExceptionAsync<ConflictException>(() => feature.UpdateAsync(
+		await Assert.ThrowsAsync<ConflictException>(() => feature.UpdateAsync(
 			ticket.Id,
 			new UpdateTicketStateRequest("Changed", TicketStatus.Closed, TicketPriority.High),
 			CancellationToken.None));

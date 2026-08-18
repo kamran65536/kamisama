@@ -4,7 +4,6 @@
     <Project Path="Chassis.Commons/KamiSama.Chassis.Commons.csproj" />
     <Project Path="Chassis.Exceptions/KamiSama.Chassis.HttpExceptions.csproj" />
     <Project Path="Chassis.ProblemDetails/KamiSama.Chassis.ProblemDetails.csproj" />
-    <Project Path="ChassisTestProject/ChassisTestProject.csproj" />
   </Folder>
   <Folder Name="/Extensions/">
     <Project Path="Core/KamiSama.Extensions.Core.csproj" />
@@ -53,6 +52,12 @@
     <Project Path="KamiSama.Modules.Locations.Postgresql/KamiSama.Modules.Locations.Postgresql.csproj" />
     <Project Path="KamiSama.Modules.Locations.Sqlite/KamiSama.Modules.Locations.Sqlite.csproj" />
   </Folder>
+  <Folder Name="/Modules/Otp/">
+    <Project Path="KamiSama.Modules.Otp.Abstractions/KamiSama.Modules.Otp.Abstractions.csproj" />
+    <Project Path="KamiSama.Modules.Otp.Core/KamiSama.Modules.Otp.Core.csproj" />
+    <Project Path="KamiSama.Modules.Otp.Postgresql/KamiSama.Modules.Otp.Postgresql.csproj" />
+    <Project Path="KamiSama.Modules.Otp.Sqlite/KamiSama.Modules.Otp.Sqlite.csproj" />
+  </Folder>
   <Folder Name="/Modules/PolicyEngine/">
     <Project Path="KamiSama.Modules.PolicyEngine.Abstractions/KamiSama.Modules.PolicyEngine.Abstractions.csproj" />
     <Project Path="KamiSama.Modules.PolicyEngine.Core/KamiSama.Modules.PolicyEngine.Core.csproj" />
@@ -87,8 +92,9 @@
     <Project Path="DependencyInjection.Tests/KamiSama.Extensions.DependencyInjection.Tests.csproj" />
     <Project Path="IranSystem.Tests/KamiSama.IranSystem.Tests.csproj" />
     <Project Path="Json.Tests/KamiSama.Extensions.Json.Tests.csproj" />
-    <Project Path="KamiSama.Modules.Ticketing.Core.Tests/KamiSama.Modules.Ticketing.Core.Tests.csproj" />
+    <Project Path="KamiSama.Modules.Ticketing.Tests/KamiSama.Modules.Ticketing.Tests.csproj" />
     <Project Path="Nlog.Tests/KamiSama.Extensions.NLog.Tests.csproj" />
+    <Project Path="TestApiServer/TestApiServer.csproj" />
     <Project Path="Testing.Tests/KamiSama.Testing.Tests.csproj" />
     <Project Path="Xml.Tests/KamiSama.Extensions.Xml.Tests.csproj" />
   </Folder>
@@ -97,6 +103,7 @@
     <File Path="../CHANGELOG" />
     <File Path=".editorconfig" />
     <File Path="LICENSE" />
+    <File Path="pack-and-push.ps1" />
     <File Path="props-test.xml" />
     <File Path="props.xml" />
     <File Path="test-configs.runsettings" />

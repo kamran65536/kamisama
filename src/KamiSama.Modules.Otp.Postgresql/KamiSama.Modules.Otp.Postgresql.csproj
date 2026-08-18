@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageDocumentationRoot>../../docs/content/api/modules-otp-postgresql</PackageDocumentationRoot>
+	</PropertyGroup>
+	<Import Project="../props.xml" />
+	<PropertyGroup>
+		<Description>PostgreSQL EF Core context and provider registration for KamiSama.Modules.Otp.Core, including keyed context resolution for the Otp module.</Description>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\KamiSama.Modules.Otp.Core\KamiSama.Modules.Otp.Core.csproj" />
+		<ProjectReference Include="..\Repositories.EntityFrameworkCore.Postgresql\KamiSama.Repositories.EntityFrameworkCore.Postgresql.csproj" />
+	</ItemGroup>
+</Project>
