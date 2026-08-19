@@ -1,4 +1,4 @@
-namespace KamiSama.Modules.Otp.Features;
+namespace KamiSama.Modules.Otp.Services;
 
 /// <summary>
 /// Specifies paging, identity and status filters, and ordering input for OTP record queries.

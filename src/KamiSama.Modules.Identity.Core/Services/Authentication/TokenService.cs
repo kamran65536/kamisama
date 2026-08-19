@@ -8,33 +8,12 @@ using System.Text;
 
 namespace KamiSama.Modules.Identity.Services.Authentication;
 
-internal interface ITokenService
-{
-	Task<string> GenerateAccessTokenAsync(Guid userId, CancellationToken cancellationToken);
-	Task<string> GenerateAccessTokenAsync(Guid userId, string sessionKey, CancellationToken cancellationToken);
-	Task<TokenPairDto> GenerateTokenPairAsync(Guid userId, CancellationToken cancellationToken);
-	Task<TokenPairDto> GenerateTokenPairAsync(Guid userId, string sessionKey, CancellationToken cancellationToken);
-	Task<string> GenerateRefreshTokenAsync(Guid userId, string sessionKey, CancellationToken cancellationToken);
-}
-
 [AutoInjectScoped<ITokenService>]
 internal class TokenService(
 	IUserManager userManager,
 	IApplicationSessionManager sessionManager,
 	IOptions<JwtOptions> options) : ITokenService
 {
-	public async Task<string> GenerateAccessTokenAsync(Guid userId, CancellationToken cancellationToken)
-		=> (await GenerateTokenPairAsync(userId, cancellationToken)).AccessToken;
-
-	public async Task<string> GenerateAccessTokenAsync(Guid userId, string sessionKey, CancellationToken cancellationToken)
-		=> (await GenerateTokenPairAsync(userId, sessionKey, cancellationToken)).AccessToken;
-
-	public async Task<TokenPairDto> GenerateTokenPairAsync(Guid userId, CancellationToken cancellationToken)
-	{
-		var session = await sessionManager.CreateAsync(userId, cancellationToken);
-		return await GenerateTokenPairAsync(userId, session.SessionKey, cancellationToken);
-	}
-
 	public async Task<TokenPairDto> GenerateTokenPairAsync(Guid userId, string sessionKey, CancellationToken cancellationToken)
 	{
 		var user = await userManager.FindByIdAsync(userId.ToString(), cancellationToken)
@@ -66,6 +45,12 @@ internal class TokenService(
 		var refreshToken = await GenerateRefreshTokenAsync(user.Id, sessionKey, cancellationToken);
 
 		return new TokenPairDto(accessToken, refreshToken, accessTokenExpiresAt);
+	}
+
+	public async Task<TokenPairDto> GenerateTokenPairAsync(Guid userId, CancellationToken cancellationToken)
+	{
+		var session = await sessionManager.CreateAsync(userId, cancellationToken);
+		return await GenerateTokenPairAsync(userId, session.SessionKey, cancellationToken);
 	}
 
 	public async Task<string> GenerateRefreshTokenAsync(Guid userId, string sessionKey, CancellationToken cancellationToken)

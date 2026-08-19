@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using KamiSama.Modules.Otp.Features;
 using KamiSama.Modules.Otp.Repositories.Database;
+using KamiSama.Modules.Otp.Services;
 
 namespace KamiSama.Modules.Otp.Repositories.Implementations;
 

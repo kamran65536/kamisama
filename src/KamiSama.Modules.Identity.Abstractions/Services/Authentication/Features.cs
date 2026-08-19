@@ -37,3 +37,17 @@ public interface ILogoutAll
 	/// <returns>A task that represents the revocation operation.</returns>
 	Task LogoutAllAsync(CancellationToken cancellationToken);
 }
+/// <summary>
+/// Internal Token service to generate token without providing the username or password
+/// </summary>
+public interface ITokenService
+{
+	/// <summary>
+	/// Generates Access token for <paramref name="userId"/>
+	/// </summary>
+	Task<TokenPairDto> GenerateTokenPairAsync(Guid userId, CancellationToken cancellationToken);
+	/// <summary>
+	/// Generates Access token for <paramref name="userId"/> for a <paramref name="sessionKey"/>
+	/// </summary>
+	Task<TokenPairDto> GenerateTokenPairAsync(Guid userId, string sessionKey, CancellationToken cancellationToken);
+}

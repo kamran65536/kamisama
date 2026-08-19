@@ -1,7 +1,7 @@
 using KamiSama.Chassis.HttpExceptions;
 using Microsoft.Extensions.Options;
 
-namespace KamiSama.Modules.Otp.Features;
+namespace KamiSama.Modules.Otp.Services;
 
 /// <summary>
 /// Generates a random numeric OTP code and persists it as a new <see cref="OtpRecordStatus.Available"/> record.

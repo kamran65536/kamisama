@@ -1,7 +1,8 @@
-1405-05-27 8/18/2026 v10.0.11.4
+1405-05-28 8/19/2026 v10.0.11.6
 - KamiSama.Modules.Otp.* are added.
 - KamiSama.Modules.Contents.* are added.
 - modules migrations are updated.
+- KamiSama.Modules.Identity.Services.Authentication.ITokenService is added.
 - packages updated.
 1405-05-23 8/14/2026 v10.0.11.1
 - KamiSama.Extensions.WebModules is renamed to KamiSama.Modules.

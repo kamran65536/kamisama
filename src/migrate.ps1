@@ -133,7 +133,7 @@ $all=@{
 	};
 	otp = @{
 		Sqlite = [MigrationContext]::New("TestApiServer", "KamiSama.Modules.Otp.Sqlite", "sqlite", "SqliteOtpDbContext", $currentVersion, $nextVersion);
-		Postgresql = [MigrationContext]::New("TestApiServer", "KamiSama.Modules.Otp.Posgtgresql", "postgresql", "PostgresqlOtpDbContext", $currentVersion, $nextVersion);
+		Postgresql = [MigrationContext]::New("TestApiServer", "KamiSama.Modules.Otp.Postgresql", "postgresql", "PostgresqlOtpDbContext", $currentVersion, $nextVersion);
 	};
 	policyengine = @{
 		Sqlite = [MigrationContext]::New("TestApiServer", "KamiSama.Modules.PolicyEngine.Sqlite", "sqlite", "SqlitePolicyEngineDbContext", $currentVersion, $nextVersion);

@@ -1,4 +1,6 @@
-namespace KamiSama.Modules.Otp.Features;
+using KamiSama.Modules.Otp.Services;
+
+namespace KamiSama.Modules.Otp.Services;
 
 /// <summary>
 /// Verifies a previously issued OTP verification token for an identity.

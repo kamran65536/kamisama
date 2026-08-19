@@ -10,7 +10,7 @@
 			.Replace(".Postgresql", ""))</RootNamespace>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<DebugType>Full</DebugType>
-		<Version>10.0.11.4</Version>
+		<Version>10.0.11.6</Version>
 		<PackageProjectUrl>https://gitlab.com/kamran65536/KamiSama</PackageProjectUrl>
 		<RepositoryUrl>https://gitlab.com/kamran65536/KamiSama</RepositoryUrl>
 		<Authors>Kamran Fallah</Authors>

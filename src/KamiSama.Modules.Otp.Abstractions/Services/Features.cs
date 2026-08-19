@@ -1,4 +1,4 @@
-namespace KamiSama.Modules.Otp.Features;
+namespace KamiSama.Modules.Otp.Services;
 
 /// <summary>
 /// Generates and persists a new one-time password for an identity.

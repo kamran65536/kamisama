@@ -1,4 +1,4 @@
-using KamiSama.Modules.Otp.Features;
+using KamiSama.Modules.Otp.Services;
 
 namespace KamiSama.Modules.Otp.Repositories.Abstractions;
 

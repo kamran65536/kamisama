@@ -1,6 +1,6 @@
 using KamiSama.Extensions;
 
-namespace KamiSama.Modules.Otp.Features;
+namespace KamiSama.Modules.Otp.Services;
 
 /// <summary>
 /// Verifies a submitted OTP code against the identity's most recent available record.
