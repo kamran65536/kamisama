@@ -1,3 +1,16 @@
+1405-05-30 8/21/2026 v10.0.11.7
+- (breaking) The previous Props, Abstractions, Core, Database and Blazor Admin templates are replaced by kamisama-solution, kamisama-admin, kamisama-empty, kamisama-bounded-context, kamisama-database-support, kamisama-bootstrap and kamisama-orchestration.
+- KamiSama AI Ready Solution generates an empty .slnx, optional props.xml, GETTING_STARTED.md, AGENTS.md and vendor-neutral .agents guidance without an architecture manifest.
+- KamiSama Admin Panel generates canonical Abstractions and Core layers, a Blazor client, an authorized ASP.NET Core server and either a new or explicitly referenced shared Bootstrap project. User Management and Ticketing are supported independently.
+- KamiSama Bounded Context and Orchestration generate infrastructure-independent Abstractions and provider-neutral Core projects with optional examples, public localization resources, WebModule registration and attribute-based dependency injection.
+- KamiSama Database Support generates a separate PostgreSQL, SQLite, SQL Server or Oracle project for an explicitly selected bounded-context Core project.
+- KamiSama Bootstrap provides a reusable composition root for multiple servers. Identity/User Management and Ticketing support independently selected PostgreSQL or SQLite providers, and Ticketing includes its hidden Identity dependency automatically.
+- props.xml is optional across the templates; projects remain independently compilable when it is disabled, configurable imports are used when enabled, and provider/project suffix namespace handling is corrected.
+- Template packaging now pins Microsoft.TemplateEngine.Tasks, includes a valid NuGet README and hidden .agents content, and avoids duplicate content/content package paths and obsolete large frontend assets.
+- Packed-template validation now installs the local package, verifies the public template list, generates and builds the complete option/provider matrix, and removes the temporary template installation and generated output.
+- Template documentation is rewritten for the new public templates, composition workflows, provider matrix, AI guidance, official Aspire tooling and Visual Studio limitations.
+- KamiSama.Repositories.EntityFrameworkCore.SqlServer is added with SQL Server multi-provider DbContext registration.
+- KamiSama.Repositories.EntityFrameworkCore.Oracle is added with Oracle multi-provider DbContext registration.
 1405-05-28 8/19/2026 v10.0.11.6
 - KamiSama.Modules.Otp.* are added.
 - KamiSama.Modules.Contents.* are added.

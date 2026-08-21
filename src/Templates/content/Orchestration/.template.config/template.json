@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "KamiSama",
+  "identity": "KamiSama.Templates.Orchestration",
+  "name": "KamiSama Orchestration",
+  "shortName": "kamisama-orchestration",
+  "sourceName": "Example",
+  "preferNameDirectory": true,
+  "classifications": [ "Orchestration", "Blazor", "KamiSama" ],
+  "tags": { "language": "C#", "type": "solution" },
+  "symbols": {
+    "UseProps": { "type": "parameter", "dataType": "bool", "defaultValue": "false" },
+    "PropsPath": { "type": "parameter", "dataType": "string", "defaultValue": "../props.xml", "isEnabled": "UseProps", "replaces": "PropsPathToken" },
+    "IncludeClient": { "type": "parameter", "dataType": "bool", "defaultValue": "false" },
+    "IncludeServer": { "type": "parameter", "dataType": "bool", "defaultValue": "false" },
+    "UserManagement": { "type": "parameter", "dataType": "bool", "defaultValue": "false" },
+    "Ticketing": { "type": "parameter", "dataType": "bool", "defaultValue": "false" },
+    "BootstrapMode": { "type": "parameter", "dataType": "choice", "defaultValue": "Create", "isEnabled": "IncludeServer", "choices": [ { "choice": "Create" }, { "choice": "Existing" } ] },
+    "BootstrapProject": { "type": "parameter", "dataType": "string", "defaultValue": "Example.Bootstrap/Example.Bootstrap.csproj", "isEnabled": "(IncludeServer && BootstrapMode == \"Existing\")", "description": "Explicit bootstrap project path relative to the generated solution root.", "replaces": "BootstrapProjectPathToken" },
+    "UserManagementProvider": { "type": "parameter", "dataType": "choice", "defaultValue": "Postgresql", "isEnabled": "(IncludeServer && (UserManagement || Ticketing))", "replaces": "UserManagementProviderToken", "choices": [ { "choice": "Postgresql" }, { "choice": "Sqlite" } ] },
+    "TicketingProvider": { "type": "parameter", "dataType": "choice", "defaultValue": "Postgresql", "isEnabled": "(IncludeServer && Ticketing)", "replaces": "TicketingProviderToken", "choices": [ { "choice": "Postgresql" }, { "choice": "Sqlite" } ] }
+  },
+  "sources": [
+    {
+      "source": "./",
+      "modifiers": [
+        { "condition": "(!IncludeClient)", "exclude": [ "Example.Client/**" ] },
+        { "condition": "(!IncludeServer)", "exclude": [ "Example.Server/**" ] },
+        { "condition": "(!UserManagement)", "exclude": [ "**/Users/**", "Example.Abstractions/UserModels.cs" ] },
+        { "condition": "(!Ticketing)", "exclude": [ "**/Tickets/**", "Example.Abstractions/TicketModels.cs" ] }
+      ]
+    },
+    {
+      "condition": "(IncludeServer && BootstrapMode == \"Create\")",
+      "source": "../Bootstrap",
+      "target": "Example.Bootstrap",
+      "exclude": [ ".template.config/**" ]
+    }
+  ]
+}

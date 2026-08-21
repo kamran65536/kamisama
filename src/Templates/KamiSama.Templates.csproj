@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<PackageDocumentationRoot>../../docs/content/api/templates</PackageDocumentationRoot>
+		<PackageDocumentationRoot></PackageDocumentationRoot>
 	</PropertyGroup>
 	<Import Project="../props.xml" />
 	<PropertyGroup>
 		<PackageId>KamiSama.Templates</PackageId>
 		<Title>KamiSama Project Templates</Title>
-		<Description>.NET templates for KamiSama abstraction and core projects and hosted Blazor WebAssembly administration applications.</Description>
-		<PackageTags>KamiSama Template Solution Project DDD Repository Domain Core Api Blazor Blazorise</PackageTags>
+		<Description>Composable .NET 10 solution, bounded-context, database, bootstrap, orchestration, and administration templates for KamiSama.</Description>
+		<PackageTags>KamiSama Template Solution DDD Bootstrap Orchestration Blazor</PackageTags>
+		<Version>10.0.11.7</Version>
 		<PackageType>Template</PackageType>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<IncludeContentInPack>true</IncludeContentInPack>
 		<IncludeBuildOutput>false</IncludeBuildOutput>
 		<ContentTargetFolders>content</ContentTargetFolders>
@@ -18,8 +20,14 @@
 		<LocalizeTemplates>false</LocalizeTemplates>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Microsoft.TemplateEngine.Tasks" Version="*" PrivateAssets="all" IsImplicitlyDefined="true" />
-		<Content Include="content\**\*" Exclude="content\**\bin\**;content\**\obj\**" />
+		<!-- 7.0.120 is the latest published Microsoft.TemplateEngine.Tasks package and is intentionally pinned. -->
+		<PackageReference Include="Microsoft.TemplateEngine.Tasks" Version="7.0.120" PrivateAssets="all" IsImplicitlyDefined="true" />
+		<Content Include="content\**\*"
+				 Exclude="content\**\bin\**;content\**\obj\**;content\Abstractions\**;content\BlazorAdminApp\**;content\Core\**;content\Database\**;content\Props\**"
+				 Pack="true"
+				 PackagePath="content" />
+		<None Include="README.md" Pack="true" PackagePath="\" />
 		<Compile Remove="**\*" />
+		<EmbeddedResource Remove="content\**\*.resx" />
 	</ItemGroup>
 </Project>

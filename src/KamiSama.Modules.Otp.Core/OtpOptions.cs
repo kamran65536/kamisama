@@ -5,7 +5,7 @@ namespace KamiSama.Modules.Otp;
 /// <summary>
 /// Binds the configurable behavior of OTP code generation from the Otp module's configuration section.
 /// </summary>
-internal class OtpOptions
+public class OtpOptions
 {
 	/// <summary>Gets or sets the number of digits generated for each OTP code.</summary>
 	/// <value>Bound from the <c>digits</c> configuration key; defaults to <c>6</c>.</value>

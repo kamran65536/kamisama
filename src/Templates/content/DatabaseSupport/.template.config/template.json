@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "KamiSama",
+  "identity": "KamiSama.Templates.DatabaseSupport",
+  "name": "KamiSama Database Support",
+  "shortName": "kamisama-database-support",
+  "sourceName": "Example",
+  "preferNameDirectory": true,
+  "classifications": [ "Database", "EF Core", "KamiSama" ],
+  "tags": { "language": "C#", "type": "project" },
+  "symbols": {
+    "UseProps": { "type": "parameter", "dataType": "bool", "defaultValue": "false" },
+    "PropsPath": { "type": "parameter", "dataType": "string", "defaultValue": "../props.xml", "isEnabled": "UseProps", "replaces": "PropsPathToken" },
+    "Provider": {
+      "type": "parameter", "dataType": "choice", "defaultValue": "Postgresql", "replaces": "ProviderToken", "fileRename": "ProviderToken",
+      "choices": [ { "choice": "Postgresql" }, { "choice": "Sqlite" }, { "choice": "SqlServer" }, { "choice": "Oracle" } ]
+    },
+    "CoreProject": { "type": "parameter", "dataType": "string", "defaultValue": "", "isRequired": true, "description": "Explicit path from the generated provider project to the bounded-context Core project.", "replaces": "CoreProjectPathToken" }
+  }
+}

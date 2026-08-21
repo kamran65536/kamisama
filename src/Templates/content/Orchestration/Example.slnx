@@ -1,0 +1,15 @@
+<Solution>
+  <Project Path="Example.Abstractions/Example.Abstractions.csproj" />
+  <Project Path="Example.Core/Example.Core.csproj" />
+  <!--#if (IncludeClient)-->
+  <Project Path="Example.Client/Example.Client.csproj" />
+  <!--#endif-->
+  <!--#if (IncludeServer && BootstrapMode == "Create")-->
+  <Project Path="Example.Bootstrap/Example.Bootstrap.csproj" />
+  <!--#elseif (IncludeServer)-->
+  <Project Path="BootstrapProjectPathToken" />
+  <!--#endif-->
+  <!--#if (IncludeServer)-->
+  <Project Path="Example.Server/Example.Server.csproj" />
+  <!--#endif-->
+</Solution>

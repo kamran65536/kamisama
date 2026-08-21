@@ -1,0 +1,11 @@
+@page "/tickets"
+@inject IListAdminTickets Tickets
+
+<PageTitle>Tickets</PageTitle>
+<h1>Tickets</h1>
+@foreach (var ticket in tickets) { <p>@ticket.Subject (@ticket.Status)</p> }
+
+@code {
+    private IReadOnlyList<TicketSummary> tickets = [];
+    protected override async Task OnInitializedAsync() => tickets = await Tickets.ListAsync();
+}

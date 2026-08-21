@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--#if (UseProps)-->
+  <Import Project="PropsPathToken" />
+  <!--#else-->
+  <PropertyGroup><TargetFramework>net10.0</TargetFramework><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable></PropertyGroup>
+  <!--#endif-->
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <ProjectReference Include="../Example.Abstractions/Example.Abstractions.csproj" />
+    <PackageReference Include="KamiSama.Modules" Version="10.0.11.7" />
+    <PackageReference Include="KamiSama.Extensions.DependencyInjection" Version="10.0.11.7" />
+  </ItemGroup>
+</Project>

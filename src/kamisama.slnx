@@ -86,7 +86,9 @@
   <Folder Name="/Repositories/">
     <Project Path="Repositories.Core/KamiSama.Repositories.Core.csproj" />
     <Project Path="Repositories.EntityFramework/KamiSama.Repositories.EntityFramework.csproj" />
+    <Project Path="Repositories.EntityFrameworkCore.Oracle/KamiSama.Repositories.EntityFrameworkCore.Oracle.csproj" />
     <Project Path="Repositories.EntityFrameworkCore.Postgresql/KamiSama.Repositories.EntityFrameworkCore.Postgresql.csproj" />
+    <Project Path="Repositories.EntityFrameworkCore.SqlServer/KamiSama.Repositories.EntityFrameworkCore.SqlServer.csproj" />
     <Project Path="Repositories.EntityFrameworkCore.Sqlite/KamiSama.Repositories.EntityFrameworkCore.Sqlite.csproj" />
     <Project Path="Repositories.EntityFrameworkCore/KamiSama.Repositories.EntityFrameworkCore.csproj" />
     <Project Path="Repositories.Json/KamiSama.Repositories.Json.csproj" />

@@ -1,8 +1,0 @@
-<Solution>
-  <Folder Name="/AdminPanel/">
-    <Project Path="Suma.AdminPanel.Abstractions/Suma.AdminPanel.Abstractions.csproj" />
-    <Project Path="Suma.AdminPanel.Client/Suma.AdminPanel.Client.csproj" />
-    <Project Path="Suma.AdminPanel.Core/Suma.AdminPanel.Core.csproj" />
-    <Project Path="Suma.AdminPanel.Server/Suma.AdminPanel.Server.csproj" />
-  </Folder>
-</Solution>

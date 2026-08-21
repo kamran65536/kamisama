@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "KamiSama",
+  "identity": "KamiSama.Templates.Bootstrap",
+  "name": "KamiSama Bootstrap",
+  "shortName": "kamisama-bootstrap",
+  "sourceName": "Example.Bootstrap",
+  "classifications": [ "Web", "Bootstrap", "KamiSama" ],
+  "tags": { "language": "C#", "type": "project" },
+  "symbols": {
+    "UseProps": { "type": "parameter", "dataType": "bool", "defaultValue": "false" },
+    "PropsPath": { "type": "parameter", "dataType": "string", "defaultValue": "../props.xml", "isEnabled": "UseProps", "replaces": "PropsPathToken" },
+    "UserManagement": { "type": "parameter", "dataType": "bool", "defaultValue": "false" },
+    "Ticketing": { "type": "parameter", "dataType": "bool", "defaultValue": "false" },
+    "UserManagementProvider": { "type": "parameter", "dataType": "choice", "defaultValue": "Postgresql", "isEnabled": "(UserManagement || Ticketing)", "replaces": "UserManagementProviderToken", "choices": [ { "choice": "Postgresql" }, { "choice": "Sqlite" } ] },
+    "TicketingProvider": { "type": "parameter", "dataType": "choice", "defaultValue": "Postgresql", "isEnabled": "Ticketing", "replaces": "TicketingProviderToken", "choices": [ { "choice": "Postgresql" }, { "choice": "Sqlite" } ] }
+  }
+}

@@ -1,4 +1,3 @@
-using KamiSama.Modules;
 using KamiSama.Modules.Contents.Repositories.Database;
 using KamiSama.Repositories;
 using KamiSama.Repositories.EntityFrameworkCore;

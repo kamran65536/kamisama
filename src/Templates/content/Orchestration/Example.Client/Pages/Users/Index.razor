@@ -1,0 +1,11 @@
+@page "/users"
+@inject IListAdminUsers Users
+
+<PageTitle>Users</PageTitle>
+<h1>Users</h1>
+@foreach (var user in users) { <p>@user.DisplayName</p> }
+
+@code {
+    private IReadOnlyList<UserSummary> users = [];
+    protected override async Task OnInitializedAsync() => users = await Users.ListAsync();
+}
