@@ -9,7 +9,7 @@
 		<Title>KamiSama Project Templates</Title>
 		<Description>Composable .NET 10 solution, bounded-context, database, bootstrap, orchestration, and administration templates for KamiSama.</Description>
 		<PackageTags>KamiSama Template Solution DDD Bootstrap Orchestration Blazor</PackageTags>
-		<Version>10.0.11.7</Version>
+		<Version>10.0.11.8</Version>
 		<PackageType>Template</PackageType>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<IncludeContentInPack>true</IncludeContentInPack>

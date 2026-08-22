@@ -7,13 +7,13 @@
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
     <ProjectReference Include="../Example.Abstractions/Example.Abstractions.csproj" />
-    <PackageReference Include="KamiSama.Modules" Version="10.0.11.7" />
-    <PackageReference Include="KamiSama.Extensions.DependencyInjection" Version="10.0.11.7" />
+    <PackageReference Include="KamiSama.Modules" Version="10.0.11.8" />
+    <PackageReference Include="KamiSama.Extensions.DependencyInjection" Version="10.0.11.8" />
     <!--#if (UserManagement)-->
-    <PackageReference Include="KamiSama.Modules.Identity.Abstractions" Version="10.0.11.7" />
+    <PackageReference Include="KamiSama.Modules.Identity.Abstractions" Version="10.0.11.8" />
     <!--#endif-->
     <!--#if (Ticketing)-->
-    <PackageReference Include="KamiSama.Modules.Ticketing.Abstractions" Version="10.0.11.7" />
+    <PackageReference Include="KamiSama.Modules.Ticketing.Abstractions" Version="10.0.11.8" />
     <!--#endif-->
   </ItemGroup>
 </Project>

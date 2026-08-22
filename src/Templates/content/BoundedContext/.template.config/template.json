@@ -5,15 +5,24 @@
   "name": "KamiSama Bounded Context",
   "shortName": "kamisama-bounded-context",
   "sourceName": "Example",
-  "preferNameDirectory": true,
+  "preferNameDirectory": false,
   "classifications": [ "DDD", "Library", "KamiSama" ],
   "tags": { "language": "C#", "type": "solution" },
   "symbols": {
+    "CreateSolutionDirectory": { "type": "parameter", "dataType": "bool", "defaultValue": "false", "displayName": "Create solution directory", "description": "Create a directory named after the solution instead of generating directly in the selected location." },
     "UseProps": { "type": "parameter", "dataType": "bool", "defaultValue": "false" },
     "PropsPath": { "type": "parameter", "dataType": "string", "defaultValue": "../props.xml", "isEnabled": "UseProps", "replaces": "PropsPathToken" },
     "IncludeExample": { "type": "parameter", "dataType": "bool", "defaultValue": "false", "description": "Include a sample contract and attributed implementation." }
   },
-  "sources": [ {
-    "modifiers": [ { "condition": "(!IncludeExample)", "exclude": [ "**/Examples/**" ] } ]
-  } ]
+  "sources": [
+    {
+      "condition": "(!CreateSolutionDirectory)",
+      "modifiers": [ { "condition": "(!IncludeExample)", "exclude": [ "**/Examples/**" ] } ]
+    },
+    {
+      "condition": "CreateSolutionDirectory",
+      "target": "Example",
+      "modifiers": [ { "condition": "(!IncludeExample)", "exclude": [ "**/Examples/**" ] } ]
+    }
+  ]
 }

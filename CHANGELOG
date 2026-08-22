@@ -1,3 +1,6 @@
+1405-05-31 8/22/2026 v10.0.11.8
+- KamiSama solution templates expose a Visual Studio Create solution directory option. It defaults to disabled so generated content is placed directly in the selected location, while users can enable it to create a solution-named directory.
+- The solution-directory option is limited to kamisama-solution, kamisama-bounded-context, kamisama-orchestration and kamisama-admin; single-project templates retain their existing layout.
 1405-05-30 8/21/2026 v10.0.11.7
 - (breaking) The previous Props, Abstractions, Core, Database and Blazor Admin templates are replaced by kamisama-solution, kamisama-admin, kamisama-empty, kamisama-bounded-context, kamisama-database-support, kamisama-bootstrap and kamisama-orchestration.
 - KamiSama AI Ready Solution generates an empty .slnx, optional props.xml, GETTING_STARTED.md, AGENTS.md and vendor-neutral .agents guidance without an architecture manifest.

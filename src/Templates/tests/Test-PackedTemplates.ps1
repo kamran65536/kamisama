@@ -142,13 +142,20 @@ function Build-Consumer {
 }
 
 function Test-SolutionCase {
-    param([bool] $UseProps)
+    param(
+        [bool] $UseProps,
+        [bool] $CreateSolutionDirectory = $false
+    )
 
-    $caseName = "solution-use-props-$($UseProps.ToString().ToLowerInvariant())"
+    $caseName = "solution-use-props-$($UseProps.ToString().ToLowerInvariant())-directory-$($CreateSolutionDirectory.ToString().ToLowerInvariant())"
     $name = if ($UseProps) { 'Validation.SolutionWithProps' } else { 'Validation.SolutionWithoutProps' }
     $outputPath = Join-Path $generatedPath $caseName
-    Invoke-Template -ShortName 'kamisama-solution' -Name $name -OutputPath $outputPath -Arguments @('--UseProps', $UseProps.ToString().ToLowerInvariant())
-    Build-Consumer -Path (Join-Path $outputPath "$name.slnx") -CaseName $caseName
+    $solutionPath = if ($CreateSolutionDirectory) { Join-Path $outputPath $name } else { $outputPath }
+    Invoke-Template -ShortName 'kamisama-solution' -Name $name -OutputPath $outputPath -Arguments @(
+        '--CreateSolutionDirectory', $CreateSolutionDirectory.ToString().ToLowerInvariant(),
+        '--UseProps', $UseProps.ToString().ToLowerInvariant()
+    )
+    Build-Consumer -Path (Join-Path $solutionPath "$name.slnx") -CaseName $caseName
 }
 
 function Test-EmptyCase {
@@ -169,22 +176,25 @@ function Test-EmptyCase {
 function Test-BoundedContextCase {
     param(
         [bool] $UseProps,
-        [bool] $IncludeExample
+        [bool] $IncludeExample,
+        [bool] $CreateSolutionDirectory = $false
     )
 
-    $caseName = "bounded-context-props-$($UseProps.ToString().ToLowerInvariant())-example-$($IncludeExample.ToString().ToLowerInvariant())"
+    $caseName = "bounded-context-props-$($UseProps.ToString().ToLowerInvariant())-example-$($IncludeExample.ToString().ToLowerInvariant())-directory-$($CreateSolutionDirectory.ToString().ToLowerInvariant())"
     $casePath = Join-Path $generatedPath $caseName
     $name = "Validation.Bounded$([int]$UseProps)$([int]$IncludeExample)"
     $outputPath = Join-Path $casePath $name
+    $solutionPath = if ($CreateSolutionDirectory) { Join-Path $outputPath $name } else { $outputPath }
     if ($UseProps) {
-        New-ConsumerProps -Directory $outputPath
+        New-ConsumerProps -Directory $solutionPath
     }
 
     Invoke-Template -ShortName 'kamisama-bounded-context' -Name $name -OutputPath $outputPath -Arguments @(
+        '--CreateSolutionDirectory', $CreateSolutionDirectory.ToString().ToLowerInvariant(),
         '--UseProps', $UseProps.ToString().ToLowerInvariant(),
         '--IncludeExample', $IncludeExample.ToString().ToLowerInvariant()
     )
-    Build-Consumer -Path (Join-Path $outputPath "$name.slnx") -CaseName $caseName
+    Build-Consumer -Path (Join-Path $solutionPath "$name.slnx") -CaseName $caseName
 }
 
 function Test-DatabaseSupportCase {
@@ -243,24 +253,29 @@ function Test-BootstrapCase {
 }
 
 function Test-OrchestrationCase {
-    param([bool] $UseProps)
+    param(
+        [bool] $UseProps,
+        [bool] $CreateSolutionDirectory = $false
+    )
 
-    $caseName = "orchestration-minimal-props-$($UseProps.ToString().ToLowerInvariant())"
+    $caseName = "orchestration-minimal-props-$($UseProps.ToString().ToLowerInvariant())-directory-$($CreateSolutionDirectory.ToString().ToLowerInvariant())"
     $casePath = Join-Path $generatedPath $caseName
     $name = if ($UseProps) { 'Validation.OrchestrationWithProps' } else { 'Validation.OrchestrationWithoutProps' }
     $outputPath = Join-Path $casePath $name
+    $solutionPath = if ($CreateSolutionDirectory) { Join-Path $outputPath $name } else { $outputPath }
     if ($UseProps) {
-        New-ConsumerProps -Directory $outputPath
+        New-ConsumerProps -Directory $solutionPath
     }
 
     Invoke-Template -ShortName 'kamisama-orchestration' -Name $name -OutputPath $outputPath -Arguments @(
+        '--CreateSolutionDirectory', $CreateSolutionDirectory.ToString().ToLowerInvariant(),
         '--UseProps', $UseProps.ToString().ToLowerInvariant(),
         '--IncludeClient', 'false',
         '--IncludeServer', 'false',
         '--UserManagement', 'false',
         '--Ticketing', 'false'
     )
-    Build-Consumer -Path (Join-Path $outputPath "$name.slnx") -CaseName $caseName
+    Build-Consumer -Path (Join-Path $solutionPath "$name.slnx") -CaseName $caseName
 }
 
 function Test-AdminCase {
@@ -279,13 +294,17 @@ function Test-AdminCase {
         [string] $UserManagementProvider = 'Postgresql',
 
         [ValidateSet('Postgresql', 'Sqlite')]
-        [string] $TicketingProvider = 'Postgresql'
+        [string] $TicketingProvider = 'Postgresql',
+
+        [bool] $CreateSolutionDirectory = $false
     )
 
     $casePath = Join-Path $generatedPath $CaseName
     $name = "Validation.$($CaseName.Replace('-', '.'))"
     $outputPath = Join-Path $casePath $name
+    $solutionPath = if ($CreateSolutionDirectory) { Join-Path $outputPath $name } else { $outputPath }
     $arguments = @(
+        '--CreateSolutionDirectory', $CreateSolutionDirectory.ToString().ToLowerInvariant(),
         '--UserManagement', $UserManagement.ToString().ToLowerInvariant(),
         '--Ticketing', $Ticketing.ToString().ToLowerInvariant(),
         '--UserManagementProvider', $UserManagementProvider,
@@ -307,7 +326,7 @@ function Test-AdminCase {
     }
 
     Invoke-Template -ShortName 'kamisama-admin' -Name $name -OutputPath $outputPath -Arguments $arguments
-    Build-Consumer -Path (Join-Path $outputPath "$name.slnx") -CaseName $CaseName
+    Build-Consumer -Path (Join-Path $solutionPath "$name.slnx") -CaseName $CaseName
 }
 
 try {
@@ -350,6 +369,30 @@ try {
         if ($manifests.Count -ne 7) {
             throw "Packed template archive must contain exactly 7 manifests; found $($manifests.Count)."
         }
+        $solutionDirectoryOptionCount = 0
+        foreach ($manifestPath in $manifests) {
+            $manifestEntry = $archive.GetEntry($manifestPath)
+            $reader = [System.IO.StreamReader]::new($manifestEntry.Open())
+            try {
+                $manifest = $reader.ReadToEnd() | ConvertFrom-Json
+                $directoryOption = $manifest.symbols.PSObject.Properties['CreateSolutionDirectory']
+                if ($manifest.tags.type -eq 'solution') {
+                    $solutionDirectoryOptionCount++
+                    if ($manifest.preferNameDirectory -ne $false -or $null -eq $directoryOption -or $directoryOption.Value.defaultValue -ne 'false') {
+                        throw "Solution template manifest '$manifestPath' must expose CreateSolutionDirectory with a false default and disable preferNameDirectory."
+                    }
+                }
+                elseif ($null -ne $directoryOption) {
+                    throw "Single-project template manifest '$manifestPath' must not expose CreateSolutionDirectory."
+                }
+            }
+            finally {
+                $reader.Dispose()
+            }
+        }
+        if ($solutionDirectoryOptionCount -ne 4) {
+            throw "Expected CreateSolutionDirectory on exactly 4 solution templates; found $solutionDirectoryOptionCount."
+        }
         if ($entryNames | Where-Object { $_ -like 'content/content/*' }) {
             throw 'Packed template archive contains an invalid content/content path.'
         }
@@ -386,13 +429,13 @@ try {
     }
 
     if ($Fast) {
-        Test-SolutionCase -UseProps $true
+        Test-SolutionCase -UseProps $true -CreateSolutionDirectory $true
         Test-EmptyCase -UseProps $true
-        Test-BoundedContextCase -UseProps $false -IncludeExample $true
+        Test-BoundedContextCase -UseProps $false -IncludeExample $true -CreateSolutionDirectory $true
         Test-DatabaseSupportCase -Provider 'Postgresql'
         Test-BootstrapCase -CaseName 'bootstrap-combined-cross' -UserManagement $true -Ticketing $true -UserManagementProvider 'Sqlite' -TicketingProvider 'Postgresql'
-        Test-OrchestrationCase -UseProps $false
-        Test-AdminCase -CaseName 'admin-both-create' -UserManagement $true -Ticketing $true -BootstrapMode 'Create'
+        Test-OrchestrationCase -UseProps $false -CreateSolutionDirectory $true
+        Test-AdminCase -CaseName 'admin-both-create' -UserManagement $true -Ticketing $true -BootstrapMode 'Create' -CreateSolutionDirectory $true
         Test-AdminCase -CaseName 'admin-both-existing' -UserManagement $true -Ticketing $true -BootstrapMode 'Existing' -UserManagementProvider 'Sqlite' -TicketingProvider 'Postgresql'
     }
     else {

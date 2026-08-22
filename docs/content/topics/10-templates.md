@@ -43,6 +43,8 @@ Old short names and their options are not compatibility aliases. In particular, 
 
 All templates also accept standard .NET template-engine arguments such as `-n|--name`, `-o|--output`, and `--force`. The tables below contain every additional public option defined by the KamiSama manifests; computed implementation symbols are not command-line options.
 
+The four solution templates expose a `Create solution directory` option in Visual Studio. It defaults to `false`, so solution content is generated directly in the selected location. Enable it to place all generated content in a new directory named after the solution. Single-project templates do not expose this option.
+
 ## Shared Props
 
 Shared MSBuild settings are optional and use `props.xml`.
@@ -71,6 +73,7 @@ dotnet new kamisama-solution -n Store --UseProps true
 
 | Option | Type | Default | Behavior |
 | --- | --- | --- | --- |
+| `--CreateSolutionDirectory` | bool | `false` | Creates a solution-named directory when enabled; shown as **Create solution directory** in Visual Studio. |
 | `--UseProps` | bool | `false` | Includes `props.xml` when `true`. |
 
 The solution also generates `GETTING_STARTED.md`. Read it with `AGENTS.md`, `.agents/instructions/architecture.md`, and `.agents/skills/solution-scaffolding/SKILL.md` before restructuring the solution. `AGENTS.md` is the repository entry point that coding agents discover; `.agents/` contains reusable instructions, prompts, commands, and skills. These files do not install or configure an AI tool.
@@ -100,6 +103,7 @@ dotnet new kamisama-bounded-context -n Catalog --UseProps true --PropsPath ../pr
 
 | Option | Type | Default | Behavior |
 | --- | --- | --- | --- |
+| `--CreateSolutionDirectory` | bool | `false` | Creates a solution-named directory when enabled; shown as **Create solution directory** in Visual Studio. |
 | `--UseProps` | bool | `false` | Configures both projects to import shared MSBuild properties. |
 | `--PropsPath` | string | `../props.xml` | Import path, enabled only when `--UseProps true`. |
 | `--IncludeExample` | bool | `false` | Includes a sample contract and attributed implementation. |
@@ -182,6 +186,7 @@ dotnet new kamisama-orchestration \
 
 | Option | Type | Default | Behavior |
 | --- | --- | --- | --- |
+| `--CreateSolutionDirectory` | bool | `false` | Creates a solution-named directory when enabled; shown as **Create solution directory** in Visual Studio. |
 | `--UseProps` | bool | `false` | Configures generated projects to import shared MSBuild properties. |
 | `--PropsPath` | string | `../props.xml` | Import path, enabled only when `--UseProps true`. |
 | `--IncludeClient` | bool | `false` | Includes the Blazor client project. |
@@ -212,6 +217,7 @@ dotnet new kamisama-admin \
 
 | Option | Type | Default | Behavior |
 | --- | --- | --- | --- |
+| `--CreateSolutionDirectory` | bool | `false` | Creates a solution-named directory when enabled; shown as **Create solution directory** in Visual Studio. |
 | `--UseProps` | bool | `false` | Configures generated projects to import shared MSBuild properties. |
 | `--PropsPath` | string | `../props.xml` | Import path, enabled only when `--UseProps true`. |
 | `--UserManagement` | bool | `true` | Includes authorized user-administration endpoints and UI. |

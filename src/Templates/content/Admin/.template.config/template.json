@@ -5,10 +5,11 @@
   "name": "KamiSama Admin",
   "shortName": "kamisama-admin",
   "sourceName": "Example",
-  "preferNameDirectory": true,
+  "preferNameDirectory": false,
   "classifications": [ "Admin", "Blazor", "KamiSama" ],
   "tags": { "language": "C#", "type": "solution" },
   "symbols": {
+    "CreateSolutionDirectory": { "type": "parameter", "dataType": "bool", "defaultValue": "false", "displayName": "Create solution directory", "description": "Create a directory named after the solution instead of generating directly in the selected location." },
     "UseProps": { "type": "parameter", "dataType": "bool", "defaultValue": "false" },
     "PropsPath": { "type": "parameter", "dataType": "string", "defaultValue": "../props.xml", "isEnabled": "UseProps", "replaces": "PropsPathToken" },
     "IncludeClient": { "type": "computed", "value": "true" },
@@ -22,6 +23,7 @@
   },
   "sources": [
     {
+      "condition": "(!CreateSolutionDirectory)",
       "source": "../Orchestration",
       "target": "./",
       "exclude": [ ".template.config/**" ],
@@ -31,11 +33,28 @@
       ]
     },
     {
-      "condition": "(BootstrapMode == \"Create\")",
+      "condition": "CreateSolutionDirectory",
+      "source": "../Orchestration",
+      "target": "Example",
+      "exclude": [ ".template.config/**" ],
+      "modifiers": [
+        { "condition": "(!UserManagement)", "exclude": [ "**/Users/**", "Example.Abstractions/UserModels.cs" ] },
+        { "condition": "(!Ticketing)", "exclude": [ "**/Tickets/**", "Example.Abstractions/TicketModels.cs" ] }
+      ]
+    },
+    {
+      "condition": "(!CreateSolutionDirectory && BootstrapMode == \"Create\")",
       "source": "../Bootstrap",
       "target": "Example.Bootstrap",
       "exclude": [ ".template.config/**" ]
     },
-    { "source": "../Shared/SolutionAi", "target": "./" }
+    {
+      "condition": "(CreateSolutionDirectory && BootstrapMode == \"Create\")",
+      "source": "../Bootstrap",
+      "target": "Example/Example.Bootstrap",
+      "exclude": [ ".template.config/**" ]
+    },
+    { "condition": "(!CreateSolutionDirectory)", "source": "../Shared/SolutionAi", "target": "./" },
+    { "condition": "CreateSolutionDirectory", "source": "../Shared/SolutionAi", "target": "Example" }
   ]
 }

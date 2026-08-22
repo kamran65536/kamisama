@@ -5,18 +5,27 @@
   "name": "KamiSama Solution",
   "shortName": "kamisama-solution",
   "sourceName": "Example",
-  "preferNameDirectory": true,
+  "preferNameDirectory": false,
   "classifications": [ "Solution", "KamiSama" ],
   "tags": { "language": "C#", "type": "solution" },
   "symbols": {
+    "CreateSolutionDirectory": { "type": "parameter", "dataType": "bool", "defaultValue": "false", "displayName": "Create solution directory", "description": "Create a directory named after the solution instead of generating directly in the selected location." },
     "UseProps": { "type": "parameter", "dataType": "bool", "defaultValue": "false", "description": "Create a shared props.xml file." }
   },
   "sources": [
     {
+      "condition": "(!CreateSolutionDirectory)",
       "source": "./",
       "modifiers": [ { "condition": "(!UseProps)", "exclude": [ "props.xml" ] } ]
     },
-    { "source": "../Shared/SolutionAi", "target": "./" }
+    {
+      "condition": "CreateSolutionDirectory",
+      "source": "./",
+      "target": "Example",
+      "modifiers": [ { "condition": "(!UseProps)", "exclude": [ "props.xml" ] } ]
+    },
+    { "condition": "(!CreateSolutionDirectory)", "source": "../Shared/SolutionAi", "target": "./" },
+    { "condition": "CreateSolutionDirectory", "source": "../Shared/SolutionAi", "target": "Example" }
   ],
   "postActions": [ {
     "actionId": "AC1156F7-BB77-4DB8-B28F-24EEBCCA1E5C",
