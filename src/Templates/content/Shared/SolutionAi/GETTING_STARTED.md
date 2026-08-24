@@ -1,23 +1,24 @@
 # Getting Started
 
-1. Inspect the generated solution and existing projects before adding code.
-2. Build the current solution with `dotnet build`.
-3. Add only the templates needed for the intended architecture.
+1. Restart OpenCode so `opencode.json` discovers the selected project skills.
+2. Inspect the generated `.slnx`, `AGENTS.md`, `agent/design/*.yaml`, and `agent/solution-map.yaml`.
+3. Inspect current options with `dotnet new <short-name> --help`, scaffold only required projects/items, complete `TODO(ai)` markers, and build the narrowest affected target.
 
-## Templates
+## Project Scaffolds
 
-- `kamisama-solution`: solution shell, optional `props.xml`, and agent guidance.
-- `kamisama-empty`: minimal class library.
-- `kamisama-bounded-context`: independent Abstractions and provider-neutral Core projects. Use it when a domain boundary owns contracts and behavior.
-- `kamisama-database-support`: one provider project for an existing bounded-context Core project.
-- `kamisama-bootstrap`: reusable shared composition root for Identity and Ticketing modules.
-- `kamisama-orchestration`: canonical Abstractions/Core platform source with optional client and server hosting.
-- `kamisama-admin`: complete Blazor administration solution composed from orchestration and bootstrap sources.
+- `kamisama-solution`: AI-enabled solution shell with optional solution folder, `props.xml`, and packaged skills.
+- `kamisama-bc`: solution-prefixed Abstractions and provider-neutral Core projects for one bounded context.
+- `kamisama-provider`: one PostgreSQL, SQLite, SQL Server, or Oracle project for a bounded context.
+- `kamisama-bootstrap`: ordered shared composition and initialization project.
+- `kamisama-server`: solution-prefixed Abstractions/Core/Server projects with an optional Blazor Client.
 
-Discover current options with `dotnet new <short-name> --help`. Prefer `kamisama-bounded-context` for business capabilities and `kamisama-bootstrap` when multiple hosts share module registration.
+## Item Scaffolds
 
-## Aspire
+- `kamisama-type`: entity or data type.
+- `kamisama-crud`: bounded-context CRUD contracts, repository, mappings, and feature services.
+- `kamisama-feature`: one Add, Update, Delete, FindById, or List operation.
+- `kamisama-panel-crud`: panel DTOs, orchestration, API, client adapters, and List/Details/Save pages.
+- `kamisama-aspire-local`: local AppHost database and initialization environment helpers; it does not create Aspire projects.
+- `kamisama-delete-button`: confirmed asynchronous deletion with Blazor Bootstrap success/failure toasts.
 
-.NET Aspire is optional orchestration tooling, not a hidden template dependency. Install the official templates with `dotnet new install Aspire.ProjectTemplates`, inspect them with `dotnet new list aspire`, and use `dotnet new aspire` or `dotnet new aspire-starter` according to the installed template version. Keep AppHost and ServiceDefaults projects explicit in the solution.
-
-Read `AGENTS.md`, `.agents/instructions/architecture.md`, and `.agents/skills/solution-scaffolding/SKILL.md` before restructuring the solution.
+Templates create deterministic scaffolds, not arbitrary domain fields or business behavior. Keep bounded contexts independent, implement cross-context workflows in panel Core, update `agent/solution-map.yaml` after verified changes, and use only packaged skill folders present in the generated shell.

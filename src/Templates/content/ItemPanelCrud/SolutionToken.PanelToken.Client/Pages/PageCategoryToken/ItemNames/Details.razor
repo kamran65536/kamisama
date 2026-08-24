@@ -1,0 +1,28 @@
+@page "/PageCategoryToken/ItemNames/{Id}"
+@namespace SolutionToken.PanelToken.Pages.PageCategoryToken.ItemNames
+@implements IDisposable
+@using SolutionToken.PanelToken.Services.ServiceCategoryToken
+@inject IFindItemNameById FindItem
+
+<h1>ItemName details</h1>
+
+@if (item is not null)
+{
+    <!-- TODO(ai): Render showable, user-relevant fields only. -->
+    <a class="btn btn-primary" href="@($"/PageCategoryToken/ItemNames/save/{item.Id}")">Edit</a>
+}
+
+@code {
+    [Parameter] public KeyTypeToken Id { get; set; } = default!;
+    private ItemNameDto? item;
+    private readonly CancellationTokenSource lifetimeCancellation = new();
+
+    protected override async Task OnParametersSetAsync()
+        => item = await FindItem.FindByIdAsync(Id, lifetimeCancellation.Token);
+
+    public void Dispose()
+    {
+        lifetimeCancellation.Cancel();
+        lifetimeCancellation.Dispose();
+    }
+}

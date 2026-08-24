@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "KamiSama",
+  "identity": "KamiSama.Templates.Item.PanelCrud",
+  "name": "KamiSama Panel CRUD",
+  "shortName": "kamisama-panel-crud",
+  "sourceName": "ItemName",
+  "preferNameDirectory": false,
+  "classifications": [ "Blazor", "CRUD", "Panel", "KamiSama" ],
+  "tags": { "language": "C#", "type": "item" },
+  "symbols": {
+    "Solution": { "type": "parameter", "dataType": "string", "isRequired": true, "replaces": "SolutionToken", "fileRename": "SolutionToken" },
+    "Panel": { "type": "parameter", "dataType": "string", "isRequired": true, "replaces": "PanelToken", "fileRename": "PanelToken" },
+    "ServiceCategory": { "type": "parameter", "dataType": "string", "isRequired": true, "replaces": "ServiceCategoryToken", "fileRename": "ServiceCategoryToken" },
+    "PageCategory": { "type": "parameter", "dataType": "string", "isRequired": true, "replaces": "PageCategoryToken", "fileRename": "PageCategoryToken" },
+    "KeyType": { "type": "parameter", "dataType": "string", "defaultValue": "Guid", "replaces": "KeyTypeToken" }
+  }
+}

@@ -4,7 +4,7 @@ KamiSama.Extensions is a reusable .NET and ASP.NET Core package family for build
 
 Use these packages when you want shared infrastructure, feature-layer building blocks, and module wiring patterns across multiple services without copying the same plumbing into every project.
 
-Version: `10.0.0`
+Version: `10.0.11.9`
 
 ## Package areas
 
@@ -18,11 +18,13 @@ Version: `10.0.0`
 | Web modules | Modular ASP.NET Core service and middleware registration. |
 | External services | Email and SMS abstractions plus SMTP, Kavenegar, and NeoZarin integrations. |
 | Application modules | Identity, Localization, Locations, ServicePlans, and Ticketing bounded contexts. |
+| Solution design and templates | Modular YAML design, AI-ready solution maps, project-family scaffolds, CRUD vertical slices, providers, servers, and Aspire helpers. |
 
 ## API documentation
 
 - [Package index](api/index.md)
 - [Symbol index](api/symbols.md)
+- [Solution design and template guide](topics/10-templates.md)
 
 ## Packages
 
@@ -78,3 +80,4 @@ Version: `10.0.0`
 - [KamiSama.Repositories.EntityFrameworkCore.Sqlite](api/repositories-entityframeworkcore-sqlite/index.md) - SQLite registration for KamiSama multi-provider Entity Framework Core DbContexts. It adds scoped keyed context resolution, lazy-loading proxies, and migration-history configuration.
 - [KamiSama.Repositories.Json](api/repositories-json/index.md) - Lazy-loading JSON file repository with synchronous and asynchronous query and mutation APIs. It caches entities in memory and rewrites an existing JSON array file after each mutation, with important failure, atomicity, and concurrency limitations.
 - [KamiSama.Repositories.Xml](api/repositories-xml/index.md) - Read-oriented XML directory repositories that load one entity per file into memory. Version 10.0.0 has an incompatible default serializer and a broken mutation path, so use these types only for reads with an explicit per-entity serializer.
+- [KamiSama.Templates](api/templates/index.md) - Eleven composable solution, project-family, and item templates for AI-ready KamiSama solution design, bounded contexts, providers, ordered Bootstrap composition, unified servers, CRUD, panel UI, Aspire helpers, and confirmed delete actions.

@@ -1,0 +1,9 @@
+schemaVersion: 1
+solution:
+  name: Example
+  file: Example.slnx
+boundedContexts: []
+projects: []
+panels: []
+bootstrap: null
+aspire: null

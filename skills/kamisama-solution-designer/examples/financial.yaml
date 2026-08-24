@@ -1,0 +1,82 @@
+$schema: ../schema/kamisama-design.schema.json
+version: 1
+modules:
+  - name: Financial
+    kind: bounded-context
+    path: Financial
+    projects:
+      - name: LedgerFlow.Financial.Abstractions
+        role: abstractions
+        path: Financial/LedgerFlow.Financial.Abstractions
+      - name: LedgerFlow.Financial.Core
+        role: core
+        path: Financial/LedgerFlow.Financial.Core
+        references:
+          - LedgerFlow.Financial.Abstractions
+      - name: LedgerFlow.Financial.Postgresql
+        role: provider
+        path: Financial/LedgerFlow.Financial.Postgresql
+        references:
+          - LedgerFlow.Financial.Core
+    providers:
+      - name: Financial.Postgresql
+        provider: Postgresql
+        project: LedgerFlow.Financial.Postgresql
+        connection: ConnectionStrings:Financial
+        migrations: true
+        initialize: false
+    data-types:
+      - name: AccountStatus
+        kind: enum
+        members:
+          - name: Active
+            value: 1
+          - name: Suspended
+            value: 2
+    entities:
+      - name: Account
+        key-type: Guid
+        properties:
+          - name: Id
+            type: Guid
+            key: true
+            visible: false
+            editable: false
+          - name: Name
+            type: string
+            searchable: true
+            visible: true
+            editable: true
+          - name: Balance
+            type: decimal
+            visible: true
+            editable: false
+          - name: Status
+            type: AccountStatus
+            searchable: true
+            visible: true
+            editable: true
+        crud:
+          operations: [add, update, delete, find-by-id, list]
+          service-category: Accounts
+          dto-type: AccountDto
+          list-item-type: AccountListItemDto
+          search-model: AccountSearchModel
+        repository:
+          name: IAccountRepository
+          search-model: AccountSearchModel
+    services:
+      - name: FindAccountById
+        kind: crud
+        operation: find-by-id
+        contract: IFindAccountById
+        input: Guid
+        output: AccountDto
+        transaction: none
+      - name: ListAccounts
+        kind: crud
+        operation: list
+        contract: IListAccounts
+        input: AccountSearchModel
+        output: PagedResult<AccountListItemDto>
+        transaction: none

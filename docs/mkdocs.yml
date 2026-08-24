@@ -750,7 +750,7 @@ nav:
               - "XmlFileRepository<TEntity>": api/repositories-xml/kamisama-repositories-xml/kamisama-repositories-xml-xmlfilerepository-tentity/index.md
   - Topic Guides:
       - "1-core": topics/1-core.md
-      - "10-templates": topics/10-templates.md
+      - "Solution design and templates": topics/10-templates.md
       - "11-web-modules": topics/11-web-modules.md
       - "2-dependency-injection": topics/2-dependency-injection.md
       - "3-json": topics/3-json.md

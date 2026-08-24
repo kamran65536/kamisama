@@ -1,0 +1,13 @@
+@page "/PageCategoryToken/ItemNames/save"
+@page "/PageCategoryToken/ItemNames/save/{Id}"
+@namespace SolutionToken.PanelToken.Pages.PageCategoryToken.ItemNames
+@using Microsoft.AspNetCore.Components.Forms
+@inherits SaveItemNamePage
+
+<h1>@(IsEditMode ? "Edit ItemName" : "Add ItemName")</h1>
+
+<EditForm Model="Model" OnValidSubmit="SaveAsync">
+    <DataAnnotationsValidator />
+    <!-- TODO(ai): Add controls for editable fields and read-only display fields. -->
+    <button type="submit" class="btn btn-primary">Save</button>
+</EditForm>

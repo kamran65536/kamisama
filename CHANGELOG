@@ -1,3 +1,13 @@
+1405-06-02 8/24/2026 v10.0.11.9
+- (breaking) KamiSama.Templates is redesigned as 11 composable solution, project-family and item scaffolds. The public catalog is now kamisama-solution, kamisama-bc, kamisama-provider, kamisama-bootstrap, kamisama-server, kamisama-type, kamisama-crud, kamisama-feature, kamisama-panel-crud, kamisama-aspire-local and kamisama-delete-button.
+- The retired kamisama-admin, kamisama-empty, kamisama-bounded-context, kamisama-database-support and kamisama-orchestration commands are removed rather than retained as incompatible aliases.
+- kamisama-solution now creates an AI-ready .slnx shell with optional props.xml, modular YAML design files, agent/solution-map.yaml, updated AGENTS.md guidance and independently selectable snapshots of the KamiSama Libraries and KamiSama Solution Designer skills.
+- The new kamisama-solution-designer skill adds a validated modular YAML design language for bounded contexts, providers, ordered Bootstrap initialization, external services, unified API/daemon/panel servers, hosted-service schedules, APIs, pages, hints and inferred orchestration.
+- Project scaffolds enforce the <Solution>.<Context or Server>.<Role> naming convention, provider-neutral bounded contexts, provider-owned migrations, ordered Bootstrap initializers and unified server families with an optional Blazor WebAssembly client.
+- Item scaffolds add public entities/data types, KamiSama FeatureDefinitionBase CRUD services, individual operations, panel List/Details/Save vertical slices, Aspire database/initialization environment helpers and a confirmed asynchronous Blazor Bootstrap DeleteButton.
+- Generated OpenCode configuration discovers selected project skills, and the solution map records verified implemented topology while C# remains authoritative for behavior.
+- Packed-template validation now verifies exactly 11 manifests, all skill combinations, props modes, all four EF Core providers, API and Blazor server modes, item placement and a composed solution containing bounded-context CRUD, panel CRUD and DeleteButton scaffolds.
+- Template documentation, package metadata and generated onboarding are updated for the redesigned catalog and template-first design workflow.
 1405-05-31 8/22/2026 v10.0.11.8
 - KamiSama solution templates expose a Visual Studio Create solution directory option. It defaults to disabled so generated content is placed directly in the selected location, while users can enable it to create a solution-named directory.
 - The solution-directory option is limited to kamisama-solution, kamisama-bounded-context, kamisama-orchestration and kamisama-admin; single-project templates retain their existing layout.

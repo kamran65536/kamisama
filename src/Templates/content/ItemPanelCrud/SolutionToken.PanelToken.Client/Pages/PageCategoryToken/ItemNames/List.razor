@@ -1,0 +1,47 @@
+@page "/PageCategoryToken/ItemNames"
+@namespace SolutionToken.PanelToken.Pages.PageCategoryToken.ItemNames
+@implements IDisposable
+@using SolutionToken.PanelToken.Components
+@using SolutionToken.PanelToken.Services.ServiceCategoryToken
+@inject IListItemNames ListItems
+@inject IDeleteItemName DeleteItem
+
+<h1>ItemNames</h1>
+<a class="btn btn-primary" href="/PageCategoryToken/ItemNames/save">Add ItemName</a>
+
+<!-- TODO(ai): Replace with SearchBox and paged CustomGrid<ItemNameListItemDto>. -->
+@foreach (var item in items)
+{
+    <div class="d-flex gap-2 align-items-center py-2">
+        <a href="@($"/PageCategoryToken/ItemNames/{item.Id}")">View</a>
+        <a href="@($"/PageCategoryToken/ItemNames/save/{item.Id}")">Edit</a>
+        <DeleteButton ConfirmMessage="Delete this ItemName?" OnDelete="() => DeleteAsync(item.Id)" />
+    </div>
+}
+
+@code {
+    private readonly List<ItemNameListItemDto> items = [];
+    private readonly CancellationTokenSource lifetimeCancellation = new();
+
+    protected override Task OnInitializedAsync()
+        => RefreshAsync(lifetimeCancellation.Token);
+
+    private Task RefreshAsync(CancellationToken cancellationToken)
+    {
+        // TODO(ai): Load a PagedResult and bind search, paging, and ordering.
+        return Task.CompletedTask;
+    }
+
+    private async Task DeleteAsync(KeyTypeToken id)
+    {
+        var cancellationToken = lifetimeCancellation.Token;
+        await DeleteItem.DeleteAsync(id, cancellationToken);
+        await RefreshAsync(cancellationToken);
+    }
+
+    public void Dispose()
+    {
+        lifetimeCancellation.Cancel();
+        lifetimeCancellation.Dispose();
+    }
+}

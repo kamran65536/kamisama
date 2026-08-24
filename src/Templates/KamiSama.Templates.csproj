@@ -7,9 +7,9 @@
 	<PropertyGroup>
 		<PackageId>KamiSama.Templates</PackageId>
 		<Title>KamiSama Project Templates</Title>
-		<Description>Composable .NET 10 solution, bounded-context, database, bootstrap, orchestration, and administration templates for KamiSama.</Description>
-		<PackageTags>KamiSama Template Solution DDD Bootstrap Orchestration Blazor</PackageTags>
-		<Version>10.0.11.8</Version>
+		<Description>Template-first .NET 10 solution design, bounded contexts, database providers, Bootstrap composition, Blazor servers, CRUD features, and Aspire development helpers for KamiSama.</Description>
+		<PackageTags>KamiSama Templates Solution DDD BoundedContext EntityFrameworkCore Bootstrap Blazor CRUD Aspire AI</PackageTags>
+		<Version>10.0.11.9</Version>
 		<PackageType>Template</PackageType>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<IncludeContentInPack>true</IncludeContentInPack>

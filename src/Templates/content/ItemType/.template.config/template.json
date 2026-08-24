@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "KamiSama",
+  "identity": "KamiSama.Templates.Item.Type",
+  "name": "KamiSama Entity or Data Type",
+  "shortName": "kamisama-type",
+  "sourceName": "ItemName",
+  "preferNameDirectory": false,
+  "classifications": [ "C#", "DDD", "KamiSama" ],
+  "tags": { "language": "C#", "type": "item" },
+  "symbols": {
+    "Type": {
+      "type": "parameter",
+      "dataType": "choice",
+      "defaultValue": "Entity",
+      "choices": [ { "choice": "Entity" }, { "choice": "DataType" } ]
+    },
+    "Namespace": { "type": "parameter", "dataType": "string", "isRequired": true, "replaces": "NamespaceToken" },
+    "KeyType": { "type": "parameter", "dataType": "string", "defaultValue": "Guid", "replaces": "KeyTypeToken" }
+  },
+  "sources": [
+    { "source": "Entity", "target": "Entities", "condition": "(Type == \"Entity\")" },
+    { "source": "DataType", "target": "DataTypes", "condition": "(Type == \"DataType\")" }
+  ]
+}

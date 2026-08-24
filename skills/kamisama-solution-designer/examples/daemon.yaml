@@ -1,0 +1,28 @@
+$schema: ../schema/kamisama-design.schema.json
+version: 1
+servers:
+  - name: Daemon
+    kind: daemon
+    project: LedgerFlow.Daemon
+    path: Hosts/LedgerFlow.Daemon
+    references:
+      - LedgerFlow.Bootstrap
+      - LedgerFlow.Financial.Abstractions
+    modules:
+      - Financial
+    services:
+      - name: RefreshExchangeRates
+        kind: hosted-service
+        contract: IRefreshExchangeRates
+        calls:
+          - ExchangeRates
+          - Financial.UpdateExchangeRates
+        transaction: orchestrated
+        schedule:
+          - name: BusinessHours
+            timezone: Asia/Tehran
+            start: "08:00"
+            end: "18:00"
+            weekdays: [Saturday, Sunday, Monday, Tuesday, Wednesday]
+            interval: PT15M
+            allow-overlap: false

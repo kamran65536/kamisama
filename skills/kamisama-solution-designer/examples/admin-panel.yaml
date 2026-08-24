@@ -1,0 +1,166 @@
+$schema: ../schema/kamisama-design.schema.json
+version: 1
+modules:
+  - name: AdminPanel
+    kind: panel
+    path: Panels/AdminPanel
+    projects:
+      - name: LedgerFlow.AdminPanel.Abstractions
+        role: abstractions
+      - name: LedgerFlow.AdminPanel.Core
+        role: core
+        references:
+          - LedgerFlow.AdminPanel.Abstractions
+          - LedgerFlow.Financial.Abstractions
+      - name: LedgerFlow.AdminPanel.Client
+        role: client
+        references:
+          - LedgerFlow.AdminPanel.Abstractions
+      - name: LedgerFlow.AdminPanel.Server
+        role: server
+        references:
+          - LedgerFlow.AdminPanel.Client
+          - LedgerFlow.AdminPanel.Core
+          - LedgerFlow.Bootstrap
+    services:
+      - name: ListAccountsForAdmin
+        kind: orchestration
+        contract: IListAccountsForAdmin
+        input: AccountSearchModel
+        output: PagedResult<AccountListItemDto>
+        calls:
+          - Financial.ListAccounts
+        transaction: none
+        inferred: true
+      - name: DeleteAccountForAdmin
+        kind: orchestration
+        contract: IDeleteAccountForAdmin
+        input: Guid
+        output: Task
+        calls:
+          - Financial.DeleteAccount
+        transaction: local
+        inferred: true
+    apis:
+      - name: AdminAccountsApi
+        route: /api/admin/accounts
+        authorization: Administrator
+        endpoints:
+          - operation: ListAccounts
+            method: GET
+            route: ""
+            service: IListAccountsForAdmin
+            request: AccountSearchModel
+            response: PagedResult<AccountListItemDto>
+            authorization: Administrator
+            paged: true
+            inferred: true
+          - operation: DeleteAccount
+            method: DELETE
+            route: /{id}
+            service: IDeleteAccountForAdmin
+            response: Task
+            authorization: Administrator
+            inferred: true
+    pages:
+      - name: AccountsList
+        route: /admin/accounts
+        kind: list
+        entity: Account
+        service: IListAccountsForAdmin
+        authorization: Administrator
+        actions:
+          - name: AddAccount
+            kind: add
+            route: /admin/accounts/save
+          - name: DeleteAccount
+            kind: delete
+            service: IDeleteAccountForAdmin
+            confirm: true
+            refresh: true
+            requires: IsDeletable
+        content:
+          - id: search
+            kind: search
+            binding: SearchModel
+            fields:
+              - name: Query
+                label: Search
+                type: string
+                binding: Query
+                editable: true
+                control: text
+          - id: accounts
+            kind: grid
+            service: IListAccountsForAdmin
+            paged: true
+            columns:
+              - name: Name
+                binding: Name
+                sortable: true
+              - name: Balance
+                binding: Balance
+                sortable: true
+              - name: Status
+                binding: Status
+                sortable: true
+            actions:
+              - name: ViewAccount
+                kind: view
+                route: /admin/accounts/{id}
+              - name: EditAccount
+                kind: edit
+                route: /admin/accounts/save/{id}
+                requires: IsEditable
+              - name: DeleteAccount
+                kind: delete
+                service: IDeleteAccountForAdmin
+                confirm: true
+                refresh: true
+                requires: IsDeletable
+      - name: AccountSave
+        route: /admin/accounts/save/{id?}
+        kind: save
+        entity: Account
+        authorization: Administrator
+        parameters:
+          - name: id
+            type: Guid
+            optional: true
+            source: route
+        actions:
+          - name: SaveAccount
+            kind: submit
+            service: ISaveAccountForAdmin
+        content:
+          - id: validation
+            kind: validation-summary
+          - id: account-form
+            kind: form
+            binding: Model
+            fields:
+              - name: Name
+                type: string
+                binding: Name
+                visible: true
+                editable: true
+                required: true
+                control: text
+              - name: Status
+                type: AccountStatus
+                binding: Status
+                visible: true
+                editable: true
+                required: true
+                control: select
+                options-source: AccountStatus
+              - name: Balance
+                type: decimal
+                binding: Balance
+                visible: true
+                editable: false
+                control: display
+            actions:
+              - name: Submit
+                kind: submit
+                service: ISaveAccountForAdmin

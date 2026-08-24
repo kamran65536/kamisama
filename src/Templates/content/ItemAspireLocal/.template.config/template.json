@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "KamiSama",
+  "identity": "KamiSama.Templates.Item.AspireLocal",
+  "name": "KamiSama Aspire Local Helpers",
+  "shortName": "kamisama-aspire-local",
+  "sourceName": "ItemName",
+  "defaultName": "AspireLocalExtensions",
+  "preferNameDirectory": false,
+  "classifications": [ "C#", "Aspire", "Local Development", "KamiSama" ],
+  "tags": { "language": "C#", "type": "item" },
+  "symbols": {
+    "Namespace": { "type": "parameter", "dataType": "string", "isRequired": true, "replaces": "NamespaceToken" }
+  }
+}

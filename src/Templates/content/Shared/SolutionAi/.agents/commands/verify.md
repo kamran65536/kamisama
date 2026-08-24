@@ -1,3 +1,3 @@
 # Verify
 
-Run `dotnet build` on the narrowest affected `.slnx` or project. Then inspect generated configuration for empty connection-string placeholders, verify controllers require authorization, and confirm no extra template manifests or nested `content/content` paths are packaged.
+Run `dotnet build` on the narrowest affected `.slnx` or project. Verify `agent/solution-map.yaml` against the `.slnx` and project references, inspect configuration for unresolved or secret values, confirm APIs enforce authorization independently of UI, and check bounded-context and panel reference isolation.

@@ -10,7 +10,9 @@
   "tags": { "language": "C#", "type": "solution" },
   "symbols": {
     "CreateSolutionDirectory": { "type": "parameter", "dataType": "bool", "defaultValue": "false", "displayName": "Create solution directory", "description": "Create a directory named after the solution instead of generating directly in the selected location." },
-    "UseProps": { "type": "parameter", "dataType": "bool", "defaultValue": "false", "description": "Create a shared props.xml file." }
+    "UseProps": { "type": "parameter", "dataType": "bool", "defaultValue": "false", "displayName": "Include props.xml", "description": "Create an opt-in shared props.xml file at the solution root." },
+    "IncludeKamiSamaLibrariesSkill": { "type": "parameter", "dataType": "bool", "defaultValue": "true", "displayName": "Include KamiSama libraries skill", "description": "Package the KamiSama public API guidance under .agents/skills/kamisama-libraries/." },
+    "IncludeSolutionDesignerSkill": { "type": "parameter", "dataType": "bool", "defaultValue": "true", "displayName": "Include solution designer skill", "description": "Package the modular YAML solution design guidance under .agents/skills/kamisama-solution-designer/." }
   },
   "sources": [
     {
@@ -24,8 +26,28 @@
       "target": "Example",
       "modifiers": [ { "condition": "(!UseProps)", "exclude": [ "props.xml" ] } ]
     },
-    { "condition": "(!CreateSolutionDirectory)", "source": "../Shared/SolutionAi", "target": "./" },
-    { "condition": "CreateSolutionDirectory", "source": "../Shared/SolutionAi", "target": "Example" }
+    {
+      "condition": "(!CreateSolutionDirectory)",
+      "source": "../Shared/SolutionAi",
+      "target": "./",
+      "modifiers": [
+        { "condition": "(!IncludeKamiSamaLibrariesSkill)", "exclude": [ ".agents/skills/kamisama-libraries/**" ] },
+        { "condition": "(!IncludeSolutionDesignerSkill)", "exclude": [ ".agents/skills/kamisama-solution-designer/**" ] }
+      ]
+    },
+    {
+      "condition": "CreateSolutionDirectory",
+      "source": "../Shared/SolutionAi",
+      "target": "Example",
+      "modifiers": [
+        { "condition": "(!IncludeKamiSamaLibrariesSkill)", "exclude": [ ".agents/skills/kamisama-libraries/**" ] },
+        { "condition": "(!IncludeSolutionDesignerSkill)", "exclude": [ ".agents/skills/kamisama-solution-designer/**" ] }
+      ]
+    }
+  ],
+  "primaryOutputs": [
+    { "condition": "(!CreateSolutionDirectory)", "path": "Example.slnx" },
+    { "condition": "CreateSolutionDirectory", "path": "Example/Example.slnx" }
   ],
   "postActions": [ {
     "actionId": "AC1156F7-BB77-4DB8-B28F-24EEBCCA1E5C",

@@ -1,6 +1,6 @@
 # KamiSama.Templates
 
-`KamiSama.Templates` provides seven composable .NET project and solution templates for KamiSama applications. It covers solution and agent guidance, minimal projects, bounded contexts, generic provider projects, reusable Bootstrap composition, optional client/server orchestration, and the complete Blazor administration layout.
+`KamiSama.Templates` supplies 11 template-first .NET 10 solution, project, and item templates. Install it to turn a modular YAML solution design into explicitly named bounded contexts, providers, composition roots, servers, domain operations, panel CRUD, and local Aspire helpers.
 
 Current documented version: `{{ version }}`
 
@@ -8,17 +8,14 @@ Current documented version: `{{ version }}`
 
 ```shell
 dotnet new install KamiSama.Templates::{{ version }}
-```
-
-List the installed templates:
-
-```shell
 dotnet new list kamisama
 ```
 
-## Documentation
+## Developer guide
 
-See [KamiSama template architecture and usage](../../topics/10-templates.md) for all seven short names and every public option. The guide documents opt-in `props.xml`, required Database Support project paths and provider-based naming, Bootstrap module providers and Ticketing's Identity infrastructure, Admin/Orchestration Create versus Existing behavior, generated `GETTING_STARTED.md`/`AGENTS.md` files, Aspire tooling, and Visual Studio limitations.
+See [KamiSama template design and usage](../../topics/10-templates.md) for the exact 11-template catalog, current options, generated structures, selectable solution skills, shared props behavior, naming conventions, composition workflow, and item-template placement and completion caveats.
+
+The old `kamisama-admin`, `kamisama-empty`, `kamisama-bounded-context`, `kamisama-database-support`, and `kamisama-orchestration` commands are breaking-retired. `kamisama-solution` and `kamisama-bootstrap` remain with redesigned behavior; use current `--help` output rather than old command assumptions.
 
 ## Uninstall
 

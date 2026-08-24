@@ -1,0 +1,23 @@
+schemaVersion: 1
+kinds:
+  SolutionDesign:
+    required: [schemaVersion, kind, metadata, solution]
+    properties:
+      metadata: [name]
+      includes: list-of-relative-yaml-paths
+      solution: [props, projects, bootstrap, aspire]
+  BoundedContextDesign:
+    required: [schemaVersion, kind, boundedContexts]
+    itemProperties: [name, entities, dataTypes, services, repositories, providers]
+  PanelDesign:
+    required: [schemaVersion, kind, panels]
+    itemProperties: [name, projects, pages, services, apis]
+  SolutionMap:
+    required: [schemaVersion, solution, boundedContexts, projects, panels]
+    properties:
+      solution: [name, file]
+      boundedContexts: list
+      projects: list
+      panels: list
+      bootstrap: object-or-null
+      aspire: object-or-null

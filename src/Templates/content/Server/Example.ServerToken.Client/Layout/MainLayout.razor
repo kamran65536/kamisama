@@ -1,0 +1,18 @@
+@inherits LayoutComponentBase
+
+<div class="d-flex flex-column min-vh-100">
+    <Toasts Class="p-3" AutoHide="true" Delay="3000" Placement="ToastsPlacement.MiddleCenter" />
+    <header class="border-bottom px-3 py-2">
+        <div class="container-fluid d-flex align-items-center justify-content-between">
+            <strong>ServerToken</strong>
+            <AuthorizeView>
+                <Authorized Context="auth">
+                    <span>@auth.User.Identity?.Name</span>
+                </Authorized>
+            </AuthorizeView>
+        </div>
+    </header>
+    <main class="container-fluid flex-fill px-3 py-4">
+        @Body
+    </main>
+</div>

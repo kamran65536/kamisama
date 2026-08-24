@@ -1,4 +1,0 @@
-<Solution>
-  <Project Path="Example.Abstractions/Example.Abstractions.csproj" />
-  <Project Path="Example.Core/Example.Core.csproj" />
-</Solution>

@@ -1,0 +1,28 @@
+<Card Class="mb-3 shadow-sm">
+    <CardHeader>
+        <CardTitle>@Title</CardTitle>
+    </CardHeader>
+    <CardBody>
+        <div class="mb-2">
+            @ChildContent
+        </div>
+        <Button @onclick="OnSearchClicked" Color="ButtonColor.Primary">
+            <Icon Name="IconName.Search" />
+            @ButtonText
+        </Button>
+    </CardBody>
+</Card>
+
+@code {
+    [Parameter]
+    public string Title { get; set; } = "Search";
+
+    [Parameter]
+    public string ButtonText { get; set; } = "Search";
+
+    [Parameter]
+    public EventCallback<MouseEventArgs> OnSearchClicked { get; set; }
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+}

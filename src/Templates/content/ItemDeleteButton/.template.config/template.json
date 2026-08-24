@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "KamiSama",
+  "identity": "KamiSama.Templates.Item.DeleteButton",
+  "name": "KamiSama Blazor Bootstrap Delete Button",
+  "shortName": "kamisama-delete-button",
+  "sourceName": "ItemName",
+  "defaultName": "DeleteButton",
+  "preferNameDirectory": false,
+  "classifications": [ "Blazor", "Component", "KamiSama" ],
+  "tags": { "language": "C#", "type": "item" },
+  "symbols": {
+    "Namespace": { "type": "parameter", "dataType": "string", "isRequired": true, "replaces": "NamespaceToken" }
+  },
+  "sources": [ { "source": "Component", "target": "Components" } ]
+}

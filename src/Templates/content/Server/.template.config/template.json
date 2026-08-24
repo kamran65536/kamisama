@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "KamiSama",
+  "identity": "KamiSama.Templates.Server",
+  "name": "KamiSama Server",
+  "shortName": "kamisama-server",
+  "sourceName": "Example",
+  "preferNameDirectory": false,
+  "classifications": [ "Web", "Blazor", "KamiSama" ],
+  "tags": { "language": "C#", "type": "project" },
+  "symbols": {
+    "Server": { "type": "parameter", "dataType": "string", "isRequired": true, "replaces": "ServerToken", "fileRename": "ServerToken", "description": "Server or panel name." },
+    "IncludeClient": { "type": "parameter", "dataType": "bool", "defaultValue": "false", "description": "Add a hosted Blazor WebAssembly client with Blazor Bootstrap." },
+    "BootstrapProject": { "type": "parameter", "dataType": "string", "defaultValue": "", "replaces": "BootstrapProjectPathToken", "description": "Optional path from the Server project to the solution Bootstrap project." },
+    "HasBootstrap": { "type": "computed", "value": "BootstrapProject != \"\"" },
+    "UseProps": { "type": "parameter", "dataType": "bool", "defaultValue": "false" },
+    "PropsPath": { "type": "parameter", "dataType": "string", "defaultValue": "../props.xml", "isEnabled": "UseProps", "replaces": "PropsPathToken" }
+  },
+  "sources": [
+    {
+      "source": "./",
+      "modifiers": [
+        { "condition": "(!IncludeClient)", "exclude": [ "Example.ServerToken.Client/**", "Example.ServerToken.Server/Components/**" ] }
+      ]
+    }
+  ],
+  "primaryOutputs": [
+    { "path": "Example.ServerToken.Abstractions/Example.ServerToken.Abstractions.csproj" },
+    { "path": "Example.ServerToken.Core/Example.ServerToken.Core.csproj" },
+    { "path": "Example.ServerToken.Server/Example.ServerToken.Server.csproj" },
+    { "condition": "IncludeClient", "path": "Example.ServerToken.Client/Example.ServerToken.Client.csproj" }
+  ]
+}

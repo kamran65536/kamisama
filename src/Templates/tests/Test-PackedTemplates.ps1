@@ -22,19 +22,23 @@ $previousDotnetCliHome = $env:DOTNET_CLI_HOME
 
 $requiredTemplateNames = @(
     'kamisama-solution',
+    'kamisama-bc',
+    'kamisama-provider',
+    'kamisama-bootstrap',
+    'kamisama-server',
+    'kamisama-type',
+    'kamisama-crud',
+    'kamisama-feature',
+    'kamisama-panel-crud',
+    'kamisama-aspire-local',
+    'kamisama-delete-button'
+)
+$retiredTemplateNames = @(
     'kamisama-admin',
     'kamisama-empty',
     'kamisama-bounded-context',
     'kamisama-database-support',
-    'kamisama-bootstrap',
     'kamisama-orchestration'
-)
-$retiredTemplateNames = @(
-    'kamisama-props',
-    'kamisama-core',
-    'kamisama-abstractions',
-    'kamisama-database',
-    'kamisama-blazor-admin'
 )
 
 function Invoke-DotNet {
@@ -62,9 +66,8 @@ function Invoke-DotNet {
         }
 
         & dotnet @Arguments 2>&1 | ForEach-Object { Write-Host $_ }
-        $exitCode = $LASTEXITCODE
-        if ($exitCode -ne 0) {
-            throw "dotnet exited with code $exitCode."
+        if ($LASTEXITCODE -ne 0) {
+            throw "dotnet exited with code $LASTEXITCODE."
         }
     }
     finally {
@@ -94,6 +97,66 @@ function Invoke-Template {
     ) + $Arguments)
 }
 
+function Assert-Path {
+    param(
+        [Parameter(Mandatory)]
+        [string] $Path,
+
+        [bool] $Exists = $true
+    )
+
+    if ((Test-Path -LiteralPath $Path) -ne $Exists) {
+        $expectation = if ($Exists) { 'exist' } else { 'be absent' }
+        throw "Expected '$Path' to $expectation."
+    }
+}
+
+function Assert-FileContains {
+    param(
+        [Parameter(Mandatory)]
+        [string] $Path,
+
+        [Parameter(Mandatory)]
+        [string] $Pattern
+    )
+
+    Assert-Path -Path $Path
+    $content = [System.IO.File]::ReadAllText($Path)
+    if ($content -notmatch $Pattern) {
+        throw "Expected '$Path' to match '$Pattern'."
+    }
+}
+
+function Assert-FileNotContains {
+    param(
+        [Parameter(Mandatory)]
+        [string] $Path,
+
+        [Parameter(Mandatory)]
+        [string] $Pattern
+    )
+
+    Assert-Path -Path $Path
+    $content = [System.IO.File]::ReadAllText($Path)
+    if ($content -match $Pattern) {
+        throw "Expected '$Path' not to match '$Pattern'."
+    }
+}
+
+function Assert-NoTemplateTokens {
+    param(
+        [Parameter(Mandatory)]
+        [string] $Path
+    )
+
+    $tokens = 'SolutionToken|ContextToken|ServerToken|PanelToken|ServiceCategoryToken|PageCategoryToken|NamespaceToken|ItemName|KeyTypeToken|ProviderToken|PropsPathToken|CoreProjectPathToken|BootstrapProjectPathToken'
+    foreach ($file in Get-ChildItem -LiteralPath $Path -File -Recurse) {
+        if ([System.IO.File]::ReadAllText($file.FullName) -match $tokens) {
+            throw "Generated file '$($file.FullName)' contains an unresolved template token."
+        }
+    }
+}
+
 function New-ConsumerProps {
     param(
         [Parameter(Mandatory)]
@@ -101,7 +164,7 @@ function New-ConsumerProps {
     )
 
     $null = New-Item -ItemType Directory -Path $Directory -Force
-    $props = @'
+    [System.IO.File]::WriteAllText((Join-Path $Directory 'props.xml'), @'
 <Project>
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
@@ -109,8 +172,7 @@ function New-ConsumerProps {
     <Nullable>enable</Nullable>
   </PropertyGroup>
 </Project>
-'@
-    [System.IO.File]::WriteAllText((Join-Path $Directory 'props.xml'), $props)
+'@)
 }
 
 function Build-Consumer {
@@ -122,10 +184,7 @@ function Build-Consumer {
         [string] $CaseName
     )
 
-    if (-not (Test-Path -LiteralPath $Path)) {
-        throw "Case '$CaseName' did not generate expected build target '$Path'."
-    }
-
+    Assert-Path -Path $Path
     $caseArtifactsPath = Join-Path $consumerArtifactsPath $CaseName
     Invoke-DotNet -Arguments @(
         'restore', $Path,
@@ -141,199 +200,290 @@ function Build-Consumer {
     )
 }
 
-function Test-SolutionCase {
-    param(
-        [bool] $UseProps,
-        [bool] $CreateSolutionDirectory = $false
-    )
+function Test-SolutionSkillCases {
+    foreach ($includeLibraries in @($false, $true)) {
+        foreach ($includeDesigner in @($false, $true)) {
+            $caseName = "solution-skills-libraries-$($includeLibraries.ToString().ToLowerInvariant())-designer-$($includeDesigner.ToString().ToLowerInvariant())"
+            $outputPath = Join-Path $generatedPath $caseName
+            Invoke-Template -ShortName 'kamisama-solution' -Name 'Validation' -OutputPath $outputPath -Arguments @(
+                '--IncludeKamiSamaLibrariesSkill', $includeLibraries.ToString().ToLowerInvariant(),
+                '--IncludeSolutionDesignerSkill', $includeDesigner.ToString().ToLowerInvariant()
+            )
 
-    $caseName = "solution-use-props-$($UseProps.ToString().ToLowerInvariant())-directory-$($CreateSolutionDirectory.ToString().ToLowerInvariant())"
-    $name = if ($UseProps) { 'Validation.SolutionWithProps' } else { 'Validation.SolutionWithoutProps' }
-    $outputPath = Join-Path $generatedPath $caseName
-    $solutionPath = if ($CreateSolutionDirectory) { Join-Path $outputPath $name } else { $outputPath }
-    Invoke-Template -ShortName 'kamisama-solution' -Name $name -OutputPath $outputPath -Arguments @(
-        '--CreateSolutionDirectory', $CreateSolutionDirectory.ToString().ToLowerInvariant(),
-        '--UseProps', $UseProps.ToString().ToLowerInvariant()
-    )
-    Build-Consumer -Path (Join-Path $solutionPath "$name.slnx") -CaseName $caseName
-}
-
-function Test-EmptyCase {
-    param([bool] $UseProps)
-
-    $caseName = "empty-use-props-$($UseProps.ToString().ToLowerInvariant())"
-    $casePath = Join-Path $generatedPath $caseName
-    $name = if ($UseProps) { 'Validation.EmptyWithProps' } else { 'Validation.EmptyWithoutProps' }
-    $outputPath = Join-Path $casePath $name
-    if ($UseProps) {
-        New-ConsumerProps -Directory $casePath
+            Assert-Path -Path (Join-Path $outputPath 'Validation.slnx')
+            Assert-Path -Path (Join-Path $outputPath 'AGENTS.md')
+            Assert-Path -Path (Join-Path $outputPath 'opencode.json')
+            Assert-Path -Path (Join-Path $outputPath 'agent/design/solution.yaml')
+            Assert-Path -Path (Join-Path $outputPath '.agents/skills/solution-scaffolding/SKILL.md')
+            Assert-Path -Path (Join-Path $outputPath '.agents/skills/kamisama-libraries/SKILL.md') -Exists $includeLibraries
+            Assert-Path -Path (Join-Path $outputPath '.agents/skills/kamisama-solution-designer/SKILL.md') -Exists $includeDesigner
+            Assert-Path -Path (Join-Path $outputPath 'props.xml') -Exists $false
+        }
     }
-
-    Invoke-Template -ShortName 'kamisama-empty' -Name $name -OutputPath $outputPath -Arguments @('--UseProps', $UseProps.ToString().ToLowerInvariant())
-    Build-Consumer -Path (Join-Path $outputPath "$name.csproj") -CaseName $caseName
 }
 
 function Test-BoundedContextCase {
     param(
         [bool] $UseProps,
-        [bool] $IncludeExample,
-        [bool] $CreateSolutionDirectory = $false
+        [bool] $Build = $false
     )
 
-    $caseName = "bounded-context-props-$($UseProps.ToString().ToLowerInvariant())-example-$($IncludeExample.ToString().ToLowerInvariant())-directory-$($CreateSolutionDirectory.ToString().ToLowerInvariant())"
-    $casePath = Join-Path $generatedPath $caseName
-    $name = "Validation.Bounded$([int]$UseProps)$([int]$IncludeExample)"
-    $outputPath = Join-Path $casePath $name
-    $solutionPath = if ($CreateSolutionDirectory) { Join-Path $outputPath $name } else { $outputPath }
+    $caseName = "bc-props-$($UseProps.ToString().ToLowerInvariant())"
+    $outputPath = Join-Path $generatedPath $caseName
     if ($UseProps) {
-        New-ConsumerProps -Directory $solutionPath
+        New-ConsumerProps -Directory $outputPath
     }
 
-    Invoke-Template -ShortName 'kamisama-bounded-context' -Name $name -OutputPath $outputPath -Arguments @(
-        '--CreateSolutionDirectory', $CreateSolutionDirectory.ToString().ToLowerInvariant(),
-        '--UseProps', $UseProps.ToString().ToLowerInvariant(),
-        '--IncludeExample', $IncludeExample.ToString().ToLowerInvariant()
+    Invoke-Template -ShortName 'kamisama-bc' -Name 'Validation' -OutputPath $outputPath -Arguments @(
+        '--Context', 'Catalog',
+        '--UseProps', $UseProps.ToString().ToLowerInvariant()
     )
-    Build-Consumer -Path (Join-Path $solutionPath "$name.slnx") -CaseName $caseName
+
+    $abstractionsProject = Join-Path $outputPath 'Validation.Catalog.Abstractions/Validation.Catalog.Abstractions.csproj'
+    $coreProject = Join-Path $outputPath 'Validation.Catalog.Core/Validation.Catalog.Core.csproj'
+    Assert-Path -Path $abstractionsProject
+    Assert-Path -Path $coreProject
+    if ($UseProps) {
+        Assert-FileContains -Path $coreProject -Pattern '<Import Project="\.\./props\.xml" />'
+        Assert-FileNotContains -Path $coreProject -Pattern '<TargetFramework>net10\.0</TargetFramework>'
+    }
+    else {
+        Assert-FileContains -Path $coreProject -Pattern '<TargetFramework>net10\.0</TargetFramework>'
+        Assert-FileNotContains -Path $coreProject -Pattern '<Import Project='
+    }
+
+    Assert-NoTemplateTokens -Path $outputPath
+    if ($Build) {
+        Build-Consumer -Path $coreProject -CaseName $caseName
+    }
 }
 
-function Test-DatabaseSupportCase {
+function Test-ProviderCase {
     param(
         [Parameter(Mandatory)]
         [ValidateSet('Postgresql', 'Sqlite', 'SqlServer', 'Oracle')]
         [string] $Provider
     )
 
-    $caseName = "database-support-$($Provider.ToLowerInvariant())"
-    $casePath = Join-Path $generatedPath $caseName
-    $name = "Validation.Database$Provider"
-    $contextPath = Join-Path $casePath $name
-    $providerProjectDirectory = Join-Path $contextPath "$name.$Provider"
-    $providerProject = Join-Path $providerProjectDirectory "$name.$Provider.csproj"
-
-    Invoke-Template -ShortName 'kamisama-bounded-context' -Name $name -OutputPath $contextPath -Arguments @(
-        '--UseProps', 'false',
-        '--IncludeExample', 'true'
-    )
-    Build-Consumer -Path (Join-Path $contextPath "$name.slnx") -CaseName "$caseName-context"
-
-    Invoke-Template -ShortName 'kamisama-database-support' -Name $name -OutputPath $contextPath -Arguments @(
-        '--UseProps', 'false',
+    $caseName = "provider-$($Provider.ToLowerInvariant())"
+    $outputPath = Join-Path $generatedPath $caseName
+    Invoke-Template -ShortName 'kamisama-bc' -Name 'Validation' -OutputPath $outputPath -Arguments @('--Context', 'Catalog')
+    Invoke-Template -ShortName 'kamisama-provider' -Name 'Validation' -OutputPath $outputPath -Arguments @(
+        '--Context', 'Catalog',
         '--Provider', $Provider,
-        '--CoreProject', "../$name.Core/$name.Core.csproj"
+        '--CoreProject', '../Validation.Catalog.Core/Validation.Catalog.Core.csproj'
     )
+
+    $providerProject = Join-Path $outputPath "Validation.Catalog.$Provider/Validation.Catalog.$Provider.csproj"
+    Assert-FileContains -Path $providerProject -Pattern "KamiSama\.Repositories\.EntityFrameworkCore\.$Provider"
+    Assert-FileContains -Path $providerProject -Pattern '\.\./Validation\.Catalog\.Core/Validation\.Catalog\.Core\.csproj'
+    Assert-NoTemplateTokens -Path $outputPath
     Build-Consumer -Path $providerProject -CaseName $caseName
 }
 
 function Test-BootstrapCase {
-    param(
-        [Parameter(Mandatory)]
-        [string] $CaseName,
-
-        [bool] $UserManagement,
-
-        [bool] $Ticketing,
-
-        [ValidateSet('Postgresql', 'Sqlite')]
-        [string] $UserManagementProvider = 'Postgresql',
-
-        [ValidateSet('Postgresql', 'Sqlite')]
-        [string] $TicketingProvider = 'Postgresql'
-    )
-
-    $name = "Validation.$($CaseName.Replace('-', '.'))"
-    $outputPath = Join-Path $generatedPath $CaseName
-    Invoke-Template -ShortName 'kamisama-bootstrap' -Name $name -OutputPath $outputPath -Arguments @(
-        '--UserManagement', $UserManagement.ToString().ToLowerInvariant(),
-        '--Ticketing', $Ticketing.ToString().ToLowerInvariant(),
-        '--UserManagementProvider', $UserManagementProvider,
-        '--TicketingProvider', $TicketingProvider
-    )
-    Build-Consumer -Path (Join-Path $outputPath "$name.csproj") -CaseName $CaseName
+    $caseName = 'bootstrap'
+    $outputPath = Join-Path $generatedPath $caseName
+    Invoke-Template -ShortName 'kamisama-bootstrap' -Name 'Validation.Bootstrap' -OutputPath $outputPath
+    $project = Join-Path $outputPath 'Validation.Bootstrap/Validation.Bootstrap.csproj'
+    Assert-FileContains -Path $project -Pattern '<RootNamespace>Validation\.Bootstrap</RootNamespace>'
+    Assert-NoTemplateTokens -Path $outputPath
+    Build-Consumer -Path $project -CaseName $caseName
 }
 
-function Test-OrchestrationCase {
+function Test-ServerCase {
     param(
-        [bool] $UseProps,
-        [bool] $CreateSolutionDirectory = $false
+        [bool] $IncludeClient,
+        [bool] $IncludeBootstrap
     )
 
-    $caseName = "orchestration-minimal-props-$($UseProps.ToString().ToLowerInvariant())-directory-$($CreateSolutionDirectory.ToString().ToLowerInvariant())"
-    $casePath = Join-Path $generatedPath $caseName
-    $name = if ($UseProps) { 'Validation.OrchestrationWithProps' } else { 'Validation.OrchestrationWithoutProps' }
-    $outputPath = Join-Path $casePath $name
-    $solutionPath = if ($CreateSolutionDirectory) { Join-Path $outputPath $name } else { $outputPath }
-    if ($UseProps) {
-        New-ConsumerProps -Directory $solutionPath
+    $caseName = "server-client-$($IncludeClient.ToString().ToLowerInvariant())-bootstrap-$($IncludeBootstrap.ToString().ToLowerInvariant())"
+    $outputPath = Join-Path $generatedPath $caseName
+    $arguments = @('--Server', 'Admin', '--IncludeClient', $IncludeClient.ToString().ToLowerInvariant())
+    if ($IncludeBootstrap) {
+        Invoke-Template -ShortName 'kamisama-bootstrap' -Name 'Validation.Bootstrap' -OutputPath $outputPath
+        $arguments += @('--BootstrapProject', '../Validation.Bootstrap/Validation.Bootstrap.csproj')
     }
 
-    Invoke-Template -ShortName 'kamisama-orchestration' -Name $name -OutputPath $outputPath -Arguments @(
-        '--CreateSolutionDirectory', $CreateSolutionDirectory.ToString().ToLowerInvariant(),
-        '--UseProps', $UseProps.ToString().ToLowerInvariant(),
-        '--IncludeClient', 'false',
-        '--IncludeServer', 'false',
-        '--UserManagement', 'false',
-        '--Ticketing', 'false'
-    )
-    Build-Consumer -Path (Join-Path $solutionPath "$name.slnx") -CaseName $caseName
+    Invoke-Template -ShortName 'kamisama-server' -Name 'Validation' -OutputPath $outputPath -Arguments $arguments
+    $serverProject = Join-Path $outputPath 'Validation.Admin.Server/Validation.Admin.Server.csproj'
+    Assert-Path -Path (Join-Path $outputPath 'Validation.Admin.Abstractions/Validation.Admin.Abstractions.csproj')
+    Assert-Path -Path (Join-Path $outputPath 'Validation.Admin.Core/Validation.Admin.Core.csproj')
+    Assert-Path -Path $serverProject
+    Assert-Path -Path (Join-Path $outputPath 'Validation.Admin.Client/Validation.Admin.Client.csproj') -Exists $IncludeClient
+
+    if ($IncludeClient) {
+        Assert-FileContains -Path $serverProject -Pattern 'Validation\.Admin\.Client'
+    }
+    else {
+        Assert-FileNotContains -Path $serverProject -Pattern 'Validation\.Admin\.Client'
+    }
+    if ($IncludeBootstrap) {
+        Assert-FileContains -Path $serverProject -Pattern '\.\./Validation\.Bootstrap/Validation\.Bootstrap\.csproj'
+    }
+    else {
+        Assert-FileNotContains -Path $serverProject -Pattern 'Validation\.Bootstrap'
+    }
+
+    Assert-NoTemplateTokens -Path $outputPath
+    Build-Consumer -Path $serverProject -CaseName $caseName
 }
 
-function Test-AdminCase {
-    param(
-        [Parameter(Mandatory)]
-        [string] $CaseName,
-
-        [bool] $UserManagement,
-
-        [bool] $Ticketing,
-
-        [ValidateSet('Create', 'Existing')]
-        [string] $BootstrapMode,
-
-        [ValidateSet('Postgresql', 'Sqlite')]
-        [string] $UserManagementProvider = 'Postgresql',
-
-        [ValidateSet('Postgresql', 'Sqlite')]
-        [string] $TicketingProvider = 'Postgresql',
-
-        [bool] $CreateSolutionDirectory = $false
-    )
-
-    $casePath = Join-Path $generatedPath $CaseName
-    $name = "Validation.$($CaseName.Replace('-', '.'))"
-    $outputPath = Join-Path $casePath $name
-    $solutionPath = if ($CreateSolutionDirectory) { Join-Path $outputPath $name } else { $outputPath }
-    $arguments = @(
-        '--CreateSolutionDirectory', $CreateSolutionDirectory.ToString().ToLowerInvariant(),
-        '--UserManagement', $UserManagement.ToString().ToLowerInvariant(),
-        '--Ticketing', $Ticketing.ToString().ToLowerInvariant(),
-        '--UserManagementProvider', $UserManagementProvider,
-        '--TicketingProvider', $TicketingProvider,
-        '--BootstrapMode', $BootstrapMode
-    )
-
-    if ($BootstrapMode -eq 'Existing') {
-        $bootstrapName = "$name.Bootstrap"
-        $bootstrapPath = Join-Path $casePath $bootstrapName
-        Invoke-Template -ShortName 'kamisama-bootstrap' -Name $bootstrapName -OutputPath $bootstrapPath -Arguments @(
-            '--UserManagement', $UserManagement.ToString().ToLowerInvariant(),
-            '--Ticketing', $Ticketing.ToString().ToLowerInvariant(),
-            '--UserManagementProvider', $UserManagementProvider,
-            '--TicketingProvider', $TicketingProvider
+function Test-TypeCases {
+    foreach ($type in @('Entity', 'DataType')) {
+        $caseName = "type-$($type.ToLowerInvariant())"
+        $outputPath = Join-Path $generatedPath $caseName
+        Invoke-Template -ShortName 'kamisama-type' -Name 'Product' -OutputPath $outputPath -Arguments @(
+            '--Type', $type,
+            '--Namespace', 'Validation.Catalog',
+            '--KeyType', 'long'
         )
-        Build-Consumer -Path (Join-Path $bootstrapPath "$bootstrapName.csproj") -CaseName "$CaseName-existing-bootstrap"
-        $arguments += @('--BootstrapProject', "../$bootstrapName/$bootstrapName.csproj")
-    }
 
-    Invoke-Template -ShortName 'kamisama-admin' -Name $name -OutputPath $outputPath -Arguments $arguments
-    Build-Consumer -Path (Join-Path $solutionPath "$name.slnx") -CaseName $CaseName
+        $folder = if ($type -eq 'Entity') { 'Entities' } else { 'DataTypes' }
+        $file = Join-Path $outputPath "$folder/Product.cs"
+        Assert-FileContains -Path $file -Pattern 'namespace Validation\.Catalog'
+        Assert-FileContains -Path $file -Pattern 'long'
+        Assert-NoTemplateTokens -Path $outputPath
+    }
+}
+
+function Test-FeatureCases {
+    $expectedFiles = @{
+        Add = 'AddProduct.cs'
+        Update = 'UpdateProduct.cs'
+        Delete = 'DeleteProduct.cs'
+        FindById = 'FindProductById.cs'
+        List = 'ListProducts.cs'
+    }
+    foreach ($operation in @('Add', 'Update', 'Delete', 'FindById', 'List')) {
+        $caseName = "feature-$($operation.ToLowerInvariant())"
+        $outputPath = Join-Path $generatedPath $caseName
+        Invoke-Template -ShortName 'kamisama-feature' -Name 'Product' -OutputPath $outputPath -Arguments @(
+            '--Operation', $operation,
+            '--Namespace', 'Validation.Catalog',
+            '--ServiceCategory', 'Products',
+            '--KeyType', 'long'
+        )
+
+        $file = Join-Path $outputPath "Services/Products/$($expectedFiles[$operation])"
+        Assert-FileContains -Path $file -Pattern 'namespace Validation\.Catalog\.Services\.Products'
+        Assert-FileContains -Path $file -Pattern 'TODO\(ai\)'
+        Assert-NoTemplateTokens -Path $outputPath
+    }
+}
+
+function Test-CrudCase {
+    $outputPath = Join-Path $generatedPath 'crud'
+    Invoke-Template -ShortName 'kamisama-crud' -Name 'Product' -OutputPath $outputPath -Arguments @(
+        '--Solution', 'Validation',
+        '--Context', 'Catalog',
+        '--ServiceCategory', 'Products',
+        '--KeyType', 'long'
+    )
+
+    Assert-Path -Path (Join-Path $outputPath 'Validation.Catalog.Abstractions/Services/Products/Dtos.cs')
+    Assert-Path -Path (Join-Path $outputPath 'Validation.Catalog.Core/Entities/Product.cs')
+    Assert-Path -Path (Join-Path $outputPath 'Validation.Catalog.Core/Repositories/Abstractions/IProductRepository.cs')
+    Assert-Path -Path (Join-Path $outputPath 'Validation.Catalog.Core/Services/Products/AddProductService.cs')
+    Assert-NoTemplateTokens -Path $outputPath
+}
+
+function Test-PanelCrudCase {
+    $outputPath = Join-Path $generatedPath 'panel-crud'
+    Invoke-Template -ShortName 'kamisama-panel-crud' -Name 'Product' -OutputPath $outputPath -Arguments @(
+        '--Solution', 'Validation',
+        '--Panel', 'Admin',
+        '--ServiceCategory', 'Products',
+        '--PageCategory', 'Catalog',
+        '--KeyType', 'long'
+    )
+
+    Assert-Path -Path (Join-Path $outputPath 'Validation.Admin.Abstractions/Services/Products/Dtos.cs')
+    Assert-Path -Path (Join-Path $outputPath 'Validation.Admin.Core/Services/Products/AddProductService.cs')
+    Assert-Path -Path (Join-Path $outputPath 'Validation.Admin.Server/Controllers/ProductsController.cs')
+    Assert-Path -Path (Join-Path $outputPath 'Validation.Admin.Client/Pages/Catalog/Products/List.razor')
+    Assert-NoTemplateTokens -Path $outputPath
+}
+
+function Test-AspireLocalCase {
+    $outputPath = Join-Path $generatedPath 'aspire-local'
+    Invoke-Template -ShortName 'kamisama-aspire-local' -Name 'AspireLocalExtensions' -OutputPath $outputPath -Arguments @('--Namespace', 'Validation.AppHost')
+    $file = Join-Path $outputPath 'AspireLocalExtensions.cs'
+    Assert-FileContains -Path $file -Pattern 'namespace Validation\.AppHost'
+    Assert-FileContains -Path $file -Pattern 'AddMigrationForAll'
+    Assert-NoTemplateTokens -Path $outputPath
+}
+
+function Test-DeleteButtonCase {
+    $outputPath = Join-Path $generatedPath 'delete-button'
+    Invoke-Template -ShortName 'kamisama-delete-button' -Name 'DeleteButton' -OutputPath $outputPath -Arguments @('--Namespace', 'Validation.Admin')
+    $file = Join-Path $outputPath 'Components/DeleteButton.razor'
+    Assert-FileContains -Path $file -Pattern '@namespace Validation\.Admin\.Components'
+    Assert-FileContains -Path $file -Pattern '<ConfirmDialog'
+    Assert-NoTemplateTokens -Path $outputPath
+}
+
+function Test-IntegratedSolution {
+    $caseName = 'integrated-root-solution'
+    $root = Join-Path $generatedPath $caseName
+    Invoke-Template -ShortName 'kamisama-solution' -Name 'Validation' -OutputPath $root -Arguments @('--UseProps', 'true')
+    Invoke-Template -ShortName 'kamisama-bc' -Name 'Validation' -OutputPath $root -Arguments @('--Context', 'Catalog', '--UseProps', 'true')
+    Invoke-Template -ShortName 'kamisama-provider' -Name 'Validation' -OutputPath $root -Arguments @(
+        '--Context', 'Catalog',
+        '--Provider', 'Postgresql',
+        '--CoreProject', '../Validation.Catalog.Core/Validation.Catalog.Core.csproj',
+        '--UseProps', 'true'
+    )
+    Invoke-Template -ShortName 'kamisama-bootstrap' -Name 'Validation.Bootstrap' -OutputPath $root -Arguments @('--UseProps', 'true')
+    Invoke-Template -ShortName 'kamisama-server' -Name 'Validation' -OutputPath $root -Arguments @(
+        '--Server', 'Admin',
+        '--IncludeClient', 'true',
+        '--BootstrapProject', '../Validation.Bootstrap/Validation.Bootstrap.csproj',
+        '--UseProps', 'true'
+    )
+    Invoke-Template -ShortName 'kamisama-crud' -Name 'Product' -OutputPath $root -Arguments @(
+        '--Solution', 'Validation',
+        '--Context', 'Catalog',
+        '--ServiceCategory', 'Products',
+        '--KeyType', 'Guid'
+    )
+    Invoke-Template -ShortName 'kamisama-panel-crud' -Name 'Product' -OutputPath $root -Arguments @(
+        '--Solution', 'Validation',
+        '--Panel', 'Admin',
+        '--ServiceCategory', 'Products',
+        '--PageCategory', 'Catalog',
+        '--KeyType', 'Guid'
+    )
+    Invoke-Template -ShortName 'kamisama-delete-button' -Name 'DeleteButton' -OutputPath (Join-Path $root 'Validation.Admin.Client') -Arguments @(
+        '--Namespace', 'Validation.Admin'
+    )
+
+    $solution = Join-Path $root 'Validation.slnx'
+    $projects = @(
+        'Validation.Catalog.Abstractions/Validation.Catalog.Abstractions.csproj',
+        'Validation.Catalog.Core/Validation.Catalog.Core.csproj',
+        'Validation.Catalog.Postgresql/Validation.Catalog.Postgresql.csproj',
+        'Validation.Bootstrap/Validation.Bootstrap.csproj',
+        'Validation.Admin.Abstractions/Validation.Admin.Abstractions.csproj',
+        'Validation.Admin.Core/Validation.Admin.Core.csproj',
+        'Validation.Admin.Client/Validation.Admin.Client.csproj',
+        'Validation.Admin.Server/Validation.Admin.Server.csproj'
+    )
+    Invoke-DotNet -WorkingDirectory $root -Arguments (@('sln', $solution, 'add') + $projects)
+    Assert-FileContains -Path $solution -Pattern 'Validation\.Admin\.Server'
+    Assert-FileContains -Path (Join-Path $root 'Validation.Admin.Server/Validation.Admin.Server.csproj') -Pattern '<Import Project="\.\./props\.xml" />'
+    Assert-Path -Path (Join-Path $root 'Validation.Catalog.Core/Services/Products/AddProductService.cs')
+    Assert-Path -Path (Join-Path $root 'Validation.Admin.Client/Pages/Catalog/Products/List.razor')
+    Assert-Path -Path (Join-Path $root 'Validation.Admin.Client/Components/DeleteButton.razor')
+    Assert-NoTemplateTokens -Path $root
+    Build-Consumer -Path $solution -CaseName $caseName
 }
 
 try {
     $null = New-Item -ItemType Directory -Path $feedPath, $hivePath, $nugetPackagesPath, $generatedPath, $repoArtifactsPath, $consumerArtifactsPath -Force
 
     $escapedFeedPath = [System.Security.SecurityElement]::Escape($feedPath)
-    $nugetConfig = @"
+    [System.IO.File]::WriteAllText($nugetConfigPath, @"
 <?xml version="1.0" encoding="utf-8"?>
 <configuration>
   <packageSources>
@@ -342,8 +492,7 @@ try {
     <add key="nuget.org" value="https://api.nuget.org/v3/index.json" protocolVersion="3" />
   </packageSources>
 </configuration>
-"@
-    [System.IO.File]::WriteAllText($nugetConfigPath, $nugetConfig)
+"@)
     $env:NUGET_PACKAGES = $nugetPackagesPath
     $env:DOTNET_CLI_HOME = Join-Path $tempRoot 'dotnet-home'
 
@@ -365,39 +514,28 @@ try {
     $archive = [System.IO.Compression.ZipFile]::OpenRead($templatePackages[0].FullName)
     try {
         $entryNames = @($archive.Entries | ForEach-Object { $_.FullName.Replace('\', '/') })
-        $manifests = @($entryNames | Where-Object { $_ -match '/\.template\.config/template\.json$' })
-        if ($manifests.Count -ne 7) {
-            throw "Packed template archive must contain exactly 7 manifests; found $($manifests.Count)."
+        $manifestPaths = @($entryNames | Where-Object { $_ -match '/\.template\.config/template\.json$' })
+        if ($manifestPaths.Count -ne 11) {
+            throw "Packed template archive must contain exactly 11 manifests; found $($manifestPaths.Count)."
         }
-        $solutionDirectoryOptionCount = 0
-        foreach ($manifestPath in $manifests) {
-            $manifestEntry = $archive.GetEntry($manifestPath)
-            $reader = [System.IO.StreamReader]::new($manifestEntry.Open())
+
+        $packedShortNames = foreach ($manifestPath in $manifestPaths) {
+            $entry = $archive.GetEntry($manifestPath)
+            $reader = [System.IO.StreamReader]::new($entry.Open())
             try {
-                $manifest = $reader.ReadToEnd() | ConvertFrom-Json
-                $directoryOption = $manifest.symbols.PSObject.Properties['CreateSolutionDirectory']
-                if ($manifest.tags.type -eq 'solution') {
-                    $solutionDirectoryOptionCount++
-                    if ($manifest.preferNameDirectory -ne $false -or $null -eq $directoryOption -or $directoryOption.Value.defaultValue -ne 'false') {
-                        throw "Solution template manifest '$manifestPath' must expose CreateSolutionDirectory with a false default and disable preferNameDirectory."
-                    }
-                }
-                elseif ($null -ne $directoryOption) {
-                    throw "Single-project template manifest '$manifestPath' must not expose CreateSolutionDirectory."
-                }
+                ($reader.ReadToEnd() | ConvertFrom-Json).shortName
             }
             finally {
                 $reader.Dispose()
             }
         }
-        if ($solutionDirectoryOptionCount -ne 4) {
-            throw "Expected CreateSolutionDirectory on exactly 4 solution templates; found $solutionDirectoryOptionCount."
+        $actualNames = @($packedShortNames | Sort-Object -Unique)
+        $expectedNames = @($requiredTemplateNames | Sort-Object)
+        if (($actualNames -join ',') -ne ($expectedNames -join ',')) {
+            throw "Packed manifest names mismatch. Expected '$($expectedNames -join ', ')'; found '$($actualNames -join ', ')'."
         }
         if ($entryNames | Where-Object { $_ -like 'content/content/*' }) {
             throw 'Packed template archive contains an invalid content/content path.'
-        }
-        if (-not ($entryNames | Where-Object { $_ -match '(^|/)\.agents/' })) {
-            throw 'Packed template archive does not include .agents content.'
         }
     }
     finally {
@@ -428,50 +566,29 @@ try {
         }
     }
 
-    if ($Fast) {
-        Test-SolutionCase -UseProps $true -CreateSolutionDirectory $true
-        Test-EmptyCase -UseProps $true
-        Test-BoundedContextCase -UseProps $false -IncludeExample $true -CreateSolutionDirectory $true
-        Test-DatabaseSupportCase -Provider 'Postgresql'
-        Test-BootstrapCase -CaseName 'bootstrap-combined-cross' -UserManagement $true -Ticketing $true -UserManagementProvider 'Sqlite' -TicketingProvider 'Postgresql'
-        Test-OrchestrationCase -UseProps $false -CreateSolutionDirectory $true
-        Test-AdminCase -CaseName 'admin-both-create' -UserManagement $true -Ticketing $true -BootstrapMode 'Create' -CreateSolutionDirectory $true
-        Test-AdminCase -CaseName 'admin-both-existing' -UserManagement $true -Ticketing $true -BootstrapMode 'Existing' -UserManagementProvider 'Sqlite' -TicketingProvider 'Postgresql'
-    }
-    else {
-        Test-SolutionCase -UseProps $false
-        Test-SolutionCase -UseProps $true
-        Test-EmptyCase -UseProps $false
-        Test-EmptyCase -UseProps $true
+    Test-SolutionSkillCases
+    Test-TypeCases
+    Test-FeatureCases
+    Test-CrudCase
+    Test-PanelCrudCase
+    Test-AspireLocalCase
+    Test-DeleteButtonCase
 
-        Test-BoundedContextCase -UseProps $false -IncludeExample $false
-        Test-BoundedContextCase -UseProps $false -IncludeExample $true
-        Test-BoundedContextCase -UseProps $true -IncludeExample $false
-        Test-BoundedContextCase -UseProps $true -IncludeExample $true
-
-        Test-DatabaseSupportCase -Provider 'Postgresql'
-        Test-DatabaseSupportCase -Provider 'Sqlite'
-        Test-DatabaseSupportCase -Provider 'SqlServer'
-        Test-DatabaseSupportCase -Provider 'Oracle'
-
-        Test-BootstrapCase -CaseName 'bootstrap-empty' -UserManagement $false -Ticketing $false
-        Test-BootstrapCase -CaseName 'bootstrap-ticketing-postgresql' -UserManagement $false -Ticketing $true -TicketingProvider 'Postgresql'
-        Test-BootstrapCase -CaseName 'bootstrap-ticketing-sqlite' -UserManagement $false -Ticketing $true -TicketingProvider 'Sqlite'
-        Test-BootstrapCase -CaseName 'bootstrap-users-postgresql' -UserManagement $true -Ticketing $false -UserManagementProvider 'Postgresql'
-        Test-BootstrapCase -CaseName 'bootstrap-users-sqlite' -UserManagement $true -Ticketing $false -UserManagementProvider 'Sqlite'
-        Test-BootstrapCase -CaseName 'bootstrap-combined-cross' -UserManagement $true -Ticketing $true -UserManagementProvider 'Sqlite' -TicketingProvider 'Postgresql'
-
-        Test-OrchestrationCase -UseProps $false
-        Test-OrchestrationCase -UseProps $true
-
-        Test-AdminCase -CaseName 'admin-users-only' -UserManagement $true -Ticketing $false -BootstrapMode 'Create'
-        Test-AdminCase -CaseName 'admin-ticketing-only' -UserManagement $false -Ticketing $true -BootstrapMode 'Create'
-        Test-AdminCase -CaseName 'admin-both' -UserManagement $true -Ticketing $true -BootstrapMode 'Create'
-        Test-AdminCase -CaseName 'admin-create-bootstrap' -UserManagement $true -Ticketing $true -BootstrapMode 'Create' -UserManagementProvider 'Sqlite' -TicketingProvider 'Postgresql'
-        Test-AdminCase -CaseName 'admin-existing-bootstrap' -UserManagement $true -Ticketing $true -BootstrapMode 'Existing' -UserManagementProvider 'Sqlite' -TicketingProvider 'Postgresql'
-        Test-AdminCase -CaseName 'admin-minimal' -UserManagement $false -Ticketing $false -BootstrapMode 'Create'
+    if (-not $Fast) {
+        Test-BoundedContextCase -UseProps $false -Build $true
+        Test-BoundedContextCase -UseProps $true -Build $true
+        foreach ($provider in @('Postgresql', 'Sqlite', 'SqlServer', 'Oracle')) {
+            Test-ProviderCase -Provider $provider
+        }
+        Test-BootstrapCase
+        foreach ($includeClient in @($false, $true)) {
+            foreach ($includeBootstrap in @($false, $true)) {
+                Test-ServerCase -IncludeClient $includeClient -IncludeBootstrap $includeBootstrap
+            }
+        }
     }
 
+    Test-IntegratedSolution
     Write-Host "Packed template consumption validation passed ($($Fast ? 'fast' : 'full') matrix)."
 }
 finally {

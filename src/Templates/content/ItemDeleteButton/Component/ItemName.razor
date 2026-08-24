@@ -1,0 +1,66 @@
+@namespace NamespaceToken.Components
+@using BlazorBootstrap
+@using Microsoft.AspNetCore.Components
+@inject ToastService ToastService
+
+<ConfirmDialog @ref="confirmationDialog" />
+<button type="button"
+        class="btn btn-danger"
+        disabled="@isDeleting"
+        @onclick="DeleteAsync">
+    @(isDeleting ? "Deleting..." : ChildContent)
+</button>
+
+@code {
+    private ConfirmDialog confirmationDialog = default!;
+    private bool isDeleting;
+
+    [Parameter]
+    public string ConfirmMessage { get; set; } = "This action cannot be undone. Do you want to continue?";
+
+    [Parameter]
+    public EventCallback OnDelete { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; } = builder => builder.AddContent(0, "Delete");
+
+    [Parameter]
+    public string SuccessMessage { get; set; } = "Deleted successfully.";
+
+    [Parameter]
+    public string FailureMessage { get; set; } = "Delete failed.";
+
+    private async Task DeleteAsync()
+    {
+        if (isDeleting || !OnDelete.HasDelegate)
+            return;
+
+        var confirmed = await confirmationDialog.ShowAsync(
+            title: "Confirm deletion",
+            message1: ConfirmMessage,
+            confirmDialogOptions: new ConfirmDialogOptions
+            {
+                YesButtonColor = ButtonColor.Danger,
+                YesButtonText = "Delete",
+                NoButtonText = "Cancel",
+            });
+
+        if (!confirmed)
+            return;
+
+        isDeleting = true;
+        try
+        {
+            await OnDelete.InvokeAsync();
+            ToastService.Notify(new ToastMessage(ToastType.Success, SuccessMessage));
+        }
+        catch (Exception exception)
+        {
+            ToastService.Notify(new ToastMessage(ToastType.Danger, $"{FailureMessage} {exception.Message}"));
+        }
+        finally
+        {
+            isDeleting = false;
+        }
+    }
+}

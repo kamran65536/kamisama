@@ -1,0 +1,12 @@
+schemaVersion: 1
+kind: SolutionDesign
+metadata:
+  name: Example
+includes:
+  - bounded-contexts.yaml
+  - panels.yaml
+solution:
+  props: optional
+  projects: []
+  bootstrap: null
+  aspire: null

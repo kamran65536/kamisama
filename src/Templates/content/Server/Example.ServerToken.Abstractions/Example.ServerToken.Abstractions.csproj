@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--#if (UseProps)-->
+  <Import Project="PropsPathToken" />
+  <!--#else-->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <!--#endif-->
+  <PropertyGroup>
+    <RootNamespace>Example.ServerToken</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="KamiSama.Chassis.Commons.Abstractions" Version="10.0.11.9" />
+    <PackageReference Include="KamiSama.Extensions.Core" Version="10.0.11.9" />
+  </ItemGroup>
+</Project>

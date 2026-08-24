@@ -1,302 +1,346 @@
 # 10. KamiSama.Templates
 
-`KamiSama.Templates` is a NuGet template package for composing .NET 10 KamiSama solutions. The replacement architecture uses focused solution and project templates instead of the previous Core, Abstractions, Props, Database, and Blazor Admin template set.
+`KamiSama.Templates` provides 11 focused .NET 10 templates for a template-first solution-design workflow. The package creates an inspectable solution shell, composes projects with explicit boundaries and references, and scaffolds domain or panel work without pretending generated TODOs are completed business behavior.
 
-## Install, Update, and Uninstall
-
-Install the documented package version:
+## Install and inspect
 
 ```shell
 dotnet new install KamiSama.Templates::{{ version }}
-```
-
-List the installed templates or inspect one template's current command-line help:
-
-```shell
 dotnet new list kamisama
-dotnet new kamisama-orchestration --help
+dotnet new kamisama-solution --help
+dotnet new kamisama-server --help
 ```
 
-Run `dotnet new install` again with the desired version to update the installed package. Uninstall the package and all templates supplied by it with:
+Install a local `.nupkg` by path when validating an unpublished package. Uninstall its reported source before switching back to the published package:
 
 ```shell
 dotnet new uninstall KamiSama.Templates
 ```
 
-When testing a locally packed `.nupkg`, install by package path. Uninstall the source reported by `dotnet new uninstall` before switching between local and published packages.
+The CLI help generated from each installed manifest is authoritative. All templates also accept standard template-engine options such as `-n|--name`, `-o|--output`, and `--force`.
 
-## Template Catalog
+## Catalog and migration
 
-The package exposes exactly these seven short names:
+The package exposes exactly these short names:
 
 | Short name | Kind | Purpose |
 | --- | --- | --- |
-| `kamisama-solution` | Solution | Creates a solution root, agent guidance, and optional shared MSBuild props. |
-| `kamisama-empty` | Project | Creates a minimal class library. |
-| `kamisama-bounded-context` | Solution | Creates paired Abstractions and Core projects for one bounded context. |
-| `kamisama-database-support` | Project | Adds one generic EF Core provider project to a Core project. |
-| `kamisama-bootstrap` | Project | Creates the ASP.NET Core composition root and optional module registrations. |
-| `kamisama-orchestration` | Solution | Creates Abstractions/Core plus optional Client and Server hosts. |
-| `kamisama-admin` | Solution | Creates the administration variant of orchestration. |
+| `kamisama-solution` | Solution | Creates the design-enabled solution root, optional shared props, and selectable agent skills. |
+| `kamisama-bc` | Project group | Creates a bounded context's Abstractions and provider-neutral Core projects. |
+| `kamisama-provider` | Project | Adds one EF Core provider project to an existing bounded context. |
+| `kamisama-bootstrap` | Project | Creates a reusable web composition root. |
+| `kamisama-server` | Project group | Creates server contracts, Core, and host projects, with optional hosted Blazor client and Bootstrap reference. |
+| `kamisama-type` | Item | Creates an Entity or DataType. |
+| `kamisama-crud` | Item group | Scaffolds a bounded-context CRUD vertical slice. |
+| `kamisama-feature` | Item | Scaffolds one Add, Update, Delete, FindById, or List operation. |
+| `kamisama-panel-crud` | Item group | Scaffolds panel-owned CRUD contracts, orchestration, API, clients, and pages. |
+| `kamisama-aspire-local` | Item | Adds local Aspire database/migration helpers. |
+| `kamisama-delete-button` | Item | Adds a Blazor Bootstrap confirmation/delete component. |
 
-Old short names and their options are not compatibility aliases. In particular, do not use `kamisama-props`, `kamisama-core`, `kamisama-abstractions`, `kamisama-database`, or `kamisama-blazor-admin` with the replacement package.
+The old seven-template package is not preserved through aliases. `kamisama-admin`, `kamisama-empty`, `kamisama-bounded-context`, `kamisama-database-support`, and `kamisama-orchestration` are breaking-retired. `kamisama-solution` and `kamisama-bootstrap` retain their names but use redesigned manifests and generated content, so old options must not be assumed.
 
-All templates also accept standard .NET template-engine arguments such as `-n|--name`, `-o|--output`, and `--force`. The tables below contain every additional public option defined by the KamiSama manifests; computed implementation symbols are not command-line options.
+## Template-first solution design
 
-The four solution templates expose a `Create solution directory` option in Visual Studio. It defaults to `false`, so solution content is generated directly in the selected location. Enable it to place all generated content in a new directory named after the solution. Single-project templates do not expose this option.
+Create the shell before generating application projects:
 
-## Shared Props
+```shell
+dotnet new kamisama-solution -n Shop -o Shop --UseProps true
+cd Shop
+dotnet build Shop.slnx
+```
 
-Shared MSBuild settings are optional and use `props.xml`.
+The shell is deliberately empty. Its generated structure is:
+
+```text
+Shop/
+|-- Shop.slnx
+|-- props.xml                         # only with --UseProps true
+|-- GETTING_STARTED.md
+|-- AGENTS.md
+|-- agent/
+|   |-- solution-map.yaml             # maintained implemented state
+|   `-- design/
+|       |-- solution.yaml             # reusable design entry point
+|       |-- bounded-contexts.yaml
+|       `-- panels.yaml
+`-- .agents/
+    |-- instructions/
+    |-- prompts/
+    |-- commands/
+    `-- skills/
+        |-- solution-scaffolding/
+        |-- kamisama-libraries/        # selectable
+        `-- kamisama-solution-designer/# selectable
+```
+
+Use the generated workflow in this order:
+
+1. Inspect the `.slnx`, `AGENTS.md`, and `agent/solution-map.yaml`.
+2. Describe reusable intent in `agent/design/solution.yaml` and resolve its includes recursively.
+3. Use the solution-designer skill to merge non-conflicting definitions and preview the smallest concrete change.
+4. Prefer an installed `kamisama-*` template, inspect its current help, and generate only projects/items required by the design.
+5. Add projects explicitly to the root `.slnx`, build the narrowest target, and update `agent/solution-map.yaml` to verified implemented state.
+
+Design YAML is creation input, while `agent/solution-map.yaml` tracks what actually exists. Neither replaces verification against the solution, project references, and source.
+
+### Solution options
+
+| Option | Type | Default | Behavior |
+| --- | --- | --- | --- |
+| `--CreateSolutionDirectory` | bool | `false` | Places all output in a new solution-named directory. |
+| `--UseProps` | bool | `false` | Creates root `props.xml`. |
+| `--IncludeKamiSamaLibrariesSkill` | bool | `true` | Includes exact KamiSama public-API guidance. |
+| `--IncludeSolutionDesignerSkill` | bool | `true` | Includes modular YAML solution-design guidance. |
+
+The two skills are independent. All four include/exclude combinations are valid; `AGENTS.md`, design YAML, solution scaffolding guidance, prompts, and commands remain when either optional skill is excluded.
+
+## Naming and shared props
+
+Use `<Solution>.<Context/Server>.<Role>` consistently:
+
+```text
+Shop.Catalog.Abstractions
+Shop.Catalog.Core
+Shop.Catalog.Postgresql
+Shop.Admin.Abstractions
+Shop.Admin.Core
+Shop.Admin.Client
+Shop.Admin.Server
+Shop.Bootstrap
+```
+
+For `kamisama-bc`, `kamisama-provider`, and `kamisama-server`, pass the solution prefix through `--name` and the middle segment through `--Context` or `--Server`. For Bootstrap, pass the complete project name, such as `Shop.Bootstrap`.
+
+Shared MSBuild properties are opt-in:
 
 - `kamisama-solution --UseProps true` creates `props.xml` at the solution root.
-- Project and composed-solution templates default `--UseProps` to `false` and emit local .NET 10 project properties.
-- With `--UseProps true`, `--PropsPath` writes an import to an existing props file; it does not create that file.
-- `--PropsPath` is enabled only when `--UseProps true`.
+- BC, Provider, Bootstrap, and Server default to local `net10.0`, implicit-usings, and nullable settings.
+- Their `--UseProps true` mode imports an existing file; it never creates one.
+- `--PropsPath` is enabled only with `--UseProps true` and defaults to `../props.xml`, relative to each generated project file.
 
-The generated `props.xml` sets `TargetFramework` to `net10.0`, enables implicit usings and nullable reference types, and derives `RootNamespace` from `MSBuildProjectName` after removing `.Abstractions`, `.Core`, `.Postgresql`, `.Sqlite`, `.SqlServer`, and `.Oracle` suffixes.
-
-The default project import is `../props.xml`. Change it when project and props locations differ:
+The generated root props sets `TargetFramework`, implicit usings, nullable, and a fallback `RootNamespace` that removes `.Abstractions`, `.Core`, `.Postgresql`, `.Sqlite`, `.SqlServer`, and `.Oracle`. Generated projects also set the intended shared namespace explicitly. Override the path for deeper layouts:
 
 ```shell
-dotnet new kamisama-empty -n Store.Shared --UseProps true --PropsPath ../../props.xml
+dotnet new kamisama-server -n Shop --Server Admin -o src \
+  --UseProps true --PropsPath ../../props.xml
 ```
 
-## Solution (`kamisama-solution`)
+## Project templates
 
-Creates `<name>.slnx`, repository-level `AGENTS.md`, and `.agents/`. The agent files are always created and are intended to be reviewed and extended with repository-specific build, test, architecture, and security guidance.
+### Bounded context (`kamisama-bc`)
 
 ```shell
-dotnet new kamisama-solution -n Store
-dotnet new kamisama-solution -n Store --UseProps true
+dotnet new kamisama-bc -n Shop -o . --Context Catalog --UseProps true
 ```
+
+Generated projects:
+
+```text
+Shop.Catalog.Abstractions/Shop.Catalog.Abstractions.csproj
+Shop.Catalog.Core/Shop.Catalog.Core.csproj
+```
+
+Abstractions owns contracts and DTOs. Core references Abstractions and owns provider-neutral entities, repositories, services, mappings, and module registration. Keep bounded contexts mutually unaware and add concrete persistence with `kamisama-provider`.
 
 | Option | Type | Default | Behavior |
 | --- | --- | --- | --- |
-| `--CreateSolutionDirectory` | bool | `false` | Creates a solution-named directory when enabled; shown as **Create solution directory** in Visual Studio. |
-| `--UseProps` | bool | `false` | Includes `props.xml` when `true`. |
+| `--Context` | string | Required | Bounded-context segment. |
+| `--UseProps` | bool | `false` | Imports shared props in both projects. |
+| `--PropsPath` | string | `../props.xml` | Import path, enabled only with `--UseProps true`. |
 
-The solution also generates `GETTING_STARTED.md`. Read it with `AGENTS.md`, `.agents/instructions/architecture.md`, and `.agents/skills/solution-scaffolding/SKILL.md` before restructuring the solution. `AGENTS.md` is the repository entry point that coding agents discover; `.agents/` contains reusable instructions, prompts, commands, and skills. These files do not install or configure an AI tool.
-
-## Empty Project (`kamisama-empty`)
-
-Creates a minimal .NET 10 class library with a starter class. Use it for infrastructure or integration projects that do not need the bounded-context layout.
+### Database provider (`kamisama-provider`)
 
 ```shell
-dotnet new kamisama-empty -n Store.Notifications
-dotnet new kamisama-empty -n Store.Notifications --UseProps true
-```
-
-| Option | Type | Default | Behavior |
-| --- | --- | --- | --- |
-| `--UseProps` | bool | `false` | Imports shared MSBuild properties when `true`. |
-| `--PropsPath` | string | `../props.xml` | Import path, enabled only when `--UseProps true`. |
-
-## Bounded Context (`kamisama-bounded-context`)
-
-Creates `<name>.Abstractions`, `<name>.Core`, and a solution file. Abstractions owns contracts and DTOs; Core owns the implementation and provider-neutral persistence types. Add concrete persistence separately with `kamisama-database-support`.
-
-```shell
-dotnet new kamisama-bounded-context -n Catalog
-dotnet new kamisama-bounded-context -n Catalog --UseProps true --PropsPath ../props.xml
-```
-
-| Option | Type | Default | Behavior |
-| --- | --- | --- | --- |
-| `--CreateSolutionDirectory` | bool | `false` | Creates a solution-named directory when enabled; shown as **Create solution directory** in Visual Studio. |
-| `--UseProps` | bool | `false` | Configures both projects to import shared MSBuild properties. |
-| `--PropsPath` | string | `../props.xml` | Import path, enabled only when `--UseProps true`. |
-| `--IncludeExample` | bool | `false` | Includes a sample contract and attributed implementation. |
-
-## Database Support (`kamisama-database-support`)
-
-Creates one provider-specific project that references an explicit Core project. It uses the generic `KamiSama.Repositories.EntityFrameworkCore.<Provider>` packages and is not restricted to module-specific database packages.
-
-```shell
-dotnet new kamisama-database-support \
-  -n Catalog \
+dotnet new kamisama-provider -n Shop -o . \
+  --Context Catalog \
   --Provider Postgresql \
-  --CoreProject ../Catalog.Core/Catalog.Core.csproj
-
-dotnet new kamisama-database-support \
-  -n Catalog \
-  --Provider SqlServer \
-  --CoreProject ../Catalog.Core/Catalog.Core.csproj
+  --CoreProject ../Shop.Catalog.Core/Shop.Catalog.Core.csproj \
+  --UseProps true
 ```
+
+This creates `Shop.Catalog.Postgresql/Shop.Catalog.Postgresql.csproj`. The provider project references the explicit Core path and one `KamiSama.Repositories.EntityFrameworkCore.<Provider>` package.
 
 | Option | Type | Default | Behavior |
 | --- | --- | --- | --- |
-| `--UseProps` | bool | `false` | Imports shared MSBuild properties when `true`. |
-| `--PropsPath` | string | `../props.xml` | Import path, enabled only when `--UseProps true`. |
+| `--Context` | string | Required | Bounded-context segment. |
 | `--Provider` | choice | `Postgresql` | Selects `Postgresql`, `Sqlite`, `SqlServer`, or `Oracle`. |
-| `--CoreProject` | string | Required; no default | Explicit path from the generated provider project to the Core project it references. |
+| `--CoreProject` | string | Required | Path from the generated provider project to its Core project. |
+| `--UseProps` | bool | `false` | Imports shared props. |
+| `--PropsPath` | string | `../props.xml` | Import path, enabled only with `--UseProps true`. |
 
-Pass the bounded-context name without a provider suffix. `-n Catalog --Provider Postgresql` generates the `Catalog.Postgresql` provider project; `Sqlite`, `SqlServer`, and `Oracle` produce the corresponding suffix. The provider controls generated type/file names and the generic `KamiSama.Repositories.EntityFrameworkCore.<Provider>` package. `--CoreProject` is required because the template does not discover or verify a Core project during generation.
+The template does not discover or validate the Core project during generation. Supply a path that will be valid from the generated provider directory.
 
-## Bootstrap (`kamisama-bootstrap`)
-
-Creates the ASP.NET Core bootstrap project and composition root. User Management and Ticketing are independent switches; each selected module has its own provider choice.
+### Bootstrap (`kamisama-bootstrap`)
 
 ```shell
-dotnet new kamisama-bootstrap -n Store.Bootstrap
-
-dotnet new kamisama-bootstrap \
-  -n Support.Bootstrap \
-  --UserManagement true \
-  --UserManagementProvider Sqlite \
-  --Ticketing true \
-  --TicketingProvider Postgresql
+dotnet new kamisama-bootstrap -n Shop.Bootstrap -o . --UseProps true
 ```
+
+This creates `Shop.Bootstrap/Shop.Bootstrap.csproj` and `BootstrapModule.cs`, a reusable composition root based on `KamiSama.Modules`. Add application/module registration deliberately after generation.
 
 | Option | Type | Default | Behavior |
 | --- | --- | --- | --- |
-| `--UseProps` | bool | `false` | Imports shared MSBuild properties when `true`. |
-| `--PropsPath` | string | `../props.xml` | Import path, enabled only when `--UseProps true`. |
-| `--UserManagement` | bool | `false` | Adds User Management registration and package references. |
-| `--Ticketing` | bool | `false` | Adds Ticketing registration and package references. |
-| `--UserManagementProvider` | choice | `Postgresql` | Selects `Postgresql` or `Sqlite`; enabled with User Management or Ticketing. |
-| `--TicketingProvider` | choice | `Postgresql` | Selects `Postgresql` or `Sqlite`; enabled only with Ticketing. |
+| `--UseProps` | bool | `false` | Imports shared props. |
+| `--PropsPath` | string | `../props.xml` | Import path, enabled only with `--UseProps true`. |
 
-### Module and Provider Matrix
-
-| Bootstrap feature | PostgreSQL | SQLite | SQL Server | Oracle |
-| --- | --- | --- | --- | --- |
-| Bootstrap without either module | No module provider required | No module provider required | No module provider required | No module provider required |
-| User Management | Supported | Supported | Not available | Not available |
-| Ticketing | Supported | Supported | Not available | Not available |
-
-User Management and Ticketing currently publish only PostgreSQL and SQLite module providers. SQL Server and Oracle remain available to application-owned bounded contexts through `kamisama-database-support`; they are not valid values for either Bootstrap module-provider option.
-
-Ticketing requires Identity infrastructure. Therefore `--Ticketing true` includes Identity Core plus the provider selected by `--UserManagementProvider`, even when `--UserManagement false`. This hidden infrastructure dependency does not enable User Management contracts, endpoints, pages, or administration UI; those remain controlled by `--UserManagement`.
-
-## Orchestration (`kamisama-orchestration`)
-
-Creates Abstractions and Core projects, with optional Blazor Client and ASP.NET Core Server projects. A generated Server can create its own Bootstrap code or reference an existing Bootstrap project.
+### Server (`kamisama-server`)
 
 ```shell
-dotnet new kamisama-orchestration -n Store
+dotnet new kamisama-server -n Shop -o . --Server PublicApi --UseProps true
 
-dotnet new kamisama-orchestration \
-  -n Store \
+dotnet new kamisama-server -n Shop -o . \
+  --Server Admin \
   --IncludeClient true \
-  --IncludeServer true \
-  --UserManagement true \
-  --Ticketing true
+  --BootstrapProject ../Shop.Bootstrap/Shop.Bootstrap.csproj \
+  --UseProps true
+```
+
+Base output:
+
+```text
+Shop.Admin.Abstractions/Shop.Admin.Abstractions.csproj
+Shop.Admin.Core/Shop.Admin.Core.csproj
+Shop.Admin.Server/Shop.Admin.Server.csproj
+Shop.Admin.Client/Shop.Admin.Client.csproj       # only with --IncludeClient true
+```
+
+The Server host references Abstractions and Core. `--IncludeClient true` adds a hosted Blazor WebAssembly client and Blazor Bootstrap wiring. A non-empty `--BootstrapProject` adds that project reference and calls its `BootstrapModule`; an empty value generates no Bootstrap dependency. Client and Bootstrap choices are independent, so Server supports all four combinations.
+
+| Option | Type | Default | Behavior |
+| --- | --- | --- | --- |
+| `--Server` | string | Required | Server or panel segment. |
+| `--IncludeClient` | bool | `false` | Includes the hosted Blazor WebAssembly Client project. |
+| `--BootstrapProject` | string | Empty | Optional path from the generated Server project to a Bootstrap project. |
+| `--UseProps` | bool | `false` | Imports shared props in all generated projects. |
+| `--PropsPath` | string | `../props.xml` | Import path, enabled only with `--UseProps true`. |
+
+## Item templates
+
+Item templates place files relative to `--output`; they do not locate a solution or project automatically. Generate `kamisama-crud` and `kamisama-panel-crud` at the common solution root because their source paths include target project names. Generate Type and Feature into the intended project root, and Aspire Local/DeleteButton into their intended AppHost/Client root.
+
+### Type (`kamisama-type`)
+
+```shell
+dotnet new kamisama-type -n Product -o Shop.Catalog.Core \
+  --Type Entity --Namespace Shop.Catalog --KeyType Guid
 ```
 
 | Option | Type | Default | Behavior |
 | --- | --- | --- | --- |
-| `--CreateSolutionDirectory` | bool | `false` | Creates a solution-named directory when enabled; shown as **Create solution directory** in Visual Studio. |
-| `--UseProps` | bool | `false` | Configures generated projects to import shared MSBuild properties. |
-| `--PropsPath` | string | `../props.xml` | Import path, enabled only when `--UseProps true`. |
-| `--IncludeClient` | bool | `false` | Includes the Blazor client project. |
-| `--IncludeServer` | bool | `false` | Includes an ASP.NET Core Server project. |
-| `--UserManagement` | bool | `false` | Includes user contracts, services, endpoints, and client features where applicable. |
-| `--Ticketing` | bool | `false` | Includes ticket contracts, services, endpoints, and client features where applicable. |
-| `--BootstrapMode` | choice | `Create` | Selects `Create` or `Existing`; enabled only with `--IncludeServer true`. |
-| `--BootstrapProject` | string | `Example.Bootstrap/Example.Bootstrap.csproj` | Existing Bootstrap project path relative to the generated solution root; enabled only for a Server in `Existing` mode. |
-| `--UserManagementProvider` | choice | `Postgresql` | Selects `Postgresql` or `Sqlite`; enabled when Server and User Management or Ticketing are selected. |
-| `--TicketingProvider` | choice | `Postgresql` | Selects `Postgresql` or `Sqlite`; enabled when Server and Ticketing are selected. |
+| `--Type` | choice | `Entity` | Selects `Entity` or `DataType`. |
+| `--Namespace` | string | Required | Base namespace written to the generated type. |
+| `--KeyType` | string | `Guid` | Entity key type; also replaces the token in the selected scaffold. |
 
-With `--IncludeServer true`, both modes generate the Server. `Create` additionally generates `<name>.Bootstrap` and references it from Server. `Existing` does not generate Bootstrap; Server references `--BootstrapProject`, and the existing project is added to the generated `.slnx`. Use a real path relative to the generated solution root because dynamic project discovery is not performed. Provider options configure generated Server settings and, in `Create` mode, the generated Bootstrap source.
+Entity output is `Entities/<name>.cs`; DataType output is `DataTypes/<name>.cs`.
 
-## Admin (`kamisama-admin`)
-
-Creates the administration-oriented orchestration layout. Client and Server participation are fixed on, while User Management, Ticketing, and Bootstrap ownership remain selectable.
+### Single feature (`kamisama-feature`)
 
 ```shell
-dotnet new kamisama-admin -n Store.Admin
-
-dotnet new kamisama-admin \
-  -n Store.Admin \
-  --UserManagement true \
-  --Ticketing false \
-  --BootstrapMode Existing \
-  --BootstrapProject ../Store.Bootstrap/Store.Bootstrap.csproj
+dotnet new kamisama-feature -n Product -o Shop.Catalog.Core \
+  --Operation FindById --Namespace Shop.Catalog \
+  --ServiceCategory Products --KeyType Guid
 ```
 
 | Option | Type | Default | Behavior |
 | --- | --- | --- | --- |
-| `--CreateSolutionDirectory` | bool | `false` | Creates a solution-named directory when enabled; shown as **Create solution directory** in Visual Studio. |
-| `--UseProps` | bool | `false` | Configures generated projects to import shared MSBuild properties. |
-| `--PropsPath` | string | `../props.xml` | Import path, enabled only when `--UseProps true`. |
-| `--UserManagement` | bool | `true` | Includes authorized user-administration endpoints and UI. |
-| `--Ticketing` | bool | `true` | Includes authorized ticket endpoints and UI. |
-| `--UserManagementProvider` | choice | `Postgresql` | Selects `Postgresql` or `Sqlite`; enabled with User Management or Ticketing. |
-| `--TicketingProvider` | choice | `Postgresql` | Selects `Postgresql` or `Sqlite`; enabled with Ticketing. |
-| `--BootstrapMode` | choice | `Create` | Selects `Create` or `Existing`. |
-| `--BootstrapProject` | string | `Example.Bootstrap/Example.Bootstrap.csproj` | Existing Bootstrap project path relative to the generated solution root, enabled only in `Existing` mode. |
+| `--Operation` | choice | `FindById` | Selects `Add`, `Update`, `Delete`, `FindById`, or `List`. |
+| `--Namespace` | string | Required | Base namespace. |
+| `--ServiceCategory` | string | Required | Folder and namespace category below `Services`. |
+| `--KeyType` | string | `Guid` | Replaces the operation's key token. |
 
-### Existing Bootstrap Usage
+Output is `Services/<ServiceCategory>/<Operation><name>.cs` (`List` pluralizes the generated filename as `List<name>s.cs`). Each operation body throws `NotImplementedException` until its domain-specific load/map/validate/persist logic is implemented.
 
-Admin always generates Client and Server. In the default `Create` mode it additionally generates `<name>.Bootstrap`. Use `BootstrapMode Existing` when a reusable Bootstrap project already exists: Admin still generates Server, but Server references the supplied Bootstrap project instead of generating a new one. Admin also generates `GETTING_STARTED.md`, `AGENTS.md`, and `.agents/` at its solution root.
+### Bounded-context CRUD (`kamisama-crud`)
 
 ```shell
-dotnet new kamisama-bootstrap \
-  -n Store.Bootstrap \
-  --UserManagement true \
-  --UserManagementProvider Postgresql \
-  --Ticketing true \
-  --TicketingProvider Postgresql
-
-dotnet new kamisama-admin \
-  -n Store.Admin \
-  --BootstrapMode Existing \
-  --BootstrapProject ../Store.Bootstrap/Store.Bootstrap.csproj \
-  --UserManagementProvider Postgresql \
-  --TicketingProvider Postgresql
+dotnet new kamisama-crud -n Product -o . \
+  --Solution Shop --Context Catalog --ServiceCategory Products --KeyType Guid
 ```
 
-The Admin switches control Admin contracts, endpoints, and UI. Configure matching module registrations and providers in the existing Bootstrap project; Admin does not rewrite it.
+| Option | Type | Default | Behavior |
+| --- | --- | --- | --- |
+| `--Solution` | string | Required | Solution prefix used in target project paths and namespaces. |
+| `--Context` | string | Required | Bounded-context segment. |
+| `--ServiceCategory` | string | Required | Service folder/category. |
+| `--KeyType` | string | `Guid` | Entity and DTO key type. |
 
-## Compose a Solution
+The scaffold spans `Shop.Catalog.Abstractions` and `Shop.Catalog.Core`: DTOs/contracts, entity, repository abstraction/implementation, feature definition, mappings, and five CRUD services. It expects those BC projects to exist.
 
-The focused templates can be combined without hidden defaults:
+### Panel CRUD (`kamisama-panel-crud`)
 
 ```shell
-mkdir Store
-cd Store
-
-dotnet new kamisama-solution -n Store -o . --UseProps true
-dotnet new kamisama-bounded-context -n Catalog -o . --UseProps true
-dotnet new kamisama-database-support -n Catalog -o . --UseProps true --Provider Postgresql --CoreProject ../Catalog.Core/Catalog.Core.csproj
-dotnet new kamisama-bootstrap -n Store.Bootstrap -o Store.Bootstrap --UseProps true --UserManagement true --UserManagementProvider Postgresql
-dotnet new kamisama-admin -n Store.Admin -o Store.Admin --UseProps true --PropsPath ../../props.xml --BootstrapMode Existing --BootstrapProject ../Store.Bootstrap/Store.Bootstrap.csproj
+dotnet new kamisama-panel-crud -n Product -o . \
+  --Solution Shop --Panel Admin \
+  --ServiceCategory Products --PageCategory Catalog --KeyType Guid
 ```
 
-Add generated projects to the root `.slnx` as needed. The replacement templates do not infer an arbitrary existing solution's desired folders or project ordering.
+| Option | Type | Default | Behavior |
+| --- | --- | --- | --- |
+| `--Solution` | string | Required | Solution prefix. |
+| `--Panel` | string | Required | Server/panel segment. |
+| `--ServiceCategory` | string | Required | Contract, service, client, and controller category. |
+| `--PageCategory` | string | Required | Blazor page folder/category. |
+| `--KeyType` | string | `Guid` | Panel DTO key type. |
 
-## Aspire Tooling
+The scaffold spans the panel's Abstractions, Core, Server, and Client projects. It creates panel-owned DTOs/contracts, orchestration stubs, controller, HTTP clients, and List/Details/Save pages without leaking bounded-context DTOs into the panel boundary.
 
-There is no KamiSama Aspire template and Aspire is not a hidden dependency. The generated `GETTING_STARTED.md` directs you to install and inspect the official templates:
+### Aspire Local (`kamisama-aspire-local`)
 
 ```shell
-dotnet new install Aspire.ProjectTemplates
-dotnet new list aspire
-dotnet new aspire-starter -n Store.AppHost
+dotnet new kamisama-aspire-local -n AspireLocalExtensions \
+  -o Shop.AppHost --Namespace Shop.AppHost
 ```
 
-Template names vary by installed Aspire version, so inspect `dotnet new list aspire` and use `dotnet new aspire` or `dotnet new aspire-starter` as available. Current official guidance uses the Aspire CLI, which can install its templates when needed:
+`--Namespace` is required. The default item name is `AspireLocalExtensions`; output is `<name>.cs` at the selected AppHost root. It adds `AddDatabaseTo`, `AddMigration`, and `AddMigrationForAll` helpers and expects the host project to reference Aspire hosting APIs.
+
+### DeleteButton (`kamisama-delete-button`)
 
 ```shell
-aspire new aspire-starter -n Store.AppHost -o Store.AppHost
-aspire run
+dotnet new kamisama-delete-button -n DeleteButton \
+  -o Shop.Admin.Client --Namespace Shop.Admin
 ```
 
-Follow the current official [.NET Aspire prerequisites](https://learn.microsoft.com/dotnet/aspire/get-started/prerequisites/), [Aspire CLI installation](https://learn.microsoft.com/dotnet/aspire/get-started/install-cli/), and [first application](https://learn.microsoft.com/dotnet/aspire/get-started/build-your-first-aspire-app) guidance for the installed version. Keep AppHost and ServiceDefaults projects explicit in the solution. `KamiSama.Templates` does not install Aspire, create those projects, or modify IDE workloads.
+`--Namespace` is required. The default item name is `DeleteButton`; output is `Components/<name>.razor`. The component uses Blazor Bootstrap `ConfirmDialog` and `ToastService`, so generate it only in a project with those dependencies and registrations.
 
-## Visual Studio and Post-Actions
+## Item completion caveats
 
-The .NET CLI is the authoritative interface for the replacement architecture. Visual Studio's template UI does not consistently expose item/solution templates, conditional parameters, or dynamically enabled choices such as `PropsPath`, provider options, and existing-Bootstrap paths.
+Item output is a structural starting point. Search generated files for `TODO(ai)` and `NotImplementedException` before declaring a capability complete. Typical required work includes:
 
-Template post-actions also cannot dynamically select and invoke arbitrary templates based on every Visual Studio choice. The Solution template's post-action is informational: it tells the user to open `GETTING_STARTED.md`; it does not generate the other six templates. The package therefore exposes focused templates rather than pretending that one wizard can safely compose every layout. If an IDE reports that a post-action was skipped, follow its printed manual instruction; for deterministic composition, generate with `dotnet new` and then open the resulting `.slnx` in Visual Studio.
+- Domain properties, invariants, validation, and editable/searchable DTO fields.
+- Request/entity/DTO mapping, filtering, ordering, paging, and persistence behavior.
+- Panel-to-bounded-context orchestration and independent API authorization.
+- Blazor controls, display fields, search/grid wiring, navigation, and error behavior.
+- Concrete module names, environment mappings, resource references, and project/package references where needed.
 
-Visual Studio does not make unsupported combinations valid. User Management and Ticketing still require PostgreSQL or SQLite, and existing Bootstrap paths still need to identify a real project.
+Templates cannot infer arbitrary domain fields or safely authorize an application. Generated code may compile while still containing placeholder behavior, and single-feature/panel orchestration stubs intentionally throw until completed.
 
-## See Also
+## Compose and build a root solution
+
+```shell
+mkdir Shop
+cd Shop
+
+dotnet new kamisama-solution -n Shop -o . --UseProps true
+dotnet new kamisama-bc -n Shop -o . --Context Catalog --UseProps true
+dotnet new kamisama-provider -n Shop -o . --Context Catalog --Provider Postgresql --CoreProject ../Shop.Catalog.Core/Shop.Catalog.Core.csproj --UseProps true
+dotnet new kamisama-bootstrap -n Shop.Bootstrap -o . --UseProps true
+dotnet new kamisama-server -n Shop -o . --Server Admin --IncludeClient true --BootstrapProject ../Shop.Bootstrap/Shop.Bootstrap.csproj --UseProps true
+
+dotnet sln Shop.slnx add Shop.Catalog.Abstractions/Shop.Catalog.Abstractions.csproj
+dotnet sln Shop.slnx add Shop.Catalog.Core/Shop.Catalog.Core.csproj
+dotnet sln Shop.slnx add Shop.Catalog.Postgresql/Shop.Catalog.Postgresql.csproj
+dotnet sln Shop.slnx add Shop.Bootstrap/Shop.Bootstrap.csproj
+dotnet sln Shop.slnx add Shop.Admin.Abstractions/Shop.Admin.Abstractions.csproj
+dotnet sln Shop.slnx add Shop.Admin.Core/Shop.Admin.Core.csproj
+dotnet sln Shop.slnx add Shop.Admin.Client/Shop.Admin.Client.csproj
+dotnet sln Shop.slnx add Shop.Admin.Server/Shop.Admin.Server.csproj
+dotnet build Shop.slnx
+```
+
+The templates do not infer solution folders, ordering, cross-boundary references, or an existing Bootstrap project. Keeping those steps explicit makes the generated architecture reviewable.
+
+## See also
 
 - [KamiSama.Templates package page](../api/templates/index.md)
 - [KamiSama.Repositories.EntityFrameworkCore](../api/repositories-entityframeworkcore/index.md)
 - [KamiSama.Modules](../api/modules/index.md)
-- [KamiSama.Modules.Identity.Core](../api/modules-identity-core/index.md)
-- [KamiSama.Modules.Ticketing.Core](../api/modules-ticketing-core/index.md)
