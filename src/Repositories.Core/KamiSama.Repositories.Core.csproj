@@ -5,7 +5,6 @@
 	<Import Project="..\props.xml" />
 	<PropertyGroup>
 		<Description>Repository contracts, an in-memory implementation, connection-string options, and database initialization abstractions.</Description>
-		<RepositoryUrl>https://gitlab.com/kamran65536/KamiSama</RepositoryUrl>
 		<RootNamespace>KamiSama.Repositories</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>

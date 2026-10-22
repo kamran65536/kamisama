@@ -85,4 +85,4 @@ dotnet new kamisama-delete-button -n DeleteButton -o Shop.Admin.Client --Namespa
 
 These items are intentional scaffolds, not finished domain behavior. Generated `TODO(ai)` markers and `NotImplementedException` bodies identify domain properties, mappings, filtering, authorization, validation, UI fields, and persistence behavior that must be completed before treating the capability as production-ready.
 
-For every parameter and generated path, see the [template guide](https://gitlab.com/kamran65536/KamiSama/-/tree/master/docs/content/topics/10-templates.md).
+For every parameter and generated path, see the [template guide](https://github.com/kamran65536/KamiSama/-/tree/master/docs/content/topics/10-templates.md).

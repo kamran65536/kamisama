@@ -1,5 +1,6 @@
-1405-07-30 10/22/2026 v10.0.13
+1405-07-30 10/22/2026 v10.0.13.1
 - package update
+- repo is changed to https://github.com/kamran65536/kamisama
 1405-06-02 8/24/2026 v10.0.11.9
 - (breaking) KamiSama.Templates is redesigned as 11 composable solution, project-family and item scaffolds. The public catalog is now kamisama-solution, kamisama-bc, kamisama-provider, kamisama-bootstrap, kamisama-server, kamisama-type, kamisama-crud, kamisama-feature, kamisama-panel-crud, kamisama-aspire-local and kamisama-delete-button.
 - The retired kamisama-admin, kamisama-empty, kamisama-bounded-context, kamisama-database-support and kamisama-orchestration commands are removed rather than retained as incompatible aliases.
