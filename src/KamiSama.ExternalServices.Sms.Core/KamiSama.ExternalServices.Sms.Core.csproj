@@ -10,7 +10,7 @@
 		<ProjectReference Include="..\KamiSama.Extensions.Logging\KamiSama.Extensions.Logging.csproj" />
 		<ProjectReference Include="..\KamiSama.ExternalServices.Exceptions\KamiSama.ExternalServices.Exceptions.csproj" />
 		<ProjectReference Include="..\KamiSama.ExternalServices.Sms.Abstractions\KamiSama.ExternalServices.Sms.Abstractions.csproj" />
-		<PackageReference Include="Microsoft.Extensions.Options" Version="10.0.11" />
+		<PackageReference Include="Microsoft.Extensions.Options" Version="10.0.13" />
 		<ProjectReference Include="..\KamiSama.Modules\KamiSama.Modules.csproj" />
 		<ProjectReference Include="..\DependencyInjection\KamiSama.Extensions.DependencyInjection.csproj" />
 	</ItemGroup>

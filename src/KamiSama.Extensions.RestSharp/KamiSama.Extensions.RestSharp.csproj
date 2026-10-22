@@ -8,8 +8,8 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Chassis.Exceptions\KamiSama.Chassis.HttpExceptions.csproj" />
-		<PackageReference Include="Microsoft.Extensions.Localization" Version="10.0.11" />
-		<PackageReference Include="RestSharp" Version="114.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Localization" Version="10.0.13" />
+		<PackageReference Include="RestSharp" Version="114.1.0" />
 		<ProjectReference Include="..\DependencyInjection\KamiSama.Extensions.DependencyInjection.csproj" />
 		<ProjectReference Include="..\Json\KamiSama.Extensions.Json.csproj" />
 	</ItemGroup>

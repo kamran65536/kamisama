@@ -14,10 +14,10 @@
 		<ProjectReference Include="..\DependencyInjection\KamiSama.Extensions.DependencyInjection.csproj" />
 		<ProjectReference Include="..\KamiSama.Modules\KamiSama.Modules.csproj" />
 		<ProjectReference Include="..\Repositories.EntityFrameworkCore\KamiSama.Repositories.EntityFrameworkCore.csproj" />
-		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.11" />
-		<PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.22.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.13" />
+		<PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.23.0" />
 		<PackageReference Include="Riok.Mapperly" Version="4.3.1" />
-		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.22.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.11" />
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.23.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.13" />
 	</ItemGroup>
 </Project>

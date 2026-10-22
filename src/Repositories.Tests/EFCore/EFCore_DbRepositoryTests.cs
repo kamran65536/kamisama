@@ -181,7 +181,7 @@ public class EFCore_DbRepositoryTests
 
 		var queryable = repository.AsQueryable();
 
-		Assert.AreEquivalent(arr, [.. queryable]);
+		Assert.AreEquivalent([..arr], [..queryable]);
 	}
 	[TestMethod]
 	public void AsQueryable_Any_checks_if_entity_exists_in_repository_or_not()

@@ -12,7 +12,7 @@
 		<ProjectReference Include="..\DependencyInjection\KamiSama.Extensions.DependencyInjection.csproj" />
 		<ProjectReference Include="..\KamiSama.Modules\KamiSama.Modules.csproj" />
 		<ProjectReference Include="..\Repositories.EntityFrameworkCore\KamiSama.Repositories.EntityFrameworkCore.csproj" />
-		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.11" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.13" />
 		<PackageReference Include="Riok.Mapperly" Version="4.3.1" />
 	</ItemGroup>
 </Project>
